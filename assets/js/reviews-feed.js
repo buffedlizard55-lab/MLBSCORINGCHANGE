@@ -1379,14 +1379,20 @@ function finalScanDecision(grace, settled, now, graceMs, rescanMs, fastRescanMs,
  */
 
 const FEED_LOG_VERSION = 1;
-const FEED_LOG_KEY_PREFIX = 'mlbReplayFeedLog.v1.';
-const FEED_LOG_INDEX_KEY = 'mlbReplayFeedLog.v1.index';
+// Storage namespace: see assets/js/feed-log.js. This copy shares an origin
+// with the everyday MLB-Live-PBP site, so its keys must never collide with
+// the original 'mlbReplayFeedLog.v1.*' keys (pinned by
+// tools/storage-namespace-test.mjs).
+const FEED_LOG_KEY_PREFIX = 'mlbScoringChange.feedLog.v1.';
+const FEED_LOG_INDEX_KEY = 'mlbScoringChange.feedLog.v1.index';
+const SOUND_PREF_KEY = 'mlbScoringChange.soundEnabled';
+const NOTIFY_PREF_KEY = 'mlbScoringChange.notifyEnabled';
 const FEED_LOG_MAX_ENTRIES = 500;
 const FEED_LOG_MAX_SNAPSHOTS_PER_GAME = 400;
 const FEED_LOG_MAX_IRREGULARITIES_PER_GAME = 30;
 const FEED_LOG_MAX_DATES = 7;
 
-/** Storage key for one date's log, e.g. `mlbReplayFeedLog.v1.2026-09-04`. */
+/** Storage key for one date's log, e.g. `mlbScoringChange.feedLog.v1.2026-09-04`. */
 function feedLogStorageKey(dateStr) {
   return `${FEED_LOG_KEY_PREFIX}${dateStr || ''}`;
 }
@@ -2105,14 +2111,14 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
   let notifyEnabled = false;
 
   try {
-    const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('replayFeedSoundEnabled') : null;
+    const stored = typeof localStorage !== 'undefined' ? localStorage.getItem(SOUND_PREF_KEY) : null;
     audioEnabled = stored === '1' || stored === 'true';
   } catch (_) {
     audioEnabled = false;
   }
 
   try {
-    const stored = typeof localStorage !== 'undefined' ? localStorage.getItem('replayFeedNotifyEnabled') : null;
+    const stored = typeof localStorage !== 'undefined' ? localStorage.getItem(NOTIFY_PREF_KEY) : null;
     notifyEnabled = stored === '1' || stored === 'true';
   } catch (_) {
     notifyEnabled = false;
@@ -2420,7 +2426,7 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     const persist = () => {
       try {
         if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('replayFeedNotifyEnabled', notifyEnabled ? '1' : '0');
+          localStorage.setItem(NOTIFY_PREF_KEY, notifyEnabled ? '1' : '0');
         }
       } catch (_) {}
       updateNotifyToggleUI();
@@ -2466,7 +2472,7 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     audioEnabled = !!enabled;
     try {
       if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('replayFeedSoundEnabled', audioEnabled ? '1' : '0');
+        localStorage.setItem(SOUND_PREF_KEY, audioEnabled ? '1' : '0');
       }
     } catch (_) {}
     updateSoundToggleUI();
@@ -3985,6 +3991,7 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       // Feed-log persistence (pure layer — every tracked entry survives a
       // refresh / revisit via a per-date localStorage log)
       FEED_LOG_VERSION, FEED_LOG_KEY_PREFIX, FEED_LOG_INDEX_KEY,
+      SOUND_PREF_KEY, NOTIFY_PREF_KEY,
       FEED_LOG_MAX_ENTRIES, FEED_LOG_MAX_SNAPSHOTS_PER_GAME,
       FEED_LOG_MAX_IRREGULARITIES_PER_GAME, FEED_LOG_MAX_DATES,
       feedLogStorageKey, isFeedLogDateStr,

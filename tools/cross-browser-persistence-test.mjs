@@ -34,6 +34,17 @@ const reviewsSource = fs.readFileSync(path.join(REPO_DIR, 'assets/js/reviews.js'
 const feedLogSource = fs.readFileSync(path.join(REPO_DIR, 'assets/js/feed-log.js'), 'utf8');
 
 const TEST_PORT = 8199;
+// The server rewrites data/feed-log-index.json on every POST. Snapshot it so
+// the test leaves the tracked file exactly as it found it (upstream, a stray
+// "2026-09-15" index entry with no log file was left behind by this test).
+const INDEX_PATH = path.join(REPO_DIR, 'data', 'feed-log-index.json');
+const INDEX_BEFORE = fs.existsSync(INDEX_PATH) ? fs.readFileSync(INDEX_PATH, 'utf8') : null;
+function restoreIndex() {
+  try {
+    if (INDEX_BEFORE == null) { if (fs.existsSync(INDEX_PATH)) fs.unlinkSync(INDEX_PATH); }
+    else fs.writeFileSync(INDEX_PATH, INDEX_BEFORE, 'utf8');
+  } catch (_) {}
+}
 const TEST_DATE = '2026-08-30';
 const TEST_GAME_PK = 822766;
 
@@ -110,7 +121,7 @@ async function run() {
   // Browser 2 fetches from server
   const browser2Log = await Browser2FeedLog.fetchLog(TEST_DATE);
   assert.ok(browser2Log, 'Browser 2 successfully fetched persistent log from server');
-  assert.ok(browser2Store[`mlbReplayFeedLog.v1.${TEST_DATE}`], 'Browser 2 cached log in its own localStorage');
+  assert.ok(browser2Store[`mlbScoringChange.feedLog.v1.${TEST_DATE}`], 'Browser 2 cached log in its own localStorage');
 
   const browser2ScoringChanges = browser2Log.entries.filter((e) => e.review && e.review.typeKey === 'scoring_change');
   assert.equal(browser2ScoringChanges.length, 1, 'Browser 2 received exactly 1 scoring change');
@@ -283,10 +294,12 @@ async function run() {
 run()
   .then(() => {
     serverProc.kill('SIGTERM');
+    restoreIndex();
     process.exit(0);
   })
   .catch((err) => {
     console.error('Test failure:', err);
     serverProc.kill('SIGTERM');
+    restoreIndex();
     process.exit(1);
   });

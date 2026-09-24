@@ -20,8 +20,16 @@
   'use strict';
 
   const FEED_LOG_VERSION = 1;
-  const FEED_LOG_KEY_PREFIX = 'mlbReplayFeedLog.v1.';
-  const FEED_LOG_INDEX_KEY = 'mlbReplayFeedLog.v1.index';
+  // STORAGE NAMESPACE (MLBSCORINGCHANGE copy). This site is served from the
+  // SAME origin as the everyday MLB-Live-PBP site
+  // (https://buffedlizard55-lab.github.io), and localStorage is per-origin.
+  // With the original 'mlbReplayFeedLog.v1.*' keys, this copy's writes -- and
+  // its 7-date index pruning, which DELETES older date logs -- would overwrite
+  // or remove the everyday site's saved feed logs. Every key this copy uses is
+  // therefore prefixed 'mlbScoringChange.' (pinned by
+  // tools/storage-namespace-test.mjs).
+  const FEED_LOG_KEY_PREFIX = 'mlbScoringChange.feedLog.v1.';
+  const FEED_LOG_INDEX_KEY = 'mlbScoringChange.feedLog.v1.index';
   const FEED_LOG_MAX_ENTRIES = 500;
   const FEED_LOG_MAX_DATES = 7;
 

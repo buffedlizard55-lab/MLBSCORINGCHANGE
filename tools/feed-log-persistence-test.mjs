@@ -76,8 +76,8 @@ const plain = (value) => JSON.parse(JSON.stringify(value));
 
 /* ==================== 1. Storage-key format + date validation ============= */
 
-assert.equal(F.feedLogStorageKey('2026-09-04'), 'mlbReplayFeedLog.v1.2026-09-04');
-assert.equal(F.FEED_LOG_INDEX_KEY, 'mlbReplayFeedLog.v1.index');
+assert.equal(F.feedLogStorageKey('2026-09-04'), 'mlbScoringChange.feedLog.v1.2026-09-04');
+assert.equal(F.FEED_LOG_INDEX_KEY, 'mlbScoringChange.feedLog.v1.index');
 assert.equal(F.FEED_LOG_VERSION, 1);
 assert.equal(F.isFeedLogDateStr('2026-09-04'), true);
 assert.equal(F.isFeedLogDateStr('2026-9-4'), false, 'non-padded date rejected');
@@ -372,7 +372,7 @@ assert.ok(third.updated[0].review.flags.some((f) => /Multiple scoring changes/i.
   assert.equal(Object.keys(pruned.index).length, 7, 'at most 7 date-logs kept');
   assert.ok(pruned.index['2026-09-04'] === 700, 'the date on screen is always kept');
   assert.ok(!('2026-08-29' in pruned.index), 'oldest date evicted');
-  assert.deepEqual(plain(pruned.remove), ['mlbReplayFeedLog.v1.2026-08-29'],
+  assert.deepEqual(plain(pruned.remove), ['mlbScoringChange.feedLog.v1.2026-08-29'],
     'eviction names the exact storage key to delete');
   assert.ok(!pruned.remove.some((k) => k.includes('not-a-date')), 'non-log keys untouched');
   // The caller's index object is not mutated.
@@ -579,9 +579,9 @@ for (let i = 0; i < 12; i += 1) await new Promise((r) => setImmediate(r));
 
 // Flush the log (the page also saves automatically after the changing poll).
 assert.equal(visit1.context.window.ReplayFeed._flushFeedLog(), true, 'log flush writes');
-const storedKeys = Object.keys(sharedStore).filter((k) => k.startsWith('mlbReplayFeedLog.v1.'));
+const storedKeys = Object.keys(sharedStore).filter((k) => k.startsWith('mlbScoringChange.feedLog.v1.'));
 assert.equal(storedKeys.length, 2, `one date log + index, got: ${storedKeys.join(', ')}`);
-const dateKey = storedKeys.find((k) => k !== 'mlbReplayFeedLog.v1.index');
+const dateKey = storedKeys.find((k) => k !== 'mlbScoringChange.feedLog.v1.index');
 const logged = JSON.parse(sharedStore[dateKey]);
 assert.equal(logged.entries.length, 1, 'every entry logged');
 assert.equal(logged.entries[0].review.reason, 'Single → Field Error');
