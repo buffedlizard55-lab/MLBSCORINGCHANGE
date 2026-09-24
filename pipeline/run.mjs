@@ -11,13 +11,18 @@
  *  4. Build the scoring model (hit-probability surface, error→hit and
  *     hit→error logistic models, pending-ruling outcome tables).
  *  5. Write data/official/*.json, data/model/*.json with provenance, a
- *     pipeline report and an irregularities list.
+ *     pipeline report and an irregularities list. Every play a row links to
+ *     also carries Baseball Savant's own per-play xBA
+ *     (`estimated_ba_using_speedangle`) when Savant has it — attached through
+ *     a rate-limit-respectful, cached client (pipeline/lib/savant.mjs).
  *  6. Join the live-captured rulings (data/capture, pipeline/capture.mjs)
  *     with the final rulings: error-type adjustment, pending calibration.
  *  7. Re-test official-scorer and home-park effects (gameData.officialScorer).
  *
  * Flags: --seasons=2024,2025,2026  --max-games=N  --skip-fetch  --no-savant
  *        --no-meta (skip the per-game official-scorer lookups)
+ *        --savant-budget=N (Savant requests per run, default 4)
+ *        --savant-delay-ms=N (pause between Savant requests, default 2500)
  * ==========================================================================*/
 
 import fs from 'node:fs';
@@ -40,6 +45,10 @@ import {
   buildHitProbSurface, buildHitProbFallback, buildPendingTable, selectAndFit, SM, isBattedBall,
 } from './lib/model-build.mjs';
 import { parseCSV } from './lib/csv.mjs';
+import {
+  collectPlayXba, createSavantClient, SAVANT_SEARCH_URL,
+} from './lib/savant.mjs';
+import { LINKER_VERSION } from './lib/link.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CACHE_DIR = process.env.PIPELINE_CACHE_DIR || path.join(ROOT, 'pipeline-cache');
@@ -89,9 +98,6 @@ const ARCHIVE_SOURCES = {
   },
 };
 const LOG_SOURCES = ARCHIVE_SOURCES; // (name kept for the sources list below)
-const SAVANT_ERRORS_CSV = (season) => 'https://baseballsavant.mlb.com/statcast_search/csv?all=true'
-  + `&hfAB=field%5C.%5C.error%7C&hfSea=${season}%7C&player_type=batter&type=details`;
-
 const NOW = new Date();
 const TODAY = NOW.toISOString().slice(0, 10);
 const addDays = (iso, d) => new Date(Date.parse(`${iso}T12:00:00Z`) + d * 86400000).toISOString().slice(0, 10);
@@ -123,6 +129,15 @@ const report = {
   warnings: [],
 };
 const irregularities = [];
+
+// Savant client: every request is cached on disk (pipeline-cache/savant.json,
+// restored by the Actions cache) and capped per run — see pipeline/lib/savant.mjs.
+const savant = args['no-savant'] ? null : createSavantClient({
+  cacheFile: path.join(CACHE_DIR, 'savant.json'),
+  budget: Number(args['savant-budget'] || 4),
+  delayMs: Number(args['savant-delay-ms'] || 2500),
+  log,
+});
 
 /* ------------------------------------------------------------------ 1 logs */
 let livePage = null;
@@ -339,9 +354,23 @@ function categoryOfEvent(et) {
 }
 const isHitCat = (c) => c === 'hit' || c === 'hit+error';
 
-async function savantCrossCheck(season, fieldErrorRecs, model) {
+/**
+ * Savant cross-check for one season. The CSV is fetched through the polite,
+ * cached client by the caller (`preFetched.text`) so the season-wide query is
+ * asked at most once per TTL instead of on every run; when the caller has no
+ * text (no Savant this run) the check reports that honestly instead of
+ * fetching behind its back.
+ */
+async function savantCrossCheck(season, fieldErrorRecs, model, preFetched = null) {
   try {
-    const csv = await fetchText(SAVANT_ERRORS_CSV(season), { timeoutMs: 120000 });
+    const csv = preFetched && typeof preFetched.text === 'string' ? preFetched.text : null;
+    if (csv == null) {
+      return {
+        url: SAVANT_SEARCH_URL, skipped: true,
+        reason: preFetched && preFetched.error ? `no Savant response this run (${preFetched.error})`
+          : 'Savant not queried this run',
+      };
+    }
     const allRows = parseCSV(csv);
     // Savant's default search includes Spring Training (verified: gamePks
     // 831545 / 832077 are gameType "S" in StatsAPI /schedule). Compare only
@@ -377,7 +406,11 @@ async function savantCrossCheck(season, fieldErrorRecs, model) {
     })();
     const mad = pairs.length ? pairs.reduce((s, [x, y]) => s + Math.abs(x - y), 0) / pairs.length : null;
     return {
-      url: SAVANT_ERRORS_CSV(season), rowsAllGameTypes: allRows.length, rowsByGameType: histObj(byType),
+      url: SAVANT_SEARCH_URL,
+      cached: !!(preFetched && preFetched.fromCache),
+      fetchedThisRun: preFetched ? !!preFetched.fetchedThisRun : null,
+      fetchedAt: (preFetched && preFetched.fetchedAt) || null,
+      rowsAllGameTypes: allRows.length, rowsByGameType: histObj(byType),
       rows: rows.length, statsapiFieldErrors: fieldErrorRecs.length,
       matched, onlySavant: byKey.size, onlySavantExamples: [...byKey.keys()].slice(0, 15), onlyStatsApiExamples: onlyOurs,
       exitVelocityAgreement: bothEv ? round(evAgree / bothEv, 4) : null,
@@ -386,7 +419,7 @@ async function savantCrossCheck(season, fieldErrorRecs, model) {
     };
   } catch (err) {
     report.warnings.push(`savant cross-check ${season}: ${err.message}`);
-    return { url: SAVANT_ERRORS_CSV(season), error: String(err.message || err) };
+    return { url: SAVANT_SEARCH_URL, error: String(err.message || err) };
   }
 }
 
@@ -420,10 +453,22 @@ async function main() {
 
     // 3. classify + link + verify
     const linkFlags = new Map(); const kinds = new Map(); const transitions = new Map();
-    for (const e of entries) {
+    const dateRecoveries = [];
+    // Order hint for the date-recovery pass: the official list is published in
+    // order, so the dates of the neighbouring entries bound where this one's
+    // game can be. Used only to break a tie between two games that BOTH pass
+    // the batter + ruling checks — never to pick a game on its own.
+    const orderHintFor = (i) => {
+      let prevDate = null; let nextDate = null;
+      for (let j = i - 1; j >= 0 && !prevDate; j -= 1) prevDate = entries[j].date || null;
+      for (let j = i + 1; j < entries.length && !nextDate; j += 1) nextDate = entries[j].date || null;
+      return { prevDate, nextDate };
+    };
+    for (let ei = 0; ei < entries.length; ei += 1) {
+      const e = entries[ei];
       e.cls = classifyEntry(e.body);
       e.cls.flags = Object.entries(transitionFlags(e.cls)).filter(([, v]) => v).map(([k]) => k);
-      e.link = linkEntry(e, { teamIndex, games, playsByGame, teamsById });
+      e.link = linkEntry(e, { teamIndex, games, playsByGame, teamsById, orderHint: orderHintFor(ei) });
       const g = gameById.get(e.link.gamePk);
       if (g) {
         e.link.officialDate = g.officialDate;
@@ -439,6 +484,27 @@ async function main() {
       }
       hist(kinds, e.cls.kind);
       if (e.cls.transition) hist(transitions, e.cls.transition);
+      // Date recoveries: the official log's date was wrong and the entry was
+      // placed in another game of the same season, verified by the batter +
+      // ruling check. Reported per season (and as an irregularity) so a wrong
+      // date in MLB's list is visible, never silently corrected.
+      const recovered = e.link.flags.find((f) => f.startsWith('date_recovered:'));
+      if (recovered) {
+        dateRecoveries.push({
+          seq: e.seq, statedDate: e.date, gameDate: e.link.officialDate || null,
+          gamePk: e.link.gamePk, atBatIndex: e.link.atBatIndex,
+          kind: (e.link.flags.find((f) => f.startsWith('date_typo:')) || '').split(':')[1] || null,
+          verifiedBy: e.link.flags.includes('date_recovered_game_only') ? 'unique pairing' : 'batter + ruling',
+          // What separated the games when the entry's own text could not:
+          // 'only game verified' | 'exact ruling' | 'log order' (see
+          // pipeline/lib/link.mjs recoverGameForEntry).
+          decidedBy: (e.link.flags.find((f) => f.startsWith('date_recovery_decided_by:')) || '').split(':')[1] || 'only game verified',
+          daysOff: e.date && e.link.officialDate
+            ? Math.round((Date.parse(`${e.link.officialDate}T12:00:00Z`) - Date.parse(`${e.date}T12:00:00Z`)) / 86400000)
+            : null,
+          transition: e.cls.transition || e.cls.kind,
+        });
+      }
     }
 
     // 4a. reconstruct initial vs final ruling for every plate appearance
@@ -473,7 +539,13 @@ async function main() {
       for (const f of e.link.flags) hist(linkFlags, f.split(':')[0]);
       // Link flags matter for ruling changes (they feed the model); for
       // bookkeeping-only entries (earned runs, RBIs, WP/PB) flag parse issues.
-      const important = e.issues.length || (e.cls.kind === 'ruling_change'
+      // A date recovery is always an irregularity: the official log's stated
+      // date differs from the game the play is in (or could not be verified at
+      // a date at all), and that has to be reviewable by hand even when the
+      // entry's own text parsed cleanly.
+      const important = e.issues.length
+        || e.link.flags.some((f) => /^date_recover/.test(f))
+        || (e.cls.kind === 'ruling_change'
         && e.link.flags.some((f) => !/^team_alias|^team_code_via|^name_match:last_name|^superseded_by|^current_ruling_compatible|^runner_error_change:verified/.test(f)));
       if (important || e.cls.kind === 'unclassified') {
         irregularities.push({
@@ -487,7 +559,10 @@ async function main() {
 
     let seasonFieldErrors = 0; let seasonPAs = 0; let chainsDropped = 0;
     const fieldErrorRecs = [];
+    // Entries the linker could not place on a play: no model score is possible
+    // for them, so the count is reported per season for both directions.
     const unlinkedErrorToHit = entries.filter((e) => e.cls.flags.includes('errorToHit') && e.link.atBatIndex == null).length;
+    const unlinkedHitToError = entries.filter((e) => e.cls.flags.includes('hitToError') && e.link.atBatIndex == null).length;
     for (const [gamePk, plays] of playsByGame) {
       const g = gameById.get(gamePk);
       for (let idx = 0; idx < plays.length; idx += 1) {
@@ -586,9 +661,11 @@ async function main() {
       transitions: histObj(transitions),
       linked: entries.filter((e) => e.link.atBatIndex != null).length,
       linkFlags: histObj(linkFlags),
+      dateRecoveries,
       errorToHitEntries: entries.filter((e) => e.cls.flags.includes('errorToHit')).length,
       hitToErrorEntries: entries.filter((e) => e.cls.flags.includes('hitToError')).length,
       unlinkedErrorToHit,
+      unlinkedHitToError,
       chainsDroppedForDisagreement: chainsDropped,
       initialErrorPopulation: errorRows.filter((r) => r.season === season).length,
       initialErrorToHit: errorRows.filter((r) => r.season === season && r.y === 1).length,
@@ -600,6 +677,52 @@ async function main() {
   // off-season before opening day, that is still last season).
   currentSeason = Math.max(...[...perSeason.entries()].filter(([, v]) => v.completedGames > 0).map(([k]) => k), SEASONS[0]);
   report.currentSeason = currentSeason;
+  // Which linking rules produced this file — see pipeline/lib/link.mjs.
+  report.linker = { version: LINKER_VERSION };
+
+  // 4c. per-play Savant xBA (`estimated_ba_using_speedangle`) for every play
+  // this run can surface — each linked official entry and every Error Watch
+  // row. It is attached to the generated JSON only; the site loads model data
+  // lazily and never fetches Savant itself. Requests are budgeted and cached
+  // (item 3 of the session brief), and coverage is reported honestly: a play
+  // Savant has not answered for yet is simply left without the field.
+  let savantXbaPlays = new Map();
+  let savantPerPlayReport = null;
+  let savantCurrentErrorList = null;
+  if (savant) {
+    const needed = new Map();   // `${gamePk}:${ai}` -> play request
+    const addNeeded = (season, gamePk, ai, gameDate, rec) => {
+      if (gamePk == null || ai == null || !gameDate) return;
+      const key = `${gamePk}:${ai}`;
+      if (needed.has(key)) return;
+      needed.set(key, {
+        season, gamePk, ai, gameDate,
+        finalError: !!rec && rec.et === 'field_error',
+        hasBattedBall: !!(rec && rec.hd && Number.isFinite(rec.hd.ls) && Number.isFinite(rec.hd.la)),
+      });
+    };
+    for (const [season, info] of perSeason) {
+      for (const e of info.entries) {
+        if (e.link.gamePk == null || e.link.atBatIndex == null) continue;
+        const rec = (playsByGameAll.get(e.link.gamePk) || [])[e.link.atBatIndex] || null;
+        const gi = gameInfoAll.get(e.link.gamePk);
+        addNeeded(season, e.link.gamePk, e.link.atBatIndex, gi && gi.officialDate, rec);
+      }
+    }
+    for (const r of errorRows) {
+      if (r.season !== currentSeason) continue;
+      addNeeded(r.season, r.gamePk, r.rec.ai, r.date, r.rec);
+    }
+    const res = await collectPlayXba({
+      client: savant, needed: [...needed.values()], currentSeason, today: TODAY, log,
+    });
+    savantXbaPlays = res.byKey;
+    savantPerPlayReport = res.report;
+    savantCurrentErrorList = res.currentSeasonErrorList;
+    log(`savant per-play xBA: ${res.report.matched}/${res.report.needed} plays known`
+      + ` (${res.report.pending} pending, ${res.report.unavailable} not on Savant,`
+      + ` ${savant.summary().requests} request(s) this run)`);
+  }
 
   // 4b. model tables (surface excludes the plays the overturn models learn from)
   const excluded = new Set([...errorRows, ...hitRows].filter((r) => r.y === 1).map((r) => r.id));
@@ -718,7 +841,7 @@ async function main() {
     { name: 'MLB Official Scoring Changes', url: LOG_PAGE },
     ...SEASONS.filter((s) => LOG_SOURCES[s] && LOG_SOURCES[s].kind === 'archive').map((s) => ({ name: `MLB Official Scoring Changes ${s} (Internet Archive capture ${LOG_SOURCES[s].archivedAt})`, url: LOG_SOURCES[s].page })),
     { name: 'MLB Stats API play-by-play', url: 'https://statsapi.mlb.com/api/v1/game/{gamePk}/playByPlay' },
-    { name: 'Baseball Savant Statcast search (cross-check)', url: SAVANT_ERRORS_CSV(currentSeason) },
+    { name: 'Baseball Savant Statcast search (cross-check + per-play xBA)', url: SAVANT_SEARCH_URL },
   ];
 
   // 6. Official-scorer and home-park effects — re-tested on every run over all
@@ -950,6 +1073,13 @@ async function main() {
       const key = e.link.atBatIndex != null ? `${e.link.gamePk}:${e.link.atBatIndex}` : null;
       if (key && e.cls.flags.includes('errorToHit')) e.model = { question: 'errorToHit', ...scoreFor(eFit, model.errorToHit, errById.get(key)) };
       if (key && e.cls.flags.includes('hitToError')) e.model = { question: 'hitToError', ...scoreFor(hFit, model.hitToError, hitById.get(key)) };
+      // Savant's own xBA for this exact ball (baseballsavant.mlb.com,
+      // estimated_ba_using_speedangle) — present only once the pipeline has
+      // fetched it; never a stand-in for the model's comparable-balls rate.
+      if (key && savantXbaPlays.has(key)) {
+        const sv = savantXbaPlays.get(key);
+        e.savant = { xba: sv.xba, ls: sv.ls, la: sv.la, gameDate: sv.gameDate, source: 'savant:estimated_ba_using_speedangle' };
+      }
     }
     if (info.logInfo) {
       writeJSON(path.join(OUT_OFFICIAL, `scoring-changes-${season}.json`), {
@@ -976,8 +1106,10 @@ async function main() {
     const s = scoreFor(eFit, model.errorToHit, r, { errKind });
     const hp = SM.hitProbability(model, SM.playFromRecord(r.rec));
     const official = (r.chain || []).map((e) => ({ seq: e.seq, transition: e.cls.transition, raw: e.raw }));
+    const sv = savantXbaPlays.get(r.id);
     return {
       id: r.id, date: r.date, gamePk: r.gamePk, ai: r.rec.ai, gameType: r.gameType,
+      savant: sv ? { xba: sv.xba, ls: sv.ls, la: sv.la, source: 'savant:estimated_ba_using_speedangle' } : undefined,
       away: r.away, home: r.home, inning: r.rec.inn, half: r.rec.top ? 'top' : 'bottom',
       batter: r.rec.bn, batterId: r.rec.b, eventType: r.rec.et, event: r.rec.ev, description: r.rec.desc,
       ls: r.rec.hd ? r.rec.hd.ls : null, la: r.rec.hd ? r.rec.hd.la : null,
@@ -1008,7 +1140,9 @@ async function main() {
   // Savant cross-check (current season, field_error plays).
   if (!args['no-savant']) {
     const cur = perSeason.get(currentSeason);
-    report.savant = await savantCrossCheck(currentSeason, cur ? cur.fieldErrorRecs : [], model);
+    report.savant = await savantCrossCheck(currentSeason, cur ? cur.fieldErrorRecs : [], model, savantCurrentErrorList);
+    report.savant.perPlay = savantPerPlayReport;
+    report.savant.client = savant ? savant.summary() : null;
   }
 
   // Discovery + report

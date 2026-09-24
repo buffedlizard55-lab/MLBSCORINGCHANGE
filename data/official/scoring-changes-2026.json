@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-09-24T20:15:36.810Z",
-  "sha256": "1c80665a1203aa63c8c43535758e1c972d4d540e3eeb7a9018065e32cb5eb5a7",
+  "fetchedAt": "2026-09-24T23:29:43.758Z",
+  "sha256": "b25c4339eb43b3c490bed096e0db945d7ae54c84a05a69c2da4cef8f2f9483c1",
   "bytes": 919598
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T20:15:36.810Z",
+ "generatedAt": "2026-09-24T23:29:43.758Z",
  "entries": [
   {
    "seq": 1,
@@ -57,10 +57,19 @@
     "batterId": 668930,
     "currentEvent": "Single",
     "currentDescription": "Brewers challenged (tag play), call on the field was overturned: Brice Turang singles on a line drive to right fielder Jake Fraley. Gary Sánchez scores. Brandon Lockridge scores. Joey Ortiz scores. Brice Turang to 2nd. Brice Turang advances to 2nd, on a missed catch error by center fielder Cedric Mullins, assist to right fielder Jake Fraley.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-03-31",
     "gameType": "R",
     "away": "TB",
     "home": "MIL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-03-31",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -103,10 +112,19 @@
     "batterId": 621020,
     "currentEvent": "Single",
     "currentDescription": "Dansby Swanson singles on a ground ball to third baseman Brady House. Pete Crow-Armstrong to 3rd. Nico Hoerner to 2nd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-03-28",
     "gameType": "R",
     "away": "WSH",
     "home": "CHC"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-03-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -149,6 +167,8 @@
     "batterId": 645277,
     "currentEvent": "Single",
     "currentDescription": "Ozzie Albies singles on a ground ball to third baseman Max Muncy.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-03-30",
     "gameType": "R",
     "away": "ATH",
@@ -159,6 +179,13 @@
     "p": 0.0369,
     "score": 4,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.044,
+    "ls": 74,
+    "la": -25,
+    "gameDate": "2026-03-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -199,6 +226,8 @@
     "batterId": 687859,
     "currentEvent": "Single",
     "currentDescription": "Troy Johnston singles on a ground ball to left fielder Jesús Sánchez. Jake McCarthy scores.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-04-01",
     "gameType": "R",
     "away": "COL",
@@ -245,10 +274,19 @@
     "batterId": 592518,
     "currentEvent": "Field Error",
     "currentDescription": "Manny Machado reaches on a missed catch error by first baseman Casey Schmitt, assist to third baseman Matt Chapman. Jackson Merrill scores.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-04-01",
     "gameType": "R",
     "away": "SF",
     "home": "SD"
+   },
+   "savant": {
+    "xba": 0.086,
+    "ls": 76.8,
+    "la": -38,
+    "gameDate": "2026-04-01",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -291,6 +329,8 @@
     "batterId": 607043,
     "currentEvent": "Single",
     "currentDescription": "Brandon Nimmo singles on a ground ball to center fielder Colton Cowser, deflected by shortstop Gunnar Henderson.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-03-30",
     "gameType": "R",
     "away": "TEX",
@@ -301,6 +341,13 @@
     "p": 0.069,
     "score": 7,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-03-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -345,6 +392,8 @@
     "batterId": 665862,
     "currentEvent": "Double",
     "currentDescription": "Jazz Chisholm Jr. doubles (1) on a pop up to shortstop Leo Rivas.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-03-30",
     "gameType": "R",
     "away": "NYY",
@@ -355,6 +404,13 @@
     "p": 0.0127,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-03-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -397,10 +453,19 @@
     "batterId": 686469,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Vinnie Pasquantino reaches on a fielder's choice, fielded by first baseman Matt Olson. Maikel Garcia scores. Fielding error by first baseman Matt Olson.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-03-28",
     "gameType": "R",
     "away": "KC",
     "home": "ATL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-03-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -443,6 +508,8 @@
     "batterId": 592518,
     "currentEvent": "Field Error",
     "currentDescription": "Manny Machado reaches on a missed catch error by first baseman Casey Schmitt, assist to third baseman Matt Chapman. Jackson Merrill scores.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-04-01",
     "gameType": "R",
     "away": "SF",
@@ -450,6 +517,13 @@
    },
    "model": {
     "question": "hitToError"
+   },
+   "savant": {
+    "xba": 0.086,
+    "ls": 76.8,
+    "la": -38,
+    "gameDate": "2026-04-01",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -487,6 +561,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:3",
      "batter_not_found"
     ],
     "officialDate": "2026-04-05",
@@ -540,6 +615,8 @@
     "batterId": 681393,
     "currentEvent": "Fielders Choice Out",
     "currentDescription": "Yankees challenged (tag play), call on the field was overturned: Connor Norby reaches on a fielder's choice out, shortstop José Caballero to catcher Austin Wells. Otto Lopez out at home.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-04-05",
     "gameType": "R",
     "away": "MIA",
@@ -584,6 +661,8 @@
     "batterId": 690976,
     "currentEvent": "Single",
     "currentDescription": "Alex Freeland singles on a ground ball to first baseman Vladimir Guerrero Jr. Alex Freeland to 2nd. Alex Freeland advances to 2nd, on a throwing error by catcher Brandon Valenzuela.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-04-07",
     "gameType": "R",
     "away": "LAD",
@@ -632,6 +711,8 @@
     "batterId": 690976,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Alex Freeland hits a sacrifice bunt. Throwing error by pitcher Kevin Gausman. Hyeseong Kim to 3rd. Alex Freeland to 1st.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-04-07",
     "gameType": "R",
     "away": "LAD",
@@ -676,6 +757,8 @@
     "batterId": 681715,
     "currentEvent": "Walk",
     "currentDescription": "Heriberto Hernández walks. Jakob Marsee to 3rd. Jakob Marsee steals (4) 3rd base. Jakob Marsee to 3rd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-04-07",
     "gameType": "R",
     "away": "CIN",
@@ -722,6 +805,8 @@
     "batterId": 668804,
     "currentEvent": "Single",
     "currentDescription": "Bryan Reynolds singles on a soft ground ball to pitcher Shane Baz.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-04-04",
     "gameType": "R",
     "away": "BAL",
@@ -729,7 +814,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0289,
+    "p": 0.029,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -774,6 +859,8 @@
     "batterId": 807712,
     "currentEvent": "Field Error",
     "currentDescription": "Luke Keaschall reaches on a fielding error by third baseman Junior Caminero.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-04-03",
     "gameType": "R",
     "away": "TB",
@@ -781,7 +868,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0093,
+    "p": 0.0096,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -826,6 +913,8 @@
     "batterId": 680777,
     "currentEvent": "Single",
     "currentDescription": "Ryan Jeffers singles. Luke Keaschall to 3rd. Josh Bell to 2nd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-04-03",
     "gameType": "R",
     "away": "TB",
@@ -833,7 +922,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.044,
+    "p": 0.0441,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -878,6 +967,8 @@
     "batterId": 678882,
     "currentEvent": "Single",
     "currentDescription": "Ceddanne Rafaela singles on a ground ball to center fielder Garrett Mitchell, deflected by shortstop David Hamilton. Caleb Durbin scores.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-04-06",
     "gameType": "R",
     "away": "MIL",
@@ -885,7 +976,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0479,
+    "p": 0.048,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -932,6 +1023,8 @@
     "batterId": 665019,
     "currentEvent": "Single",
     "currentDescription": "Kody Clemens singles on a ground ball to right fielder Lane Thomas. Victor Caratini out at 3rd on the throw, right fielder Lane Thomas to third baseman Maikel Garcia. Kody Clemens to 2nd.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-04-02",
     "gameType": "R",
     "away": "MIN",
@@ -978,10 +1071,19 @@
     "batterId": 663647,
     "currentEvent": "Field Error",
     "currentDescription": "Ke'Bryan Hayes reaches on a fielding error by center fielder Oneil Cruz. Noelvi Marte scores. Jose Trevino to 2nd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-03-31",
     "gameType": "R",
     "away": "PIT",
     "home": "CIN"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-03-31",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -1022,6 +1124,8 @@
     "batterId": 682663,
     "currentEvent": "Single",
     "currentDescription": "Agustín Ramírez singles on a ground ball to center fielder Dane Myers. Xavier Edwards to 2nd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-04-09",
     "gameType": "R",
     "away": "CIN",
@@ -1068,6 +1172,8 @@
     "batterId": 663968,
     "currentEvent": "Field Error",
     "currentDescription": "Jake Mangum reaches on a fielding error by pitcher Anthony Nunez. Nick Yorke scores. Nick Gonzales to 2nd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-04-04",
     "gameType": "R",
     "away": "BAL",
@@ -1075,9 +1181,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0106,
+    "p": 0.011,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.087,
+    "ls": 64.5,
+    "la": -37,
+    "gameDate": "2026-04-04",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -1120,6 +1233,8 @@
     "batterId": 661388,
     "currentEvent": "Single",
     "currentDescription": "William Contreras singles on a ground ball to third baseman Junior Caminero.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-04-01",
     "gameType": "R",
     "away": "TB",
@@ -1127,7 +1242,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0511,
+    "p": 0.0512,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -1170,6 +1285,8 @@
     "batterId": 670770,
     "currentEvent": "Walk",
     "currentDescription": "TJ Friedl walks.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-04-11",
     "gameType": "R",
     "away": "LAA",
@@ -1216,6 +1333,8 @@
     "batterId": 701398,
     "currentEvent": "Field Error",
     "currentDescription": "Sal Stewart reaches on a fielding error by first baseman Nolan Schanuel. Spencer Steer scores. Elly De La Cruz to 3rd.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-04-11",
     "gameType": "R",
     "away": "LAA",
@@ -1223,9 +1342,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0079,
+    "p": 0.008,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.199,
+    "ls": 66.6,
+    "la": 10,
+    "gameDate": "2026-04-11",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -1268,6 +1394,8 @@
     "batterId": 671218,
     "currentEvent": "Single",
     "currentDescription": "Heliot Ramos singles on a soft ground ball to catcher Rafael Marchán.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-04-07",
     "gameType": "R",
     "away": "PHI",
@@ -1318,6 +1446,8 @@
     "batterId": 670764,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Taylor Walls hits a sacrifice bunt. Jake Fraley scores. Ben Williamson to 2nd. Taylor Walls to 1st.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-04-12",
     "gameType": "R",
     "away": "NYY",
@@ -1364,6 +1494,8 @@
     "batterId": 670042,
     "currentEvent": "Triple",
     "currentDescription": "Luke Raley triples (1) on a line drive to right fielder Cam Smith. Josh Naylor scores. Randy Arozarena scores.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-04-12",
     "gameType": "R",
     "away": "HOU",
@@ -1408,6 +1540,8 @@
     "batterId": 668227,
     "currentEvent": "Walk",
     "currentDescription": "Randy Arozarena walks.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-04-12",
     "gameType": "R",
     "away": "HOU",
@@ -1454,6 +1588,8 @@
     "batterId": 686681,
     "currentEvent": "Groundout",
     "currentDescription": "Michael Massey grounds out, second baseman Chase Meidroth to first baseman Munetaka Murakami.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-04-12",
     "gameType": "R",
     "away": "CWS",
@@ -1500,6 +1636,8 @@
     "batterId": 678882,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Ceddanne Rafaela reaches on a fielder's choice, fielded by third baseman Ramón Urías. Connor Wong to 2nd. Connor Wong advances to 2nd, on a fielding error by third baseman Ramón Urías.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2026-04-12",
     "gameType": "R",
     "away": "BOS",
@@ -1546,6 +1684,8 @@
     "batterId": 664040,
     "currentEvent": "Field Error",
     "currentDescription": "Brandon Lowe reaches on a throwing error by pitcher Caleb Thielbar. Nick Gonzales scores. Oneil Cruz to 3rd.",
+    "inning": 11,
+    "half": "top",
     "officialDate": "2026-04-11",
     "gameType": "R",
     "away": "PIT",
@@ -1553,9 +1693,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0081,
+    "p": 0.0082,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.19,
+    "ls": 53,
+    "la": -72,
+    "gameDate": "2026-04-11",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -1598,6 +1745,8 @@
     "batterId": 673357,
     "currentEvent": "Field Error",
     "currentDescription": "Luis Robert Jr. reaches on a missed catch error by first baseman Jose Fernandez, assist to shortstop Geraldo Perdomo.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-04-08",
     "gameType": "R",
     "away": "AZ",
@@ -1605,9 +1754,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0136,
+    "p": 0.014,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.069,
+    "ls": 80.8,
+    "la": -23,
+    "gameDate": "2026-04-08",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -1648,6 +1804,8 @@
     "batterId": 690976,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Alex Freeland hits a sacrifice bunt. Throwing error by pitcher Kevin Gausman. Hyeseong Kim to 3rd. Alex Freeland to 1st.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-04-07",
     "gameType": "R",
     "away": "LAD",
@@ -1694,6 +1852,8 @@
     "batterId": 683083,
     "currentEvent": "Single",
     "currentDescription": "Nasim Nuñez singles on a soft bunt ground ball to first baseman Gary Sánchez. Nasim Nuñez out at 2nd, first baseman Gary Sánchez to shortstop Joey Ortiz.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-04-11",
     "gameType": "R",
     "away": "WSH",
@@ -1744,6 +1904,8 @@
     "batterId": 666018,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Jonathan Aranda reaches on a fielder's choice, fielded by second baseman Jazz Chisholm Jr. Chandler Simpson scores. Taylor Walls to 3rd. Yandy Díaz to 2nd. Fielding error by second baseman Jazz Chisholm Jr.",
+    "inning": 10,
+    "half": "bottom",
     "officialDate": "2026-04-11",
     "gameType": "R",
     "away": "NYY",
@@ -1790,6 +1952,8 @@
     "batterId": 676609,
     "currentEvent": "Single",
     "currentDescription": "José Caballero singles on a ground ball to third baseman Andy Ibáñez.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-04-07",
     "gameType": "R",
     "away": "ATH",
@@ -1797,7 +1961,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0995,
+    "p": 0.0996,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -1840,6 +2004,8 @@
     "batterId": 645277,
     "currentEvent": "Groundout",
     "currentDescription": "Ozzie Albies grounds out, second baseman Xavier Edwards to first baseman Liam Hicks.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-04-14",
     "gameType": "R",
     "away": "MIA",
@@ -1886,6 +2052,8 @@
     "batterId": 672580,
     "currentEvent": "Single",
     "currentDescription": "Maikel Garcia singles on a ground ball to third baseman Kevin McGonigle.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-04-14",
     "gameType": "R",
     "away": "KC",
@@ -1893,7 +2061,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0649,
+    "p": 0.065,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -1938,6 +2106,8 @@
     "batterId": 664983,
     "currentEvent": "Single",
     "currentDescription": "Jake McCarthy singles on a fly ball to right fielder Cam Smith. Tyler Freeman to 2nd.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2026-04-15",
     "gameType": "R",
     "away": "COL",
@@ -1990,6 +2160,8 @@
     "batterId": 675659,
     "currentEvent": "Groundout",
     "currentDescription": "Greg Jones grounds out, shortstop Otto Lopez to first baseman Connor Norby.",
+    "inning": 10,
+    "half": "top",
     "officialDate": "2026-04-17",
     "gameType": "R",
     "away": "MIL",
@@ -2034,10 +2206,19 @@
     "batterId": 701398,
     "currentEvent": "Field Error",
     "currentDescription": "Sal Stewart reaches on a fielding error by first baseman Nolan Schanuel. Spencer Steer scores. Elly De La Cruz to 3rd.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-04-11",
     "gameType": "R",
     "away": "LAA",
     "home": "CIN"
+   },
+   "savant": {
+    "xba": 0.199,
+    "ls": 66.6,
+    "la": 10,
+    "gameDate": "2026-04-11",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2080,6 +2261,8 @@
     "batterId": 694388,
     "currentEvent": "Single",
     "currentDescription": "Joey Loperfido singles on a ground ball to right fielder Jordan Beck, deflected by second baseman Willi Castro. Christian Walker scores. Cam Smith to 3rd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-04-14",
     "gameType": "R",
     "away": "COL",
@@ -2134,6 +2317,8 @@
     "batterId": 680728,
     "currentEvent": "Field Error",
     "currentDescription": "Adrian Del Castillo reaches on a fielding error by left fielder Weston Wilson. Corbin Carroll scores. Geraldo Perdomo scores. Adrian Del Castillo to 3rd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-04-15",
     "gameType": "R",
     "away": "AZ",
@@ -2144,6 +2329,13 @@
     "p": 0.0004,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.266,
+    "ls": 96.9,
+    "la": 30,
+    "gameDate": "2026-04-15",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2184,6 +2376,8 @@
     "batterId": 666152,
     "currentEvent": "Single",
     "currentDescription": "David Hamilton singles on a sharp line drive to right fielder Matt Vierling.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2026-04-21",
     "gameType": "R",
     "away": "MIL",
@@ -2228,6 +2422,8 @@
     "batterId": 663586,
     "currentEvent": "Groundout",
     "currentDescription": "Austin Riley grounds out, shortstop CJ Abrams to first baseman Luis García Jr. Drake Baldwin scores. Matt Olson to 2nd.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-04-21",
     "gameType": "R",
     "away": "ATL",
@@ -2274,6 +2470,8 @@
     "batterId": 671056,
     "currentEvent": "Double",
     "currentDescription": "Iván Herrera doubles (4) on a ground ball to left fielder Yordan Alvarez, deflected by third baseman Shay Whitcomb.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2026-04-18",
     "gameType": "R",
     "away": "STL",
@@ -2281,7 +2479,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0492,
+    "p": 0.0493,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -2326,6 +2524,8 @@
     "batterId": 624428,
     "currentEvent": "Triple",
     "currentDescription": "Adam Frazier triples (1) on a sharp line drive to right fielder Fernando Tatis Jr. Logan O'Hoppe scores.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-04-17",
     "gameType": "R",
     "away": "SD",
@@ -2370,6 +2570,8 @@
     "batterId": 691781,
     "currentEvent": "Forceout",
     "currentDescription": "Brady House grounds into a force out, second baseman Luis Arraez to shortstop Willy Adames. José Tena scores. Keibert Ruiz out at 2nd. Brady House to 1st. Brady House advances to 1st, on a missed catch error by first baseman Rafael Devers, assist to shortstop Willy Adames.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-04-17",
     "gameType": "R",
     "away": "SF",
@@ -2416,6 +2618,8 @@
     "batterId": 656305,
     "currentEvent": "Single",
     "currentDescription": "Matt Chapman singles on a ground ball to shortstop CJ Abrams.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-04-19",
     "gameType": "R",
     "away": "SF",
@@ -2468,6 +2672,8 @@
     "batterId": 650859,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Luis Rengifo reaches on a fielder's choice. Brice Turang scores. Joey Ortiz to 3rd. Jake Bauers to 2nd. Missed catch error by catcher Agustín Ramírez, assist to second baseman Xavier Edwards.",
+    "inning": 10,
+    "half": "top",
     "officialDate": "2026-04-17",
     "gameType": "R",
     "away": "MIL",
@@ -2514,10 +2720,19 @@
     "batterId": 630105,
     "currentEvent": "Field Error",
     "currentDescription": "Jake Cronenworth reaches on a missed catch error by first baseman Josh Naylor, assist to pitcher Luis Castillo. Miguel Andujar to 3rd. Luis Campusano to 2nd.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-04-16",
     "gameType": "R",
     "away": "SEA",
     "home": "SD"
+   },
+   "savant": {
+    "xba": 0.284,
+    "ls": 71.1,
+    "la": 7,
+    "gameDate": "2026-04-16",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2560,6 +2775,8 @@
     "batterId": 573262,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Mike Yastrzemski reaches on a fielder's choice, fielded by shortstop CJ Abrams. Jorge Mateo to 3rd. Jorge Mateo advances to 3rd, on a fielding error by shortstop CJ Abrams.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-04-20",
     "gameType": "R",
     "away": "ATL",
@@ -2606,6 +2823,8 @@
     "batterId": 661388,
     "currentEvent": "Field Error",
     "currentDescription": "William Contreras reaches on a fielding error by second baseman Xavier Edwards. William Contreras to 2nd.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2026-04-18",
     "gameType": "R",
     "away": "MIL",
@@ -2613,9 +2832,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0104,
+    "p": 0.0106,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.105,
+    "ls": 93.4,
+    "la": -21,
+    "gameDate": "2026-04-18",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2656,10 +2882,19 @@
     "batterId": 516782,
     "currentEvent": "Sac Fly",
     "currentDescription": "Starling Marte out on a sacrifice fly. Bobby Witt Jr. scores. Lane Thomas out at 2nd. Starling Marte to 1st.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-04-24",
     "gameType": "R",
     "away": "LAA",
     "home": "KC"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-04-24",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2705,6 +2940,8 @@
     "batterId": 662139,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Daulton Varsho reaches on a fielder's choice. Vladimir Guerrero Jr. scores. Kazuma Okamoto to 3rd. Fielding error by second baseman Juan Brito.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-04-25",
     "gameType": "R",
     "away": "CLE",
@@ -2712,9 +2949,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0115,
+    "p": 0.0119,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-04-25",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2755,10 +2999,19 @@
     "batterId": 671732,
     "currentEvent": "Grounded Into DP",
     "currentDescription": "Lawrence Butler grounds into a double play, pitcher Kumar Rocker to first baseman Jake Burger. Jeff McNeil out at 1st. Lawrence Butler out at 1st.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-04-26",
     "gameType": "R",
     "away": "ATH",
     "home": "TEX"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 81.4,
+    "la": 68,
+    "gameDate": "2026-04-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2803,6 +3056,8 @@
     "batterId": 699912,
     "currentEvent": "Strikeout",
     "currentDescription": "Jose Fernandez strikes out swinging.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-04-26",
     "gameType": "R",
     "away": "SD",
@@ -2849,6 +3104,8 @@
     "batterId": 680574,
     "currentEvent": "Single",
     "currentDescription": "Matt McLain singles on a ground ball to third baseman Junior Caminero. TJ Friedl to 3rd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-04-20",
     "gameType": "R",
     "away": "CIN",
@@ -2893,10 +3150,19 @@
     "batterId": 662139,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Daulton Varsho reaches on a fielder's choice. Vladimir Guerrero Jr. scores. Kazuma Okamoto to 3rd. Fielding error by second baseman Juan Brito.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-04-25",
     "gameType": "R",
     "away": "CLE",
     "home": "TOR"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-04-25",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2939,6 +3205,8 @@
     "batterId": 679845,
     "currentEvent": "Single",
     "currentDescription": "Nick Loftin singles on a ground ball to shortstop Zach Neto, deflected by third baseman Oswald Peraza.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-04-25",
     "gameType": "R",
     "away": "LAA",
@@ -2949,6 +3217,13 @@
     "p": 0.0904,
     "score": 9,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-04-25",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2989,10 +3264,19 @@
     "batterId": 641343,
     "currentEvent": "Single",
     "currentDescription": "Jake Bauers singles on a sharp line drive to center fielder Alek Thomas. William Contreras scores. Brice Turang scores. Tyler Black to 3rd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-04-28",
     "gameType": "R",
     "away": "AZ",
     "home": "MIL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-04-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3033,6 +3317,8 @@
     "batterId": 678246,
     "currentEvent": "Intent Walk",
     "currentDescription": "Drew Pomeranz intentionally walks Miguel Vargas.",
+    "inning": 10,
+    "half": "bottom",
     "officialDate": "2026-04-29",
     "gameType": "R",
     "away": "LAA",
@@ -3079,6 +3365,8 @@
     "batterId": 701762,
     "currentEvent": "Single",
     "currentDescription": "Nick Kurtz singles on a soft ground ball to catcher Carter Jensen.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-04-29",
     "gameType": "R",
     "away": "KC",
@@ -3089,6 +3377,13 @@
     "p": 0.0285,
     "score": 3,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-04-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3131,10 +3426,19 @@
     "batterId": 680777,
     "currentEvent": "Single",
     "currentDescription": "Ryan Jeffers singles on a pop up to third baseman Kazuma Okamoto. Throwing error by third baseman Kazuma Okamoto.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-04-30",
     "gameType": "R",
     "away": "TOR",
     "home": "MIN"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-04-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3175,6 +3479,8 @@
     "batterId": 663656,
     "currentEvent": "Walk",
     "currentDescription": "Kyle Tucker walks.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-04-26",
     "gameType": "R",
     "away": "CHC",
@@ -3221,6 +3527,8 @@
     "batterId": 542303,
     "currentEvent": "Single",
     "currentDescription": "Marcell Ozuna singles on a fly ball to center fielder Will Benson. Jake Mangum scores. Marcell Ozuna to 2nd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-05-02",
     "gameType": "R",
     "away": "CIN",
@@ -3265,6 +3573,8 @@
     "batterId": 668227,
     "currentEvent": "Walk",
     "currentDescription": "Randy Arozarena walks.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-05-02",
     "gameType": "R",
     "away": "KC",
@@ -3300,15 +3610,22 @@
     "flags": []
    },
    "link": {
-    "gamePk": 823144,
-    "atBatIndex": null,
-    "batterName": null,
-    "currentEventType": null,
-    "method": null,
+    "gamePk": 823146,
+    "atBatIndex": 63,
+    "batterName": "Lane Thomas",
+    "currentEventType": "single",
+    "method": "full_name",
     "flags": [
-     "batter_not_found"
+     "date_recovered:5/2->5/1",
+     "date_typo:day",
+     "inning_mismatch"
     ],
-    "officialDate": "2026-05-02",
+    "batterId": 657041,
+    "currentEvent": "Single",
+    "currentDescription": "Lane Thomas singles on a line drive to center fielder Julio Rodríguez. Salvador Perez scores.",
+    "inning": 8,
+    "half": "top",
+    "officialDate": "2026-05-01",
     "gameType": "R",
     "away": "KC",
     "home": "SEA"
@@ -3352,6 +3669,8 @@
     "batterId": 668227,
     "currentEvent": "Walk",
     "currentDescription": "Randy Arozarena walks.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-05-02",
     "gameType": "R",
     "away": "KC",
@@ -3393,6 +3712,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:6",
      "batter_not_found"
     ],
     "officialDate": "2026-05-03",
@@ -3441,6 +3761,8 @@
     "batterId": 690993,
     "currentEvent": "Single",
     "currentDescription": "Colt Keith singles. Gleyber Torres to 2nd.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-05-02",
     "gameType": "R",
     "away": "TEX",
@@ -3487,6 +3809,8 @@
     "batterId": 702284,
     "currentEvent": "Single",
     "currentDescription": "Cole Young singles on a ground ball to second baseman Michael Massey, deflected by first baseman Vinnie Pasquantino.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-05-02",
     "gameType": "R",
     "away": "KC",
@@ -3494,7 +3818,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1338,
+    "p": 0.1337,
     "score": 13,
     "kind": "out_of_fold"
    }
@@ -3539,6 +3863,8 @@
     "batterId": 671056,
     "currentEvent": "Field Error",
     "currentDescription": "Iván Herrera reaches on a throwing error by third baseman Nick Gonzales.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-04-30",
     "gameType": "R",
     "away": "STL",
@@ -3546,9 +3872,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0085,
+    "p": 0.0087,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-04-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3591,6 +3924,8 @@
     "batterId": 673237,
     "currentEvent": "Field Error",
     "currentDescription": "Yainer Diaz reaches on a fielding error by second baseman Jeremiah Jackson. Dustin Harris to 3rd.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-04-30",
     "gameType": "R",
     "away": "HOU",
@@ -3598,9 +3933,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0061,
+    "p": 0.0062,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.274,
+    "ls": 93.2,
+    "la": -2,
+    "gameDate": "2026-04-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3643,6 +3985,8 @@
     "batterId": 656811,
     "currentEvent": "Groundout",
     "currentDescription": "Ryan O'Hearn grounds out, second baseman Ketel Marte to pitcher Michael Soroka.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-05-06",
     "gameType": "R",
     "away": "PIT",
@@ -3687,6 +4031,8 @@
     "batterId": 700337,
     "currentEvent": "Sac Fly",
     "currentDescription": "Edgar Quero out on a sacrifice fly. Chase Meidroth scores. Jarred Kelenic to 3rd. Randal Grichuk out at 2nd. Edgar Quero to 1st.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-05-09",
     "gameType": "R",
     "away": "SEA",
@@ -3731,10 +4077,19 @@
     "batterId": 802415,
     "currentEvent": "Field Error",
     "currentDescription": "Chandler Simpson reaches on a fielding error by shortstop Trevor Story. Nick Fortes scores. Chandler Simpson to 2nd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-05-10",
     "gameType": "R",
     "away": "TB",
     "home": "BOS"
+   },
+   "savant": {
+    "xba": 0.104,
+    "ls": 81.1,
+    "la": -14,
+    "gameDate": "2026-05-10",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3779,6 +4134,8 @@
     "batterId": 663330,
     "currentEvent": "Field Error",
     "currentDescription": "Jahmai Jones reaches on a throwing error by third baseman Maikel Garcia.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-05-10",
     "gameType": "R",
     "away": "DET",
@@ -3786,9 +4143,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0036,
+    "p": 0.0035,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.637,
+    "ls": 107.6,
+    "la": 4,
+    "gameDate": "2026-05-10",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3831,6 +4195,8 @@
     "batterId": 678882,
     "currentEvent": "Single",
     "currentDescription": "Ceddanne Rafaela singles on a ground ball to left fielder Chandler Simpson, deflected by third baseman Junior Caminero.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-05-08",
     "gameType": "R",
     "away": "TB",
@@ -3881,6 +4247,8 @@
     "batterId": 681198,
     "currentEvent": "Groundout",
     "currentDescription": "TJ Rumfield grounds out to first baseman Bryce Harper. Jordan Beck scores.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-05-08",
     "gameType": "R",
     "away": "COL",
@@ -3927,6 +4295,8 @@
     "batterId": 608324,
     "currentEvent": "Single",
     "currentDescription": "Alex Bregman singles on a ground ball to left fielder Alejandro Osuna, deflected by third baseman Josh Jung. Michael Conforto to 3rd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-05-09",
     "gameType": "R",
     "away": "CHC",
@@ -3973,6 +4343,8 @@
     "batterId": 650859,
     "currentEvent": "Single",
     "currentDescription": "Luis Rengifo singles on a ground ball to third baseman Ryan McMahon.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-05-10",
     "gameType": "R",
     "away": "NYY",
@@ -3980,7 +4352,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0355,
+    "p": 0.0356,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4027,6 +4399,8 @@
     "batterId": 691023,
     "currentEvent": "Flyout",
     "currentDescription": "Jordan Walker flies out to left fielder Tyler Soderstrom.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-05-12",
     "gameType": "R",
     "away": "STL",
@@ -4076,6 +4450,8 @@
     "batterId": 677649,
     "currentEvent": "Field Error",
     "currentDescription": "Ezequiel Duran reaches on a fielding error by shortstop Geraldo Perdomo. Corey Seager scores. Josh Jung to 3rd.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-05-12",
     "gameType": "R",
     "away": "AZ",
@@ -4083,9 +4459,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0129,
+    "p": 0.013,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.119,
+    "ls": 83.7,
+    "la": -14,
+    "gameDate": "2026-05-12",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4130,6 +4513,8 @@
     "batterId": 665489,
     "currentEvent": "Single",
     "currentDescription": "Vladimir Guerrero Jr. singles on a ground ball to left fielder Ryan Vilade, deflected by third baseman Junior Caminero. Yohendrick Piñango scores.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-05-12",
     "gameType": "R",
     "away": "TB",
@@ -4137,7 +4522,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0507,
+    "p": 0.0508,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4182,6 +4567,8 @@
     "batterId": 802415,
     "currentEvent": "Field Error",
     "currentDescription": "Chandler Simpson reaches on a fielding error by shortstop Trevor Story. Nick Fortes scores. Chandler Simpson to 2nd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-05-10",
     "gameType": "R",
     "away": "TB",
@@ -4189,9 +4576,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0127,
+    "p": 0.0132,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.104,
+    "ls": 81.1,
+    "la": -14,
+    "gameDate": "2026-05-10",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4236,6 +4630,8 @@
     "batterId": 679529,
     "currentEvent": "Double",
     "currentDescription": "Spencer Torkelson doubles (9) on a line drive to right fielder Jesús Sánchez. Matt Vierling scores. Zach McKinstry to 3rd.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2026-05-15",
     "gameType": "R",
     "away": "TOR",
@@ -4280,6 +4676,8 @@
     "batterId": 571448,
     "currentEvent": "Walk",
     "currentDescription": "Nolan Arenado walks.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-05-17",
     "gameType": "R",
     "away": "AZ",
@@ -4326,6 +4724,8 @@
     "batterId": 656555,
     "currentEvent": "Field Error",
     "currentDescription": "Rhys Hoskins reaches on a fielding error by shortstop Zach Neto.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-05-13",
     "gameType": "R",
     "away": "LAA",
@@ -4336,6 +4736,13 @@
     "p": 0.0059,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.248,
+    "ls": 98.2,
+    "la": -4,
+    "gameDate": "2026-05-13",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4378,6 +4785,8 @@
     "batterId": 686894,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Joey Wiemer reaches on a fielder's choice, fielded by third baseman Bo Bichette. CJ Abrams scores.",
+    "inning": 11,
+    "half": "bottom",
     "officialDate": "2026-05-18",
     "gameType": "R",
     "away": "NYM",
@@ -4424,6 +4833,8 @@
     "batterId": 691720,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Kyle Karros reaches on a fielder's choice, fielded by third baseman Nolan Arenado. Troy Johnston scores. Jake McCarthy to 3rd. Fielding error by third baseman Nolan Arenado.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-05-17",
     "gameType": "R",
     "away": "AZ",
@@ -4470,6 +4881,8 @@
     "batterId": 620443,
     "currentEvent": "Single",
     "currentDescription": "Luis Torrens singles on a ground ball to right fielder James Wood, deflected by first baseman Luis García Jr.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2026-05-18",
     "gameType": "R",
     "away": "NYM",
@@ -4477,7 +4890,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0848,
+    "p": 0.0847,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -4522,6 +4935,8 @@
     "batterId": 805300,
     "currentEvent": "Field Error",
     "currentDescription": "Braves challenged (play at 1st), call on the field was upheld: Jakob Marsee reaches on a fielding error by shortstop Ha-Seong Kim.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-05-18",
     "gameType": "R",
     "away": "ATL",
@@ -4532,6 +4947,13 @@
     "p": 0.0064,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.329,
+    "ls": 101.7,
+    "la": -8,
+    "gameDate": "2026-05-18",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4572,6 +4994,8 @@
     "batterId": 665742,
     "currentEvent": "Groundout",
     "currentDescription": "Juan Soto grounds out, pitcher Andrew Nardi to shortstop Otto Lopez to first baseman Connor Norby.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-05-23",
     "gameType": "R",
     "away": "NYM",
@@ -4618,6 +5042,8 @@
     "batterId": 673548,
     "currentEvent": "Field Error",
     "currentDescription": "Seiya Suzuki reaches on a fielding error by third baseman Luis Rengifo. Miguel Amaya scores. Nico Hoerner to 3rd. Ian Happ to 2nd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-05-19",
     "gameType": "R",
     "away": "MIL",
@@ -4628,6 +5054,13 @@
     "p": 0.0042,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.514,
+    "ls": 108.6,
+    "la": 1,
+    "gameDate": "2026-05-19",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4670,6 +5103,8 @@
     "batterId": 691016,
     "currentEvent": "Triple",
     "currentDescription": "Tyler Soderstrom triples (2) on a fly ball to left fielder Josh Lowe. Nick Kurtz scores.",
+    "inning": 10,
+    "half": "top",
     "officialDate": "2026-05-20",
     "gameType": "R",
     "away": "ATH",
@@ -4716,6 +5151,8 @@
     "batterId": 694384,
     "currentEvent": "Single",
     "currentDescription": "Nolan Schanuel singles on a ground ball to second baseman Darell Hernaiz. Oswald Peraza to 2nd.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2026-05-19",
     "gameType": "R",
     "away": "ATH",
@@ -4723,7 +5160,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0462,
+    "p": 0.0463,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4770,6 +5207,8 @@
     "batterId": 669707,
     "currentEvent": "Single",
     "currentDescription": "Jared Triolo singles on a line drive to center fielder Victor Scott II.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-05-19",
     "gameType": "R",
     "away": "PIT",
@@ -4816,6 +5255,8 @@
     "batterId": 665862,
     "currentEvent": "Field Error",
     "currentDescription": "Jazz Chisholm Jr. reaches on a fielding error by pitcher Louis Varland. Cody Bellinger to 3rd.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2026-05-20",
     "gameType": "R",
     "away": "TOR",
@@ -4823,9 +5264,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0084,
+    "p": 0.0085,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.254,
+    "ls": 47.1,
+    "la": -64,
+    "gameDate": "2026-05-20",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4868,6 +5316,8 @@
     "batterId": 666969,
     "currentEvent": "Single",
     "currentDescription": "Adolis García singles on a ground ball to third baseman José Ramírez.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-05-22",
     "gameType": "R",
     "away": "CLE",
@@ -4915,6 +5365,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:3",
      "batter_not_found"
     ],
     "officialDate": "2026-05-22",
@@ -4963,6 +5414,8 @@
     "batterId": 605137,
     "currentEvent": "Field Error",
     "currentDescription": "Josh Bell reaches on a fielding error by second baseman Braden Shewmake. Byron Buxton scores.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-05-19",
     "gameType": "R",
     "away": "HOU",
@@ -4970,9 +5423,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0037,
+    "p": 0.0036,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.571,
+    "ls": 106.7,
+    "la": 2,
+    "gameDate": "2026-05-19",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5015,10 +5475,19 @@
     "batterId": 805367,
     "currentEvent": "Groundout",
     "currentDescription": "Chase Meidroth grounds out, shortstop Orlando Arcia to first baseman Josh Bell.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-05-25",
     "gameType": "R",
     "away": "MIN",
     "home": "CWS"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-05-25",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5061,10 +5530,19 @@
     "batterId": 677942,
     "currentEvent": "Single",
     "currentDescription": "Blaze Alexander singles on a ground ball to second baseman Richie Palacios. Samuel Basallo scores. Leody Taveras to 3rd. Jeremiah Jackson to 2nd.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-05-26",
     "gameType": "R",
     "away": "TB",
     "home": "BAL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 71.7,
+    "la": 51,
+    "gameDate": "2026-05-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5105,10 +5583,19 @@
     "batterId": 671277,
     "currentEvent": "Single",
     "currentDescription": "Luis García Jr. singles on a sharp ground ball to center fielder Jackson Merrill. Dylan Crews scores. Drew Millas scores. Curtis Mead to 3rd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-05-30",
     "gameType": "R",
     "away": "SD",
     "home": "WSH"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-05-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5149,10 +5636,19 @@
     "batterId": 690924,
     "currentEvent": "Sac Fly",
     "currentDescription": "Braxton Fulford out on a sacrifice fly to first baseman Rafael Devers in foul territory. Kyle Karros scores.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-05-31",
     "gameType": "R",
     "away": "SF",
     "home": "COL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 72.5,
+    "la": 36,
+    "gameDate": "2026-05-31",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5190,6 +5686,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:13",
      "batter_not_found"
     ],
     "officialDate": "2026-05-31",
@@ -5238,6 +5735,8 @@
     "batterId": 683146,
     "currentEvent": "Single",
     "currentDescription": "Brett Baty singles on a ground ball to shortstop Elly De La Cruz.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-05-27",
     "gameType": "R",
     "away": "CIN",
@@ -5248,6 +5747,13 @@
     "p": 0.0679,
     "score": 7,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 68.2,
+    "la": 45,
+    "gameDate": "2026-05-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5290,6 +5796,8 @@
     "batterId": 595978,
     "currentEvent": "Single",
     "currentDescription": "Austin Hedges singles on a ground ball to third baseman Curtis Mead.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-05-27",
     "gameType": "R",
     "away": "WSH",
@@ -5300,6 +5808,13 @@
     "p": 0.1069,
     "score": 11,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-05-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5342,6 +5857,8 @@
     "batterId": 661388,
     "currentEvent": "Single",
     "currentDescription": "William Contreras singles on a ground ball to third baseman Matt Chapman. Brice Turang to 3rd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-06-02",
     "gameType": "R",
     "away": "SF",
@@ -5394,6 +5911,8 @@
     "batterId": 802415,
     "currentEvent": "Single",
     "currentDescription": "Chandler Simpson singles on a ground ball to first baseman Vaughn Grissom. Junior Caminero to 3rd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-05-29",
     "gameType": "R",
     "away": "LAA",
@@ -5404,6 +5923,13 @@
     "p": 0.0739,
     "score": 7,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.282,
+    "ls": 67.5,
+    "la": -48,
+    "gameDate": "2026-05-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5446,6 +5972,8 @@
     "batterId": 672640,
     "currentEvent": "Single",
     "currentDescription": "Otto Lopez singles on a sharp ground ball to right fielder Carson Benge. Joe Mack scores.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2026-05-29",
     "gameType": "R",
     "away": "MIA",
@@ -5453,9 +5981,16 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2235,
+    "p": 0.2232,
     "score": 22,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.316,
+    "ls": 101.3,
+    "la": -9,
+    "gameDate": "2026-05-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5496,10 +6031,19 @@
     "batterId": 805367,
     "currentEvent": "Single",
     "currentDescription": "Chase Meidroth singles on a ground ball to center fielder Kody Clemens. Luisangel Acuña to 3rd.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-05-27",
     "gameType": "R",
     "away": "MIN",
     "home": "CWS"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-05-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5540,6 +6084,8 @@
     "batterId": 643289,
     "currentEvent": "Walk",
     "currentDescription": "Mauricio Dubón walks.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-05-30",
     "gameType": "R",
     "away": "ATL",
@@ -5586,6 +6132,8 @@
     "batterId": 665161,
     "currentEvent": "Double",
     "currentDescription": "Jeremy Peña doubles (5) on a ground ball to left fielder Bryan Reynolds.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-06-02",
     "gameType": "R",
     "away": "PIT",
@@ -5593,7 +6141,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.197,
+    "p": 0.1971,
     "score": 20,
     "kind": "out_of_fold"
    }
@@ -5636,6 +6184,8 @@
     "batterId": 663968,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Jake Mangum hits a sacrifice bunt. Throwing error by third baseman Isaac Paredes. Endy Rodríguez scores. Jake Mangum to 1st.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-06-02",
     "gameType": "R",
     "away": "PIT",
@@ -5682,6 +6232,8 @@
     "batterId": 681198,
     "currentEvent": "Field Error",
     "currentDescription": "TJ Rumfield reaches on a fielding error by right fielder Jo Adell. TJ Rumfield scores.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2026-06-02",
     "gameType": "R",
     "away": "COL",
@@ -5689,6 +6241,13 @@
    },
    "model": {
     "question": "hitToError"
+   },
+   "savant": {
+    "xba": 0.266,
+    "ls": 97.1,
+    "la": 28,
+    "gameDate": "2026-06-02",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5729,6 +6288,8 @@
     "batterId": 622268,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Donovan Walton out on a sacrifice bunt, catcher Will Smith to first baseman Freddie Freeman. Jo Adell to 2nd.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-06-05",
     "gameType": "R",
     "away": "LAA",
@@ -5770,6 +6331,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:6",
      "batter_not_found"
     ],
     "officialDate": "2026-06-06",
@@ -5818,6 +6380,8 @@
     "batterId": 669397,
     "currentEvent": "Field Error",
     "currentDescription": "Nick Allen reaches on a throwing error by third baseman Nick Gonzales.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-06-03",
     "gameType": "R",
     "away": "PIT",
@@ -5828,6 +6392,13 @@
     "p": 0.0018,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.32,
+    "ls": 29.3,
+    "la": -18,
+    "gameDate": "2026-06-03",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5868,6 +6439,8 @@
     "batterId": 676694,
     "currentEvent": "Pop Out",
     "currentDescription": "Jake Meyers pops out to second baseman Nick Madrigal. Jose Altuve scores.",
+    "inning": 10,
+    "half": "top",
     "officialDate": "2026-06-08",
     "gameType": "R",
     "away": "HOU",
@@ -5916,6 +6489,8 @@
     "batterId": 669392,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Samad Taylor hits a sacrifice bunt. Gavin Sheets scores. Jase Bowen to 2nd. Samad Taylor to 1st.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-06-08",
     "gameType": "R",
     "away": "CIN",
@@ -5962,6 +6537,8 @@
     "batterId": 682928,
     "currentEvent": "Single",
     "currentDescription": "CJ Abrams singles on a ground ball to third baseman Matt Chapman. CJ Abrams to 2nd. CJ Abrams advances to 2nd, on a throwing error by third baseman Matt Chapman.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-06-09",
     "gameType": "R",
     "away": "WSH",
@@ -6014,6 +6591,8 @@
     "batterId": 663494,
     "currentEvent": "Single",
     "currentDescription": "Bryan Torres singles on a soft ground ball to third baseman Eugenio Suárez. José Fermín to 2nd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-06-06",
     "gameType": "R",
     "away": "CIN",
@@ -6021,7 +6600,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0644,
+    "p": 0.0645,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6066,6 +6645,8 @@
     "batterId": 700932,
     "currentEvent": "Single",
     "currentDescription": "Kyle Manzardo singles on a ground ball to center fielder Trent Grisham, deflected by shortstop José Caballero. José Ramírez scores. Chase DeLauter to 3rd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-06-08",
     "gameType": "R",
     "away": "NYY",
@@ -6118,6 +6699,8 @@
     "batterId": 656716,
     "currentEvent": "Field Error",
     "currentDescription": "Zach McKinstry reaches on a fielding error by second baseman Luke Keaschall.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-06-10",
     "gameType": "R",
     "away": "MIN",
@@ -6125,9 +6708,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0085,
+    "p": 0.0087,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.108,
+    "ls": 76.7,
+    "la": 0,
+    "gameDate": "2026-06-10",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6168,6 +6758,8 @@
     "batterId": 802139,
     "currentEvent": "Single",
     "currentDescription": "JJ Wetherholt singles on a line drive to right fielder Kody Clemens. Masyn Winn scores. Blaze Jordan to 3rd.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-06-12",
     "gameType": "R",
     "away": "STL",
@@ -6214,6 +6806,8 @@
     "batterId": 572233,
     "currentEvent": "Forceout",
     "currentDescription": "Christian Walker grounds into a force out, shortstop Bobby Witt Jr. to second baseman Nick Loftin. Joey Loperfido scores. Yordan Alvarez out at 2nd. Christian Walker to 1st.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-06-13",
     "gameType": "R",
     "away": "HOU",
@@ -6258,6 +6852,8 @@
     "batterId": 686780,
     "currentEvent": "Strikeout",
     "currentDescription": "Pedro Pagés strikes out swinging, catcher Alex Jackson to second baseman Luke Keaschall. Pedro Pagés out at , catcher Alex Jackson.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-06-13",
     "gameType": "R",
     "away": "STL",
@@ -6301,6 +6897,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:3",
      "no_game_found"
     ]
    }
@@ -6343,6 +6940,8 @@
     "batterId": 670156,
     "currentEvent": "Walk",
     "currentDescription": "Miles Mastrobuoni walks.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-06-13",
     "gameType": "R",
     "away": "SEA",
@@ -6389,6 +6988,8 @@
     "batterId": 669003,
     "currentEvent": "Single",
     "currentDescription": "Garrett Mitchell singles on a ground ball to shortstop Trea Turner. Andrew Vaughn to 2nd.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-06-12",
     "gameType": "R",
     "away": "PHI",
@@ -6441,6 +7042,8 @@
     "batterId": 575929,
     "currentEvent": "Field Error",
     "currentDescription": "Willson Contreras reaches on a throwing error by third baseman Josh Jung. Wilyer Abreu scores. Willson Contreras to 2nd.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-06-12",
     "gameType": "R",
     "away": "TEX",
@@ -6451,6 +7054,13 @@
     "p": 0.0044,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.46,
+    "ls": 97.7,
+    "la": 2,
+    "gameDate": "2026-06-12",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6488,6 +7098,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:7",
      "batter_not_found"
     ],
     "officialDate": "2026-06-16",
@@ -6534,10 +7145,19 @@
     "batterId": 671732,
     "currentEvent": "Field Error",
     "currentDescription": "Lawrence Butler reaches on a fielding error by shortstop Ezequiel Tovar.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-06-14",
     "gameType": "R",
     "away": "COL",
     "home": "ATH"
+   },
+   "savant": {
+    "xba": 0.011,
+    "ls": 74.1,
+    "la": 61,
+    "gameDate": "2026-06-14",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6580,6 +7200,8 @@
     "batterId": 682928,
     "currentEvent": "Single",
     "currentDescription": "CJ Abrams singles on a sharp ground ball to left fielder Luke Raley. Andrés Chaparro scores. Curtis Mead to 2nd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-06-13",
     "gameType": "R",
     "away": "SEA",
@@ -6626,6 +7248,8 @@
     "batterId": 691016,
     "currentEvent": "Field Error",
     "currentDescription": "Tyler Soderstrom reaches on a fielding error by first baseman Spencer Horwitz.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-06-15",
     "gameType": "R",
     "away": "PIT",
@@ -6633,9 +7257,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0134,
+    "p": 0.0141,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.092,
+    "ls": 89,
+    "la": -22,
+    "gameDate": "2026-06-15",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6678,10 +7309,19 @@
     "batterId": 696285,
     "currentEvent": "Field Error",
     "currentDescription": "Jacob Young reaches on a throwing error by third baseman Junior Caminero. Jorbit Vivas to 2nd.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-06-19",
     "gameType": "R",
     "away": "WSH",
     "home": "TB"
+   },
+   "savant": {
+    "xba": 0.225,
+    "ls": 60.1,
+    "la": -43,
+    "gameDate": "2026-06-19",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6715,14 +7355,38 @@
     ]
    },
    "link": {
-    "gamePk": null,
-    "atBatIndex": null,
-    "batterName": null,
-    "currentEventType": null,
-    "method": null,
+    "gamePk": 823448,
+    "atBatIndex": 76,
+    "batterName": "Gabriel Rincones Jr.",
+    "currentEventType": "field_error",
+    "method": "full_name",
     "flags": [
-     "no_game_found"
-    ]
+     "date_recovered:6/6->6/18",
+     "date_typo:day",
+     "date_recovery_decided_by:exact_ruling"
+    ],
+    "batterId": 687282,
+    "currentEvent": "Field Error",
+    "currentDescription": "Gabriel Rincones Jr. reaches on a throwing error by third baseman Bo Bichette. J.T. Realmuto to 3rd.",
+    "inning": 9,
+    "half": "bottom",
+    "officialDate": "2026-06-18",
+    "gameType": "R",
+    "away": "NYM",
+    "home": "PHI"
+   },
+   "model": {
+    "question": "hitToError",
+    "p": 0.0146,
+    "score": 1,
+    "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.03,
+    "ls": 67.5,
+    "la": -24,
+    "gameDate": "2026-06-18",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6765,6 +7429,8 @@
     "batterId": 545121,
     "currentEvent": "Single",
     "currentDescription": "Ildemaro Vargas singles on a ground ball to first baseman Nolan Schanuel. Ildemaro Vargas to 2nd. Ildemaro Vargas advances to 2nd, on a throwing error by first baseman Nolan Schanuel.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-06-16",
     "gameType": "R",
     "away": "LAA",
@@ -6819,6 +7485,8 @@
     "batterId": 680869,
     "currentEvent": "Field Error",
     "currentDescription": "Zack Gelof reaches on a throwing error by first baseman Spencer Horwitz. Nick Kurtz scores. Tyler Soderstrom scores. Jacob Wilson scores. Zack Gelof to 2nd.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-06-16",
     "gameType": "R",
     "away": "PIT",
@@ -6826,9 +7494,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0074,
+    "p": 0.0075,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.289,
+    "ls": 99.2,
+    "la": -12,
+    "gameDate": "2026-06-16",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6871,6 +7546,8 @@
     "batterId": 686555,
     "currentEvent": "Single",
     "currentDescription": "Isaac Collins singles on a bunt ground ball to first baseman Luis García Jr. John Rave scores.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-06-17",
     "gameType": "R",
     "away": "KC",
@@ -6917,6 +7594,8 @@
     "batterId": 665019,
     "currentEvent": "Double",
     "currentDescription": "Kody Clemens doubles (16) on a ground ball to left fielder Lourdes Gurriel Jr., deflected by third baseman Nolan Arenado. Luke Keaschall scores.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-06-19",
     "gameType": "R",
     "away": "MIN",
@@ -6967,10 +7646,19 @@
     "batterId": 663368,
     "currentEvent": "Field Error",
     "currentDescription": "Blake Perkins reaches on a throwing error by second baseman Edwin Arroyo.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-06-23",
     "gameType": "R",
     "away": "MIL",
     "home": "CIN"
+   },
+   "savant": {
+    "xba": 0.401,
+    "ls": 94.4,
+    "la": -1,
+    "gameDate": "2026-06-23",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7015,6 +7703,8 @@
     "batterId": 677800,
     "currentEvent": "Groundout",
     "currentDescription": "Wilyer Abreu grounds out, second baseman Willi Castro to first baseman TJ Rumfield.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-06-24",
     "gameType": "R",
     "away": "BOS",
@@ -7063,10 +7753,19 @@
     "batterId": 682928,
     "currentEvent": "Single",
     "currentDescription": "CJ Abrams singles on a fly ball to left fielder Brandon Marsh. Luis García Jr. to 3rd. CJ Abrams to 2nd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-06-24",
     "gameType": "R",
     "away": "PHI",
     "home": "WSH"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-24",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7109,6 +7808,8 @@
     "batterId": 642350,
     "currentEvent": "Field Error",
     "currentDescription": "Jose Siri reaches on a throwing error by third baseman Max Muncy. Donovan Walton to 2nd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-06-20",
     "gameType": "R",
     "away": "LAA",
@@ -7116,9 +7817,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0158,
+    "p": 0.0168,
     "score": 2,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.056,
+    "ls": 77.7,
+    "la": -28,
+    "gameDate": "2026-06-20",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7159,6 +7867,8 @@
     "batterId": 671732,
     "currentEvent": "Home Run",
     "currentDescription": "Lawrence Butler homers (5) on a fly ball to center field.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-06-19",
     "gameType": "R",
     "away": "LAA",
@@ -7205,6 +7915,8 @@
     "batterId": 663968,
     "currentEvent": "Single",
     "currentDescription": "Jake Mangum singles on a ground ball to third baseman J.P. Crawford.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-06-23",
     "gameType": "R",
     "away": "SEA",
@@ -7257,6 +7969,8 @@
     "batterId": 665953,
     "currentEvent": "Field Error",
     "currentDescription": "Andrés Chaparro reaches on a throwing error by shortstop Trea Turner.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-06-23",
     "gameType": "R",
     "away": "PHI",
@@ -7267,6 +7981,13 @@
     "p": 0.0055,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.337,
+    "ls": 94.9,
+    "la": 1,
+    "gameDate": "2026-06-23",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7309,6 +8030,8 @@
     "batterId": 668930,
     "currentEvent": "Field Error",
     "currentDescription": "Brice Turang reaches on a fielding error by shortstop Elly De La Cruz.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-06-23",
     "gameType": "R",
     "away": "MIL",
@@ -7316,9 +8039,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0097,
+    "p": 0.0099,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.173,
+    "ls": 84.5,
+    "la": -4,
+    "gameDate": "2026-06-23",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7361,6 +8091,8 @@
     "batterId": 668715,
     "currentEvent": "Single",
     "currentDescription": "Spencer Steer singles on a ground ball to second baseman Jazz Chisholm Jr. Spencer Steer advances to 3rd, on a fielding error by second baseman Jazz Chisholm Jr. Spencer Steer advances to 3rd, on a throwing error by center fielder José Caballero.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-06-21",
     "gameType": "R",
     "away": "CIN",
@@ -7407,6 +8139,8 @@
     "batterId": 802415,
     "currentEvent": "Single",
     "currentDescription": "Chandler Simpson singles on a ground ball to shortstop CJ Abrams, deflected by third baseman Curtis Mead.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-06-21",
     "gameType": "R",
     "away": "WSH",
@@ -7454,6 +8188,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:12",
      "batter_not_found"
     ],
     "officialDate": "2026-06-27",
@@ -7502,6 +8237,8 @@
     "batterId": 691718,
     "currentEvent": "Single",
     "currentDescription": "Pete Crow-Armstrong singles on a ground ball to first baseman Mark Vientos. Pedro Ramírez scores. Pete Crow-Armstrong to 2nd. Throwing error by first baseman Mark Vientos.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-06-24",
     "gameType": "R",
     "away": "CHC",
@@ -7510,7 +8247,7 @@
    "model": {
     "question": "errorToHit",
     "p": 0.105,
-    "score": 11,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -7554,6 +8291,8 @@
     "batterId": 694384,
     "currentEvent": "Single",
     "currentDescription": "Nolan Schanuel singles on a ground ball to second baseman Jeremiah Jackson. Oswald Peraza scores. Nolan Schanuel to 3rd. Nolan Schanuel advances to 3rd, on a throwing error by second baseman Jeremiah Jackson.",
+    "inning": 10,
+    "half": "bottom",
     "officialDate": "2026-06-24",
     "gameType": "R",
     "away": "BAL",
@@ -7561,7 +8300,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0266,
+    "p": 0.0267,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -7606,6 +8345,8 @@
     "batterId": 572233,
     "currentEvent": "Single",
     "currentDescription": "Christian Walker singles on a ground ball to shortstop Kevin McGonigle.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-06-26",
     "gameType": "R",
     "away": "HOU",
@@ -7616,6 +8357,13 @@
     "p": 0.0632,
     "score": 6,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7658,6 +8406,8 @@
     "batterId": 676694,
     "currentEvent": "Single",
     "currentDescription": "Jake Meyers singles on a ground ball to left fielder Riley Greene.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-06-27",
     "gameType": "R",
     "away": "HOU",
@@ -7665,9 +8415,16 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2725,
+    "p": 0.2724,
     "score": 27,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7705,6 +8462,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:6",
      "batter_not_found"
     ],
     "officialDate": "2026-07-01",
@@ -7753,6 +8511,8 @@
     "batterId": 670032,
     "currentEvent": "Field Error",
     "currentDescription": "Nicky Lopez reaches on a fielding error by second baseman Ernie Clement.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-06-28",
     "gameType": "R",
     "away": "TEX",
@@ -7763,6 +8523,13 @@
     "p": 0.0044,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.486,
+    "ls": 95.7,
+    "la": 5,
+    "gameDate": "2026-06-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7805,6 +8572,8 @@
     "batterId": 672724,
     "currentEvent": "Field Error",
     "currentDescription": "Oswald Peraza reaches on a missed catch error by first baseman Joey Meneses, assist to second baseman Jeff McNeil. Vaughn Grissom to 3rd. Wade Meckler to 2nd.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-06-28",
     "gameType": "R",
     "away": "ATH",
@@ -7812,9 +8581,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0064,
+    "p": 0.0065,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.338,
+    "ls": 102.9,
+    "la": -10,
+    "gameDate": "2026-06-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7858,10 +8634,19 @@
     "batterId": 663616,
     "currentEvent": "Forceout",
     "currentDescription": "Trevor Larnach grounds into a force out, first baseman Christian Walker to shortstop Nick Allen. Tristan Gray out at 2nd. Trevor Larnach advances to 2nd, on a missed catch error by pitcher Peter Lambert, assist to shortstop Nick Allen.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-06-29",
     "gameType": "R",
     "away": "MIN",
     "home": "HOU"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7902,6 +8687,8 @@
     "batterId": 670764,
     "currentEvent": "Single",
     "currentDescription": "Taylor Walls singles on a ground ball to shortstop Nick Allen.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2026-07-04",
     "gameType": "R",
     "away": "TB",
@@ -7946,6 +8733,8 @@
     "batterId": 677800,
     "currentEvent": "Double",
     "currentDescription": "Wilyer Abreu doubles (18) on a sharp line drive to right fielder Jo Adell. Anthony Seigler scores. Ceddanne Rafaela scores.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2026-07-04",
     "gameType": "R",
     "away": "BOS",
@@ -7992,6 +8781,8 @@
     "batterId": 665966,
     "currentEvent": "Groundout",
     "currentDescription": "Carlos Narváez grounds out, shortstop Zach Neto to first baseman Vaughn Grissom. Jarren Duran to 3rd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-07-05",
     "gameType": "R",
     "away": "BOS",
@@ -8036,6 +8827,8 @@
     "batterId": 640459,
     "currentEvent": "Single",
     "currentDescription": "Brian Navarreto singles on a ground ball to left fielder Carlos Cortes. Jakob Marsee to 2nd.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-07-05",
     "gameType": "R",
     "away": "MIA",
@@ -8084,10 +8877,19 @@
     "batterId": 686475,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Tyler Tolbert reaches on a fielder's choice. Isaac Collins to 2nd. Isaac Collins advances to 2nd, on a fielding error by shortstop Colson Montgomery.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-06-28",
     "gameType": "R",
     "away": "KC",
     "home": "CWS"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8130,10 +8932,19 @@
     "batterId": 666211,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Taylor Trammell reaches on a fielder's choice. Cam Smith to 3rd. Cam Smith advances to 3rd, on a fielding error by first baseman Royce Lewis.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-06-30",
     "gameType": "R",
     "away": "MIN",
     "home": "HOU"
+   },
+   "savant": {
+    "xba": 0.252,
+    "ls": 80.7,
+    "la": 4,
+    "gameDate": "2026-06-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8176,6 +8987,8 @@
     "batterId": 643289,
     "currentEvent": "Single",
     "currentDescription": "Mauricio Dubón singles on a bunt ground ball to catcher Pedro Pagés. Ozzie Albies scores. Michael Harris II to 2nd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-07-01",
     "gameType": "R",
     "away": "STL",
@@ -8222,6 +9035,8 @@
     "batterId": 689414,
     "currentEvent": "Field Error",
     "currentDescription": "Liam Hicks reaches on a fielding error by shortstop Willi Castro.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-07-02",
     "gameType": "R",
     "away": "MIA",
@@ -8229,9 +9044,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0077,
+    "p": 0.0079,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.161,
+    "ls": 89.3,
+    "la": -6,
+    "gameDate": "2026-07-02",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8274,6 +9096,8 @@
     "batterId": 642201,
     "currentEvent": "Field Error",
     "currentDescription": "Eli White reaches on a fielding error by center fielder Tyrone Taylor. Matt Olson scores. Austin Riley scores. Michael Harris II scores. Eli White to 2nd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-07-04",
     "gameType": "R",
     "away": "NYM",
@@ -8281,9 +9105,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.001,
+    "p": 0.0011,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.054,
+    "ls": 78.2,
+    "la": 54,
+    "gameDate": "2026-07-04",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8317,14 +9148,40 @@
     ]
    },
    "link": {
-    "gamePk": null,
-    "atBatIndex": null,
-    "batterName": null,
-    "currentEventType": null,
-    "method": null,
+    "gamePk": 824983,
+    "atBatIndex": 76,
+    "batterName": "Henry Bolte",
+    "currentEventType": "field_error",
+    "method": "full_name",
     "flags": [
-     "no_game_found"
-    ]
+     "date_recovered:9/4->7/4",
+     "date_typo:month",
+     "date_recovery_decided_by:exact_ruling",
+     "inning_mismatch",
+     "subject_not_first_mention"
+    ],
+    "batterId": 703607,
+    "currentEvent": "Field Error",
+    "currentDescription": "Henry Bolte reaches on a throwing error by shortstop Otto Lopez. Carlos Cortes scores. Henry Bolte to 2nd.",
+    "inning": 9,
+    "half": "bottom",
+    "officialDate": "2026-07-04",
+    "gameType": "R",
+    "away": "MIA",
+    "home": "ATH"
+   },
+   "model": {
+    "question": "hitToError",
+    "p": 0.0175,
+    "score": 2,
+    "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.07,
+    "ls": 66.5,
+    "la": -14,
+    "gameDate": "2026-07-04",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8367,6 +9224,8 @@
     "batterId": 683734,
     "currentEvent": "Single",
     "currentDescription": "Andrew Vaughn singles on a ground ball to right fielder Jordan Walker, deflected by second baseman JJ Wetherholt.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-07-07",
     "gameType": "R",
     "away": "MIL",
@@ -8417,6 +9276,8 @@
     "batterId": 647304,
     "currentEvent": "Single",
     "currentDescription": "Josh Naylor singles on a pop up to third baseman Leo Jiménez, deflected by shortstop Otto Lopez.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-07-09",
     "gameType": "R",
     "away": "SEA",
@@ -8461,6 +9322,8 @@
     "batterId": 670032,
     "currentEvent": "Grounded Into DP",
     "currentDescription": "Nicky Lopez grounds into a double play, first baseman Christian Walker to shortstop Jeremy Peña. Evan Carter out at 2nd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-07-11",
     "gameType": "R",
     "away": "HOU",
@@ -8505,6 +9368,8 @@
     "batterId": 682829,
     "currentEvent": "Single",
     "currentDescription": "Elly De La Cruz singles on a sharp line drive to center fielder Pete Crow-Armstrong. TJ Friedl to 2nd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-07-11",
     "gameType": "R",
     "away": "CHC",
@@ -8551,6 +9416,8 @@
     "batterId": 641857,
     "currentEvent": "Home Run",
     "currentDescription": "Ryan McMahon homers (9) on a fly ball to right center field.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-07-11",
     "gameType": "R",
     "away": "NYY",
@@ -8592,6 +9459,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:13",
      "batter_not_found"
     ],
     "officialDate": "2026-07-12",
@@ -8640,6 +9508,8 @@
     "batterId": 668952,
     "currentEvent": "Single",
     "currentDescription": "Ryan Kreidler singles on a ground ball to shortstop Anthony Volpe.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-07-05",
     "gameType": "R",
     "away": "MIN",
@@ -8647,7 +9517,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0365,
+    "p": 0.0366,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8692,6 +9562,8 @@
     "batterId": 624585,
     "currentEvent": "Field Error",
     "currentDescription": "Jorge Soler reaches on a throwing error by shortstop Alika Williams.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-06-27",
     "gameType": "R",
     "away": "ATH",
@@ -8699,9 +9571,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0039,
+    "p": 0.0038,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.426,
+    "ls": 78.8,
+    "la": 12,
+    "gameDate": "2026-06-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8742,6 +9621,8 @@
     "batterId": 694497,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Evan Carter out on a sacrifice bunt, pitcher Bryan King to second baseman Jose Altuve. Ezequiel Duran to 2nd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-07-10",
     "gameType": "R",
     "away": "HOU",
@@ -8788,6 +9669,8 @@
     "batterId": 668942,
     "currentEvent": "Single",
     "currentDescription": "Josh Rojas singles on a ground ball to third baseman Blaze Alexander.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-07-12",
     "gameType": "R",
     "away": "KC",
@@ -8795,7 +9678,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0626,
+    "p": 0.0627,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8840,10 +9723,19 @@
     "batterId": 671056,
     "currentEvent": "Field Error",
     "currentDescription": "Iván Herrera reaches on a fielding error by second baseman Ketel Marte.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-07-17",
     "gameType": "R",
     "away": "STL",
     "home": "AZ"
+   },
+   "savant": {
+    "xba": 0.483,
+    "ls": 93.4,
+    "la": 4,
+    "gameDate": "2026-07-17",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8886,6 +9778,8 @@
     "batterId": 702332,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Caleb Durbin reaches on a fielder's choice, fielded by third baseman Junior Caminero. Wilyer Abreu scores. Willson Contreras to 3rd. Caleb Durbin to 2nd. Throwing error by third baseman Junior Caminero.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-07-19",
     "gameType": "R",
     "away": "TB",
@@ -8934,6 +9828,8 @@
     "batterId": 679845,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Nick Loftin hits a sacrifice bunt. Josh Rojas scores. Tyler Tolbert to 2nd. Nick Loftin to 1st.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2026-07-20",
     "gameType": "R",
     "away": "SF",
@@ -8982,6 +9878,8 @@
     "batterId": 665877,
     "currentEvent": "Field Error",
     "currentDescription": "José Fermín reaches on a fielding error by pitcher Paul Sewald.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-07-17",
     "gameType": "R",
     "away": "STL",
@@ -8989,9 +9887,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0122,
+    "p": 0.0125,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.068,
+    "ls": 76,
+    "la": -9,
+    "gameDate": "2026-07-17",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9037,6 +9942,8 @@
     "batterId": 661388,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Brewers challenged (force play), call on the field was overturned: William Contreras reaches on a fielder's choice, fielded by third baseman Bo Bichette. Jackson Chourio to 3rd. Brice Turang to 2nd.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-07-22",
     "gameType": "R",
     "away": "NYM",
@@ -9083,6 +9990,8 @@
     "batterId": 699013,
     "currentEvent": "Strikeout",
     "currentDescription": "Esmerlyn Valdez strikes out swinging.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-07-18",
     "gameType": "R",
     "away": "PIT",
@@ -9124,6 +10033,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:7",
      "batter_not_found"
     ],
     "officialDate": "2026-07-22",
@@ -9172,6 +10082,8 @@
     "batterId": 702284,
     "currentEvent": "Single",
     "currentDescription": "Cole Young singles on a ground ball to third baseman Casey Schmitt.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-07-19",
     "gameType": "R",
     "away": "SF",
@@ -9179,7 +10091,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0402,
+    "p": 0.0403,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -9224,6 +10136,8 @@
     "batterId": 681624,
     "currentEvent": "Field Error",
     "currentDescription": "Andy Pages reaches on a fielding error by shortstop Trea Turner. Teoscar Hernández scores. Max Muncy to 3rd. Shohei Ohtani to 2nd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-07-20",
     "gameType": "R",
     "away": "LAD",
@@ -9231,9 +10145,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0148,
-    "score": 1,
+    "p": 0.0153,
+    "score": 2,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.046,
+    "ls": 72.6,
+    "la": -21,
+    "gameDate": "2026-07-20",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9276,6 +10197,8 @@
     "batterId": 677800,
     "currentEvent": "Field Error",
     "currentDescription": "Wilyer Abreu reaches on a throwing error by pitcher Shane Baz. Wilyer Abreu to 2nd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-07-20",
     "gameType": "R",
     "away": "BAL",
@@ -9283,9 +10206,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0061,
+    "p": 0.0062,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.249,
+    "ls": 47.7,
+    "la": -56,
+    "gameDate": "2026-07-20",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9329,6 +10259,8 @@
     "batterId": 672275,
     "currentEvent": "Single",
     "currentDescription": "Patrick Bailey singles on a ground ball to right fielder Alan Roden. Kyle Manzardo scores.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-07-22",
     "gameType": "R",
     "away": "MIN",
@@ -9375,6 +10307,8 @@
     "batterId": 701538,
     "currentEvent": "Sac Fly",
     "currentDescription": "Jackson Merrill out on a sacrifice fly to right fielder Griffin Conine. Manny Machado scores.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2026-07-24",
     "gameType": "R",
     "away": "SD",
@@ -9421,6 +10355,8 @@
     "batterId": 641680,
     "currentEvent": "Field Error",
     "currentDescription": "Jonah Heim reaches on a throwing error by pitcher Brandyn Garcia.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-07-20",
     "gameType": "R",
     "away": "ATH",
@@ -9428,9 +10364,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0067,
+    "p": 0.0068,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.25,
+    "ls": 62.1,
+    "la": -56,
+    "gameDate": "2026-07-20",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9474,6 +10417,8 @@
     "batterId": 666211,
     "currentEvent": "Hit By Pitch",
     "currentDescription": "Taylor Trammell hit by pitch.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-07-27",
     "gameType": "R",
     "away": "HOU",
@@ -9520,6 +10465,8 @@
     "batterId": 673548,
     "currentEvent": "Single",
     "currentDescription": "Seiya Suzuki singles on a ground ball to shortstop Masyn Winn, deflected by third baseman Blaze Jordan.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-07-27",
     "gameType": "R",
     "away": "CHC",
@@ -9530,6 +10477,13 @@
     "p": 0.0474,
     "score": 5,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 85.6,
+    "la": 37,
+    "gameDate": "2026-07-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9572,6 +10526,8 @@
     "batterId": 663743,
     "currentEvent": "Single",
     "currentDescription": "Nick Fortes singles on a ground ball to right fielder Angel Martínez.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-07-24",
     "gameType": "R",
     "away": "CLE",
@@ -9579,7 +10535,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.3424,
+    "p": 0.3423,
     "score": 34,
     "kind": "out_of_fold"
    }
@@ -9625,10 +10581,19 @@
     "batterId": 641933,
     "currentEvent": "Flyout",
     "currentDescription": "Tyler O'Neill flies out to center fielder Javier Báez.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-07-29",
     "gameType": "R",
     "away": "BAL",
     "home": "DET"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-07-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9671,6 +10636,8 @@
     "batterId": 683011,
     "currentEvent": "Single",
     "currentDescription": "Anthony Volpe singles on a ground ball to shortstop Trea Turner. Jasson Domínguez to 2nd.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2026-07-24",
     "gameType": "R",
     "away": "NYY",
@@ -9678,7 +10645,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0859,
+    "p": 0.0858,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -9723,10 +10690,19 @@
     "batterId": 682985,
     "currentEvent": "Double",
     "currentDescription": "Riley Greene doubles (23) on a ground ball to center fielder Lane Thomas. Hao-Yu Lee scores. Colt Keith scores. Kevin McGonigle to 3rd.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-07-26",
     "gameType": "R",
     "away": "KC",
     "home": "DET"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-07-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9769,6 +10745,8 @@
     "batterId": 650559,
     "currentEvent": "Field Error",
     "currentDescription": "Bryan De La Cruz reaches on a throwing error by shortstop Anthony Volpe. Bryan De La Cruz to 2nd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-07-26",
     "gameType": "R",
     "away": "NYY",
@@ -9776,9 +10754,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0126,
+    "p": 0.0131,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.065,
+    "ls": 74.2,
+    "la": -8,
+    "gameDate": "2026-07-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9821,6 +10806,8 @@
     "batterId": 682998,
     "currentEvent": "Field Error",
     "currentDescription": "Corbin Carroll reaches on a fielding error by second baseman Brandon Lowe. Tim Tawa scores. James McCann to 2nd.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-07-28",
     "gameType": "R",
     "away": "AZ",
@@ -9831,6 +10818,13 @@
     "p": 0.0062,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.326,
+    "ls": 75.8,
+    "la": 11,
+    "gameDate": "2026-07-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9873,6 +10867,8 @@
     "batterId": 803011,
     "currentEvent": "Single",
     "currentDescription": "Sam Antonacci singles on a ground ball to third baseman José Caballero.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2026-07-27",
     "gameType": "R",
     "away": "NYY",
@@ -9880,9 +10876,16 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0949,
+    "p": 0.0948,
     "score": 9,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 65.2,
+    "la": -35,
+    "gameDate": "2026-07-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9925,6 +10928,8 @@
     "batterId": 676475,
     "currentEvent": "Field Error",
     "currentDescription": "Alec Burleson reaches on a fielding error by first baseman Nathaniel Lowe.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-07-26",
     "gameType": "R",
     "away": "CIN",
@@ -9932,9 +10937,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.004,
+    "p": 0.0039,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.649,
+    "ls": 96.7,
+    "la": 6,
+    "gameDate": "2026-07-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9972,6 +10984,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:6",
      "batter_not_found"
     ],
     "officialDate": "2026-07-31",
@@ -10020,6 +11033,8 @@
     "batterId": 680757,
     "currentEvent": "Single",
     "currentDescription": "Steven Kwan singles on a ground ball to shortstop Elly De La Cruz.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2026-07-29",
     "gameType": "R",
     "away": "CLE",
@@ -10030,6 +11045,13 @@
     "p": 0.0721,
     "score": 7,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-07-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10072,6 +11094,8 @@
     "batterId": 665019,
     "currentEvent": "Single",
     "currentDescription": "Kody Clemens singles on a ground ball to second baseman Michael Massey. Josh Bell to 2nd.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2026-08-05",
     "gameType": "R",
     "away": "MIN",
@@ -10118,6 +11142,8 @@
     "batterId": 805999,
     "currentEvent": "Sac Bunt",
     "currentDescription": "A.J. Ewing out on a sacrifice bunt, catcher Patrick Bailey to first baseman Nathaniel Lowe. Luis Torrens to 2nd.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2026-08-06",
     "gameType": "R",
     "away": "NYM",
@@ -10164,6 +11190,8 @@
     "batterId": 687093,
     "currentEvent": "Field Error",
     "currentDescription": "Vaughn Grissom reaches on a fielding error by third baseman Christian Encarnacion-Strand. Nolan Schanuel scores. Vaughn Grissom to 2nd.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-08-04",
     "gameType": "R",
     "away": "LAA",
@@ -10171,9 +11199,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0075,
+    "p": 0.0077,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.243,
+    "ls": 79.6,
+    "la": 4,
+    "gameDate": "2026-08-04",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10214,6 +11249,8 @@
     "batterId": 701398,
     "currentEvent": "Walk",
     "currentDescription": "Sal Stewart walks. Elly De La Cruz to 2nd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-08-04",
     "gameType": "R",
     "away": "ATH",
@@ -10258,6 +11295,8 @@
     "batterId": 691718,
     "currentEvent": "Single",
     "currentDescription": "Pete Crow-Armstrong singles on a ground ball to second baseman Michael Massey. Carson Kelly scores. Pedro Ramírez scores. Dansby Swanson to 3rd. Throwing error by second baseman Michael Massey.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-08-07",
     "gameType": "R",
     "away": "CHC",
@@ -10299,6 +11338,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:6",
      "batter_not_found"
     ],
     "officialDate": "2026-08-08",
@@ -10347,6 +11387,8 @@
     "batterId": 687551,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Drew Gilbert reaches on a fielder's choice, fielded by third baseman Colt Keith. Osleivis Basabe scores.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-08-09",
     "gameType": "R",
     "away": "DET",
@@ -10391,6 +11433,8 @@
     "batterId": 701358,
     "currentEvent": "Single",
     "currentDescription": "Cam Smith singles on a ground ball to right fielder Jung Hoo Lee, deflected by second baseman Osleivis Basabe. Nick Allen scores. Cam Smith out at 2nd on the throw, right fielder Jung Hoo Lee to shortstop Willy Adames.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-08-10",
     "gameType": "R",
     "away": "HOU",
@@ -10437,6 +11481,8 @@
     "batterId": 668930,
     "currentEvent": "Field Error",
     "currentDescription": "Brice Turang reaches on a fielding error by third baseman Nick Gonzales. Cooper Pratt scores.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-08-06",
     "gameType": "R",
     "away": "PIT",
@@ -10444,9 +11490,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0042,
+    "p": 0.0041,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.431,
+    "ls": 86,
+    "la": 6,
+    "gameDate": "2026-08-06",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10487,6 +11540,8 @@
     "batterId": 669134,
     "currentEvent": "Forceout",
     "currentDescription": "Luis Campusano grounds into a force out, fielded by third baseman David Hamilton. Jackson Merrill out at 3rd. Austin Hays to 2nd. Luis Campusano to 1st. Missed catch error by second baseman Jihwan Bae, assist to third baseman David Hamilton.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-08-11",
     "gameType": "R",
     "away": "MIL",
@@ -10533,6 +11588,8 @@
     "batterId": 693409,
     "currentEvent": "Single",
     "currentDescription": "César Prieto singles on a bunt ground ball to pitcher Ryan Feltner.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2026-08-07",
     "gameType": "R",
     "away": "COL",
@@ -10585,6 +11642,8 @@
     "batterId": 643217,
     "currentEvent": "Field Error",
     "currentDescription": "Andrew Benintendi reaches on a throwing error by second baseman Gleyber Torres. Munetaka Murakami to 3rd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-08-15",
     "gameType": "R",
     "away": "CWS",
@@ -10592,9 +11651,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0114,
+    "p": 0.0118,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.089,
+    "ls": 78.6,
+    "la": -5,
+    "gameDate": "2026-08-15",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10637,6 +11703,8 @@
     "batterId": 650859,
     "currentEvent": "Single",
     "currentDescription": "Luis Rengifo singles on a ground ball to third baseman Bo Bichette.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2026-08-18",
     "gameType": "R",
     "away": "SD",
@@ -10684,6 +11752,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:3",
      "batter_not_found"
     ],
     "officialDate": "2026-08-22",
@@ -10732,6 +11801,8 @@
     "batterId": 660688,
     "currentEvent": "Field Error",
     "currentDescription": "Keibert Ruiz reaches on a fielding error by first baseman Joc Pederson. Andrés Chaparro to 2nd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-08-19",
     "gameType": "R",
     "away": "WSH",
@@ -10742,6 +11813,13 @@
     "p": 0.0022,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.594,
+    "ls": 106.4,
+    "la": 6,
+    "gameDate": "2026-08-19",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10784,6 +11862,8 @@
     "batterId": 686681,
     "currentEvent": "Single",
     "currentDescription": "Michael Massey singles on a ground ball to shortstop Kevin McGonigle. Vinnie Pasquantino scores.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-08-21",
     "gameType": "R",
     "away": "DET",
@@ -10836,6 +11916,8 @@
     "batterId": 691023,
     "currentEvent": "Field Error",
     "currentDescription": "Jordan Walker reaches on a throwing error by third baseman Bryson Stott. Jordan Walker to 2nd.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-08-21",
     "gameType": "R",
     "away": "STL",
@@ -10843,9 +11925,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0135,
+    "p": 0.0141,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.098,
+    "ls": 102.4,
+    "la": -34,
+    "gameDate": "2026-08-21",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10894,6 +11983,8 @@
     "batterId": 677951,
     "currentEvent": "Single",
     "currentDescription": "Bobby Witt Jr. singles on a line drive to right fielder Carlos Cortes.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-08-20",
     "gameType": "R",
     "away": "ATH",
@@ -10901,7 +11992,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2539,
+    "p": 0.2536,
     "score": 25,
     "kind": "out_of_fold"
    }
@@ -10946,6 +12037,8 @@
     "batterId": 802415,
     "currentEvent": "Field Error",
     "currentDescription": "Chandler Simpson advances to 2nd, on a missed catch error by first baseman Brandon Valenzuela, assist to second baseman Charles McAdoo.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2026-08-20",
     "gameType": "R",
     "away": "TOR",
@@ -10953,9 +12046,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0088,
+    "p": 0.009,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.218,
+    "ls": 66.9,
+    "la": -42,
+    "gameDate": "2026-08-20",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10996,10 +12096,19 @@
     "batterId": 665833,
     "currentEvent": "Single",
     "currentDescription": "Oneil Cruz singles on a ground ball. Bryan Reynolds out at 2nd, hit by batted ball, first baseman Alec Burleson unassisted.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-08-28",
     "gameType": "R",
     "away": "PIT",
     "home": "STL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 67.9,
+    "la": 37,
+    "gameDate": "2026-08-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11040,10 +12149,19 @@
     "batterId": 650490,
     "currentEvent": "Single",
     "currentDescription": "Yandy Díaz singles on a sharp line drive to center fielder Jackson Merrill. Richie Palacios scores. Cedric Mullins scores. Taylor Walls scores. Yandy Díaz to 3rd. Throwing error by second baseman Luis Rengifo, assist to center fielder Jackson Merrill.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-08-29",
     "gameType": "R",
     "away": "SD",
     "home": "TB"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-08-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11086,10 +12204,19 @@
     "batterId": 665489,
     "currentEvent": "Single",
     "currentDescription": "Vladimir Guerrero Jr. singles on a sharp ground ball to left fielder Randy Arozarena. Myles Straw scores. Vladimir Guerrero Jr. to 2nd.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-08-30",
     "gameType": "R",
     "away": "SEA",
     "home": "TOR"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 90.3,
+    "la": -30,
+    "gameDate": "2026-08-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11132,6 +12259,8 @@
     "batterId": 702616,
     "currentEvent": "Single",
     "currentDescription": "Jackson Holliday singles on a ground ball to pitcher Matthew Liberatore.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-08-25",
     "gameType": "R",
     "away": "BAL",
@@ -11184,10 +12313,19 @@
     "batterId": 672960,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Kazuma Okamoto reaches on a fielder's choice, fielded by third baseman J.P. Crawford. George Springer scores. Myles Straw to 2nd. Fielding error by third baseman J.P. Crawford.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-08-28",
     "gameType": "R",
     "away": "SEA",
     "home": "TOR"
+   },
+   "savant": {
+    "xba": 0.049,
+    "ls": 71.6,
+    "la": -32,
+    "gameDate": "2026-08-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11230,10 +12368,19 @@
     "batterId": 681198,
     "currentEvent": "Single",
     "currentDescription": "TJ Rumfield singles on a ground ball. Hunter Goodman out at 2nd, hit by batted ball, first baseman Pete Alonso unassisted.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2026-08-31",
     "gameType": "R",
     "away": "BAL",
     "home": "COL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-08-31",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11274,6 +12421,8 @@
     "batterId": 676724,
     "currentEvent": "Single",
     "currentDescription": "Jared Young singles on a sharp ground ball to right fielder Victor Mesa Jr. Bo Bichette scores. Carson Benge scores. Jared Young to 2nd. Throwing error by right fielder Victor Mesa Jr.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-09-02",
     "gameType": "R",
     "away": "NYM",
@@ -11320,6 +12469,8 @@
     "batterId": 672695,
     "currentEvent": "Field Error",
     "currentDescription": "Geraldo Perdomo reaches on a fielding error by third baseman Shay Whitcomb.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-08-29",
     "gameType": "R",
     "away": "AZ",
@@ -11330,6 +12481,13 @@
     "p": 0.0063,
     "score": 1,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.34,
+    "ls": 80.5,
+    "la": 8,
+    "gameDate": "2026-08-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11372,10 +12530,19 @@
     "batterId": 645277,
     "currentEvent": "Double",
     "currentDescription": "Braves challenged (home-plate collision), call on the field was upheld: Braves challenged (tag play), call on the field was upheld: Ozzie Albies doubles (24) on a ground ball to right fielder Troy Johnston. Mauricio Dubón out at home on the throw, right fielder Troy Johnston to second baseman Connor Norby to catcher Brett Sullivan. Ozzie Albies to 1st.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2026-08-30",
     "gameType": "R",
     "away": "COL",
     "home": "ATL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 81.4,
+    "la": 4,
+    "gameDate": "2026-08-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11418,6 +12585,8 @@
     "batterId": 663743,
     "currentEvent": "Single",
     "currentDescription": "Nick Fortes singles on a bunt ground ball to pitcher MacKenzie Gore. Jorge Mateo scores. Victor Mesa Jr. to 2nd.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2026-09-06",
     "gameType": "R",
     "away": "TB",
@@ -11464,6 +12633,8 @@
     "batterId": 668723,
     "currentEvent": "Single",
     "currentDescription": "Ryan Vilade singles on a ground ball to pitcher Jefry Yan. Victor Mesa Jr. scores. Taylor Walls to 3rd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-09-01",
     "gameType": "R",
     "away": "NYM",
@@ -11512,10 +12683,19 @@
     "batterId": 676609,
     "currentEvent": "Double",
     "currentDescription": "José Caballero doubles (13) on a line drive to left fielder Eli White.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2026-08-29",
     "gameType": "R",
     "away": "BOS",
     "home": "NYY"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-08-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11560,6 +12740,8 @@
     "batterId": 622761,
     "currentEvent": "Single",
     "currentDescription": "Jorge Mateo singles on a ground ball to third baseman Austin Riley.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2026-09-08",
     "gameType": "R",
     "away": "TB",
@@ -11606,6 +12788,8 @@
     "batterId": 666971,
     "currentEvent": "Double",
     "currentDescription": "Lourdes Gurriel Jr. doubles (9) on a fly ball to center fielder Kyle Isbel. Ildemaro Vargas scores. Lourdes Gurriel Jr. to 3rd. Lourdes Gurriel Jr. advances to 3rd, on a fielding error by center fielder Kyle Isbel.",
+    "inning": 11,
+    "half": "top",
     "officialDate": "2026-09-08",
     "gameType": "R",
     "away": "AZ",
@@ -11655,6 +12839,8 @@
     "batterId": 676724,
     "currentEvent": "Single",
     "currentDescription": "Jared Young singles on a sharp ground ball to right fielder Victor Mesa Jr. Bo Bichette scores. Carson Benge scores. Jared Young to 2nd. Throwing error by right fielder Victor Mesa Jr.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2026-09-02",
     "gameType": "R",
     "away": "NYM",
@@ -11701,6 +12887,8 @@
     "batterId": 665019,
     "currentEvent": "Single",
     "currentDescription": "Kody Clemens singles on a ground ball to second baseman Hao-Yu Lee, deflected by first baseman Colt Keith. Luke Keaschall to 2nd.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-09-02",
     "gameType": "R",
     "away": "DET",
@@ -11753,6 +12941,8 @@
     "batterId": 667472,
     "currentEvent": "Single",
     "currentDescription": "Dane Myers singles on a ground ball to left fielder Jackson Chourio, deflected by third baseman David Hamilton. Juan Brito scores. Héctor Rodríguez scores.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-09-06",
     "gameType": "R",
     "away": "MIL",
@@ -11799,6 +12989,8 @@
     "batterId": 683748,
     "currentEvent": "Double",
     "currentDescription": "Victor Mesa Jr. doubles (4) on a ground ball to left fielder Wyatt Langford, deflected by third baseman Cody Freeman.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2026-09-06",
     "gameType": "R",
     "away": "TB",
@@ -11851,6 +13043,8 @@
     "batterId": 695734,
     "currentEvent": "Field Error",
     "currentDescription": "Daylen Lile reaches on a fielding error by shortstop Mookie Betts. James Wood scores.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2026-09-05",
     "gameType": "R",
     "away": "WSH",
@@ -11861,6 +13055,13 @@
     "p": 0.0044,
     "score": 0,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.463,
+    "ls": 87.3,
+    "la": 9,
+    "gameDate": "2026-09-05",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11901,6 +13102,8 @@
     "batterId": 699302,
     "currentEvent": "Groundout",
     "currentDescription": "Héctor Rodríguez grounds out, second baseman Alex Freeland to first baseman Enrique Hernández.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2026-09-09",
     "gameType": "R",
     "away": "CIN",
@@ -11947,6 +13150,8 @@
     "batterId": 671056,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Iván Herrera reaches on a fielder's choice, fielded by shortstop Cole Carrigg. Nathan Church to 3rd. Bryan Torres to 2nd. Fielding error by shortstop Cole Carrigg.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2026-09-04",
     "gameType": "R",
     "away": "STL",
@@ -11991,6 +13196,8 @@
     "batterId": 683734,
     "currentEvent": "Double",
     "currentDescription": "Andrew Vaughn doubles (18) on a line drive to left fielder JJ Bleday. Brice Turang scores. Fielding error by left fielder JJ Bleday.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2026-09-11",
     "gameType": "R",
     "away": "CIN",
@@ -12035,6 +13242,8 @@
     "batterId": 814430,
     "currentEvent": "Walk",
     "currentDescription": "Jake Rogers challenged (pitch result), call on the field was confirmed: Brett Callahan walks.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-09-17",
     "gameType": "R",
     "away": "DET",
@@ -12081,6 +13290,8 @@
     "batterId": 681715,
     "currentEvent": "Field Error",
     "currentDescription": "Marlins challenged (play at 1st), call on the field was overturned: Heriberto Hernández reaches on a fielding error by third baseman Max Muncy.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2026-09-11",
     "gameType": "R",
     "away": "LAD",
@@ -12088,9 +13299,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0071,
+    "p": 0.0072,
     "score": 1,
     "kind": "model"
+   },
+   "savant": {
+    "xba": 0.332,
+    "ls": 87.7,
+    "la": -1,
+    "gameDate": "2026-09-11",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12133,6 +13351,8 @@
     "batterId": 641355,
     "currentEvent": "Field Error",
     "currentDescription": "Cody Bellinger reaches on a fielding error by pitcher A.J. Minter. Ben Rice to 2nd.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2026-09-14",
     "gameType": "R",
     "away": "NYY",
@@ -12140,9 +13360,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0085,
+    "p": 0.0087,
     "score": 1,
     "kind": "model"
+   },
+   "savant": {
+    "xba": 0.186,
+    "ls": 50,
+    "la": -75,
+    "gameDate": "2026-09-14",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12185,6 +13412,8 @@
     "batterId": 694671,
     "currentEvent": "Field Error",
     "currentDescription": "Wyatt Langford advances to 2nd, on a throwing error by third baseman Kazuma Okamoto.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2026-09-18",
     "gameType": "R",
     "away": "TOR",
@@ -12192,9 +13421,16 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0102,
+    "p": 0.0105,
     "score": 1,
     "kind": "model"
+   },
+   "savant": {
+    "xba": 0.14,
+    "ls": 59.6,
+    "la": -39,
+    "gameDate": "2026-09-18",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   }
  ]

@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-09-24T20:15:36.810Z",
+ "generatedAt": "2026-09-24T23:29:43.758Z",
  "entries": [
   {
    "seq": 1,
@@ -62,6 +62,8 @@
     "batterId": 664728,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Kyle Isbel hits a sacrifice bunt. Dairon Blanco to 3rd. Kyle Isbel to 1st.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-03-27",
     "gameType": "R",
     "away": "CLE",
@@ -110,6 +112,8 @@
     "batterId": 671277,
     "currentEvent": "Double",
     "currentDescription": "Luis García Jr. doubles (1) on a fly ball to center fielder Brandon Marsh, deflected by second baseman Bryson Stott.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-03-27",
     "gameType": "R",
     "away": "PHI",
@@ -132,6 +136,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.392,
+    "ls": 102.7,
+    "la": -1,
+    "gameDate": "2025-03-30",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "fielding_credit",
     "initial": null,
@@ -154,6 +165,8 @@
     "batterId": 695238,
     "currentEvent": "Field Error",
     "currentDescription": "Will Wagner reaches on a throwing error by shortstop Jorge Mateo.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-03-30",
     "gameType": "R",
     "away": "BAL",
@@ -198,6 +211,8 @@
     "batterId": 664728,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Kyle Isbel hits a sacrifice bunt. Maikel Garcia scores. MJ Melendez to 2nd. Kyle Isbel to 1st.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-04-04",
     "gameType": "R",
     "away": "BAL",
@@ -220,6 +235,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.156,
+    "ls": 83.1,
+    "la": -4,
+    "gameDate": "2025-04-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -244,6 +266,8 @@
     "batterId": 680776,
     "currentEvent": "Field Error",
     "currentDescription": "Jarren Duran reaches on a fielding error by first baseman Alec Burleson. Jarren Duran to 2nd.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2025-04-06",
     "gameType": "R",
     "away": "STL",
@@ -251,7 +275,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0095,
+    "p": 0.0096,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -296,6 +320,8 @@
     "batterId": 571448,
     "currentEvent": "Single",
     "currentDescription": "Nolan Arenado singles on a ground ball to third baseman Alex Bregman. Willson Contreras scores. Brendan Donovan to 3rd. Throwing error by third baseman Alex Bregman.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2025-04-04",
     "gameType": "R",
     "away": "STL",
@@ -324,6 +350,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.365,
+    "ls": 100.9,
+    "la": 20,
+    "gameDate": "2025-04-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -348,6 +381,8 @@
     "batterId": 677951,
     "currentEvent": "Field Error",
     "currentDescription": "Bobby Witt Jr. reaches on a fielding error by center fielder Jorge Mateo. Bobby Witt Jr. to 3rd.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2025-04-06",
     "gameType": "R",
     "away": "BAL",
@@ -376,6 +411,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.224,
+    "ls": 98.4,
+    "la": 36,
+    "gameDate": "2025-04-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "earned_run",
     "initial": null,
@@ -398,6 +440,8 @@
     "batterId": 663624,
     "currentEvent": "Field Error",
     "currentDescription": "Ryan Mountcastle reaches on a fielding error by right fielder Hunter Renfroe. Ryan Mountcastle to 3rd.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-04-06",
     "gameType": "R",
     "away": "BAL",
@@ -420,6 +464,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.224,
+    "ls": 98.4,
+    "la": 36,
+    "gameDate": "2025-04-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "wild_pitch_passed_ball",
     "initial": null,
@@ -442,6 +493,8 @@
     "batterId": 663624,
     "currentEvent": "Field Error",
     "currentDescription": "Ryan Mountcastle reaches on a fielding error by right fielder Hunter Renfroe. Ryan Mountcastle to 3rd.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-04-06",
     "gameType": "R",
     "away": "BAL",
@@ -488,6 +541,8 @@
     "batterId": 686668,
     "currentEvent": "Single",
     "currentDescription": "Brenton Doyle singles on a ground ball to second baseman Brice Turang.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-04-10",
     "gameType": "R",
     "away": "MIL",
@@ -545,6 +600,8 @@
     "batterId": 701358,
     "currentEvent": "Walk",
     "currentDescription": "Cam Smith walks. Yainer Diaz to 2nd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-08-29",
     "gameType": "R",
     "away": "LAA",
@@ -593,6 +650,8 @@
     "batterId": 672515,
     "currentEvent": "Single",
     "currentDescription": "Gabriel Moreno singles on a line drive to center fielder Cedric Mullins.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-04-08",
     "gameType": "R",
     "away": "BAL",
@@ -634,6 +693,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:3",
      "batter_not_found"
     ],
     "officialDate": "2025-04-14",
@@ -682,6 +742,8 @@
     "batterId": 593428,
     "currentEvent": "Double",
     "currentDescription": "Xander Bogaerts doubles (4) on a line drive to left fielder Miguel Andujar.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2025-04-09",
     "gameType": "R",
     "away": "SD",
@@ -728,6 +790,8 @@
     "batterId": 624585,
     "currentEvent": "Single",
     "currentDescription": "Jorge Soler singles on a sharp ground ball to left fielder Jose Altuve, deflected by shortstop Jeremy Peña.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-04-11",
     "gameType": "R",
     "away": "LAA",
@@ -780,6 +844,8 @@
     "batterId": 514888,
     "currentEvent": "Single",
     "currentDescription": "Jose Altuve singles on a fly ball to right fielder Mike Trout. Jose Altuve out at 2nd, second baseman Kyren Paris to shortstop Tim Anderson to first baseman Nolan Schanuel.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-04-11",
     "gameType": "R",
     "away": "LAA",
@@ -832,6 +898,8 @@
     "batterId": 596019,
     "currentEvent": "Single",
     "currentDescription": "Francisco Lindor singles on a sharp ground ball to second baseman Max Muncy.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2025-04-12",
     "gameType": "R",
     "away": "NYM",
@@ -884,6 +952,8 @@
     "batterId": 624585,
     "currentEvent": "Single",
     "currentDescription": "Jorge Soler singles on a ground ball to third baseman José Ramírez.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-04-05",
     "gameType": "R",
     "away": "CLE",
@@ -891,7 +961,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0697,
+    "p": 0.0698,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -912,6 +982,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.575,
+    "ls": 103.4,
+    "la": 3,
+    "gameDate": "2025-04-12",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -936,6 +1013,8 @@
     "batterId": 676059,
     "currentEvent": "Field Error",
     "currentDescription": "Jordan Westburg reaches on a missed catch error by first baseman Vladimir Guerrero Jr., assist to shortstop Bo Bichette. Ryan O'Hearn to 3rd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-04-12",
     "gameType": "R",
     "away": "TOR",
@@ -943,7 +1022,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0035,
+    "p": 0.0034,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -988,6 +1067,8 @@
     "batterId": 641658,
     "currentEvent": "Single",
     "currentDescription": "Diamondbacks challenged (play at 1st), call on the field was overturned: Garrett Hampson singles on a soft ground ball to first baseman Eric Wagaman. Eugenio Suárez to 3rd. Gabriel Moreno to 2nd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-04-15",
     "gameType": "R",
     "away": "AZ",
@@ -1032,6 +1113,8 @@
     "batterId": 669397,
     "currentEvent": "Single",
     "currentDescription": "Nick Allen singles on a ground ball to left fielder Alan Roden.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-04-15",
     "gameType": "R",
     "away": "ATL",
@@ -1078,6 +1161,8 @@
     "batterId": 578428,
     "currentEvent": "Single",
     "currentDescription": "Jose Iglesias singles on a ground ball to third baseman Matt Shaw.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2025-04-14",
     "gameType": "R",
     "away": "CHC",
@@ -1130,6 +1215,8 @@
     "batterId": 665839,
     "currentEvent": "Single",
     "currentDescription": "Pirates challenged (tag play), call on the field was upheld: Enmanuel Valdez singles on a fly ball to left fielder Steven Kwan. Oneil Cruz scores. Bryan Reynolds out at 3rd on the throw, left fielder Steven Kwan to third baseman José Ramírez. Enmanuel Valdez to 2nd.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-04-18",
     "gameType": "R",
     "away": "CLE",
@@ -1176,6 +1263,8 @@
     "batterId": 663728,
     "currentEvent": "Single",
     "currentDescription": "Cal Raleigh singles on a ground ball to left fielder Blake Dunn. Julio Rodríguez scores. Jorge Polanco to 3rd.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-04-17",
     "gameType": "R",
     "away": "SEA",
@@ -1228,6 +1317,8 @@
     "batterId": 661388,
     "currentEvent": "Single",
     "currentDescription": "William Contreras singles on a sharp ground ball to shortstop Jacob Wilson. Christian Yelich scores. Throwing error by shortstop Jacob Wilson.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2025-04-20",
     "gameType": "R",
     "away": "ATH",
@@ -1280,6 +1371,8 @@
     "batterId": 660757,
     "currentEvent": "Single",
     "currentDescription": "Oscar Gonzalez singles on a ground ball to right fielder Zach McKinstry. Manny Machado scores. Oscar Gonzalez out at 2nd, third baseman Jace Jung to shortstop Trey Sweeney. Connor Joe to 3rd.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-04-21",
     "gameType": "R",
     "away": "SD",
@@ -1330,6 +1423,8 @@
     "batterId": 676609,
     "currentEvent": "Groundout",
     "currentDescription": "José Caballero grounds out, shortstop Anthony Volpe to first baseman Paul Goldschmidt.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-04-20",
     "gameType": "R",
     "away": "NYY",
@@ -1383,6 +1478,8 @@
     "batterId": 668930,
     "currentEvent": "Strikeout",
     "currentDescription": "Brice Turang called out on strikes.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2025-04-21",
     "gameType": "R",
     "away": "MIL",
@@ -1429,6 +1526,8 @@
     "batterId": 606992,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Eric Haase hits a sacrifice bunt. Missed catch error by first baseman LaMonte Wade Jr., assist to third baseman Matt Chapman. Joey Ortiz scores. Vinny Capra scores. Eric Haase to 2nd.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-04-24",
     "gameType": "R",
     "away": "MIL",
@@ -1475,6 +1574,8 @@
     "batterId": 660271,
     "currentEvent": "Single",
     "currentDescription": "Shohei Ohtani singles on a ground ball to shortstop Dansby Swanson, deflected by third baseman Gage Workman.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2025-04-22",
     "gameType": "R",
     "away": "LAD",
@@ -1525,6 +1626,8 @@
     "batterId": 661388,
     "currentEvent": "Pop Out",
     "currentDescription": "William Contreras pops out to shortstop Masyn Winn.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-04-26",
     "gameType": "R",
     "away": "MIL",
@@ -1547,6 +1650,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.201,
+    "ls": 97.1,
+    "la": -12,
+    "gameDate": "2025-04-27",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -1571,6 +1681,8 @@
     "batterId": 666182,
     "currentEvent": "Field Error",
     "currentDescription": "Bo Bichette reaches on a throwing error by third baseman Oswaldo Cabrera. Bo Bichette to 2nd.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2025-04-27",
     "gameType": "R",
     "away": "TOR",
@@ -1578,7 +1690,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0074,
+    "p": 0.0075,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -1599,6 +1711,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.443,
+    "ls": 98.4,
+    "la": 3,
+    "gameDate": "2025-04-25",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -1623,6 +1742,8 @@
     "batterId": 669701,
     "currentEvent": "Field Error",
     "currentDescription": "Josh Smith reaches on a fielding error by shortstop Willy Adames.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-04-25",
     "gameType": "R",
     "away": "TEX",
@@ -1630,7 +1751,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0045,
+    "p": 0.0044,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -1673,6 +1794,8 @@
     "batterId": 680977,
     "currentEvent": "Single",
     "currentDescription": "Brendan Donovan singles on a line drive to left fielder Santiago Espinal.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-05-01",
     "gameType": "R",
     "away": "STL",
@@ -1717,6 +1840,8 @@
     "batterId": 686668,
     "currentEvent": "Walk",
     "currentDescription": "Brenton Doyle walks.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2025-05-02",
     "gameType": "R",
     "away": "COL",
@@ -1761,6 +1886,8 @@
     "batterId": 668901,
     "currentEvent": "Forceout",
     "currentDescription": "Mark Vientos grounds into a force out, second baseman Nolan Gorman to shortstop Masyn Winn. Brandon Nimmo scores. Jesse Winker out at 2nd. Mark Vientos to 1st. Mark Vientos advances to 1st, on a missed catch error by first baseman Willson Contreras, assist to shortstop Masyn Winn.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-05-02",
     "gameType": "R",
     "away": "NYM",
@@ -1807,6 +1934,8 @@
     "batterId": 669394,
     "currentEvent": "Single",
     "currentDescription": "Jake Burger singles on a line drive to right fielder Lawrence Butler. Jonah Heim scores. Marcus Semien to 3rd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-04-29",
     "gameType": "R",
     "away": "ATH",
@@ -1829,6 +1958,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.321,
+    "ls": 57.8,
+    "la": -53,
+    "gameDate": "2025-05-04",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "error_added",
     "initial": null,
@@ -1851,6 +1987,8 @@
     "batterId": 665926,
     "currentEvent": "Field Error",
     "currentDescription": "Andrés Giménez reaches on a fielding error by pitcher Emmanuel Clase. Andrés Giménez to 2nd. Andrés Giménez advances to 2nd, on a throwing error by pitcher Emmanuel Clase.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-05-04",
     "gameType": "R",
     "away": "CLE",
@@ -1897,6 +2035,8 @@
     "batterId": 596019,
     "currentEvent": "Double",
     "currentDescription": "Francisco Lindor doubles (7) on a sharp line drive to left fielder Lourdes Gurriel Jr. José Azócar scores. Tyrone Taylor scores.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2025-05-07",
     "gameType": "R",
     "away": "NYM",
@@ -1947,6 +2087,8 @@
     "batterId": 677950,
     "currentEvent": "Single",
     "currentDescription": "Alek Thomas singles on a ground ball to first baseman Pete Alonso.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-05-05",
     "gameType": "R",
     "away": "NYM",
@@ -1975,6 +2117,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.547,
+    "ls": 111.2,
+    "la": 0,
+    "gameDate": "2025-05-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -2001,6 +2150,8 @@
     "batterId": 545341,
     "currentEvent": "Field Error",
     "currentDescription": "Randal Grichuk reaches on a fielding error by third baseman Mark Vientos. Randal Grichuk to 2nd.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2025-05-06",
     "gameType": "R",
     "away": "NYM",
@@ -2008,7 +2159,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0033,
+    "p": 0.0032,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2054,6 +2205,8 @@
     "batterId": 621035,
     "currentEvent": "Single",
     "currentDescription": "Chris Taylor singles on a soft bunt ground ball to pitcher Eduardo Rodriguez. Miguel Rojas to 3rd. James Outman to 2nd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-05-09",
     "gameType": "R",
     "away": "LAD",
@@ -2095,6 +2248,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:6",
      "batter_not_found"
     ],
     "officialDate": "2025-05-11",
@@ -2145,6 +2299,8 @@
     "batterId": 669289,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Santiago Espinal reaches on a fielder's choice, fielded by third baseman Austin Riley. Spencer Steer to 3rd. Spencer Steer advances to 3rd, on a fielding error by third baseman Austin Riley.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-05-08",
     "gameType": "R",
     "away": "CIN",
@@ -2197,6 +2353,8 @@
     "batterId": 643289,
     "currentEvent": "Single",
     "currentDescription": "Mauricio Dubón singles on a ground ball to shortstop Elly De La Cruz.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-05-09",
     "gameType": "R",
     "away": "CIN",
@@ -2247,6 +2405,8 @@
     "batterId": 686611,
     "currentEvent": "Single",
     "currentDescription": "Dylan Crews singles on a ground ball to shortstop Nick Allen. Keibert Ruiz scores. Nasim Nuñez scores. Throwing error by shortstop Nick Allen.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2025-05-12",
     "gameType": "R",
     "away": "WSH",
@@ -2293,6 +2453,8 @@
     "batterId": 663647,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Umpire reviewed (play at 1st), call on the field was overturned: Ke'Bryan Hayes reaches on a fielder's choice, fielded by third baseman Luisangel Acuña. Jihwan Bae scores. Jared Triolo to 3rd.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2025-05-12",
     "gameType": "R",
     "away": "PIT",
@@ -2339,6 +2501,8 @@
     "batterId": 596019,
     "currentEvent": "Single",
     "currentDescription": "Francisco Lindor singles on a ground ball to center fielder Jihwan Bae.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-05-12",
     "gameType": "R",
     "away": "PIT",
@@ -2346,7 +2510,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2198,
+    "p": 0.22,
     "score": 22,
     "kind": "out_of_fold"
    }
@@ -2391,6 +2555,8 @@
     "batterId": 663698,
     "currentEvent": "Single",
     "currentDescription": "Joey Bart singles on a ground ball to shortstop Nick Allen. Adam Frazier scores. Ke'Bryan Hayes to 3rd. Andrew McCutchen to 2nd.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-05-11",
     "gameType": "R",
     "away": "ATL",
@@ -2413,6 +2579,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.628,
+    "ls": 103.5,
+    "la": 6,
+    "gameDate": "2025-05-09",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -2437,6 +2610,8 @@
     "batterId": 691182,
     "currentEvent": "Field Error",
     "currentDescription": "Adael Amador reaches on a fielding error by second baseman Jake Cronenworth. Sean Bouchard to 2nd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-05-09",
     "gameType": "R",
     "away": "SD",
@@ -2489,6 +2664,8 @@
     "batterId": 694671,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Wyatt Langford reaches on a fielder's choice, fielded by third baseman Ben Williamson. Blaine Crim to 3rd. Josh Smith to 2nd. Fielding error by third baseman Ben Williamson.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-05-04",
     "gameType": "R",
     "away": "SEA",
@@ -2511,6 +2688,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.136,
+    "ls": 92.5,
+    "la": -14,
+    "gameDate": "2025-05-11",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -2535,6 +2719,8 @@
     "batterId": 663616,
     "currentEvent": "Field Error",
     "currentDescription": "Trevor Larnach reaches on a throwing error by first baseman LaMonte Wade Jr.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2025-05-11",
     "gameType": "R",
     "away": "SF",
@@ -2542,7 +2728,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0083,
+    "p": 0.0085,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -2563,6 +2749,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.42,
+    "ls": 99.3,
+    "la": 2,
+    "gameDate": "2025-05-13",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -2587,6 +2780,8 @@
     "batterId": 669707,
     "currentEvent": "Field Error",
     "currentDescription": "Jared Triolo reaches on a fielding error by third baseman Mark Vientos. Alexander Canario to 3rd. Jared Triolo to 2nd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-05-13",
     "gameType": "R",
     "away": "PIT",
@@ -2594,7 +2789,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0048,
+    "p": 0.0047,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2615,6 +2810,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.182,
+    "ls": 48.8,
+    "la": -86,
+    "gameDate": "2025-05-17",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -2639,6 +2841,8 @@
     "batterId": 677008,
     "currentEvent": "Field Error",
     "currentDescription": "Heston Kjerstad reaches on a missed catch error by first baseman Nathaniel Lowe, assist to pitcher Jake Irvin. Ramón Urías to 3rd. Ramón Urías advances to 3rd, on a fielding error by first baseman Nathaniel Lowe.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-05-17",
     "gameType": "R",
     "away": "WSH",
@@ -2683,6 +2887,8 @@
     "batterId": 669720,
     "currentEvent": "Double",
     "currentDescription": "Austin Hays doubles (5) on a fly ball to center fielder Angel Martínez. Santiago Espinal scores. Austin Hays to 3rd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-05-17",
     "gameType": "R",
     "away": "CLE",
@@ -2705,6 +2911,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.091,
+    "ls": 59.4,
+    "la": -28,
+    "gameDate": "2025-05-16",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -2729,6 +2942,8 @@
     "batterId": 802415,
     "currentEvent": "Field Error",
     "currentDescription": "Chandler Simpson reaches on a throwing error by second baseman Ronny Simon. José Caballero scores. Chandler Simpson to 2nd.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-05-16",
     "gameType": "R",
     "away": "TB",
@@ -2736,7 +2951,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0127,
+    "p": 0.0132,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -2781,6 +2996,8 @@
     "batterId": 664913,
     "currentEvent": "Single",
     "currentDescription": "Seth Brown singles on a sharp line drive to right fielder Jo Adell, deflected by second baseman Tim Anderson.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-05-21",
     "gameType": "R",
     "away": "LAA",
@@ -2831,6 +3048,8 @@
     "batterId": 624585,
     "currentEvent": "Catcher Interference",
     "currentDescription": "Jorge Soler reaches on catcher interference by Nick Fortes. Nolan Schanuel scores. Yoán Moncada to 3rd. Taylor Ward to 2nd. Jorge Soler to 1st.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-05-23",
     "gameType": "R",
     "away": "MIA",
@@ -2853,6 +3072,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.621,
+    "ls": 102.5,
+    "la": 32,
+    "gameDate": "2025-05-24",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -2877,6 +3103,8 @@
     "batterId": 596103,
     "currentEvent": "Field Error",
     "currentDescription": "Austin Slater reaches on a fielding error by left fielder Wyatt Langford. Austin Slater to 3rd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-05-24",
     "gameType": "R",
     "away": "TEX",
@@ -2929,6 +3157,8 @@
     "batterId": 669127,
     "currentEvent": "Single",
     "currentDescription": "Shea Langeliers singles on a ground ball to left fielder Weston Wilson, deflected by shortstop Trea Turner.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2025-05-24",
     "gameType": "R",
     "away": "PHI",
@@ -2936,7 +3166,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0879,
+    "p": 0.0878,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -2981,6 +3211,8 @@
     "batterId": 543309,
     "currentEvent": "Single",
     "currentDescription": "Kyle Higashioka singles on a ground ball to third baseman Miguel Vargas. Josh Jung scores.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2025-05-25",
     "gameType": "R",
     "away": "TEX",
@@ -2988,7 +3220,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0837,
+    "p": 0.0836,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -3033,6 +3265,8 @@
     "batterId": 605170,
     "currentEvent": "Single",
     "currentDescription": "Victor Caratini singles on a ground ball to right fielder Dylan Moore, deflected by second baseman Leo Rivas. Christian Walker scores.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2025-05-24",
     "gameType": "R",
     "away": "SEA",
@@ -3085,6 +3319,8 @@
     "batterId": 608070,
     "currentEvent": "Single",
     "currentDescription": "José Ramírez singles on a ground ball to first baseman Freddie Freeman.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-05-27",
     "gameType": "R",
     "away": "LAD",
@@ -3092,7 +3328,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0377,
+    "p": 0.0378,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3135,6 +3371,8 @@
     "batterId": 656716,
     "currentEvent": "Forceout",
     "currentDescription": "Zach McKinstry grounds into a force out, second baseman Jonathan India to shortstop Bobby Witt Jr. Wenceel Pérez out at 2nd. Zach McKinstry to 1st.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-05-30",
     "gameType": "R",
     "away": "DET",
@@ -3157,6 +3395,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.06,
+    "ls": 64.3,
+    "la": -30,
+    "gameDate": "2025-06-03",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -3181,6 +3426,8 @@
     "batterId": 687263,
     "currentEvent": "Field Error",
     "currentDescription": "Zach Neto reaches on a throwing error by third baseman Abraham Toro.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-06-03",
     "gameType": "R",
     "away": "LAA",
@@ -3188,7 +3435,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0141,
+    "p": 0.0148,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3233,6 +3480,8 @@
     "batterId": 672386,
     "currentEvent": "Double",
     "currentDescription": "Alejandro Kirk doubles (6) on a fly ball to center fielder Johan Rojas. Vladimir Guerrero Jr. scores.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-06-04",
     "gameType": "R",
     "away": "PHI",
@@ -3255,6 +3504,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.072,
+    "ls": 75.3,
+    "la": -14,
+    "gameDate": "2025-06-03",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -3279,6 +3535,8 @@
     "batterId": 695734,
     "currentEvent": "Field Error",
     "currentDescription": "Daylen Lile reaches on a fielding error by first baseman Michael Busch. José Tena to 3rd. Daylen Lile to 2nd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-06-03",
     "gameType": "R",
     "away": "CHC",
@@ -3286,8 +3544,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0144,
-    "score": 1,
+    "p": 0.0152,
+    "score": 2,
     "kind": "out_of_fold"
    }
   },
@@ -3331,6 +3589,8 @@
     "batterId": 669364,
     "currentEvent": "Double",
     "currentDescription": "Xavier Edwards doubles (5) on a ground ball to left fielder Heliot Ramos.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-06-01",
     "gameType": "R",
     "away": "SF",
@@ -3372,6 +3632,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:16",
      "batter_not_found"
     ],
     "officialDate": "2025-06-07",
@@ -3420,6 +3681,8 @@
     "batterId": 666464,
     "currentEvent": "Single",
     "currentDescription": "Jerar Encarnacion singles on a ground ball to third baseman Manny Machado.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-06-03",
     "gameType": "R",
     "away": "SD",
@@ -3427,7 +3690,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0428,
+    "p": 0.0429,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3473,6 +3736,8 @@
     "batterId": 666134,
     "currentEvent": "Lineout",
     "currentDescription": "Nolan Jones lines out to second baseman Matt McLain.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-06-09",
     "gameType": "R",
     "away": "CIN",
@@ -3519,6 +3784,8 @@
     "batterId": 701538,
     "currentEvent": "Double",
     "currentDescription": "Jackson Merrill doubles (10) on a sharp line drive to right fielder Teoscar Hernández. Luis Arraez scores.",
+    "inning": 10,
+    "half": "bottom",
     "officialDate": "2025-06-09",
     "gameType": "R",
     "away": "LAD",
@@ -3565,6 +3832,8 @@
     "batterId": 686948,
     "currentEvent": "Single",
     "currentDescription": "Drake Baldwin singles on a ground ball to second baseman Ketel Marte. Ronald Acuña Jr. to 2nd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-06-05",
     "gameType": "R",
     "away": "AZ",
@@ -3572,7 +3841,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0526,
+    "p": 0.0527,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -3617,6 +3886,8 @@
     "batterId": 668670,
     "currentEvent": "Single",
     "currentDescription": "Jake Rogers singles on a ground ball to third baseman Matt Shaw. Zach McKinstry scores.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2025-06-07",
     "gameType": "R",
     "away": "CHC",
@@ -3663,6 +3934,8 @@
     "batterId": 669743,
     "currentEvent": "Single",
     "currentDescription": "Alex Call singles on a sharp ground ball to first baseman Josh Smith.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-06-08",
     "gameType": "R",
     "away": "TEX",
@@ -3670,7 +3943,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0605,
+    "p": 0.0606,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -3715,6 +3988,8 @@
     "batterId": 687263,
     "currentEvent": "Single",
     "currentDescription": "Zach Neto singles on a sharp ground ball to shortstop J.P. Crawford, deflected by third baseman Ben Williamson.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2025-06-06",
     "gameType": "R",
     "away": "SEA",
@@ -3765,6 +4040,8 @@
     "batterId": 622569,
     "currentEvent": "Single",
     "currentDescription": "Pablo Reyes singles on a line drive to right fielder Jac Caglianone.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2025-06-12",
     "gameType": "R",
     "away": "NYY",
@@ -3809,6 +4086,8 @@
     "batterId": 543760,
     "currentEvent": "Single",
     "currentDescription": "Marcus Semien singles on a line drive to center fielder Robert Hassell III. Sam Haggerty scores. Josh Jung scores. Marcus Semien to 3rd. Fielding error by center fielder Robert Hassell III.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2025-06-07",
     "gameType": "R",
     "away": "TEX",
@@ -3855,6 +4134,8 @@
     "batterId": 666969,
     "currentEvent": "Single",
     "currentDescription": "Adolis García singles on a ground ball to third baseman Royce Lewis.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2025-06-10",
     "gameType": "R",
     "away": "TEX",
@@ -3907,6 +4188,8 @@
     "batterId": 623168,
     "currentEvent": "Single",
     "currentDescription": "Tyler Heineman singles on a ground ball to second baseman Nolan Gorman. Tyler Heineman to 2nd. Tyler Heineman advances to 2nd, on a fielding error by second baseman Nolan Gorman.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-06-11",
     "gameType": "R",
     "away": "TOR",
@@ -3914,7 +4197,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0222,
+    "p": 0.0223,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -3957,6 +4240,8 @@
     "batterId": 672580,
     "currentEvent": "Single",
     "currentDescription": "Maikel Garcia singles on a line drive to left fielder Tyler Soderstrom.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-06-14",
     "gameType": "R",
     "away": "ATH",
@@ -3979,6 +4264,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.126,
+    "ls": 76.8,
+    "la": -45,
+    "gameDate": "2025-06-14",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -4003,6 +4295,8 @@
     "batterId": 686948,
     "currentEvent": "Field Error",
     "currentDescription": "Drake Baldwin reaches on a fielding error by pitcher Chase Dollander. Drake Baldwin to 2nd. Drake Baldwin advances to 2nd, on a throwing error by pitcher Chase Dollander.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-06-14",
     "gameType": "R",
     "away": "COL",
@@ -4044,6 +4338,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:3",
      "batter_not_found"
     ],
     "officialDate": "2025-06-15",
@@ -4092,6 +4387,8 @@
     "batterId": 669364,
     "currentEvent": "Single",
     "currentDescription": "Xavier Edwards singles on a ground ball to second baseman Nick Gonzales. Heriberto Hernández to 3rd.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-06-09",
     "gameType": "R",
     "away": "MIA",
@@ -4144,6 +4441,8 @@
     "batterId": 666149,
     "currentEvent": "Single",
     "currentDescription": "Tyler Fitzgerald singles on a ground ball to third baseman Orlando Arcia. Tyler Fitzgerald out at 2nd, second baseman Thairo Estrada to shortstop Ryan Ritter to first baseman Keston Hiura.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2025-06-11",
     "gameType": "R",
     "away": "SF",
@@ -4151,7 +4450,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.028,
+    "p": 0.0281,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -4172,6 +4471,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.056,
+    "ls": 78.2,
+    "la": -9,
+    "gameDate": "2025-06-11",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -4196,6 +4502,8 @@
     "batterId": 518692,
     "currentEvent": "Field Error",
     "currentDescription": "Freddie Freeman reaches on a fielding error by pitcher Adrian Morejon.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-06-11",
     "gameType": "R",
     "away": "LAD",
@@ -4203,7 +4511,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0123,
+    "p": 0.0129,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4248,6 +4556,8 @@
     "batterId": 608369,
     "currentEvent": "Single",
     "currentDescription": "Corey Seager singles on a ground ball to shortstop Chase Meidroth, deflected by second baseman Brooks Baldwin. Wyatt Langford to 2nd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-06-14",
     "gameType": "R",
     "away": "CWS",
@@ -4270,6 +4580,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.395,
+    "ls": 65.2,
+    "la": 41,
+    "gameDate": "2025-06-15",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -4294,6 +4611,8 @@
     "batterId": 671221,
     "currentEvent": "Field Error",
     "currentDescription": "Drew Waters reaches on a fielding error by second baseman Max Schuemann.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-06-15",
     "gameType": "R",
     "away": "ATH",
@@ -4301,7 +4620,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0059,
+    "p": 0.0057,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4346,6 +4665,8 @@
     "batterId": 690022,
     "currentEvent": "Single",
     "currentDescription": "Ryan Ritter singles on a soft bunt ground ball to pitcher Grant Holmes. Ryan Ritter to 3rd. Ryan Ritter advances to 3rd, on a throwing error by pitcher Grant Holmes.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-06-15",
     "gameType": "R",
     "away": "COL",
@@ -4353,7 +4674,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0977,
+    "p": 0.0976,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -4398,6 +4719,8 @@
     "batterId": 676391,
     "currentEvent": "Single",
     "currentDescription": "Ernie Clement singles on a ground ball to first baseman Otto Kemp.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2025-06-13",
     "gameType": "R",
     "away": "TOR",
@@ -4405,7 +4728,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0554,
+    "p": 0.0555,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -4426,6 +4749,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.597,
+    "ls": 82.1,
+    "la": 22,
+    "gameDate": "2025-06-17",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -4450,6 +4780,8 @@
     "batterId": 669364,
     "currentEvent": "Field Error",
     "currentDescription": "Xavier Edwards reaches on a fielding error by right fielder Max Kepler. Javier Sanoja scores.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-06-17",
     "gameType": "R",
     "away": "PHI",
@@ -4497,6 +4829,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:13",
      "batter_not_found"
     ],
     "officialDate": "2025-06-21",
@@ -4521,6 +4854,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.494,
+    "ls": 100.9,
+    "la": 1,
+    "gameDate": "2025-06-24",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "earned_run",
     "initial": null,
@@ -4545,6 +4885,8 @@
     "batterId": 669242,
     "currentEvent": "Field Error",
     "currentDescription": "Tommy Edman reaches on a fielding error by first baseman Michael Toglia. Tommy Edman to 2nd.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-06-24",
     "gameType": "R",
     "away": "LAD",
@@ -4591,6 +4933,8 @@
     "batterId": 666158,
     "currentEvent": "Single",
     "currentDescription": "Gavin Lux singles on a ground ball to second baseman Brendan Donovan.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-06-20",
     "gameType": "R",
     "away": "CIN",
@@ -4598,7 +4942,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0929,
+    "p": 0.0928,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -4643,6 +4987,8 @@
     "batterId": 695336,
     "currentEvent": "Single",
     "currentDescription": "Thomas Saggese singles on a ground ball to second baseman Matt McLain. Nolan Arenado to 2nd.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-06-22",
     "gameType": "R",
     "away": "CIN",
@@ -4650,7 +4996,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0509,
+    "p": 0.051,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4695,6 +5041,8 @@
     "batterId": 595879,
     "currentEvent": "Single",
     "currentDescription": "Javier Báez singles on a ground ball to second baseman Brandon Lowe. Wenceel Pérez to 2nd.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2025-06-21",
     "gameType": "R",
     "away": "DET",
@@ -4717,6 +5065,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.207,
+    "ls": 42.5,
+    "la": -66,
+    "gameDate": "2025-06-25",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -4741,6 +5096,8 @@
     "batterId": 683737,
     "currentEvent": "Field Error",
     "currentDescription": "Michael Busch reaches on a fielding error by catcher Yohel Pozo. Dansby Swanson to 2nd.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-06-25",
     "gameType": "R",
     "away": "CHC",
@@ -4793,6 +5150,8 @@
     "batterId": 656976,
     "currentEvent": "Single",
     "currentDescription": "Pavin Smith singles on a soft ground ball to pitcher Grant Taylor.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2025-06-25",
     "gameType": "R",
     "away": "AZ",
@@ -4821,6 +5180,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.273,
+    "ls": 100.9,
+    "la": -6,
+    "gameDate": "2025-06-25",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -4845,6 +5211,8 @@
     "batterId": 670623,
     "currentEvent": "Field Error",
     "currentDescription": "Isaac Paredes reaches on a fielding error by shortstop Trea Turner. Jeremy Peña scores.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2025-06-25",
     "gameType": "R",
     "away": "PHI",
@@ -4900,6 +5268,8 @@
     "batterId": 663330,
     "currentEvent": "Lineout",
     "currentDescription": "Jahmai Jones lines out to right fielder Lawrence Butler.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-06-24",
     "gameType": "R",
     "away": "ATH",
@@ -4946,6 +5316,8 @@
     "batterId": 624431,
     "currentEvent": "Field Error",
     "currentDescription": "Jose Trevino reaches on a throwing error by shortstop Anthony Volpe. Spencer Steer scores.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-06-23",
     "gameType": "R",
     "away": "NYY",
@@ -4953,7 +5325,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0114,
+    "p": 0.0118,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4998,6 +5370,8 @@
     "batterId": 642851,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Austin Wynns hits a sacrifice bunt. Tyler Soderstrom to 3rd. Luis Urías to 2nd. Austin Wynns to 1st.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-06-20",
     "gameType": "R",
     "away": "CLE",
@@ -5044,6 +5418,8 @@
     "batterId": 691016,
     "currentEvent": "Single",
     "currentDescription": "Tyler Soderstrom singles on a ground ball to shortstop Anthony Volpe, deflected by third baseman Jazz Chisholm Jr. Nick Kurtz to 2nd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-06-27",
     "gameType": "R",
     "away": "ATH",
@@ -5096,6 +5472,8 @@
     "batterId": 665862,
     "currentEvent": "Double",
     "currentDescription": "Jazz Chisholm Jr. doubles (8) on a sharp line drive to center fielder Denzel Clarke. Trent Grisham scores. Aaron Judge scores. Ben Rice scores. Jazz Chisholm Jr. to 3rd. Fielding error by center fielder Denzel Clarke.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-06-29",
     "gameType": "R",
     "away": "ATH",
@@ -5142,6 +5520,8 @@
     "batterId": 676609,
     "currentEvent": "Single",
     "currentDescription": "José Caballero singles on a bunt ground ball to pitcher Jacob Lopez, deflected by first baseman Nick Kurtz. Jake Mangum scores. Jonathan Aranda to 2nd.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2025-06-30",
     "gameType": "R",
     "away": "ATH",
@@ -5164,6 +5544,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.227,
+    "ls": 103.7,
+    "la": -17,
+    "gameDate": "2025-06-29",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5190,6 +5577,8 @@
     "batterId": 695734,
     "currentEvent": "Field Error",
     "currentDescription": "Daylen Lile reaches on a fielding error by first baseman Nolan Schanuel. Daylen Lile to 2nd.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2025-06-29",
     "gameType": "R",
     "away": "WSH",
@@ -5197,7 +5586,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0076,
+    "p": 0.0077,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5242,6 +5631,8 @@
     "batterId": 663330,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Jahmai Jones reaches on a fielder's choice, fielded by third baseman Max Muncy. Parker Meadows scores. Gleyber Torres scores. Jahmai Jones to 2nd. Fielding error by third baseman Max Muncy.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-06-26",
     "gameType": "R",
     "away": "ATH",
@@ -5288,6 +5679,8 @@
     "batterId": 669289,
     "currentEvent": "Single",
     "currentDescription": "Santiago Espinal singles on a ground ball to shortstop Trevor Story.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-06-30",
     "gameType": "R",
     "away": "CIN",
@@ -5295,7 +5688,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0382,
+    "p": 0.0383,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -5340,6 +5733,8 @@
     "batterId": 572233,
     "currentEvent": "Single",
     "currentDescription": "Christian Walker singles on a ground ball to first baseman Michael Toglia.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2025-07-01",
     "gameType": "R",
     "away": "HOU",
@@ -5347,7 +5742,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1256,
+    "p": 0.1255,
     "score": 13,
     "kind": "out_of_fold"
    }
@@ -5392,6 +5787,8 @@
     "batterId": 571448,
     "currentEvent": "Single",
     "currentDescription": "Nolan Arenado singles on a ground ball to second baseman Nico Hoerner, deflected by first baseman Michael Busch. Alec Burleson to 2nd.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-07-04",
     "gameType": "R",
     "away": "STL",
@@ -5399,7 +5796,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1115,
+    "p": 0.1114,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -5445,6 +5842,8 @@
     "batterId": 656537,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Derek Hill reaches on a fielder's choice, fielded by third baseman Noelvi Marte. Eric Wagaman scores. Derek Hill to 3rd. Derek Hill advances to 3rd, on a throwing error by third baseman Noelvi Marte. Derek Hill advances to 3rd, on a throwing error by pitcher Lyon Richardson.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-07-07",
     "gameType": "R",
     "away": "MIA",
@@ -5467,6 +5866,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.303,
+    "ls": 85.3,
+    "la": 4,
+    "gameDate": "2025-07-08",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5491,6 +5897,8 @@
     "batterId": 691785,
     "currentEvent": "Field Error",
     "currentDescription": "Marcelo Mayer reaches on a fielding error by shortstop Ryan Ritter.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-07-08",
     "gameType": "R",
     "away": "COL",
@@ -5519,6 +5927,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.05,
+    "ls": 90.9,
+    "la": -41,
+    "gameDate": "2025-07-08",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5543,6 +5958,8 @@
     "batterId": 672724,
     "currentEvent": "Field Error",
     "currentDescription": "Oswald Peraza reaches on a fielding error by second baseman Cole Young. Paul Goldschmidt scores. Anthony Volpe to 2nd.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2025-07-08",
     "gameType": "R",
     "away": "SEA",
@@ -5550,7 +5967,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0163,
+    "p": 0.0173,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -5593,6 +6010,8 @@
     "batterId": 669364,
     "currentEvent": "Bunt Groundout",
     "currentDescription": "Xavier Edwards bunt grounds out softly, pitcher Dean Kremer to first baseman Ryan O'Hearn. Connor Norby to 3rd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-07-11",
     "gameType": "R",
     "away": "MIA",
@@ -5639,6 +6058,8 @@
     "batterId": 643565,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Mike Tauchman reaches on a fielder's choice, fielded by shortstop Brayan Rocchio. Colson Montgomery scores. Michael A. Taylor to 2nd.",
+    "inning": 11,
+    "half": "bottom",
     "officialDate": "2025-07-11",
     "gameType": "R",
     "away": "CLE",
@@ -5683,6 +6104,8 @@
     "batterId": 701538,
     "currentEvent": "Single",
     "currentDescription": "Jackson Merrill singles on a soft bunt ground ball to pitcher Ranger Suarez. Xander Bogaerts to 3rd. Xander Bogaerts advances to 3rd, on a throwing error by pitcher Ranger Suarez.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-07-11",
     "gameType": "R",
     "away": "PHI",
@@ -5729,6 +6152,8 @@
     "batterId": 682622,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Noelvi Marte reaches on a fielder's choice, fielded by second baseman Orlando Arcia. Will Benson scores.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-07-12",
     "gameType": "R",
     "away": "COL",
@@ -5775,6 +6200,8 @@
     "batterId": 669720,
     "currentEvent": "Single",
     "currentDescription": "Austin Hays singles on a ground ball to second baseman Kyle Farmer. Elly De La Cruz to 3rd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-07-13",
     "gameType": "R",
     "away": "COL",
@@ -5803,6 +6230,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.058,
+    "ls": 66.8,
+    "la": -33,
+    "gameDate": "2025-07-13",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5827,6 +6261,8 @@
     "batterId": 805779,
     "currentEvent": "Field Error",
     "currentDescription": "Jacob Wilson reaches on a throwing error by third baseman Addison Barger. Jacob Wilson to 2nd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-07-13",
     "gameType": "R",
     "away": "TOR",
@@ -5834,7 +6270,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0155,
+    "p": 0.0164,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -5877,6 +6313,8 @@
     "batterId": 701350,
     "currentEvent": "Groundout",
     "currentDescription": "Roman Anthony grounds out, third baseman Matt Shaw to first baseman Justin Turner. Jarren Duran to 3rd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-07-20",
     "gameType": "R",
     "away": "BOS",
@@ -5899,6 +6337,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.067,
+    "ls": 60.3,
+    "la": -29,
+    "gameDate": "2025-07-20",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5923,6 +6368,8 @@
     "batterId": 687221,
     "currentEvent": "Field Error",
     "currentDescription": "Dalton Rushing reaches on a missed catch error by first baseman Andrew Vaughn, assist to shortstop Joey Ortiz. Will Smith scores. Andy Pages to 3rd. James Outman to 2nd.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-07-20",
     "gameType": "R",
     "away": "MIL",
@@ -5930,7 +6377,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0125,
+    "p": 0.0128,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5973,6 +6420,8 @@
     "batterId": 677951,
     "currentEvent": "Walk",
     "currentDescription": "Bobby Witt Jr. walks.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-07-20",
     "gameType": "R",
     "away": "KC",
@@ -6017,6 +6466,8 @@
     "batterId": 666160,
     "currentEvent": "Single",
     "currentDescription": "Mickey Moniak singles on a line drive to center fielder Victor Scott II. Adael Amador scores. Mickey Moniak to 2nd. Fielding error by center fielder Victor Scott II.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-07-21",
     "gameType": "R",
     "away": "STL",
@@ -6061,6 +6512,8 @@
     "batterId": 802415,
     "currentEvent": "Single",
     "currentDescription": "Chandler Simpson singles on a line drive to center fielder Colton Cowser. Ha-Seong Kim scores.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-07-19",
     "gameType": "R",
     "away": "BAL",
@@ -6083,6 +6536,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.263,
+    "ls": 58.5,
+    "la": -72,
+    "gameDate": "2025-07-22",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "error_added",
     "initial": null,
@@ -6105,6 +6565,8 @@
     "batterId": 668904,
     "currentEvent": "Field Error",
     "currentDescription": "Royce Lewis reaches on a fielding error by pitcher Edgardo Henriquez. Carlos Correa scores. Ty France scores. Matt Wallner scores. Royce Lewis to 3rd. Throwing error by pitcher Edgardo Henriquez.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-07-22",
     "gameType": "R",
     "away": "MIN",
@@ -6151,6 +6613,8 @@
     "batterId": 671277,
     "currentEvent": "Single",
     "currentDescription": "Reds challenged (tag play), call on the field was upheld: Luis García Jr. singles on a ground ball to center fielder TJ Friedl. Luis García Jr. to 2nd. Luis García Jr. advances to 2nd, on a fielding error by shortstop Elly De La Cruz.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-07-23",
     "gameType": "R",
     "away": "CIN",
@@ -6197,6 +6661,8 @@
     "batterId": 694192,
     "currentEvent": "Single",
     "currentDescription": "Jackson Chourio singles on a ground ball to pitcher Matt Brash. Christian Yelich to 2nd.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-07-22",
     "gameType": "R",
     "away": "MIL",
@@ -6253,6 +6719,8 @@
     "batterId": 691781,
     "currentEvent": "Forceout",
     "currentDescription": "Brady House grounds into a force out, pitcher Chase Burns to catcher Tyler Stephenson. Josh Bell out at home. Nathaniel Lowe to 3rd. Luis García Jr. to 2nd. Brady House to 1st.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-07-22",
     "gameType": "R",
     "away": "CIN",
@@ -6299,6 +6767,8 @@
     "batterId": 650859,
     "currentEvent": "Single",
     "currentDescription": "Luis Rengifo singles on a ground ball to third baseman Otto Kemp. Jorge Soler to 2nd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-07-20",
     "gameType": "R",
     "away": "LAA",
@@ -6306,7 +6776,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1106,
+    "p": 0.1105,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -6351,6 +6821,8 @@
     "batterId": 677595,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Ronny Mauricio reaches on a fielder's choice, fielded by third baseman Yoán Moncada. Brett Baty scores. Francisco Alvarez to 3rd. Throwing error by third baseman Yoán Moncada.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-07-21",
     "gameType": "R",
     "away": "LAA",
@@ -6395,6 +6867,8 @@
     "batterId": 678011,
     "currentEvent": "Forceout",
     "currentDescription": "Anthony Seigler grounds into a force out, shortstop J.P. Crawford to second baseman Cole Young. Blake Perkins out at 2nd. Anthony Seigler to 1st.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-07-21",
     "gameType": "R",
     "away": "MIL",
@@ -6439,6 +6913,8 @@
     "batterId": 596103,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Austin Slater reaches on a fielder's choice, fielded by third baseman Vidal Bruján. Chase Meidroth to 2nd. Chase Meidroth advances to 2nd, on a fielding error by third baseman Vidal Bruján.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2025-07-25",
     "gameType": "R",
     "away": "CHC",
@@ -6483,6 +6959,8 @@
     "batterId": 671732,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Lawrence Butler out on a sacrifice bunt, third baseman Mauricio Dubón to first baseman Christian Walker. Jacob Wilson to 2nd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-07-25",
     "gameType": "R",
     "away": "ATH",
@@ -6524,6 +7002,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:13",
      "batter_not_found"
     ],
     "officialDate": "2025-07-26",
@@ -6572,6 +7051,8 @@
     "batterId": 669369,
     "currentEvent": "Single",
     "currentDescription": "Bryce Johnson singles on a bunt ground ball to first baseman Willson Contreras. Jake Cronenworth scores.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-07-26",
     "gameType": "R",
     "away": "SD",
@@ -6622,6 +7103,8 @@
     "batterId": 700337,
     "currentEvent": "Single",
     "currentDescription": "Edgar Quero singles on a ground ball to left fielder Ian Happ. Austin Slater to 2nd.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2025-07-25",
     "gameType": "R",
     "away": "CHC",
@@ -6668,6 +7151,8 @@
     "batterId": 668904,
     "currentEvent": "Single",
     "currentDescription": "Royce Lewis singles on a sharp ground ball to third baseman Miguel Rojas. Carlos Correa scores. Ty France to 2nd.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2025-07-22",
     "gameType": "R",
     "away": "MIN",
@@ -6720,6 +7205,8 @@
     "batterId": 641487,
     "currentEvent": "Single",
     "currentDescription": "J.P. Crawford singles on a ground ball to second baseman Luis Rengifo. Jorge Polanco scores. Dominic Canzone to 2nd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-07-26",
     "gameType": "R",
     "away": "SEA",
@@ -6769,6 +7256,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:13",
      "batter_not_found"
     ],
     "officialDate": "2025-07-29",
@@ -6820,6 +7308,8 @@
     "batterId": 695657,
     "currentEvent": "Single",
     "currentDescription": "Colson Montgomery singles on a sharp line drive to first baseman Bryce Harper. Andrew Benintendi scores. Lenyn Sosa to 3rd. Fielding error by pitcher Seth Johnson.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-07-28",
     "gameType": "R",
     "away": "PHI",
@@ -6827,7 +7317,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0045,
+    "p": 0.0046,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -6872,6 +7362,8 @@
     "batterId": 661388,
     "currentEvent": "Single",
     "currentDescription": "William Contreras singles on a ground ball to shortstop Dansby Swanson, deflected by third baseman Matt Shaw.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2025-07-29",
     "gameType": "R",
     "away": "CHC",
@@ -6879,7 +7371,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0606,
+    "p": 0.0607,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6924,6 +7416,8 @@
     "batterId": 677800,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Wilyer Abreu hits a sacrifice bunt. Ceddanne Rafaela scores. Abraham Toro to 2nd. Wilyer Abreu to 1st.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2025-08-03",
     "gameType": "R",
     "away": "HOU",
@@ -6968,6 +7462,8 @@
     "batterId": 686475,
     "currentEvent": "Single",
     "currentDescription": "Tyler Tolbert singles on a line drive to right fielder Joey Loperfido. Kyle Isbel scores. Jonathan India scores. Bobby Witt Jr. to 3rd.",
+    "inning": 10,
+    "half": "top",
     "officialDate": "2025-08-03",
     "gameType": "R",
     "away": "KC",
@@ -7009,6 +7505,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:3",
      "batter_not_found"
     ],
     "officialDate": "2025-08-05",
@@ -7055,6 +7552,8 @@
     "batterId": 680716,
     "currentEvent": "Single",
     "currentDescription": "Jonathan Ornelas singles on a ground ball to third baseman Graham Pauley. Ozzie Albies out at 3rd, third baseman Graham Pauley to first baseman Eric Wagaman to shortstop Otto Lopez.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-08-07",
     "gameType": "R",
     "away": "MIA",
@@ -7099,6 +7598,8 @@
     "batterId": 595777,
     "currentEvent": "Walk",
     "currentDescription": "Jurickson Profar walks. Nacho Alvarez Jr. to 2nd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-08-07",
     "gameType": "R",
     "away": "MIA",
@@ -7143,6 +7644,8 @@
     "batterId": 672820,
     "currentEvent": "Groundout",
     "currentDescription": "Lenyn Sosa grounds out, second baseman Brayan Rocchio to first baseman Carlos Santana.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-08-08",
     "gameType": "R",
     "away": "CLE",
@@ -7189,6 +7692,8 @@
     "batterId": 683002,
     "currentEvent": "Double",
     "currentDescription": "Gunnar Henderson doubles (26) on a line drive to left fielder JJ Bleday.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-08-10",
     "gameType": "R",
     "away": "ATH",
@@ -7233,6 +7738,8 @@
     "batterId": 608369,
     "currentEvent": "Intent Walk",
     "currentDescription": "Andrew Saalfrank intentionally walks Corey Seager.",
+    "inning": 10,
+    "half": "bottom",
     "officialDate": "2025-08-11",
     "gameType": "R",
     "away": "AZ",
@@ -7255,6 +7762,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.294,
+    "ls": 99.7,
+    "la": -8,
+    "gameDate": "2025-08-09",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -7279,6 +7793,8 @@
     "batterId": 686555,
     "currentEvent": "Field Error",
     "currentDescription": "Isaac Collins reaches on a fielding error by third baseman Ronny Mauricio. Joey Ortiz scores.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-08-09",
     "gameType": "R",
     "away": "NYM",
@@ -7286,7 +7802,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0069,
+    "p": 0.007,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -7307,6 +7823,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.406,
+    "ls": 99.3,
+    "la": -2,
+    "gameDate": "2025-08-10",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -7333,6 +7856,8 @@
     "batterId": 606192,
     "currentEvent": "Field Error",
     "currentDescription": "Teoscar Hernández reaches on a fielding error by second baseman Ernie Clement.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-08-10",
     "gameType": "R",
     "away": "TOR",
@@ -7385,6 +7910,8 @@
     "batterId": 687401,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Joey Ortiz reaches on a fielder's choice, fielded by shortstop Francisco Lindor. Andrew Vaughn scores. Blake Perkins scores. Anthony Seigler to 2nd. Fielding error by shortstop Francisco Lindor.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-08-09",
     "gameType": "R",
     "away": "NYM",
@@ -7435,6 +7962,8 @@
     "batterId": 669357,
     "currentEvent": "Walk",
     "currentDescription": "Nolan Gorman walks.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-08-11",
     "gameType": "R",
     "away": "COL",
@@ -7476,6 +8005,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:3",
      "batter_not_found"
     ],
     "officialDate": "2025-08-14",
@@ -7500,6 +8030,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.067,
+    "ls": 80.1,
+    "la": -40,
+    "gameDate": "2025-08-07",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -7524,6 +8061,8 @@
     "batterId": 542303,
     "currentEvent": "Field Error",
     "currentDescription": "Marcell Ozuna reaches on a throwing error by shortstop Otto Lopez. Jurickson Profar scores. Drake Baldwin to 3rd. Marcell Ozuna to 2nd.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-08-07",
     "gameType": "R",
     "away": "MIA",
@@ -7531,7 +8070,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.011,
+    "p": 0.0114,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -7576,6 +8115,8 @@
     "batterId": 669364,
     "currentEvent": "Single",
     "currentDescription": "Xavier Edwards singles on a ground ball to third baseman José Ramírez.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2025-08-12",
     "gameType": "R",
     "away": "MIA",
@@ -7583,7 +8124,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0674,
+    "p": 0.0675,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -7630,6 +8171,8 @@
     "batterId": 593428,
     "currentEvent": "Single",
     "currentDescription": "Xander Bogaerts singles on a sharp ground ball to third baseman Matt Chapman.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2025-08-11",
     "gameType": "R",
     "away": "SD",
@@ -7682,6 +8225,8 @@
     "batterId": 641355,
     "currentEvent": "Single",
     "currentDescription": "Cody Bellinger singles on a ground ball to second baseman Thomas Saggese. José Caballero scores. Anthony Volpe scores. Aaron Judge to 3rd.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2025-08-17",
     "gameType": "R",
     "away": "NYY",
@@ -7726,6 +8271,8 @@
     "batterId": 642086,
     "currentEvent": "Single",
     "currentDescription": "Dominic Smith singles on a ground ball to right fielder Jake Mangum. Heliot Ramos scores. Rafael Devers scores. Willy Adames scores. Dominic Smith to 2nd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-08-17",
     "gameType": "R",
     "away": "TB",
@@ -7767,6 +8314,7 @@
     "currentEventType": null,
     "method": null,
     "flags": [
+     "date_recovery_ambiguous:6",
      "batter_not_found"
     ],
     "officialDate": "2025-08-19",
@@ -7813,6 +8361,8 @@
     "batterId": 656941,
     "currentEvent": "Groundout",
     "currentDescription": "Kyle Schwarber grounds out, second baseman Jorge Polanco to pitcher Gabe Speier.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-08-19",
     "gameType": "R",
     "away": "SEA",
@@ -7859,6 +8409,8 @@
     "batterId": 607208,
     "currentEvent": "Single",
     "currentDescription": "Trea Turner singles on a ground ball to pitcher Orlando Ribalta.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-08-17",
     "gameType": "R",
     "away": "PHI",
@@ -7909,6 +8461,8 @@
     "batterId": 678011,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Anthony Seigler out on a sacrifice bunt, third baseman Matt Shaw to first baseman Michael Busch. Christian Yelich to 2nd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-08-20",
     "gameType": "R",
     "away": "MIL",
@@ -7955,6 +8509,8 @@
     "batterId": 664761,
     "currentEvent": "Single",
     "currentDescription": "Alec Bohm singles on a ground ball to second baseman Cole Young.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2025-08-18",
     "gameType": "R",
     "away": "SEA",
@@ -7962,7 +8518,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0362,
+    "p": 0.0363,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8005,6 +8561,8 @@
     "batterId": 656941,
     "currentEvent": "Single",
     "currentDescription": "Kyle Schwarber singles on a sharp ground ball to right fielder Luke Raley. Bryson Stott scores. Trea Turner scores. Kyle Schwarber to 2nd. Kyle Schwarber advances to 2nd, on a throwing error by right fielder Luke Raley.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-08-20",
     "gameType": "R",
     "away": "SEA",
@@ -8027,6 +8585,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.249,
+    "ls": 83.3,
+    "la": 2,
+    "gameDate": "2025-08-19",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -8051,6 +8616,8 @@
     "batterId": 669364,
     "currentEvent": "Field Error",
     "currentDescription": "Xavier Edwards reaches on a fielding error by shortstop Masyn Winn.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2025-08-19",
     "gameType": "R",
     "away": "STL",
@@ -8058,7 +8625,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0069,
+    "p": 0.007,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8103,6 +8670,8 @@
     "batterId": 687231,
     "currentEvent": "Single",
     "currentDescription": "Darell Hernaiz singles on a ground ball to third baseman Royce Lewis.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-08-19",
     "gameType": "R",
     "away": "ATH",
@@ -8110,7 +8679,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0646,
+    "p": 0.0647,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8153,6 +8722,8 @@
     "batterId": 678882,
     "currentEvent": "Forceout",
     "currentDescription": "Ceddanne Rafaela grounds into a force out, third baseman Amed Rosario to second baseman José Caballero. Masataka Yoshida out at 2nd. Ceddanne Rafaela to 1st.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2025-08-23",
     "gameType": "R",
     "away": "BOS",
@@ -8199,6 +8770,8 @@
     "batterId": 672386,
     "currentEvent": "Single",
     "currentDescription": "Alejandro Kirk singles on a soft ground ball to pitcher Tyler Phillips. Bo Bichette to 2nd.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-08-23",
     "gameType": "R",
     "away": "TOR",
@@ -8249,6 +8822,8 @@
     "batterId": 682641,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Luis Matos reaches on a fielder's choice, fielded by third baseman Anthony Seigler. Dominic Smith scores. Casey Schmitt scores. Fielding error by third baseman Anthony Seigler.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-08-23",
     "gameType": "R",
     "away": "SF",
@@ -8293,6 +8868,8 @@
     "batterId": 666023,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Freddy Fermin hits a sacrifice bunt. Throwing error by third baseman Casey Schmitt. Ramón Laureano scores. Jake Cronenworth scores. Freddy Fermin to 1st. Fielding error by right fielder Luis Matos.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2025-08-21",
     "gameType": "R",
     "away": "SF",
@@ -8339,6 +8916,8 @@
     "batterId": 664770,
     "currentEvent": "Single",
     "currentDescription": "Nathan Lukes singles on a soft ground ball to shortstop Maximo Acosta.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2025-08-22",
     "gameType": "R",
     "away": "TOR",
@@ -8389,6 +8968,8 @@
     "batterId": 665742,
     "currentEvent": "Walk",
     "currentDescription": "Juan Soto walks.",
+    "inning": 5,
+    "half": "bottom",
     "officialDate": "2025-08-25",
     "gameType": "R",
     "away": "PHI",
@@ -8411,6 +8992,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.139,
+    "ls": 90.3,
+    "la": -16,
+    "gameDate": "2025-08-30",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -8435,6 +9023,8 @@
     "batterId": 681546,
     "currentEvent": "Field Error",
     "currentDescription": "James Outman reaches on a throwing error by first baseman Ryan O'Hearn.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-08-30",
     "gameType": "R",
     "away": "SD",
@@ -8442,7 +9032,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0115,
+    "p": 0.012,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8485,6 +9075,8 @@
     "batterId": 663757,
     "currentEvent": "Grounded Into DP",
     "currentDescription": "Trent Grisham ground bunts into a double play, third baseman José Caballero to first baseman Jonathan Aranda to shortstop Taylor Walls to first baseman Jonathan Aranda. Austin Wells out at 2nd.",
+    "inning": 9,
+    "half": "bottom",
     "officialDate": "2025-07-30",
     "gameType": "R",
     "away": "TB",
@@ -8531,6 +9123,8 @@
     "batterId": 642133,
     "currentEvent": "Single",
     "currentDescription": "Rowdy Tellez singles on a ground ball to second baseman Zack Gelof.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-08-29",
     "gameType": "R",
     "away": "TEX",
@@ -8585,6 +9179,8 @@
     "batterId": 663647,
     "currentEvent": "Walk",
     "currentDescription": "Ke'Bryan Hayes walks. Spencer Steer to 2nd.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-09-03",
     "gameType": "R",
     "away": "TOR",
@@ -8629,6 +9225,8 @@
     "batterId": 642133,
     "currentEvent": "Groundout",
     "currentDescription": "Rowdy Tellez grounds out, third baseman Blaze Alexander to first baseman Tyler Locklear. Ezequiel Duran to 3rd.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-09-03",
     "gameType": "R",
     "away": "TEX",
@@ -8651,6 +9249,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.698,
+    "ls": 108.7,
+    "la": 19,
+    "gameDate": "2025-08-31",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -8675,6 +9280,8 @@
     "batterId": 669288,
     "currentEvent": "Field Error",
     "currentDescription": "Daniel Johnson reaches on a fielding error by right fielder Luis Matos. Daniel Johnson to 2nd.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2025-08-31",
     "gameType": "R",
     "away": "BAL",
@@ -8727,6 +9334,8 @@
     "batterId": 645302,
     "currentEvent": "Single",
     "currentDescription": "Victor Robles singles on a ground ball to shortstop Xander Bogaerts.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-08-27",
     "gameType": "R",
     "away": "SD",
@@ -8734,7 +9343,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0268,
+    "p": 0.0269,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -8779,6 +9388,8 @@
     "batterId": 671732,
     "currentEvent": "Single",
     "currentDescription": "Lawrence Butler singles on a ground ball to right fielder Jordan Walker, deflected by second baseman Thomas Saggese.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-09-01",
     "gameType": "R",
     "away": "ATH",
@@ -8831,6 +9442,8 @@
     "batterId": 668709,
     "currentEvent": "Single",
     "currentDescription": "JJ Bleday singles on a ground ball to second baseman Thomas Saggese.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2025-09-01",
     "gameType": "R",
     "away": "ATH",
@@ -8883,6 +9496,8 @@
     "batterId": 700932,
     "currentEvent": "Single",
     "currentDescription": "Red Sox challenged (tag play), call on the field was overturned: Kyle Manzardo singles on a line drive to left fielder Jarren Duran. José Ramírez scores. Kyle Manzardo out at 2nd on the throw, left fielder Jarren Duran to second baseman Nick Sogard.",
+    "inning": 2,
+    "half": "top",
     "officialDate": "2025-09-03",
     "gameType": "R",
     "away": "CLE",
@@ -8890,7 +9505,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1119,
+    "p": 0.1122,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -8935,6 +9550,8 @@
     "batterId": 671732,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Lawrence Butler reaches on a fielder's choice, fielded by first baseman Oswald Peraza. Shea Langeliers scores. Tyler Soderstrom to 3rd. Jacob Wilson to 2nd.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-09-05",
     "gameType": "R",
     "away": "ATH",
@@ -8979,6 +9596,8 @@
     "batterId": 666182,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Bo Bichette reaches on a fielder's choice, fielded by first baseman Spencer Steer. George Springer scores. Myles Straw to 3rd. Vladimir Guerrero Jr. to 2nd.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2025-09-03",
     "gameType": "R",
     "away": "TOR",
@@ -9023,6 +9642,8 @@
     "batterId": 500743,
     "currentEvent": "Single",
     "currentDescription": "Miguel Rojas singles on a ground ball to right fielder Jeremiah Jackson.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-09-07",
     "gameType": "R",
     "away": "LAD",
@@ -9067,6 +9688,8 @@
     "batterId": 686611,
     "currentEvent": "Double",
     "currentDescription": "Nationals challenged (tag play), call on the field was overturned: Dylan Crews doubles (7) on a ground ball to center fielder Jakob Marsee. Luis García Jr. scores. Riley Adams to 3rd.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-09-08",
     "gameType": "R",
     "away": "WSH",
@@ -9113,6 +9736,8 @@
     "batterId": 677594,
     "currentEvent": "Fielders Choice",
     "currentDescription": "Julio Rodríguez reaches on a fielder's choice, fielded by third baseman Nacho Alvarez Jr. Victor Robles scores. Randy Arozarena scores. Cal Raleigh scores. Julio Rodríguez to 2nd. Fielding error by third baseman Nacho Alvarez Jr.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-09-07",
     "gameType": "R",
     "away": "SEA",
@@ -9159,6 +9784,8 @@
     "batterId": 807713,
     "currentEvent": "Single",
     "currentDescription": "Matt Shaw singles on a sharp line drive to center fielder Michael Harris II. Nico Hoerner scores. Willi Castro scores. Dansby Swanson scores. Matt Shaw to 2nd. Throwing error by center fielder Michael Harris II.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2025-09-09",
     "gameType": "R",
     "away": "CHC",
@@ -9166,7 +9793,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2598,
+    "p": 0.2596,
     "score": 26,
     "kind": "out_of_fold"
    }
@@ -9209,6 +9836,8 @@
     "batterId": 681624,
     "currentEvent": "Single",
     "currentDescription": "Andy Pages singles on a line drive to right fielder Tyler Freeman.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2025-09-10",
     "gameType": "R",
     "away": "COL",
@@ -9255,6 +9884,8 @@
     "batterId": 668904,
     "currentEvent": "Single",
     "currentDescription": "Royce Lewis singles on a ground ball to left fielder Taylor Ward, deflected by third baseman Yoán Moncada. Luke Keaschall scores.",
+    "inning": 8,
+    "half": "top",
     "officialDate": "2025-09-08",
     "gameType": "R",
     "away": "MIN",
@@ -9262,7 +9893,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0587,
+    "p": 0.0588,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -9307,6 +9938,8 @@
     "batterId": 623168,
     "currentEvent": "Single",
     "currentDescription": "Tyler Heineman singles on a ground ball to first baseman Christian Walker. Myles Straw scores. Vladimir Guerrero Jr. to 2nd.",
+    "inning": 10,
+    "half": "bottom",
     "officialDate": "2025-09-09",
     "gameType": "R",
     "away": "HOU",
@@ -9351,6 +9984,8 @@
     "batterId": 681481,
     "currentEvent": "Single",
     "currentDescription": "Kerry Carpenter singles on a ground ball to right fielder Joey Wiemer.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-09-12",
     "gameType": "R",
     "away": "DET",
@@ -9373,6 +10008,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.05,
+    "ls": 87.5,
+    "la": -39,
+    "gameDate": "2025-09-10",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -9397,6 +10039,8 @@
     "batterId": 672580,
     "currentEvent": "Field Error",
     "currentDescription": "Maikel Garcia reaches on a throwing error by shortstop Brayan Rocchio.",
+    "inning": 1,
+    "half": "top",
     "officialDate": "2025-09-10",
     "gameType": "R",
     "away": "KC",
@@ -9404,7 +10048,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0138,
+    "p": 0.0145,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9425,6 +10069,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.129,
+    "ls": 91.9,
+    "la": -15,
+    "gameDate": "2025-09-11",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -9449,6 +10100,8 @@
     "batterId": 805367,
     "currentEvent": "Field Error",
     "currentDescription": "Chase Meidroth reaches on a fielding error by second baseman Tristan Gray.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2025-09-11",
     "gameType": "R",
     "away": "TB",
@@ -9456,7 +10109,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.009,
+    "p": 0.0091,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9499,6 +10152,8 @@
     "batterId": 687401,
     "currentEvent": "Sac Bunt",
     "currentDescription": "Joey Ortiz hits a sacrifice bunt. Throwing error by pitcher Andre Pallante. Jake Bauers to 3rd. Caleb Durbin to 2nd. Joey Ortiz to 1st.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-09-12",
     "gameType": "R",
     "away": "STL",
@@ -9543,6 +10198,8 @@
     "batterId": 643396,
     "currentEvent": "Single",
     "currentDescription": "Isiah Kiner-Falefa singles on a ground ball to third baseman Emmanuel Rivera. Isiah Kiner-Falefa to 2nd. Isiah Kiner-Falefa advances to 2nd, on a throwing error by third baseman Emmanuel Rivera.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-09-12",
     "gameType": "R",
     "away": "BAL",
@@ -9565,6 +10222,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.052,
+    "ls": 65.3,
+    "la": -8,
+    "gameDate": "2025-09-13",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -9589,6 +10253,8 @@
     "batterId": 680977,
     "currentEvent": "Field Error",
     "currentDescription": "Brendan Donovan reaches on a throwing error by third baseman Caleb Durbin. Pedro Pagés to 3rd.",
+    "inning": 6,
+    "half": "top",
     "officialDate": "2025-09-13",
     "gameType": "R",
     "away": "STL",
@@ -9596,8 +10262,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0147,
-    "score": 1,
+    "p": 0.0151,
+    "score": 2,
     "kind": "out_of_fold"
    }
   },
@@ -9641,6 +10307,8 @@
     "batterId": 669200,
     "currentEvent": "Single",
     "currentDescription": "Mason McCoy singles on a line drive to shortstop Ezequiel Tovar.",
+    "inning": 2,
+    "half": "bottom",
     "officialDate": "2025-09-14",
     "gameType": "R",
     "away": "COL",
@@ -9695,6 +10363,8 @@
     "batterId": 682928,
     "currentEvent": "Single",
     "currentDescription": "CJ Abrams singles on a ground ball to left fielder Jurickson Profar, deflected by third baseman Vidal Bruján.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2025-09-16",
     "gameType": "R",
     "away": "ATL",
@@ -9723,6 +10393,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.064,
+    "ls": 86,
+    "la": -25,
+    "gameDate": "2025-09-17",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -9747,6 +10424,8 @@
     "batterId": 693304,
     "currentEvent": "Field Error",
     "currentDescription": "Nick Gonzales reaches on a throwing error by third baseman Matt Shaw. Nick Gonzales to 2nd.",
+    "inning": 6,
+    "half": "bottom",
     "officialDate": "2025-09-17",
     "gameType": "R",
     "away": "CHC",
@@ -9754,7 +10433,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0146,
+    "p": 0.015,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9799,6 +10478,8 @@
     "batterId": 686469,
     "currentEvent": "Single",
     "currentDescription": "Vinnie Pasquantino singles on a ground ball to second baseman Jorge Polanco. Bobby Witt Jr. to 2nd.",
+    "inning": 3,
+    "half": "bottom",
     "officialDate": "2025-09-16",
     "gameType": "R",
     "away": "SEA",
@@ -9845,6 +10526,8 @@
     "batterId": 543807,
     "currentEvent": "Double",
     "currentDescription": "George Springer doubles (24) on a ground ball to left fielder Chandler Simpson, deflected by third baseman Tristan Gray.",
+    "inning": 3,
+    "half": "top",
     "officialDate": "2025-09-15",
     "gameType": "R",
     "away": "TOR",
@@ -9873,6 +10556,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.727,
+    "ls": 95.3,
+    "la": 16,
+    "gameDate": "2025-09-11",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "sacrifice_credit",
     "initial": null,
@@ -9895,6 +10585,8 @@
     "batterId": 680718,
     "currentEvent": "Field Error",
     "currentDescription": "Addison Barger reaches on a fielding error by right fielder Jesús Sánchez. George Springer scores. Nathan Lukes to 2nd.",
+    "inning": 8,
+    "half": "bottom",
     "officialDate": "2025-09-11",
     "gameType": "R",
     "away": "HOU",
@@ -9941,6 +10633,8 @@
     "batterId": 676812,
     "currentEvent": "Single",
     "currentDescription": "Carson McCusker singles on a soft ground ball to first baseman Jake Burger.",
+    "inning": 4,
+    "half": "top",
     "officialDate": "2025-09-23",
     "gameType": "R",
     "away": "MIN",
@@ -9951,6 +10645,13 @@
     "p": 0.0918,
     "score": 9,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-09-23",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9969,6 +10670,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.058,
+    "ls": 78.1,
+    "la": -7,
+    "gameDate": "2025-09-26",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -9993,6 +10701,8 @@
     "batterId": 656941,
     "currentEvent": "Field Error",
     "currentDescription": "Kyle Schwarber reaches on a missed catch error by first baseman Edouard Julien, assist to shortstop Brooks Lee.",
+    "inning": 1,
+    "half": "bottom",
     "officialDate": "2025-09-26",
     "gameType": "R",
     "away": "MIN",
@@ -10000,7 +10710,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0115,
+    "p": 0.012,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -10021,6 +10731,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-09-26",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -10045,6 +10762,8 @@
     "batterId": 686668,
     "currentEvent": "Field Error",
     "currentDescription": "Brenton Doyle reaches on a fielding error by second baseman Casey Schmitt.",
+    "inning": 5,
+    "half": "top",
     "officialDate": "2025-09-26",
     "gameType": "R",
     "away": "COL",
@@ -10073,6 +10792,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-09-28",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -10097,6 +10823,8 @@
     "batterId": 686681,
     "currentEvent": "Field Error",
     "currentDescription": "Michael Massey reaches on a missed catch error by pitcher Michael Kelly, assist to second baseman Darell Hernaiz.",
+    "inning": 7,
+    "half": "top",
     "officialDate": "2025-09-28",
     "gameType": "R",
     "away": "KC",
@@ -10119,6 +10847,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-09-27",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -10143,6 +10878,8 @@
     "batterId": 605137,
     "currentEvent": "Field Error",
     "currentDescription": "Josh Bell reaches on a fielding error by left fielder Brooks Baldwin. Josh Bell to 2nd.",
+    "inning": 4,
+    "half": "bottom",
     "officialDate": "2025-09-27",
     "gameType": "R",
     "away": "CWS",
@@ -10195,10 +10932,19 @@
     "batterId": 695336,
     "currentEvent": "Double",
     "currentDescription": "Thomas Saggese doubles (17) on a sharp line drive to left fielder Kevin Alcántara.",
+    "inning": 9,
+    "half": "top",
     "officialDate": "2025-09-28",
     "gameType": "R",
     "away": "STL",
     "home": "CHC"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-09-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10241,6 +10987,8 @@
     "batterId": 592663,
     "currentEvent": "Single",
     "currentDescription": "J.T. Realmuto singles on a sharp ground ball to third baseman Max Muncy.",
+    "inning": 7,
+    "half": "bottom",
     "officialDate": "2025-10-04",
     "gameType": "D",
     "away": "LAD",
@@ -10248,9 +10996,16 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1306,
+    "p": 0.1305,
     "score": 13,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-10-04",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   }
  ]

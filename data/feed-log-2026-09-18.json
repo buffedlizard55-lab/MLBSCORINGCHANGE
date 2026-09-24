@@ -1,0 +1,91 @@
+{
+  "v": 1,
+  "date": "2026-09-18",
+  "savedAt": 1790289196012,
+  "entries": [
+    {
+      "gamePk": 822847,
+      "review": {
+        "id": "scoring-71",
+        "atBatIndex": 71,
+        "inning": 8,
+        "halfInning": "bottom",
+        "inningLabel": "▼ Bot 8th",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "home",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "TEX",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Rescored",
+        "reason": "Single → Field Error",
+        "description": "Wyatt Langford advances to 2nd, on a throwing error by third baseman Kazuma Okamoto.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "single",
+          "event": "Single",
+          "label": "Single",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "final": {
+          "eventType": "field_error",
+          "event": "Field Error",
+          "label": "Field Error",
+          "category": "error",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-09-24T22:33:16.012Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 694671,
+          "fullName": "Wyatt Langford"
+        },
+        "pitcher": null,
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "official": {
+          "season": 2026,
+          "seq": 253,
+          "date": "2026-09-18",
+          "raw": "253. 9/18 TOR@TEX -- In the bottom of the 8th, the single for Wyatt Langford has been changed to a throwing error charged to Kazuma Okamoto. As a result, 1 run is now unearned against Joe Mantiply. Okamoto already had an error for allowing Langford to advance to 2nd base.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        }
+      },
+      "firstSeen": 1790289195946,
+      "lastSeen": 1790289196012,
+      "matchupLabel": "TOR @ TEX"
+    }
+  ],
+  "order": [
+    "822847:scoring-71"
+  ],
+  "snapshots": {},
+  "irregularities": {},
+  "grace": {},
+  "settled": [],
+  "trimmed": {
+    "entries": 0,
+    "snapshots": 0
+  }
+}

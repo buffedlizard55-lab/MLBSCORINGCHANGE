@@ -44,6 +44,8 @@ jobs:
         run: |
           node tools/pipeline-log-test.mjs
           node tools/pipeline-model-test.mjs
+          node tools/pipeline-link-test.mjs
+          node tools/savant-xba-test.mjs
 
       - name: Run pipeline
         env:

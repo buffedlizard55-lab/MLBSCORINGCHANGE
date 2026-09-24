@@ -24,7 +24,7 @@ StatsAPI) and, once posted, the matching entry in MLB's official log.
 | [MLB Official Scoring Changes](https://www.mlb.com/official-information/scoring-changes) | the scoring changes MLB publishes for the current season | fetched every run |
 | Internet Archive captures of that page — [2025 (2026-02-10)](https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes), [2024 (2025-01-21)](https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes) | the complete 2024 and 2025 lists | last capture after each season, found with the [CDX API](https://web.archive.org/cdx/search/cdx?url=mlb.com/official-information/scoring-changes&output=json) |
 | MLB StatsAPI `/teams`, `/schedule` (game types R, F, D, L, W), `/game/{gamePk}/playByPlay` | every completed game's plate appearances: result, batter, inning, runners, fielding credits, Statcast `hitData` | a `fields` projection, verified equal to the unprojected payload on one game per season every run |
-| [Baseball Savant Statcast search](https://baseballsavant.mlb.com/statcast_search) (field-error CSV) | cross-check only: counts, exit velocity / launch angle, `estimated_ba_using_speedangle` | current season, every run |
+| [Baseball Savant Statcast search](https://baseballsavant.mlb.com/statcast_search) | cross-check of the error population (counts, exit velocity / launch angle) **and** the true per-play `estimated_ba_using_speedangle`, attached to every linked official entry and Error Watch row | the current season's error list at most every 6 h; past-season error lists and month windows cached 30 days; ≤ 4 requests a run, coverage reported in `savant.perPlay` |
 | MLB StatsAPI `/api/v1.1/game/{gamePk}/feed/live?fields=gameData,officialScorer,id,fullName,venue,name` | official scorer and venue of every game (§17) | once per game, cached |
 | Live capture — `data/capture/` (this project, from StatsAPI playByPlay during live games) | rulings as first called, error type, pending markers and their resolutions (§14) | every 10 min during game hours |
 
@@ -67,18 +67,46 @@ do not count as an error. After this pass: 1 / 2 / 0 unclassified entries (2024 
    game that day against a similarly coded opponent (`TBN@TOR` → TB; `TOR@LAA` → LAD), ±10 days.
 2. **Plate appearance:** a batter of that half-inning whose full name (or unique last name, or a
    last name within edit distance 2 — flagged) appears in the text; among candidates, prefer the
-   one whose current ruling agrees with the new ruling, then the earliest mention.
+   one whose current ruling **is** the new ruling (`exact`) over one StatsAPI codes in a documented
+   alternative way (`compatible` — the same batter can have several plate appearances in a game,
+   and only one of them is the entry's subject; verified on 2026 #173, where the compatible play is
+   a 4th-inning force out and the entry's play is the bottom-9th field error), then an uncheckable
+   one, then half-inning scope, the earliest mention and the lowest at-bat. A mismatch is ranked
+   last and reported (`current_ruling_mismatch`), never preferred.
 3. **Verification against StatsAPI's current ruling:** `exact`, `compatible` or `mismatch`.
    *Compatible* encodes conventions verified on linked plays: a sacrifice fielder's choice is
    coded `sac_bunt` (2026 #123, #186; 2025 #102); reaching on an error on a play with another
    fielding event is coded in the fielder's-choice family (2024 #28, #141; 2025 #44; 2026 #56).
 4. **Chains:** several entries about one play are ordered; earlier entries replaced by a later
    one are marked `superseded_by` (e.g. 2024 #14 → #24).
+5. **Date recovery (session 4):** when the stated pairing has no game within ±10 days, the whole
+   season is searched for it. A game is accepted only if the batter named in the entry batted in the
+   stated half-inning **and** that play's current ruling does not contradict the entry's new ruling
+   (rules 2–4 applied to a recovered game). When several games of the pairing pass those checks the
+   call is made only by evidence that separates them, strongest first: exactly one game whose play's
+   current ruling **is** the entry's new ruling (`exact` — stronger than the documented `compatible`
+   codings), else exactly one game inside the neighbouring entries' date window (the list is
+   published in order); two exact matches stay unlinked and flagged. A bookkeeping entry that names
+   no batter is accepted only when the pairing played exactly one game that season, or when exactly
+   one of its games is a strong single-field date typo (same day of another month, or month and day
+   swapped — a different *day* inside the same month is not evidence of a typo). Every recovery
+   stays flagged (`date_recovered:6/6->6/18`, `date_typo:day|month|transposed`,
+   `date_recovered_game_only`, `date_recovery_decided_by:exact_ruling|log_order`) and is listed in
+   Irregularities; nothing is guessed. An entry that cannot be placed at all keeps `no_game_found` /
+   `batter_not_found`.
 
-Run of 2026-09-24: 662 of 693 entries linked to their exact play; every error → hit entry
-linked. Remaining flags (56 entries) are listed on the Irregularities tab — including genuine
-errors in MLB's log (e.g. 2026 #140 "6/6 NYM@PHI": that day PHI hosted CWS per
-[StatsAPI](https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=2026-06-05&endDate=2026-06-07&teamId=143)).
+Run of 2026-09-24 (linker v3): 665 of 693 entries linked to their exact play; every error → hit
+entry linked. Two 2026 hit → error entries (#140 "6/6 NYM@PHI", #173 "9/4 MIA@ATH") only became linkable
+with the date-recovery pass: the games were played on 6/18 (game 823448, Rincones Jr., bottom 9th)
+and 7/4 (game 824983, Bolte, bottom 9th) — MLB's own dates are wrong, which the linker flags
+(`date_recovered` / `date_typo`, #173's printed inning too) rather than rewriting. #173 needed the
+stronger tie-break as well: its stated pairing (MIA@ATH) played on 7/3 and 7/4, both games contain a
+Bolte plate appearance (and Bolte has two plate appearances in the 7/4 game), and only the 7/4 play is an exact `field_error` — the 7/3 play is coded
+`fielders_choice`, which agrees only "compatibly", so the calendar-adjacent log-order hint could not
+separate them and the entry stayed unlinked (`date_recovery_ambiguous:2`) until the exact match was
+preferred. The Irregularities tab
+keeps every flagged entry, including genuine errors in MLB's log such as #140's date: on 6/6 PHI
+hosted CWS per [StatsAPI](https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=2026-06-05&endDate=2026-06-07&teamId=143).
 
 ## 6. Labels
 
@@ -188,6 +216,10 @@ rulings and their resolutions recalibrate this distribution (§16).
   the same model line through a guarded hook in `reviews.js` `renderReviewCard`; `game.js` scores
   from the page's own live feed (which already carries `hitData`) via the shared pure
   `MLBScoringModel.scoreReview`.
+- Baseball Savant's per-play xBA is **not** fetched by any page: the pipeline attaches it to the
+  generated JSON (`savant.perPlay` reports coverage) and `scoring.html` shows it beside the model's
+  comparable-balls rate. The live feed's hot path is untouched (no new fetch, no new field in
+  `PBP_FIELDS`), and a row the pipeline has no xBA for simply shows none.
 - Without `assets/js/scoring-model.js` or the model file, everything renders as before.
 
 ## 12. Operations
@@ -202,6 +234,11 @@ rulings and their resolutions recalibrate this distribution (§16).
   A live page with no season header at all (structure change) writes an excerpt to `_probe/`
   and a warning.
 - **Freshness:** every 3 hours on `main`; the workflow also requests a GitHub Pages rebuild.
+- **Static feed logs:** `pipeline/sync-feed-log.mjs` (`.github/workflows/official-feed-log.yml`,
+  after each pipeline run and on its own 3-hourly schedule) appends verified official ruling changes
+  into the committed `data/feed-log-<date>.json` files for the last 14 days, so a GitHub-Pages
+  visitor without `server.mjs` sees recent confirmed changes. Same ids and merge rules as the
+  browser and `server.mjs`, facts only; a run with nothing new writes nothing.
 - **Live capture:** every 10 minutes during game hours (15:00–08:59 UTC, March–November) on
   `main` (`.github/workflows/live-capture.yml`); a run with no live games exits in seconds and
   commits nothing. `tests.yml` ignores data-only pushes.
@@ -213,6 +250,7 @@ node tools/pipeline-offline-smoke.mjs   # end-to-end on a synthetic stub (offlin
 node pipeline/run.mjs                   # real run — needs access to MLB hosts (GitHub Actions)
 node pipeline/run.mjs --seasons=2026 --max-games=50 --no-savant   # quick partial run
 node tools/capture-test.mjs             # live capture, offline (synthetic stub)
+node pipeline/sync-feed-log.mjs --dry-run  # what the static feed-log sync would append
 node pipeline/capture.mjs --polls=1     # real capture poll — needs access to MLB hosts
 ```
 

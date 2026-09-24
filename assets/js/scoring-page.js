@@ -230,8 +230,11 @@
     wrap.appendChild(card('Error → hit model', e ? `AUC ${e.cv.auc.toFixed(2)}` : '—',
       e ? `out-of-time ${e.outOfTime ? e.outOfTime.auc.toFixed(2) : '—'} · base rate ${pct(e.baseRate)}` : null));
     const sv = r && r.savant;
+    const svSub = [];
+    if (sv && sv.matched != null) svSub.push('errors matched on Baseball Savant');
+    if (sv && sv.perPlay) svSub.push(`${num(sv.perPlay.matched)} / ${num(sv.perPlay.needed)} plays have Savant xBA`);
     wrap.appendChild(card('Cross-check', sv && sv.matched != null ? `${num(sv.matched)} / ${num(sv.rows)}` : '—',
-      sv && sv.matched != null ? 'errors matched on Baseball Savant' : null));
+      svSub.length ? svSub.join(' · ') : null));
     const cap = state.model && state.model.capture;
     if (cap) {
       wrap.appendChild(card('Live capture', num(cap.plays),
@@ -281,6 +284,19 @@
     i.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => onInput(i.value), 150); });
     return i;
   }
+  /**
+   * Baseball Savant's own expected batting average for this exact ball
+   * (`estimated_ba_using_speedangle`, attached by the pipeline when it has
+   * fetched it). Returns null when the pipeline has no value for the play —
+   * the number is never estimated or inferred here.
+   */
+  function savantXbaText(s) {
+    if (!s || typeof s.xba !== 'number') return null;
+    const ev = typeof s.ls === 'number' ? ` · exit velocity ${s.ls.toFixed(1)} mph` : '';
+    const la = typeof s.la === 'number' ? `, ${Math.round(s.la)}°` : '';
+    return `Savant xBA ${s.xba.toFixed(3)} — expected batting average for this ball${ev}${la}`;
+  }
+
   function battedBallText(p) {
     const parts = [];
     if (typeof p.ls === 'number') parts.push(`${p.ls.toFixed(1)} mph`);
@@ -372,6 +388,8 @@
       body.appendChild(el('div', 'sc-official-text', `Official log #${o.seq}: ${o.raw.replace(/^\d+[.)]\s*/, '')}`));
     });
     body.appendChild(el('div', 'sc-bb', battedBallText(p)));
+    const xba = savantXbaText(p.savant);
+    if (xba) body.appendChild(el('div', 'sc-bb sc-savant-xba', xba));
     const links = el('div', 'sc-links');
     links.appendChild(ext('Gameday', gamedayUrl(p.gamePk)));
     links.appendChild(ext('Savant', savantUrl(p.gamePk)));
@@ -467,6 +485,8 @@
     head.appendChild(el('span', `sc-class sc-class-${e.cls ? e.cls.kind : 'x'}`, classificationLabel(e.cls)));
     body.appendChild(head);
     body.appendChild(el('div', 'sc-desc', e.raw.replace(/^\d+[.)]\s*/, '')));
+    const xba = savantXbaText(e.savant);
+    if (xba) body.appendChild(el('div', 'sc-bb sc-savant-xba', xba));
     const v = el('div', 'sc-verify');
     const L = e.link || {};
     if (L.atBatIndex != null) {
@@ -523,7 +543,8 @@
     help.appendChild(el('span', null,
       `Every play in ${season} first ruled a hit — usually a single — whose final official ruling is an error. ` +
       'Each row keeps the pre-change chance the hit would become an error (out of 100, out-of-fold) and the final result, ' +
-      'linked to the exact play and checked against its current StatsAPI ruling. ' +
+      'linked to the exact play and checked against its current StatsAPI ruling. Where Baseball Savant has published ' +
+      'the play, its own expected batting average (xBA) for that exact ball is shown beside the model number. ' +
       'By design these never appear in the live feed\u2019s All feed, ✏️ Scoring Changes tab or alert sounds — ' +
       'they live in the feed\u2019s own 📉 Hit → Error tab and in this section, so the primary alert system stays ' +
       'focused on error → hit and scoring-pending movement. Source: '));
@@ -629,7 +650,10 @@
     const s3 = section('How it works',
       `Hit probability comes from ${num(m.hitProb.surface.nBalls)} batted balls (exit velocity × launch angle cells, smoothed); ` +
       `it correlates ${state.report && state.report.savant && state.report.savant.hitProbVsSavantXba ? state.report.savant.hitProbVsSavantXba.pearson : '—'} ` +
-      'with Baseball Savant\u2019s expected batting average on the same plays. Each question is a regularised logistic regression; ' +
+      'with Baseball Savant\u2019s expected batting average on the same plays. Where Savant has published a play the site can show, ' +
+      'the pipeline attaches Savant\u2019s own xBA for that exact ball (`estimated_ba_using_speedangle`) and the rows show both numbers ' +
+      'side by side — the model number is the comparable-balls rate, Savant\u2019s is the expected batting average for that one ball. ' +
+      'Each question is a regularised logistic regression; ' +
       'the terms were chosen by cross-validation (simplest model within one standard error of the best).');
     const coefRows = (x) => [['intercept', x.intercept], ...x.terms.map((t, i) => [t, x.coef[i]])];
     s3.appendChild(table(['Error → hit term', 'Coefficient'], coefRows(e)));
@@ -646,6 +670,7 @@
       'The live capture polls every 2 minutes for about 6 of every 10 minutes during game hours, and GitHub can delay scheduled runs: very short-lived pending markers can be missed, so captured pending rulings lean toward longer decisions.',
       'StatsAPI does not always reflect a logged change (flagged under Irregularities); such plays are kept out of the training labels.',
       'Hit probability uses exit velocity and launch angle only (no sprint speed or fielder positioning), so it approximates rather than reproduces Savant\u2019s xBA.',
+      'Savant\u2019s per-play xBA is attached only where the pipeline has fetched it (a few requests per run, cached): plays are added over the runs after a change, and a play Savant does not publish simply shows no xBA rather than a substitute.',
     ].forEach((t) => ul.appendChild(el('li', null, t)));
     s4.appendChild(ul);
     wrap.appendChild(s4);

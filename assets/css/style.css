@@ -2293,6 +2293,10 @@ a.sc-matchup:hover { text-decoration: underline; }
 .sc-desc { color: #c5d4e8; font-size: 13.5px; line-height: 1.5; margin-top: 5px; }
 .sc-official-text { color: #a7f3d0; font-size: 13px; line-height: 1.45; margin-top: 4px; border-left: 2px solid #16a34a; padding-left: 8px; }
 .sc-bb { color: var(--muted); font-size: 12.5px; margin-top: 4px; }
+/* True per-play xBA from Baseball Savant (pipeline-attached), shown beside the
+   model's comparable-balls rate — see pipeline/lib/savant.mjs. */
+.sc-savant-xba { color: var(--text); opacity: 0.82; }
+.sc-savant-xba::before { content: "📊 "; }
 .sc-verify { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12.5px; margin-top: 5px; }
 .sc-ok { color: #8ff0ac; }
 .sc-warn { color: #ffa8a8; }

@@ -18,7 +18,7 @@ const env = {
   PIPELINE_PROBE_DIR: path.join(tmp, 'probe'),
 };
 function runPipeline(extraEnv = {}, extraArgs = [], expectFailure = false) {
-  const r = spawnSync(process.execPath, ['--require', path.join(ROOT, 'tools/fixtures/pipeline-fetch-stub.cjs'), path.join(ROOT, 'pipeline/run.mjs'), ...extraArgs], {
+  const r = spawnSync(process.execPath, ['--require', path.join(ROOT, 'tools/fixtures/pipeline-fetch-stub.cjs'), path.join(ROOT, 'pipeline/run.mjs'), '--savant-delay-ms=1', ...extraArgs], {
     cwd: ROOT, env: { ...env, ...extraEnv }, encoding: 'utf8', timeout: 180000,
   });
   if (expectFailure) {
@@ -138,6 +138,92 @@ assert.ok(watch.plays.length > 0);
 assert.ok(watch.plays.some((p) => p.status === 'changed_to_hit'), 'changed plays appear with final status');
 assert.ok(watch.plays.every((p) => p.score == null || (p.score >= 0 && p.score <= 100)));
 assert.ok(report.savant.matched > 0, 'savant cross-check matched rows');
+assert.equal(report.savant.fetchedThisRun, true, 'the cross-check ran on this run\'s fetch of the season error list');
+
+// Per-play Savant xBA (session 4, item 3): the pipeline attaches true
+// estimated_ba_using_speedangle values to the plays the site can surface —
+// linked official entries and Error Watch rows. Requests are budgeted (4 per
+// run by default), cached, and coverage accumulates across runs without ever
+// inventing a value for a play Savant has not answered for.
+{
+  const pp = report.savant.perPlay;
+  assert.ok(pp && pp.needed > 0, 'per-play xBA pass ran');
+  assert.equal(pp.requests, 4, 'Savant budget respected (4 requests in the first run)');
+  assert.ok(pp.matched > 0, 'plays on the season error list got their xBA in run 1');
+  assert.ok(pp.pending > 0, 'month windows are filled in lazily, not in one run');
+  assert.equal(pp.coverage, Math.round((pp.matched / pp.needed) * 1e4) / 1e4);
+  assert.equal(pp.failures.length, 0, `no Savant failures (${JSON.stringify(pp.failures)})`);
+  assert.ok(pp.queries.some((q) => q.kind === 'month' && q.integrity && q.integrity.kept > 0), 'a date-range window was used');
+  assert.ok(pp.queries.every((q) => q.kind !== 'month' || q.integrity.outsideRange === 0), 'date-range responses are self-checked against the requested dates');
+  const watch0 = read('model/error-watch.json').plays;
+  const withXba = watch0.filter((p2) => p2.savant);
+  assert.ok(withXba.length > 0, 'Error Watch rows carry Savant xBA');
+  assert.ok(withXba.every((p2) => p2.savant.xba == null || (p2.savant.xba >= 0 && p2.savant.xba <= 1)), 'xBA is a probability');
+  // Neither invented nor approximated: the number equals what Savant served
+  // for that exact gamePk:atBatIndex.
+  {
+    // Plays still ruled errors come from the season error list; plays changed
+    // to a hit only appear in a date-range query. Both sources are checked.
+    const { parseSavantRows, seasonErrorsUrl, dateRangeUrl } = await import('../pipeline/lib/savant.mjs');
+    const served = new Map([
+      ...parseSavantRows(await (await fetch(seasonErrorsUrl(2026))).text()),
+      ...parseSavantRows(await (await fetch(dateRangeUrl('2026-04-01', '2026-07-31'))).text()),
+    ].map((r) => [`${r.gamePk}:${r.ai}`, r]));
+    assert.ok(withXba.every((p2) => served.has(p2.id) && served.get(p2.id).xba === p2.savant.xba), 'xBA equals the value Savant served for that play');
+    assert.ok(withXba.every((p2) => p2.savant.ls == null || served.get(p2.id).ls === p2.savant.ls), 'the EV Savant saw is carried with the xBA');
+  }
+  const entries0 = read('official/scoring-changes-2026.json').entries.filter((e) => e.savant);
+  assert.ok(entries0.length > 0, 'linked official entries carry Savant xBA');
+  assert.ok(entries0.every((e) => e.savant.xba == null || Number.isFinite(e.savant.ls)), 'the EV/LA Savant saw for the ball is kept with it');
+}
+
+// Run 2 also checks the cache: the season error list stays inside its TTL, and
+// the remaining month windows keep filling in.
+const pp1 = report.savant.perPlay;
+const reportRun2 = (() => { const before = fs.readFileSync(path.join(tmp, 'data', 'model/pipeline-report.json'), 'utf8'); return JSON.parse(before); })();
+
+// Date recovery (session 4): two SYNTHETIC mis-dated 2026 entries about the
+// same unique play — one 3 months out (nothing within ±10 days: the
+// season-wide pass), one inside a game window where the pairing played but the
+// named batter did not (the batter-check pass). Both must link, stay flagged,
+// and come out with a model score, exactly like the real 2026 #140/#173.
+{
+  const rec = report.seasons[2026].dateRecoveries || [];
+  assert.equal(rec.length, 2, `both mis-dated entries recovered (${JSON.stringify(rec)})`);
+  assert.ok(rec.every((x) => x.verifiedBy === 'batter + ruling'), 'recovered only on the batter + ruling check');
+  assert.ok(rec.every((x) => x.kind === 'month'), 'both are same-day-of-month month typos');
+  assert.ok(rec.every((x) => x.decidedBy === 'only game verified'),
+    `each recovery reports what decided it (${JSON.stringify(rec.map((x) => x.decidedBy))})`);
+  assert.ok(rec.every((x) => x.gameDate === '2026-05-05'), 'both point at the game actually played');
+  const seqs = new Set(rec.map((x) => x.seq));
+  const recEntries = official.entries.filter((e) => seqs.has(e.seq));
+  assert.equal(recEntries.length, 2);
+  for (const e of recEntries) {
+    assert.ok(e.link.flags.some((f) => /^date_recovered:/.test(f)), `date_recovered flag on #${e.seq}`);
+    assert.ok(e.link.flags.includes('date_typo:month'), `date_typo:month on #${e.seq}`);
+    assert.ok(!e.link.flags.includes('no_game_found'), `#${e.seq} is no longer unlinked`);
+    assert.ok(e.cls.flags.includes('hitToError'), `#${e.seq} is a hit → error change`);
+    assert.ok(e.model && Number.isInteger(e.model.score), `model score on recovered #${e.seq}`);
+    assert.equal(e.model.question, 'hitToError');
+  }
+  // The recovered plays also make it into the training labels now.
+  assert.ok(model.hitToError.n > 0);
+  assert.ok(report.seasons[2026].linkFlags.date_recovered >= 2, 'recoveries are counted in the report');
+  assert.equal(report.seasons[2026].unlinkedHitToError, 0,
+    'after the recovery pass no 2026 hit → error entry is left without a play');
+  // A wrong date in MLB's own log is an irregularity: the recovered entries are
+  // listed for manual review even though their text parsed cleanly.
+  const irr = read('official/irregularities.json');
+  const recIrr = irr.items.filter((x) => x.season === 2026
+    && (x.linkFlags || []).some((f) => /^date_recover/.test(f)));
+  const recSeqs = new Set(recIrr.map((x) => x.seq));
+  assert.ok([...seqs].every((s) => recSeqs.has(s)),
+    `both recovered entries are listed as irregularities (got seqs ${[...recSeqs].join(',')})`);
+  assert.ok(recIrr.filter((x) => seqs.has(x.seq)).every((x) => x.gamePk && x.atBatIndex != null),
+    'a review entry names the play the entry was linked to');
+  assert.ok(recIrr.some((x) => (x.linkFlags || []).some((f) => /^date_recovery_/.test(f))),
+    'a stated date that could NOT be verified is listed too — never silently dropped');
+}
 
 // Run 2: archive captures are immutable — reused from the stored parse,
 // never re-fetched from the Internet Archive.
@@ -147,6 +233,10 @@ const requested = fs.readFileSync(reqLog, 'utf8');
 assert.ok(!requested.includes('web.archive.org'), 'second run makes no Internet Archive requests');
 const report2 = read('model/pipeline-report.json');
 assert.equal(report2.logs[2024].source, 'stored');
+assert.equal(report2.savant.fetchedThisRun, false, 'the season error list came from the cache inside its TTL');
+assert.ok(report2.savant.perPlay.requests === 4, 'run 2 spends its budget on the months still missing');
+assert.ok(report2.savant.perPlay.matched > pp1.matched, `coverage grows across runs (${pp1.matched} → ${report2.savant.perPlay.matched})`);
+assert.ok(report2.savant.perPlay.pending < pp1.pending, 'fewer plays left pending');
 assert.equal(report2.logs[2026].source, 'live');
 assert.equal(read('official/scoring-changes-2024.json').entries.length, read('official/scoring-changes-2024.json').entries.filter((e) => e.cls).length);
 
