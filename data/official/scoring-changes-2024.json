@@ -5,7 +5,7 @@
   "url": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://web.archive.org/web/20250121083545id_/https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": "2025-01-21T08:35:45Z",
-  "fetchedAt": "2026-09-24T18:46:28.092Z",
+  "fetchedAt": "2026-09-24T18:53:52.117Z",
   "sha256": "3d9a56c5632dd1c7e33a9fdcc510ca7f724e36abcc6e8c5922fb12c437dac9b2",
   "bytes": 639177
  },
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T18:46:28.092Z",
+ "generatedAt": "2026-09-24T18:53:52.117Z",
  "entries": [
   {
    "seq": 1,
@@ -114,7 +114,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.056,
+    "p": 0.0572,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -322,7 +322,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -544,7 +544,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0921,
+    "p": 0.0928,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -1032,7 +1032,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0611,
+    "p": 0.0613,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -1084,7 +1084,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1411,
+    "p": 0.139,
     "score": 14,
     "kind": "out_of_fold"
    }
@@ -1232,7 +1232,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0942,
+    "p": 0.0932,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -1284,7 +1284,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1924,
+    "p": 0.1915,
     "score": 19,
     "kind": "out_of_fold"
    }
@@ -1486,7 +1486,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0841,
+    "p": 0.0839,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -1763,8 +1763,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.095,
-    "score": 9,
+    "p": 0.096,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -1947,7 +1947,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0729,
+    "p": 0.0728,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -1999,7 +1999,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0907,
+    "p": 0.0897,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -2051,7 +2051,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0535,
+    "p": 0.0537,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -2291,7 +2291,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
+    "p": 0.043,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -2313,16 +2313,18 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
-    "initial": null,
-    "final": null,
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "hit+error",
     "initialHitType": null,
-    "finalHitType": null,
-    "rule": null,
-    "oldPhrase": null,
-    "newPhrase": null,
-    "transition": null,
-    "flags": []
+    "finalHitType": "single",
+    "rule": "T2",
+    "oldPhrase": "a two-base throwing error",
+    "newPhrase": "Harrison Bader reaches on an infield single to third base Matt Chapman and advances to second on a throwing error by Chapman",
+    "transition": "error->hit+error",
+    "flags": [
+     "errorToHit"
+    ]
    },
    "link": {
     "gamePk": 745346,
@@ -2338,6 +2340,12 @@
     "gameType": "R",
     "away": "NYM",
     "home": "SF"
+   },
+   "model": {
+    "question": "errorToHit",
+    "p": 0.0334,
+    "score": 3,
+    "kind": "out_of_fold"
    }
   },
   {
@@ -2387,7 +2395,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1681,
+    "p": 0.1677,
     "score": 17,
     "kind": "out_of_fold"
    }
@@ -2647,7 +2655,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "rbi",
+    "kind": "error_added",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -2835,16 +2843,18 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
-    "initial": null,
-    "final": null,
-    "initialHitType": null,
+    "kind": "ruling_change",
+    "initial": "hit",
+    "final": "fc",
+    "initialHitType": "single",
     "finalHitType": null,
-    "rule": null,
-    "oldPhrase": null,
-    "newPhrase": null,
-    "transition": null,
-    "flags": []
+    "rule": "T3",
+    "oldPhrase": "Nathaniel Lowe's single",
+    "newPhrase": "a fielder's choice",
+    "transition": "hit->fc",
+    "flags": [
+     "hitToFc"
+    ]
    },
    "link": {
     "gamePk": 745018,
@@ -3253,7 +3263,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0538,
+    "p": 0.0539,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -3349,7 +3359,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0365,
+    "p": 0.0377,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3401,7 +3411,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0404,
+    "p": 0.0405,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3423,7 +3433,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "error_added",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -3543,7 +3553,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.067,
+    "p": 0.0668,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -3661,7 +3671,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "baserunning",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -3793,7 +3803,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0426,
+    "p": 0.043,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4178,7 +4188,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0538,
+    "p": 0.054,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4334,7 +4344,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0827,
+    "p": 0.0819,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -4762,7 +4772,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0626,
+    "p": 0.0628,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -4814,7 +4824,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0378,
+    "p": 0.0382,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4866,8 +4876,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2361,
-    "score": 24,
+    "p": 0.2342,
+    "score": 23,
     "kind": "out_of_fold"
    }
   },
@@ -4918,7 +4928,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0944,
+    "p": 0.0942,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -4970,7 +4980,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1271,
+    "p": 0.1273,
     "score": 13,
     "kind": "out_of_fold"
    }
@@ -5128,7 +5138,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.071,
+    "p": 0.0711,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -5152,7 +5162,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "pitching_decision",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -5195,7 +5205,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -5364,7 +5374,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0668,
+    "p": 0.0678,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -5416,7 +5426,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0344,
+    "p": 0.035,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -5468,7 +5478,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0713,
+    "p": 0.0722,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -5575,7 +5585,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0873,
+    "p": 0.0865,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -5903,7 +5913,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0499,
+    "p": 0.0501,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -6051,7 +6061,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0604,
+    "p": 0.0602,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6165,7 +6175,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "fielding_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -6239,8 +6249,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0447,
-    "score": 4,
+    "p": 0.0453,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -6429,7 +6439,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0517,
+    "p": 0.0519,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -6497,7 +6507,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "fielding_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -6541,7 +6551,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -6667,7 +6677,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0536,
+    "p": 0.054,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -6876,7 +6886,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -6952,7 +6962,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0684,
+    "p": 0.0695,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -7094,7 +7104,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0926,
+    "p": 0.094,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -7146,7 +7156,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0527,
+    "p": 0.0528,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -7396,7 +7406,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1025,
+    "p": 0.1018,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -7500,7 +7510,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0863,
+    "p": 0.0856,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -7552,7 +7562,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0484,
+    "p": 0.0497,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -7648,7 +7658,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0395,
+    "p": 0.0399,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -7760,7 +7770,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "error_added",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -7878,7 +7888,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0072,
+    "p": 0.0073,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8218,7 +8228,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0603,
+    "p": 0.0615,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8319,7 +8329,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0393,
+    "p": 0.0398,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8466,7 +8476,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0463,
+    "p": 0.0466,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -8608,7 +8618,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0516,
+    "p": 0.0518,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -8662,7 +8672,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0126,
+    "p": 0.013,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8714,7 +8724,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0564,
+    "p": 0.0565,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8788,15 +8798,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
-    "initial": null,
-    "final": null,
+    "kind": "ruling_change",
+    "initial": "other_pa",
+    "final": "out",
     "initialHitType": null,
     "finalHitType": null,
-    "rule": null,
-    "oldPhrase": null,
-    "newPhrase": null,
-    "transition": null,
+    "rule": "T1",
+    "oldPhrase": "an intentional walk",
+    "newPhrase": "Jesus Sanchez is now out catcher Miguel Amaya unassisted",
+    "transition": "other_pa->out",
     "flags": []
    },
    "link": {
@@ -8862,7 +8872,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0565,
+    "p": 0.0568,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -9200,7 +9210,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.076,
+    "p": 0.0755,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -9222,7 +9232,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -9312,7 +9322,7 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "double_play_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -9430,7 +9440,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0804,
+    "p": 0.0797,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -9578,7 +9588,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0918,
+    "p": 0.0934,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -9922,8 +9932,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1953,
-    "score": 20,
+    "p": 0.1941,
+    "score": 19,
     "kind": "out_of_fold"
    }
   },
@@ -10160,7 +10170,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0536,
+    "p": 0.0548,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -10368,7 +10378,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0618,
+    "p": 0.0621,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -10900,7 +10910,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.156,
+    "p": 0.1555,
     "score": 16,
     "kind": "out_of_fold"
    }
@@ -10952,7 +10962,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.141,
+    "p": 0.1409,
     "score": 14,
     "kind": "out_of_fold"
    }
@@ -11094,8 +11104,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0748,
-    "score": 7,
+    "p": 0.0754,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -11146,7 +11156,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1195,
+    "p": 0.1182,
     "score": 12,
     "kind": "out_of_fold"
    }

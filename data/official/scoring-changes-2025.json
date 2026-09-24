@@ -5,7 +5,7 @@
   "url": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://web.archive.org/web/20260210034254id_/https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": "2026-02-10T03:42:54Z",
-  "fetchedAt": "2026-09-24T18:46:28.092Z",
+  "fetchedAt": "2026-09-24T18:53:52.117Z",
   "sha256": "3fb1bd59dc9bb5607b7e23198fe176dceca69009af377d18e8bf39a71eb34356",
   "bytes": 853480
  },
@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T18:46:28.092Z",
+ "generatedAt": "2026-09-24T18:53:52.117Z",
  "entries": [
   {
    "seq": 1,
@@ -41,7 +41,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "error_removed",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -303,7 +303,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0715,
+    "p": 0.0725,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -495,7 +495,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0763,
+    "p": 0.0757,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -568,7 +568,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "fielding_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -735,7 +735,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0694,
+    "p": 0.0692,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -787,7 +787,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0883,
+    "p": 0.0878,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -891,7 +891,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.068,
+    "p": 0.069,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -1085,7 +1085,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1005,
+    "p": 0.1011,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -1183,7 +1183,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1334,
+    "p": 0.1339,
     "score": 13,
     "kind": "out_of_fold"
    }
@@ -1235,7 +1235,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0428,
+    "p": 0.0432,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -1482,7 +1482,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.079,
+    "p": 0.0799,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -1830,7 +1830,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "error_added",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -1954,7 +1954,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0544,
+    "p": 0.0549,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -2204,7 +2204,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0265,
+    "p": 0.027,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -2346,7 +2346,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1222,
+    "p": 0.1235,
     "score": 12,
     "kind": "out_of_fold"
    }
@@ -2692,7 +2692,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0566,
+    "p": 0.0567,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -2796,7 +2796,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0915,
+    "p": 0.0899,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -2944,7 +2944,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0917,
+    "p": 0.0906,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -2996,7 +2996,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0809,
+    "p": 0.0819,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -3048,7 +3048,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1005,
+    "p": 0.0992,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -3100,7 +3100,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0366,
+    "p": 0.0372,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3435,7 +3435,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
+    "p": 0.0428,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3678,7 +3678,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0581,
+    "p": 0.0584,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -3730,7 +3730,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.088,
+    "p": 0.0888,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -3870,7 +3870,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0436,
+    "p": 0.0448,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3922,7 +3922,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0235,
+    "p": 0.024,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -3988,16 +3988,18 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
-    "initial": null,
-    "final": null,
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "error",
     "initialHitType": null,
     "finalHitType": null,
-    "rule": null,
-    "oldPhrase": null,
-    "newPhrase": null,
-    "transition": null,
-    "flags": []
+    "rule": "T2",
+    "oldPhrase": "a two-base error charged to Dollander",
+    "newPhrase": ". there are now 2 errors charged to Chase Dollander, one allowing Drake Baldwin to reach 1st and another to account for subsequent advancements",
+    "transition": "error->error",
+    "flags": [
+     "errorToError"
+    ]
    },
    "link": {
     "gamePk": 777523,
@@ -4157,7 +4159,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0272,
+    "p": 0.0283,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -4359,7 +4361,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0826,
+    "p": 0.0823,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -4411,7 +4413,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0534,
+    "p": 0.0538,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4604,8 +4606,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.096,
-    "score": 10,
+    "p": 0.0949,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -4656,7 +4658,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0531,
+    "p": 0.0532,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4806,7 +4808,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0446,
+    "p": 0.0448,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -5057,7 +5059,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0716,
+    "p": 0.0725,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -5301,7 +5303,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0402,
+    "p": 0.0405,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -5353,7 +5355,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1211,
+    "p": 0.1197,
     "score": 12,
     "kind": "out_of_fold"
    }
@@ -5578,7 +5580,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -6090,7 +6092,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "error_added",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -6210,7 +6212,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0798,
+    "p": 0.0791,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -6264,7 +6266,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1421,
+    "p": 0.1419,
     "score": 14,
     "kind": "out_of_fold"
    }
@@ -6316,7 +6318,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.107,
+    "p": 0.1074,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -6685,7 +6687,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0632,
+    "p": 0.0643,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6737,7 +6739,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0706,
+    "p": 0.0704,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -6761,7 +6763,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "pitching_decision",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -6889,7 +6891,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0588,
+    "p": 0.06,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6911,7 +6913,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "earned_run",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -7593,7 +7595,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0654,
+    "p": 0.0665,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -7647,7 +7649,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0899,
+    "p": 0.0905,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -7715,7 +7717,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "rbi",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -7898,7 +7900,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -7972,7 +7974,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0378,
+    "p": 0.0382,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8120,7 +8122,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0627,
+    "p": 0.0638,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8356,7 +8358,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0421,
+    "p": 0.0424,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8378,7 +8380,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "fielding_credit",
+    "kind": "baserunning",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -8474,7 +8476,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -8744,7 +8746,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0285,
+    "p": 0.029,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -8796,7 +8798,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.083,
+    "p": 0.0824,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -8848,7 +8850,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0825,
+    "p": 0.0819,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -9176,7 +9178,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2709,
+    "p": 0.2671,
     "score": 27,
     "kind": "out_of_fold"
    }
@@ -9198,7 +9200,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "fielding_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -9272,7 +9274,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.057,
+    "p": 0.0582,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -9658,7 +9660,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0545,
+    "p": 0.0543,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -9712,8 +9714,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0647,
-    "score": 6,
+    "p": 0.0658,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -9786,16 +9788,18 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
-    "initial": null,
-    "final": null,
+    "kind": "ruling_change",
+    "initial": "fc+error",
+    "final": "hit",
     "initialHitType": null,
-    "finalHitType": null,
-    "rule": null,
-    "oldPhrase": null,
-    "newPhrase": null,
-    "transition": null,
-    "flags": []
+    "finalHitType": "single",
+    "rule": "T2",
+    "oldPhrase": "a fielder's choice and an error",
+    "newPhrase": "a base hit, removing the error for Jorge Polanco",
+    "transition": "fc+error->hit",
+    "flags": [
+     "fcToHit"
+    ]
    },
    "link": {
     "gamePk": 776302,
@@ -9860,7 +9864,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0794,
+    "p": 0.0793,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -9882,7 +9886,7 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "rbi",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -9956,7 +9960,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0883,
+    "p": 0.0879,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -10256,7 +10260,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1275,
+    "p": 0.1274,
     "score": 13,
     "kind": "out_of_fold"
    }

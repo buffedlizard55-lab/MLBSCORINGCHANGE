@@ -1,6 +1,6 @@
 # Official MLB scoring changes — 2024
 # Source: https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes
-# Fetched: 2026-09-24T18:46:28.092Z  sha256(html)=3d9a56c5632dd1c7e33a9fdcc510ca7f724e36abcc6e8c5922fb12c437dac9b2
+# Fetched: 2026-09-24T18:53:52.117Z  sha256(html)=3d9a56c5632dd1c7e33a9fdcc510ca7f724e36abcc6e8c5922fb12c437dac9b2
 # Verbatim entry lines as extracted from the page (one per line).
 
 1) 3/20 LAD@SD - In the top of the 8th inning, pitcher Jhony Brito is now charged with two earned runs and pitcher Adrian Morejon is charged with no earned runs, instead of each pitcher being charged with one earned run.

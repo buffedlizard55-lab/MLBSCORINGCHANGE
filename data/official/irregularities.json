@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-09-24T18:46:28.092Z",
- "count": 89,
+ "generatedAt": "2026-09-24T18:53:52.117Z",
+ "count": 56,
  "items": [
   {
    "season": 2024,
@@ -11,6 +11,7 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 745687,
    "atBatIndex": 27,
@@ -25,22 +26,11 @@
    "linkFlags": [
     "name_match:fuzzy_last_name"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 747063,
    "atBatIndex": 73,
    "currentEventType": "field_error"
-  },
-  {
-   "season": 2024,
-   "seq": 7,
-   "section": "2024 Regular Season",
-   "raw": "7) 3/31 CLE@OAK - In the bottom of the 6th inning, Ryan Noda is now credited with a sacrifice bunt and not charged a time at-bat.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 745683,
-   "atBatIndex": 44,
-   "currentEventType": "sac_bunt"
   },
   {
    "season": 2024,
@@ -53,6 +43,7 @@
    "linkFlags": [
     "batter_not_found"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "pitching_decision",
    "gamePk": 745031,
    "atBatIndex": null,
@@ -69,6 +60,7 @@
     "ambiguous_plate_appearance",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 746330,
    "atBatIndex": 13,
@@ -83,21 +75,10 @@
    "linkFlags": [
     "teams_swapped"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 745591,
    "atBatIndex": 1,
-   "currentEventType": "single"
-  },
-  {
-   "season": 2024,
-   "seq": 48,
-   "section": "2024 Regular Season",
-   "raw": "48) 4/24 NYM@SF -- In the top of the 4th inning, Harrison Bader reaches on an infield single to third base Matt Chapman and advances to second on a throwing error by Chapman. It was originally a two-base throwing error.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 745346,
-   "atBatIndex": 29,
    "currentEventType": "single"
   },
   {
@@ -109,7 +90,8 @@
    "linkFlags": [
     "batter_not_found"
    ],
-   "classification": "unclassified",
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "hit->fc",
    "gamePk": 745018,
    "atBatIndex": null,
    "currentEventType": null
@@ -123,37 +105,10 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 745587,
    "atBatIndex": 29,
-   "currentEventType": "field_out"
-  },
-  {
-   "season": 2024,
-   "seq": 71,
-   "section": "2024 Regular Season",
-   "raw": "71) 5/16 NYM@PHI -- In the top of the 8th inning, a throwing error has been charged to Brandon Marsh for allowing Pete Alonso to advance to 3rd base following Harrison Bader's single.",
-   "parseIssues": [],
-   "linkFlags": [
-    "name_match:fuzzy_last_name"
-   ],
-   "classification": "unclassified",
-   "gamePk": 745580,
-   "atBatIndex": 61,
-   "currentEventType": "field_out"
-  },
-  {
-   "season": 2024,
-   "seq": 76,
-   "section": "2024 Regular Season",
-   "raw": "76) 5/20 SD@ATL2 -- In the top of the 8th inning, during Jake Cronenworth's at-bat, Luis Arraez stole 3rd base between the 5th and 6th pitches.",
-   "parseIssues": [],
-   "linkFlags": [
-    "name_match:fuzzy_last_name"
-   ],
-   "classification": "unclassified",
-   "gamePk": 747121,
-   "atBatIndex": 59,
    "currentEventType": "field_out"
   },
   {
@@ -167,6 +122,7 @@
    "linkFlags": [
     "team_code_via:teamCode:ARI"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit->error",
    "gamePk": 746146,
    "atBatIndex": 5,
@@ -181,6 +137,7 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->sac",
    "gamePk": 746716,
    "atBatIndex": 46,
@@ -195,6 +152,7 @@
    "linkFlags": [
     "teams_swapped"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit->hit",
    "gamePk": 747111,
    "atBatIndex": 54,
@@ -211,24 +169,11 @@
    "linkFlags": [
     "batter_not_found"
    ],
-   "classification": "unclassified",
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "pitching_decision",
    "gamePk": 746699,
    "atBatIndex": null,
    "currentEventType": null
-  },
-  {
-   "season": 2024,
-   "seq": 107,
-   "section": "2024 Regular Season",
-   "raw": "107) 6/24 WAS@SD -- In the bottom of the 2nd inning, the sacrifice has been removed for Bryce Johnson.",
-   "parseIssues": [],
-   "linkFlags": [
-    "team_code_via:teamCode:WAS"
-   ],
-   "classification": "unclassified",
-   "gamePk": 745397,
-   "atBatIndex": 16,
-   "currentEventType": "field_out"
   },
   {
    "season": 2024,
@@ -239,6 +184,7 @@
    "linkFlags": [
     "name_match:fuzzy_last_name"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "sac+error->hit",
    "gamePk": 746698,
    "atBatIndex": 53,
@@ -254,6 +200,7 @@
     "team_code_via:teamCode:WAS",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "out->out",
    "gamePk": 745399,
    "atBatIndex": 18,
@@ -268,58 +215,11 @@
    "linkFlags": [
     "name_match:fuzzy_last_name"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 745555,
    "atBatIndex": 23,
    "currentEventType": "single"
-  },
-  {
-   "season": 2024,
-   "seq": 127,
-   "section": "2024 Regular Season",
-   "raw": "127) 7/6 DET@CIN -- In the top of the 8th inning, Riley Greene grounds out, second baseman Jonathan India to pitcher Sam Moll, instead of first baseman Spence Steer to India to Moll.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 746694,
-   "atBatIndex": 56,
-   "currentEventType": "field_out"
-  },
-  {
-   "season": 2024,
-   "seq": 134,
-   "section": "2024 Regular Season",
-   "raw": "134) 7/13 LAD@DET -- In the top of the 4th inning, Cavan Biggio grounded out, pitcher Keider Montero to shortstop Javier Baez to first baseman Andy Ibanez, instead of Baez to Ibanez.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 746447,
-   "atBatIndex": 29,
-   "currentEventType": "field_out"
-  },
-  {
-   "season": 2024,
-   "seq": 135,
-   "section": "2024 Regular Season",
-   "raw": "135) 7/14 TOR@AZ -- In the bottom of the 8th inning, the sacrifice has been removed for Geraldo Perdomo.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 747176,
-   "atBatIndex": 73,
-   "currentEventType": "field_out"
-  },
-  {
-   "season": 2024,
-   "seq": 142,
-   "section": "2024 Regular Season",
-   "raw": "142) 7/25 BAL@MIA -- In the bottom of the 8th inning, there is no sacrifice bunt for Jazz Chisholm Jr.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 746037,
-   "atBatIndex": 60,
-   "currentEventType": "field_out"
   },
   {
    "season": 2024,
@@ -330,6 +230,7 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "out->out",
    "gamePk": 745068,
    "atBatIndex": 63,
@@ -344,22 +245,11 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 746199,
    "atBatIndex": 0,
    "currentEventType": "double"
-  },
-  {
-   "season": 2024,
-   "seq": 160,
-   "section": "2024 Regular Season",
-   "raw": "160) 8/9 DET@SF -- In the top of the 2nd inning, a throwing error has been added to left fielder Michael Conforto to allow Wenceel Pérez to reach 2nd base.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 745308,
-   "atBatIndex": 9,
-   "currentEventType": "walk"
   },
   {
    "season": 2024,
@@ -371,6 +261,7 @@
     "team_code_via:teamCode:WAS",
     "name_match:fuzzy_last_name"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "unclassified",
    "gamePk": 747000,
    "atBatIndex": 39,
@@ -385,6 +276,7 @@
    "linkFlags": [
     "subject_not_first_mention"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 745300,
    "atBatIndex": 4,
@@ -400,46 +292,11 @@
     "name_match:fuzzy_last_name",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 745298,
    "atBatIndex": 27,
    "currentEventType": "double_play"
-  },
-  {
-   "season": 2024,
-   "seq": 181,
-   "section": "2024 Regular Season",
-   "raw": "181) 8/25 CHC@MIA -- In the bottom of the 8th inning, Jesus Sanchez is now out catcher Miguel Amaya unassisted, instead of an intentional walk. Sanchez failed to touch first base and was ruled out.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 746023,
-   "atBatIndex": 63,
-   "currentEventType": "field_out"
-  },
-  {
-   "season": 2024,
-   "seq": 190,
-   "section": "2024 Regular Season",
-   "raw": "190) 8/29 ATL@PHI -- In the top of the 5th inning, Whit Merrifield is now credited with a SAC bunt.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 745531,
-   "atBatIndex": 36,
-   "currentEventType": "sac_bunt"
-  },
-  {
-   "season": 2024,
-   "seq": 192,
-   "section": "2024 Regular Season",
-   "raw": "192) 8/31 STL@NYY -- In the bottom of the 8th inning, Juan Soto is now charged with grounding into a double play.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 745699,
-   "atBatIndex": 61,
-   "currentEventType": "grounded_into_double_play"
   },
   {
    "season": 2024,
@@ -464,26 +321,11 @@
     "subject_not_first_mention",
     "ambiguous_plate_appearance"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "wild_pitch_passed_ball",
    "gamePk": 776543,
    "atBatIndex": 46,
    "currentEventType": "walk"
-  },
-  {
-   "season": 2025,
-   "seq": 12,
-   "section": "2025 Regular Season",
-   "raw": "12) 4/8 BAL@ARI -- In the top of the 7th inning, the final out of the inning goes catcher Gabriel Moreno to third baseman Eugenio Suarez to second baseman Garrett Hampson, instead of Moreno to Suarez.",
-   "parseIssues": [],
-   "linkFlags": [
-    "team_code_via:teamCode:ARI",
-    "inning_mismatch",
-    "ambiguous_plate_appearance"
-   ],
-   "classification": "unclassified",
-   "gamePk": 778396,
-   "atBatIndex": 15,
-   "currentEventType": "single"
   },
   {
    "season": 2025,
@@ -496,6 +338,7 @@
     "ambiguous_plate_appearance",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit+error->error",
    "gamePk": 778240,
    "atBatIndex": 20,
@@ -512,22 +355,11 @@
     "ambiguous_plate_appearance",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 778226,
    "atBatIndex": 0,
    "currentEventType": "strikeout"
-  },
-  {
-   "season": 2025,
-   "seq": 38,
-   "section": "2025 Regular Season",
-   "raw": "38) 5/4 CLE@TOR -- In the bottom of the 9th inning, an additional error has been charged to pitcher Emmanuel Clase for the throw allowing Andres Gimenez to advance to 2nd base. Gimenez still reaches on an error by Clase, who now has two on the play.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 778056,
-   "atBatIndex": 77,
-   "currentEventType": "field_error"
   },
   {
    "season": 2025,
@@ -540,6 +372,7 @@
     "inning_mismatch",
     "subject_not_first_mention"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 778039,
    "atBatIndex": 72,
@@ -555,22 +388,11 @@
     "name_match:fuzzy_last_name",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->out",
    "gamePk": 777988,
    "atBatIndex": 27,
    "currentEventType": "single"
-  },
-  {
-   "season": 2025,
-   "seq": 82,
-   "section": "2025 Regular Season",
-   "raw": "82) 6/14 COL@ATL -- In the bottom of the 6th inning. there are now 2 errors charged to Chase Dollander, one allowing Drake Baldwin to reach 1st and another to account for subsequent advancements. The play was originally a two-base error charged to Dollander.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 777523,
-   "atBatIndex": 45,
-   "currentEventType": "field_error"
   },
   {
    "season": 2025,
@@ -581,6 +403,7 @@
    "linkFlags": [
     "team_alias:CHW"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "unclassified",
    "gamePk": 777508,
    "atBatIndex": 68,
@@ -596,6 +419,7 @@
     "name_match:fuzzy_last_name",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 777386,
    "atBatIndex": 58,
@@ -611,34 +435,11 @@
     "name_match:last_name",
     "subject_not_first_mention"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "out->fc+error",
    "gamePk": 777208,
    "atBatIndex": 42,
    "currentEventType": "fielders_choice"
-  },
-  {
-   "season": 2025,
-   "seq": 114,
-   "section": "2025 Regular Season",
-   "raw": "114) 7/11 MIA@BAL -- In the top of the 3rd inning, the sacrifice has been removed for Xavier Edwards.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 777157,
-   "atBatIndex": 18,
-   "currentEventType": "field_out"
-  },
-  {
-   "season": 2025,
-   "seq": 125,
-   "section": "2025 Regular Season",
-   "raw": "125) 7/22 MIN@LAD -- In the top of the 7th inning, pitcher Edgardo Henriquez is now charged with two errors during the Royce Lewis at-bat, instead of just one.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 777039,
-   "atBatIndex": 60,
-   "currentEventType": "field_error"
   },
   {
    "season": 2025,
@@ -653,6 +454,7 @@
     "inning_mismatch",
     "ambiguous_plate_appearance"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "fielding_credit",
    "gamePk": 777017,
    "atBatIndex": 5,
@@ -669,7 +471,8 @@
    "linkFlags": [
     "batter_not_found"
    ],
-   "classification": "unclassified",
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "pitching_decision",
    "gamePk": 776945,
    "atBatIndex": null,
    "currentEventType": null
@@ -684,6 +487,7 @@
     "name_match:fuzzy_last_name",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit->error",
    "gamePk": 776972,
    "atBatIndex": 67,
@@ -698,6 +502,7 @@
    "linkFlags": [
     "team_code_corrected:LAA->LAD"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit->error",
    "gamePk": 776788,
    "atBatIndex": 60,
@@ -714,6 +519,7 @@
     "ambiguous_plate_appearance",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 776783,
    "atBatIndex": 11,
@@ -728,46 +534,11 @@
     "team_separator:at"
    ],
    "linkFlags": [],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 776780,
    "atBatIndex": 58,
    "currentEventType": "single"
-  },
-  {
-   "season": 2025,
-   "seq": 159,
-   "section": "2025 Regular Season",
-   "raw": "159) 8/17 TB@SF -- In the bottom of the 6th inning, Dominic Smith is now credited with 2 RBIs on his single with the 3rd run scoring on a throw to 2nd base, instead of 3 RBIs.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 776703,
-   "atBatIndex": 42,
-   "currentEventType": "single"
-  },
-  {
-   "season": 2025,
-   "seq": 163,
-   "section": "2025 Regular Season",
-   "raw": "163) 8/20 MIL@CHC -- In the top of the 6th inning, Anthony Seigler now has a sacrifice bunt.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 776663,
-   "atBatIndex": 42,
-   "currentEventType": "sac_bunt"
-  },
-  {
-   "season": 2025,
-   "seq": 175,
-   "section": "2025 Regular Season",
-   "raw": "175) 7/30 TB@NYY -- In the bottom of the 9th inning, the sacrifice bunt for Trent Grisham has been rescinded and the play is now ruled a reverse-ground-double-play.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 776938,
-   "atBatIndex": 72,
-   "currentEventType": "grounded_into_double_play"
   },
   {
    "season": 2025,
@@ -776,22 +547,11 @@
    "raw": "187) 9/8 WSH@MIA -- In the top of the 4th inning, Dylan Crews is now credited with a double. He has been credited with a single, advancing to 2nd base on the throw.",
    "parseIssues": [],
    "linkFlags": [],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "unclassified",
    "gamePk": 776409,
    "atBatIndex": 28,
    "currentEventType": "double"
-  },
-  {
-   "season": 2025,
-   "seq": 190,
-   "section": "2025 Regular Season",
-   "raw": "190) 9/10 COL@LAD -- In the bottom of the 4th inning, baserunner Andy Pages is now out pitcher Kyle Freeland to shortstop Ezequiel Tovar, instead of Freeland to Tovar to second baseman Orlando Arcia to third baseman Kyle Karros.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 776380,
-   "atBatIndex": 30,
-   "currentEventType": "single"
   },
   {
    "season": 2025,
@@ -802,21 +562,10 @@
    "linkFlags": [
     "subject_not_first_mention"
    ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 777825,
    "atBatIndex": 4,
-   "currentEventType": "single"
-  },
-  {
-   "season": 2025,
-   "seq": 202,
-   "section": "2025 Regular Season",
-   "raw": "202) 9/16 SEA @ KC -- In the bottom of the 3rd inning, Vinnie Pasquantino reached on what was ruled a fielder's choice and an error. This has been changed to a base hit, removing the error for Jorge Polanco.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 776302,
-   "atBatIndex": 29,
    "currentEventType": "single"
   },
   {
@@ -828,6 +577,7 @@
    "linkFlags": [
     "name_match:fuzzy_last_name"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 823159,
    "atBatIndex": 9,
@@ -845,6 +595,7 @@
     "subject_not_first_mention",
     "current_ruling_compatible:fielders_choice_out"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 823566,
    "atBatIndex": 47,
@@ -859,6 +610,7 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "fc->hit",
    "gamePk": 822831,
    "atBatIndex": 15,
@@ -873,34 +625,11 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 824133,
    "atBatIndex": 8,
    "currentEventType": "single"
-  },
-  {
-   "season": 2026,
-   "seq": 55,
-   "section": "2026 Regular Season",
-   "raw": "55. 4/24 LAA@KC -- In the bottom of the 4th, Starling Marte is now credited with a sacrifice fly.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 824124,
-   "atBatIndex": 28,
-   "currentEventType": "sac_fly"
-  },
-  {
-   "season": 2026,
-   "seq": 57,
-   "section": "2026 Regular Season",
-   "raw": "57. 4/26 ATH@TEX -- In the top of the 2nd, a GIDP has been added for Lawrence Butler as the play was ultimately a reverse-force double play.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 822911,
-   "atBatIndex": 10,
-   "currentEventType": "grounded_into_double_play"
   },
   {
    "season": 2026,
@@ -911,6 +640,7 @@
    "linkFlags": [
     "subject_not_first_mention"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit->error",
    "gamePk": 824113,
    "atBatIndex": 20,
@@ -925,6 +655,7 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 825011,
    "atBatIndex": 16,
@@ -939,6 +670,7 @@
    "linkFlags": [
     "team_code_corrected:TBN->TB"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 822817,
    "atBatIndex": 64,
@@ -953,34 +685,11 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 823059,
    "atBatIndex": 44,
    "currentEventType": "single"
-  },
-  {
-   "season": 2026,
-   "seq": 107,
-   "section": "2026 Regular Season",
-   "raw": "107. 5/31 SF@COL -- In the bottom of the 2nd, Braxton Fulford is now credited with the Sacrifice Fly on his Foul Pop Out where originally he was not.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 824354,
-   "atBatIndex": 18,
-   "currentEventType": "sac_fly"
-  },
-  {
-   "season": 2026,
-   "seq": 130,
-   "section": "2026 Regular Season",
-   "raw": "130. 6/13 STL@MIN -- In the top of the 6th, the Twins are not credited with a double play on the Pedro Pages strikeout. Alex Jackson and Luke Keaschall have one less double play.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 823694,
-   "atBatIndex": 45,
-   "currentEventType": "strikeout"
   },
   {
    "season": 2026,
@@ -993,6 +702,7 @@
    "linkFlags": [
     "no_game_found"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "pitching_decision",
    "gamePk": null,
    "atBatIndex": null,
@@ -1007,22 +717,11 @@
    "linkFlags": [
     "no_game_found"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit->error",
    "gamePk": null,
    "atBatIndex": null,
    "currentEventType": null
-  },
-  {
-   "season": 2026,
-   "seq": 145,
-   "section": "2026 Regular Season",
-   "raw": "145. 6/23 MIL@CIN -- In the top of the 3rd, Blake Perkins reaches on a throwing error by second baseman Edwin Arroyo, instead of catcher's interference on Jose Trevino.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 824501,
-   "atBatIndex": 12,
-   "currentEventType": "field_error"
   },
   {
    "season": 2026,
@@ -1034,6 +733,7 @@
     "name_match:fuzzy_last_name",
     "current_ruling_compatible:force_out"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "fc+error->fc+error",
    "gamePk": 824176,
    "atBatIndex": 15,
@@ -1048,6 +748,7 @@
    "linkFlags": [
     "name_match:fuzzy_last_name"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->fc+error",
    "gamePk": 824580,
    "atBatIndex": 14,
@@ -1062,34 +763,11 @@
    "linkFlags": [
     "no_game_found"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit+error->error",
    "gamePk": null,
    "atBatIndex": null,
    "currentEventType": null
-  },
-  {
-   "season": 2026,
-   "seq": 176,
-   "section": "2026 Regular Season",
-   "raw": "176. 7/11 HOU@TEX -- In the bottom of the 7th, Nicky Lopez is now charged with grounding into a double play, instead of not being charged with a GIDP.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 822875,
-   "atBatIndex": 58,
-   "currentEventType": "grounded_into_double_play"
-  },
-  {
-   "season": 2026,
-   "seq": 182,
-   "section": "2026 Regular Season",
-   "raw": "182. 7/10 HOU@TEX -- In the bottom of the 8th, Evan Carter is now given credit for a sacrifice bunt.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 822878,
-   "atBatIndex": 64,
-   "currentEventType": "sac_bunt"
   },
   {
    "season": 2026,
@@ -1101,24 +779,11 @@
     "date_mismatch",
     "subject_not_first_mention"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit->fc",
    "gamePk": 823761,
    "atBatIndex": 41,
    "currentEventType": "fielders_choice"
-  },
-  {
-   "season": 2026,
-   "seq": 195,
-   "section": "2026 Regular Season",
-   "raw": "195. 7/24 SD@MIA -- In the top of the 4th, Parker Merrill has been credited with a SAC fly.",
-   "parseIssues": [],
-   "linkFlags": [
-    "name_match:last_name"
-   ],
-   "classification": "unclassified",
-   "gamePk": 823843,
-   "atBatIndex": 29,
-   "currentEventType": "sac_fly"
   },
   {
    "season": 2026,
@@ -1129,7 +794,8 @@
    "linkFlags": [
     "name_match:fuzzy_last_name"
    ],
-   "classification": "unclassified",
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "out->sac",
    "gamePk": 824401,
    "atBatIndex": 64,
    "currentEventType": "sac_bunt"
@@ -1147,22 +813,11 @@
     "subject_not_first_mention",
     "ambiguous_plate_appearance"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->hit",
    "gamePk": 824074,
    "atBatIndex": 26,
    "currentEventType": "single"
-  },
-  {
-   "season": 2026,
-   "seq": 236,
-   "section": "2026 Regular Season",
-   "raw": "236. 8/30 COL@ATL -- In the bottom of the 6th, Ozzie Albies single has been changed to a double.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 824876,
-   "atBatIndex": 45,
-   "currentEventType": "double"
   },
   {
    "season": 2026,
@@ -1173,6 +828,7 @@
     "unexpected_suffix:!"
    ],
    "linkFlags": [],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit+error->hit",
    "gamePk": 823539,
    "atBatIndex": 16,
@@ -1187,6 +843,7 @@
    "linkFlags": [
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 824875,
    "atBatIndex": 46,
@@ -1202,22 +859,11 @@
     "name_match:last_name",
     "current_ruling_mismatch"
    ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "error->error",
    "gamePk": 822931,
    "atBatIndex": 4,
    "currentEventType": "single"
-  },
-  {
-   "season": 2026,
-   "seq": 250,
-   "section": "2026 Regular Season",
-   "raw": "250. 9/17 DET@CWS -- In the top of the 8th, Brett Callahan is out on a play at third base, third baseman Miguel Vargas to first baseman Munetaka Murakami to third baseman Miguel Vargas, instead of Murakami to Vargas.",
-   "parseIssues": [],
-   "linkFlags": [],
-   "classification": "unclassified",
-   "gamePk": 824548,
-   "atBatIndex": 62,
-   "currentEventType": "walk"
   },
   {
    "season": 2026,

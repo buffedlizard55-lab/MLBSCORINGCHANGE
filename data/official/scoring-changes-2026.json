@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-09-24T18:46:28.092Z",
-  "sha256": "168cb2f6298718f1ef5f79f1b6642aae7000691d62ae81de76f7e14443813f2b",
+  "fetchedAt": "2026-09-24T18:53:52.117Z",
+  "sha256": "5cda53905446d323d585c9ade3e2caeaf8eae8cb2e13a0d79baad71b35288086",
   "bytes": 919598
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T18:46:28.092Z",
+ "generatedAt": "2026-09-24T18:53:52.117Z",
  "entries": [
   {
    "seq": 1,
@@ -156,7 +156,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0361,
+    "p": 0.0373,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -298,7 +298,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0719,
+    "p": 0.0716,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -352,8 +352,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0147,
-    "score": 1,
+    "p": 0.015,
+    "score": 2,
     "kind": "out_of_fold"
    }
   },
@@ -729,7 +729,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.03,
+    "p": 0.0304,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -833,7 +833,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0462,
+    "p": 0.0465,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -885,7 +885,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0503,
+    "p": 0.0506,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -1127,7 +1127,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0496,
+    "p": 0.0508,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -1223,7 +1223,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0078,
+    "p": 0.0079,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -1627,7 +1627,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "earned_run",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -1701,7 +1701,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1291,
+    "p": 0.1284,
     "score": 13,
     "kind": "out_of_fold"
    }
@@ -1797,7 +1797,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.096,
+    "p": 0.0967,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -1945,8 +1945,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0347,
-    "score": 3,
+    "p": 0.0354,
+    "score": 4,
     "kind": "out_of_fold"
    }
   },
@@ -2087,7 +2087,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0825,
+    "p": 0.0819,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -2281,7 +2281,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0478,
+    "p": 0.049,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -2635,7 +2635,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -2734,7 +2734,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "double_play_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -2946,7 +2946,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0882,
+    "p": 0.0889,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -3086,7 +3086,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0404,
+    "p": 0.0405,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3494,7 +3494,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1286,
+    "p": 0.1267,
     "score": 13,
     "kind": "out_of_fold"
    }
@@ -3838,7 +3838,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0653,
+    "p": 0.0664,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -3980,7 +3980,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0359,
+    "p": 0.036,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4137,7 +4137,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0491,
+    "p": 0.0504,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4723,7 +4723,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0479,
+    "p": 0.0481,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4875,7 +4875,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0508,
+    "p": 0.052,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -5128,7 +5128,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -5245,7 +5245,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.071,
+    "p": 0.0706,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -5297,7 +5297,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1041,
+    "p": 0.1046,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -5453,7 +5453,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1484,
+    "p": 0.1485,
     "score": 15,
     "kind": "out_of_fold"
    }
@@ -5593,7 +5593,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1263,
+    "p": 0.1272,
     "score": 13,
     "kind": "out_of_fold"
    }
@@ -5969,7 +5969,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0513,
+    "p": 0.0526,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -6073,7 +6073,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0874,
+    "p": 0.0866,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -6237,7 +6237,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "double_play_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -6396,7 +6396,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0643,
+    "p": 0.0642,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6772,7 +6772,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0987,
+    "p": 0.0979,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -6924,7 +6924,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0575,
+    "p": 0.0587,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6946,15 +6946,15 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
-    "initial": null,
-    "final": null,
+    "kind": "ruling_change",
+    "initial": "other_pa",
+    "final": "error",
     "initialHitType": null,
     "finalHitType": null,
-    "rule": null,
-    "oldPhrase": null,
-    "newPhrase": null,
-    "transition": null,
+    "rule": "T1",
+    "oldPhrase": "catcher's interference on Jose Trevino",
+    "newPhrase": "Blake Perkins reaches on a throwing error by second baseman Edwin Arroyo",
+    "transition": "other_pa->error",
     "flags": []
    },
    "link": {
@@ -7212,7 +7212,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.091,
+    "p": 0.0917,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -7414,7 +7414,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0752,
+    "p": 0.0762,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -7509,7 +7509,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1011,
+    "p": 0.1004,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -7613,8 +7613,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0651,
-    "score": 7,
+    "p": 0.065,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -7665,7 +7665,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1812,
+    "p": 0.1806,
     "score": 18,
     "kind": "out_of_fold"
    }
@@ -8374,7 +8374,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0763,
+    "p": 0.0757,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -8440,7 +8440,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "double_play_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -8647,7 +8647,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0381,
+    "p": 0.0385,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8721,7 +8721,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -8795,7 +8795,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0608,
+    "p": 0.0619,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -9179,7 +9179,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0391,
+    "p": 0.0403,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -9352,7 +9352,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "sacrifice_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -9527,7 +9527,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.046,
+    "p": 0.0472,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -9579,7 +9579,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.217,
+    "p": 0.2157,
     "score": 22,
     "kind": "out_of_fold"
    }
@@ -9678,7 +9678,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0886,
+    "p": 0.0876,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -9880,7 +9880,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0919,
+    "p": 0.0926,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -10027,8 +10027,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.075,
-    "score": 8,
+    "p": 0.0745,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -10095,15 +10095,15 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
-    "initial": null,
-    "final": null,
+    "kind": "ruling_change",
+    "initial": "out",
+    "final": "sac",
     "initialHitType": null,
     "finalHitType": null,
-    "rule": null,
-    "oldPhrase": null,
-    "newPhrase": null,
-    "transition": null,
+    "rule": "T3",
+    "oldPhrase": "AJ Ewing's bunt groundout",
+    "newPhrase": "a sacrifice bunt",
+    "transition": "out->sac",
     "flags": []
    },
    "link": {
@@ -10540,7 +10540,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0729,
+    "p": 0.0727,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -10791,7 +10791,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0869,
+    "p": 0.0859,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -10901,8 +10901,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2474,
-    "score": 25,
+    "p": 0.2437,
+    "score": 24,
     "kind": "out_of_fold"
    }
   },
@@ -11349,16 +11349,18 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
-    "initial": null,
-    "final": null,
-    "initialHitType": null,
-    "finalHitType": null,
-    "rule": null,
-    "oldPhrase": null,
-    "newPhrase": null,
-    "transition": null,
-    "flags": []
+    "kind": "ruling_change",
+    "initial": "hit",
+    "final": "hit",
+    "initialHitType": "single",
+    "finalHitType": "double",
+    "rule": "T3",
+    "oldPhrase": "Ozzie Albies single",
+    "newPhrase": "a double",
+    "transition": "hit->hit",
+    "flags": [
+     "hitTypeChange"
+    ]
    },
    "link": {
     "gamePk": 824876,
@@ -11706,7 +11708,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0799,
+    "p": 0.0797,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -11804,7 +11806,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1058,
+    "p": 0.1063,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -11968,7 +11970,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "rbi",
+    "kind": "error_added",
     "initial": null,
     "final": null,
     "initialHitType": null,
@@ -12012,7 +12014,7 @@
    "section": "2026 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "unclassified",
+    "kind": "fielding_credit",
     "initial": null,
     "final": null,
     "initialHitType": null,
