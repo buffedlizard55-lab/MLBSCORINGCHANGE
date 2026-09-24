@@ -28,7 +28,7 @@ StatsAPI) and, once posted, the matching entry in MLB's official log.
 | MLB StatsAPI `/api/v1.1/game/{gamePk}/feed/live?fields=gameData,officialScorer,id,fullName,venue,name` | official scorer and venue of every game (§17) | once per game, cached |
 | Live capture — `data/capture/` (this project, from StatsAPI playByPlay during live games) | rulings as first called, error type, pending markers and their resolutions (§14) | every 10 min during game hours |
 
-Run of 2026-09-24: 7,322 completed games (2,472 / 2,477 / 2,373), 553,300 plate appearances,
+Run of 2026-09-24 (20:15 UTC): 7,323 completed games (2,472 / 2,477 / 2,374), 553,370 plate appearances,
 0 fetch failures, projection self-check equal in all three seasons.
 
 ## 3. Reading the official log
@@ -86,6 +86,10 @@ errors in MLB's log (e.g. 2026 #140 "6/6 NYM@PHI": that day PHI hosted CWS per
   ruling is the last entry's new ruling. A chain is used only if its last entry agrees with the
   play's current StatsAPI ruling; otherwise the play keeps its current ruling and the entry stays
   flagged. Plays with no entry: initial = final = current ruling.
+- An error → error entry labels a play only if that play itself is scored an error: on any
+  other play it concerns a runner's error (e.g. 2025 #128) and says nothing about the batter's
+  ruling. Such entries whose play carries a runner error in StatsAPI are flagged
+  `runner_error_change:verified` instead of a mismatch.
 - **Error → hit population:** initial ruling `error` (StatsAPI `field_error`); label 1 if the
   final ruling is a hit (or hit + error). **Hit → error population:** initial hit other than a
   home run; label 1 if the final ruling is an error.
@@ -96,7 +100,7 @@ errors in MLB's log (e.g. 2026 #140 "6/6 NYM@PHI": that day PHI hosted CWS per
 
 - **Hit probability (xBA-style):** share of comparable batted balls that became hits, on a grid
   of exit velocity 40–120 mph (2-mph cells) × launch angle −60° to 72° (3° cells), built from
-  370,650 batted balls with the training plays excluded. Empirical-Bayes smoothing (25 pseudo
+  370,696 batted balls with the training plays excluded. Empirical-Bayes smoothing (25 pseudo
   counts): cell → 3×3 block → launch-angle strip → overall. Without Statcast data: rate by
   trajectory × fielder, then trajectory, then overall. Validation: Pearson **0.974** with Savant's
   `estimated_ba_using_speedangle` on 1,003 plays (mean absolute difference 0.029).
@@ -127,36 +131,36 @@ errors in MLB's log (e.g. 2026 #140 "6/6 NYM@PHI": that day PHI hosted CWS per
 | | Error → hit | Hit → error |
 | --- | --- | --- |
 | Terms | logit(hit prob.), fielder group (P, C, 1B, 3B, OF vs 2B/SS), trajectory | logit(hit prob.), infield, trajectory |
-| λ | 3 | 1 |
-| Plays / changed | 3,166 / 192 (6.06%) | 100,969 / 120 (0.12%) |
-| CV AUC | 0.620 | 0.913 |
-| CV log loss (base) | 0.2225 (0.2287) | 0.0074 (0.0092) |
-| CV Brier (base) | 0.0560 (0.0570) | 0.00118 (0.00119) |
-| Out-of-time AUC, 2026 | 0.615 (945 plays, 58 changed) | 0.934 (30,982 plays, 46 changed) |
+| λ | 1 | 1 |
+| Plays / changed | 3,161 / 189 (5.98%) | 100,972 / 120 (0.12%) |
+| CV AUC | 0.609 | 0.913 |
+| CV log loss (base) | 0.2199 (0.2264) | 0.0074 (0.0092) |
+| CV Brier (base) | 0.0549 (0.0562) | 0.00118 (0.00119) |
+| Out-of-time AUC, 2026 | 0.622 (944 plays, 58 changed) | 0.934 (30,982 plays, 46 changed) |
 
-Error → hit coefficients: intercept −2.458; logit(hit prob.) +0.339; OF +1.253; 1B +0.434;
-C +0.357; 3B +0.258; P −0.030; line drive −0.488; fly ball −0.954; popup +0.050; bunt +0.499.
-The home-club set was tested and **rejected** by the selection rule.
+Error → hit coefficients: intercept −2.485; logit(hit prob.) +0.350; OF +1.919; 1B +0.521;
+C +0.602; 3B +0.314; P −0.025; line drive −1.178; fly ball −1.876; popup +0.074; bunt +0.775.
+The home-club and official-scorer sets were tested and **rejected** by the selection rule (§17).
 
 **What drives error → hit changes (raw rates, settled plays):**
 
 | Comparable-ball hit rate | Errors | Changed to hit | Rate |
 | --- | --- | --- | --- |
-| 0.00–0.10 | 950 | 38 | 4.0% |
+| 0.00–0.10 | 949 | 38 | 4.0% |
 | 0.10–0.20 | 696 | 35 | 5.0% |
-| 0.20–0.35 | 874 | 51 | 5.8% |
+| 0.20–0.35 | 872 | 50 | 5.7% |
 | 0.35–0.50 | 320 | 29 | 9.1% |
-| 0.50–0.70 | 285 | 36 | 12.6% |
+| 0.50–0.70 | 283 | 34 | 12.0% |
 | 0.70–1.00 | 41 | 3 | 7.3% |
 
-By fielder: outfield 11.0% (218), first base 7.5%, second base 6.4%, third base 6.2%, pitcher
-5.1%, shortstop 3.8%. By trajectory: line drive 10.8% (111), ground ball 6.0% (2,810), fly ball
-3.3%, popup 2.9%. By season: 6.2% / 5.9% / 6.1%.
+By fielder: outfield 9.8% (215), first base 7.5%, second base 6.4%, third base 6.2%, pitcher
+5.1%, shortstop 3.8%. By trajectory: line drive 9.2% (109), ground ball 6.0% (2,808), fly ball
+2.6%, popup 2.9%. By season: 6.1% / 5.7% / 6.1%.
 
 ## 9. Score bands
 
 Scores are probabilities ×100. Bands are relative to each question's base rate:
-error → hit: Low 0–4, Typical 5–8, Elevated 9–17 (≈1.5× typical), High 18–49 (≈3×), Likely 50+.
+error → hit: Low 0–3, Typical 4–8, Elevated 9–17 (≈1.5× typical), High 18–49 (≈3×), Likely 50+.
 Hit → error (base 0.12%): Low 0, Elevated 1–4, High 5–49, Likely 50+.
 
 ## 10. Pending rulings

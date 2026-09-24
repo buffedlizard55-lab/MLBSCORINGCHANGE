@@ -44,8 +44,8 @@ capture it required is built and running.)
   Play B .850 → 70%") was hypothetical. Initial ruling → later ruling (groundout → error,
   error → single, single → error, fielding error → hit) is a scoring-change model.
 - **What the official data actually shows (this project, 2024–2026):** errors on balls that
-  comparable batted balls turn into hits 50–70% of the time were changed to hits **12.6%**
-  of the time (36 of 285); errors on weak contact (under 10%) **4.0%** (38 of 950). A real,
+  comparable batted balls turn into hits 50–70% of the time were changed to hits **12.0%**
+  of the time (34 of 283); errors on weak contact (under 10%) **4.0%** (38 of 949). A real,
   roughly 3× effect — but most errors, even on well-struck balls, stand.
 
 ### Standing instructions (from the same request)
@@ -123,17 +123,20 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 
 | | Error → hit | Hit → error |
 | --- | --- | --- |
-| Settled plays / changed | 3,166 / 192 (6.1%) | 100,969 / 120 (0.12%) |
-| Cross-validated AUC (by game) | 0.620 | 0.913 |
-| Out-of-time AUC (fit 2024–25 → predict 2026) | 0.615 | 0.934 |
-| Log loss vs always-base-rate | 0.2225 vs 0.2287 | 0.0074 vs 0.0092 |
+| Settled plays / changed | 3,161 / 189 (6.0%) | 100,972 / 120 (0.12%) |
+| Cross-validated AUC (by game) | 0.609 | 0.913 |
+| Out-of-time AUC (fit 2024–25 → predict 2026) | 0.622 | 0.934 |
+| Log loss vs always-base-rate | 0.2199 vs 0.2264 | 0.0074 vs 0.0092 |
 
-- Coverage: 7,322 completed games; 553,300 plate appearances; 693 official entries
+- Coverage: 7,323 completed games; 553,370 plate appearances; 693 official entries
   (229 + 211 + 253) with 662 linked to their exact play.
-- The xBA-style hit probability (370,650 batted balls) correlates **0.974** with Savant's
+- The xBA-style hit probability (370,696 batted balls) correlates **0.974** with Savant's
   `estimated_ba_using_speedangle` on the same plays; all 1,015 regular-season 2026 errors match
   Savant exactly.
-- Calibration (error → hit): plays scored 5–10 were changed 6.3% of the time; 10–20 → 15.5%.
+- Calibration (error → hit): plays scored 5–10 were changed 6.0% of the time; 10–20 → 12.0%.
+- Label clean-up (session 2 review): 3 official entries no longer count as error → hit — they are
+  RBI / runner changes on a hit (2024 #49, 2025 #55, 2025 #128) — and runner-level error → error
+  entries no longer label the batter's play (3 spurious "error that stood" rows removed).
 - Full methodology: [`docs/MODEL.md`](docs/MODEL.md).
 
 **Official scorer & home park (follow-up 3)** — official scorer found for all 7,323 completed
@@ -141,16 +144,17 @@ games (88 / 92 / 82 scorers in 2024 / 2025 / 2026); re-tested on every run:
 
 | Question · grouping | Groups | Dispersion (1 = no difference) | Permutation p | Cross-validated candidate | Verdict |
 | --- | --- | --- | --- | --- | --- |
-| Error → hit · official scorer | 101 | 1.05 | 0.30 | log loss +0.0013 vs best (SE 0.0011) | not used |
-| Error → hit · home club | 31 | 0.99 | 0.41 | +0.0023 (SE 0.0016) | not used |
-| Hit → error · official scorer | 103 | 0.81 | 0.91 | — | not used |
-| Hit → error · home club | 31 | 0.71 | 0.87 | — | not used |
+| Error → hit · official scorer | 101 | 1.04 | 0.32 | log loss +0.0014 vs best (SE 0.0011) | not used |
+| Error → hit · home club | 31 | 1.01 | 0.38 | +0.0022 (SE 0.0016) | not used |
+| Hit → error · official scorer | 103 | 0.81 | 0.90 | — | not used |
+| Hit → error · home club | 31 | 0.71 | 0.85 | — | not used |
 
 **Error type (follow-up 1)** — early evidence from past seasons, descriptive only. The official
-log names the original error type for 56 of the 192 error → hit changes (fielding 28, throwing 22,
-missed catch 6; 120 say only "an error"). Compared with the errors that stood (fielding 61%,
-throwing 34%, missed catch 5%), throwing errors were **not** changed less often (ratio 1.16);
-missed-catch errors about twice as often (2.13, from only 6 changes). So error type is probably a
+log names the original error type for 54 of the 189 error → hit changes (fielding 28, throwing 20,
+missed catch 6; 119 say only "an error", 16 have no "instead of / originally" clause). Compared
+with the errors that stood (fielding 61%, throwing 34%, missed catch 5%), throwing errors were
+**not** changed less often (ratio 1.09); missed-catch errors about twice as often (2.22, from
+only 6 changes). So error type is probably a
 modest signal, not the large one suggested at the end of session 1. The live capture now measures
 it properly; the adjustment turns on only if cross-validation confirms a gain.
 
