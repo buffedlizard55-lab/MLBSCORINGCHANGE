@@ -34,6 +34,18 @@
 
 import { HIT_EVENTS } from './statsapi.mjs';
 
+/**
+ * Version of the linking behaviour, published in the pipeline report so a
+ * consumer (and the test suite) can tell which rules produced a data file:
+ *   1  original rules (rules 1–4)
+ *   2  season-wide date recovery (session 4)
+ *   3  candidate ranking prefers an `exact` ruling agreement over a documented
+ *      `compatible` one (session 4 follow-up — the same batter can have several
+ *      plate appearances in a game, and only one of them IS the entry's ruling)
+ * Bump this whenever a change here can move an entry to a different play.
+ */
+export const LINKER_VERSION = 3;
+
 export function normalizeName(s) {
   return String(s || '')
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -522,19 +534,23 @@ export function linkEntry(entry, ctx) {
     if (games.length === 1) link.gamePk = games[0].gamePk;
     return link;
   }
-  // Prefer: current ruling agrees with the new ruling, then earliest mention,
-  // then half-inning scope over whole-game scope.
+  // Prefer, in order: the play whose CURRENT ruling IS the entry's new ruling
+  // (`exact`) over one StatsAPI codes in a documented alternative way
+  // (`compatible`, e.g. a reached-on-error play coded as a fielder's choice) —
+  // the batter can have several plate appearances in a game, and the exact one
+  // is the entry's subject; then a play whose ruling cannot be checked; then
+  // half-inning scope over whole-game scope, the earliest mention, lowest ai.
+  // (A mismatch is ranked last and reported, never preferred.)
   const scored = candidates.map((c) => ({
     ...c,
-    agrees: rulingAgrees(cls.final, cls.finalHitType, c.rec.et),
+    agreement: rulingAgreement(cls.final, cls.finalHitType, c.rec.et),
   }));
-  scored.sort((a, b) => {
-    const ag = (x) => (x.agrees === true ? 0 : x.agrees === null ? 1 : 2);
-    return ag(a) - ag(b)
+  const rank = (x) => (x.agreement === 'exact' ? 0 : x.agreement === 'compatible' ? 1
+    : x.agreement === null ? 2 : 3);
+  scored.sort((a, b) => rank(a) - rank(b)
       || (a.scope === b.scope ? 0 : a.scope === 'half_inning' ? -1 : 1)
       || a.pos - b.pos
-      || a.rec.ai - b.rec.ai;
-  });
+      || a.rec.ai - b.rec.ai);
   const best = scored[0];
   const firstMention = [...scored].sort((a, b) => a.pos - b.pos || a.rec.ai - b.rec.ai)[0];
   link.gamePk = best.game.gamePk;
@@ -553,12 +569,13 @@ export function linkEntry(entry, ctx) {
   if (best.method !== 'full_name') link.flags.push(`name_match:${best.method}`);
   if (best.scope === 'whole_game') link.flags.push(entry.inning == null ? 'inning_missing_matched_game' : 'inning_mismatch');
   if (best !== firstMention && best.rec !== firstMention.rec) link.flags.push('subject_not_first_mention');
-  const samePaCount = new Set(scored.filter((c) => c.agrees === best.agrees && c.pos === best.pos).map((c) => `${c.game.gamePk}:${c.rec.ai}`)).size;
+  // Ambiguity is about plate appearances this evidence cannot tell apart: two
+  // candidates that agree equally well at the same mention (an exact and a
+  // compatible one are told apart by the ruling, so they are not ambiguous).
+  const samePaCount = new Set(scored.filter((c) => c.agreement === best.agreement && c.pos === best.pos).map((c) => `${c.game.gamePk}:${c.rec.ai}`)).size;
   if (samePaCount > 1) link.flags.push('ambiguous_plate_appearance');
-  if (best.agrees === false) link.flags.push('current_ruling_mismatch');
-  if (rulingAgreement(cls.final, cls.finalHitType, best.rec.et) === 'compatible') {
-    link.flags.push(`current_ruling_compatible:${best.rec.et}`);
-  }
+  if (best.agreement === 'mismatch') link.flags.push('current_ruling_mismatch');
+  if (best.agreement === 'compatible') link.flags.push(`current_ruling_compatible:${best.rec.et}`);
   return link;
 }
 

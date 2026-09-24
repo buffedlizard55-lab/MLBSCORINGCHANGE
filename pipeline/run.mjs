@@ -48,6 +48,7 @@ import { parseCSV } from './lib/csv.mjs';
 import {
   collectPlayXba, createSavantClient, SAVANT_SEARCH_URL,
 } from './lib/savant.mjs';
+import { LINKER_VERSION } from './lib/link.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CACHE_DIR = process.env.PIPELINE_CACHE_DIR || path.join(ROOT, 'pipeline-cache');
@@ -676,6 +677,8 @@ async function main() {
   // off-season before opening day, that is still last season).
   currentSeason = Math.max(...[...perSeason.entries()].filter(([, v]) => v.completedGames > 0).map(([k]) => k), SEASONS[0]);
   report.currentSeason = currentSeason;
+  // Which linking rules produced this file — see pipeline/lib/link.mjs.
+  report.linker = { version: LINKER_VERSION };
 
   // 4c. per-play Savant xBA (`estimated_ba_using_speedangle`) for every play
   // this run can surface — each linked official entry and every Error Watch

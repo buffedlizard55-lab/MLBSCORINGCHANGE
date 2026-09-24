@@ -43,7 +43,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  buildTeamIndex, dateTypoKind, linkEntry, recoverGameForEntry, textMentionsName, rulingAgrees,
+  LINKER_VERSION, buildTeamIndex, dateTypoKind, linkEntry, recoverGameForEntry, textMentionsName, rulingAgrees,
 } from '../pipeline/lib/link.mjs';
 import { classifyEntry, transitionFlags } from '../pipeline/lib/log-classifier.mjs';
 
@@ -105,6 +105,64 @@ const playsByGame = new Map(Object.entries(PLAYS).map(([pk, list]) => [Number(pk
 // future pipeline run drops a row (e.g. the play changes again), the fixture
 // keeps testing the linked behaviour and this check reports that it could not
 // re-verify — it never silently passes off stale data as current.
+/**
+ * The real published pipeline output must place 2026 #140 and #173 on the plays
+ * this test's own fixtures describe: game 823448 at-bat 76 (Rincones Jr., a
+ * `field_error`) and game 824983 at-bat 76 (Bolte, a `field_error`, bottom 9th).
+ * #173 is the harder one: the same batter (Henry Bolte) has plate appearances in
+ * BOTH MIA@ATH games of 7/3 and 7/4, so the linker must prefer the play whose
+ * current ruling IS the entry's new ruling over a `compatible` one.
+ *
+ * Reads the committed outputs only (no network). If a row is missing — a later
+ * pipeline run, or a play that changed again — it reports SKIPPED instead of
+ * silently passing stale facts off as current.
+ */
+function verifyRecoveredLinksInRepoData() {
+  const file = path.join(ROOT, 'data', 'official', 'scoring-changes-2026.json');
+  if (!fs.existsSync(file)) return { checked: 0, skipped: 'scoring-changes-2026.json not present' };
+  const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const entries = data.entries || [];
+  const bySeq = new Map(entries.map((e) => [e.seq, e]));
+  // The play-level expectations below only hold for data produced by the
+  // current linking rules, and the pipeline publishes which version produced a
+  // file (`report.linker.version`, see pipeline/lib/link.mjs). Older data is
+  // reported as skipped — never quietly treated as a pass, and never a failure
+  // the code cannot control (the 3-hourly run regenerates it).
+  const reportFile = path.join(ROOT, 'data', 'model', 'pipeline-report.json');
+  let printed = null;
+  try { printed = JSON.parse(fs.readFileSync(reportFile, 'utf8')).linker; } catch { /* no report yet */ }
+  if (!printed || !(printed.version >= LINKER_VERSION)) {
+    return { checked: 0, skipped: `committed data was produced by linker v${printed ? printed.version : '?'} (needs v${LINKER_VERSION}) — the pipeline run on this push regenerates it` };
+  }
+  const want = [
+    [140, 823448, 76, 'Gabriel Rincones Jr.'],
+    [173, 824983, 76, 'Henry Bolte'],
+  ];
+  let checked = 0;
+  const misses = [];
+  for (const [seq, gamePk, ai, batter] of want) {
+    const e = bySeq.get(seq);
+    if (!e || !e.link) { misses.push(`#${seq} entry missing`); continue; }
+    // Before the session-4 recovery these were `no_game_found`: if the data still
+    // says so, that is a real failure, not a skip.
+    if (e.link.gamePk == null || e.link.atBatIndex == null) {
+      misses.push(`#${seq} unlinked (${(e.link.flags || []).join(', ')})`);
+      continue;
+    }
+    assert.equal(e.link.gamePk, gamePk, `#${seq} gamePk`);
+    assert.equal(e.link.atBatIndex, ai, `#${seq} atBatIndex`);
+    assert.equal(e.link.batterName, batter, `#${seq} batter`);
+    assert.equal(e.link.currentEventType, 'field_error', `#${seq} current ruling`);
+    assert.ok((e.link.flags || []).some((f) => /^date_recovered:/.test(f)), `#${seq} stays flagged as a recovery`);
+    assert.ok(!(e.link.flags || []).includes('no_game_found'), `#${seq} is not reported as no_game_found`);
+    assert.ok(e.model && e.model.question === 'hitToError' && Number.isInteger(e.model.score),
+      `#${seq} carries its hit → error model score (the point of the recovery)`);
+    checked += 1;
+  }
+  assert.equal(misses.length, 0, `real recovered links (${misses.join('; ')})`);
+  return { checked, skipped: null };
+}
+
 function verifyAgainstRepoData() {
   const file = path.join(ROOT, 'data', 'model', 'error-watch.json');
   if (!fs.existsSync(file)) return { checked: 0, skipped: 'error-watch.json not present' };
@@ -338,7 +396,14 @@ test('a bookkeeping entry (no batter named) recovers only an unambiguous game', 
 
 /* --------------------------------------------------------- 4 repo cross-check */
 
+// The two plays' facts, re-read from the repo's own Error Watch output. A play
+// that the recovery pass reclassified (game 823448 at-bat 76 now begins as a
+// single, so it belongs to the hit → error population rather than Error Watch)
+// is reported as not re-verifiable here — the recovered-links check below is
+// what pins it.
 const repoCheck = verifyAgainstRepoData();
+const recCheck = verifyRecoveredLinksInRepoData();
 
 console.log(`pipeline-link-test: OK (${passed} sections; repo cross-check: ` +
-  `${repoCheck.skipped ? repoCheck.skipped : `${repoCheck.checked}/2 error-watch rows re-verified`})`);
+  `${repoCheck.skipped ? repoCheck.skipped : `${repoCheck.checked}/2 error-watch rows re-verified`}; ` +
+  `real recovered links: ${recCheck.skipped || `${recCheck.checked}/2 verified`})`);
