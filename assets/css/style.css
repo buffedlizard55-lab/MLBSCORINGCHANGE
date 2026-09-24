@@ -2169,3 +2169,76 @@ a:hover { text-decoration: underline; }
     animation: none;
   }
 }
+
+/* ============================================================================
+ * Scoring-change model (🎯 Error Watch tab, model lines on ✏️ scoring-change
+ * and ⚖️ pending rows, scoring.html). Scores are 0–100 chances from
+ * assets/js/scoring-model.js; tones follow the model's bands.
+ * ==========================================================================*/
+.chip-error_watch { background: rgba(244, 114, 182, 0.16); color: #f9a8d4; border: 1px solid rgba(244, 114, 182, 0.5); }
+.feed-type-error_watch { border-left: 4px solid #f472b6; }
+.feed-model {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(47, 129, 247, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.feed-model-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  margin-top: 4px;
+}
+.feed-model .feed-model-line { margin-top: 0; }
+.feed-model-label { color: var(--muted); font-weight: 700; }
+.feed-model-result { color: #c5d4e8; }
+.feed-model-bb { color: var(--muted); font-size: 12.5px; }
+.feed-model-official { font-size: 12.5px; font-weight: 700; color: #74c0fc; text-decoration: none; }
+.feed-model-official:hover { text-decoration: underline; }
+.model-score {
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  white-space: nowrap;
+}
+.feed-model-band { font-size: 12px; font-weight: 800; }
+.model-tone-high { color: #8ff0ac; }
+.model-score.model-tone-high { background: rgba(46, 160, 67, 0.2); border-color: rgba(46, 160, 67, 0.6); }
+.model-tone-mid { color: #ffd43b; }
+.model-score.model-tone-mid { background: rgba(210, 153, 34, 0.18); border-color: rgba(210, 153, 34, 0.55); }
+.model-tone-low { color: #74c0fc; }
+.model-score.model-tone-low { background: rgba(47, 129, 247, 0.16); border-color: rgba(47, 129, 247, 0.5); }
+.model-tone-none { color: var(--muted); }
+.model-score.model-tone-none { background: rgba(139, 160, 186, 0.12); }
+.model-outcome {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.model-outcome-hit { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.5); }
+.model-outcome-error { color: #ffa8a8; border-color: rgba(224, 49, 49, 0.5); }
+.model-outcome-fc, .model-outcome-sac { color: #c4b5fd; border-color: rgba(167, 139, 250, 0.45); }
+.model-outcome-out { color: #ffe066; border-color: rgba(255, 212, 59, 0.45); }
+.model-note {
+  font-size: 13px;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+.model-note a { color: #74c0fc; font-weight: 700; }

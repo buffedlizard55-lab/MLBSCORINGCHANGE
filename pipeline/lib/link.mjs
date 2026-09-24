@@ -75,11 +75,50 @@ function dayDiff(a, b) {
   return Math.round((Date.parse(`${a}T12:00:00Z`) - Date.parse(`${b}T12:00:00Z`)) / 86400000);
 }
 
+/**
+ * Same-date correction for a mistyped team code (flagged, never silent):
+ * the correctly-coded side played exactly ONE game that date in the stated
+ * home/away slot, and its opponent's code shares the first two letters with
+ * the mistyped code (observed: "TBN@TOR" for TB@TOR, "TOR@LAA" for TOR@LAD).
+ */
+function correctTeamCode(entry, teamIndex, games, teamsById) {
+  if (!entry.date) return null;
+  const away = teamIndex.get(entry.away || '');
+  const home = teamIndex.get(entry.home || '');
+  const codesOf = (id) => {
+    const t = teamsById.get(id) || {};
+    return [t.abbreviation, t.teamCode, t.fileCode].filter(Boolean).map((c) => String(c).toUpperCase());
+  };
+  const similar = (a, b) => a && b && a.slice(0, 2) === b.slice(0, 2);
+  const out = [];
+  if (home) {
+    const list = games.filter((g) => g.homeId === home.id && g.officialDate === entry.date);
+    if (list.length === 1 && codesOf(list[0].awayId).some((c) => similar(c, entry.away))) {
+      out.push({ game: list[0], flag: `team_code_corrected:${entry.away}->${codesOf(list[0].awayId)[0]}` });
+    }
+  }
+  if (away) {
+    const list = games.filter((g) => g.awayId === away.id && g.officialDate === entry.date);
+    if (list.length === 1 && codesOf(list[0].homeId).some((c) => similar(c, entry.home))) {
+      out.push({ game: list[0], flag: `team_code_corrected:${entry.home}->${codesOf(list[0].homeId)[0]}` });
+    }
+  }
+  return out.length === 1 ? out[0] : null;
+}
+
 /** Candidate games for an entry. Returns {games, flags}. */
-export function candidateGames(entry, teamIndex, games) {
+export function candidateGames(entry, teamIndex, games, teamsById = new Map()) {
   const flags = [];
   const away = teamIndex.get(entry.away || '');
   const home = teamIndex.get(entry.home || '');
+  const exactPairExists = away && home && games.some((g) => g.awayId === away.id && g.homeId === home.id
+    && entry.date && g.officialDate === entry.date);
+  if (!exactPairExists) {
+    const fix = correctTeamCode(entry, teamIndex, games, teamsById);
+    if (fix && (!away || !home || fix.game.awayId !== away.id || fix.game.homeId !== home.id)) {
+      return { games: [fix.game], flags: [fix.flag] };
+    }
+  }
   if (!away || !home) {
     return { games: [], flags: [`unknown_team:${!away ? entry.away : entry.home}`] };
   }
@@ -96,6 +135,11 @@ export function candidateGames(entry, teamIndex, games) {
     if (!list.length) {
       const swapped = games.filter((g) => g.awayId === home.id && g.homeId === away.id && g.officialDate === entry.date);
       if (swapped.length) { list = swapped; flags.push('teams_swapped'); }
+    }
+    if (!list.length) {
+      // Wider window for a wrong date; the batter check still has to pass.
+      list = pair.filter((g) => Math.abs(dayDiff(g.officialDate, entry.date)) <= 10);
+      if (list.length) flags.push('date_mismatch_wide');
     }
   } else {
     list = pair.slice();
@@ -137,26 +181,53 @@ export function findNameInText(fullName, normText, lastNameCounts) {
   return null;
 }
 
-/** Does a current eventType agree with a classified final ruling category? */
-export function rulingAgrees(finalCategory, finalHitType, eventType) {
+const FC_EVENTS = new Set(['fielders_choice', 'fielders_choice_out']);
+const SAC_EVENTS = new Set(['sac_bunt', 'sac_fly', 'sac_bunt_double_play', 'sac_fly_double_play']);
+const OUT_EVENT_RE = /(_out$|double_play|triple_play|^strikeout)/;
+
+/**
+ * How does a play's CURRENT StatsAPI eventType relate to a classified final
+ * ruling? 'exact' | 'compatible' | 'mismatch' | null (not checkable).
+ * 'compatible' encodes StatsAPI conventions verified on real linked plays:
+ *   - a sacrifice fielder's choice is coded sac_bunt / sac_fly
+ *     (2026 log #123, #186; 2025 #102);
+ *   - a batter reaching on an error on a play with another fielding event is
+ *     coded in the fielder's-choice family (fielders_choice / force_out)
+ *     (2024 #28, #141; 2025 #44; 2026 #56).
+ */
+export function rulingAgreement(finalCategory, finalHitType, eventType) {
   if (!finalCategory || !eventType) return null;
+  const et = eventType;
   switch (finalCategory) {
     case 'hit':
     case 'hit+error':
-      if (!HIT_EVENTS.has(eventType)) return false;
-      return finalHitType ? finalHitType === eventType : true;
+      if (!HIT_EVENTS.has(et)) return 'mismatch';
+      return !finalHitType || finalHitType === et ? 'exact' : 'mismatch';
     case 'error':
-      return eventType === 'field_error';
+      if (et === 'field_error') return 'exact';
+      return FC_EVENTS.has(et) || et === 'force_out' ? 'compatible' : 'mismatch';
     case 'fc':
+      if (FC_EVENTS.has(et)) return 'exact';
+      return et === 'force_out' || SAC_EVENTS.has(et) ? 'compatible' : 'mismatch';
     case 'fc+error':
-      return eventType === 'fielders_choice' || eventType === 'fielders_choice_out';
+      if (FC_EVENTS.has(et) || et === 'field_error') return 'exact';
+      return et === 'force_out' || SAC_EVENTS.has(et) ? 'compatible' : 'mismatch';
     case 'sac':
+      return SAC_EVENTS.has(et) ? 'exact' : 'mismatch';
     case 'sac+error':
-      return eventType === 'sac_bunt' || eventType === 'sac_fly'
-        || eventType === 'sac_bunt_double_play' || eventType === 'sac_fly_double_play';
+      if (SAC_EVENTS.has(et)) return 'exact';
+      return et === 'field_error' ? 'compatible' : 'mismatch';
+    case 'out':
+      return OUT_EVENT_RE.test(et) ? 'exact' : 'mismatch';
     default:
       return null;
   }
+}
+
+/** true (exact/compatible) / false (mismatch) / null (not checkable). */
+export function rulingAgrees(finalCategory, finalHitType, eventType) {
+  const a = rulingAgreement(finalCategory, finalHitType, eventType);
+  return a === null ? null : a !== 'mismatch';
 }
 
 /**
@@ -165,7 +236,7 @@ export function rulingAgrees(finalCategory, finalHitType, eventType) {
  * @param {object} ctx     {teamIndex, games, playsByGame: Map<gamePk, rec[]>}
  */
 export function linkEntry(entry, ctx) {
-  const { games, flags } = candidateGames(entry, ctx.teamIndex, ctx.games);
+  const { games, flags } = candidateGames(entry, ctx.teamIndex, ctx.games, ctx.teamsById);
   const link = { gamePk: null, atBatIndex: null, batterName: null, currentEventType: null, method: null, flags: [...flags] };
   if (!games.length) {
     link.flags.push('no_game_found');
@@ -235,5 +306,8 @@ export function linkEntry(entry, ctx) {
   const samePaCount = new Set(scored.filter((c) => c.agrees === best.agrees && c.pos === best.pos).map((c) => `${c.game.gamePk}:${c.rec.ai}`)).size;
   if (samePaCount > 1) link.flags.push('ambiguous_plate_appearance');
   if (best.agrees === false) link.flags.push('current_ruling_mismatch');
+  if (rulingAgreement(cls.final, cls.finalHitType, best.rec.et) === 'compatible') {
+    link.flags.push(`current_ruling_compatible:${best.rec.et}`);
+  }
   return link;
 }

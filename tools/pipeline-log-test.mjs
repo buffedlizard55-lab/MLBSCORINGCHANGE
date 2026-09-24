@@ -274,4 +274,20 @@ test('<ol start> and reversed numbering follow browser rules', () => {
   assert.equal(t2, '3. a\n2. b\n1. c');
 });
 
+test('team separator variants (real lines: 2024 #77 "ARI-LAD", 2025 #157 "SD at SF")', () => {
+  const a = parseEntryLine('77) 5/20 ARI-LAD -- In the bottom of the 1st inning, Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply, instead of a bunt single to Mantiply.', 2024);
+  assert.equal(a.away, 'ARI');
+  assert.equal(a.home, 'LAD');
+  assert.equal(a.date, '2024-05-20');
+  assert.ok(a.issues.includes('team_separator:-'));
+  assert.equal(classifyEntry(a.body).transition, 'hit->error');
+  const b = parseEntryLine('157) 8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single, instead of an error by third baseman Matt Chapman.', 2025);
+  assert.equal(b.away, 'SD');
+  assert.equal(b.home, 'SF');
+  assert.ok(b.issues.includes('team_separator:at'));
+  assert.equal(classifyEntry(b.body).transition, 'error->hit');
+  const c = parseEntryLine('8) 3/30 MIL@NYM -- In the top of the 1st inning, x.', 2024);
+  assert.ok(!c.issues.some((i) => i.startsWith('team_separator')), '"@" is not flagged');
+});
+
 console.log(`pipeline-log-test: ${passed} passed`);

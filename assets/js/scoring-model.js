@@ -163,7 +163,10 @@
       probability: p,
       score: score,
       scoreText: scoreText(p),
-      band: band(model, score),
+      // Per-question bands (derived from that question's base rate by the
+      // pipeline) take precedence over the model-wide default bands.
+      band: band(spec.bands ? { bands: spec.bands } : model, score),
+      relativeToBase: spec.baseRate ? p / spec.baseRate : null,
       hitProbability: hp.p,
       hitProbabilitySource: hp.source,
       baseRate: spec.baseRate != null ? spec.baseRate : null,

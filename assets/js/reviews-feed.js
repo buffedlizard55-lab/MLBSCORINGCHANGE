@@ -2148,6 +2148,9 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     scoringSnapshots.clear();
     scoringGraceFinals.clear();
     scoringIrregularities.clear();
+    errorWatch.clear();
+    modelState.hitData.clear();
+    modelState.playFacts.clear();
     isFirstLoad = true;
     pendingAlertableCount = 0;
     alertedRunRiskKeys.clear();
@@ -2592,6 +2595,10 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       // first poll, so this is a no-op wait on essentially every cycle.)
       const season = (games.find((g) => g && g.season) || {}).season
         || requestDate.slice(0, 4);
+      // Scoring-change model + official log confirmations (non-blocking,
+      // cached; no-ops without the model module).
+      loadScoringModel();
+      loadOfficialLog(season);
       try {
         teamsById = await MLB.getTeams(season);
       } catch (dirErr) {
@@ -2942,6 +2949,10 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     // ({gamePk, review} pairs); admit merges them into feedState idempotently
     // by stable key.
     const scoringResult = admitScoringEntries([...scoring.added, ...scoring.updated], game);
+    // Scoring-change model inputs + Error Watch (inert without the model
+    // module; never alerts). Runs after the merges so pending / scoring rows
+    // of this poll are known.
+    const watchChanged = updateModelInputs(game, gamePk, pbp);
     const combined = {
       added: [...result.added, ...scoringResult.added],
       updated: [...result.updated, ...scoringResult.updated],
@@ -3006,6 +3017,9 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       // §4b, which holds one game's playByPlay pending for 4s while a second
       // game's review banner is asserted on screen.
       renderFeedUpdates(combined);
+    } else if (watchChanged) {
+      renderTabs();
+      if (filter === 'errorwatch') renderFeed();
     }
     // Alert now (chime + desktop notification) if this game's response
     // carries the first new/at-risk event of the poll — render above already
@@ -3023,6 +3037,444 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
         });
     }
     return true;
+  }
+
+  /* ------------------------------------------------ scoring-change model */
+  // Scores come from the shared pure module assets/js/scoring-model.js, with
+  // parameters fitted by the official-data pipeline (pipeline/run.mjs →
+  // data/model/scoring-model.json; methodology in docs/MODEL.md). Everything
+  // in this section is ADDITIVE and inert when the module or the model file
+  // is missing (e.g. the unit-test VMs): rows render exactly as before and no
+  // extra request is made. The model never triggers sounds or notifications.
+  const SCORING_MODEL_URL = 'data/model/scoring-model.json';
+  const OFFICIAL_LOG_URL_FOR = (season) => `data/official/scoring-changes-${season}.json`;
+  const OFFICIAL_LOG_PAGE = 'https://www.mlb.com/official-information/scoring-changes';
+  const MODEL_RETRY_MS = 60 * 1000;
+  const OFFICIAL_REFRESH_MS = 30 * 60 * 1000;
+  const HIT_DATA_MIN_GAP_MS = 15 * 1000;
+  const HIT_DATA_MAX_ATTEMPTS = 4;
+  const modelState = {
+    model: null,
+    modelPromise: null,
+    modelFailedAt: 0,
+    official: new Map(),          // `${gamePk}:${atBatIndex}` → [{seq, transition, kind, raw}]
+    officialSeason: null,
+    officialAt: 0,
+    officialPromise: null,
+    hitData: new Map(),           // gamePk → { at, byAi: Map(ai → battedBall|null), attempts }
+    hitDataInFlight: new Set(),
+    playFacts: new Map(),         // `${gamePk}:${ai}` → { reached, eventType, event, homeId }
+  };
+  const errorWatch = new Map();   // `${gamePk}:${ai}` → Error Watch item (this date)
+
+  function scoringModelModule() {
+    return typeof window !== 'undefined' && window.MLBScoringModel ? window.MLBScoringModel : null;
+  }
+
+  function loadScoringModel() {
+    if (!scoringModelModule() || typeof fetch !== 'function') return null;
+    if (modelState.model || modelState.modelPromise) return modelState.modelPromise;
+    if (Date.now() - modelState.modelFailedAt < MODEL_RETRY_MS) return null;
+    modelState.modelPromise = fetch(SCORING_MODEL_URL, { cache: 'no-cache' })
+      .then((res) => (res && res.ok ? res.json() : null))
+      .then((m) => {
+        if (m && m.errorToHit && m.hitProb) {
+          modelState.model = m;
+          renderFeed();
+          renderTabs();
+        } else {
+          modelState.modelFailedAt = Date.now();
+        }
+        return modelState.model;
+      })
+      .catch((err) => {
+        modelState.modelFailedAt = Date.now();
+        console.warn('scoring model unavailable — rows render without scores', err);
+        return null;
+      })
+      .finally(() => { modelState.modelPromise = null; });
+    return modelState.modelPromise;
+  }
+
+  /** Official MLB log entries (pipeline output) keyed by game + plate appearance. */
+  function loadOfficialLog(season) {
+    if (!scoringModelModule() || typeof fetch !== 'function' || !season) return;
+    const fresh = modelState.officialSeason === String(season) &&
+      Date.now() - modelState.officialAt < OFFICIAL_REFRESH_MS;
+    if (fresh || modelState.officialPromise) return;
+    modelState.officialPromise = fetch(OFFICIAL_LOG_URL_FOR(season), { cache: 'no-cache' })
+      .then((res) => (res && res.ok ? res.json() : null))
+      .then((data) => {
+        const map = new Map();
+        ((data && data.entries) || []).forEach((e) => {
+          const link = e && e.link;
+          if (!link || link.gamePk == null || link.atBatIndex == null) return;
+          const key = `${link.gamePk}:${link.atBatIndex}`;
+          const list = map.get(key) || [];
+          list.push({
+            seq: e.seq,
+            section: e.section || null,
+            transition: e.cls ? e.cls.transition : null,
+            kind: e.cls ? e.cls.kind : null,
+            raw: e.raw,
+          });
+          map.set(key, list);
+        });
+        modelState.official = map;
+        if (map.size) renderFeed();
+      })
+      .catch(() => { /* official confirmations simply stay hidden */ })
+      .finally(() => {
+        modelState.officialSeason = String(season);
+        modelState.officialAt = Date.now();
+        modelState.officialPromise = null;
+      });
+  }
+
+  function hitDataFor(gamePk, ai) {
+    const c = modelState.hitData.get(gamePk);
+    return c && c.byAi.has(ai) ? c.byAi.get(ai) : undefined;   // undefined = not fetched yet
+  }
+
+  /** Lazily fetch Statcast hitData for plays the model needs (one request per game). */
+  function ensureHitData(gamePk, ais) {
+    const SMod = scoringModelModule();
+    if (!SMod || !MLB || typeof MLB.getPlayHitData !== 'function' || !ais.length) return;
+    const cached = modelState.hitData.get(gamePk);
+    const wanted = ais.filter((ai) => {
+      if (!cached || !cached.byAi.has(ai)) return true;
+      // hitData can land a few seconds after the play: retry a few times.
+      return cached.byAi.get(ai) === null && (cached.attempts || 0) < HIT_DATA_MAX_ATTEMPTS;
+    });
+    if (!wanted.length || modelState.hitDataInFlight.has(gamePk)) return;
+    if (cached && Date.now() - cached.at < HIT_DATA_MIN_GAP_MS) return;
+    modelState.hitDataInFlight.add(gamePk);
+    MLB.getPlayHitData(gamePk)
+      .then((data) => {
+        const byAi = new Map(cached ? cached.byAi : []);
+        ((data && data.allPlays) || []).forEach((p) => {
+          const ai = p && p.about ? p.about.atBatIndex : null;
+          if (ai == null) return;
+          byAi.set(ai, SMod.battedBallFromEvents(p.playEvents) || null);
+        });
+        modelState.hitData.set(gamePk, { at: Date.now(), byAi, attempts: (cached ? cached.attempts || 0 : 0) + 1 });
+        renderFeed();
+      })
+      .catch(() => {
+        modelState.hitData.set(gamePk, {
+          at: Date.now(),
+          byAi: cached ? cached.byAi : new Map(),
+          attempts: (cached ? cached.attempts || 0 : 0) + 1,
+        });
+      })
+      .finally(() => modelState.hitDataInFlight.delete(gamePk));
+  }
+
+  /**
+   * For a pending row, the play being ruled on: the marker's own plate
+   * appearance for os_ruling_pending_primary; the previous plate appearance
+   * for os_ruling_pending_prior (a base-running marker about the prior play).
+   */
+  function pendingTargetIndex(r) {
+    const codes = Array.isArray(r.pendingCodes) ? r.pendingCodes : [];
+    if (codes.includes('os_ruling_pending_primary') || !codes.includes('os_ruling_pending_prior')) {
+      return r.atBatIndex;
+    }
+    return r.atBatIndex > 0 ? r.atBatIndex - 1 : null;
+  }
+
+  function gameHomeId(game) {
+    const t = game ? gameSideTeam(game, 'home') : null;
+    return t && t.id != null ? t.id : null;
+  }
+
+  function newErrorWatchItem(game, gamePk, play, initialDescription, firstSeen) {
+    const about = play.about || {};
+    const res = play.result || {};
+    const matchup = play.matchup || {};
+    const half = String(about.halfInning || '').toLowerCase();
+    const labels = game ? gameSideLabels(game) : { away: null, home: null };
+    return {
+      key: `${gamePk}:${about.atBatIndex}`,
+      gamePk,
+      atBatIndex: about.atBatIndex,
+      firstSeen,
+      timestamp: about.endTime || about.startTime || new Date(firstSeen).toISOString(),
+      halfInning: half,
+      inningLabel: scoringInningLabel(about) || '',
+      matchupLabel: game ? gameTeamsLabel(game, teamsById) : `Game ${gamePk}`,
+      battingLabel: half === 'top' ? labels.away : half === 'bottom' ? labels.home : null,
+      homeId: gameHomeId(game),
+      batter: matchup.batter && matchup.batter.fullName ? matchup.batter.fullName : null,
+      pitcher: matchup.pitcher && matchup.pitcher.fullName ? matchup.pitcher.fullName : null,
+      initialDescription,
+      currentEventType: res.eventType || null,
+      currentEvent: res.event || null,
+      currentDescription: res.description || null,
+      changedAt: null,
+    };
+  }
+
+  /**
+   * After each playByPlay poll: track every plate appearance scored a field
+   * error (Error Watch), remember the facts the model needs, and request
+   * batted-ball data for those plays. Returns true when the watch changed.
+   */
+  function updateModelInputs(game, gamePk, pbp) {
+    const SMod = scoringModelModule();
+    if (!SMod) return false;
+    const plays = Array.isArray(pbp && pbp.allPlays) ? pbp.allPlays : [];
+    const byAi = new Map();
+    plays.forEach((p) => {
+      const ai = p && p.about ? p.about.atBatIndex : null;
+      if (ai != null) byAi.set(ai, p);
+    });
+    const homeId = gameHomeId(game);
+    const wanted = new Set();
+    let changed = false;
+    const remember = (ai) => {
+      const p = byAi.get(ai);
+      if (!p) return;
+      const res = p.result || {};
+      modelState.playFacts.set(`${gamePk}:${ai}`, {
+        reached: SMod.batterReached(p),
+        eventType: res.eventType || null,
+        event: res.event || null,
+        homeId,
+      });
+      wanted.add(ai);
+    };
+    plays.forEach((p) => {
+      const about = (p && p.about) || {};
+      const res = (p && p.result) || {};
+      const ai = about.atBatIndex;
+      if (ai == null || res.type !== 'atBat' || about.isComplete === false) return;
+      const key = `${gamePk}:${ai}`;
+      let item = errorWatch.get(key);
+      if (!item && res.eventType === 'field_error') {
+        item = newErrorWatchItem(game, gamePk, p, res.description || res.event || 'Field Error', Date.now());
+        errorWatch.set(key, item);
+        changed = true;
+      }
+      if (!item) return;
+      const et = res.eventType || null;
+      const desc = res.description || null;
+      if (item.currentEventType !== et || item.currentDescription !== desc) {
+        if (item.currentEventType !== et) item.changedAt = Date.now();
+        item.currentEventType = et;
+        item.currentEvent = res.event || null;
+        item.currentDescription = desc;
+        changed = true;
+      }
+      remember(ai);
+    });
+    feedState.seen.forEach((entry) => {
+      const r = entry && entry.review;
+      if (!r || entry.gamePk !== gamePk || r.atBatIndex == null) return;
+      if (r.typeKey === 'scoring_change') {
+        remember(r.atBatIndex);
+        // A tracked change whose initial call was a field error belongs on
+        // the Error Watch too (restored logs included): its final result IS
+        // the change.
+        const key = `${gamePk}:${r.atBatIndex}`;
+        const p = byAi.get(r.atBatIndex);
+        if (!errorWatch.has(key) && p && r.initial && r.initial.eventType === 'field_error') {
+          errorWatch.set(key, newErrorWatchItem(game, gamePk, p,
+            r.initialDescription || r.initial.label || 'Field Error', entry.firstSeen || Date.now()));
+          changed = true;
+        }
+      } else if (r.typeKey === 'pending_scoring') {
+        const target = pendingTargetIndex(r);
+        if (target != null) remember(target);
+      }
+    });
+    ensureHitData(gamePk, [...wanted]);
+    return changed;
+  }
+
+  /** The model's play shape for a plate appearance (+ its batted ball). */
+  function modelPlay(gamePk, ai, eventType, halfInning, homeId) {
+    const bb = hitDataFor(gamePk, ai);
+    return Object.assign({
+      et: eventType || null,
+      top: halfInning === 'top' ? true : halfInning === 'bottom' ? false : null,
+      homeId: homeId != null ? homeId : null,
+    }, bb || {});
+  }
+
+  const FIELDER_NAMES = {
+    P: 'pitcher', C: 'catcher', '1B': 'first base', '2B': 'second base',
+    '3B': 'third base', SS: 'shortstop', OF: 'outfield',
+  };
+
+  function battedBallLine(gamePk, ai) {
+    const SMod = scoringModelModule();
+    const bb = hitDataFor(gamePk, ai);
+    if (bb === undefined) return 'Batted ball: loading Statcast data…';
+    if (bb === null) return 'Batted ball: no Statcast data for this play — estimate uses league averages';
+    const parts = [];
+    if (typeof bb.ls === 'number') parts.push(`${bb.ls.toFixed(1)} mph`);
+    if (typeof bb.la === 'number') parts.push(`${Math.round(bb.la)}°`);
+    if (bb.traj) parts.push(String(bb.traj).replace(/_/g, ' '));
+    const where = FIELDER_NAMES[SMod.locationGroup(bb.loc)];
+    if (where) parts.push(`to ${where}`);
+    const hp = modelState.model ? SMod.hitProbability(modelState.model, bb).p : null;
+    const tail = typeof hp === 'number'
+      ? ` — comparable batted balls became hits ${Math.round(hp * 100)}% of the time`
+      : '';
+    return `Batted ball: ${parts.join(' · ') || 'recorded'}${tail}`;
+  }
+
+  function scoreChip(res) {
+    const chip = el('span', `model-score model-tone-${res.band.tone}`, `${res.scoreText}/100`);
+    chip.title = `Model probability ${(res.probability * 100).toFixed(1)}%` +
+      (res.baseRate != null
+        ? ` — league base rate ${(res.baseRate * 100).toFixed(1)}%, so this play is ${res.relativeToBase.toFixed(1)}× typical`
+        : '') +
+      '. Fitted on official MLB scoring changes 2024–2026; methodology and accuracy on the Scoring Model page.';
+    return chip;
+  }
+
+  function officialConfirmation(gamePk, ai) {
+    const list = modelState.official.get(`${gamePk}:${ai}`);
+    if (!list || !list.length) return null;
+    const a = el('a', 'feed-model-official',
+      `✓ Official MLB log ${list.map((e) => `#${e.seq}`).join(', ')}`,
+      { href: OFFICIAL_LOG_PAGE, target: '_blank', rel: 'noopener' });
+    a.title = list.map((e) => e.raw).join('\n');
+    return a;
+  }
+
+  /** Model block for scoring-change and pending rows (null when not applicable). */
+  function modelBlockForEntry(entry) {
+    const SMod = scoringModelModule();
+    const model = modelState.model;
+    const r = entry && entry.review;
+    if (!SMod || !model || !r || r.atBatIndex == null) return null;
+    const game = games.find((g) => g.gamePk === entry.gamePk) || null;
+    const homeId = gameHomeId(game);
+    if (r.typeKey === 'scoring_change') {
+      const initialEt = r.initial && r.initial.eventType;
+      const fromError = initialEt === 'field_error';
+      const fromHit = SCORING_HIT_EVENT_TYPES.has(initialEt) && initialEt !== 'home_run';
+      if (!fromError && !fromHit) return null;
+      const play = modelPlay(entry.gamePk, r.atBatIndex, initialEt, r.halfInning, homeId);
+      const res = fromError ? SMod.scoreErrorToHit(model, play) : SMod.scoreHitToError(model, play);
+      if (!res) return null;
+      const finalEt = r.final && r.final.eventType;
+      const predictedHappened = fromError ? SCORING_HIT_EVENT_TYPES.has(finalEt) : finalEt === 'field_error';
+      const block = el('div', 'feed-model');
+      const line = el('div', 'feed-model-line');
+      line.appendChild(el('span', 'feed-model-label',
+        fromError ? 'Pre-change chance this error becomes a hit' : 'Pre-change chance this hit becomes an error'));
+      line.appendChild(scoreChip(res));
+      line.appendChild(el('span', `feed-model-band model-tone-${res.band.tone}`, res.band.label));
+      block.appendChild(line);
+      block.appendChild(el('div', 'feed-model-line feed-model-result',
+        `Final result: ${r.final ? r.final.label : 'changed'}${predictedHappened ? ' — the change the model scored' : ' — a different change than the one scored'}`));
+      block.appendChild(el('div', 'feed-model-line feed-model-bb', battedBallLine(entry.gamePk, r.atBatIndex)));
+      const off = officialConfirmation(entry.gamePk, r.atBatIndex);
+      if (off) block.appendChild(off);
+      return block;
+    }
+    if (r.typeKey === 'pending_scoring') {
+      const target = pendingTargetIndex(r);
+      if (target == null) return null;
+      const facts = modelState.playFacts.get(`${entry.gamePk}:${target}`) || {};
+      const play = modelPlay(entry.gamePk, target, facts.eventType, r.halfInning, homeId);
+      const dist = SMod.pendingDistribution(model, play, facts.reached);
+      if (!dist || !dist.distribution.length) return null;
+      const block = el('div', 'feed-model');
+      const line = el('div', 'feed-model-line feed-model-dist');
+      line.appendChild(el('span', 'feed-model-label', 'Likely final ruling'));
+      dist.distribution.slice(0, 4).forEach((d) => {
+        const chip = el('span', `model-outcome model-outcome-${d.outcome}`, `${d.label} ${d.scoreText}`);
+        chip.title = `${(d.probability * 100).toFixed(1)}% of comparable batted balls (n=${dist.n.toLocaleString()}) were scored this way.`;
+        line.appendChild(chip);
+      });
+      block.appendChild(line);
+      const note = target !== r.atBatIndex ? ' (ruling concerns the previous play)' : '';
+      block.appendChild(el('div', 'feed-model-line feed-model-bb', battedBallLine(entry.gamePk, target) + note));
+      if (r.outcome === 'resolved') {
+        const finalFacts = modelState.playFacts.get(`${entry.gamePk}:${target}`);
+        if (finalFacts && finalFacts.event) {
+          block.appendChild(el('div', 'feed-model-line feed-model-result', `Final result: ${finalFacts.event}`));
+        }
+      }
+      return block;
+    }
+    return null;
+  }
+
+  /** One Error Watch row: overturn chance + live final ruling. */
+  function errorWatchRow(item) {
+    const SMod = scoringModelModule();
+    const model = modelState.model;
+    const changed = item.currentEventType && item.currentEventType !== 'field_error';
+    const toHit = changed && SCORING_HIT_EVENT_TYPES.has(item.currentEventType);
+    const row = el('div', `feed-row feed-type-error_watch ${changed ? 'feed-outcome-changed' : 'feed-outcome-stands'}`);
+    row.dataset.key = `ew:${item.key}`;
+    const time = el('div', 'feed-time');
+    time.appendChild(el('span', 'feed-time-txt', timeLabel(item.timestamp)));
+    const t = new Date(item.timestamp);
+    if (!Number.isNaN(t.getTime())) {
+      time.appendChild(el('span', 'feed-time-hm', t.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })));
+    }
+    row.appendChild(time);
+    const body = el('div', 'feed-body');
+    const head = el('div', 'feed-head');
+    const link = el('a', 'feed-game', '', { href: `game.html?gamePk=${item.gamePk}`, title: `Open game — ${item.matchupLabel}` });
+    link.appendChild(el('span', 'feed-game-txt', item.matchupLabel));
+    head.appendChild(link);
+    head.appendChild(el('span', 'chip-review-type chip-error_watch', 'Error Watch'));
+    if (item.battingLabel) head.appendChild(el('span', 'feed-batting', `Batting: ${item.battingLabel}`));
+    if (item.inningLabel) head.appendChild(el('span', 'feed-inn', item.inningLabel));
+    head.appendChild(el('span', `review-outcome-pill ${changed ? 'outcome-changed' : 'outcome-stands'}`,
+      changed ? `✏️ Now: ${item.currentEvent || item.currentEventType}` : 'Stands as error'));
+    body.appendChild(head);
+    if (SMod && model) {
+      const res = SMod.scoreErrorToHit(model, modelPlay(item.gamePk, item.atBatIndex, 'field_error', item.halfInning, item.homeId));
+      if (res) {
+        const line = el('div', 'feed-model-line');
+        line.appendChild(el('span', 'feed-model-label', 'Chance this error becomes a hit'));
+        line.appendChild(scoreChip(res));
+        line.appendChild(el('span', `feed-model-band model-tone-${res.band.tone}`, res.band.label));
+        body.appendChild(line);
+      }
+    } else {
+      body.appendChild(el('div', 'feed-model-line feed-model-bb', 'Model loading…'));
+    }
+    body.appendChild(el('div', 'feed-scoring-line feed-scoring-initial', `Initial call: ${item.initialDescription}`));
+    if (changed && item.currentDescription) {
+      body.appendChild(el('div', 'feed-scoring-line feed-scoring-final',
+        `Final ruling${toHit ? ' (changed to a hit)' : ''}: ${item.currentDescription}`));
+    }
+    body.appendChild(el('div', 'feed-model-line feed-model-bb', battedBallLine(item.gamePk, item.atBatIndex)));
+    const off = officialConfirmation(item.gamePk, item.atBatIndex);
+    if (off) body.appendChild(off);
+    if (item.batter || item.pitcher) {
+      const foot = el('div', 'feed-foot');
+      if (item.batter) foot.appendChild(el('span', 'feed-player', `Batter: ${item.batter}`));
+      if (item.pitcher) foot.appendChild(el('span', 'feed-player', `Pitcher: ${item.pitcher}`));
+      body.appendChild(foot);
+    }
+    row.appendChild(body);
+    return row;
+  }
+
+  function renderErrorWatch(wrap) {
+    const intro = el('div', 'model-note');
+    intro.appendChild(el('span', null,
+      'Every play scored "reached on error" today, with the model\u2019s chance (0–100) that the official scorer changes it to a hit. Final rulings update live. '));
+    intro.appendChild(el('a', null, 'Season list, methodology & accuracy →', { href: 'scoring.html' }));
+    wrap.appendChild(intro);
+    const items = [...errorWatch.values()];
+    if (!items.length) {
+      wrap.appendChild(el('div', 'empty', 'No errors recorded yet for this date — they appear here as they happen.'));
+      return;
+    }
+    items.sort((a, b) => String(b.timestamp || '').localeCompare(String(a.timestamp || '')))
+      .forEach((item) => wrap.appendChild(errorWatchRow(item)));
   }
 
   /* -------------------------------------------------- run-at-risk tracking */
@@ -3332,6 +3784,7 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       ['all', `All (${counts.all})`],
       ['scoring', `✏️ Scoring Changes (${counts.scoring})`],
       ['pending_scoring', `⚖️ Scoring Pending (${counts.pending_scoring})`],
+      ...(scoringModelModule() ? [['errorwatch', `🎯 Error Watch (${errorWatch.size})`]] : []),
       ['abs', `ABS (${counts.abs})`],
       ['manager', `Challenges (${counts.manager})`],
       ['crew', `Reviews (${counts.crew})`],
@@ -3351,6 +3804,7 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
 
   function renderFeed() {
     const wrap = UI.clear($('#feed-list'));
+    if (filter === 'errorwatch') { renderErrorWatch(wrap); return; }
     const entries = [...feedState.seen.values()].filter(matchesFilter);
     if (!entries.length) {
       wrap.appendChild(el('div', 'empty',
@@ -3504,6 +3958,8 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       // replaces the generic reason/description lines (which would only
       // duplicate the final ruling).
       body.appendChild(scoringChangeBlock(r));
+      const model = modelBlockForEntry(entry);
+      if (model) body.appendChild(model);
     } else {
       const title = el('div', 'feed-reason', r.reason);
       body.appendChild(title);
@@ -3522,6 +3978,10 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
         const resolved = el('div', 'feed-resolved', `Resolved as: ${r.resolvedDescription}`);
         resolved.title = 'Official scorer ruling: the play was charged as shown above.';
         body.appendChild(resolved);
+      }
+      if (r.typeKey === 'pending_scoring') {
+        const model = modelBlockForEntry(entry);
+        if (model) body.appendChild(model);
       }
     }
 

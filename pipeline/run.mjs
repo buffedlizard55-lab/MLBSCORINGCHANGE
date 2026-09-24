@@ -305,6 +305,7 @@ async function main() {
     const logInfo = await loadOfficialLog(season);
     const { teams, games, playsByGame } = await loadSeasonPlays(season);
     const teamIndex = buildTeamIndex(teams);
+    const teamsById = new Map(teams.map((t) => [t.id, t]));
     const abbr = new Map(teams.map((t) => [t.id, t.abbreviation]));
     const gameById = new Map(games.map((g) => [g.gamePk, g]));
     const entries = logInfo ? logInfo.entries : [];
@@ -314,7 +315,7 @@ async function main() {
     for (const e of entries) {
       e.cls = classifyEntry(e.body);
       e.cls.flags = Object.entries(transitionFlags(e.cls)).filter(([, v]) => v).map(([k]) => k);
-      e.link = linkEntry(e, { teamIndex, games, playsByGame });
+      e.link = linkEntry(e, { teamIndex, games, playsByGame, teamsById });
       const g = gameById.get(e.link.gamePk);
       if (g) {
         e.link.officialDate = g.officialDate;
@@ -324,17 +325,6 @@ async function main() {
       }
       hist(kinds, e.cls.kind);
       if (e.cls.transition) hist(transitions, e.cls.transition);
-      for (const f of e.link.flags) hist(linkFlags, f.split(':')[0]);
-      // Link flags matter for ruling changes (they feed the model); for
-      // bookkeeping-only entries (earned runs, RBIs, WP/PB) flag parse issues.
-      const important = e.issues.length || (e.cls.kind === 'ruling_change'
-        && e.link.flags.some((f) => !/^team_alias|^team_code_via|^name_match:last_name/.test(f)));
-      if (important || e.cls.kind === 'unclassified') {
-        irregularities.push({
-          season, seq: e.seq, raw: e.raw, parseIssues: e.issues, linkFlags: e.link.flags,
-          classification: e.cls.kind === 'ruling_change' ? e.cls.transition : e.cls.kind,
-        });
-      }
     }
 
     // 4a. reconstruct initial vs final ruling for every plate appearance
@@ -346,6 +336,30 @@ async function main() {
       chains.get(key).push(e);
     }
     for (const list of chains.values()) list.sort((a, b) => a.seq - b.seq);
+    // An earlier entry whose ruling a later entry on the same play replaced
+    // is not a mismatch: annotate it (the chain's last entry is what counts).
+    for (const list of chains.values()) {
+      const last = list[list.length - 1];
+      if (list.length < 2 || last.link.flags.includes('current_ruling_mismatch')) continue;
+      for (const e of list.slice(0, -1)) {
+        const i = e.link.flags.indexOf('current_ruling_mismatch');
+        if (i >= 0) e.link.flags[i] = `superseded_by:${last.seq}`;
+      }
+    }
+    for (const e of entries) {
+      for (const f of e.link.flags) hist(linkFlags, f.split(':')[0]);
+      // Link flags matter for ruling changes (they feed the model); for
+      // bookkeeping-only entries (earned runs, RBIs, WP/PB) flag parse issues.
+      const important = e.issues.length || (e.cls.kind === 'ruling_change'
+        && e.link.flags.some((f) => !/^team_alias|^team_code_via|^name_match:last_name|^superseded_by|^current_ruling_compatible/.test(f)));
+      if (important || e.cls.kind === 'unclassified') {
+        irregularities.push({
+          season, seq: e.seq, section: e.section, raw: e.raw, parseIssues: e.issues, linkFlags: e.link.flags,
+          classification: e.cls.kind === 'ruling_change' ? e.cls.transition : e.cls.kind,
+          gamePk: e.link.gamePk, atBatIndex: e.link.atBatIndex, currentEventType: e.link.currentEventType || null,
+        });
+      }
+    }
 
     let seasonFieldErrors = 0; let seasonPAs = 0; let chainsDropped = 0;
     const fieldErrorRecs = [];
@@ -517,6 +531,32 @@ async function main() {
     };
   }
   model.errorToHit.rates.byHomeClub = rateTable(eTrain, (r) => r.home || String(r.play.homeId));
+  // Bands relative to each question's league base rate (score = 0–100 %):
+  // "Elevated" ≈ 1.5× typical, "High" ≈ 3× typical, "Likely" = 50%+.
+  const bandsFor = (base) => {
+    // Rare events (base < 1%): integer scores cannot express multiples of
+    // the base rate, so use absolute cuts.
+    if (base < 0.01) {
+      return [
+        { min: 50, label: 'Likely', tone: 'high' },
+        { min: 5, label: 'High', tone: 'high' },
+        { min: 1, label: 'Elevated', tone: 'mid' },
+        { min: 0, label: 'Low', tone: 'none' },
+      ];
+    }
+    const pct = (k) => Math.max(1, Math.round(k * base * 100));
+    const cuts = [
+      { min: 50, label: 'Likely', tone: 'high' },
+      { min: pct(3), label: 'High', tone: 'high' },
+      { min: pct(1.5), label: 'Elevated', tone: 'mid' },
+      { min: pct(0.75), label: 'Typical', tone: 'low' },
+      { min: 0, label: 'Low', tone: 'none' },
+    ];
+    return cuts.filter((c, i) => i === 0 || c.min < cuts[i - 1].min || c.min === 0)
+      .filter((c, i, a) => a.findIndex((d) => d.min === c.min) === i);
+  };
+  model.errorToHit.bands = bandsFor(model.errorToHit.baseRate);
+  model.hitToError.bands = bandsFor(model.hitToError.baseRate);
   model.bands = SM.DEFAULT_BANDS;
   model.training = {
     seasons: SEASONS,

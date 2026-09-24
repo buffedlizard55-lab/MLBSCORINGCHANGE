@@ -9,7 +9,7 @@ import {
 } from '../pipeline/lib/stats.mjs';
 import { extractGamePlays, PBP_FIELDS, isCompleted } from '../pipeline/lib/statsapi.mjs';
 import {
-  normalizeName, findNameInText, rulingAgrees, buildTeamIndex, candidateGames, linkEntry, levenshtein,
+  normalizeName, findNameInText, rulingAgrees, rulingAgreement, buildTeamIndex, candidateGames, linkEntry, levenshtein,
 } from '../pipeline/lib/link.mjs';
 import {
   buildHitProbSurface, buildHitProbFallback, buildPendingTable, selectAndFit,
@@ -307,6 +307,44 @@ test('surface, fallback, pending table and selection on synthetic records', () =
   assert.ok(spec.cv.auc > 0.6);
   assert.equal(oofById.size, rows.length);
   assert.ok(spec.outOfTime && spec.outOfTime.n > 0);
+});
+
+test('StatsAPI coding conventions: compatible vs mismatch', () => {
+  assert.equal(rulingAgreement('fc', null, 'sac_bunt'), 'compatible', 'sacrifice fielder\'s choice is coded sac_bunt');
+  assert.equal(rulingAgreement('error', null, 'fielders_choice'), 'compatible');
+  assert.equal(rulingAgreement('error', null, 'force_out'), 'compatible');
+  assert.equal(rulingAgreement('error', null, 'single'), 'mismatch');
+  assert.equal(rulingAgreement('hit', 'double', 'field_out'), 'mismatch');
+  assert.equal(rulingAgreement('fc+error', null, 'field_error'), 'exact');
+  assert.equal(rulingAgreement('out', null, 'grounded_into_double_play'), 'exact');
+  assert.equal(rulingAgrees('error', null, 'force_out'), true);
+});
+
+test('team-code correction on the same date and wide date window (synthetic)', () => {
+  const teams = [
+    { id: 139, abbreviation: 'TB', teamCode: 'tba', fileCode: 'tb' },
+    { id: 141, abbreviation: 'TOR', teamCode: 'tor', fileCode: 'tor' },
+    { id: 108, abbreviation: 'LAA', teamCode: 'ana', fileCode: 'ana' },
+    { id: 119, abbreviation: 'LAD', teamCode: 'lan', fileCode: 'la' },
+  ];
+  const idx = buildTeamIndex(teams);
+  const byId = new Map(teams.map((t) => [t.id, t]));
+  const games = [
+    { gamePk: 1, awayId: 139, homeId: 141, officialDate: '2026-05-12', gameNumber: 1 },
+    { gamePk: 2, awayId: 141, homeId: 119, officialDate: '2025-08-10', gameNumber: 1 },
+    { gamePk: 3, awayId: 139, homeId: 108, officialDate: '2025-08-20', gameNumber: 1 },
+  ];
+  const tbn = candidateGames({ away: 'TBN', home: 'TOR', date: '2026-05-12' }, idx, games, byId);
+  assert.deepEqual(tbn.games.map((g) => g.gamePk), [1]);
+  assert.deepEqual(tbn.flags, ['team_code_corrected:TBN->TB']);
+  const laa = candidateGames({ away: 'TOR', home: 'LAA', date: '2025-08-10' }, idx, games, byId);
+  assert.deepEqual(laa.games.map((g) => g.gamePk), [2], 'TOR played only at LAD that day');
+  assert.deepEqual(laa.flags, ['team_code_corrected:LAA->LAD']);
+  const wide = candidateGames({ away: 'TB', home: 'LAA', date: '2025-08-12' }, idx, games, byId);
+  assert.deepEqual(wide.games.map((g) => g.gamePk), [3]);
+  assert.ok(wide.flags.includes('date_mismatch_wide'));
+  const none = candidateGames({ away: 'XYZ', home: 'QRS', date: '2025-08-12' }, idx, games, byId);
+  assert.equal(none.games.length, 0);
 });
 
 console.log(`pipeline-model-test: ${passed} passed`);

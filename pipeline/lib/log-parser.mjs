@@ -101,7 +101,9 @@ export function parseInning(body) {
 const ENTRY_RE = /^(\d{1,3})\s*[.)]\s*(.+)$/;
 // [M/D ]AWAY@HOME[suffix] -- body      (suffix = "2", " GM2", " (GM1)", "!", ...)
 // Separator: "--", en/em dash, or a single hyphen surrounded by spaces.
-const HEAD_RE = /^(?:(\d{1,2})\s*\/\s*(\d{1,2})\s+)?([A-Za-z]{2,3})\s*@\s*([A-Za-z]{2,3})(.*?)(?:\s*(?:--|\u2013|\u2014)\s*|\s+-\s+)(.+)$/;
+// Team separator: "@" (standard); also observed "ARI-LAD" (2024 #77) and
+// "SD at SF" (2025 #157) — accepted and flagged team_separator:<sep>.
+const HEAD_RE = /^(?:(\d{1,2})\s*\/\s*(\d{1,2})\s+)?([A-Za-z]{2,3})(\s*@\s*|-|\s+at\s+)([A-Za-z]{2,3})(.*?)(?:\s*(?:--|\u2013|\u2014)\s*|\s+-\s+)(.+)$/;
 const SECTION_RE = /^(20\d\d)\s+(regular season|postseason|post-season|playoffs|season|spring training)\b/i;
 
 function pad2(n) { return String(n).padStart(2, '0'); }
@@ -163,12 +165,14 @@ export function parseEntryLine(line, seasonYear) {
       entry.issues.push('missing_date');
     }
     entry.away = h[3].toUpperCase();
-    entry.home = h[4].toUpperCase();
-    entry.suffix = h[5] || '';
+    entry.home = h[5].toUpperCase();
+    const sep = h[4].trim().toLowerCase();
+    if (sep !== '@') entry.issues.push(`team_separator:${sep}`);
+    entry.suffix = h[6] || '';
     const suf = parseSuffix(entry.suffix);
     entry.gameNumber = suf.gameNumber;
     entry.issues.push(...suf.flags);
-    entry.body = h[6].trim();
+    entry.body = h[7].trim();
   }
   const inn = parseInning(entry.body);
   entry.half = inn.half;
