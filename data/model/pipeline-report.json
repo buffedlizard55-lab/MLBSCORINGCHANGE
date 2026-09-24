@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-24T20:13:44.443Z",
+ "generatedAt": "2026-09-24T20:15:36.810Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -133,7 +133,7 @@
    "hitToErrorEntries": 38,
    "unlinkedErrorToHit": 0,
    "chainsDroppedForDisagreement": 8,
-   "initialErrorPopulation": 1163,
+   "initialErrorPopulation": 1162,
    "initialErrorToHit": 71
   },
   "2025": {
@@ -228,7 +228,7 @@
    "hitToErrorEntries": 40,
    "unlinkedErrorToHit": 0,
    "chainsDroppedForDisagreement": 6,
-   "initialErrorPopulation": 1056,
+   "initialErrorPopulation": 1055,
    "initialErrorToHit": 60
   },
   "2026": {
@@ -319,7 +319,7 @@
    "hitToErrorEntries": 53,
    "unlinkedErrorToHit": 0,
    "chainsDroppedForDisagreement": 6,
-   "initialErrorPopulation": 1026,
+   "initialErrorPopulation": 1025,
    "initialErrorToHit": 58
   }
  },
@@ -431,15 +431,15 @@
     "traj:popup",
     "traj:bunt"
    ],
-   "n": 3164,
+   "n": 3161,
    "positives": 189,
    "cv": {
     "folds": 10,
-    "logLoss": 0.21974,
-    "baseLogLoss": 0.22624,
-    "auc": 0.6089,
-    "brier": 0.05485,
-    "baseBrier": 0.05617,
+    "logLoss": 0.21989,
+    "baseLogLoss": 0.22639,
+    "auc": 0.609,
+    "brier": 0.0549,
+    "baseBrier": 0.05622,
     "calibration": [
      {
       "band": "0–2",
@@ -450,23 +450,23 @@
      },
      {
       "band": "2–5",
-      "n": 1231,
+      "n": 1226,
       "predicted": 0.0384,
-      "observed": 0.0455,
+      "observed": 0.0457,
       "positives": 56
      },
      {
       "band": "5–10",
-      "n": 1632,
+      "n": 1633,
       "predicted": 0.0679,
       "observed": 0.06,
       "positives": 98
      },
      {
       "band": "10–20",
-      "n": 190,
+      "n": 191,
       "predicted": 0.124,
-      "observed": 0.1211,
+      "observed": 0.1204,
       "positives": 23
      },
      {
@@ -479,7 +479,7 @@
      {
       "band": "35–50",
       "n": 1,
-      "predicted": 0.3676,
+      "predicted": 0.3677,
       "observed": 1,
       "positives": 1
      },
@@ -495,13 +495,13 @@
    "outOfTime": {
     "trainSeasons": "< 2026",
     "testSeason": 2026,
-    "n": 945,
+    "n": 944,
     "positives": 58,
-    "auc": 0.6222,
-    "logLoss": 0.22167,
-    "baseLogLoss": 0.23078,
-    "brier": 0.05586,
-    "baseBrier": 0.05761,
+    "auc": 0.6215,
+    "logLoss": 0.22189,
+    "baseLogLoss": 0.23096,
+    "brier": 0.05592,
+    "baseBrier": 0.05767,
     "calibration": [
      {
       "band": "0–2",
@@ -512,29 +512,29 @@
      },
      {
       "band": "2–5",
-      "n": 344,
+      "n": 342,
       "predicted": 0.0385,
-      "observed": 0.0523,
+      "observed": 0.0526,
       "positives": 18
      },
      {
       "band": "5–10",
-      "n": 522,
-      "predicted": 0.0671,
-      "observed": 0.0575,
+      "n": 523,
+      "predicted": 0.0672,
+      "observed": 0.0574,
       "positives": 30
      },
      {
       "band": "10–20",
       "n": 42,
-      "predicted": 0.1267,
+      "predicted": 0.127,
       "observed": 0.119,
       "positives": 5
      },
      {
       "band": "20–35",
       "n": 9,
-      "predicted": 0.2532,
+      "predicted": 0.2533,
       "observed": 0.4444,
       "positives": 4
      },
@@ -692,7 +692,7 @@
     ]
    }
   },
-  "surfaceBalls": 370693
+  "surfaceBalls": 370696
  },
  "warnings": [],
  "currentSeason": 2026,
@@ -744,42 +744,42 @@
    "scorer": {
     "test": {
      "groups": 101,
-     "plays": 3164,
+     "plays": 3161,
      "positives": 189,
-     "statistic": 105.591,
-     "dispersion": 1.045,
-     "pValue": 0.3238,
+     "statistic": 105.387,
+     "dispersion": 1.043,
+     "pValue": 0.3218,
      "permutations": 2000,
      "seed": 20260924
     },
     "cv": {
      "tested": true,
      "groupsInCandidate": 28,
-     "logLoss": 0.22113,
-     "deltaVsBest": 0.00139,
-     "pairedSE": 0.001103,
+     "logLoss": 0.22129,
+     "deltaVsBest": 0.001401,
+     "pairedSE": 0.001104,
      "selected": false
     },
     "verdict": "no detectable difference — not used",
-    "playsWithScorer": 3164
+    "playsWithScorer": 3161
    },
    "homeClub": {
     "test": {
      "groups": 31,
-     "plays": 3164,
+     "plays": 3161,
      "positives": 189,
-     "statistic": 31.437,
-     "dispersion": 1.014,
-     "pValue": 0.3933,
+     "statistic": 31.359,
+     "dispersion": 1.012,
+     "pValue": 0.3798,
      "permutations": 2000,
      "seed": 20260924
     },
     "cv": {
      "tested": true,
      "groupsInCandidate": 30,
-     "logLoss": 0.22195,
-     "deltaVsBest": 0.002203,
-     "pairedSE": 0.001562,
+     "logLoss": 0.2221,
+     "deltaVsBest": 0.002211,
+     "pairedSE": 0.001563,
      "selected": false
     },
     "verdict": "no detectable difference — not used"
