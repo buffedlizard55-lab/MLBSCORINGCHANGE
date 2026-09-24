@@ -1,0 +1,14 @@
+{
+ "schema": 1,
+ "lastRunAt": "2026-09-24T20:06:23.884Z",
+ "lastChangeAt": "2026-09-24T20:06:23.884Z",
+ "lastRun": {
+  "polls": 4,
+  "gamesPolled": 5,
+  "added": 1,
+  "changed": 0,
+  "filled": 0,
+  "warnings": []
+ },
+ "note": "Rewritten when a ruling is captured or changes, otherwise at most every 3 hours (so idle runs do not create commits)."
+}
