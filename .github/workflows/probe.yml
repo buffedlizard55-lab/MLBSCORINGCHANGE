@@ -1,0 +1,7 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -s -o /dev/null -w "%{http_code}\n" https://statsapi.mlb.com/api/v1/eventTypes
