@@ -563,18 +563,27 @@ const visit1 = await bootPage(sharedStore);
 assert.equal(feedRows(visit1.registry).length, 0, 'baseline poll mints no scoring row');
 assert.ok(!('Scoring Changes' in statPairs(visit1.registry)), 'no Scoring Changes stat before any change');
 
-// Visit 1, poll B: the official scorer changes single → field error.
+// Visit 1, poll B: the official scorer changes single → field error. This is
+// a HIT → ERROR change, so per the session-3 charter the row is tracked and
+// logged but renders ONLY in its own 📉 Hit → Error tab — never in All, never
+// in ✏️ Scoring Changes, never with a chime. Persistence is unchanged.
 servedPbp = { allPlays: [E2E_ERROR], currentPlay: null };
 visit1.context.window.ReplayFeed.refresh();
 for (let i = 0; i < 12; i += 1) await new Promise((r) => setImmediate(r));
 {
+  assert.equal(feedRows(visit1.registry).length, 0,
+    'a hit → error change does NOT render in the All feed (session-3 charter)');
+  visit1.context.window.ReplayFeed.setFilter('hiterror');
   const rows = feedRows(visit1.registry);
-  assert.equal(rows.length, 1, 'rescored play renders exactly one row in All');
+  assert.equal(rows.length, 1, 'the 📉 Hit → Error tab renders exactly one row');
   assert.equal(rows[0].dataset.key, '800001:scoring-21', 'stable per-play key');
   const blob = collectStrings(rows[0], []).join(' | ');
   assert.ok(blob.includes('Single') && blob.includes('Field Error'), `initial + final labels, got: ${blob}`);
   assert.ok(blob.includes('Initial call') && blob.includes('Final ruling'), 'both rulings shown');
-  assert.equal(statPairs(visit1.registry)['Scoring Changes'], '1');
+  const pairs = statPairs(visit1.registry);
+  assert.equal(pairs['Hit → Error'], '1', 'the dedicated Hit → Error stat shows');
+  assert.ok(!('Scoring Changes' in pairs), 'the primary Scoring Changes stat stays out of it');
+  visit1.context.window.ReplayFeed.setFilter('all');
 }
 
 // Flush the log (the page also saves automatically after the changing poll).
@@ -638,15 +647,22 @@ const visit2 = await (async () => {
   vm.runInContext(reviewsSource, context, { filename: 'assets/js/reviews.js' });
   vm.runInContext(feedSource, context, { filename: 'assets/js/reviews-feed.js' });
   // NOTE: no await yet — assert the first paint BEFORE the scan settles.
+  // The refreshed page boots into the All filter, so a restored hit → error
+  // row is not painted there (session-3 charter segregation) — but it IS
+  // restored into the feed state, so its own tab shows it from the log
+  // before any scan settles.
   domReadyCb();
+  assert.equal(feedRows(registry).length, 0,
+    'a restored hit → error row stays out of the All feed on first paint');
+  context.window.ReplayFeed.setFilter('hiterror');
   const firstPaintRows = feedRows(registry);
   assert.equal(firstPaintRows.length, 1,
-    'refreshed page paints the logged scoring row on first paint, before any scan settles');
+    'the 📉 Hit → Error tab paints the logged row on first paint, before any scan settles');
   assert.equal(firstPaintRows[0].dataset.key, '800001:scoring-21');
   const firstBlob = collectStrings(firstPaintRows[0], []).join(' | ');
   assert.ok(firstBlob.includes('Single → Field Error') || (firstBlob.includes('Single') && firstBlob.includes('Field Error')),
     `restored row keeps initial → final, got: ${firstBlob}`);
-  assert.equal(statPairs(registry)['Scoring Changes'], '1', 'stat restored on first paint');
+  assert.equal(statPairs(registry)['Hit → Error'], '1', 'dedicated stat restored on first paint');
   for (let i = 0; i < 12; i += 1) await new Promise((r) => setImmediate(r));
   return { context, registry };
 })();
@@ -658,15 +674,21 @@ const visit2 = await (async () => {
   const rows = feedRows(visit2.registry);
   assert.equal(rows.length, 1, 'first post-refresh scan adds no duplicate row');
   assert.equal(rows.filter((r) => r.dataset.key === '800001:scoring-21').length, 1);
-  assert.equal(statPairs(visit2.registry)['Scoring Changes'], '1');
-  assert.equal(statPairs(visit2.registry)['Events'], '1', 'All feed counts the restored row');
+  const pairs = statPairs(visit2.registry);
+  assert.equal(pairs['Hit → Error'], '1', 'dedicated stat survives the first scan');
+  assert.equal(pairs['Events'], '0', 'All feed (Events) never counts a hit → error row');
+  assert.ok(!('Scoring Changes' in pairs), 'primary Scoring Changes stat never claims it');
   const blob = collectStrings(rows[0], []).join(' | ');
   assert.ok(!blob.includes('undefined'), `restored row leaks no "undefined": ${blob}`);
 }
 
-// The ✏️ tab isolates the restored row; other tabs stay replay-only.
+// The ✏️ tab stays clear of the restored row; its own tab keeps it; other
+// tabs stay replay-only.
 visit2.context.window.ReplayFeed.setFilter('scoring');
-assert.equal(feedRows(visit2.registry).length, 1, 'Scoring Changes tab shows the restored row');
+assert.equal(feedRows(visit2.registry).length, 0,
+  'the ✏️ Scoring Changes tab does NOT show a hit → error row (primary surface)');
+visit2.context.window.ReplayFeed.setFilter('hiterror');
+assert.equal(feedRows(visit2.registry).length, 1, 'the 📉 Hit → Error tab keeps the restored row');
 visit2.context.window.ReplayFeed.setFilter('live');
 assert.equal(feedRows(visit2.registry).length, 0, 'Under Review stays replay-only after refresh');
 visit2.context.window.ReplayFeed.setFilter('all');
