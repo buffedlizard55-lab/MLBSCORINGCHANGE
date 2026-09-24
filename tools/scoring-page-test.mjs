@@ -52,7 +52,13 @@ const documentStub = {
 };
 // One deterministic Savant xBA value is injected into the served copies of the
 // real files (pipeline outputs only carry it once Savant has answered for the
-// play) so the rendering path is exercised by this test on every run.
+// play) so the rendering path is exercised by this test on every run — even
+// while a fresh pipeline run has not asked Savant about these plays yet.
+//
+// The official list renders newest-first in pages of 100, so the fixtures go on
+// rows the FIRST page shows: for 📋 Official Changes the last linked entry of
+// the file, and for 📉 Hit → Error the last linked hit → error entry. That
+// keeps the expected value deterministic however the data refreshes.
 const SAVANT_FIXTURE = { xba: 0.329, ls: 95.1, la: -3, source: 'savant:estimated_ba_using_speedangle' };
 const fetchStub = async (url) => {
   const u = new URL(String(url), ROOT);
@@ -61,8 +67,11 @@ const fetchStub = async (url) => {
   const data = JSON.parse(body);
   if (/error-watch\.json$/.test(u.pathname) && data.plays && data.plays[0]) data.plays[0].savant = { ...SAVANT_FIXTURE };
   if (/scoring-changes-\d{4}\.json$/.test(u.pathname) && data.entries) {
-    const e = data.entries.find((x) => x.link && x.link.atBatIndex != null);
-    if (e) e.savant = { xba: SAVANT_FIXTURE.xba, ls: SAVANT_FIXTURE.ls, la: SAVANT_FIXTURE.la, gameDate: e.date, source: SAVANT_FIXTURE.source };
+    const linked = data.entries.filter((x) => x.link && x.link.atBatIndex != null);
+    const h2e = linked.filter((x) => ((x.cls && x.cls.flags) || []).includes('hitToError'));
+    [linked[linked.length - 1], h2e[h2e.length - 1]].forEach((e) => {
+      if (e) e.savant = { xba: SAVANT_FIXTURE.xba, ls: SAVANT_FIXTURE.ls, la: SAVANT_FIXTURE.la, gameDate: e.date, source: SAVANT_FIXTURE.source };
+    });
   }
   if (/pipeline-report\.json$/.test(u.pathname) && data.savant) {
     data.savant.perPlay = { needed: 10, matched: 4, pending: 6, coverage: 0.4 };
@@ -123,10 +132,11 @@ assert.equal(rows.length, Math.min(100, watch.plays.length), 'watch: first page 
 assert.ok(panel.includes('/100'), 'watch: scores rendered');
 assert.ok(find(registry['#sc-panel'], (n) => n.attrs.href && n.attrs.href.startsWith('https://www.mlb.com/gameday/')), 'watch: Gameday links');
 assert.ok(find(registry['#sc-panel'], (n) => n.attrs.href && n.attrs.href.startsWith('https://baseballsavant.mlb.com/gamefeed?gamePk=')), 'watch: Savant links');
-if (watch.plays.some((p) => p.savant)) {
-  assert.ok(panel.includes('Savant xBA 0.329'), 'watch: the true per-play xBA is shown next to the model number');
-  assert.ok(panel.includes('exit velocity 95.1 mph'), 'watch: the EV Savant saw is shown with its xBA');
-}
+// The watch panel pages from the front of the file, whose first row carries the
+// injected fixture.
+assert.ok(watch.plays.length > 0, 'watch: plays present');
+assert.ok(panel.includes('Savant xBA 0.329'), 'watch: the true per-play xBA is shown next to the model number');
+assert.ok(panel.includes('exit velocity 95.1 mph'), 'watch: the EV Savant saw is shown with its xBA');
 noJunk(panel, 'watch');
 const statusSelect = findAll(registry['#sc-panel'], (n) => n.tagName === 'SELECT')[0];
 statusSelect.value = 'changed_to_hit';
@@ -154,9 +164,11 @@ registry['#sc-tabs'].children[1].dispatch('click');
 await settle();
 panel = text('#sc-panel');
 assert.ok(panel.includes(`of ${off2026.entries.length} entries`), 'official: all entries');
-if (off2026.entries.some((e) => e.savant)) {
-  assert.ok(panel.includes('Savant xBA 0.329'), 'official: Savant xBA shown for the linked play');
-}
+// Unconditional: the fetch stub injected the fixture into the entry the first
+// page renders (asserted here so a change in the injection target is visible).
+assert.ok(off2026.entries.some((e) => e.link && e.link.atBatIndex != null), 'official: there are linked entries');
+assert.ok(panel.includes('Savant xBA 0.329'), 'official: Savant xBA shown for the linked play');
+assert.ok(panel.includes('exit velocity 95.1 mph'), 'official: the EV Savant saw is shown with its xBA');
 assert.match(windowStub.location.hash, /^#official\/2026$/);
 const typeSelect = findAll(registry['#sc-panel'], (n) => n.tagName === 'SELECT')[1];
 typeSelect.value = 'errorToHit';
@@ -178,9 +190,8 @@ const h2eEntries = off2026.entries.filter((e) => e.cls.flags.includes('hitToErro
 assert.ok(panel.includes(`of ${h2eEntries.length} entries`), `hit→error: all flagged entries (${h2eEntries.length})`);
 assert.ok(panel.includes('Hit → Error'), 'hit→error: classification label');
 assert.ok(panel.includes('first ruled a hit'), 'hit→error: section explains the segregation');
-if (h2eEntries.some((e) => e.savant)) {
-  assert.ok(panel.includes('Savant xBA 0.329'), 'hit→error: the true per-play xBA is shown beside the model number');
-}
+assert.ok(h2eEntries.some((e) => e.link && e.link.atBatIndex != null), 'hit→error: there are linked entries');
+assert.ok(panel.includes('Savant xBA 0.329'), 'hit→error: the true per-play xBA is shown beside the model number');
 assert.ok(!panel.includes('undefined') && !panel.includes('NaN'), 'hit→error: no junk');
 const h2eRows = findAll(registry['#sc-panel'], (n) => n.className.split(/\s+/).includes('sc-row'));
 assert.equal(h2eRows.length, Math.min(100, h2eEntries.length), 'hit→error: first page row count');
