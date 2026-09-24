@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-09-24T23:16:47.918Z",
+ "generatedAt": "2026-09-24T23:24:48.184Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -10,7 +10,7 @@
    "laStep": 3,
    "nLa": 44,
    "smoothing": 25,
-   "nBalls": 370913,
+   "nBalls": 370912,
    "overall": 0.3233,
    "rate": [
     0.2392,
@@ -157,9 +157,9 @@
     0.1501,
     0.2363,
     0.1932,
-    0.1484,
-    0.1616,
-    0.1059,
+    0.1488,
+    0.162,
+    0.1063,
     0.1153,
     0.2211,
     0.1364,
@@ -201,9 +201,9 @@
     0.2861,
     0.165,
     0.1699,
-    0.1319,
-    0.0829,
-    0.0875,
+    0.1323,
+    0.0832,
+    0.0878,
     0.1932,
     0.1656,
     0.1577,
@@ -245,9 +245,9 @@
     0.149,
     0.1654,
     0.1147,
-    0.1568,
-    0.1037,
-    0.1092,
+    0.1571,
+    0.104,
+    0.112,
     0.1203,
     0.0842,
     0.1169,
@@ -1743,7 +1743,7 @@
     0.0842,
     0.0836,
     0.0973,
-    0.1122,
+    0.1123,
     0.1275,
     0.1576,
     0.1813,
@@ -1824,7 +1824,7 @@
     "fly_ball|P": 0.242,
     "unknown|OF": 0.2461
    },
-   "nBalls": 372317
+   "nBalls": 372316
   }
  },
  "pending": {
@@ -16348,21 +16348,21 @@
    "traj:bunt"
   ],
   "lambda": 1,
-  "intercept": -2.485356,
+  "intercept": -2.485331,
   "coef": [
-   0.349717,
-   -0.025154,
-   0.602019,
-   0.520386,
-   0.314999,
-   1.919354,
-   -1.177373,
-   -1.876365,
-   0.072002,
-   0.77459
+   0.349743,
+   -0.025155,
+   0.602024,
+   0.520394,
+   0.315005,
+   1.919326,
+   -1.177383,
+   -1.876335,
+   0.072046,
+   0.774589
   ],
   "termMeans": {
-   "logit_hit_prob": -1.57537,
+   "logit_hit_prob": -1.57536,
    "loc:P": 0.07405,
    "loc:C": 0.00823,
    "loc:1B": 0.12215,
@@ -16477,7 +16477,7 @@
      "logit_hit_prob"
     ],
     "lambda": 3,
-    "logLoss": 0.22278,
+    "logLoss": 0.22277,
     "foldSE": 0.00875,
     "deltaVsBest": 0.002827,
     "pairedSE": 0.001947,
@@ -16634,7 +16634,7 @@
     "foldSE": 0.00824,
     "deltaVsBest": 0.000018,
     "pairedSE": 0.00082,
-    "auc": 0.6055,
+    "auc": 0.6056,
     "brier": 0.05435
    },
    {
@@ -16676,7 +16676,7 @@
     "foldSE": 0.0083,
     "deltaVsBest": 0.000848,
     "pairedSE": 0.000824,
-    "auc": 0.6165,
+    "auc": 0.6166,
     "brier": 0.05539
    },
    {
@@ -16697,7 +16697,7 @@
     "foldSE": 0.00844,
     "deltaVsBest": 0.001894,
     "pairedSE": 0.001445,
-    "auc": 0.6122,
+    "auc": 0.6123,
     "brier": 0.05564
    },
    {
@@ -16721,7 +16721,7 @@
     "deltaVsBest": 0.000261,
     "pairedSE": 0.001042,
     "auc": 0.6059,
-    "brier": 0.05436
+    "brier": 0.05435
    },
    {
     "terms": [
@@ -16787,7 +16787,7 @@
     "lambda": 10,
     "logLoss": 0.22164,
     "foldSE": 0.00844,
-    "deltaVsBest": 0.001692,
+    "deltaVsBest": 0.001691,
     "pairedSE": 0.001533,
     "auc": 0.6197,
     "brier": 0.05561
@@ -16813,7 +16813,7 @@
     "foldSE": 0.00822,
     "deltaVsBest": 0.000426,
     "pairedSE": 0.001045,
-    "auc": 0.6044,
+    "auc": 0.6045,
     "brier": 0.05439
    },
    {
@@ -16837,7 +16837,7 @@
     "foldSE": 0.0083,
     "deltaVsBest": 0.000232,
     "pairedSE": 0.000641,
-    "auc": 0.6092,
+    "auc": 0.6093,
     "brier": 0.05495
    },
    {
@@ -17281,7 +17281,7 @@
      "scorer:800935"
     ],
     "lambda": 10,
-    "logLoss": 0.22188,
+    "logLoss": 0.22187,
     "foldSE": 0.00845,
     "deltaVsBest": 0.001927,
     "pairedSE": 0.00148,
@@ -17294,7 +17294,7 @@
    "testSeason": 2026,
    "n": 943,
    "positives": 58,
-   "auc": 0.6214,
+   "auc": 0.6213,
    "logLoss": 0.22209,
    "baseLogLoss": 0.23114,
    "brier": 0.05597,
@@ -17778,52 +17778,52 @@
    "traj:bunt"
   ],
   "lambda": 1,
-  "intercept": -8.479349,
+  "intercept": -8.478385,
   "coef": [
-   -0.440366,
-   3.064576,
-   -0.248323,
-   0.373946,
-   -0.568339,
-   -1.010365
+   -0.444078,
+   3.068015,
+   -0.248858,
+   0.364583,
+   -0.581322,
+   -1.016663
   ],
   "termMeans": {
-   "logit_hit_prob": 0.42838,
-   "infield": 0.1375,
+   "logit_hit_prob": 0.42836,
+   "infield": 0.13751,
    "traj:line_drive": 0.5237,
    "traj:fly_ball": 0.09381,
-   "traj:popup": 0.0036,
+   "traj:popup": 0.00359,
    "traj:bunt": 0.01162
   },
-  "baseRate": 0.0012,
-  "n": 100973,
-  "positives": 121,
+  "baseRate": 0.00121,
+  "n": 100974,
+  "positives": 122,
   "cv": {
    "folds": 10,
-   "logLoss": 0.00739,
-   "baseLogLoss": 0.00926,
-   "auc": 0.9133,
-   "brier": 0.00119,
-   "baseBrier": 0.0012,
+   "logLoss": 0.00743,
+   "baseLogLoss": 0.00933,
+   "auc": 0.9139,
+   "brier": 0.0012,
+   "baseBrier": 0.00121,
    "calibration": [
     {
      "band": "0–2",
-     "n": 100822,
+     "n": 100817,
      "predicted": 0.0012,
      "observed": 0.0012,
-     "positives": 119
+     "positives": 120
     },
     {
      "band": "2–5",
-     "n": 144,
+     "n": 150,
      "predicted": 0.0262,
-     "observed": 0.0139,
+     "observed": 0.0133,
      "positives": 2
     },
     {
      "band": "5–10",
      "n": 7,
-     "predicted": 0.0614,
+     "predicted": 0.0622,
      "observed": 0,
      "positives": 0
     },
@@ -17858,123 +17858,123 @@
    ]
   },
   "selectionRule": "simplest model within one standard error (paired per-play log-loss differences vs the best candidate) under 10-fold cross-validation grouped by game",
-  "bestLogLoss": 0.00739,
+  "bestLogLoss": 0.00743,
   "selection": [
    {
     "terms": [],
     "lambda": 1,
-    "logLoss": 0.00928,
-    "foldSE": 0.00095,
-    "deltaVsBest": 0.001887,
-    "pairedSE": 0.000212,
-    "auc": 0.3995,
+    "logLoss": 0.00934,
+    "foldSE": 0.00093,
+    "deltaVsBest": 0.00191,
+    "pairedSE": 0.000213,
+    "auc": 0.4024,
+    "brier": 0.00121
+   },
+   {
+    "terms": [
+     "logit_hit_prob"
+    ],
+    "lambda": 1,
+    "logLoss": 0.00841,
+    "foldSE": 0.00083,
+    "deltaVsBest": 0.000976,
+    "pairedSE": 0.000143,
+    "auc": 0.8255,
     "brier": 0.0012
    },
    {
     "terms": [
      "logit_hit_prob"
     ],
-    "lambda": 1,
-    "logLoss": 0.00835,
-    "foldSE": 0.00084,
-    "deltaVsBest": 0.000966,
+    "lambda": 10,
+    "logLoss": 0.00841,
+    "foldSE": 0.00083,
+    "deltaVsBest": 0.000977,
     "pairedSE": 0.000142,
-    "auc": 0.8243,
-    "brier": 0.00119
-   },
-   {
-    "terms": [
-     "logit_hit_prob"
-    ],
-    "lambda": 10,
-    "logLoss": 0.00836,
-    "foldSE": 0.00084,
-    "deltaVsBest": 0.000967,
-    "pairedSE": 0.000141,
-    "auc": 0.8242,
-    "brier": 0.00119
+    "auc": 0.8254,
+    "brier": 0.0012
    },
    {
     "terms": [
      "logit_hit_prob",
      "infield"
-    ],
-    "lambda": 1,
-    "logLoss": 0.00742,
-    "foldSE": 0.00068,
-    "deltaVsBest": 0.00003,
-    "pairedSE": 0.000023,
-    "auc": 0.9118,
-    "brier": 0.00119
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "infield"
-    ],
-    "lambda": 10,
-    "logLoss": 0.00753,
-    "foldSE": 0.00071,
-    "deltaVsBest": 0.000144,
-    "pairedSE": 0.000047,
-    "auc": 0.9136,
-    "brier": 0.00119
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "infield",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt"
-    ],
-    "lambda": 1,
-    "logLoss": 0.00739,
-    "foldSE": 0.00068,
-    "deltaVsBest": 0,
-    "pairedSE": 0,
-    "auc": 0.9133,
-    "brier": 0.00119
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "infield",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt"
-    ],
-    "lambda": 10,
-    "logLoss": 0.00752,
-    "foldSE": 0.00071,
-    "deltaVsBest": 0.000129,
-    "pairedSE": 0.000039,
-    "auc": 0.9114,
-    "brier": 0.00119
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_z"
     ],
     "lambda": 1,
     "logLoss": 0.00746,
+    "foldSE": 0.00066,
+    "deltaVsBest": 0.00003,
+    "pairedSE": 0.000023,
+    "auc": 0.9124,
+    "brier": 0.0012
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "infield"
+    ],
+    "lambda": 10,
+    "logLoss": 0.00758,
     "foldSE": 0.00069,
-    "deltaVsBest": 0.000072,
-    "pairedSE": 0.000037,
-    "auc": 0.9088,
-    "brier": 0.00119
+    "deltaVsBest": 0.000145,
+    "pairedSE": 0.000047,
+    "auc": 0.9141,
+    "brier": 0.0012
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "infield",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt"
+    ],
+    "lambda": 1,
+    "logLoss": 0.00743,
+    "foldSE": 0.00067,
+    "deltaVsBest": 0,
+    "pairedSE": 0,
+    "auc": 0.9139,
+    "brier": 0.0012
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "infield",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt"
+    ],
+    "lambda": 10,
+    "logLoss": 0.00756,
+    "foldSE": 0.00069,
+    "deltaVsBest": 0.000129,
+    "pairedSE": 0.000039,
+    "auc": 0.912,
+    "brier": 0.0012
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_z"
+    ],
+    "lambda": 1,
+    "logLoss": 0.00751,
+    "foldSE": 0.00067,
+    "deltaVsBest": 0.000078,
+    "pairedSE": 0.000036,
+    "auc": 0.9087,
+    "brier": 0.0012
    },
    {
     "terms": [
@@ -17991,31 +17991,31 @@
      "ev_z"
     ],
     "lambda": 10,
-    "logLoss": 0.00755,
-    "foldSE": 0.00072,
-    "deltaVsBest": 0.000161,
+    "logLoss": 0.0076,
+    "foldSE": 0.0007,
+    "deltaVsBest": 0.000168,
     "pairedSE": 0.000045,
     "auc": 0.9102,
-    "brier": 0.00119
+    "brier": 0.0012
    }
   ],
   "outOfTime": {
    "trainSeasons": "< 2026",
    "testSeason": 2026,
-   "n": 30983,
-   "positives": 47,
-   "auc": 0.9356,
-   "logLoss": 0.00896,
-   "baseLogLoss": 0.01145,
-   "brier": 0.0015,
-   "baseBrier": 0.00151,
+   "n": 30984,
+   "positives": 48,
+   "auc": 0.9364,
+   "logLoss": 0.00911,
+   "baseLogLoss": 0.01167,
+   "brier": 0.00154,
+   "baseBrier": 0.00155,
    "calibration": [
     {
      "band": "0–2",
-     "n": 30920,
+     "n": 30921,
      "predicted": 0.001,
-     "observed": 0.0015,
-     "positives": 47
+     "observed": 0.0016,
+     "positives": 48
     },
     {
      "band": "2–5",
@@ -18072,9 +18072,9 @@
     },
     {
      "key": "0.10–0.20",
-     "n": 6339,
-     "positives": 17,
-     "rate": 0.0027
+     "n": 6340,
+     "positives": 18,
+     "rate": 0.0028
     },
     {
      "key": "0.20–0.35",
@@ -18116,9 +18116,9 @@
     },
     {
      "key": "SS",
-     "n": 3545,
-     "positives": 31,
-     "rate": 0.0087
+     "n": 3546,
+     "positives": 32,
+     "rate": 0.009
     },
     {
      "key": "2B",
@@ -18160,8 +18160,8 @@
     },
     {
      "key": "ground_ball",
-     "n": 37084,
-     "positives": 100,
+     "n": 37085,
+     "positives": 101,
      "rate": 0.0027
     },
     {
@@ -18204,8 +18204,8 @@
     },
     {
      "key": 2026,
-     "n": 30983,
-     "positives": 47,
+     "n": 30984,
+     "positives": 48,
      "rate": 0.0015
     }
    ]
@@ -18834,7 +18834,7 @@
       "n": 29,
       "observed": 4,
       "expected": 1.66,
-      "ratio": 2.411,
+      "ratio": 2.412,
       "shrunkRatio": 1.201
      },
      {
@@ -19375,14 +19375,14 @@
    ],
    "method": "permutation test (group labels shuffled across plays) of Σ (observed − expected)² / variance, expected from out-of-fold model probabilities; plus a cross-validated candidate model with one term per group (≥ 40 plays)",
    "scorer": {
-    "playsWithScorer": 100973,
+    "playsWithScorer": 100974,
     "test": {
      "groups": 103,
-     "plays": 100973,
-     "positives": 121,
-     "statistic": 84.577,
-     "dispersion": 0.821,
-     "pValue": 0.8603,
+     "plays": 100974,
+     "positives": 122,
+     "statistic": 82.634,
+     "dispersion": 0.802,
+     "pValue": 0.8842,
      "permutations": 500,
      "seed": 20260924
     },
@@ -19396,11 +19396,11 @@
    "homeClub": {
     "test": {
      "groups": 31,
-     "plays": 100973,
-     "positives": 121,
-     "statistic": 22.415,
-     "dispersion": 0.723,
-     "pValue": 0.8483,
+     "plays": 100974,
+     "positives": 122,
+     "statistic": 23.163,
+     "dispersion": 0.747,
+     "pValue": 0.8263,
      "permutations": 500,
      "seed": 20260924
     },
@@ -19545,7 +19545,7 @@
     "testSeason": 2026,
     "n": 943,
     "positives": 58,
-    "auc": 0.6214,
+    "auc": 0.6213,
     "logLoss": 0.22209,
     "baseLogLoss": 0.23114,
     "brier": 0.05597,
@@ -19616,34 +19616,34 @@
     "traj:popup",
     "traj:bunt"
    ],
-   "n": 100973,
-   "positives": 121,
+   "n": 100974,
+   "positives": 122,
    "cv": {
     "folds": 10,
-    "logLoss": 0.00739,
-    "baseLogLoss": 0.00926,
-    "auc": 0.9133,
-    "brier": 0.00119,
-    "baseBrier": 0.0012,
+    "logLoss": 0.00743,
+    "baseLogLoss": 0.00933,
+    "auc": 0.9139,
+    "brier": 0.0012,
+    "baseBrier": 0.00121,
     "calibration": [
      {
       "band": "0–2",
-      "n": 100822,
+      "n": 100817,
       "predicted": 0.0012,
       "observed": 0.0012,
-      "positives": 119
+      "positives": 120
      },
      {
       "band": "2–5",
-      "n": 144,
+      "n": 150,
       "predicted": 0.0262,
-      "observed": 0.0139,
+      "observed": 0.0133,
       "positives": 2
      },
      {
       "band": "5–10",
       "n": 7,
-      "predicted": 0.0614,
+      "predicted": 0.0622,
       "observed": 0,
       "positives": 0
      },
@@ -19680,20 +19680,20 @@
    "outOfTime": {
     "trainSeasons": "< 2026",
     "testSeason": 2026,
-    "n": 30983,
-    "positives": 47,
-    "auc": 0.9356,
-    "logLoss": 0.00896,
-    "baseLogLoss": 0.01145,
-    "brier": 0.0015,
-    "baseBrier": 0.00151,
+    "n": 30984,
+    "positives": 48,
+    "auc": 0.9364,
+    "logLoss": 0.00911,
+    "baseLogLoss": 0.01167,
+    "brier": 0.00154,
+    "baseBrier": 0.00155,
     "calibration": [
      {
       "band": "0–2",
-      "n": 30920,
+      "n": 30921,
       "predicted": 0.001,
-      "observed": 0.0015,
-      "positives": 47
+      "observed": 0.0016,
+      "positives": 48
      },
      {
       "band": "2–5",
@@ -19740,6 +19740,6 @@
     ]
    }
   },
-  "surfaceBalls": 370913
+  "surfaceBalls": 370912
  }
 }

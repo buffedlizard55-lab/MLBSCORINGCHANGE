@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-09-24T23:16:47.918Z",
-  "sha256": "8b4c4295dae2c8fafee3312c8d1d91d05586d8214cad0c93bb0c1662a855dfae",
+  "fetchedAt": "2026-09-24T23:24:48.184Z",
+  "sha256": "5cda53905446d323d585c9ade3e2caeaf8eae8cb2e13a0d79baad71b35288086",
   "bytes": 919598
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T23:16:47.918Z",
+ "generatedAt": "2026-09-24T23:24:48.184Z",
  "entries": [
   {
    "seq": 1,
@@ -826,7 +826,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0095,
+    "p": 0.0096,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -1139,7 +1139,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0108,
+    "p": 0.011,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -1300,7 +1300,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0079,
+    "p": 0.008,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -1651,7 +1651,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0082,
+    "p": 0.0083,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -1712,7 +1712,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0136,
+    "p": 0.0138,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -1919,7 +1919,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0996,
+    "p": 0.0997,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -2790,7 +2790,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0104,
+    "p": 0.0106,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -2900,7 +2900,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0117,
+    "p": 0.0119,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3774,7 +3774,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0086,
+    "p": 0.0087,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -3835,7 +3835,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0061,
+    "p": 0.0062,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -4478,7 +4478,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.013,
+    "p": 0.0132,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -4846,7 +4846,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0064,
+    "p": 0.0065,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -5166,7 +5166,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0084,
+    "p": 0.0085,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -5383,6 +5383,13 @@
     "gameType": "R",
     "away": "MIN",
     "home": "CWS"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-05-25",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5431,6 +5438,13 @@
     "gameType": "R",
     "away": "TB",
     "home": "BAL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 71.7,
+    "la": 51,
+    "gameDate": "2026-05-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5477,6 +5491,13 @@
     "gameType": "R",
     "away": "SD",
     "home": "WSH"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-05-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5523,6 +5544,13 @@
     "gameType": "R",
     "away": "SF",
     "home": "COL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 72.5,
+    "la": 36,
+    "gameDate": "2026-05-31",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5621,6 +5649,13 @@
     "p": 0.0678,
     "score": 7,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 68.2,
+    "la": 45,
+    "gameDate": "2026-05-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5675,6 +5710,13 @@
     "p": 0.1069,
     "score": 11,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-05-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5783,6 +5825,13 @@
     "p": 0.0739,
     "score": 7,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.282,
+    "ls": 67.5,
+    "la": -48,
+    "gameDate": "2026-05-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5837,6 +5886,13 @@
     "p": 0.2232,
     "score": 22,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.316,
+    "ls": 101.3,
+    "la": -9,
+    "gameDate": "2026-05-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5883,6 +5939,13 @@
     "gameType": "R",
     "away": "MIN",
     "home": "CWS"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-05-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5980,7 +6043,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.197,
+    "p": 0.1972,
     "score": 20,
     "kind": "out_of_fold"
    }
@@ -6547,7 +6610,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0086,
+    "p": 0.0087,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -6890,7 +6953,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0044,
+    "p": 0.0045,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -7096,7 +7159,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0138,
+    "p": 0.014,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -7201,7 +7264,8 @@
     "method": "full_name",
     "flags": [
      "date_recovered:6/6->6/18",
-     "date_typo:day"
+     "date_typo:day",
+     "date_recovery_decided_by:exact_ruling"
     ],
     "batterId": 687282,
     "currentEvent": "Field Error",
@@ -7215,7 +7279,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0142,
+    "p": 0.0145,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -7332,7 +7396,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0074,
+    "p": 0.0075,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -7597,6 +7661,13 @@
     "gameType": "R",
     "away": "PHI",
     "home": "WSH"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-24",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7648,7 +7719,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0163,
+    "p": 0.0166,
     "score": 2,
     "kind": "out_of_fold"
    },
@@ -7870,7 +7941,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0098,
+    "p": 0.0099,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -8188,6 +8259,13 @@
     "p": 0.0632,
     "score": 6,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8242,6 +8320,13 @@
     "p": 0.2724,
     "score": 27,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8342,9 +8427,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": 0.486,
-    "ls": 95.7,
-    "la": 5,
+    "xba": null,
+    "ls": 80,
+    "la": 12,
     "gameDate": "2026-06-28",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -8398,14 +8483,14 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0064,
+    "p": 0.0065,
     "score": 1,
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": 0.338,
-    "ls": 102.9,
-    "la": -10,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2026-06-28",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -8457,6 +8542,13 @@
     "gameType": "R",
     "away": "MIN",
     "home": "HOU"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8693,6 +8785,13 @@
     "gameType": "R",
     "away": "KC",
     "home": "CWS"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-06-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8741,6 +8840,13 @@
     "gameType": "R",
     "away": "MIN",
     "home": "HOU"
+   },
+   "savant": {
+    "xba": 0.252,
+    "ls": 80.7,
+    "la": 4,
+    "gameDate": "2026-06-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8840,7 +8946,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0078,
+    "p": 0.0079,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -8944,15 +9050,35 @@
     ]
    },
    "link": {
-    "gamePk": null,
-    "atBatIndex": null,
-    "batterName": null,
-    "currentEventType": null,
-    "method": null,
+    "gamePk": 824983,
+    "atBatIndex": 31,
+    "batterName": "Henry Bolte",
+    "currentEventType": "force_out",
+    "method": "full_name",
     "flags": [
-     "date_recovery_ambiguous:2",
-     "no_game_found"
-    ]
+     "date_recovered:9/4->7/4",
+     "date_typo:month",
+     "date_recovery_decided_by:exact_ruling",
+     "inning_mismatch",
+     "subject_not_first_mention",
+     "ambiguous_plate_appearance",
+     "current_ruling_compatible:force_out"
+    ],
+    "batterId": 703607,
+    "currentEvent": "Forceout",
+    "currentDescription": "Henry Bolte grounds into a force out, shortstop Otto Lopez to second baseman Xavier Edwards. Carlos Cortes out at 2nd. Henry Bolte to 1st.",
+    "inning": 4,
+    "half": "bottom",
+    "officialDate": "2026-07-04",
+    "gameType": "R",
+    "away": "MIA",
+    "home": "ATH"
+   },
+   "model": {
+    "question": "hitToError",
+    "p": 0.0114,
+    "score": 1,
+    "kind": "out_of_fold"
    }
   },
   {
@@ -9658,7 +9784,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0122,
+    "p": 0.0124,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -9916,8 +10042,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0148,
-    "score": 1,
+    "p": 0.0151,
+    "score": 2,
     "kind": "out_of_fold"
    },
    "savant": {
@@ -9977,7 +10103,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0061,
+    "p": 0.0062,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -10135,7 +10261,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0067,
+    "p": 0.0068,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -10248,6 +10374,13 @@
     "p": 0.0474,
     "score": 5,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 85.6,
+    "la": 37,
+    "gameDate": "2026-07-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10351,6 +10484,13 @@
     "gameType": "R",
     "away": "BAL",
     "home": "DET"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-07-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10453,6 +10593,13 @@
     "gameType": "R",
     "away": "KC",
     "home": "DET"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-07-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10504,14 +10651,14 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0129,
+    "p": 0.013,
     "score": 1,
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": 0.065,
-    "ls": 74.2,
-    "la": -8,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2026-07-26",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -10565,14 +10712,14 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0062,
+    "p": 0.0063,
     "score": 1,
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": 0.326,
-    "ls": 75.8,
-    "la": 11,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2026-07-28",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -10629,6 +10776,13 @@
     "p": 0.0949,
     "score": 9,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 65.2,
+    "la": -35,
+    "gameDate": "2026-07-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10685,9 +10839,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": 0.649,
-    "ls": 96.7,
-    "la": 6,
+    "xba": null,
+    "ls": 75.6,
+    "la": 22,
     "gameDate": "2026-07-26",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -10788,6 +10942,13 @@
     "p": 0.0721,
     "score": 7,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-07-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10935,7 +11096,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0076,
+    "p": 0.0077,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -11226,7 +11387,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0041,
+    "p": 0.0042,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -11387,7 +11548,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0116,
+    "p": 0.0117,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -11661,7 +11822,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0138,
+    "p": 0.014,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -11782,7 +11943,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0089,
+    "p": 0.009,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -11838,6 +11999,13 @@
     "gameType": "R",
     "away": "PIT",
     "home": "STL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 67.9,
+    "la": 37,
+    "gameDate": "2026-08-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11884,6 +12052,13 @@
     "gameType": "R",
     "away": "SD",
     "home": "TB"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-08-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11932,6 +12107,13 @@
     "gameType": "R",
     "away": "SEA",
     "home": "TOR"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 90.3,
+    "la": -30,
+    "gameDate": "2026-08-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12034,6 +12216,13 @@
     "gameType": "R",
     "away": "SEA",
     "home": "TOR"
+   },
+   "savant": {
+    "xba": 0.049,
+    "ls": 71.6,
+    "la": -32,
+    "gameDate": "2026-08-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12082,6 +12271,13 @@
     "gameType": "R",
     "away": "BAL",
     "home": "COL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-08-31",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12184,9 +12380,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": 0.34,
-    "ls": 80.5,
-    "la": 8,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2026-08-29",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -12237,6 +12433,13 @@
     "gameType": "R",
     "away": "COL",
     "home": "ATL"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 81.4,
+    "la": 4,
+    "gameDate": "2026-08-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12383,6 +12586,13 @@
     "gameType": "R",
     "away": "BOS",
     "home": "NYY"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-08-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -13047,7 +13257,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0086,
+    "p": 0.0087,
     "score": 1,
     "kind": "model"
    },
@@ -13108,14 +13318,14 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0104,
+    "p": 0.0105,
     "score": 1,
     "kind": "model"
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.14,
+    "ls": 59.6,
+    "la": -39,
     "gameDate": "2026-09-18",
     "source": "savant:estimated_ba_using_speedangle"
    }

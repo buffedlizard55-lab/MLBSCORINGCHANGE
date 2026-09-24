@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-09-24T23:16:47.918Z",
+ "generatedAt": "2026-09-24T23:24:48.184Z",
  "entries": [
   {
    "seq": 1,
@@ -136,6 +136,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.392,
+    "ls": 102.7,
+    "la": -1,
+    "gameDate": "2025-03-30",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "fielding_credit",
     "initial": null,
@@ -164,13 +171,6 @@
     "gameType": "R",
     "away": "BAL",
     "home": "TOR"
-   },
-   "savant": {
-    "xba": 0.392,
-    "ls": 102.7,
-    "la": -1,
-    "gameDate": "2025-03-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -235,6 +235,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.156,
+    "ls": 83.1,
+    "la": -4,
+    "gameDate": "2025-04-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -268,16 +275,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0095,
+    "p": 0.0096,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.156,
-    "ls": 83.1,
-    "la": -4,
-    "gameDate": "2025-04-06",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -350,6 +350,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.365,
+    "ls": 100.9,
+    "la": 20,
+    "gameDate": "2025-04-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -386,13 +393,6 @@
     "p": 0.0002,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.365,
-    "ls": 100.9,
-    "la": 20,
-    "gameDate": "2025-04-06",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -411,6 +411,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.224,
+    "ls": 98.4,
+    "la": 36,
+    "gameDate": "2025-04-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "earned_run",
     "initial": null,
@@ -439,13 +446,6 @@
     "gameType": "R",
     "away": "BAL",
     "home": "KC"
-   },
-   "savant": {
-    "xba": 0.224,
-    "ls": 98.4,
-    "la": 36,
-    "gameDate": "2025-04-06",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -464,6 +464,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.224,
+    "ls": 98.4,
+    "la": 36,
+    "gameDate": "2025-04-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "wild_pitch_passed_ball",
     "initial": null,
@@ -492,13 +499,6 @@
     "gameType": "R",
     "away": "BAL",
     "home": "KC"
-   },
-   "savant": {
-    "xba": 0.224,
-    "ls": 98.4,
-    "la": 36,
-    "gameDate": "2025-04-06",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -982,6 +982,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.575,
+    "ls": 103.4,
+    "la": 3,
+    "gameDate": "2025-04-12",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -1018,13 +1025,6 @@
     "p": 0.0035,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.575,
-    "ls": 103.4,
-    "la": 3,
-    "gameDate": "2025-04-12",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -1650,6 +1650,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.201,
+    "ls": 97.1,
+    "la": -12,
+    "gameDate": "2025-04-27",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -1683,16 +1690,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0074,
+    "p": 0.0075,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.201,
-    "ls": 97.1,
-    "la": -12,
-    "gameDate": "2025-04-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -1711,6 +1711,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.443,
+    "ls": 98.4,
+    "la": 3,
+    "gameDate": "2025-04-25",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -1744,16 +1751,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0044,
+    "p": 0.0045,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.443,
-    "ls": 98.4,
-    "la": 3,
-    "gameDate": "2025-04-25",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -1958,6 +1958,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.321,
+    "ls": 57.8,
+    "la": -53,
+    "gameDate": "2025-05-04",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "error_added",
     "initial": null,
@@ -1986,13 +1993,6 @@
     "gameType": "R",
     "away": "CLE",
     "home": "TOR"
-   },
-   "savant": {
-    "xba": 0.321,
-    "ls": 57.8,
-    "la": -53,
-    "gameDate": "2025-05-04",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2117,6 +2117,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.547,
+    "ls": 111.2,
+    "la": 0,
+    "gameDate": "2025-05-06",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -2152,16 +2159,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0032,
+    "p": 0.0033,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.547,
-    "ls": 111.2,
-    "la": 0,
-    "gameDate": "2025-05-06",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2579,6 +2579,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.628,
+    "ls": 103.5,
+    "la": 6,
+    "gameDate": "2025-05-09",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -2615,13 +2622,6 @@
     "p": 0.0023,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.628,
-    "ls": 103.5,
-    "la": 6,
-    "gameDate": "2025-05-09",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2688,6 +2688,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.136,
+    "ls": 92.5,
+    "la": -14,
+    "gameDate": "2025-05-11",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -2721,16 +2728,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0084,
+    "p": 0.0085,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.136,
-    "ls": 92.5,
-    "la": -14,
-    "gameDate": "2025-05-11",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2749,6 +2749,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.42,
+    "ls": 99.3,
+    "la": 2,
+    "gameDate": "2025-05-13",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -2785,13 +2792,6 @@
     "p": 0.0048,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.42,
-    "ls": 99.3,
-    "la": 2,
-    "gameDate": "2025-05-13",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2810,6 +2810,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.182,
+    "ls": 48.8,
+    "la": -86,
+    "gameDate": "2025-05-17",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -2840,13 +2847,6 @@
     "gameType": "R",
     "away": "WSH",
     "home": "BAL"
-   },
-   "savant": {
-    "xba": 0.182,
-    "ls": 48.8,
-    "la": -86,
-    "gameDate": "2025-05-17",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2911,6 +2911,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.091,
+    "ls": 59.4,
+    "la": -28,
+    "gameDate": "2025-05-16",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -2944,16 +2951,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0129,
+    "p": 0.0131,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.091,
-    "ls": 59.4,
-    "la": -28,
-    "gameDate": "2025-05-16",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3072,6 +3072,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.621,
+    "ls": 102.5,
+    "la": 32,
+    "gameDate": "2025-05-24",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -3108,13 +3115,6 @@
     "p": 0.0002,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.621,
-    "ls": 102.5,
-    "la": 32,
-    "gameDate": "2025-05-24",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3395,6 +3395,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.06,
+    "ls": 64.3,
+    "la": -30,
+    "gameDate": "2025-06-03",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -3428,16 +3435,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0144,
+    "p": 0.0146,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.06,
-    "ls": 64.3,
-    "la": -30,
-    "gameDate": "2025-06-03",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3504,6 +3504,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.072,
+    "ls": 75.3,
+    "la": -14,
+    "gameDate": "2025-06-03",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -3537,16 +3544,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0148,
-    "score": 1,
+    "p": 0.015,
+    "score": 2,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.072,
-    "ls": 75.3,
-    "la": -14,
-    "gameDate": "2025-06-03",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4264,6 +4264,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.126,
+    "ls": 76.8,
+    "la": -45,
+    "gameDate": "2025-06-14",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -4294,13 +4301,6 @@
     "gameType": "R",
     "away": "COL",
     "home": "ATL"
-   },
-   "savant": {
-    "xba": 0.126,
-    "ls": 76.8,
-    "la": -45,
-    "gameDate": "2025-06-14",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4471,6 +4471,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.056,
+    "ls": 78.2,
+    "la": -9,
+    "gameDate": "2025-06-11",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -4504,16 +4511,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0126,
+    "p": 0.0128,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.056,
-    "ls": 78.2,
-    "la": -9,
-    "gameDate": "2025-06-11",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4580,6 +4580,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.395,
+    "ls": 65.2,
+    "la": 41,
+    "gameDate": "2025-06-15",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -4616,13 +4623,6 @@
     "p": 0.0058,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.395,
-    "ls": 65.2,
-    "la": 41,
-    "gameDate": "2025-06-15",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4749,6 +4749,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.597,
+    "ls": 82.1,
+    "la": 22,
+    "gameDate": "2025-06-17",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -4785,13 +4792,6 @@
     "p": 0.0001,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.597,
-    "ls": 82.1,
-    "la": 22,
-    "gameDate": "2025-06-17",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -4854,6 +4854,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.494,
+    "ls": 100.9,
+    "la": 1,
+    "gameDate": "2025-06-24",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "earned_run",
     "initial": null,
@@ -4884,13 +4891,6 @@
     "gameType": "R",
     "away": "LAD",
     "home": "COL"
-   },
-   "savant": {
-    "xba": 0.494,
-    "ls": 100.9,
-    "la": 1,
-    "gameDate": "2025-06-24",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5065,6 +5065,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.207,
+    "ls": 42.5,
+    "la": -66,
+    "gameDate": "2025-06-25",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5098,16 +5105,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0067,
+    "p": 0.0068,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.207,
-    "ls": 42.5,
-    "la": -66,
-    "gameDate": "2025-06-25",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5180,6 +5180,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.273,
+    "ls": 100.9,
+    "la": -6,
+    "gameDate": "2025-06-25",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5213,16 +5220,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0056,
+    "p": 0.0057,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.273,
-    "ls": 100.9,
-    "la": -6,
-    "gameDate": "2025-06-25",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5325,7 +5325,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0116,
+    "p": 0.0118,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5544,6 +5544,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.227,
+    "ls": 103.7,
+    "la": -17,
+    "gameDate": "2025-06-29",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5579,16 +5586,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0077,
+    "p": 0.0078,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.227,
-    "ls": 103.7,
-    "la": -17,
-    "gameDate": "2025-06-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5866,6 +5866,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.303,
+    "ls": 85.3,
+    "la": 4,
+    "gameDate": "2025-07-08",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5902,13 +5909,6 @@
     "p": 0.0055,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.303,
-    "ls": 85.3,
-    "la": 4,
-    "gameDate": "2025-07-08",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5927,6 +5927,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.05,
+    "ls": 90.9,
+    "la": -41,
+    "gameDate": "2025-07-08",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -5960,16 +5967,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0168,
+    "p": 0.0171,
     "score": 2,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.05,
-    "ls": 90.9,
-    "la": -41,
-    "gameDate": "2025-07-08",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6230,6 +6230,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.058,
+    "ls": 66.8,
+    "la": -33,
+    "gameDate": "2025-07-13",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -6263,16 +6270,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0159,
+    "p": 0.0162,
     "score": 2,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.058,
-    "ls": 66.8,
-    "la": -33,
-    "gameDate": "2025-07-13",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6337,6 +6337,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.067,
+    "ls": 60.3,
+    "la": -29,
+    "gameDate": "2025-07-20",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -6370,16 +6377,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0125,
+    "p": 0.0127,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.067,
-    "ls": 60.3,
-    "la": -29,
-    "gameDate": "2025-07-20",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6536,6 +6536,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.263,
+    "ls": 58.5,
+    "la": -72,
+    "gameDate": "2025-07-22",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "error_added",
     "initial": null,
@@ -6564,13 +6571,6 @@
     "gameType": "R",
     "away": "MIN",
     "home": "LAD"
-   },
-   "savant": {
-    "xba": 0.263,
-    "ls": 58.5,
-    "la": -72,
-    "gameDate": "2025-07-22",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7762,6 +7762,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.294,
+    "ls": 99.7,
+    "la": -8,
+    "gameDate": "2025-08-09",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -7798,13 +7805,6 @@
     "p": 0.007,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.294,
-    "ls": 99.7,
-    "la": -8,
-    "gameDate": "2025-08-09",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7823,6 +7823,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.406,
+    "ls": 99.3,
+    "la": -2,
+    "gameDate": "2025-08-10",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -7858,16 +7865,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0049,
+    "p": 0.005,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.406,
-    "ls": 99.3,
-    "la": -2,
-    "gameDate": "2025-08-10",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8030,6 +8030,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.067,
+    "ls": 80.1,
+    "la": -40,
+    "gameDate": "2025-08-07",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -8063,16 +8070,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0112,
+    "p": 0.0114,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.067,
-    "ls": 80.1,
-    "la": -40,
-    "gameDate": "2025-08-07",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8585,6 +8585,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.249,
+    "ls": 83.3,
+    "la": 2,
+    "gameDate": "2025-08-19",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -8621,13 +8628,6 @@
     "p": 0.007,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.249,
-    "ls": 83.3,
-    "la": 2,
-    "gameDate": "2025-08-19",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8992,6 +8992,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.139,
+    "ls": 90.3,
+    "la": -16,
+    "gameDate": "2025-08-30",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -9025,16 +9032,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0118,
+    "p": 0.0119,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.139,
-    "ls": 90.3,
-    "la": -16,
-    "gameDate": "2025-08-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9249,6 +9249,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.698,
+    "ls": 108.7,
+    "la": 19,
+    "gameDate": "2025-08-31",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -9285,13 +9292,6 @@
     "p": 0.0001,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.698,
-    "ls": 108.7,
-    "la": 19,
-    "gameDate": "2025-08-31",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10008,6 +10008,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.05,
+    "ls": 87.5,
+    "la": -39,
+    "gameDate": "2025-09-10",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -10041,16 +10048,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0141,
+    "p": 0.0144,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.05,
-    "ls": 87.5,
-    "la": -39,
-    "gameDate": "2025-09-10",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10069,6 +10069,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.129,
+    "ls": 91.9,
+    "la": -15,
+    "gameDate": "2025-09-11",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -10102,16 +10109,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.009,
+    "p": 0.0091,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.129,
-    "ls": 91.9,
-    "la": -15,
-    "gameDate": "2025-09-11",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10222,6 +10222,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.052,
+    "ls": 65.3,
+    "la": -8,
+    "gameDate": "2025-09-13",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -10258,13 +10265,6 @@
     "p": 0.0151,
     "score": 2,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.052,
-    "ls": 65.3,
-    "la": -8,
-    "gameDate": "2025-09-13",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10393,6 +10393,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.064,
+    "ls": 86,
+    "la": -25,
+    "gameDate": "2025-09-17",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -10429,13 +10436,6 @@
     "p": 0.015,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.064,
-    "ls": 86,
-    "la": -25,
-    "gameDate": "2025-09-17",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10556,6 +10556,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.727,
+    "ls": 95.3,
+    "la": 16,
+    "gameDate": "2025-09-11",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "sacrifice_credit",
     "initial": null,
@@ -10584,13 +10591,6 @@
     "gameType": "R",
     "away": "HOU",
     "home": "TOR"
-   },
-   "savant": {
-    "xba": 0.727,
-    "ls": 95.3,
-    "la": 16,
-    "gameDate": "2025-09-11",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10663,6 +10663,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.058,
+    "ls": 78.1,
+    "la": -7,
+    "gameDate": "2025-09-26",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -10696,16 +10703,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0117,
+    "p": 0.0119,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.058,
-    "ls": 78.1,
-    "la": -7,
-    "gameDate": "2025-09-26",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10724,6 +10724,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.615,
+    "ls": 97.1,
+    "la": 7,
+    "gameDate": "2025-09-26",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -10760,13 +10767,6 @@
     "p": 0.0037,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.615,
-    "ls": 97.1,
-    "la": 7,
-    "gameDate": "2025-09-26",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10785,6 +10785,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.151,
+    "ls": 93.6,
+    "la": -13,
+    "gameDate": "2025-09-28",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -10815,13 +10822,6 @@
     "gameType": "R",
     "away": "KC",
     "home": "ATH"
-   },
-   "savant": {
-    "xba": 0.151,
-    "ls": 93.6,
-    "la": -13,
-    "gameDate": "2025-09-28",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10840,6 +10840,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": 0.39,
+    "ls": 100.6,
+    "la": 22,
+    "gameDate": "2025-09-27",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit",
@@ -10876,13 +10883,6 @@
     "p": 0.0002,
     "score": 0,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.39,
-    "ls": 100.6,
-    "la": 22,
-    "gameDate": "2025-09-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {

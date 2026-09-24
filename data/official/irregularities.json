@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-24T23:16:47.918Z",
+ "generatedAt": "2026-09-24T23:24:48.184Z",
  "count": 79,
  "items": [
   {
@@ -995,7 +995,8 @@
    "parseIssues": [],
    "linkFlags": [
     "date_recovered:6/6->6/18",
-    "date_typo:day"
+    "date_typo:day",
+    "date_recovery_decided_by:exact_ruling"
    ],
    "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit->error",
@@ -1073,14 +1074,19 @@
    "raw": "173. 9/4 MIA@ATH -- In the bottom of the 8th, Henry Bolte now reaches on an error instead of a single, advancing to 2nd on the error. As a result, 1 run is changed to unearned against Tyler Zuber.",
    "parseIssues": [],
    "linkFlags": [
-    "date_recovery_ambiguous:2",
-    "no_game_found"
+    "date_recovered:9/4->7/4",
+    "date_typo:month",
+    "date_recovery_decided_by:exact_ruling",
+    "inning_mismatch",
+    "subject_not_first_mention",
+    "ambiguous_plate_appearance",
+    "current_ruling_compatible:force_out"
    ],
    "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit+error->error",
-   "gamePk": null,
-   "atBatIndex": null,
-   "currentEventType": null
+   "gamePk": 824983,
+   "atBatIndex": 31,
+   "currentEventType": "force_out"
   },
   {
    "season": 2026,
