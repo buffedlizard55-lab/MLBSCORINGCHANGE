@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-09-24T18:53:52.117Z",
-  "sha256": "5cda53905446d323d585c9ade3e2caeaf8eae8cb2e13a0d79baad71b35288086",
+  "fetchedAt": "2026-09-24T19:33:03.185Z",
+  "sha256": "3cffaf6edd9d412ccc974d46d798c0304a73d7bd90d7ebe21d37e093b7f8e4cb",
   "bytes": 919598
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T18:53:52.117Z",
+ "generatedAt": "2026-09-24T19:33:03.185Z",
  "entries": [
   {
    "seq": 1,
@@ -6021,7 +6021,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0635,
+    "p": 0.0636,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -7613,8 +7613,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.065,
-    "score": 6,
+    "p": 0.0653,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -10540,7 +10540,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0727,
+    "p": 0.0728,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -10901,7 +10901,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2437,
+    "p": 0.2438,
     "score": 24,
     "kind": "out_of_fold"
    }

@@ -16,8 +16,8 @@
    "issues": []
   }
  ],
- "fromPrevious": false,
- "generatedAt": "2026-09-24T18:53:52.117Z",
+ "fromPrevious": true,
+ "generatedAt": "2026-09-24T19:33:03.185Z",
  "entries": [
   {
    "seq": 1,
@@ -6864,7 +6864,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0053,
+    "p": 0.0052,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -7888,7 +7888,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0073,
+    "p": 0.0072,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9588,7 +9588,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0934,
+    "p": 0.093,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -10274,7 +10274,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1021,
+    "p": 0.1018,
     "score": 10,
     "kind": "out_of_fold"
    }

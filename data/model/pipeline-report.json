@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-24T18:53:52.117Z",
+ "generatedAt": "2026-09-24T19:33:03.185Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -14,35 +14,19 @@
  "logs": {
   "2024": {
    "ok": true,
-   "entries": 229,
-   "sections": [
-    {
-     "label": "2024 Regular Season",
-     "entries": 229,
-     "issues": []
-    }
-   ],
-   "bytes": 639177
+   "source": "stored",
+   "note": "archive capture 2025-01-21T08:35:45Z already stored",
+   "entries": 229
   },
   "2025": {
    "ok": true,
-   "entries": 211,
-   "sections": [
-    {
-     "label": "2025 Regular Season",
-     "entries": 210,
-     "issues": []
-    },
-    {
-     "label": "2025 Postseason",
-     "entries": 1,
-     "issues": []
-    }
-   ],
-   "bytes": 853480
+   "source": "stored",
+   "note": "archive capture 2026-02-10T03:42:54Z already stored",
+   "entries": 211
   },
   "2026": {
    "ok": true,
+   "source": "live",
    "entries": 253,
    "sections": [
     {
@@ -50,8 +34,7 @@
      "entries": 253,
      "issues": []
     }
-   ],
-   "bytes": 919598
+   ]
   }
  },
  "seasons": {
@@ -243,9 +226,9 @@
     "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=W"
    ],
    "scheduled": 2483,
-   "completed": 2373,
-   "gamesWithPlays": 2373,
-   "fetched": 274,
+   "completed": 2374,
+   "gamesWithPlays": 2374,
+   "fetched": 275,
    "failed": 0,
    "failures": [],
    "selfCheck": {
@@ -255,9 +238,9 @@
     "plays": 58
    },
    "byGameType": {
-    "R": 2373
+    "R": 2374
    },
-   "plateAppearances": 180096,
+   "plateAppearances": 180166,
    "fieldErrorPlateAppearances": 1015,
    "officialEntries": 253,
    "entryKinds": {
@@ -319,11 +302,11 @@
  },
  "discovery": {
   "creditCodes": {
-   "f_putout": 389737,
-   "f_assist": 123511,
-   "f_fielded_ball": 103887,
+   "f_putout": 389788,
+   "f_assist": 123525,
+   "f_fielded_ball": 103898,
    "f_deflection": 3905,
-   "f_throwing_error": 3745,
+   "f_throwing_error": 3746,
    "f_fielding_error": 3104,
    "f_assist_of": 1953,
    "f_error_dropped_ball": 339,
@@ -350,26 +333,26 @@
   "unresolvedPendingResults": [],
   "scoringAdvisories": [],
   "battedBallLocations": {
-   "1": 13249,
-   "2": 3654,
-   "3": 28313,
-   "4": 43685,
-   "5": 39262,
-   "6": 45151,
-   "7": 61663,
-   "8": 68968,
-   "9": 63827,
+   "1": 13251,
+   "2": 3655,
+   "3": 28314,
+   "4": 43692,
+   "5": 39268,
+   "6": 45154,
+   "7": 61670,
+   "8": 68976,
+   "9": 63832,
    "78": 3288,
-   "89": 3073,
+   "89": 3074,
    "null": 1291
   },
   "battedBallTrajectories": {
-   "ground_ball": 155747,
-   "fly_ball": 99844,
-   "line_drive": 89140,
-   "popup": 26552,
-   "bunt_grounder": 3761,
-   "bunt_popup": 335,
+   "ground_ball": 155763,
+   "fly_ball": 99856,
+   "line_drive": 89148,
+   "popup": 26555,
+   "bunt_grounder": 3762,
+   "bunt_popup": 336,
    "bunt_line_drive": 28,
    "null": 17
   },
@@ -379,7 +362,7 @@
    "withTraj": 3169,
    "withLoc": 3169
   },
-  "battedBalls": 375424
+  "battedBalls": 375465
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -465,7 +448,7 @@
      {
       "band": "35–50",
       "n": 1,
-      "predicted": 0.3532,
+      "predicted": 0.3531,
       "observed": 0,
       "positives": 0
      },
@@ -483,7 +466,7 @@
     "testSeason": 2026,
     "n": 945,
     "positives": 58,
-    "auc": 0.6152,
+    "auc": 0.6155,
     "logLoss": 0.22436,
     "baseLogLoss": 0.23075,
     "brier": 0.05658,
@@ -527,7 +510,7 @@
      {
       "band": "35–50",
       "n": 1,
-      "predicted": 0.3532,
+      "predicted": 0.3529,
       "observed": 0,
       "positives": 0
      },
@@ -674,7 +657,8 @@
     ]
    }
   },
-  "surfaceBalls": 370650
+  "surfaceBalls": 370691
  },
- "warnings": []
+ "warnings": [],
+ "currentSeason": 2026
 }
