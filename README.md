@@ -75,7 +75,7 @@ capture it required is built and running.)
 | Observed, captured and logged events | *Observed*: every live `field_error` play (Error Watch). *Captured*: rulings the feed saw change (✏️ rows). *Logged*: MLB's official log, parsed and linked play-by-play (`data/official/`). |
 | Expected chance **and** final result | Every row shows both: the pre-change chance and the live / official final ruling. |
 | Full list | `scoring.html` → Official Changes (every entry, 2024–2026) and Error Watch (every error of the season). |
-| Up to date, no manual checking | `.github/workflows/official-data.yml` rebuilds everything from official sources every 3 hours; the live feed polls StatsAPI continuously. |
+| Up to date, no manual checking | `.github/workflows/official-data.yml` rebuilds everything from official sources every 3 hours; `.github/workflows/official-feed-log.yml` then appends each newly confirmed change to the committed `data/feed-log-<date>.json` files (visible on GitHub Pages, where there is no API server); the live feed polls StatsAPI continuously. |
 | Official source links | Every row links to Gameday / Baseball Savant / StatsAPI / the official MLB log. |
 | Irregularities flagged | `data/official/irregularities.json` → `scoring.html` ⚑ Irregularities (e.g. log typos like `TBN@TOR`, games that do not exist on the stated date). |
 | Train on live-captured rulings, error type included (follow-up 1) | `pipeline/capture.mjs` + `.github/workflows/live-capture.yml` record every error call and pending marker as first called → `data/capture/`; the pipeline's captured-data adjustment (`pipeline/lib/adjust.mjs`) switches on by itself once enough captured errors settle and cross-validation shows a gain. Status on `scoring.html` → Model. |
@@ -110,6 +110,13 @@ plainly; every data problem found is either fixed at the source or flagged in pu
    **📉 Hit → Error** section of `scoring.html` (every officially logged hit→error change,
    2024–2026). No every-single tracking: detection reuses the compact per-play baselines the
    scoring tracker already keeps, so the feed never fills with single-by-single noise.
+   Session-4 decision (item 4): nothing rings for a hit → error change — the alert chime lives only
+   in `assets/js/reviews-feed.js`, and there `shouldAlertForReview` / `visibleInAllFeed` exclude
+   these rows (`tools/official-feed-log-test.mjs` pins that). `game.html`'s Challenges & Reviews
+   tab and the scoreboard's `✏️ N Scoring Change(s)` indicator are silent drill-downs — they read
+   the persisted feed log and exist so the result can be *looked at*; they were deliberately left
+   as they are, because error → hit stays the primary tracked subject and its chance is the number
+   worth acting on.
 3. **✏️ Scoring Changes page** (`scoring.html`) — Error Watch for the whole season, MLB's
    official list for 2024–2026 (verbatim, classified, linked to the exact play and checked against
    its current ruling), the model card (accuracy, calibration, what drives changes, limitations)
@@ -117,9 +124,12 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 4. **Official-data pipeline** (`pipeline/`, runs on GitHub Actions every 3 hours) — parses the
    official log (live page for 2026; Internet Archive captures for 2024 and 2025), scans every
    completed game's play-by-play, links and verifies each entry, fits the models, cross-checks
-   against Baseball Savant, and commits `data/official/*.json` and `data/model/*.json`. It rolls
-   over to new seasons by itself, reuses the immutable archive captures, and after a failed run
-   keeps the last good data online with a visible failure notice.
+   against Baseball Savant, and commits `data/official/*.json` and `data/model/*.json`. Every play
+   it links also carries Baseball Savant's own per-play xBA (`estimated_ba_using_speedangle`),
+   fetched through a cached, budgeted client (at most 4 requests a run, politely spaced), with the
+   coverage reported in `pipeline-report.json` → `savant.perPlay`. It rolls over to new seasons by
+   itself, reuses the immutable archive captures, and after a failed run keeps the last good data
+   online with a visible failure notice.
 5. **📡 Live ruling capture** (`pipeline/capture.mjs`, every 10 minutes during game hours on
    GitHub Actions) — MLB StatsAPI rewrites its history after a scoring change (verified: its
    time-stamped snapshots show the *new* ruling even for moments before the change), so the
@@ -132,6 +142,14 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 6. **Official scorer & home park re-tested every run** — the official scorer of every game is
    looked up; a permutation test and a cross-validated candidate model decide whether scorer or
    park terms belong in the scores (so far: no).
+7. **📄 Confirmed changes without a server** (session-4 item 2) — `pipeline/sync-feed-log.mjs`
+   appends every *verified* official ruling change (linked play, StatsAPI ruling not contradicting
+   the log) into the committed `data/feed-log-<date>.json` files, using the same row ids and merge
+   rules the browser and `server.mjs` use and carrying facts only — no invented scores, pitchers or
+   observation times — plus the log's verbatim line and URL and the flags it raised. A visitor on
+   GitHub Pages (no `server.mjs`, so no `/api/feed-log`) still sees recent confirmed changes, and
+   the file only changes when MLB actually posts something new
+   (`.github/workflows/official-feed-log.yml`; see `docs/scoring-changes.md`).
 
 ## Current results (pipeline runs of 2026-09-24; the site always shows the latest)
 
@@ -146,7 +164,8 @@ plainly; every data problem found is either fixed at the source or flagged in pu
   (229 + 211 + 253) with 662 linked to their exact play.
 - The xBA-style hit probability (370,696 batted balls) correlates **0.974** with Savant's
   `estimated_ba_using_speedangle` on the same plays; all 1,015 regular-season 2026 errors match
-  Savant exactly.
+  Savant exactly. Savant's own xBA is also attached **per play** to every linked official entry and
+  Error Watch row (shown on `scoring.html`), with the coverage reported in the pipeline report.
 - Calibration (error → hit): plays scored 5–10 were changed 6.0% of the time; 10–20 → 12.0%.
 - Label clean-up (session 2 review): 3 official entries no longer count as error → hit — they are
   RBI / runner changes on a hit (2024 #49, 2025 #55, 2025 #128) — and runner-level error → error
@@ -202,6 +221,14 @@ plays settle (≥ 8 changes for a shift; ≥ 15 changes and ≥ 150 errors for e
 - StatsAPI does not always apply a logged change (e.g. 2026 #13: the log says Alex Freeland now
   has a single, while StatsAPI still shows the original sacrifice). Entries whose play's current
   ruling disagrees with the log are flagged and kept out of training labels.
+- The per-play Savant xBA fills in as the pipeline asks Savant politely (at most 4 requests a run,
+  cached: the current season's error list every 6 hours, past-season lists and month windows for
+  30 days), so right after a deploy some rows legitimately have no xBA yet. Coverage — matched /
+  pending / not-indexed / unavailable — is reported in `pipeline-report.json` → `savant.perPlay`
+  and never filled with a guess.
+- The static feed logs hold only what pipeline runs have written: a ruling change appears on GitHub
+  Pages once the 3-hourly run has re-read the log, and only dates inside the last 14 days are
+  written. Until then the date's file simply has no row (the feed shows nothing rather than a guess).
 - Prior seasons depend on Internet Archive captures of MLB's page (2025: 2026-02-10 capture;
   2024: 2025-01-21 capture).
 
@@ -214,6 +241,8 @@ plays settle (≥ 8 changes for a shift; ≥ 15 changes and ≥ 150 errors for e
 - Scorer / park effects: nothing to do unless the verdict changes (it is re-tested every run).
 - Model headroom beyond error type: the log's own changes are ~6% of errors, so further gains
   most likely need new inputs (fielder range / sprint speed from Savant, play description text).
+- Watch `.github/workflows/official-feed-log.yml` after a game day: the static feed logs should
+  gain that day's confirmed changes, and a run with nothing new must commit nothing.
 - Optional opt-in alert when an error's score is "High".
 
 ## Working on this repo
@@ -544,6 +573,9 @@ node tools/storage-namespace-test.mjs          # browser storage keys stay under
 node tools/pipeline-log-test.mjs               # official-log parser + classifier (ruling transitions, flags)
 node tools/pipeline-model-test.mjs             # model fitting / scoring / banding on synthetic populations
 node tools/capture-test.mjs                    # live ruling capture (first-call states, pending markers)
+node tools/pipeline-link-test.mjs              # official-entry → play linker (incl. season-wide date recovery)
+node tools/savant-xba-test.mjs                 # Savant per-play xBA client (caching, budget, politeness, date ranges)
+node tools/official-feed-log-test.mjs          # official-log rows in the static feed logs (facts only, idempotent)
 node tools/pipeline-offline-smoke.mjs          # end-to-end pipeline run against stubbed official sources
 ```
 
@@ -555,6 +587,9 @@ changes) is persistent across the website:
 - **Across browsers & sessions**: saved to the backend disk store (`data/feed-log-<date>.json`)
   via `POST /api/feed-log` and cached in `localStorage`, so opening the website on
   another browser immediately restores all tracked entries and baselines.
+- **Without a server (GitHub Pages)**: tier 4 is the committed `data/feed-log-<date>.json` file,
+  and since session 4 those files also carry MLB's confirmed ruling changes for the last 14 days,
+  appended by `pipeline/sync-feed-log.mjs` (rows are facts only; see `docs/scoring-changes.md`).
 - **Across the website**:
   - `reviews.html`: renders the All feed and dedicated ✏️ Scoring Changes tab.
   - `game.html`: dedicated **Challenges & Reviews** tab displays official scoring changes

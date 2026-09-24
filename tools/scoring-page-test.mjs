@@ -50,11 +50,24 @@ const documentStub = {
   querySelector: (sel) => registry[sel] || null,
   addEventListener() {},
 };
+// One deterministic Savant xBA value is injected into the served copies of the
+// real files (pipeline outputs only carry it once Savant has answered for the
+// play) so the rendering path is exercised by this test on every run.
+const SAVANT_FIXTURE = { xba: 0.329, ls: 95.1, la: -3, source: 'savant:estimated_ba_using_speedangle' };
 const fetchStub = async (url) => {
   const u = new URL(String(url), ROOT);
   if (!existsSync(u)) return { ok: false, status: 404, json: async () => ({}) };
   const body = readFileSync(u, 'utf8');
-  return { ok: true, status: 200, json: async () => JSON.parse(body) };
+  const data = JSON.parse(body);
+  if (/error-watch\.json$/.test(u.pathname) && data.plays && data.plays[0]) data.plays[0].savant = { ...SAVANT_FIXTURE };
+  if (/scoring-changes-\d{4}\.json$/.test(u.pathname) && data.entries) {
+    const e = data.entries.find((x) => x.link && x.link.atBatIndex != null);
+    if (e) e.savant = { xba: SAVANT_FIXTURE.xba, ls: SAVANT_FIXTURE.ls, la: SAVANT_FIXTURE.la, gameDate: e.date, source: SAVANT_FIXTURE.source };
+  }
+  if (/pipeline-report\.json$/.test(u.pathname) && data.savant) {
+    data.savant.perPlay = { needed: 10, matched: 4, pending: 6, coverage: 0.4 };
+  }
+  return { ok: true, status: 200, json: async () => data };
 };
 const context = {
   window: windowStub, document: documentStub, fetch: fetchStub, console,
@@ -95,6 +108,7 @@ const summary = text('#sc-summary');
 assert.ok(summary.includes(String(report.seasons['2026'].officialEntries)), 'summary: 2026 entry count');
 assert.ok(summary.includes(watch.plays.length.toLocaleString()), 'summary: error count');
 assert.ok(summary.includes(`AUC ${model.errorToHit.cv.auc.toFixed(2)}`), 'summary: model AUC');
+assert.ok(summary.includes('plays have Savant xBA'), 'summary: per-play Savant xBA coverage is reported, not guessed');
 noJunk(summary, 'summary');
 
 // Tabs
@@ -109,6 +123,10 @@ assert.equal(rows.length, Math.min(100, watch.plays.length), 'watch: first page 
 assert.ok(panel.includes('/100'), 'watch: scores rendered');
 assert.ok(find(registry['#sc-panel'], (n) => n.attrs.href && n.attrs.href.startsWith('https://www.mlb.com/gameday/')), 'watch: Gameday links');
 assert.ok(find(registry['#sc-panel'], (n) => n.attrs.href && n.attrs.href.startsWith('https://baseballsavant.mlb.com/gamefeed?gamePk=')), 'watch: Savant links');
+if (watch.plays.some((p) => p.savant)) {
+  assert.ok(panel.includes('Savant xBA 0.329'), 'watch: the true per-play xBA is shown next to the model number');
+  assert.ok(panel.includes('exit velocity 95.1 mph'), 'watch: the EV Savant saw is shown with its xBA');
+}
 noJunk(panel, 'watch');
 const statusSelect = findAll(registry['#sc-panel'], (n) => n.tagName === 'SELECT')[0];
 statusSelect.value = 'changed_to_hit';
@@ -136,6 +154,9 @@ registry['#sc-tabs'].children[1].dispatch('click');
 await settle();
 panel = text('#sc-panel');
 assert.ok(panel.includes(`of ${off2026.entries.length} entries`), 'official: all entries');
+if (off2026.entries.some((e) => e.savant)) {
+  assert.ok(panel.includes('Savant xBA 0.329'), 'official: Savant xBA shown for the linked play');
+}
 assert.match(windowStub.location.hash, /^#official\/2026$/);
 const typeSelect = findAll(registry['#sc-panel'], (n) => n.tagName === 'SELECT')[1];
 typeSelect.value = 'errorToHit';
@@ -157,6 +178,9 @@ const h2eEntries = off2026.entries.filter((e) => e.cls.flags.includes('hitToErro
 assert.ok(panel.includes(`of ${h2eEntries.length} entries`), `hit→error: all flagged entries (${h2eEntries.length})`);
 assert.ok(panel.includes('Hit → Error'), 'hit→error: classification label');
 assert.ok(panel.includes('first ruled a hit'), 'hit→error: section explains the segregation');
+if (h2eEntries.some((e) => e.savant)) {
+  assert.ok(panel.includes('Savant xBA 0.329'), 'hit→error: the true per-play xBA is shown beside the model number');
+}
 assert.ok(!panel.includes('undefined') && !panel.includes('NaN'), 'hit→error: no junk');
 const h2eRows = findAll(registry['#sc-panel'], (n) => n.className.split(/\s+/).includes('sc-row'));
 assert.equal(h2eRows.length, Math.min(100, h2eEntries.length), 'hit→error: first page row count');

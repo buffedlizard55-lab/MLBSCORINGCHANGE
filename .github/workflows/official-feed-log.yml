@@ -1,0 +1,82 @@
+# Static feed-log sync: append official-log-confirmed scoring changes into the
+# committed data/feed-log-<date>.json files, so a visitor on GitHub Pages (with
+# no server.mjs) still sees recent confirmed changes. Reads only the pipeline's
+# committed outputs — no network — and writes with the same idempotent merge the
+# local server uses, so re-running it changes nothing unless MLB published
+# something new. A row is appended only for a ruling change whose play the
+# linker verified; everything else is counted and reported, never guessed.
+name: Static feed-log sync
+
+on:
+  # After the official-data pipeline finishes — that is what refreshes the
+  # data/official/scoring-changes-*.json this job reads.
+  workflow_run:
+    workflows: ['Official data pipeline']
+    types: [completed]
+  # Plus its own (later) schedule, so a delayed pipeline run never blocks it.
+  schedule:
+    - cron: '53 */3 * * *'   # ~30 minutes after the pipeline's '23 */3'
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - 'pipeline/sync-feed-log.mjs'
+      - 'pipeline/lib/official-feed-row.mjs'
+      - 'tools/official-feed-log-test.mjs'
+      - '.github/workflows/official-feed-log.yml'
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: official-feed-log-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      # workflow_run events check out the branch the pipeline ran on; every
+      # other trigger uses the current ref.
+      BRANCH: ${{ github.event.workflow_run.head_branch || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.workflow_run.head_branch || github.ref_name }}
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Feed-log sync unit tests
+        run: node tools/official-feed-log-test.mjs
+
+      - name: Append confirmed changes to the static feed logs
+        run: node pipeline/sync-feed-log.mjs --days=14
+
+      - name: Commit feed logs
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/feed-log-*.json data/feed-log-index.json
+          if git diff --cached --quiet; then
+            echo "No feed-log changes."
+            exit 0
+          fi
+          git commit -m "feed-log: append officially confirmed scoring changes [run ${{ github.run_id }}]"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin "$BRANCH" && git push origin "HEAD:$BRANCH" && exit 0
+            sleep $((attempt * 10))
+          done
+          echo "::error::could not push feed-log commit"
+          exit 1
+
+      - name: Request a Pages rebuild
+        if: always() && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --jq '.status' || true

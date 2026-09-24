@@ -57,3 +57,16 @@
     (pipeline) ≡ the model's `hitToError` question. Do not add per-single tracking rows to
     "catch" these earlier *in the feed* — bloat is exactly what the section exists to avoid;
     earlier evidence belongs to the live-capture pipeline (`data/capture/`), not the alert UI.
+14. **The static feed logs are generated too — three writers, one contract.** A
+    `data/feed-log-<date>.json` file can be written by the browser (`reviews-feed.js`
+    `serializeFeedLog`), by `server.mjs` (`mergeFeedLogPayloads`) or by
+    `pipeline/sync-feed-log.mjs` (`.github/workflows/official-feed-log.yml`), and they must agree:
+    dedupe by `<gamePk>:<review.id>`, never let an incoming `null` overwrite an observed value,
+    union flags, keep the longer history, preserve snapshots/irregularities/grace/settled, drop the
+    oldest rows at 500 and count them in `trimmed`. The pipeline appends only *verified* ruling
+    changes (`link.atBatIndex` set, no `current_ruling_mismatch`), as facts only — never an invented
+    pitcher, score, description or observation time — and the merge must stay idempotent (an
+    unchanged row keeps its `timestamp`/`lastSeen` so re-running commits nothing). Never hand-edit
+    these files; `tools/official-feed-log-test.mjs` pins the contract. Likewise, Baseball Savant's
+    per-play xBA comes only from the pipeline (`pipeline/lib/savant.mjs` — cached, budgeted, politely
+    spaced); no page may fetch Savant, and a row without xBA shows none.

@@ -1,0 +1,91 @@
+{
+  "v": 1,
+  "date": "2026-09-11",
+  "savedAt": 1790289196012,
+  "entries": [
+    {
+      "gamePk": 823817,
+      "review": {
+        "id": "scoring-60",
+        "atBatIndex": 60,
+        "inning": 7,
+        "halfInning": "bottom",
+        "inningLabel": "▼ Bot 7th",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "home",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "MIA",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Rescored",
+        "reason": "Single → Field Error",
+        "description": "Marlins challenged (play at 1st), call on the field was overturned: Heriberto Hernández reaches on a fielding error by third baseman Max Muncy.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "single",
+          "event": "Single",
+          "label": "Single",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "final": {
+          "eventType": "field_error",
+          "event": "Field Error",
+          "label": "Field Error",
+          "category": "error",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-09-24T22:33:16.012Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 681715,
+          "fullName": "Heriberto Hernández"
+        },
+        "pitcher": null,
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "official": {
+          "season": 2026,
+          "seq": 251,
+          "date": "2026-09-11",
+          "raw": "251. 9/11 LAD@MIA -- In the bottom of the 7th, Heriberto Hernandez now reaches on an error by third baseman Max Muncy, instead of on a single.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        }
+      },
+      "firstSeen": 1790289195946,
+      "lastSeen": 1790289196012,
+      "matchupLabel": "LAD @ MIA"
+    }
+  ],
+  "order": [
+    "823817:scoring-60"
+  ],
+  "snapshots": {},
+  "irregularities": {},
+  "grace": {},
+  "settled": [],
+  "trimmed": {
+    "entries": 0,
+    "snapshots": 0
+  }
+}

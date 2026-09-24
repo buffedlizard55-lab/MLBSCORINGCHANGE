@@ -141,6 +141,45 @@ When a scoring change was detected after hours of polling on Browser 1, it was s
   4. Multi-client merge: concurrent updates from separate clients merge without data loss.
 - All 15 deterministic suites pass (15/15 green).
 
+## Session-4 addition — official rows for a visitor with no server
+
+`data/feed-log-<date>.json` only ever held dates some browser had tracked and posted to
+`server.mjs`, so a visitor reading the site from GitHub Pages (no `server.mjs`) got whatever the
+seed files happened to contain. `pipeline/sync-feed-log.mjs` (new) writes MLB's **confirmed**
+scoring changes straight into those files:
+
+- **Source:** `data/official/scoring-changes-<season>.json` — the committed pipeline output the
+  3-hourly `official-data.yml` run refreshes. Read only: no network, no re-derivation of links.
+- **Appended only when the change is verified:** `cls.kind === 'ruling_change'`, the play linked
+  (`link.atBatIndex != null`) and StatsAPI's current ruling not contradicting the log
+  (no `current_ruling_mismatch`). Bookkeeping entries (earned runs, RBIs, fielding credits, …),
+  unlinked rulings and pending mismatches are counted in the run log and left out — never guessed.
+- **Facts only:** gamePk, `review.id` = the same `scoring-<atBatIndex>` the browser mints (so a
+  later browser write merges into the same row instead of duplicating it), `typeKey`
+  `scoring_change`, the log's initial/final rulings, its verbatim line and URL, the flags the text
+  or the link raised, and `mechanism: official_log`. Nothing is invented: `pitcher`, the scores,
+  `initialDescription` and `initialObservedAt` stay `null`. The play's own inning/half is shown
+  (a differing inning printed in the log is flagged and its text kept verbatim); `firstSeen`,
+  `lastSeen` and `review.timestamp` record when the pipeline wrote the row, not when MLB made the
+  change. Two official entries about one play become one row (latest seq wins, `changeCount`, a
+  "Multiple official rulings on one play" flag).
+- **The merge is `server.mjs`'s** (`mergePayloads` semantics): dedupe by `<gamePk>:<review.id>`,
+  an incoming `null` never overwrites an observed value, `flags` union, the longer `history` chain
+  wins, snapshots / irregularities / grace / settled are preserved, and the 500-row cap keeps the
+  most recent rows and counts the rest in `trimmed`. An unchanged row keeps its previous
+  `timestamp`/`lastSeen`, and a date's file is only rewritten when something actually differs —
+  so a re-run, and the workflow's commit step, are no-ops.
+- **Scheduling:** `.github/workflows/official-feed-log.yml` runs it after every official-data
+  pipeline run (plus its own 3-hourly schedule) and commits only `data/feed-log-*.json` and
+  `data/feed-log-index.json`. It only writes dates inside the last 14 days (`--days=N`).
+- **Verified by** `tools/official-feed-log-test.mjs` (5 sections): the rows are fact-only and
+  match the browser's own `scoringCategory`; the browser's `isHitToErrorChange` agrees with the
+  pipeline classifier except the two documented cases (a home-run initial call keeps the primary
+  ✏️ surface — no hit→error model exists for home runs; a StatsAPI "compatible coding" that recodes
+  a reached-on-error play into the fielder's-choice family, which the row flags in words); the real
+  `restoreFeedLog` restores every appended row; and the merge is idempotent through the real CLI
+  against a temp `--data-dir`.
+
 ## Verification limits (flagged for review)
 
 - **No live re-verification was possible in this session:** the sandbox has no external network (`curl https://statsapi.mlb.com/api/v1/eventTypes` → exit 35; `fetch` fails), so the registry/payload shapes above could not be re-fetched. All checks rest on the repo's live-verbatim fixtures (eventTypes + playByPlay captures of 2026-09-04, scoring log entries #230/#232) and the deterministic suites, which are all green (11/11). If the upstream registry or the scoring-changes log vocabulary drifts, the nightly API smoke test (`docs/workflows/smoke.yml`) is the tripwire — treat any smoke failure as an irregularity for review before trusting new rows.

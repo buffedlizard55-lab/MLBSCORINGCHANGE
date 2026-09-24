@@ -25,12 +25,16 @@ const TEAMS = [
 const SEASONS = [2024, 2025, 2026];
 const GAMES_PER_SEASON = 24;
 const world = { games: new Map(), schedule: new Map(), log: new Map(), savant: new Map() };
+// Every batted ball of every season, keyed by nothing but its own game_date:
+// this is what a Savant date-range query (game_date_gt/game_date_lt) returns,
+// in the same CSV shape as the real endpoint (which carries game_date).
+const savantAll = [];
 
 for (const season of SEASONS) {
   const r = rng(season);
   const games = [];
   const logLines = [];
-  const savantRows = [];
+  const savantRows = [];   // final field errors only — Savant's season error list
   for (let i = 0; i < GAMES_PER_SEASON; i += 1) {
     const away = TEAMS[i % 4];
     const home = TEAMS[(i + 1) % 4];
@@ -46,11 +50,17 @@ for (const season of SEASONS) {
       const bat = top ? away : home;
       const fld = top ? home : away;
       const batterId = bat.id * 100 + (ai % 9);
-      const batterName = `${bat.abbreviation}bat Number${ai % 9}x${bat.abbreviation}`;
+      // One deliberately unique batter in exactly one 2026 game (game index 7),
+      // used by the mis-dated official-log entries below so the date-recovery
+      // pass is exercised end to end.
+      const unique = season === 2026 && i === 7 && ai === 12;
+      const batterName = unique ? 'Unique Recovery'
+        : `${bat.abbreviation}bat Number${ai % 9}x${bat.abbreviation}`;
       const ls = 45 + r() * 70; const la = -40 + r() * 90;
       const pHit = sig(-1.4 + (ls - 85) / 10 - Math.abs(la - 12) / 14);
       let et = r() < pHit ? 'single' : (r() < 0.05 ? 'field_error' : 'field_out');
       if (r() < 0.2) et = 'strikeout';
+      if (unique) et = 'field_error';
       const inPlay = et !== 'strikeout';
       let desc = `${batterName} ${et}.`;
       // Official-log entries: some singles "were errors", some errors "were singles".
@@ -58,6 +68,16 @@ for (const season of SEASONS) {
         logLines.push({ date: officialDate, away, home, top, inning, text: `${batterName} now has a single instead of reaching on an error by shortstop ${fld.abbreviation}ss Fielder.` });
       } else if (et === 'field_error' && r() < 0.25) {
         logLines.push({ date: officialDate, away, home, top, inning, text: `${batterName} reaches on an error by shortstop ${fld.abbreviation}ss Fielder, instead of a single.` });
+      }
+      // Two SYNTHETIC mis-dated entries about the same unique play (game 7 of
+      // 2026, played 5/5): one stated 10+ days away from every game of the
+      // pairing (the season-wide recovery pass), one stated inside a window
+      // where the pairing DID play but the batter did not (the batter-check
+      // recovery pass). Both are hit → error changes, so a recovered entry
+      // must come out with a model score — the real 2026 #140/#173 shape.
+      if (unique) {
+        logLines.push({ date: `${season}-08-05`, away, home, top, inning, text: `${batterName} reaches on a fielding error by shortstop ${fld.abbreviation}ss Fielder, instead of a single.` });
+        logLines.push({ date: `${season}-07-05`, away, home, top, inning, text: `the single for ${batterName} has been changed to a fielding error charged to ${fld.abbreviation}ss Fielder.` });
       }
       const events = inPlay ? [{ index: 0, isPitch: true, details: { isInPlay: true }, hitData: { launchSpeed: Number(ls.toFixed(1)), launchAngle: Math.round(la), totalDistance: 100, trajectory: la < 8 ? 'ground_ball' : la < 25 ? 'line_drive' : 'fly_ball', hardness: 'medium', location: String(1 + Math.floor(r() * 9)), coordinates: { coordX: 100, coordY: 120 } } }] : [{ index: 0, isPitch: true, details: { isInPlay: false } }];
       if (ai === 5 && season === 2026) events.push({ index: 1, details: { eventType: 'os_ruling_pending_prior', description: 'Official Scorer Ruling Pending' } });
@@ -70,8 +90,17 @@ for (const season of SEASONS) {
         playEvents: events,
         runners: [{ movement: { originBase: null, start: null, end: reached ? '1B' : null, outBase: reached ? null : '1B', isOut: !reached }, details: { eventType: et, runner: { id: batterId }, isScoringEvent: false }, credits: et === 'field_error' ? [{ player: { id: fld.id * 100 + 6 }, position: { code: '6', abbreviation: 'SS' }, credit: 'f_fielding_error' }] : [] }],
       });
-      if (et === 'field_error' && season === 2026) {
-        savantRows.push({ game_pk: gamePk, at_bat_number: ai + 1, launch_speed: ls.toFixed(1), launch_angle: Math.round(la), estimated_ba_using_speedangle: pHit.toFixed(3), events: 'field_error' });
+      if (inPlay) {
+        const row = {
+          game_pk: gamePk, at_bat_number: ai + 1, game_date: officialDate,
+          launch_speed: ls.toFixed(1), launch_angle: Math.round(la),
+          estimated_ba_using_speedangle: pHit.toFixed(3), events: et,
+        };
+        savantAll.push(row);
+        // Savant's season error list is filtered on the play's CURRENT ruling,
+        // so a play changed to a hit is not in it (it only shows up in a
+        // date-range query) — exactly the split collectPlayXba relies on.
+        if (et === 'field_error') savantRows.push(row);
       }
     }
     world.games.set(gamePk, { allPlays });
@@ -91,7 +120,8 @@ for (const season of SEASONS) {
     ? `<p><strong>${header}</strong></p><ol>${lines.map((l) => `<li><p>${l.replace(/^\S+\s/, '').replace(/'/g, '&#x27;')}</p></li>`).join('\n')}</ol>`
     : `<h2>${header}</h2><p>${lines.join('<br>')}</p>`;
   world.log.set(season, `<html><head><script>var junk = "1) 1/1 X@Y -- no";</script></head><body>${listHtml}</body></html>`);
-  world.savant.set(season, `\uFEFF"game_pk","at_bat_number","launch_speed","launch_angle","estimated_ba_using_speedangle","events"\n${savantRows.map((x) => [x.game_pk, x.at_bat_number, x.launch_speed, x.launch_angle, x.estimated_ba_using_speedangle, x.events].map((v) => `"${v}"`).join(',')).join('\n')}\n`);
+  const csv = (rows) => `\uFEFF"game_pk","at_bat_number","game_date","launch_speed","launch_angle","estimated_ba_using_speedangle","events"\n${rows.map((x) => [x.game_pk, x.at_bat_number, x.game_date, x.launch_speed, x.launch_angle, x.estimated_ba_using_speedangle, x.events].map((v) => `"${v}"`).join(',')).join('\n')}\n`;
+  world.savant.set(season, csv(savantRows));
 }
 
 // Test controls: STUB_REQUEST_LOG = file to append requested URLs to;
@@ -141,5 +171,13 @@ globalThis.fetch = (input) => {
     return respond(world.log.get(2026), 'text/html');
   }
   if ((m = url.match(/baseballsavant\.mlb\.com\/statcast_search\/csv\?.*hfSea=(\d{4})/))) return respond(world.savant.get(Number(m[1])) || '', 'text/csv');
+  if ((m = url.match(/baseballsavant\.mlb\.com\/statcast_search\/csv\?(.*)$/)) && /game_date_gt=/.test(m[1])) {
+    // Date-range query (the whole league's batted balls for those dates).
+    const q = new URLSearchParams(m[1]);
+    const gt = q.get('game_date_gt'); const lt = q.get('game_date_lt');
+    const rows = savantAll.filter((r) => r.game_date >= gt && r.game_date <= lt);
+    const csv = `\uFEFF"game_pk","at_bat_number","game_date","launch_speed","launch_angle","estimated_ba_using_speedangle","events"\n${rows.map((x) => [x.game_pk, x.at_bat_number, x.game_date, x.launch_speed, x.launch_angle, x.estimated_ba_using_speedangle, x.events].map((v) => `"${v}"`).join(',')).join('\n')}\n`;
+    return respond(csv, 'text/csv');
+  }
   return Promise.resolve({ ok: false, status: 599, text: async () => `unstubbed ${url}`, json: async () => ({}) });
 };

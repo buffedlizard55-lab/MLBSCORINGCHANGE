@@ -1,0 +1,91 @@
+{
+  "v": 1,
+  "date": "2026-09-14",
+  "savedAt": 1790289196012,
+  "entries": [
+    {
+      "gamePk": 823656,
+      "review": {
+        "id": "scoring-57",
+        "atBatIndex": 57,
+        "inning": 8,
+        "halfInning": "top",
+        "inningLabel": "▲ Top 8th",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "away",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "NYY",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Rescored",
+        "reason": "Single → Field Error",
+        "description": "Cody Bellinger reaches on a fielding error by pitcher A.J. Minter. Ben Rice to 2nd.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "single",
+          "event": "Single",
+          "label": "Single",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "final": {
+          "eventType": "field_error",
+          "event": "Field Error",
+          "label": "Field Error",
+          "category": "error",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-09-24T22:33:16.012Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 641355,
+          "fullName": "Cody Bellinger"
+        },
+        "pitcher": null,
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "official": {
+          "season": 2026,
+          "seq": 252,
+          "date": "2026-09-14",
+          "raw": "252. 9/14 NYY@MIN -- In the top of the 8th, Cody Bellinger now reaches on an error by pitcher A.J. Minter, instead of on a single. As a result, the run scored by Bellinger is now unearned for Minter, instead of earned.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        }
+      },
+      "firstSeen": 1790289195946,
+      "lastSeen": 1790289196012,
+      "matchupLabel": "NYY @ MIN"
+    }
+  ],
+  "order": [
+    "823656:scoring-57"
+  ],
+  "snapshots": {},
+  "irregularities": {},
+  "grace": {},
+  "settled": [],
+  "trimmed": {
+    "entries": 0,
+    "snapshots": 0
+  }
+}
