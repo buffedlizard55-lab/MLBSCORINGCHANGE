@@ -5,7 +5,7 @@
   "url": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://web.archive.org/web/20250121083545id_/https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": "2025-01-21T08:35:45Z",
-  "fetchedAt": "2026-09-24T18:38:55.418Z",
+  "fetchedAt": "2026-09-24T18:46:28.092Z",
   "sha256": "3d9a56c5632dd1c7e33a9fdcc510ca7f724e36abcc6e8c5922fb12c437dac9b2",
   "bytes": 639177
  },
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T18:38:55.418Z",
+ "generatedAt": "2026-09-24T18:46:28.092Z",
  "entries": [
   {
    "seq": 1,
@@ -114,7 +114,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0554,
+    "p": 0.056,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -396,7 +396,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0129,
+    "p": 0.0137,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -492,7 +492,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0127,
+    "p": 0.0135,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -544,7 +544,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0889,
+    "p": 0.0921,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -676,7 +676,7 @@
     "currentEventType": "single",
     "method": "full_name",
     "flags": [
-     "current_ruling_mismatch"
+     "superseded_by:24"
     ],
     "batterId": 665926,
     "currentEvent": "Single",
@@ -688,7 +688,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0139,
+    "p": 0.0146,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -878,7 +878,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0105,
+    "p": 0.0111,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -980,7 +980,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0117,
+    "p": 0.0123,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -1032,7 +1032,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0613,
+    "p": 0.0611,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -1084,7 +1084,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1401,
+    "p": 0.1411,
     "score": 14,
     "kind": "out_of_fold"
    }
@@ -1232,7 +1232,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0938,
+    "p": 0.0942,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -1284,7 +1284,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1914,
+    "p": 0.1924,
     "score": 19,
     "kind": "out_of_fold"
    }
@@ -1370,7 +1370,7 @@
     "currentEventType": "fielders_choice",
     "method": "full_name",
     "flags": [
-     "current_ruling_mismatch"
+     "current_ruling_compatible:fielders_choice"
     ],
     "batterId": 547989,
     "currentEvent": "Fielders Choice",
@@ -1381,7 +1381,10 @@
     "home": "KC"
    },
    "model": {
-    "question": "hitToError"
+    "question": "hitToError",
+    "p": 0.0118,
+    "score": 1,
+    "kind": "out_of_fold"
    }
   },
   {
@@ -1483,7 +1486,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0843,
+    "p": 0.0841,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -1760,7 +1763,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0949,
+    "p": 0.095,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -1944,7 +1947,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0706,
+    "p": 0.0729,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -1996,7 +1999,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0912,
+    "p": 0.0907,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -2048,7 +2051,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0534,
+    "p": 0.0535,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -2288,7 +2291,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0405,
+    "p": 0.0417,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -2384,7 +2387,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1682,
+    "p": 0.1681,
     "score": 17,
     "kind": "out_of_fold"
    }
@@ -2482,8 +2485,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0445,
-    "score": 4,
+    "p": 0.0461,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -2534,7 +2537,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0479,
+    "p": 0.0482,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -2764,7 +2767,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0082,
+    "p": 0.0087,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -2956,7 +2959,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0128,
+    "p": 0.0135,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3008,7 +3011,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0058,
+    "p": 0.0062,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3198,7 +3201,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0829,
+    "p": 0.0831,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -3250,7 +3253,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0537,
+    "p": 0.0538,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -3346,7 +3349,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0352,
+    "p": 0.0365,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3540,7 +3543,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0671,
+    "p": 0.067,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -3636,7 +3639,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0495,
+    "p": 0.0493,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -3690,18 +3693,18 @@
   {
    "seq": 77,
    "raw": "77) 5/20 ARI-LAD -- In the bottom of the 1st inning, Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply, instead of a bunt single to Mantiply.",
-   "date": null,
-   "month": null,
-   "day": null,
-   "away": null,
-   "home": null,
+   "date": "2024-05-20",
+   "month": 5,
+   "day": 20,
+   "away": "ARI",
+   "home": "LAD",
    "suffix": "",
    "gameNumber": null,
-   "body": "5/20 ARI-LAD -- In the bottom of the 1st inning, Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply, instead of a bunt single to Mantiply.",
+   "body": "In the bottom of the 1st inning, Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply, instead of a bunt single to Mantiply.",
    "half": "bottom",
    "inning": 1,
    "issues": [
-    "unparsed_head"
+    "team_separator:-"
    ],
    "section": "2024 Regular Season",
    "sectionIndex": 0,
@@ -3713,22 +3716,34 @@
     "finalHitType": null,
     "rule": "T1",
     "oldPhrase": "a bunt single to Mantiply",
-    "newPhrase": "5/20 ARI-LAD -- In the bottom of the 1st inning, Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply",
+    "newPhrase": "Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply",
     "transition": "hit->error",
     "flags": [
      "hitToError"
     ]
    },
    "link": {
-    "gamePk": null,
-    "atBatIndex": null,
-    "batterName": null,
-    "currentEventType": null,
-    "method": null,
+    "gamePk": 746146,
+    "atBatIndex": 5,
+    "batterName": "Shohei Ohtani",
+    "currentEventType": "field_error",
+    "method": "full_name",
     "flags": [
-     "unknown_team:null",
-     "no_game_found"
-    ]
+     "team_code_via:teamCode:ARI"
+    ],
+    "batterId": 660271,
+    "currentEvent": "Field Error",
+    "currentDescription": "Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply.",
+    "officialDate": "2024-05-20",
+    "gameType": "R",
+    "away": "AZ",
+    "home": "LAD"
+   },
+   "model": {
+    "question": "hitToError",
+    "p": 0.0023,
+    "score": 0,
+    "kind": "out_of_fold"
    }
   },
   {
@@ -3778,7 +3793,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
+    "p": 0.0426,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3830,7 +3845,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0056,
+    "p": 0.006,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4053,7 +4068,7 @@
     "currentEventType": "force_out",
     "method": "full_name",
     "flags": [
-     "current_ruling_mismatch"
+     "current_ruling_compatible:force_out"
     ],
     "batterId": 640492,
     "currentEvent": "Forceout",
@@ -4111,7 +4126,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0515,
+    "p": 0.0514,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4163,7 +4178,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0537,
+    "p": 0.0538,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4267,7 +4282,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0029,
+    "p": 0.0031,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -4319,7 +4334,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0824,
+    "p": 0.0827,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -4747,7 +4762,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0628,
+    "p": 0.0626,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -4799,7 +4814,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0379,
+    "p": 0.0378,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4851,7 +4866,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2353,
+    "p": 0.2361,
     "score": 24,
     "kind": "out_of_fold"
    }
@@ -4903,7 +4918,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0947,
+    "p": 0.0944,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -4955,8 +4970,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1232,
-    "score": 12,
+    "p": 0.1271,
+    "score": 13,
     "kind": "out_of_fold"
    }
   },
@@ -5009,7 +5024,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0073,
+    "p": 0.0077,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5061,7 +5076,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0004,
+    "p": 0.0003,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -5113,7 +5128,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0713,
+    "p": 0.071,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -5290,7 +5305,8 @@
     "currentEventType": "single",
     "method": "full_name",
     "flags": [
-     "team_code_via:teamCode:WAS"
+     "team_code_via:teamCode:WAS",
+     "current_ruling_mismatch"
     ],
     "batterId": 682928,
     "currentEvent": "Single",
@@ -5348,8 +5364,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0645,
-    "score": 6,
+    "p": 0.0668,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -5452,7 +5468,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0688,
+    "p": 0.0713,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -5507,7 +5523,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0113,
+    "p": 0.0119,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5559,7 +5575,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0878,
+    "p": 0.0873,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -5701,7 +5717,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0301,
+    "p": 0.0305,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -5887,7 +5903,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0498,
+    "p": 0.0499,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -6035,7 +6051,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0598,
+    "p": 0.0604,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6223,7 +6239,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0449,
+    "p": 0.0447,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -6413,7 +6429,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0516,
+    "p": 0.0517,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -6599,7 +6615,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0874,
+    "p": 0.0904,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -6651,7 +6667,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0543,
+    "p": 0.0536,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -6826,7 +6842,7 @@
     "currentEventType": "fielders_choice",
     "method": "full_name",
     "flags": [
-     "current_ruling_mismatch"
+     "current_ruling_compatible:fielders_choice"
     ],
     "batterId": 543877,
     "currentEvent": "Fielders Choice",
@@ -6837,7 +6853,10 @@
     "home": "MIN"
    },
    "model": {
-    "question": "hitToError"
+    "question": "hitToError",
+    "p": 0.0053,
+    "score": 1,
+    "kind": "out_of_fold"
    }
   },
   {
@@ -6933,7 +6952,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0674,
+    "p": 0.0684,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -6972,7 +6991,9 @@
     "batterName": "Spencer Steer",
     "currentEventType": "field_error",
     "method": "full_name",
-    "flags": [],
+    "flags": [
+     "current_ruling_mismatch"
+    ],
     "batterId": 668715,
     "currentEvent": "Field Error",
     "currentDescription": "Rays challenged (play at 1st), call on the field was upheld: Spencer Steer reaches on a missed catch error by first baseman Yandy Díaz, assist to third baseman José Caballero.",
@@ -7073,7 +7094,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0925,
+    "p": 0.0926,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -7125,7 +7146,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0526,
+    "p": 0.0527,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -7177,7 +7198,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0074,
+    "p": 0.0079,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -7323,7 +7344,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0081,
+    "p": 0.0087,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -7375,7 +7396,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1024,
+    "p": 0.1025,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -7479,7 +7500,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.086,
+    "p": 0.0863,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -7531,7 +7552,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.047,
+    "p": 0.0484,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -7627,7 +7648,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0392,
+    "p": 0.0395,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -7857,7 +7878,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0068,
+    "p": 0.0072,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8041,8 +8062,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0347,
-    "score": 3,
+    "p": 0.0359,
+    "score": 4,
     "kind": "out_of_fold"
    }
   },
@@ -8093,7 +8114,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0075,
+    "p": 0.008,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8145,7 +8166,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0064,
+    "p": 0.0069,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8197,7 +8218,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0584,
+    "p": 0.0603,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8387,7 +8408,7 @@
     "currentEventType": "force_out",
     "method": "full_name",
     "flags": [
-     "current_ruling_mismatch"
+     "current_ruling_compatible:force_out"
     ],
     "batterId": 600869,
     "currentEvent": "Forceout",
@@ -8445,7 +8466,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0462,
+    "p": 0.0463,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -8587,7 +8608,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0515,
+    "p": 0.0516,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -8641,7 +8662,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0127,
+    "p": 0.0126,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8693,7 +8714,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0562,
+    "p": 0.0564,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8745,7 +8766,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0028,
+    "p": 0.0027,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -8841,7 +8862,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0567,
+    "p": 0.0565,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8893,7 +8914,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0217,
+    "p": 0.0227,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -8935,7 +8956,7 @@
     "currentEventType": "force_out",
     "method": "full_name",
     "flags": [
-     "current_ruling_mismatch"
+     "current_ruling_compatible:force_out"
     ],
     "batterId": 608070,
     "currentEvent": "Forceout",
@@ -9127,7 +9148,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0036,
+    "p": 0.0039,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -9179,7 +9200,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0762,
+    "p": 0.076,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -9409,7 +9430,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0801,
+    "p": 0.0804,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -9461,7 +9482,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0141,
+    "p": 0.0149,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9557,7 +9578,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0909,
+    "p": 0.0918,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -9609,7 +9630,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0075,
+    "p": 0.008,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9661,7 +9682,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0075,
+    "p": 0.0079,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9715,7 +9736,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0037,
+    "p": 0.0038,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -9901,8 +9922,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1948,
-    "score": 19,
+    "p": 0.1953,
+    "score": 20,
     "kind": "out_of_fold"
    }
   },
@@ -9953,7 +9974,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0766,
+    "p": 0.0763,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -10139,7 +10160,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0518,
+    "p": 0.0536,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -10243,7 +10264,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1018,
+    "p": 0.1021,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -10295,7 +10316,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0086,
+    "p": 0.0091,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -10347,7 +10368,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0622,
+    "p": 0.0618,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -10489,7 +10510,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0394,
+    "p": 0.0408,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -10715,7 +10736,7 @@
     "currentEventType": "fielders_choice",
     "method": "full_name",
     "flags": [
-     "current_ruling_mismatch"
+     "current_ruling_compatible:fielders_choice"
     ],
     "batterId": 663743,
     "currentEvent": "Fielders Choice",
@@ -10773,7 +10794,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0474,
+    "p": 0.0476,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -10827,7 +10848,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0132,
+    "p": 0.0134,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -10879,7 +10900,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1561,
+    "p": 0.156,
     "score": 16,
     "kind": "out_of_fold"
    }
@@ -10931,7 +10952,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1411,
+    "p": 0.141,
     "score": 14,
     "kind": "out_of_fold"
    }
@@ -11073,7 +11094,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0723,
+    "p": 0.0748,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -11125,7 +11146,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1196,
+    "p": 0.1195,
     "score": 12,
     "kind": "out_of_fold"
    }

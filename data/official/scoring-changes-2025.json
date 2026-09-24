@@ -5,7 +5,7 @@
   "url": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://web.archive.org/web/20260210034254id_/https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": "2026-02-10T03:42:54Z",
-  "fetchedAt": "2026-09-24T18:38:55.418Z",
+  "fetchedAt": "2026-09-24T18:46:28.092Z",
   "sha256": "3fb1bd59dc9bb5607b7e23198fe176dceca69009af377d18e8bf39a71eb34356",
   "bytes": 853480
  },
@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T18:38:55.418Z",
+ "generatedAt": "2026-09-24T18:46:28.092Z",
  "entries": [
   {
    "seq": 1,
@@ -251,7 +251,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0089,
+    "p": 0.0095,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -303,7 +303,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.069,
+    "p": 0.0715,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -495,7 +495,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.076,
+    "p": 0.0763,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -735,7 +735,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0692,
+    "p": 0.0694,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -787,7 +787,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0882,
+    "p": 0.0883,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -839,7 +839,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0597,
+    "p": 0.0598,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -891,7 +891,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0656,
+    "p": 0.068,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -943,7 +943,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0032,
+    "p": 0.0035,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -1085,7 +1085,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0973,
+    "p": 0.1005,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -1183,7 +1183,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1335,
+    "p": 0.1334,
     "score": 13,
     "kind": "out_of_fold"
    }
@@ -1482,7 +1482,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.078,
+    "p": 0.079,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -1578,7 +1578,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0069,
+    "p": 0.0074,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -1630,7 +1630,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0041,
+    "p": 0.0045,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -1954,7 +1954,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0545,
+    "p": 0.0544,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -2008,7 +2008,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0032,
+    "p": 0.0033,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2048,7 +2048,8 @@
     "currentEventType": "single",
     "method": "fuzzy_last_name",
     "flags": [
-     "name_match:fuzzy_last_name"
+     "name_match:fuzzy_last_name",
+     "current_ruling_mismatch"
     ],
     "batterId": 621035,
     "currentEvent": "Single",
@@ -2139,7 +2140,7 @@
     "currentEventType": "fielders_choice",
     "method": "full_name",
     "flags": [
-     "current_ruling_mismatch"
+     "current_ruling_compatible:fielders_choice"
     ],
     "batterId": 669289,
     "currentEvent": "Fielders Choice",
@@ -2150,7 +2151,10 @@
     "home": "ATL"
    },
    "model": {
-    "question": "hitToError"
+    "question": "hitToError",
+    "p": 0.0075,
+    "score": 1,
+    "kind": "out_of_fold"
    }
   },
   {
@@ -2200,7 +2204,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0264,
+    "p": 0.0265,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -2342,7 +2346,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1221,
+    "p": 0.1222,
     "score": 12,
     "kind": "out_of_fold"
    }
@@ -2440,7 +2444,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0022,
+    "p": 0.0023,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2538,7 +2542,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0078,
+    "p": 0.0083,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -2590,7 +2594,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0044,
+    "p": 0.0048,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2740,7 +2744,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0119,
+    "p": 0.0127,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -2792,7 +2796,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0924,
+    "p": 0.0915,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -2940,7 +2944,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0913,
+    "p": 0.0917,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -2992,7 +2996,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0784,
+    "p": 0.0809,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -3044,7 +3048,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0995,
+    "p": 0.1005,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -3096,7 +3100,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0367,
+    "p": 0.0366,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3192,7 +3196,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0133,
+    "p": 0.0141,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3290,7 +3294,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0137,
+    "p": 0.0144,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3431,7 +3435,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0406,
+    "p": 0.0415,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3576,7 +3580,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.055,
+    "p": 0.0552,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -3674,7 +3678,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0583,
+    "p": 0.0581,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -3726,7 +3730,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0852,
+    "p": 0.088,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -3866,7 +3870,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0422,
+    "p": 0.0436,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4101,7 +4105,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0655,
+    "p": 0.0656,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -4153,7 +4157,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0263,
+    "p": 0.0272,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -4205,7 +4209,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0117,
+    "p": 0.0123,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4303,7 +4307,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0057,
+    "p": 0.0059,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4355,7 +4359,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0799,
+    "p": 0.0826,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -4407,7 +4411,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0536,
+    "p": 0.0534,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4600,7 +4604,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0956,
+    "p": 0.096,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -4652,7 +4656,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.053,
+    "p": 0.0531,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4750,7 +4754,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0063,
+    "p": 0.0067,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4802,7 +4806,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0442,
+    "p": 0.0446,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4854,7 +4858,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0052,
+    "p": 0.0056,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4955,7 +4959,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0112,
+    "p": 0.0114,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4995,7 +4999,7 @@
     "currentEventType": "sac_bunt",
     "method": "full_name",
     "flags": [
-     "current_ruling_mismatch"
+     "current_ruling_compatible:sac_bunt"
     ],
     "batterId": 642851,
     "currentEvent": "Sac Bunt",
@@ -5053,7 +5057,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0691,
+    "p": 0.0716,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -5199,7 +5203,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0072,
+    "p": 0.0076,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5297,7 +5301,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
+    "p": 0.0402,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -5349,7 +5353,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1212,
+    "p": 0.1211,
     "score": 12,
     "kind": "out_of_fold"
    }
@@ -5401,7 +5405,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1055,
+    "p": 0.1053,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -5500,7 +5504,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0051,
+    "p": 0.0055,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5552,7 +5556,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0155,
+    "p": 0.0163,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -5784,7 +5788,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0596,
+    "p": 0.0597,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -5836,7 +5840,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0153,
+    "p": 0.0155,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -5932,7 +5936,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0118,
+    "p": 0.0125,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -6206,7 +6210,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.079,
+    "p": 0.0798,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -6312,8 +6316,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1036,
-    "score": 10,
+    "p": 0.107,
+    "score": 11,
     "kind": "out_of_fold"
    }
   },
@@ -6681,7 +6685,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0612,
+    "p": 0.0632,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6733,7 +6737,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0705,
+    "p": 0.0706,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -6885,7 +6889,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0568,
+    "p": 0.0588,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -7292,7 +7296,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0065,
+    "p": 0.0069,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -7328,14 +7332,27 @@
     ]
    },
    "link": {
-    "gamePk": null,
-    "atBatIndex": null,
-    "batterName": null,
-    "currentEventType": null,
-    "method": null,
+    "gamePk": 776788,
+    "atBatIndex": 60,
+    "batterName": "Teoscar Hernández",
+    "currentEventType": "field_error",
+    "method": "full_name",
     "flags": [
-     "no_game_found"
-    ]
+     "team_code_corrected:LAA->LAD"
+    ],
+    "batterId": 606192,
+    "currentEvent": "Field Error",
+    "currentDescription": "Teoscar Hernández reaches on a fielding error by second baseman Ernie Clement.",
+    "officialDate": "2025-08-10",
+    "gameType": "R",
+    "away": "TOR",
+    "home": "LAD"
+   },
+   "model": {
+    "question": "hitToError",
+    "p": 0.0049,
+    "score": 0,
+    "kind": "out_of_fold"
    }
   },
   {
@@ -7524,7 +7541,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0103,
+    "p": 0.011,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -7576,26 +7593,26 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0633,
-    "score": 6,
+    "p": 0.0654,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
   {
    "seq": 157,
    "raw": "157) 8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single, instead of an error by third baseman Matt Chapman.",
-   "date": null,
-   "month": null,
-   "day": null,
-   "away": null,
-   "home": null,
+   "date": "2025-08-11",
+   "month": 8,
+   "day": 11,
+   "away": "SD",
+   "home": "SF",
    "suffix": "",
    "gameNumber": null,
-   "body": "8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single, instead of an error by third baseman Matt Chapman.",
+   "body": "In the top of the 8th inning, Xander Bogaerts now reaches on a single, instead of an error by third baseman Matt Chapman.",
    "half": "top",
    "inning": 8,
    "issues": [
-    "unparsed_head"
+    "team_separator:at"
    ],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
@@ -7607,22 +7624,32 @@
     "finalHitType": "single",
     "rule": "T1",
     "oldPhrase": "an error by third baseman Matt Chapman",
-    "newPhrase": "8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single",
+    "newPhrase": "Xander Bogaerts now reaches on a single",
     "transition": "error->hit",
     "flags": [
      "errorToHit"
     ]
    },
    "link": {
-    "gamePk": null,
-    "atBatIndex": null,
-    "batterName": null,
-    "currentEventType": null,
-    "method": null,
-    "flags": [
-     "unknown_team:null",
-     "no_game_found"
-    ]
+    "gamePk": 776780,
+    "atBatIndex": 58,
+    "batterName": "Xander Bogaerts",
+    "currentEventType": "single",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 593428,
+    "currentEvent": "Single",
+    "currentDescription": "Xander Bogaerts singles on a sharp ground ball to third baseman Matt Chapman.",
+    "officialDate": "2025-08-11",
+    "gameType": "R",
+    "away": "SD",
+    "home": "SF"
+   },
+   "model": {
+    "question": "errorToHit",
+    "p": 0.0899,
+    "score": 9,
+    "kind": "out_of_fold"
    }
   },
   {
@@ -7849,7 +7876,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0377,
+    "p": 0.0381,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -7945,7 +7972,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.038,
+    "p": 0.0378,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8041,7 +8068,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0065,
+    "p": 0.0069,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8093,7 +8120,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0617,
+    "p": 0.0627,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8189,7 +8216,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0486,
+    "p": 0.0491,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -8425,7 +8452,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0109,
+    "p": 0.0115,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8521,7 +8548,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0538,
+    "p": 0.0539,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -8769,7 +8796,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0828,
+    "p": 0.083,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -8821,7 +8848,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0822,
+    "p": 0.0825,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -8873,7 +8900,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1228,
+    "p": 0.1226,
     "score": 12,
     "kind": "out_of_fold"
    }
@@ -9149,7 +9176,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2707,
+    "p": 0.2709,
     "score": 27,
     "kind": "out_of_fold"
    }
@@ -9245,7 +9272,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0552,
+    "p": 0.057,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -9387,7 +9414,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0136,
+    "p": 0.0138,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9439,7 +9466,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0084,
+    "p": 0.009,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9579,7 +9606,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0141,
+    "p": 0.0147,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9685,7 +9712,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0626,
+    "p": 0.0647,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -9737,7 +9764,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.014,
+    "p": 0.0146,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9833,7 +9860,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0767,
+    "p": 0.0794,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -9929,7 +9956,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0885,
+    "p": 0.0883,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -9981,7 +10008,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0108,
+    "p": 0.0115,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -10033,7 +10060,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0034,
+    "p": 0.0037,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -10229,8 +10256,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1234,
-    "score": 12,
+    "p": 0.1275,
+    "score": 13,
     "kind": "out_of_fold"
    }
   }
