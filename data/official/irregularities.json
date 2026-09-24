@@ -1,0 +1,573 @@
+{
+ "generatedAt": "2026-09-24T18:29:41.831Z",
+ "count": 56,
+ "items": [
+  {
+   "season": 2024,
+   "seq": 14,
+   "raw": "14) 4/3 CLE@SEA -- In the top of the 4th inning, Andres Gimenez reaches on an error by shortstop J.P Crawford, instead of an infield single. As a result, two of the runs in the inning are now unearned to George Kirby.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "hit->error"
+  },
+  {
+   "season": 2024,
+   "seq": 17,
+   "raw": "17) 4/6 HOU@TEX -- Jose Leclerc has been awarded a save.",
+   "parseIssues": [
+    "missing_inning"
+   ],
+   "linkFlags": [
+    "batter_not_found"
+   ],
+   "classification": "pitching_decision"
+  },
+  {
+   "season": 2024,
+   "seq": 19,
+   "raw": "19) 4/7 CWS@KC -- In the top of the 8th inning, the obstruction error charged to Salvador Perez has been changed to a throwing error charged to Will Smith.",
+   "parseIssues": [],
+   "linkFlags": [
+    "inning_mismatch",
+    "ambiguous_plate_appearance",
+    "current_ruling_mismatch"
+   ],
+   "classification": "error->error"
+  },
+  {
+   "season": 2024,
+   "seq": 28,
+   "raw": "28) 4/9 HOU@KC -- In the top of the 7th inning, Jose Abreu now reaches on an error by shortstop Bobby Witt Jr., instead of on a single.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "hit->error"
+  },
+  {
+   "season": 2024,
+   "seq": 36,
+   "raw": "36) 4/17 PHI@COL -- In the top of the 1st inning, Brenton Doyle now has a single instead of an error charged to Alec Boehm. As a result, 1 run in the inning is now earned against Christopher Sanchez.",
+   "parseIssues": [],
+   "linkFlags": [
+    "teams_swapped"
+   ],
+   "classification": "error->hit"
+  },
+  {
+   "season": 2024,
+   "seq": 48,
+   "raw": "48) 4/24 NYM@SF -- In the top of the 4th inning, Harrison Bader reaches on an infield single to third base Matt Chapman and advances to second on a throwing error by Chapman. It was originally a two-base throwing error.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 59,
+   "raw": "59) 4/30 WSH@TEX -- In the bottom of the 7th inning, Nathaniel Lowe's single has been changed to a fielder's choice.",
+   "parseIssues": [],
+   "linkFlags": [
+    "batter_not_found"
+   ],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 60,
+   "raw": "60) 5/5 SF@PHI -- In the top of the 4th inning, Bryce Harper is now credited with a single, instead of reaching on an error by left fielder Michael Conforto.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "error->hit"
+  },
+  {
+   "season": 2024,
+   "seq": 71,
+   "raw": "71) 5/16 NYM@PHI -- In the top of the 8th inning, a throwing error has been charged to Brandon Marsh for allowing Pete Alonso to advance to 3rd base following Harrison Bader's single.",
+   "parseIssues": [],
+   "linkFlags": [
+    "name_match:fuzzy_last_name"
+   ],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 76,
+   "raw": "76) 5/20 SD@ATL2 -- In the top of the 8th inning, during Jake Cronenworth's at-bat, Luis Arraez stole 3rd base between the 5th and 6th pitches.",
+   "parseIssues": [],
+   "linkFlags": [
+    "name_match:fuzzy_last_name"
+   ],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 81,
+   "raw": "81) 5/21 SD@CIN -- In the bottom of the 6th inning, Jacob Hurtubise is now credited with a sacrifice fly, scoring Jonathan India, instead of India scoring on an error by catcher Luis Campusano. As a result, the run scored by India is now earned to Joe Musgrove.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "error->sac"
+  },
+  {
+   "season": 2024,
+   "seq": 91,
+   "raw": "91) 6/1 ATL@OAK -- In the top of the 6th inning, Brent Rooker now has a triple instead of a double+advance to 3rd base on the throw.",
+   "parseIssues": [],
+   "linkFlags": [
+    "teams_swapped"
+   ],
+   "classification": "hit->hit"
+  },
+  {
+   "season": 2024,
+   "seq": 106,
+   "raw": "106) 6/23 BOS@CIN -- The winning pitcher is Brennan Bernardino, not Greg Weissert.",
+   "parseIssues": [
+    "missing_inning"
+   ],
+   "linkFlags": [
+    "batter_not_found"
+   ],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 107,
+   "raw": "107) 6/24 WAS@SD -- In the bottom of the 2nd inning, the sacrifice has been removed for Bryce Johnson.",
+   "parseIssues": [],
+   "linkFlags": [
+    "team_code_via:teamCode:WAS"
+   ],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 108,
+   "raw": "108) 6/21 BOS@CIN -- In the bottom of the 7th inning, TJ Friedel is now credited with a single. The play had been scored a sacrifice and an error on pitcher Cam Booser. The error stands for allowing additional advances on the play.",
+   "parseIssues": [],
+   "linkFlags": [
+    "name_match:fuzzy_last_name"
+   ],
+   "classification": "sac+error->hit"
+  },
+  {
+   "season": 2024,
+   "seq": 124,
+   "raw": "124) 6/30 MIA@PHI -- In the top of the 3rd inning, Jazz Chisolm Jr now has a single instead of an error charged to Ranger Suarez.",
+   "parseIssues": [],
+   "linkFlags": [
+    "name_match:fuzzy_last_name"
+   ],
+   "classification": "error->hit"
+  },
+  {
+   "season": 2024,
+   "seq": 135,
+   "raw": "135) 7/14 TOR@AZ -- In the bottom of the 8th inning, the sacrifice has been removed for Geraldo Perdomo.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 141,
+   "raw": "141) 7/21 MIL@MIN -- In the bottom of the 2nd inning, Christian Vazquez now reaches on a force out error instead of a single plus error. As a result, 2 run in the inning are changed to unearned against Aaron Civale.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "hit+error->error"
+  },
+  {
+   "season": 2024,
+   "seq": 142,
+   "raw": "142) 7/25 BAL@MIA -- In the bottom of the 8th inning, there is no sacrifice bunt for Jazz Chisholm Jr.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 149,
+   "raw": "149) 7/25 OAK@LAA -- In the top of the 1st inning, Lawrence Butler steals third base and scores on a missed catch error by third baseman Anthony Rendon, instead of stealing third and scoring on a throwing error by the catcher Logan O'Hoppe.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "error->error"
+  },
+  {
+   "season": 2024,
+   "seq": 159,
+   "raw": "159) 8/3 CWS@MIN -- In the bottom of the 5th inning, Brooks Lee is now credited with a steal of second and advance to third on a throwing error by pitcher Touki Toussaint, instead of a caught stealing.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "other->error"
+  },
+  {
+   "season": 2024,
+   "seq": 160,
+   "raw": "160) 8/9 DET@SF -- In the top of the 2nd inning, a throwing error has been added to left fielder Michael Conforto to allow Wenceel Pérez to reach 2nd base.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 170,
+   "raw": "170) 8/14 WAS@BAL -- In the bottom of the 5th, Austin Slater's double play is now catcher Keibert Ruiz to second baseman Luis García Jr. to first baseman Andrés Chaparro. Originally it was just Ruiz to Garcia Jr.",
+   "parseIssues": [],
+   "linkFlags": [
+    "team_code_via:teamCode:WAS",
+    "name_match:fuzzy_last_name"
+   ],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 171,
+   "raw": "171) 8/12 ATL@SF -- In the bottom of the 1st inning, the error charged to center fielder Ramon Laureano has been changed to a double for Tyler Fitzgerald.",
+   "parseIssues": [],
+   "linkFlags": [
+    "subject_not_first_mention"
+   ],
+   "classification": "error->hit"
+  },
+  {
+   "season": 2024,
+   "seq": 172,
+   "raw": "172) 8/15 ATL@SF -- In the top of the 4th inning, the dropped catch error charged to second baseman Casey Schmitt has been changed to a throwing error charged to third baseman Matt Chapman. Chapman also loses an assist on the play.",
+   "parseIssues": [],
+   "linkFlags": [
+    "name_match:fuzzy_last_name",
+    "current_ruling_mismatch"
+   ],
+   "classification": "error->error"
+  },
+  {
+   "season": 2024,
+   "seq": 173,
+   "raw": "173) 8/16 KC@CIN -- In the bottom of the 2nd inning, Jeimer Candelario reaches on a missed catch error by pitcher Michael Lorenzen, with an assist to shortstop Bobby Witt Jr., instead of reaching on a fielder's choice.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "fc->error"
+  },
+  {
+   "season": 2024,
+   "seq": 184,
+   "raw": "184) 8/23 TEX@CLE -- In the bottom of the 3rd inning, Jose Ramirez grounds into a force out and then reaches 2nd base on a missed catch error by pitcher Nathan Eovaldi, instead of on a throwing error by shortstop Corey Seager.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "error->error"
+  },
+  {
+   "season": 2024,
+   "seq": 185,
+   "raw": "185) 8/26 KC@CLE -- In the bottom of the 1st inning, Jose Ramirez advances to 2nd base on a pickoff error by first baseman Vinnie Pasquantino, instead of Ramirez being charged a caught stealing and pitcher Cole Ragans being credited with an assist.",
+   "parseIssues": [],
+   "linkFlags": [
+    "ambiguous_plate_appearance",
+    "current_ruling_mismatch"
+   ],
+   "classification": "other->error"
+  },
+  {
+   "season": 2024,
+   "seq": 190,
+   "raw": "190) 8/29 ATL@PHI -- In the top of the 5th inning, Whit Merrifield is now credited with a SAC bunt.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 192,
+   "raw": "192) 8/31 STL@NYY -- In the bottom of the 8th inning, Juan Soto is now charged with grounding into a double play.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2024,
+   "seq": 221,
+   "raw": "221) 9/22 ATL@MIA -- In the bottom of the 7th inning, play at 3rd base during the Nick Fortes plate appearance is now a missed catch error charged to Gio Urshela with an assist to Aaron Bummer. The original ruling was the runner safe on a fielder's choice. As a result, Fortes no longer has a SAC bunt and is charged a turn at bat.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "fc->error"
+  },
+  {
+   "season": 2025,
+   "seq": 11,
+   "raw": "11) LAA@HOU -- In the bottom of the 6th inning, with Jeremy Pena batting, the passed ball charged to Logan O'Hoppe has been changed to a wild pitch charged to Michael Darrell-Hicks.",
+   "parseIssues": [
+    "missing_date"
+   ],
+   "linkFlags": [
+    "date_inferred",
+    "name_match:fuzzy_last_name",
+    "subject_not_first_mention",
+    "ambiguous_plate_appearance"
+   ],
+   "classification": "wild_pitch_passed_ball"
+  },
+  {
+   "season": 2025,
+   "seq": 12,
+   "raw": "12) 4/8 BAL@ARI -- In the top of the 7th inning, the final out of the inning goes catcher Gabriel Moreno to third baseman Eugenio Suarez to second baseman Garrett Hampson, instead of Moreno to Suarez.",
+   "parseIssues": [],
+   "linkFlags": [
+    "team_code_via:teamCode:ARI",
+    "inning_mismatch",
+    "ambiguous_plate_appearance"
+   ],
+   "classification": "other->out"
+  },
+  {
+   "season": 2025,
+   "seq": 27,
+   "raw": "27) 4/20 NYY@TB -- In the bottom of the 9th inning, Jose Caballero reached on a 2-base error, instead of a single and just advancing to second base on the error. This makes the run later scored by Caballero now unearned to Devin Williams .",
+   "parseIssues": [],
+   "linkFlags": [
+    "inning_mismatch",
+    "ambiguous_plate_appearance",
+    "current_ruling_mismatch"
+   ],
+   "classification": "hit+error->error"
+  },
+  {
+   "season": 2025,
+   "seq": 28,
+   "raw": "28) 4/21 MIL@SF -- In the bottom of the 5th inning, the throwing error charged to Brice Turang has been changed to a missed catcher error charged to Rhys Hoskins.",
+   "parseIssues": [],
+   "linkFlags": [
+    "inning_mismatch",
+    "ambiguous_plate_appearance",
+    "current_ruling_mismatch"
+   ],
+   "classification": "error->error"
+  },
+  {
+   "season": 2025,
+   "seq": 38,
+   "raw": "38) 5/4 CLE@TOR -- In the bottom of the 9th inning, an additional error has been charged to pitcher Emmanuel Clase for the throw allowing Andres Gimenez to advance to 2nd base. Gimenez still reaches on an error by Clase, who now has two on the play.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2025,
+   "seq": 40,
+   "raw": "40) 5/5 NYM@ARI -- In the top of the 9th inning, Alek Thomas reaches on an infield single to first baseman Pete Alonso, instead of a throwing error on Alonso.",
+   "parseIssues": [],
+   "linkFlags": [
+    "team_code_via:teamCode:ARI",
+    "inning_mismatch",
+    "subject_not_first_mention"
+   ],
+   "classification": "error->hit"
+  },
+  {
+   "season": 2025,
+   "seq": 42,
+   "raw": "42) 5/9 LAD@AZ -- In the top of the 3rd inning, the error charged to first baseman Josh Naylor has been changed to an assumed out at home plate. As a result, Outman loses an RBI and the runs scored by Enrique Hernandez and Miguel Rojas have been changed to unearned against Eduardo Rodriguez.",
+   "parseIssues": [],
+   "linkFlags": [
+    "name_match:fuzzy_last_name"
+   ],
+   "classification": "error->out"
+  },
+  {
+   "season": 2025,
+   "seq": 44,
+   "raw": "44) 5/8 CIN@ATL -- In the top of the 5th inning, the single for Santiago Espinal has been changed to a force-out error charged to Austin Riley. As a result, the run scoring that inning is now unearned against Spencer Schwellenbach.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "hit->error"
+  },
+  {
+   "season": 2025,
+   "seq": 64,
+   "raw": "64) 5/30 DET@KC -- In the top of the 4th inning, Zach McKinstry advances to second base on a caught stealing error by second baseman Jonathan India with an assist to catcher Salvador Perez, instead of a stolen base.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "other->error"
+  },
+  {
+   "season": 2025,
+   "seq": 82,
+   "raw": "82) 6/14 COL@ATL -- In the bottom of the 6th inning. there are now 2 errors charged to Chase Dollander, one allowing Drake Baldwin to reach 1st and another to account for subsequent advancements. The play was originally a two-base error charged to Dollander.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2025,
+   "seq": 100,
+   "raw": "100) 6/24 ATH@DET -- In the bottom of the 7th inning, both runs scored on a missed catch error by catcher Austin Wynns, assist to left fielder Tyler Soderstrom, instead of a throwing error by Soderstrom. As a result, both runs charged to Hogan Harris become unearned instead of just one run, and Zach McKinstry loses an RBI.",
+   "parseIssues": [],
+   "linkFlags": [
+    "name_match:fuzzy_last_name",
+    "current_ruling_mismatch"
+   ],
+   "classification": "error->error"
+  },
+  {
+   "season": 2025,
+   "seq": 102,
+   "raw": "102) 6/20 CLE @ ATH -- In the bottom of the 2nd inning, Austin Wynns reached on a fielder's choice sac bunt, instead of reaching on a fielder's choice error by third baseman Jose Ramirez. As a result, the run in the inning is now earned to Tanner Bibee.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "fc+error->fc"
+  },
+  {
+   "season": 2025,
+   "seq": 111,
+   "raw": "111) 7/7 MIA@CIN -- In the top of the 6th inning, during Derek Hill's at-bat, the fielders choice throwing error by third baseman Noelvi Marte is now an assumed out at home plate, instead of an assumed out at second base. As a result, the run scored by Eric Wagaman is now unearned for pitcher Lyon Richardson, instead of earned. Hill also no longer is credited with a run batted in on the play.",
+   "parseIssues": [],
+   "linkFlags": [
+    "name_match:last_name",
+    "subject_not_first_mention"
+   ],
+   "classification": "out->fc+error"
+  },
+  {
+   "season": 2025,
+   "seq": 114,
+   "raw": "114) 7/11 MIA@BAL -- In the top of the 3rd inning, the sacrifice has been removed for Xavier Edwards.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2025,
+   "seq": 124,
+   "raw": "124) 7/19 BAL@TB -- In the bottom of the 8th inning, the run scored by Chandler Simpson has been changed from earned to unearned for pitcher Seranthony Dominguez as the fielders choice error by first baseman Ryan O' Hearn is now assumed to go to home plate instead of second base.",
+   "parseIssues": [],
+   "linkFlags": [
+    "current_ruling_mismatch"
+   ],
+   "classification": "other->fc+error"
+  },
+  {
+   "season": 2025,
+   "seq": 136,
+   "raw": "136) CHC@CWS -- In the top of the 8th inning, on the rundown during Matt SHaw's at-bat, assists have been added for Edgar Quero, Miguel Vargas, Lenyn Sosa, and Mike Vasil. Additionally, the run has been changed to unearned against Vasil.",
+   "parseIssues": [
+    "missing_date"
+   ],
+   "linkFlags": [
+    "date_inferred",
+    "inning_mismatch",
+    "ambiguous_plate_appearance"
+   ],
+   "classification": "fielding_credit"
+  },
+  {
+   "season": 2025,
+   "seq": 139,
+   "raw": "139) 7/29 TEX@LAA -- The winning pitcher is now Brock Burke, instead of Reid Detmers.",
+   "parseIssues": [
+    "missing_inning"
+   ],
+   "linkFlags": [
+    "batter_not_found"
+   ],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2025,
+   "seq": 140,
+   "raw": "140) 7/28 PHI@CWS -- In the bottom of the 8th inning, Seth Johnson is now credited with an error instead of Bryce Harper on Colson Montgomery's single.",
+   "parseIssues": [],
+   "linkFlags": [
+    "name_match:fuzzy_last_name",
+    "current_ruling_mismatch"
+   ],
+   "classification": "hit->error"
+  },
+  {
+   "season": 2025,
+   "seq": 151,
+   "raw": "151) 8/10 TOR@LAA -- In the bottom of the 7th inning, the single for Teoscar Hernandez has been changed to an error charged to Ernie Clement.",
+   "parseIssues": [],
+   "linkFlags": [
+    "no_game_found"
+   ],
+   "classification": "hit->error"
+  },
+  {
+   "season": 2025,
+   "seq": 153,
+   "raw": "153) 8/11 COL@STL -- In the top of the 3rd inning, the throwing error charged to Nolan Gorman has been changed to a dropped catch error charged to Willson Contreras. Gorman now has an assist on the play.",
+   "parseIssues": [],
+   "linkFlags": [
+    "inning_mismatch",
+    "ambiguous_plate_appearance",
+    "current_ruling_mismatch"
+   ],
+   "classification": "error->error"
+  },
+  {
+   "season": 2025,
+   "seq": 163,
+   "raw": "163) 8/20 MIL@CHC -- In the top of the 6th inning, Anthony Seigler now has a sacrifice bunt.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2025,
+   "seq": 175,
+   "raw": "175) 7/30 TB@NYY -- In the bottom of the 9th inning, the sacrifice bunt for Trent Grisham has been rescinded and the play is now ruled a reverse-ground-double-play.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2025,
+   "seq": 187,
+   "raw": "187) 9/8 WSH@MIA -- In the top of the 4th inning, Dylan Crews is now credited with a double. He has been credited with a single, advancing to 2nd base on the throw.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  },
+  {
+   "season": 2025,
+   "seq": 200,
+   "raw": "200) 9/16 ATL@WSH -- In the bottom of the 1st inning, the error charged to Vidal Brujan has been changed to a single for CJ Abrams.",
+   "parseIssues": [],
+   "linkFlags": [
+    "subject_not_first_mention"
+   ],
+   "classification": "error->hit"
+  },
+  {
+   "season": 2025,
+   "seq": 202,
+   "raw": "202) 9/16 SEA @ KC -- In the bottom of the 3rd inning, Vinnie Pasquantino reached on what was ruled a fielder's choice and an error. This has been changed to a base hit, removing the error for Jorge Polanco.",
+   "parseIssues": [],
+   "linkFlags": [],
+   "classification": "unclassified"
+  }
+ ]
+}
