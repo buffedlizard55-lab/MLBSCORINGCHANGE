@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-09-24T19:33:03.185Z",
+ "generatedAt": "2026-09-24T20:00:24.134Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -16295,6 +16295,42 @@
      0
     ]
    }
+  },
+  "calibration": {
+   "status": "collecting",
+   "active": false,
+   "resolved": 0,
+   "a": 5,
+   "minResolved": 10,
+   "observed": {
+    "hit": 0,
+    "error": 0,
+    "fc": 0,
+    "out": 0,
+    "sac": 0,
+    "other": 0
+   },
+   "expected": {
+    "hit": 0,
+    "error": 0,
+    "fc": 0,
+    "out": 0,
+    "sac": 0,
+    "other": 0
+   },
+   "weights": {
+    "hit": 1,
+    "error": 1,
+    "fc": 1,
+    "out": 1,
+    "sac": 1,
+    "other": 1
+   },
+   "metrics": {
+    "raw": null,
+    "calibratedLeaveOneOut": null
+   },
+   "rule": "w = (observed + a) / (expected + a) per outcome; used only with ≥ minResolved resolved rulings and a lower leave-one-out log loss than the uncalibrated distribution"
   }
  },
  "errorToHit": {
@@ -16325,6 +16361,18 @@
    0.049743,
    0.498495
   ],
+  "termMeans": {
+   "logit_hit_prob": -1.57469,
+   "loc:P": 0.07391,
+   "loc:C": 0.00821,
+   "loc:1B": 0.12224,
+   "loc:3B": 0.30417,
+   "loc:OF": 0.06886,
+   "traj:line_drive": 0.03506,
+   "traj:fly_ball": 0.04801,
+   "traj:popup": 0.02148,
+   "traj:bunt": 0.0079
+  },
   "baseRate": 0.06064,
   "n": 3166,
   "positives": 192,
@@ -17043,6 +17091,202 @@
     "pairedSE": 0.001555,
     "auc": 0.6123,
     "brier": 0.05638
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "scorer:427131",
+     "scorer:427508",
+     "scorer:431022",
+     "scorer:431036",
+     "scorer:431038",
+     "scorer:431054",
+     "scorer:431058",
+     "scorer:431070",
+     "scorer:431080",
+     "scorer:431081",
+     "scorer:431083",
+     "scorer:431088",
+     "scorer:433298",
+     "scorer:434138",
+     "scorer:482386",
+     "scorer:482388",
+     "scorer:482394",
+     "scorer:493726",
+     "scorer:496999",
+     "scorer:501169",
+     "scorer:504025",
+     "scorer:511136",
+     "scorer:511409",
+     "scorer:607890",
+     "scorer:640277",
+     "scorer:663079",
+     "scorer:699537",
+     "scorer:800935"
+    ],
+    "lambda": 0.3,
+    "logLoss": 0.22531,
+    "foldSE": 0.00914,
+    "deltaVsBest": 0.003612,
+    "pairedSE": 0.001974,
+    "auc": 0.5978,
+    "brier": 0.05541
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "scorer:427131",
+     "scorer:427508",
+     "scorer:431022",
+     "scorer:431036",
+     "scorer:431038",
+     "scorer:431054",
+     "scorer:431058",
+     "scorer:431070",
+     "scorer:431080",
+     "scorer:431081",
+     "scorer:431083",
+     "scorer:431088",
+     "scorer:433298",
+     "scorer:434138",
+     "scorer:482386",
+     "scorer:482388",
+     "scorer:482394",
+     "scorer:493726",
+     "scorer:496999",
+     "scorer:501169",
+     "scorer:504025",
+     "scorer:511136",
+     "scorer:511409",
+     "scorer:607890",
+     "scorer:640277",
+     "scorer:663079",
+     "scorer:699537",
+     "scorer:800935"
+    ],
+    "lambda": 1,
+    "logLoss": 0.22334,
+    "foldSE": 0.00892,
+    "deltaVsBest": 0.001639,
+    "pairedSE": 0.001199,
+    "auc": 0.607,
+    "brier": 0.05579
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "scorer:427131",
+     "scorer:427508",
+     "scorer:431022",
+     "scorer:431036",
+     "scorer:431038",
+     "scorer:431054",
+     "scorer:431058",
+     "scorer:431070",
+     "scorer:431080",
+     "scorer:431081",
+     "scorer:431083",
+     "scorer:431088",
+     "scorer:433298",
+     "scorer:434138",
+     "scorer:482386",
+     "scorer:482388",
+     "scorer:482394",
+     "scorer:493726",
+     "scorer:496999",
+     "scorer:501169",
+     "scorer:504025",
+     "scorer:511136",
+     "scorer:511409",
+     "scorer:607890",
+     "scorer:640277",
+     "scorer:663079",
+     "scorer:699537",
+     "scorer:800935"
+    ],
+    "lambda": 3,
+    "logLoss": 0.22303,
+    "foldSE": 0.00881,
+    "deltaVsBest": 0.001332,
+    "pairedSE": 0.001088,
+    "auc": 0.6183,
+    "brier": 0.05611
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "scorer:427131",
+     "scorer:427508",
+     "scorer:431022",
+     "scorer:431036",
+     "scorer:431038",
+     "scorer:431054",
+     "scorer:431058",
+     "scorer:431070",
+     "scorer:431080",
+     "scorer:431081",
+     "scorer:431083",
+     "scorer:431088",
+     "scorer:433298",
+     "scorer:434138",
+     "scorer:482386",
+     "scorer:482388",
+     "scorer:482394",
+     "scorer:493726",
+     "scorer:496999",
+     "scorer:501169",
+     "scorer:504025",
+     "scorer:511136",
+     "scorer:511409",
+     "scorer:607890",
+     "scorer:640277",
+     "scorer:663079",
+     "scorer:699537",
+     "scorer:800935"
+    ],
+    "lambda": 10,
+    "logLoss": 0.22364,
+    "foldSE": 0.00889,
+    "deltaVsBest": 0.001935,
+    "pairedSE": 0.001473,
+    "auc": 0.6177,
+    "brier": 0.0563
    }
   ],
   "outOfTime": {
@@ -17107,6 +17351,7 @@
     }
    ]
   },
+  "selectedSetIndex": 4,
   "rates": {
    "byHitProbability": [
     {
@@ -17463,7 +17708,64 @@
     "label": "Low",
     "tone": "none"
    }
-  ]
+  ],
+  "errorKind": {
+   "stoodByKind": {
+    "fielding": 1810,
+    "throwing": 1004,
+    "missed_catch": 149,
+    "unknown": 2,
+    "shift_violation": 2
+   },
+   "changedToHitLogWording": {
+    "unspecified": 120,
+    "fielding": 28,
+    "throwing": 22,
+    "no_clause": 16,
+    "missed_catch": 6
+   },
+   "impliedRelativeRate": {
+    "fielding": {
+     "shareOfChangedWithStatedType": 0.5,
+     "shareOfErrorsThatStood": 0.611,
+     "ratio": 0.82,
+     "changedStated": 28
+    },
+    "throwing": {
+     "shareOfChangedWithStatedType": 0.393,
+     "shareOfErrorsThatStood": 0.339,
+     "ratio": 1.16,
+     "changedStated": 22
+    },
+    "missed_catch": {
+     "shareOfChangedWithStatedType": 0.107,
+     "shareOfErrorsThatStood": 0.05,
+     "ratio": 2.13,
+     "changedStated": 6
+    }
+   },
+   "note": "Early evidence only: the original error type of a play changed to a hit is not in StatsAPI any more (verified), and the official log names it for only part of the changes. The ratio compares the share of each type among changes whose log wording states it with the share among errors that stood — it assumes the wording does not depend on the type. Not used in scores; the live capture measures it properly."
+  },
+  "adjust": {
+   "question": "Adjustment to the error → hit model learned from rulings captured live before any change (error type included)",
+   "status": "collecting",
+   "active": false,
+   "n": 0,
+   "positives": 0,
+   "gates": {
+    "minChangedShift": 8,
+    "minChangedKind": 15,
+    "minPlaysKind": 150
+   },
+   "byKind": [],
+   "terms": [],
+   "intercept": 0,
+   "coef": [],
+   "termMeans": {
+    "kind:throwing": 0,
+    "kind:missed_catch": 0
+   }
+  }
  },
  "hitToError": {
   "question": "P(play scored as a hit, not a home run, is officially changed to an error)",
@@ -17485,6 +17787,14 @@
    -0.546539,
    -1.006561
   ],
+  "termMeans": {
+   "logit_hit_prob": 0.42817,
+   "infield": 0.1375,
+   "traj:line_drive": 0.52371,
+   "traj:fly_ball": 0.0938,
+   "traj:popup": 0.0036,
+   "traj:bunt": 0.01162
+  },
   "baseRate": 0.00119,
   "n": 100969,
   "positives": 120,
@@ -17751,6 +18061,7 @@
     }
    ]
   },
+  "selectedSetIndex": 3,
   "rates": {
    "byHitProbability": [
     {
@@ -17978,8 +18289,1161 @@
   {
    "name": "Baseball Savant Statcast search (cross-check)",
    "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details"
+  },
+  {
+   "name": "MLB Stats API game feed (official scorer, venue)",
+   "url": "https://statsapi.mlb.com/api/v1.1/game/{gamePk}/feed/live?fields=gameData,officialScorer,id,fullName,venue,name"
+  },
+  {
+   "name": "Live ruling capture (this project, from MLB Stats API playByPlay)",
+   "url": "data/capture/"
   }
  ],
+ "effects": {
+  "errorToHit": {
+   "question": "errorToHit",
+   "seasons": [
+    2024,
+    2025,
+    2026
+   ],
+   "baseModelTerms": [
+    "logit_hit_prob",
+    "loc:P",
+    "loc:C",
+    "loc:1B",
+    "loc:3B",
+    "loc:OF",
+    "traj:line_drive",
+    "traj:fly_ball",
+    "traj:popup",
+    "traj:bunt"
+   ],
+   "method": "permutation test (group labels shuffled across plays) of Σ (observed − expected)² / variance, expected from out-of-fold model probabilities; plus a cross-validated candidate model with one term per group (≥ 40 plays)",
+   "scorer": {
+    "playsWithScorer": 3166,
+    "test": {
+     "groups": 101,
+     "plays": 3166,
+     "positives": 192,
+     "statistic": 106.317,
+     "dispersion": 1.053,
+     "pValue": 0.3023,
+     "permutations": 2000,
+     "seed": 20260924
+    },
+    "cv": {
+     "tested": true,
+     "groupsInCandidate": 28,
+     "logLoss": 0.22303,
+     "deltaVsBest": 0.001332,
+     "pairedSE": 0.001088,
+     "selected": false
+    },
+    "verdict": "no detectable difference — not used",
+    "table": [
+     {
+      "key": "431054",
+      "label": "Ed Munson",
+      "n": 91,
+      "observed": 6,
+      "expected": 6.2,
+      "ratio": 0.968,
+      "shrunkRatio": 0.988
+     },
+     {
+      "key": "640277",
+      "label": "Bill Seiple",
+      "n": 72,
+      "observed": 1,
+      "expected": 4,
+      "ratio": 0.25,
+      "shrunkRatio": 0.786
+     },
+     {
+      "key": "431058",
+      "label": "Tim O'Driscoll",
+      "n": 60,
+      "observed": 6,
+      "expected": 3.8,
+      "ratio": 1.578,
+      "shrunkRatio": 1.159
+     },
+     {
+      "key": "504025",
+      "label": "Bob Ellis",
+      "n": 57,
+      "observed": 4,
+      "expected": 3.42,
+      "ratio": 1.17,
+      "shrunkRatio": 1.043
+     },
+     {
+      "key": "431083",
+      "label": "Jordan Sprechman",
+      "n": 57,
+      "observed": 5,
+      "expected": 3.71,
+      "ratio": 1.347,
+      "shrunkRatio": 1.094
+     },
+     {
+      "key": "482394",
+      "label": "Benjamin Trittipoe",
+      "n": 56,
+      "observed": 4,
+      "expected": 3.37,
+      "ratio": 1.186,
+      "shrunkRatio": 1.047
+     },
+     {
+      "key": "482388",
+      "label": "Bill Mathews",
+      "n": 55,
+      "observed": 4,
+      "expected": 3.66,
+      "ratio": 1.092,
+      "shrunkRatio": 1.025
+     },
+     {
+      "key": "800935",
+      "label": "John Jackson",
+      "n": 55,
+      "observed": 6,
+      "expected": 3.67,
+      "ratio": 1.636,
+      "shrunkRatio": 1.171
+     },
+     {
+      "key": "427508",
+      "label": "Stew Thornley",
+      "n": 54,
+      "observed": 2,
+      "expected": 3.1,
+      "ratio": 0.644,
+      "shrunkRatio": 0.916
+     },
+     {
+      "key": "431038",
+      "label": "Howie Karpin",
+      "n": 53,
+      "observed": 4,
+      "expected": 3.21,
+      "ratio": 1.244,
+      "shrunkRatio": 1.059
+     },
+     {
+      "key": "699537",
+      "label": "Loren Foxx",
+      "n": 53,
+      "observed": 4,
+      "expected": 2.94,
+      "ratio": 1.358,
+      "shrunkRatio": 1.082
+     },
+     {
+      "key": "511136",
+      "label": "Randy Liss",
+      "n": 53,
+      "observed": 1,
+      "expected": 3.1,
+      "ratio": 0.323,
+      "shrunkRatio": 0.84
+     },
+     {
+      "key": "431070",
+      "label": "Ronald Roth",
+      "n": 53,
+      "observed": 2,
+      "expected": 3.31,
+      "ratio": 0.604,
+      "shrunkRatio": 0.902
+     },
+     {
+      "key": "427131",
+      "label": "Michael Duca",
+      "n": 50,
+      "observed": 6,
+      "expected": 2.92,
+      "ratio": 2.054,
+      "shrunkRatio": 1.238
+     },
+     {
+      "key": "431022",
+      "label": "Dave Einspahr",
+      "n": 47,
+      "observed": 2,
+      "expected": 2.52,
+      "ratio": 0.793,
+      "shrunkRatio": 0.958
+     },
+     {
+      "key": "434138",
+      "label": "Billy Altman",
+      "n": 45,
+      "observed": 4,
+      "expected": 3.36,
+      "ratio": 1.192,
+      "shrunkRatio": 1.048
+     },
+     {
+      "key": "607890",
+      "label": "Jason Johnson",
+      "n": 45,
+      "observed": 1,
+      "expected": 2.72,
+      "ratio": 0.368,
+      "shrunkRatio": 0.865
+     },
+     {
+      "key": "431081",
+      "label": "Allan Spear",
+      "n": 44,
+      "observed": 1,
+      "expected": 2.63,
+      "ratio": 0.38,
+      "shrunkRatio": 0.871
+     },
+     {
+      "key": "511409",
+      "label": "Chris Johnson",
+      "n": 44,
+      "observed": 4,
+      "expected": 2.36,
+      "ratio": 1.698,
+      "shrunkRatio": 1.133
+     },
+     {
+      "key": "431036",
+      "label": "Ron Jernick",
+      "n": 44,
+      "observed": 2,
+      "expected": 2.44,
+      "ratio": 0.818,
+      "shrunkRatio": 0.964
+     },
+     {
+      "key": "663079",
+      "label": "Jason Lee",
+      "n": 43,
+      "observed": 1,
+      "expected": 2.58,
+      "ratio": 0.388,
+      "shrunkRatio": 0.874
+     },
+     {
+      "key": "501169",
+      "label": "Bob Maver",
+      "n": 42,
+      "observed": 1,
+      "expected": 2.66,
+      "ratio": 0.376,
+      "shrunkRatio": 0.869
+     },
+     {
+      "key": "496999",
+      "label": "Dave Musil Jr.",
+      "n": 42,
+      "observed": 2,
+      "expected": 2.63,
+      "ratio": 0.762,
+      "shrunkRatio": 0.95
+     },
+     {
+      "key": "431080",
+      "label": "Dennis Smythe",
+      "n": 41,
+      "observed": 3,
+      "expected": 3.27,
+      "ratio": 0.917,
+      "shrunkRatio": 0.98
+     },
+     {
+      "key": "433298",
+      "label": "Eric Radovich",
+      "n": 41,
+      "observed": 3,
+      "expected": 2.45,
+      "ratio": 1.226,
+      "shrunkRatio": 1.044
+     },
+     {
+      "key": "431088",
+      "label": "Bob Webb",
+      "n": 40,
+      "observed": 1,
+      "expected": 2.4,
+      "ratio": 0.416,
+      "shrunkRatio": 0.887
+     },
+     {
+      "key": "493726",
+      "label": "Jim Young",
+      "n": 40,
+      "observed": 1,
+      "expected": 2.26,
+      "ratio": 0.442,
+      "shrunkRatio": 0.897
+     },
+     {
+      "key": "482386",
+      "label": "Ron Kleinfelter",
+      "n": 40,
+      "observed": 0,
+      "expected": 2.04,
+      "ratio": 0,
+      "shrunkRatio": 0.83
+     },
+     {
+      "key": "431084",
+      "label": "Mike Stamus",
+      "n": 39,
+      "observed": 1,
+      "expected": 2.28,
+      "ratio": 0.438,
+      "shrunkRatio": 0.895
+     },
+     {
+      "key": "433218",
+      "label": "Chad Broski",
+      "n": 37,
+      "observed": 3,
+      "expected": 2.25,
+      "ratio": 1.331,
+      "shrunkRatio": 1.061
+     },
+     {
+      "key": "484489",
+      "label": "Dennis Hetrick",
+      "n": 37,
+      "observed": 2,
+      "expected": 2.07,
+      "ratio": 0.967,
+      "shrunkRatio": 0.994
+     },
+     {
+      "key": "639285",
+      "label": "Chris Thoms",
+      "n": 36,
+      "observed": 1,
+      "expected": 1.89,
+      "ratio": 0.53,
+      "shrunkRatio": 0.925
+     },
+     {
+      "key": "427283",
+      "label": "Chuck Klonke",
+      "n": 36,
+      "observed": 4,
+      "expected": 2.45,
+      "ratio": 1.636,
+      "shrunkRatio": 1.125
+     },
+     {
+      "key": "636643",
+      "label": "Tim Clodjeaux",
+      "n": 36,
+      "observed": 2,
+      "expected": 2.04,
+      "ratio": 0.982,
+      "shrunkRatio": 0.997
+     },
+     {
+      "key": "680379",
+      "label": "John Maffei",
+      "n": 35,
+      "observed": 2,
+      "expected": 2.07,
+      "ratio": 0.964,
+      "shrunkRatio": 0.994
+     },
+     {
+      "key": "624930",
+      "label": "Roger Lajoie",
+      "n": 35,
+      "observed": 2,
+      "expected": 2.26,
+      "ratio": 0.884,
+      "shrunkRatio": 0.979
+     },
+     {
+      "key": "700452",
+      "label": "Dan Zibell",
+      "n": 34,
+      "observed": 1,
+      "expected": 1.98,
+      "ratio": 0.506,
+      "shrunkRatio": 0.918
+     },
+     {
+      "key": "670603",
+      "label": "Howard Kaplan",
+      "n": 34,
+      "observed": 2,
+      "expected": 2.16,
+      "ratio": 0.925,
+      "shrunkRatio": 0.987
+     },
+     {
+      "key": "811630",
+      "label": "Shawn Medeiros",
+      "n": 34,
+      "observed": 0,
+      "expected": 2.14,
+      "ratio": 0,
+      "shrunkRatio": 0.824
+     },
+     {
+      "key": "494624",
+      "label": "Adam Liberman",
+      "n": 33,
+      "observed": 2,
+      "expected": 1.77,
+      "ratio": 1.131,
+      "shrunkRatio": 1.02
+     },
+     {
+      "key": "681131",
+      "label": "Drew Olson",
+      "n": 33,
+      "observed": 2,
+      "expected": 2.4,
+      "ratio": 0.835,
+      "shrunkRatio": 0.968
+     },
+     {
+      "key": "603539",
+      "label": "Guy Curtright",
+      "n": 33,
+      "observed": 3,
+      "expected": 2.22,
+      "ratio": 1.352,
+      "shrunkRatio": 1.064
+     },
+     {
+      "key": "680446",
+      "label": "Mark Gola",
+      "n": 33,
+      "observed": 3,
+      "expected": 2.37,
+      "ratio": 1.266,
+      "shrunkRatio": 1.051
+     },
+     {
+      "key": "482170",
+      "label": "Mark Honbo",
+      "n": 33,
+      "observed": 3,
+      "expected": 1.61,
+      "ratio": 1.864,
+      "shrunkRatio": 1.12
+     },
+     {
+      "key": "573949",
+      "label": "Charlie McCarthy",
+      "n": 32,
+      "observed": 1,
+      "expected": 1.87,
+      "ratio": 0.536,
+      "shrunkRatio": 0.927
+     },
+     {
+      "key": "433339",
+      "label": "David Feldman",
+      "n": 32,
+      "observed": 2,
+      "expected": 1.82,
+      "ratio": 1.1,
+      "shrunkRatio": 1.015
+     },
+     {
+      "key": "482194",
+      "label": "Dick Shute",
+      "n": 32,
+      "observed": 3,
+      "expected": 1.98,
+      "ratio": 1.512,
+      "shrunkRatio": 1.085
+     },
+     {
+      "key": "541663",
+      "label": "Greg Royce",
+      "n": 32,
+      "observed": 2,
+      "expected": 2.07,
+      "ratio": 0.968,
+      "shrunkRatio": 0.995
+     },
+     {
+      "key": "695905",
+      "label": "Jim O'Connor",
+      "n": 32,
+      "observed": 3,
+      "expected": 1.68,
+      "ratio": 1.786,
+      "shrunkRatio": 1.113
+     },
+     {
+      "key": "693946",
+      "label": "Rick Soos",
+      "n": 32,
+      "observed": 2,
+      "expected": 1.69,
+      "ratio": 1.184,
+      "shrunkRatio": 1.027
+     },
+     {
+      "key": "603873",
+      "label": "David Vatz",
+      "n": 31,
+      "observed": 1,
+      "expected": 1.83,
+      "ratio": 0.546,
+      "shrunkRatio": 0.93
+     },
+     {
+      "key": "800937",
+      "label": "Jay D'Abramo",
+      "n": 31,
+      "observed": 1,
+      "expected": 1.91,
+      "ratio": 0.523,
+      "shrunkRatio": 0.923
+     },
+     {
+      "key": "431091",
+      "label": "Trey Wilkinson",
+      "n": 31,
+      "observed": 4,
+      "expected": 2.28,
+      "ratio": 1.752,
+      "shrunkRatio": 1.14
+     },
+     {
+      "key": "814501",
+      "label": "Michael Miller",
+      "n": 30,
+      "observed": 6,
+      "expected": 1.85,
+      "ratio": 3.252,
+      "shrunkRatio": 1.351
+     },
+     {
+      "key": "431047",
+      "label": "Dave Matheson",
+      "n": 29,
+      "observed": 4,
+      "expected": 1.69,
+      "ratio": 2.36,
+      "shrunkRatio": 1.197
+     },
+     {
+      "key": "661298",
+      "label": "Alexandra Irving",
+      "n": 28,
+      "observed": 0,
+      "expected": 1.71,
+      "ratio": 0,
+      "shrunkRatio": 0.854
+     },
+     {
+      "key": "800936",
+      "label": "Frank Johnson",
+      "n": 28,
+      "observed": 1,
+      "expected": 1.57,
+      "ratio": 0.636,
+      "shrunkRatio": 0.951
+     },
+     {
+      "key": "640298",
+      "label": "Max Utsler",
+      "n": 28,
+      "observed": 1,
+      "expected": 1.74,
+      "ratio": 0.575,
+      "shrunkRatio": 0.937
+     },
+     {
+      "key": "433437",
+      "label": "Mike Maconi",
+      "n": 28,
+      "observed": 2,
+      "expected": 1.47,
+      "ratio": 1.36,
+      "shrunkRatio": 1.046
+     },
+     {
+      "key": "431016",
+      "label": "Rick Blount",
+      "n": 28,
+      "observed": 1,
+      "expected": 1.69,
+      "ratio": 0.591,
+      "shrunkRatio": 0.941
+     },
+     {
+      "key": "431092",
+      "label": "Bill Zavestoski",
+      "n": 27,
+      "observed": 2,
+      "expected": 1.65,
+      "ratio": 1.216,
+      "shrunkRatio": 1.03
+     },
+     {
+      "key": "482188",
+      "label": "Darin Padur",
+      "n": 27,
+      "observed": 2,
+      "expected": 1.67,
+      "ratio": 1.195,
+      "shrunkRatio": 1.028
+     },
+     {
+      "key": "823823",
+      "label": "Lauren Wiser",
+      "n": 27,
+      "observed": 1,
+      "expected": 1.58,
+      "ratio": 0.634,
+      "shrunkRatio": 0.95
+     },
+     {
+      "key": "431085",
+      "label": "Howard Starkman",
+      "n": 26,
+      "observed": 0,
+      "expected": 1.82,
+      "ratio": 0,
+      "shrunkRatio": 0.846
+     },
+     {
+      "key": "484662",
+      "label": "Dan Peterson",
+      "n": 25,
+      "observed": 0,
+      "expected": 1.31,
+      "ratio": 0,
+      "shrunkRatio": 0.884
+     },
+     {
+      "key": "666101",
+      "label": "Jay Garneau",
+      "n": 25,
+      "observed": 0,
+      "expected": 1.31,
+      "ratio": 0,
+      "shrunkRatio": 0.884
+     },
+     {
+      "key": "535257",
+      "label": "Pat Butcher",
+      "n": 25,
+      "observed": 1,
+      "expected": 1.2,
+      "ratio": 0.835,
+      "shrunkRatio": 0.982
+     },
+     {
+      "key": "699949",
+      "label": "Dan Quesnell",
+      "n": 24,
+      "observed": 3,
+      "expected": 1.39,
+      "ratio": 2.158,
+      "shrunkRatio": 1.141
+     },
+     {
+      "key": "511128",
+      "label": "Kyle Matschke",
+      "n": 23,
+      "observed": 3,
+      "expected": 1.35,
+      "ratio": 2.22,
+      "shrunkRatio": 1.145
+     },
+     {
+      "key": "431035",
+      "label": "Mark Jacobson",
+      "n": 23,
+      "observed": 1,
+      "expected": 1.3,
+      "ratio": 0.767,
+      "shrunkRatio": 0.973
+     },
+     {
+      "key": "666939",
+      "label": "Todd Reeves",
+      "n": 23,
+      "observed": 1,
+      "expected": 1.09,
+      "ratio": 0.917,
+      "shrunkRatio": 0.992
+     },
+     {
+      "key": "482136",
+      "label": "Brian Berger",
+      "n": 22,
+      "observed": 1,
+      "expected": 1.1,
+      "ratio": 0.911,
+      "shrunkRatio": 0.991
+     },
+     {
+      "key": "674635",
+      "label": "Chris Ruiz",
+      "n": 22,
+      "observed": 1,
+      "expected": 1.29,
+      "ratio": 0.774,
+      "shrunkRatio": 0.974
+     },
+     {
+      "key": "650888",
+      "label": "Kara Blackstone",
+      "n": 22,
+      "observed": 1,
+      "expected": 1.27,
+      "ratio": 0.787,
+      "shrunkRatio": 0.976
+     },
+     {
+      "key": "827715",
+      "label": "Evan Roberts",
+      "n": 21,
+      "observed": 1,
+      "expected": 1.29,
+      "ratio": 0.778,
+      "shrunkRatio": 0.975
+     },
+     {
+      "key": "699520",
+      "label": "Randy Oliver",
+      "n": 21,
+      "observed": 1,
+      "expected": 1.42,
+      "ratio": 0.705,
+      "shrunkRatio": 0.963
+     },
+     {
+      "key": "661294",
+      "label": "Ryan Easton",
+      "n": 21,
+      "observed": 2,
+      "expected": 1.44,
+      "ratio": 1.387,
+      "shrunkRatio": 1.049
+     },
+     {
+      "key": "686265",
+      "label": "Sarah Johnson",
+      "n": 21,
+      "observed": 1,
+      "expected": 1.21,
+      "ratio": 0.828,
+      "shrunkRatio": 0.982
+     },
+     {
+      "key": "639680",
+      "label": "Herb Morell",
+      "n": 20,
+      "observed": 0,
+      "expected": 1.13,
+      "ratio": 0,
+      "shrunkRatio": 0.899
+     },
+     {
+      "key": "431089",
+      "label": "Steve Weller",
+      "n": 20,
+      "observed": 3,
+      "expected": 1.58,
+      "ratio": 1.9,
+      "shrunkRatio": 1.123
+     }
+    ]
+   },
+   "homeClub": {
+    "test": {
+     "groups": 31,
+     "plays": 3166,
+     "positives": 192,
+     "statistic": 30.777,
+     "dispersion": 0.993,
+     "pValue": 0.4148,
+     "permutations": 2000,
+     "seed": 20260924
+    },
+    "cv": {
+     "tested": true,
+     "groupsInCandidate": 30,
+     "logLoss": 0.22401,
+     "deltaVsBest": 0.002314,
+     "pairedSE": 0.001555,
+     "selected": false
+    },
+    "verdict": "no detectable difference — not used",
+    "table": [
+     {
+      "key": "BOS",
+      "label": "BOS",
+      "n": 141,
+      "observed": 8,
+      "expected": 8.38,
+      "ratio": 0.954,
+      "shrunkRatio": 0.979
+     },
+     {
+      "key": "SF",
+      "label": "SF",
+      "n": 126,
+      "observed": 9,
+      "expected": 7.04,
+      "ratio": 1.279,
+      "shrunkRatio": 1.115
+     },
+     {
+      "key": "WSH",
+      "label": "WSH",
+      "n": 126,
+      "observed": 7,
+      "expected": 7.85,
+      "ratio": 0.892,
+      "shrunkRatio": 0.952
+     },
+     {
+      "key": "CWS",
+      "label": "CWS",
+      "n": 120,
+      "observed": 4,
+      "expected": 6.96,
+      "ratio": 0.575,
+      "shrunkRatio": 0.825
+     },
+     {
+      "key": "MIL",
+      "label": "MIL",
+      "n": 118,
+      "observed": 11,
+      "expected": 7.69,
+      "ratio": 1.43,
+      "shrunkRatio": 1.187
+     },
+     {
+      "key": "COL",
+      "label": "COL",
+      "n": 117,
+      "observed": 7,
+      "expected": 7.45,
+      "ratio": 0.939,
+      "shrunkRatio": 0.974
+     },
+     {
+      "key": "LAA",
+      "label": "LAA",
+      "n": 116,
+      "observed": 9,
+      "expected": 6.8,
+      "ratio": 1.324,
+      "shrunkRatio": 1.131
+     },
+     {
+      "key": "PHI",
+      "label": "PHI",
+      "n": 116,
+      "observed": 11,
+      "expected": 7.17,
+      "ratio": 1.533,
+      "shrunkRatio": 1.223
+     },
+     {
+      "key": "MIA",
+      "label": "MIA",
+      "n": 113,
+      "observed": 4,
+      "expected": 6.41,
+      "ratio": 0.624,
+      "shrunkRatio": 0.853
+     },
+     {
+      "key": "PIT",
+      "label": "PIT",
+      "n": 113,
+      "observed": 5,
+      "expected": 6.62,
+      "ratio": 0.756,
+      "shrunkRatio": 0.903
+     },
+     {
+      "key": "NYY",
+      "label": "NYY",
+      "n": 111,
+      "observed": 6,
+      "expected": 7.12,
+      "ratio": 0.842,
+      "shrunkRatio": 0.934
+     },
+     {
+      "key": "CLE",
+      "label": "CLE",
+      "n": 110,
+      "observed": 6,
+      "expected": 6.63,
+      "ratio": 0.905,
+      "shrunkRatio": 0.962
+     },
+     {
+      "key": "HOU",
+      "label": "HOU",
+      "n": 109,
+      "observed": 9,
+      "expected": 6.72,
+      "ratio": 1.34,
+      "shrunkRatio": 1.136
+     },
+     {
+      "key": "MIN",
+      "label": "MIN",
+      "n": 109,
+      "observed": 4,
+      "expected": 6.29,
+      "ratio": 0.636,
+      "shrunkRatio": 0.86
+     },
+     {
+      "key": "LAD",
+      "label": "LAD",
+      "n": 108,
+      "observed": 5,
+      "expected": 6.7,
+      "ratio": 0.746,
+      "shrunkRatio": 0.898
+     },
+     {
+      "key": "CHC",
+      "label": "CHC",
+      "n": 104,
+      "observed": 5,
+      "expected": 6.43,
+      "ratio": 0.777,
+      "shrunkRatio": 0.913
+     },
+     {
+      "key": "CIN",
+      "label": "CIN",
+      "n": 103,
+      "observed": 7,
+      "expected": 6.04,
+      "ratio": 1.159,
+      "shrunkRatio": 1.06
+     },
+     {
+      "key": "DET",
+      "label": "DET",
+      "n": 100,
+      "observed": 6,
+      "expected": 5.85,
+      "ratio": 1.026,
+      "shrunkRatio": 1.009
+     },
+     {
+      "key": "TB",
+      "label": "TB",
+      "n": 98,
+      "observed": 6,
+      "expected": 6.22,
+      "ratio": 0.965,
+      "shrunkRatio": 0.987
+     },
+     {
+      "key": "BAL",
+      "label": "BAL",
+      "n": 96,
+      "observed": 4,
+      "expected": 5.37,
+      "ratio": 0.744,
+      "shrunkRatio": 0.911
+     },
+     {
+      "key": "ATL",
+      "label": "ATL",
+      "n": 95,
+      "observed": 5,
+      "expected": 6.03,
+      "ratio": 0.83,
+      "shrunkRatio": 0.936
+     },
+     {
+      "key": "NYM",
+      "label": "NYM",
+      "n": 94,
+      "observed": 9,
+      "expected": 6.23,
+      "ratio": 1.446,
+      "shrunkRatio": 1.171
+     },
+     {
+      "key": "SD",
+      "label": "SD",
+      "n": 94,
+      "observed": 5,
+      "expected": 5.63,
+      "ratio": 0.888,
+      "shrunkRatio": 0.96
+     },
+     {
+      "key": "AZ",
+      "label": "AZ",
+      "n": 91,
+      "observed": 4,
+      "expected": 5.41,
+      "ratio": 0.739,
+      "shrunkRatio": 0.908
+     },
+     {
+      "key": "SEA",
+      "label": "SEA",
+      "n": 91,
+      "observed": 7,
+      "expected": 5.49,
+      "ratio": 1.275,
+      "shrunkRatio": 1.097
+     },
+     {
+      "key": "STL",
+      "label": "STL",
+      "n": 89,
+      "observed": 13,
+      "expected": 5.32,
+      "ratio": 2.443,
+      "shrunkRatio": 1.501
+     },
+     {
+      "key": "TEX",
+      "label": "TEX",
+      "n": 83,
+      "observed": 5,
+      "expected": 5.44,
+      "ratio": 0.919,
+      "shrunkRatio": 0.971
+     },
+     {
+      "key": "TOR",
+      "label": "TOR",
+      "n": 81,
+      "observed": 2,
+      "expected": 5.22,
+      "ratio": 0.383,
+      "shrunkRatio": 0.789
+     },
+     {
+      "key": "ATH",
+      "label": "ATH",
+      "n": 80,
+      "observed": 5,
+      "expected": 4.14,
+      "ratio": 1.207,
+      "shrunkRatio": 1.061
+     },
+     {
+      "key": "KC",
+      "label": "KC",
+      "n": 75,
+      "observed": 4,
+      "expected": 4.44,
+      "ratio": 0.901,
+      "shrunkRatio": 0.97
+     },
+     {
+      "key": "OAK",
+      "label": "OAK",
+      "n": 39,
+      "observed": 0,
+      "expected": 2.36,
+      "ratio": 0,
+      "shrunkRatio": 0.809
+     }
+    ]
+   }
+  },
+  "hitToError": {
+   "question": "hitToError",
+   "seasons": [
+    2024,
+    2025,
+    2026
+   ],
+   "baseModelTerms": [
+    "logit_hit_prob",
+    "infield",
+    "traj:line_drive",
+    "traj:fly_ball",
+    "traj:popup",
+    "traj:bunt"
+   ],
+   "method": "permutation test (group labels shuffled across plays) of Σ (observed − expected)² / variance, expected from out-of-fold model probabilities; plus a cross-validated candidate model with one term per group (≥ 40 plays)",
+   "scorer": {
+    "playsWithScorer": 100969,
+    "test": {
+     "groups": 103,
+     "plays": 100969,
+     "positives": 120,
+     "statistic": 82.988,
+     "dispersion": 0.806,
+     "pValue": 0.9102,
+     "permutations": 500,
+     "seed": 20260924
+    },
+    "cv": {
+     "tested": false,
+     "selected": false
+    },
+    "verdict": "no detectable difference — not used",
+    "table": []
+   },
+   "homeClub": {
+    "test": {
+     "groups": 31,
+     "plays": 100969,
+     "positives": 120,
+     "statistic": 22.042,
+     "dispersion": 0.711,
+     "pValue": 0.8663,
+     "permutations": 500,
+     "seed": 20260924
+    },
+    "cv": {
+     "tested": false,
+     "selected": false
+    },
+    "verdict": "no detectable difference — not used",
+    "table": []
+   }
+  }
+ },
+ "capture": {
+  "files": [],
+  "plays": 0,
+  "errorsCaptured": 0,
+  "capturedAsOriginal": 0,
+  "settled": 0,
+  "changedToHit": 0,
+  "changedOther": 0,
+  "changesSeenLive": 0,
+  "unloggedChanges": 0,
+  "pendingCaptured": 0,
+  "pendingResolved": 0,
+  "firstCaptureAt": null,
+  "lastCaptureAt": null,
+  "lagMinutes": null,
+  "originalMaxLagMin": 30,
+  "byKind": {},
+  "source": "data/capture/rulings-YYYY-MM.json — pipeline/capture.mjs polls MLB StatsAPI playByPlay during live games (GitHub Actions, every 10 minutes during game hours)",
+  "whyNeeded": "StatsAPI rewrites history: timecode snapshots and diffPatch show the current ruling even for moments before a change (verified on 2026 official log #3 and #6), so an original call can only be known if it was recorded before it changed.",
+  "recentErrors": [],
+  "pending": []
+ },
  "metricsSummary": {
   "errorToHit": {
    "terms": [
@@ -18116,6 +19580,10 @@
       "positives": 0
      }
     ]
+   },
+   "adjust": {
+    "status": "collecting",
+    "active": false
    }
   },
   "hitToError": {

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-24T19:33:03.185Z",
+ "generatedAt": "2026-09-24T20:00:24.134Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -58,6 +58,13 @@
     "projectedUrl": "https://statsapi.mlb.com/api/v1/game/745444/playByPlay?fields=allPlays,result,type,event,eventType,description,rbi,awayScore,homeScore,isOut,about,atBatIndex,inning,isTopInning,halfInning,hasReview,startTime,matchup,batter,pitcher,id,fullName,batSide,pitchHand,code,splits,menOnBase,count,outs,playEvents,details,isInPlay,index,hitData,launchSpeed,launchAngle,totalDistance,trajectory,hardness,location,coordinates,coordX,coordY,runners,movement,originBase,start,end,outBase,runner,credits,credit,player,position,abbreviation,isScoringEvent",
     "equal": true,
     "plays": 79
+   },
+   "meta": {
+    "url": "https://statsapi.mlb.com/api/v1.1/game/745444/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
+    "fetched": 2472,
+    "failed": 0,
+    "withScorer": 2472,
+    "scorers": 88
    },
    "byGameType": {
     "R": 2429,
@@ -149,6 +156,13 @@
     "equal": true,
     "plays": 74
    },
+   "meta": {
+    "url": "https://statsapi.mlb.com/api/v1.1/game/778563/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
+    "fetched": 2477,
+    "failed": 0,
+    "withScorer": 2477,
+    "scorers": 92
+   },
    "byGameType": {
     "R": 2430,
     "D": 18,
@@ -236,6 +250,13 @@
     "projectedUrl": "https://statsapi.mlb.com/api/v1/game/823543/playByPlay?fields=allPlays,result,type,event,eventType,description,rbi,awayScore,homeScore,isOut,about,atBatIndex,inning,isTopInning,halfInning,hasReview,startTime,matchup,batter,pitcher,id,fullName,batSide,pitchHand,code,splits,menOnBase,count,outs,playEvents,details,isInPlay,index,hitData,launchSpeed,launchAngle,totalDistance,trajectory,hardness,location,coordinates,coordX,coordY,runners,movement,originBase,start,end,outBase,runner,credits,credit,player,position,abbreviation,isScoringEvent",
     "equal": true,
     "plays": 58
+   },
+   "meta": {
+    "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
+    "fetched": 2374,
+    "failed": 0,
+    "withScorer": 2374,
+    "scorers": 82
    },
    "byGameType": {
     "R": 2374
@@ -362,7 +383,17 @@
    "withTraj": 3169,
    "withLoc": 3169
   },
-  "battedBalls": 375465
+  "battedBalls": 375465,
+  "errorKindCheck": {
+   "fielding|fielding": 1911,
+   "throwing|throwing": 1063,
+   "missed_catch|missed_catch": 157,
+   "fielding|throwing": 32,
+   "shift_violation|shift_violation": 3,
+   "missed_catch|fielding": 1,
+   "none|none": 1,
+   "fielding|none": 1
+  }
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -522,6 +553,10 @@
       "positives": 0
      }
     ]
+   },
+   "adjust": {
+    "status": "collecting",
+    "active": false
    }
   },
   "hitToError": {
@@ -660,5 +695,126 @@
   "surfaceBalls": 370691
  },
  "warnings": [],
- "currentSeason": 2026
+ "currentSeason": 2026,
+ "capture": {
+  "files": [],
+  "plays": 0,
+  "errorsCaptured": 0,
+  "capturedAsOriginal": 0,
+  "settled": 0,
+  "changedToHit": 0,
+  "changedOther": 0,
+  "changesSeenLive": 0,
+  "unloggedChanges": 0,
+  "pendingCaptured": 0,
+  "pendingResolved": 0,
+  "firstCaptureAt": null,
+  "lastCaptureAt": null,
+  "lagMinutes": null,
+  "originalMaxLagMin": 30,
+  "byKind": {},
+  "adjust": {
+   "status": "collecting",
+   "n": 0,
+   "positives": 0
+  },
+  "pendingCalibration": {
+   "status": "collecting",
+   "resolved": 0
+  }
+ },
+ "effects": {
+  "errorToHit": {
+   "seasons": [
+    2024,
+    2025,
+    2026
+   ],
+   "scorer": {
+    "test": {
+     "groups": 101,
+     "plays": 3166,
+     "positives": 192,
+     "statistic": 106.317,
+     "dispersion": 1.053,
+     "pValue": 0.3023,
+     "permutations": 2000,
+     "seed": 20260924
+    },
+    "cv": {
+     "tested": true,
+     "groupsInCandidate": 28,
+     "logLoss": 0.22303,
+     "deltaVsBest": 0.001332,
+     "pairedSE": 0.001088,
+     "selected": false
+    },
+    "verdict": "no detectable difference — not used",
+    "playsWithScorer": 3166
+   },
+   "homeClub": {
+    "test": {
+     "groups": 31,
+     "plays": 3166,
+     "positives": 192,
+     "statistic": 30.777,
+     "dispersion": 0.993,
+     "pValue": 0.4148,
+     "permutations": 2000,
+     "seed": 20260924
+    },
+    "cv": {
+     "tested": true,
+     "groupsInCandidate": 30,
+     "logLoss": 0.22401,
+     "deltaVsBest": 0.002314,
+     "pairedSE": 0.001555,
+     "selected": false
+    },
+    "verdict": "no detectable difference — not used"
+   }
+  },
+  "hitToError": {
+   "seasons": [
+    2024,
+    2025,
+    2026
+   ],
+   "scorer": {
+    "test": {
+     "groups": 103,
+     "plays": 100969,
+     "positives": 120,
+     "statistic": 82.988,
+     "dispersion": 0.806,
+     "pValue": 0.9102,
+     "permutations": 500,
+     "seed": 20260924
+    },
+    "cv": {
+     "tested": false,
+     "selected": false
+    },
+    "verdict": "no detectable difference — not used",
+    "playsWithScorer": 100969
+   },
+   "homeClub": {
+    "test": {
+     "groups": 31,
+     "plays": 100969,
+     "positives": 120,
+     "statistic": 22.042,
+     "dispersion": 0.711,
+     "pValue": 0.8663,
+     "permutations": 500,
+     "seed": 20260924
+    },
+    "cv": {
+     "tested": false,
+     "selected": false
+    },
+    "verdict": "no detectable difference — not used"
+   }
+  }
+ }
 }
