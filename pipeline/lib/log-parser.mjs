@@ -4,9 +4,12 @@
  * Source: https://www.mlb.com/official-information/scoring-changes
  * (prior seasons: Internet Archive snapshots of that same page).
  *
- * The page is a numbered list. Two formats have been observed:
- *   2026:  "001. 3/26 PIT@NYM -- In the bottom of the 3rd inning, ..."
- *   2024/5 "1) 3/27 CLE@KC -- In the top of the 1st inning, ..."
+ * The page is a numbered list. Formats observed (verified against the pages):
+ *   2026:   an HTML <ol> of <li><p>3/31 TB@MIL -- In the bottom of the 5th, ...
+ *           The markup carries NO number: browsers draw "1.", "2.", ... so the
+ *           entry number is the item's list position (htmlToText emits it).
+ *   2024/5: "1) 3/27 CLE@KC -- In the top of the 1st inning, ..." (text
+ *           numbers; 2024 entries 1-7 use a single hyphen: "LAD@SD - In ...")
  * plus irregularities that we FLAG rather than silently fix:
  *   - doubleheader suffixes: "CLE2", "SF2", " GM2", " (GM1)"
  *   - stray characters: "BOS@NYY!"
@@ -48,6 +51,21 @@ export function htmlToText(html) {
   let s = String(html || '');
   s = s.replace(/<!--[\s\S]*?-->/g, ' ');
   s = s.replace(/<(script|style|noscript|template|svg)\b[\s\S]*?<\/\1\s*>/gi, ' ');
+  // Ordered lists: emit "N. text" per item, N = the number a browser draws
+  // (honours start= and reversed). The 2026 log has no numbers in markup.
+  s = s.replace(/<ol\b([^>]*)>([\s\S]*?)<\/ol\s*>/gi, (m, attrs, inner) => {
+    const items = inner.match(/<li\b[^>]*>[\s\S]*?(?=<li\b|$)/gi) || [];
+    const reversed = /\breversed\b/i.test(attrs);
+    const st = String(attrs).match(/\bstart\s*=\s*["']?(-?\d+)/i);
+    let n = st ? Number(st[1]) : (reversed ? items.length : 1);
+    const lines = items.map((item) => {
+      const text = item.replace(/<\/?(li|p|div|span|strong|em|b|i|u|a|br)\b[^>]*>/gi, ' ');
+      const line = `\n${n}. ${text}\n`;
+      n += reversed ? -1 : 1;
+      return line;
+    });
+    return `\n${lines.join('')}\n`;
+  });
   s = s.replace(/<br\s*\/?>/gi, '\n');
   s = s.replace(/<\/?(p|div|li|h[1-6]|tr|td|th|section|article|header|footer|ul|ol|table|main|nav|aside|blockquote)\b[^>]*>/gi, '\n');
   s = s.replace(/<[^>]+>/g, '');
@@ -82,7 +100,8 @@ export function parseInning(body) {
 
 const ENTRY_RE = /^(\d{1,3})\s*[.)]\s*(.+)$/;
 // [M/D ]AWAY@HOME[suffix] -- body      (suffix = "2", " GM2", " (GM1)", "!", ...)
-const HEAD_RE = /^(?:(\d{1,2})\s*\/\s*(\d{1,2})\s+)?([A-Za-z]{2,3})\s*@\s*([A-Za-z]{2,3})(.*?)\s*(?:--|\u2013|\u2014)\s*(.+)$/;
+// Separator: "--", en/em dash, or a single hyphen surrounded by spaces.
+const HEAD_RE = /^(?:(\d{1,2})\s*\/\s*(\d{1,2})\s+)?([A-Za-z]{2,3})\s*@\s*([A-Za-z]{2,3})(.*?)(?:\s*(?:--|\u2013|\u2014)\s*|\s+-\s+)(.+)$/;
 const SECTION_RE = /^(20\d\d)\s+(regular season|postseason|post-season|playoffs|season|spring training)\b/i;
 
 function pad2(n) { return String(n).padStart(2, '0'); }
@@ -178,9 +197,20 @@ export function parseLogText(text) {
     }
     const em = line.match(ENTRY_RE);
     if (!em) continue;
-    const looksLikeEntry = /@/.test(line) && /(--|\u2013|\u2014)/.test(line);
-    if (!looksLikeEntry) continue;
     const seq = Number(em[1]);
+    const looksLikeEntry = /@/.test(line) && /(--|\u2013|\u2014|\s-\s)/.test(line);
+    // A numbered line that continues the current section's sequence (or
+    // starts a freshly headed section at 1) is kept even if its head is
+    // unusual — it is flagged (unparsed_head) instead of silently dropped.
+    const last = current && current.entries.length ? current.entries[current.entries.length - 1].seq : null;
+    const continuesSection = !pendingHeader && last != null && seq === last + 1;
+    const startsSection = !!pendingHeader && seq === 1;
+    if (!looksLikeEntry && !continuesSection && !startsSection) {
+      if (current && current.entries.length && current.issues.length < 40) {
+        current.issues.push(`rejected_numbered_line:${line.slice(0, 80)}`);
+      }
+      continue;
+    }
     const restart = current && seq <= 1 && current.entries.length > 0;
     if (!current || pendingHeader || restart) {
       const header = pendingHeader || (restart ? { label: null, season: current.season } : { label: null, season: null });

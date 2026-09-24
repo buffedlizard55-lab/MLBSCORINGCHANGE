@@ -106,6 +106,8 @@
     if (term === 'infield') return INFIELD[locationGroup(play.loc)] ? 1 : 0;
     if (term.indexOf('loc:') === 0) return locationGroup(play.loc) === term.slice(4) ? 1 : 0;
     if (term.indexOf('traj:') === 0) return trajGroup(play.traj) === term.slice(5) ? 1 : 0;
+    // Home club (the official scorer is assigned by the home park).
+    if (term.indexOf('home:') === 0) return play.homeId != null && String(play.homeId) === term.slice(5) ? 1 : 0;
     throw new Error('Unknown model term: ' + term);
   }
 

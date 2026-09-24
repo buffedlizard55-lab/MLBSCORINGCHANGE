@@ -74,7 +74,9 @@ export function hitType(phrase) {
   return null;
 }
 
-const INNING_PREFIX_RE = /^\s*in the (top|bottom)\s+(half\s+)?of the [^,]+?inning,?\s*/i;
+// "In the top of the 3rd inning, " / "In the bottom of the fifth inning, " /
+// 2026 style "In the bottom of the 5th, " (no "inning").
+const INNING_PREFIX_RE = /^\s*in the (top|bottom)\s+(half\s+)?of the (?:\d{1,2}(?:st|nd|rd|th)?|[a-z]+)(?:\s+inning)?\s*,?\s*/i;
 
 function stripInningPrefix(sentence) {
   return String(sentence || '').replace(INNING_PREFIX_RE, '');
@@ -131,7 +133,9 @@ export function classifyEntry(body) {
     if (idx < 0) continue;
     const newPhrase = body1.slice(0, idx);
     const oldPhrase = body1.slice(idx).replace(/^instead of\s*/i, '');
-    if (categorize(oldPhrase) === 'other' && categorize(newPhrase) === 'other') continue;
+    // Both sides must be play rulings. "advances on a stolen base, instead of
+    // an obstruction error" or "earned, instead of unearned" are bookkeeping.
+    if (categorize(oldPhrase) === 'other' || categorize(newPhrase) === 'other') continue;
     return finish('T1', oldPhrase, newPhrase);
   }
 
@@ -152,14 +156,21 @@ export function classifyEntry(body) {
     let oldPhrase = m[1];
     // The old phrase may itself contain "... . This has been changed to <new>"
     const inline = oldPhrase.match(/^(.+?)\.\s*this\s+(?:has\s+been|was)\s+changed\s+to\s+(.+)$/i);
-    if (inline) return finish('T2', inline[1], inline[2]);
+    if (inline && categorize(inline[1]) !== 'other') return finish('T2', inline[1], inline[2]);
+    // The old ruling must be a play ruling ("had been credited with a steal",
+    // "ruled as defensive indifference" are baserunning bookkeeping).
+    if (categorize(oldPhrase) === 'other') continue;
     // "changed to" in the following sentence
     const next = sentences[i + 1] || '';
     const cm = next.match(/\b(?:this|it|that|the\s+(?:play|ruling))\s+(?:has\s+been|was|is\s+now)\s+changed\s+to\s+(.+?)(?:\.\s*$|$)/i);
     if (cm) return finish('T2', oldPhrase, cm[1]);
-    // Otherwise the new ruling is the main clause of the previous sentence
-    const prev = i > 0 ? stripInningPrefix(sentences[i - 1]) : stripInningPrefix(s.slice(0, m.index));
-    if (prev && categorize(prev) !== 'other') {
+    // Otherwise the new ruling is the nearest earlier clause that states a
+    // play ruling (e.g. "X is now safe on a dropped catch error. An assist
+    // has been added for Y. X was originally ruled ... fielder's choice.").
+    const earlier = [stripInningPrefix(s.slice(0, m.index))];
+    for (let j = i - 1; j >= 0; j -= 1) earlier.push(stripInningPrefix(sentences[j]));
+    const prev = earlier.find((c) => c && categorize(c) !== 'other');
+    if (prev) {
       oldPhrase = oldPhrase.replace(/^(?:as\s+)?/, '');
       return finish('T2', oldPhrase, prev);
     }

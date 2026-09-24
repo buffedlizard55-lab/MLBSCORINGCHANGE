@@ -175,4 +175,103 @@ test('bookkeeping-only entries', () => {
   assert.equal(cls(226).kind, 'wild_pitch_passed_ball');
 });
 
+
+// ---------------------------------------------------------------------------
+// REAL fixtures added after the first GitHub Actions run (36041533035):
+//  (a) 2024 entries 1-8, verbatim from the Internet Archive capture
+//      https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes
+//      — entries 1-7 use a single hyphen separator ("LAD@SD - In the ...").
+//  (b) 2024 entry 84 (same capture): new ruling stated two sentences before
+//      "originally ruled".
+//  (c) The live 2026 page's markup (first 16 list items), byte-for-byte from
+//      https://www.mlb.com/official-information/scoring-changes as fetched by
+//      that run: an <ol> whose items carry NO number (the browser draws it).
+// ---------------------------------------------------------------------------
+const LOG_2024_FIRST = [
+  "2024 Regular Season",
+  "1) 3/20 LAD@SD - In the top of the 8th inning, pitcher Jhony Brito is now charged with two earned runs and pitcher Adrian Morejon is charged with no earned runs, instead of each pitcher being charged with one earned run.",
+  "2) 3/21 SD@LAD - In the top of the 3rd inning, Fernando Tatis now has a single instead of an error charged to Max Muncy. As a result, one run in the inning is changed to earned against Michael Grove.",
+  "3) 3/28 CLE@OAK - In the top of the 4th inning, after Austin Hedges' single, the missed catch error charged to Ryan Noda has been changed to a throwing error charged to Nick Allen.",
+  "4) 3/28 CLE@OAK - In the bottom of the 4th inning, JJ Bleday now reaches on a throwing error charged to Brayan Rocchio instead of a missed catch error charged to Josh Naylor. Rocchio also loses an assist.",
+  "5) 3/30 LAA@BAL - In the top of the 9th inning, after Nolan Schanuel's singe, the missed catch error charged to Mike Baumann has been changed to a throwing error charged to Ryan Mountcastle.",
+  "6) 3/30 BOS@SEA - In the bottom of the 10th inning, the run scored by Josh Rojas has been changed to unearned against Joely Rodriguez.",
+  "7) 3/31 CLE@OAK - In the bottom of the 6th inning, Ryan Noda is now credited with a sacrifice bunt and not charged a time at-bat.",
+  "8) 3/30 MIL@NYM -- In the top of the 1st inning, the single for William Contreras has been changed to an error charged to Zack Short. As a result, 3 runs in the inning are changed to unearned against Luis Severino.",
+].join('\n');
+
+test('2024 single-hyphen entries parse (entries 1-8, verbatim)', () => {
+  const [sec] = parseLogText(LOG_2024_FIRST);
+  assert.equal(sec.season, 2024);
+  assert.deepEqual(sec.entries.map((e) => e.seq), [1, 2, 3, 4, 5, 6, 7, 8]);
+  assert.deepEqual(sec.issues, []);
+  const e1 = sec.entries[0];
+  assert.equal(e1.date, '2024-03-20');
+  assert.equal(e1.away, 'LAD');
+  assert.equal(e1.home, 'SD');
+  assert.equal(e1.half, 'top');
+  assert.equal(e1.inning, 8);
+  assert.ok(e1.body.startsWith('In the top of the 8th inning, pitcher Jhony Brito'));
+  const k = (i) => classifyEntry(sec.entries[i - 1].body);
+  assert.equal(k(1).kind, 'earned_run');
+  assert.equal(k(2).transition, 'error->hit');
+  assert.equal(k(3).transition, 'error->error');
+  assert.equal(k(4).transition, 'error->error');
+  assert.equal(k(6).kind, 'earned_run');
+  assert.equal(k(7).kind, 'unclassified', 'old ruling not stated → flagged for review');
+  assert.equal(k(8).transition, 'hit->error');
+});
+
+test('2024 #84: new ruling found two sentences before "originally ruled"', () => {
+  const c = classifyEntry("In the bottom of the 2nd inning, Jose Azocar is now safe at 1st on a dropped catch error by Josh Bell. An assist has been added for Otto Lopez. Azocar was originally ruled to have reached on a fielder's choice.");
+  assert.equal(c.rule, 'T2');
+  assert.equal(c.transition, 'fc->error');
+});
+
+const LIVE_2026_OL_HTML = "<p><strong>2026 Regular Season</strong></p><ol>\n<li><p>3/31 TB@MIL -- In the bottom of the 5th, assists have been added for Jake Fraley, Jonathan Aranda, Carson Williams, and Ben Williamson on the Brice Turang single.</p></li>\n<li><p>3/28 WSH@CHC -- In the bottom of the 6th, Dansby Swanson is now credited with a single instead of reaching on a fielders&#x27; choice.</p></li>\n<li><p>3/30 ATH@ATL -- In the bottom of the 4th, Ozzie Albies now has a single instead of a reaching on an error charged to Max Muncy.</p></li>\n<li><p>4/1 COL@TOR -- In the top of the 8th, Troy Johnston is now charged a caught stealing, safe on a throwing error charged to Tommy Nance. Johnston had been credited with a steal of 2nd.</p></li>\n<li><p>4/1 SF@SD -- In the bottom of the 1st, Manny Machado reaches on a missed catch by first baseman Casey Schmitt, instead of a throwing error on third baseman Matt Chapman.</p></li>\n<li><p>3/30 TEX@BAL -- In the top of the 6th, Brandon Nimmo now has a single, instead of reaching on an error charged to Gunnar Henderson.</p></li>\n<li><p>3/30 NYY@SEA -- In the top of the 2nd, Jazz Chisolm now has a double, instead of reaching a 2-base error charged to Leo Rivas.</p></li>\n<li><p>3/28 KC@ATL -- In the top of the 8th, Vinnie Pasquantino reaches on a fielder&#x27;s choice error charged to Matt Olson, instead of a straight error. As a result, Pasquantino gets no RBI and the run charged to Joel Payamps is now unearned.</p></li>\n<li><p>4/1 SF@SD -- In the bottom of the 1st, Manny Machado reaches on a missed catch error by Casey Schmitt, with an assist to Matt Chapman, instead of reaching via a single plus a throwing error by Chapman.</p></li>\n<li><p>4/5 CHC@CLE2 -- In the top of the 9th, Scott Kingery is now credited with a stolen base. The advance had been ruled as defensive indifference.</p></li>\n<li><p>4/5 MIA@NYY -- In the bottom of the 3rd, the missed catch error charged to Otto Lopez has been changed to a throwing error charged to Connor Nordby. As a result, Nordby loses an assist.</p></li>\n<li><p>4/7 LAD@TOR -- In the top of the 9th, the run scored by Alex Freeland has been changed to earned for pitcher Jeff Hoffman, instead of unearned.</p></li>\n<li><p>4/7 LAD@TOR -- In the top of the 3rd, Alex Freeland now is credited with reaching base on a single, instead of on a sacrifice fielders choice.</p></li>\n<li><p>4/7 CIN@MIA -- In the bottom of the 6th, Heriberto Hernandez now advances to 2nd base on a stolen base, instead of on an obstruction error by second baseman Matt McLain.</p></li>\n<li><p>4/4 BAL@PIT -- In the bottom of the 4th, Bryan Reynolds now reaches on a single, instead of an error by pitcher Shane Baz. As a result, the run scored by Reynolds later in the inning is now earned for Baz, instead of unearned.</p></li>\n<li><p>4/3 TB@MIN -- In the bottom of the 7th, Luke Keaschall now reaches on an error by third baseman Junior Caminero, instead of on a single.</p></li></ol>";
+
+test('live 2026 <ol> markup: numbers come from list position', () => {
+  const html = `<html><body><p>The below details all Official Scoring changes.</p>${LIVE_2026_OL_HTML}</body></html>`;
+  const sections = parseLogHtml(html);
+  assert.equal(sections.length, 1);
+  const [sec] = sections;
+  assert.equal(sec.label, '2026 Regular Season');
+  assert.equal(sec.season, 2026);
+  assert.deepEqual(sec.entries.map((e) => e.seq), Array.from({ length: 16 }, (_, i) => i + 1));
+  const e = (n) => sec.entries[n - 1];
+  assert.equal(e(1).date, '2026-03-31');
+  assert.equal(e(1).away, 'TB');
+  assert.equal(e(1).home, 'MIL');
+  assert.equal(e(1).half, 'bottom');
+  assert.equal(e(1).inning, 5);
+  assert.equal(e(10).home, 'CLE');
+  assert.equal(e(10).gameNumber, 2, 'CHC@CLE2 → game 2 of a doubleheader');
+  assert.ok(!e(2).body.includes('&#x27;'), 'entities decoded');
+  const k = (n) => classifyEntry(e(n).body);
+  assert.equal(k(1).kind, 'fielding_credit');
+  assert.equal(k(2).transition, 'fc->hit');
+  assert.equal(k(3).transition, 'error->hit');
+  assert.ok(transitionFlags(k(3)).errorToHit);
+  assert.equal(k(4).kind, 'baserunning', 'caught stealing vs steal is not a play ruling');
+  assert.equal(k(5).transition, 'error->error');
+  assert.equal(k(6).transition, 'error->hit');
+  assert.equal(k(7).transition, 'error->hit');
+  assert.equal(k(7).finalHitType, 'double');
+  assert.equal(k(8).transition, 'error->fc+error');
+  assert.equal(k(9).transition, 'hit+error->error');
+  assert.equal(k(10).kind, 'baserunning');
+  assert.equal(k(12).kind, 'earned_run');
+  assert.equal(k(13).transition, 'fc->hit');
+  assert.equal(k(14).kind, 'baserunning', 'stolen base instead of obstruction error');
+  assert.equal(k(15).transition, 'error->hit');
+  assert.equal(k(16).transition, 'hit->error');
+  assert.ok(transitionFlags(k(16)).hitToError);
+});
+
+test('<ol start> and reversed numbering follow browser rules', () => {
+  const t1 = htmlToText('<ol start="5"><li>a</li><li>b</li></ol>');
+  assert.equal(t1, '5. a\n6. b');
+  const t2 = htmlToText('<ol reversed><li>a</li><li>b</li><li>c</li></ol>');
+  assert.equal(t2, '3. a\n2. b\n1. c');
+});
+
 console.log(`pipeline-log-test: ${passed} passed`);

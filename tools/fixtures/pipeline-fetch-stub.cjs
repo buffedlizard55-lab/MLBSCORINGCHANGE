@@ -85,7 +85,12 @@ for (const season of SEASONS) {
     return `${n} ${mm}/${dd} ${l.away.abbreviation}@${l.home.abbreviation} -- In the ${l.top ? 'top' : 'bottom'} of the ${ord} inning, ${l.text}`;
   });
   lines.push(`${season === 2026 ? String(lines.length + 1).padStart(3, '0') + '.' : `${lines.length + 1})`} 5/1 AAA@BBB -- In the top of the 2nd inning, the run scored by Nobody is now unearned against Someone.`);
-  world.log.set(season, `<html><head><script>var junk = "1) 1/1 X@Y -- no";</script></head><body><h2>${header}</h2><p>${lines.join('<br>')}</p></body></html>`);
+  // 2026 mirrors the live page: <ol><li><p>…</p></li></ol> with NO numbers in
+  // the markup; 2024/2025 mirror the archived "N) …" text paragraphs.
+  const listHtml = season === 2026
+    ? `<p><strong>${header}</strong></p><ol>${lines.map((l) => `<li><p>${l.replace(/^\S+\s/, '').replace(/'/g, '&#x27;')}</p></li>`).join('\n')}</ol>`
+    : `<h2>${header}</h2><p>${lines.join('<br>')}</p>`;
+  world.log.set(season, `<html><head><script>var junk = "1) 1/1 X@Y -- no";</script></head><body>${listHtml}</body></html>`);
   world.savant.set(season, `\uFEFF"game_pk","at_bat_number","launch_speed","launch_angle","estimated_ba_using_speedangle","events"\n${savantRows.map((x) => [x.game_pk, x.at_bat_number, x.launch_speed, x.launch_angle, x.estimated_ba_using_speedangle, x.events].map((v) => `"${v}"`).join(',')).join('\n')}\n`);
 }
 

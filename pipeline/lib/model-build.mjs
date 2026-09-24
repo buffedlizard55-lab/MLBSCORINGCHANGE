@@ -188,12 +188,28 @@ export function selectAndFit(rows, candidateSets, model, {
       fits.push({ ev, oof, X });
     }
   }
-  // One-standard-error rule: the simplest model (fewest terms, then the
-  // strongest regularisation) whose CV log loss is within 1 SE of the best.
+  // One-standard-error rule on PAIRED differences: every candidate is
+  // scored on the same plays, so compare per-play log losses against the
+  // best candidate (d_i = loss_i(candidate) - loss_i(best)) and use the SE of
+  // mean(d). Per-fold SEs would be dominated by fold-to-fold swings in the
+  // number of positives, which move every model together. Pick the simplest
+  // model (fewest terms, then strongest regularisation) within 1 paired SE.
+  const eps = 1e-12;
+  const perPlayLoss = (oof) => oof.map((p, i) => {
+    const q = Math.min(1 - eps, Math.max(eps, p));
+    return y[i] ? -Math.log(q) : -Math.log(1 - q);
+  });
   const minimum = fits.reduce((a, b) => (b.ev.logLoss < a.ev.logLoss ? b : a));
-  const threshold = minimum.ev.logLoss + minimum.ev.se;
+  const lossMin = perPlayLoss(minimum.oof);
+  for (const f of fits) {
+    const d = perPlayLoss(f.oof).map((v, i) => v - lossMin[i]);
+    const md = d.reduce((s, v) => s + v, 0) / d.length;
+    const sd = Math.sqrt(d.reduce((s, v) => s + (v - md) ** 2, 0) / Math.max(1, d.length - 1));
+    f.ev.deltaVsBest = md;
+    f.ev.pairedSE = sd / Math.sqrt(d.length);
+  }
   const best = fits
-    .filter((f) => f.ev.logLoss <= threshold)
+    .filter((f) => f.ev.deltaVsBest <= f.ev.pairedSE + 1e-12)
     .sort((a, b) => a.ev.terms.length - b.ev.terms.length || b.ev.lambda - a.ev.lambda || a.ev.logLoss - b.ev.logLoss)[0];
   const final = best.ev.terms.length
     ? fitLogistic(best.X, y, { lambda: best.ev.lambda })
@@ -217,11 +233,11 @@ export function selectAndFit(rows, candidateSets, model, {
         ...r, predicted: round(r.predicted, 4), observed: round(r.observed, 4),
       })),
     },
-    selectionRule: 'one-standard-error rule on 10-fold (by game) cross-validated log loss',
+    selectionRule: 'simplest model within one standard error (paired per-play log-loss differences vs the best candidate) under 10-fold cross-validation grouped by game',
     bestLogLoss: round(minimum.ev.logLoss, 5),
-    bestLogLossSE: round(minimum.ev.se, 5),
     selection: evaluations.map((e) => ({
-      terms: e.terms, lambda: e.lambda, logLoss: round(e.logLoss, 5), se: round(e.se, 5), auc: round(e.auc, 4), brier: round(e.brier, 5),
+      terms: e.terms, lambda: e.lambda, logLoss: round(e.logLoss, 5), foldSE: round(e.se, 5),
+      deltaVsBest: round(e.deltaVsBest, 6), pairedSE: round(e.pairedSE, 6), auc: round(e.auc, 4), brier: round(e.brier, 5),
     })),
   };
   // Out-of-time check: train on seasons before ootSeason, test on ootSeason.

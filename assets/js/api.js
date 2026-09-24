@@ -344,6 +344,26 @@ const MLB = (() => {
     'runner', 'isScoringEvent', 'playIndex',
   ];
 
+  /**
+   * Batted-ball data (Statcast hitData) for the scoring-change model
+   * (assets/js/scoring-model.js). A SEPARATE, lazily-requested projection so
+   * the hot-path PBP_FIELDS above stays exactly as verified: the feed asks
+   * for it only for games that have a field_error, a pending official-scorer
+   * ruling or an observed scoring change — typically once or twice per game.
+   * The same field names are verified by the official-data pipeline's
+   * projected-vs-full self check (pipeline/lib/statsapi.mjs PBP_FIELDS).
+   */
+  const HIT_DATA_FIELDS = [
+    'allPlays', 'about', 'atBatIndex', 'playEvents', 'details', 'isInPlay',
+    'hitData', 'launchSpeed', 'launchAngle', 'totalDistance', 'trajectory',
+    'hardness', 'location', 'coordinates', 'coordX', 'coordY',
+  ];
+
+  async function getPlayHitData(gamePk, options = {}) {
+    const opts = { timeout: 5000, retries: 0, ...options };
+    return getJSON(`${V1}/game/${gamePk}/playByPlay?fields=${HIT_DATA_FIELDS.join(',')}`, opts);
+  }
+
   async function getPlayByPlay(gamePk, options = {}) {
     const opts = { timeout: 5000, ...options };
     try {
@@ -461,7 +481,7 @@ const MLB = (() => {
 
   return {
     getSchedule, getReviewStatus, getGameStatus, getLiveFeed, getPlayByPlay,
-    getTeams, getChallengeCounts,
+    getTeams, getChallengeCounts, getPlayHitData,
     rateLimitedForMs,
     teamLogoUrl, teamLogoFallbackUrl, headshotUrl,
     ordinal, localTime, localDate, localDateTime,

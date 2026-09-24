@@ -115,6 +115,9 @@ test('scoreWith computes the logistic score from named terms', () => {
   assert.equal(SM.band(model, 85).label, 'Very likely');
   assert.equal(SM.band(model, 3).label, 'Unlikely');
   assert.throws(() => SM.featureValue('nope', 0.5, play), /Unknown model term/);
+  assert.equal(SM.featureValue('home:147', 0.5, { homeId: 147 }), 1);
+  assert.equal(SM.featureValue('home:147', 0.5, { homeId: 121 }), 0);
+  assert.equal(SM.featureValue('home:147', 0.5, {}), 0);
 });
 
 test('pendingDistribution picks the most specific adequately-sized cell', () => {

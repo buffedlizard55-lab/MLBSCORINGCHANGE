@@ -28,7 +28,7 @@ import {
   getTeams, getSeasonSchedule, isCompleted, getPlayByPlay, extractGamePlays, samePlays,
   HIT_EVENTS, playByPlayUrl,
 } from './lib/statsapi.mjs';
-import { buildTeamIndex, linkEntry } from './lib/link.mjs';
+import { buildTeamIndex, linkEntry, rulingAgrees } from './lib/link.mjs';
 import {
   buildHitProbSurface, buildHitProbFallback, buildPendingTable, selectAndFit, SM, isBattedBall,
 } from './lib/model-build.mjs';
@@ -240,7 +240,13 @@ const isHitCat = (c) => c === 'hit' || c === 'hit+error';
 async function savantCrossCheck(season, fieldErrorRecs, model) {
   try {
     const csv = await fetchText(SAVANT_ERRORS_CSV(season), { timeoutMs: 120000 });
-    const rows = parseCSV(csv);
+    const allRows = parseCSV(csv);
+    // Savant's default search includes Spring Training (verified: gamePks
+    // 831545 / 832077 are gameType "S" in StatsAPI /schedule). Compare only
+    // the game types this pipeline scans.
+    const KEEP = new Set(['R', 'F', 'D', 'L', 'W']);
+    const byType = allRows.reduce((m, r) => hist(m, r.game_type || '?'), new Map());
+    const rows = allRows.some((r) => r.game_type) ? allRows.filter((r) => KEEP.has(r.game_type)) : allRows;
     const byKey = new Map(rows.map((r) => [`${r.game_pk}:${Number(r.at_bat_number) - 1}`, r]));
     let matched = 0; let evAgree = 0; let laAgree = 0; let bothEv = 0;
     const onlyOurs = []; const pairs = [];
@@ -269,7 +275,8 @@ async function savantCrossCheck(season, fieldErrorRecs, model) {
     })();
     const mad = pairs.length ? pairs.reduce((s, [x, y]) => s + Math.abs(x - y), 0) / pairs.length : null;
     return {
-      url: SAVANT_ERRORS_CSV(season), rows: rows.length, statsapiFieldErrors: fieldErrorRecs.length,
+      url: SAVANT_ERRORS_CSV(season), rowsAllGameTypes: allRows.length, rowsByGameType: histObj(byType),
+      rows: rows.length, statsapiFieldErrors: fieldErrorRecs.length,
       matched, onlySavant: byKey.size, onlySavantExamples: [...byKey.keys()].slice(0, 15), onlyStatsApiExamples: onlyOurs,
       exitVelocityAgreement: bothEv ? round(evAgree / bothEv, 4) : null,
       launchAngleAgreement: bothEv ? round(laAgree / bothEv, 4) : null,
@@ -340,7 +347,7 @@ async function main() {
     }
     for (const list of chains.values()) list.sort((a, b) => a.seq - b.seq);
 
-    let seasonFieldErrors = 0; let seasonPAs = 0;
+    let seasonFieldErrors = 0; let seasonPAs = 0; let chainsDropped = 0;
     const fieldErrorRecs = [];
     const unlinkedErrorToHit = entries.filter((e) => e.cls.flags.includes('errorToHit') && e.link.atBatIndex == null).length;
     for (const [gamePk, plays] of playsByGame) {
@@ -376,7 +383,19 @@ async function main() {
         }
 
         const key = `${gamePk}:${rec.ai}`;
-        const chain = chains.get(key);
+        let chain = chains.get(key);
+        // Use an official chain for labels only when its LAST entry agrees
+        // with the play's current StatsAPI ruling. A disagreement means a
+        // wrong link or a change StatsAPI never applied — it is already in
+        // irregularities (link flag current_ruling_mismatch) and is kept out
+        // of the training labels.
+        if (chain) {
+          const last = chain[chain.length - 1];
+          if (rulingAgrees(last.cls.final, last.cls.finalHitType, rec.et) === false) {
+            chainsDropped += 1;
+            chain = null;
+          }
+        }
         let initial; let final; let initialHitType;
         if (chain) {
           initial = chain[0].cls.initial;
@@ -398,6 +417,7 @@ async function main() {
           date: g ? g.officialDate : null,
           away: g ? abbr.get(g.awayId) : null,
           home: g ? abbr.get(g.homeId) : null,
+          homeId: g ? g.homeId : null,
           gameType: g ? g.gameType : null,
         };
         if (initial === 'error') errorRows.push({ ...base, y: isHitCat(final) ? 1 : 0, final });
@@ -419,6 +439,7 @@ async function main() {
       errorToHitEntries: entries.filter((e) => e.cls.flags.includes('errorToHit')).length,
       hitToErrorEntries: entries.filter((e) => e.cls.flags.includes('hitToError')).length,
       unlinkedErrorToHit,
+      chainsDroppedForDisagreement: chainsDropped,
       initialErrorPopulation: errorRows.filter((r) => r.season === season).length,
       initialErrorToHit: errorRows.filter((r) => r.season === season && r.y === 1).length,
     };
@@ -438,7 +459,8 @@ async function main() {
   };
   model.pending = buildPendingTable(allBatted);
 
-  const toRow = (r) => ({ id: r.id, gamePk: r.gamePk, season: r.season, y: r.y, play: SM.playFromRecord(r.rec) });
+  const playOf = (r) => ({ ...SM.playFromRecord(r.rec), homeId: r.homeId });
+  const toRow = (r) => ({ id: r.id, gamePk: r.gamePk, season: r.season, y: r.y, play: playOf(r), home: r.home });
   const eTrain = errorRows.filter((r) => r.labelFinal).map(toRow);
   const hTrain = hitRows.filter((r) => r.labelFinal).map(toRow);
   const E_SETS = [
@@ -450,6 +472,11 @@ async function main() {
     ['logit_hit_prob', 'loc:P', 'loc:C', 'loc:1B', 'loc:3B', 'loc:OF', 'traj:line_drive', 'traj:fly_ball', 'traj:popup', 'traj:bunt', 'ev_z', 'ev_missing'],
     ['logit_hit_prob', 'loc:P', 'loc:C', 'loc:1B', 'loc:3B', 'loc:OF', 'traj:line_drive', 'traj:fly_ball', 'traj:popup', 'traj:bunt', 'ev_z', 'ev_missing', 'batting_home'],
   ];
+  // Home-club terms (official scorers are assigned per home park) for clubs
+  // with enough plays; tested as an extra candidate — kept only if CV says so.
+  const homeCounts = eTrain.reduce((m, r) => hist(m, r.play.homeId), new Map());
+  const HOME_TERMS = [...homeCounts.entries()].filter(([id, n]) => id != null && n >= 40).map(([id]) => `home:${id}`).sort();
+  if (HOME_TERMS.length) E_SETS.push([...E_SETS[4], ...HOME_TERMS]);
   const H_SETS = [
     [],
     ['logit_hit_prob'],
@@ -463,6 +490,33 @@ async function main() {
   log(`fitting hitToError on ${hTrain.length} plays (${hTrain.filter((r) => r.y).length} changed to error)`);
   const hFit = selectAndFit(hTrain, H_SETS, model, { ootSeason: currentSeason, lambdas: [1, 10] });
   model.hitToError = { question: 'P(play scored as a hit, not a home run, is officially changed to an error)', ...hFit.spec };
+  // Transparent empirical rates (training plays) for the model card.
+  const rateTable = (rows, keyFn, order = null) => {
+    const m = new Map();
+    for (const r of rows) {
+      const k = keyFn(r);
+      const c = m.get(k) || { key: k, n: 0, positives: 0 };
+      c.n += 1; c.positives += r.y; m.set(k, c);
+    }
+    const out = [...m.values()].map((c) => ({ ...c, rate: round(c.positives / c.n, 4) }));
+    return order ? out.sort((a, b) => order.indexOf(a.key) - order.indexOf(b.key)) : out.sort((a, b) => b.n - a.n);
+  };
+  const HP_BANDS = [[0, 0.1], [0.1, 0.2], [0.2, 0.35], [0.35, 0.5], [0.5, 0.7], [0.7, 1.01]];
+  const hpBand = (r) => {
+    const p = SM.hitProbability(model, r.play).p;
+    const b = HP_BANDS.find(([lo, hi]) => p >= lo && p < hi);
+    return b ? `${b[0].toFixed(2)}–${Math.min(1, b[1]).toFixed(2)}` : 'unknown';
+  };
+  const HP_ORDER = HP_BANDS.map(([lo, hi]) => `${lo.toFixed(2)}–${Math.min(1, hi).toFixed(2)}`);
+  for (const [name, rows] of [['errorToHit', eTrain], ['hitToError', hTrain]]) {
+    model[name].rates = {
+      byHitProbability: rateTable(rows, hpBand, HP_ORDER),
+      byFielder: rateTable(rows, (r) => SM.locationGroup(r.play.loc)),
+      byTrajectory: rateTable(rows, (r) => SM.trajGroup(r.play.traj)),
+      bySeason: rateTable(rows, (r) => r.season),
+    };
+  }
+  model.errorToHit.rates.byHomeClub = rateTable(eTrain, (r) => r.home || String(r.play.homeId));
   model.bands = SM.DEFAULT_BANDS;
   model.training = {
     seasons: SEASONS,
@@ -481,7 +535,7 @@ async function main() {
     if (!row) return null;
     const oof = fitResult.oofById.get(row.id);
     if (oof != null) return { p: round(oof, 4), score: SM.toScore(oof), kind: 'out_of_fold' };
-    const s = SM.scoreWith(spec, model, SM.playFromRecord(row.rec));
+    const s = SM.scoreWith(spec, model, playOf(row));
     return s ? { p: round(s.probability, 4), score: s.score, kind: 'model' } : null;
   };
   const errById = new Map(errorRows.map((r) => [r.id, r]));
