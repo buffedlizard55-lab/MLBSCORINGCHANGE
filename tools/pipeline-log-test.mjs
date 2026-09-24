@@ -217,7 +217,7 @@ test('2024 single-hyphen entries parse (entries 1-8, verbatim)', () => {
   assert.equal(k(3).transition, 'error->error');
   assert.equal(k(4).transition, 'error->error');
   assert.equal(k(6).kind, 'earned_run');
-  assert.equal(k(7).kind, 'unclassified', 'old ruling not stated → flagged for review');
+  assert.equal(k(7).kind, 'sacrifice_credit', 'sacrifice credit (old ruling not stated) is bookkeeping');
   assert.equal(k(8).transition, 'hit->error');
 });
 
@@ -288,6 +288,41 @@ test('team separator variants (real lines: 2024 #77 "ARI-LAD", 2025 #157 "SD at 
   assert.equal(classifyEntry(b.body).transition, 'error->hit');
   const c = parseEntryLine('8) 3/30 MIL@NYM -- In the top of the 1st inning, x.', 2024);
   assert.ok(!c.issues.some((i) => i.startsWith('team_separator')), '"@" is not flagged');
+});
+
+
+// Real official lines (verbatim from the 2024/2025 Internet Archive captures
+// and the live 2026 page) covering classifier rules added after reviewing
+// every "unclassified" entry. Entries still unclassified on purpose:
+// 2025 #87 ("infield since" — official typo) and 2025 #187 ("He has been
+// credited with…" — tense makes the old/new ruling ambiguous).
+const CLASSIFIER_FIXTURES = [
+  [2024, "59) 4/30 WSH@TEX -- In the bottom of the 7th inning, Nathaniel Lowe's single has been changed to a fielder's choice.", "hit->fc"],
+  [2024, "48) 4/24 NYM@SF -- In the top of the 4th inning, Harrison Bader reaches on an infield single to third base Matt Chapman and advances to second on a throwing error by Chapman. It was originally a two-base throwing error.", "error->hit+error"],
+  [2024, "106) 6/23 BOS@CIN -- The winning pitcher is Brennan Bernardino, not Greg Weissert.", "pitching_decision"],
+  [2024, "181) 8/25 CHC@MIA -- In the bottom of the 8th inning, Jesus Sanchez is now out catcher Miguel Amaya unassisted, instead of an intentional walk. Sanchez failed to touch first base and was ruled out.", "other_pa->out"],
+  [2024, "192) 8/31 STL@NYY -- In the bottom of the 8th inning, Juan Soto is now charged with grounding into a double play.", "double_play_credit"],
+  [2024, "71) 5/16 NYM@PHI -- In the top of the 8th inning, a throwing error has been charged to Brandon Marsh for allowing Pete Alonso to advance to 3rd base following Harrison Bader's single.", "error_added"],
+  [2025, "202) 9/16 SEA @ KC -- In the bottom of the 3rd inning, Vinnie Pasquantino reached on what was ruled a fielder's choice and an error. This has been changed to a base hit, removing the error for Jorge Polanco.", "fc+error->hit"],
+  [2025, "159) 8/17 TB@SF -- In the bottom of the 6th inning, Dominic Smith is now credited with 2 RBIs on his single with the 3rd run scoring on a throw to 2nd base, instead of 3 RBIs.", "rbi"],
+  [2025, "87) 6/14 CHW@TEX -- In the bottom of the 8th inning, Corey Seager reached on an infield since, instead of an error on Brooks Baldwin.", "unclassified"],
+  [2025, "187) 9/8 WSH@MIA -- In the top of the 4th inning, Dylan Crews is now credited with a double. He has been credited with a single, advancing to 2nd base on the throw.", "unclassified"],
+  [2026, "236. 8/30 COL@ATL -- In the bottom of the 6th, Ozzie Albies single has been changed to a double.", "hit->hit"],
+  [2026, "210. 8/6 NYM@CLE -- In the top of the 7th A.J. Ewing's bunt groundout has been changed to a sacrifice bunt.", "out->sac"],
+  [2026, "145. 6/23 MIL@CIN -- In the top of the 3rd, Blake Perkins reaches on a throwing error by second baseman Edwin Arroyo, instead of catcher's interference on Jose Trevino.", "other_pa->error"],
+  [2026, "250. 9/17 DET@CWS -- In the top of the 8th, Brett Callahan is out on a play at third base, third baseman Miguel Vargas to first baseman Munetaka Murakami to third baseman Miguel Vargas, instead of Murakami to Vargas.", "fielding_credit"],
+  [2026, "55. 4/24 LAA@KC -- In the bottom of the 4th, Starling Marte is now credited with a sacrifice fly.", "sacrifice_credit"],
+];
+
+test('classifier on real entries: possessive changes, "originally", other PA results, bookkeeping kinds', () => {
+  for (const [season, raw, expected] of CLASSIFIER_FIXTURES) {
+    const e = parseEntryLine(raw, season);
+    const c = classifyEntry(e.body);
+    const got = c.kind === 'ruling_change' ? c.transition : c.kind;
+    assert.equal(got, expected, `${season} ${raw.slice(0, 60)}`);
+  }
+  const c202 = classifyEntry(parseEntryLine(CLASSIFIER_FIXTURES.find((f) => f[1].startsWith('202)'))[1], 2025).body);
+  assert.equal(c202.final, 'hit', '"removing the error" does not make the new ruling hit+error');
 });
 
 console.log(`pipeline-log-test: ${passed} passed`);

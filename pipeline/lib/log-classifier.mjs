@@ -44,10 +44,14 @@ const ERROR_RE = /\b(error|errors|E[1-9]|missed catch|dropped catch|dropped thro
 const FC_RE = /\bfielder'?s'?\s+choice\b|\bfielders\s+choice\b|\bfielders'\s+choice\b|\bFC\b/i;
 const SAC_RE = /\bsac(rifice)?\b|\bSAC\b/i;
 const OUT_RE = /\b(ground ?out|groundout|grounded out|fly ?out|flyout|flied out|line ?out|lineout|lined out|pop ?out|popout|popped out|force ?out|forceout|forced out|out)\b/i;
+// Plate-appearance results that are neither hit/error/FC/sac/out.
+const OTHER_PA_RE = /\b(intentional walk|walk|base on balls|catcher'?s interference|catcher interference|hit by (a )?pitch)\b/i;
+// Clauses that name an error only to say it was taken away.
+const REMOVED_ERROR_RE = /,?\s*(?:removing|and removing|with the removal of|eliminating)\s+(?:the|an|his|her)\s+error[^,.;]*/gi;
 
 /** Categorise one ruling phrase. */
 export function categorize(phrase) {
-  const p = String(phrase || '').replace(NOT_HIT_RE, ' ');
+  const p = String(phrase || '').replace(REMOVED_ERROR_RE, ' ').replace(NOT_HIT_RE, ' ');
   const hit = HIT_RE.test(p);
   const error = ERROR_RE.test(p);
   const fc = FC_RE.test(p);
@@ -61,6 +65,7 @@ export function categorize(phrase) {
   if (hit) return 'hit';
   if (error) return 'error';
   if (out) return 'out';
+  if (OTHER_PA_RE.test(p)) return 'other_pa';
   return 'other';
 }
 
@@ -87,12 +92,22 @@ function trimPhrase(p) {
 }
 
 /** Non-play ("bookkeeping") change detection when no transition template fires. */
+// Fielding-sequence corrections: "..., instead of Baez to Ibanez" /
+// "Originally it was just Ruiz to Garcia Jr."
+const FIELD_SEQ_RE = /\b(?:instead of|originally it was(?: just)?)\s+(?:(?:first|second|third)\s+baseman\s+|shortstop\s+|catcher\s+|pitcher\s+|(?:left|center|right)\s+fielder\s+)?[A-Z][\w.'\u2019-]+(?:\s+[A-Z][\w.'\u2019-]+)*\s+to\s+/;
+
 function bookkeepingKind(text) {
-  const t = String(text || '').toLowerCase();
-  if (/defensive indifference|stolen base|caught stealing|\bsteal/.test(t)) return 'baserunning';
+  const raw = String(text || '');
+  const t = raw.toLowerCase();
+  if (/winning pitcher|losing pitcher/.test(t)) return 'pitching_decision';
+  if (/\bsacrifice\b|\bsac (bunt|fly)\b/.test(t)) return 'sacrifice_credit';
+  if (/grounding into a double play|\bgidp\b|double play on|one less double play|credited with a double play/.test(t)) return 'double_play_credit';
+  if (/error has been (charged|added)|additional error|\b(two|2) errors\b/.test(t)) return 'error_added';
+  if (FIELD_SEQ_RE.test(raw)) return 'fielding_credit';
+  if (/defensive indifference|stolen base|caught stealing|\bsteal|\bstole\b/.test(t)) return 'baserunning';
   if (/wild pitch|passed ball/.test(t)) return 'wild_pitch_passed_ball';
   if (/\bassist|\bputout|put-out|put out\b/.test(t)) return 'fielding_credit';
-  if (/\brbi\b|run batted in|runs batted in/.test(t)) return 'rbi';
+  if (/\brbis?\b|run batted in|runs batted in/.test(t)) return 'rbi';
   if (/\bunearned|\bearned\b/.test(t)) return 'earned_run';
   if (/error .*has been removed|error .*removed/.test(t)) return 'error_removed';
   if (/\bwin\b|\bloss\b|\bsave\b|\bhold\b|blown save/.test(t)) return 'pitching_decision';
@@ -145,13 +160,23 @@ export function classifyEntry(body) {
     if (m && categorize(m[1]) !== 'other') return finish('T3', m[1], m[2]);
   }
 
+  // T3b: "Nathaniel Lowe's single has been changed to a fielder's choice",
+  // "Ozzie Albies single has been changed to a double" (both sides must be
+  // play rulings, so "the run ... has been changed to earned" never matches).
+  for (const s of sentences) {
+    const m = stripInningPrefix(s).match(/^(.+?)\s+(?:has|have)\s+been\s+changed\s+to\s+(.+)$/i);
+    if (m && categorize(m[1]) !== 'other' && categorize(m[2]) !== 'other') return finish('T3', m[1], m[2]);
+  }
+
   // T2: originally ruled/scored ... / original ruling was ... / had been credited with ...
   for (let i = 0; i < sentences.length; i += 1) {
     const s = sentences[i];
     const m = s.match(/\b(?:was\s+)?originally\s+(?:ruled|scored|called)\s+(?:as\s+)?(.+?)(?:\.\s*$|$)/i)
       || s.match(/\bthe\s+original\s+ruling\s+was\s+(.+?)(?:\.\s*$|$)/i)
       || s.match(/\bhad\s+(?:originally\s+)?been\s+(?:credited\s+with|scored(?:\s+as)?|ruled(?:\s+as)?)\s+(.+?)(?:\.\s*$|$)/i)
-      || s.match(/\bthe\s+play\s+had\s+been\s+scored\s+(.+?)(?:\.\s*$|$)/i);
+      || s.match(/\bthe\s+play\s+had\s+been\s+scored\s+(.+?)(?:\.\s*$|$)/i)
+      || s.match(/\b(?:it|this|the\s+play)\s+was\s+originally\s+(?:ruled\s+|scored\s+)?(?:as\s+)?(.+?)(?:\.\s*$|$)/i)
+      || s.match(/\bwhat\s+was\s+(?:ruled|scored)\s+(?:as\s+)?(.+?)(?:\.\s*$|$)/i);
     if (!m) continue;
     let oldPhrase = m[1];
     // The old phrase may itself contain "... . This has been changed to <new>"

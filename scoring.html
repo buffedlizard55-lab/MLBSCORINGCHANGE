@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLB Scoring Changes — Official List &amp; Overturn Model</title>
+  <meta name="description" content="Every official MLB scoring change, every error of the season with the chance it is changed to a hit, and the model behind it — with official source links for every row.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23fff' stroke='%23e03131' stroke-width='6'/%3E%3Cpath d='M50 4 A46 46 0 0 1 96 50 M50 96 A46 46 0 0 1 4 50 M4 50 A46 46 0 0 1 50 4 M96 50 A46 46 0 0 1 50 96' stroke='%23e03131' stroke-width='2.5' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page-scoring">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-ball">⚾</span>
+      <span>MLB Scoring Changes</span>
+      <span class="brand-sub">official list · overturn model</span>
+    </div>
+    <nav class="sc-toplinks" aria-label="Site">
+      <a class="btn btn-ghost" href="index.html">Scoreboard</a>
+      <a class="btn btn-ghost" href="reviews.html">🚨 Replay Feed</a>
+      <a class="btn" href="scoring.html" aria-current="page">✏️ Scoring Changes</a>
+    </nav>
+  </header>
+
+  <main class="sc-main">
+    <section class="sc-intro">
+      <p>
+        Every <strong>official MLB scoring change</strong>, every <strong>error of the season</strong> with the
+        model's chance (0–100) that the official scorer changes it to a hit, and each play's
+        <strong>final result</strong>. Every row links to official sources so you can verify it yourself.
+        For live games, use the <a href="reviews.html">Replay Feed</a> (🎯 Error Watch, ✏️ Scoring Changes and ⚖️ Scoring Pending tabs).
+      </p>
+      <p id="sc-updated" class="sc-updated">Loading official data…</p>
+    </section>
+
+    <section id="sc-summary" class="sc-cards" aria-label="Summary"></section>
+
+    <nav id="sc-tabs" class="tabs" aria-label="Sections"></nav>
+
+    <section id="sc-panel" class="sc-panel" aria-live="polite"></section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Unofficial fan project, not affiliated with MLB. Sources:
+      <a href="https://www.mlb.com/official-information/scoring-changes" target="_blank" rel="noopener">MLB Official Scoring Changes</a>
+      (prior seasons via <a href="https://web.archive.org/" target="_blank" rel="noopener">Internet Archive</a> captures of that page),
+      the public <a href="https://statsapi.mlb.com" target="_blank" rel="noopener">MLB StatsAPI</a>, and
+      <a href="https://baseballsavant.mlb.com" target="_blank" rel="noopener">Baseball Savant</a> (cross-check).
+      Data refreshes automatically every 3 hours.
+    </p>
+  </footer>
+
+  <script src="assets/js/scoring-model.js"></script>
+  <script src="assets/js/scoring-page.js"></script>
+</body>
+</html>

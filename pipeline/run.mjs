@@ -355,6 +355,7 @@ async function main() {
       if (important || e.cls.kind === 'unclassified') {
         irregularities.push({
           season, seq: e.seq, section: e.section, raw: e.raw, parseIssues: e.issues, linkFlags: e.link.flags,
+          sourceUrl: logInfo && logInfo.source ? logInfo.source.url : null,
           classification: e.cls.kind === 'ruling_change' ? e.cls.transition : e.cls.kind,
           gamePk: e.link.gamePk, atBatIndex: e.link.atBatIndex, currentEventType: e.link.currentEventType || null,
         });
