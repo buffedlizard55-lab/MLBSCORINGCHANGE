@@ -5,22 +5,350 @@
   "url": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://web.archive.org/web/20250121083545id_/https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": "2025-01-21T08:35:45Z",
-  "fetchedAt": "2026-09-24T18:29:41.831Z",
+  "fetchedAt": "2026-09-24T18:38:55.418Z",
   "sha256": "3d9a56c5632dd1c7e33a9fdcc510ca7f724e36abcc6e8c5922fb12c437dac9b2",
   "bytes": 639177
  },
  "sections": [
   {
    "label": "2024 Regular Season",
-   "entries": 221,
-   "issues": [
-    "seq_gap:76->78"
-   ]
+   "entries": 229,
+   "issues": []
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T18:29:41.831Z",
+ "generatedAt": "2026-09-24T18:38:55.418Z",
  "entries": [
+  {
+   "seq": 1,
+   "raw": "1) 3/20 LAD@SD - In the top of the 8th inning, pitcher Jhony Brito is now charged with two earned runs and pitcher Adrian Morejon is charged with no earned runs, instead of each pitcher being charged with one earned run.",
+   "date": "2024-03-20",
+   "month": 3,
+   "day": 20,
+   "away": "LAD",
+   "home": "SD",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the top of the 8th inning, pitcher Jhony Brito is now charged with two earned runs and pitcher Adrian Morejon is charged with no earned runs, instead of each pitcher being charged with one earned run.",
+   "half": "top",
+   "inning": 8,
+   "issues": [],
+   "section": "2024 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "earned_run",
+    "initial": null,
+    "final": null,
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
+    "flags": []
+   },
+   "link": {
+    "gamePk": 745444,
+    "atBatIndex": 3,
+    "batterName": "Will Smith",
+    "currentEventType": "field_out",
+    "method": "fuzzy_last_name",
+    "flags": [
+     "name_match:fuzzy_last_name",
+     "inning_mismatch",
+     "ambiguous_plate_appearance"
+    ],
+    "batterId": 669257,
+    "currentEvent": "Flyout",
+    "currentDescription": "Will Smith flies out to left fielder Jurickson Profar.",
+    "officialDate": "2024-03-20",
+    "gameType": "R",
+    "away": "LAD",
+    "home": "SD"
+   }
+  },
+  {
+   "seq": 2,
+   "raw": "2) 3/21 SD@LAD - In the top of the 3rd inning, Fernando Tatis now has a single instead of an error charged to Max Muncy. As a result, one run in the inning is changed to earned against Michael Grove.",
+   "date": "2024-03-21",
+   "month": 3,
+   "day": 21,
+   "away": "SD",
+   "home": "LAD",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the top of the 3rd inning, Fernando Tatis now has a single instead of an error charged to Max Muncy. As a result, one run in the inning is changed to earned against Michael Grove.",
+   "half": "top",
+   "inning": 3,
+   "issues": [],
+   "section": "2024 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "hit",
+    "initialHitType": null,
+    "finalHitType": "single",
+    "rule": "T1",
+    "oldPhrase": "an error charged to Max Muncy",
+    "newPhrase": "Fernando Tatis now has a single",
+    "transition": "error->hit",
+    "flags": [
+     "errorToHit"
+    ]
+   },
+   "link": {
+    "gamePk": 746175,
+    "atBatIndex": 31,
+    "batterName": "Fernando Tatis Jr.",
+    "currentEventType": "single",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 665487,
+    "currentEvent": "Single",
+    "currentDescription": "Fernando Tatis Jr. singles on a ground ball to left fielder Teoscar Hernández, deflected by third baseman Max Muncy. Jackson Merrill scores. Xander Bogaerts to 3rd.",
+    "officialDate": "2024-03-21",
+    "gameType": "R",
+    "away": "SD",
+    "home": "LAD"
+   },
+   "model": {
+    "question": "errorToHit",
+    "p": 0.0554,
+    "score": 6,
+    "kind": "out_of_fold"
+   }
+  },
+  {
+   "seq": 3,
+   "raw": "3) 3/28 CLE@OAK - In the top of the 4th inning, after Austin Hedges' single, the missed catch error charged to Ryan Noda has been changed to a throwing error charged to Nick Allen.",
+   "date": "2024-03-28",
+   "month": 3,
+   "day": 28,
+   "away": "CLE",
+   "home": "OAK",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the top of the 4th inning, after Austin Hedges' single, the missed catch error charged to Ryan Noda has been changed to a throwing error charged to Nick Allen.",
+   "half": "top",
+   "inning": 4,
+   "issues": [],
+   "section": "2024 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "error",
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": "T3",
+    "oldPhrase": "missed catch error",
+    "newPhrase": "a throwing error charged to Nick Allen",
+    "transition": "error->error",
+    "flags": [
+     "errorToError"
+    ]
+   },
+   "link": {
+    "gamePk": 745687,
+    "atBatIndex": 27,
+    "batterName": "Austin Hedges",
+    "currentEventType": "single",
+    "method": "full_name",
+    "flags": [
+     "current_ruling_mismatch"
+    ],
+    "batterId": 595978,
+    "currentEvent": "Single",
+    "currentDescription": "Austin Hedges singles on a ground ball to shortstop Nick Allen. David Fry scores. Tyler Freeman scores. Andrés Giménez to 2nd. Throwing error by shortstop Nick Allen.",
+    "officialDate": "2024-03-28",
+    "gameType": "R",
+    "away": "CLE",
+    "home": "OAK"
+   }
+  },
+  {
+   "seq": 4,
+   "raw": "4) 3/28 CLE@OAK - In the bottom of the 4th inning, JJ Bleday now reaches on a throwing error charged to Brayan Rocchio instead of a missed catch error charged to Josh Naylor. Rocchio also loses an assist.",
+   "date": "2024-03-28",
+   "month": 3,
+   "day": 28,
+   "away": "CLE",
+   "home": "OAK",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the bottom of the 4th inning, JJ Bleday now reaches on a throwing error charged to Brayan Rocchio instead of a missed catch error charged to Josh Naylor. Rocchio also loses an assist.",
+   "half": "bottom",
+   "inning": 4,
+   "issues": [],
+   "section": "2024 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "error",
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": "T1",
+    "oldPhrase": "a missed catch error charged to Josh Naylor",
+    "newPhrase": "JJ Bleday now reaches on a throwing error charged to Brayan Rocchio",
+    "transition": "error->error",
+    "flags": [
+     "errorToError"
+    ]
+   },
+   "link": {
+    "gamePk": 745687,
+    "atBatIndex": 31,
+    "batterName": "JJ Bleday",
+    "currentEventType": "field_error",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 668709,
+    "currentEvent": "Field Error",
+    "currentDescription": "JJ Bleday reaches on a throwing error by shortstop Brayan Rocchio.",
+    "officialDate": "2024-03-28",
+    "gameType": "R",
+    "away": "CLE",
+    "home": "OAK"
+   }
+  },
+  {
+   "seq": 5,
+   "raw": "5) 3/30 LAA@BAL - In the top of the 9th inning, after Nolan Schanuel's singe, the missed catch error charged to Mike Baumann has been changed to a throwing error charged to Ryan Mountcastle.",
+   "date": "2024-03-30",
+   "month": 3,
+   "day": 30,
+   "away": "LAA",
+   "home": "BAL",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the top of the 9th inning, after Nolan Schanuel's singe, the missed catch error charged to Mike Baumann has been changed to a throwing error charged to Ryan Mountcastle.",
+   "half": "top",
+   "inning": 9,
+   "issues": [],
+   "section": "2024 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "error",
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": "T3",
+    "oldPhrase": "missed catch error",
+    "newPhrase": "a throwing error charged to Ryan Mountcastle",
+    "transition": "error->error",
+    "flags": [
+     "errorToError"
+    ]
+   },
+   "link": {
+    "gamePk": 747063,
+    "atBatIndex": 73,
+    "batterName": "Nolan Schanuel",
+    "currentEventType": "field_error",
+    "method": "fuzzy_last_name",
+    "flags": [
+     "name_match:fuzzy_last_name"
+    ],
+    "batterId": 694384,
+    "currentEvent": "Field Error",
+    "currentDescription": "Nolan Schanuel reaches on a missed catch error by pitcher Mike Baumann, assist to first baseman Ryan Mountcastle. Taylor Ward scores. Brandon Drury to 3rd.",
+    "officialDate": "2024-03-30",
+    "gameType": "R",
+    "away": "LAA",
+    "home": "BAL"
+   }
+  },
+  {
+   "seq": 6,
+   "raw": "6) 3/30 BOS@SEA - In the bottom of the 10th inning, the run scored by Josh Rojas has been changed to unearned against Joely Rodriguez.",
+   "date": "2024-03-30",
+   "month": 3,
+   "day": 30,
+   "away": "BOS",
+   "home": "SEA",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the bottom of the 10th inning, the run scored by Josh Rojas has been changed to unearned against Joely Rodriguez.",
+   "half": "bottom",
+   "inning": 10,
+   "issues": [],
+   "section": "2024 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "earned_run",
+    "initial": null,
+    "final": null,
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
+    "flags": []
+   },
+   "link": {
+    "gamePk": 745278,
+    "atBatIndex": 74,
+    "batterName": "Josh Rojas",
+    "currentEventType": "single",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 668942,
+    "currentEvent": "Single",
+    "currentDescription": "Josh Rojas singles on a line drive to right fielder Wilyer Abreu. Luke Raley to 3rd. Josh Rojas to 2nd. Luke Raley advances to 3rd, on a fielding error by right fielder Wilyer Abreu.",
+    "officialDate": "2024-03-30",
+    "gameType": "R",
+    "away": "BOS",
+    "home": "SEA"
+   }
+  },
+  {
+   "seq": 7,
+   "raw": "7) 3/31 CLE@OAK - In the bottom of the 6th inning, Ryan Noda is now credited with a sacrifice bunt and not charged a time at-bat.",
+   "date": "2024-03-31",
+   "month": 3,
+   "day": 31,
+   "away": "CLE",
+   "home": "OAK",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the bottom of the 6th inning, Ryan Noda is now credited with a sacrifice bunt and not charged a time at-bat.",
+   "half": "bottom",
+   "inning": 6,
+   "issues": [],
+   "section": "2024 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "unclassified",
+    "initial": null,
+    "final": null,
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
+    "flags": []
+   },
+   "link": {
+    "gamePk": 745683,
+    "atBatIndex": 44,
+    "batterName": "Ryan Noda",
+    "currentEventType": "sac_bunt",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 676116,
+    "currentEvent": "Sac Bunt",
+    "currentDescription": "Ryan Noda out on a sacrifice bunt, pitcher Tim Herrin to first baseman Josh Naylor. J.D. Davis to 2nd.",
+    "officialDate": "2024-03-31",
+    "gameType": "R",
+    "away": "CLE",
+    "home": "OAK"
+   }
+  },
   {
    "seq": 8,
    "raw": "8) 3/30 MIL@NYM -- In the top of the 1st inning, the single for William Contreras has been changed to an error charged to Zack Short. As a result, 3 runs in the inning are changed to unearned against Luis Severino.",
@@ -68,7 +396,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0081,
+    "p": 0.0129,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -164,7 +492,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0071,
+    "p": 0.0127,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -216,8 +544,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0889,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -360,7 +688,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0084,
+    "p": 0.0139,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -411,10 +739,7 @@
     "home": "BAL"
    },
    "model": {
-    "question": "hitToError",
-    "p": 0.0049,
-    "score": 0,
-    "kind": "out_of_fold"
+    "question": "hitToError"
    }
   },
   {
@@ -553,7 +878,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0055,
+    "p": 0.0105,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -655,7 +980,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0065,
+    "p": 0.0117,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -707,8 +1032,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0613,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -759,8 +1084,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
-    "score": 4,
+    "p": 0.1401,
+    "score": 14,
     "kind": "out_of_fold"
    }
   },
@@ -907,8 +1232,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.0938,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -959,8 +1284,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
-    "score": 4,
+    "p": 0.1914,
+    "score": 19,
     "kind": "out_of_fold"
    }
   },
@@ -1056,10 +1381,7 @@
     "home": "KC"
    },
    "model": {
-    "question": "hitToError",
-    "p": 0.0056,
-    "score": 1,
-    "kind": "out_of_fold"
+    "question": "hitToError"
    }
   },
   {
@@ -1109,7 +1431,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0024,
+    "p": 0.0011,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -1161,8 +1483,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0843,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -1318,15 +1640,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "hit",
+    "kind": "rbi",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
-    "finalHitType": "single",
-    "rule": "T1",
-    "oldPhrase": "2 runs batted in",
-    "newPhrase": "Jonatan Clase is now credited with 1 run batted in on his single",
-    "transition": "other->hit",
+    "finalHitType": null,
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -1438,8 +1760,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0949,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -1622,8 +1944,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0706,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -1674,8 +1996,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0912,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -1726,8 +2048,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0434,
-    "score": 4,
+    "p": 0.0534,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -1868,8 +2190,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0063,
-    "score": 1,
+    "p": 0.0019,
+    "score": 0,
     "kind": "out_of_fold"
    }
   },
@@ -1966,7 +2288,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
+    "p": 0.0405,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -2062,8 +2384,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.1682,
+    "score": 17,
     "kind": "out_of_fold"
    }
   },
@@ -2160,7 +2482,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
+    "p": 0.0445,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -2212,8 +2534,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.0479,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -2442,8 +2764,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0036,
-    "score": 0,
+    "p": 0.0082,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -2584,10 +2906,7 @@
     "home": "PHI"
    },
    "model": {
-    "question": "errorToHit",
-    "p": 0.0424,
-    "score": 4,
-    "kind": "out_of_fold"
+    "question": "errorToHit"
    }
   },
   {
@@ -2637,7 +2956,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0071,
+    "p": 0.0128,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -2689,8 +3008,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0021,
-    "score": 0,
+    "p": 0.0058,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -2879,8 +3198,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0829,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -2931,8 +3250,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0537,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -3027,7 +3346,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
+    "p": 0.0352,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3079,7 +3398,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
+    "p": 0.0404,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3221,8 +3540,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0671,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -3317,8 +3636,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0495,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -3369,6 +3688,50 @@
    }
   },
   {
+   "seq": 77,
+   "raw": "77) 5/20 ARI-LAD -- In the bottom of the 1st inning, Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply, instead of a bunt single to Mantiply.",
+   "date": null,
+   "month": null,
+   "day": null,
+   "away": null,
+   "home": null,
+   "suffix": "",
+   "gameNumber": null,
+   "body": "5/20 ARI-LAD -- In the bottom of the 1st inning, Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply, instead of a bunt single to Mantiply.",
+   "half": "bottom",
+   "inning": 1,
+   "issues": [
+    "unparsed_head"
+   ],
+   "section": "2024 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "hit",
+    "final": "error",
+    "initialHitType": "single",
+    "finalHitType": null,
+    "rule": "T1",
+    "oldPhrase": "a bunt single to Mantiply",
+    "newPhrase": "5/20 ARI-LAD -- In the bottom of the 1st inning, Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply",
+    "transition": "hit->error",
+    "flags": [
+     "hitToError"
+    ]
+   },
+   "link": {
+    "gamePk": null,
+    "atBatIndex": null,
+    "batterName": null,
+    "currentEventType": null,
+    "method": null,
+    "flags": [
+     "unknown_team:null",
+     "no_game_found"
+    ]
+   }
+  },
+  {
    "seq": 78,
    "raw": "78) 5/19 OAK@KC -- In the bottom of the 8th inning, Dairon Blanco reaches on an infield single to second baseman Zack Gelof, instead of an error by Gelof.",
    "date": "2024-05-19",
@@ -3415,7 +3778,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
+    "p": 0.0424,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3467,8 +3830,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.002,
-    "score": 0,
+    "p": 0.0056,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -3672,15 +4035,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "fielding_credit",
-    "initial": null,
-    "final": null,
+    "kind": "ruling_change",
+    "initial": "fc",
+    "final": "error",
     "initialHitType": null,
     "finalHitType": null,
-    "rule": null,
-    "oldPhrase": null,
-    "newPhrase": null,
-    "transition": null,
+    "rule": "T2",
+    "oldPhrase": "to have reached on a fielder's choice",
+    "newPhrase": "Jose Azocar is now safe at 1st on a dropped catch error by Josh Bell",
+    "transition": "fc->error",
     "flags": []
    },
    "link": {
@@ -3689,7 +4052,9 @@
     "batterName": "José Azócar",
     "currentEventType": "force_out",
     "method": "full_name",
-    "flags": [],
+    "flags": [
+     "current_ruling_mismatch"
+    ],
     "batterId": 640492,
     "currentEvent": "Forceout",
     "currentDescription": "José Azocar grounds into a force out, shortstop Tim Anderson to second baseman Otto Lopez. Donovan Solano out at 2nd. José Azocar to 1st. José Azocar advances to 1st, on a missed catch error by first baseman Josh Bell, assist to second baseman Otto Lopez.",
@@ -3746,8 +4111,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0515,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -3798,8 +4163,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0434,
-    "score": 4,
+    "p": 0.0537,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -3850,7 +4215,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0003,
+    "p": 0.0001,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -3902,7 +4267,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0007,
+    "p": 0.0029,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -3954,8 +4319,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
-    "score": 4,
+    "p": 0.0824,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -4330,7 +4695,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0005,
+    "p": 0.0002,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -4382,8 +4747,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.0628,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -4434,7 +4799,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
+    "p": 0.0379,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4486,8 +4851,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.2353,
+    "score": 24,
     "kind": "out_of_fold"
    }
   },
@@ -4538,8 +4903,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
-    "score": 4,
+    "p": 0.0947,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -4590,8 +4955,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.1232,
+    "score": 12,
     "kind": "out_of_fold"
    }
   },
@@ -4644,8 +5009,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.003,
-    "score": 0,
+    "p": 0.0073,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -4748,8 +5113,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
-    "score": 4,
+    "p": 0.0713,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -4983,8 +5348,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0645,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -5035,8 +5400,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0344,
+    "score": 3,
     "kind": "out_of_fold"
    }
   },
@@ -5087,8 +5452,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0688,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -5142,7 +5507,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.006,
+    "p": 0.0113,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5194,8 +5559,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.0878,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -5262,15 +5627,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "hit",
+    "kind": "rbi",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
-    "finalHitType": "double",
-    "rule": "T1",
-    "oldPhrase": "two runs batted in",
-    "newPhrase": "Jackson Chourio now credited with one run batted in on his double",
-    "transition": "other->hit",
+    "finalHitType": null,
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -5336,8 +5701,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0164,
-    "score": 2,
+    "p": 0.0301,
+    "score": 3,
     "kind": "out_of_fold"
    }
   },
@@ -5522,8 +5887,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0498,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -5670,8 +6035,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0598,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -5784,15 +6149,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "out",
+    "kind": "unclassified",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "first baseman Spence Steer to India to Moll",
-    "newPhrase": "Riley Greene grounds out, second baseman Jonathan India to pitcher Sam Moll",
-    "transition": "other->out",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -5858,7 +6223,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
+    "p": 0.0449,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -6048,8 +6413,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.0516,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -6116,15 +6481,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "out",
+    "kind": "unclassified",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "Baez to Ibanez",
-    "newPhrase": "Cavan Biggio grounded out, pitcher Keider Montero to shortstop Javier Baez to first baseman Andy Ibanez",
-    "transition": "other->out",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -6234,8 +6599,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0874,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -6286,8 +6651,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.0543,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -6472,10 +6837,7 @@
     "home": "MIN"
    },
    "model": {
-    "question": "hitToError",
-    "p": 0.0018,
-    "score": 0,
-    "kind": "out_of_fold"
+    "question": "hitToError"
    }
   },
   {
@@ -6571,8 +6933,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0674,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -6711,8 +7073,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
-    "score": 4,
+    "p": 0.0925,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -6763,8 +7125,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0526,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -6815,8 +7177,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0033,
-    "score": 0,
+    "p": 0.0074,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -6961,8 +7323,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0037,
-    "score": 0,
+    "p": 0.0081,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -7013,8 +7375,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0434,
-    "score": 4,
+    "p": 0.1024,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -7065,8 +7427,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.026,
+    "score": 3,
     "kind": "out_of_fold"
    }
   },
@@ -7117,8 +7479,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0434,
-    "score": 4,
+    "p": 0.086,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -7169,8 +7531,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.047,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -7265,7 +7627,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
+    "p": 0.0392,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -7333,15 +7695,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "error",
+    "kind": "baserunning",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "a caught stealing",
-    "newPhrase": "Brooks Lee is now credited with a steal of second and advance to third on a throwing error by pitcher Touki Toussaint",
-    "transition": "other->error",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -7350,9 +7712,7 @@
     "batterName": "Brooks Lee",
     "currentEventType": "single",
     "method": "full_name",
-    "flags": [
-     "current_ruling_mismatch"
-    ],
+    "flags": [],
     "batterId": 686797,
     "currentEvent": "Single",
     "currentDescription": "Brooks Lee singles on a sharp line drive to right fielder Dominic Fletcher. Austin Martin scores.",
@@ -7497,8 +7857,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0027,
-    "score": 0,
+    "p": 0.0068,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -7681,8 +8041,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0347,
+    "score": 3,
     "kind": "out_of_fold"
    }
   },
@@ -7733,8 +8093,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0032,
-    "score": 0,
+    "p": 0.0075,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -7785,8 +8145,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0026,
-    "score": 0,
+    "p": 0.0064,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -7837,8 +8197,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0584,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -7938,7 +8298,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
+    "p": 0.0393,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8085,8 +8445,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
-    "score": 4,
+    "p": 0.0462,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -8227,8 +8587,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
-    "score": 4,
+    "p": 0.0515,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -8281,8 +8641,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0127,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -8333,8 +8693,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.0562,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -8385,8 +8745,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0085,
-    "score": 1,
+    "p": 0.0028,
+    "score": 0,
     "kind": "out_of_fold"
    }
   },
@@ -8407,15 +8767,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "out",
+    "kind": "unclassified",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "an intentional walk",
-    "newPhrase": "Jesus Sanchez is now out catcher Miguel Amaya unassisted",
-    "transition": "other->out",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -8481,8 +8841,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0567,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -8533,7 +8893,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0153,
+    "p": 0.0217,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -8603,15 +8963,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "error",
+    "kind": "baserunning",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "Ramirez being charged a caught stealing and pitcher Cole Ragans being credited with an assist",
-    "newPhrase": "Jose Ramirez advances to 2nd base on a pickoff error by first baseman Vinnie Pasquantino",
-    "transition": "other->error",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -8621,8 +8981,7 @@
     "currentEventType": "force_out",
     "method": "full_name",
     "flags": [
-     "ambiguous_plate_appearance",
-     "current_ruling_mismatch"
+     "ambiguous_plate_appearance"
     ],
     "batterId": 608070,
     "currentEvent": "Forceout",
@@ -8768,7 +9127,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.001,
+    "p": 0.0036,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -8820,8 +9179,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0762,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -9050,8 +9409,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0801,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -9102,7 +9461,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0083,
+    "p": 0.0141,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9198,8 +9557,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0909,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -9250,8 +9609,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0032,
-    "score": 0,
+    "p": 0.0075,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -9302,8 +9661,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.003,
-    "score": 0,
+    "p": 0.0075,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -9356,7 +9715,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0011,
+    "p": 0.0037,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -9424,15 +9783,15 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "error",
-    "final": "other",
+    "kind": "wild_pitch_passed_ball",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "an error by catcher Alejandro Kirk",
-    "newPhrase": "Jorge Soler advances to third on a wild pitch by Kevin Gausman",
-    "transition": "error->other",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -9542,8 +9901,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.1948,
+    "score": 19,
     "kind": "out_of_fold"
    }
   },
@@ -9594,8 +9953,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0766,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -9780,8 +10139,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0518,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -9832,8 +10191,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0217,
-    "score": 2,
+    "p": 0.014,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -9884,8 +10243,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.1018,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -9936,8 +10295,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.004,
-    "score": 0,
+    "p": 0.0086,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -9988,8 +10347,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
-    "score": 4,
+    "p": 0.0622,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -10130,7 +10489,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
+    "p": 0.0394,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -10316,7 +10675,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0013,
+    "p": 0.0042,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -10414,8 +10773,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.0474,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -10468,8 +10827,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0225,
-    "score": 2,
+    "p": 0.0132,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -10520,8 +10879,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.1561,
+    "score": 16,
     "kind": "out_of_fold"
    }
   },
@@ -10572,8 +10931,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.1411,
+    "score": 14,
     "kind": "out_of_fold"
    }
   },
@@ -10714,8 +11073,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0723,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -10766,8 +11125,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
-    "score": 4,
+    "p": 0.1196,
+    "score": 12,
     "kind": "out_of_fold"
    }
   }

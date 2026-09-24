@@ -5,17 +5,15 @@
   "url": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://web.archive.org/web/20260210034254id_/https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": "2026-02-10T03:42:54Z",
-  "fetchedAt": "2026-09-24T18:29:41.831Z",
+  "fetchedAt": "2026-09-24T18:38:55.418Z",
   "sha256": "3fb1bd59dc9bb5607b7e23198fe176dceca69009af377d18e8bf39a71eb34356",
   "bytes": 853480
  },
  "sections": [
   {
    "label": "2025 Regular Season",
-   "entries": 209,
-   "issues": [
-    "seq_gap:156->158"
-   ]
+   "entries": 210,
+   "issues": []
   },
   {
    "label": "2025 Postseason",
@@ -24,7 +22,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T18:29:41.831Z",
+ "generatedAt": "2026-09-24T18:38:55.418Z",
  "entries": [
   {
    "seq": 1,
@@ -253,8 +251,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0045,
-    "score": 0,
+    "p": 0.0089,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -305,8 +303,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.069,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -357,7 +355,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0004,
+    "p": 0.0002,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -497,8 +495,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.076,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -570,15 +568,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "out",
+    "kind": "unclassified",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "Moreno to Suarez",
-    "newPhrase": "the final out of the inning goes catcher Gabriel Moreno to third baseman Eugenio Suarez to second baseman Garrett Hampson",
-    "transition": "other->out",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -737,8 +735,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0692,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -789,8 +787,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0882,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -841,8 +839,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0597,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -893,8 +891,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0656,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -945,7 +943,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0009,
+    "p": 0.0032,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -1087,8 +1085,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0434,
-    "score": 4,
+    "p": 0.0973,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -1185,8 +1183,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
-    "score": 4,
+    "p": 0.1335,
+    "score": 13,
     "kind": "out_of_fold"
    }
   },
@@ -1237,7 +1235,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
+    "p": 0.0428,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -1338,10 +1336,7 @@
     "home": "TB"
    },
    "model": {
-    "question": "hitToError",
-    "p": 0.0088,
-    "score": 1,
-    "kind": "out_of_fold"
+    "question": "hitToError"
    }
   },
   {
@@ -1487,8 +1482,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.078,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -1583,8 +1578,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.003,
-    "score": 0,
+    "p": 0.0069,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -1635,7 +1630,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0013,
+    "p": 0.0041,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -1701,15 +1696,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "out",
+    "kind": "baserunning",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "a caught stealing",
-    "newPhrase": "Brenton Doyle is out advancing at second",
-    "transition": "other->out",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -1959,8 +1954,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0434,
-    "score": 4,
+    "p": 0.0545,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -2013,7 +2008,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0009,
+    "p": 0.0032,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2155,10 +2150,7 @@
     "home": "ATL"
    },
    "model": {
-    "question": "hitToError",
-    "p": 0.0028,
-    "score": 0,
-    "kind": "out_of_fold"
+    "question": "hitToError"
    }
   },
   {
@@ -2208,8 +2200,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0264,
+    "score": 3,
     "kind": "out_of_fold"
    }
   },
@@ -2350,8 +2342,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.1221,
+    "score": 12,
     "kind": "out_of_fold"
    }
   },
@@ -2448,7 +2440,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0008,
+    "p": 0.0022,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2546,8 +2538,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0035,
-    "score": 0,
+    "p": 0.0078,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -2598,7 +2590,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0014,
+    "p": 0.0044,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2696,8 +2688,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0566,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -2748,7 +2740,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0065,
+    "p": 0.0119,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -2800,8 +2792,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0924,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -2948,8 +2940,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
-    "score": 4,
+    "p": 0.0913,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -3000,8 +2992,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0434,
-    "score": 4,
+    "p": 0.0784,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -3052,8 +3044,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
-    "score": 4,
+    "p": 0.0995,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -3104,7 +3096,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
+    "p": 0.0367,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3126,15 +3118,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "error",
+    "kind": "baserunning",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "a stolen base",
-    "newPhrase": "Zach McKinstry advances to second base on a caught stealing error by second baseman Jonathan India with an assist to catcher Salvador Perez",
-    "transition": "other->error",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -3143,9 +3135,7 @@
     "batterName": "Zach McKinstry",
     "currentEventType": "force_out",
     "method": "full_name",
-    "flags": [
-     "current_ruling_mismatch"
-    ],
+    "flags": [],
     "batterId": 656716,
     "currentEvent": "Forceout",
     "currentDescription": "Zach McKinstry grounds into a force out, second baseman Jonathan India to shortstop Bobby Witt Jr. Wenceel Pérez out at 2nd. Zach McKinstry to 1st.",
@@ -3202,7 +3192,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0077,
+    "p": 0.0133,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3300,7 +3290,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0082,
+    "p": 0.0137,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3441,7 +3431,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
+    "p": 0.0406,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3586,8 +3576,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
-    "score": 4,
+    "p": 0.055,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -3684,8 +3674,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0583,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -3736,8 +3726,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
-    "score": 4,
+    "p": 0.0852,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -3876,7 +3866,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
+    "p": 0.0422,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3928,8 +3918,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0235,
+    "score": 2,
     "kind": "out_of_fold"
    }
   },
@@ -4111,8 +4101,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0655,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -4163,8 +4153,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0263,
+    "score": 3,
     "kind": "out_of_fold"
    }
   },
@@ -4215,7 +4205,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0064,
+    "p": 0.0117,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4237,15 +4227,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "error",
-    "final": "other",
+    "kind": "unclassified",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "an error on Brooks Baldwin",
-    "newPhrase": "Corey Seager reached on an infield since",
-    "transition": "error->other",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -4313,8 +4303,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0014,
-    "score": 0,
+    "p": 0.0057,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -4365,8 +4355,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0799,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -4417,8 +4407,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0536,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -4469,7 +4459,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0003,
+    "p": 0.0001,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -4610,8 +4600,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
-    "score": 4,
+    "p": 0.0956,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -4662,8 +4652,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
-    "score": 4,
+    "p": 0.053,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -4760,8 +4750,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0025,
-    "score": 0,
+    "p": 0.0063,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -4812,7 +4802,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
+    "p": 0.0442,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4864,8 +4854,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0019,
-    "score": 0,
+    "p": 0.0052,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -4965,7 +4955,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0053,
+    "p": 0.0112,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5063,8 +5053,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.0691,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -5209,8 +5199,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.003,
-    "score": 0,
+    "p": 0.0072,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -5307,7 +5297,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
+    "p": 0.0401,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -5359,8 +5349,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0417,
-    "score": 4,
+    "p": 0.1212,
+    "score": 12,
     "kind": "out_of_fold"
    }
   },
@@ -5411,8 +5401,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.1055,
+    "score": 11,
     "kind": "out_of_fold"
    }
   },
@@ -5510,8 +5500,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0018,
-    "score": 0,
+    "p": 0.0051,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -5562,8 +5552,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.01,
-    "score": 1,
+    "p": 0.0155,
+    "score": 2,
     "kind": "out_of_fold"
    }
   },
@@ -5794,8 +5784,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0596,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -5846,8 +5836,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0083,
-    "score": 1,
+    "p": 0.0153,
+    "score": 2,
     "kind": "out_of_fold"
    }
   },
@@ -5942,7 +5932,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0069,
+    "p": 0.0118,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -6052,15 +6042,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "fc+error",
+    "kind": "earned_run",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "second base",
-    "newPhrase": "the run scored by Chandler Simpson has been changed from earned to unearned for pitcher Seranthony Dominguez as the fielders choice error by first baseman Ryan O' Hearn is now assumed to go to home plate",
-    "transition": "other->fc+error",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -6069,9 +6059,7 @@
     "batterName": "Chandler Simpson",
     "currentEventType": "single",
     "method": "full_name",
-    "flags": [
-     "current_ruling_mismatch"
-    ],
+    "flags": [],
     "batterId": 802415,
     "currentEvent": "Single",
     "currentDescription": "Chandler Simpson singles on a line drive to center fielder Colton Cowser. Ha-Seong Kim scores.",
@@ -6098,15 +6086,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "error",
+    "kind": "unclassified",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "just one",
-    "newPhrase": "pitcher Edgardo Henriquez is now charged with two errors during the Royce Lewis at-bat",
-    "transition": "other->error",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -6218,8 +6206,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.079,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -6272,8 +6260,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.1421,
+    "score": 14,
     "kind": "out_of_fold"
    }
   },
@@ -6324,8 +6312,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
-    "score": 4,
+    "p": 0.1036,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -6392,15 +6380,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "error",
-    "final": "other",
+    "kind": "baserunning",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "reaching second on a caught stealing and drop catch error by second baseman Cole Young",
-    "newPhrase": "Anthony Seigler steals second base",
-    "transition": "error->other",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -6693,8 +6681,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
-    "score": 4,
+    "p": 0.0612,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -6745,8 +6733,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0705,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -6845,7 +6833,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0019,
+    "p": 0.0045,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -6897,8 +6885,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0568,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -7140,15 +7128,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "out",
+    "kind": "fielding_credit",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "shortstop Gabriel Arias also getting an assist on the play before Rocchio",
-    "newPhrase": "Lenyn Sosa now grounds out second baseman Brayan Rocchio to first baseman Carlos Santana",
-    "transition": "other->out",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -7304,8 +7292,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0025,
-    "score": 0,
+    "p": 0.0065,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -7536,7 +7524,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0054,
+    "p": 0.0103,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -7588,9 +7576,53 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
-    "score": 4,
+    "p": 0.0633,
+    "score": 6,
     "kind": "out_of_fold"
+   }
+  },
+  {
+   "seq": 157,
+   "raw": "157) 8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single, instead of an error by third baseman Matt Chapman.",
+   "date": null,
+   "month": null,
+   "day": null,
+   "away": null,
+   "home": null,
+   "suffix": "",
+   "gameNumber": null,
+   "body": "8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single, instead of an error by third baseman Matt Chapman.",
+   "half": "top",
+   "inning": 8,
+   "issues": [
+    "unparsed_head"
+   ],
+   "section": "2025 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "hit",
+    "initialHitType": null,
+    "finalHitType": "single",
+    "rule": "T1",
+    "oldPhrase": "an error by third baseman Matt Chapman",
+    "newPhrase": "8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single",
+    "transition": "error->hit",
+    "flags": [
+     "errorToHit"
+    ]
+   },
+   "link": {
+    "gamePk": null,
+    "atBatIndex": null,
+    "batterName": null,
+    "currentEventType": null,
+    "method": null,
+    "flags": [
+     "unknown_team:null",
+     "no_game_found"
+    ]
    }
   },
   {
@@ -7656,15 +7688,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "hit",
+    "kind": "unclassified",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
-    "finalHitType": "single",
-    "rule": "T1",
-    "oldPhrase": "3 RBIs",
-    "newPhrase": "Dominic Smith is now credited with 2 RBIs on his single with the 3rd run scoring on a throw to 2nd base",
-    "transition": "other->hit",
+    "finalHitType": null,
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -7817,7 +7849,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
+    "p": 0.0377,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -7913,7 +7945,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
+    "p": 0.038,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8009,8 +8041,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0026,
-    "score": 0,
+    "p": 0.0065,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -8061,8 +8093,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0407,
-    "score": 4,
+    "p": 0.0617,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -8083,15 +8115,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "out",
+    "kind": "baserunning",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "caught stealing",
-    "newPhrase": "Ceddanne Rafaela is out advancing at second",
-    "transition": "other->out",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -8157,8 +8189,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0486,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -8179,15 +8211,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "fc+error",
+    "kind": "rbi",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "not having a run batted in",
-    "newPhrase": "Luis Matos now is credited with a run batted in on the fielders choice with an error he reached base on",
-    "transition": "other->fc+error",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -8297,7 +8329,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0427,
+    "p": 0.0421,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8319,15 +8351,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "error",
-    "final": "other",
+    "kind": "fielding_credit",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "advancing to second on a missed catch error by Bryson Stott with assists to Cristopher Sánchez and Bryce Harper",
-    "newPhrase": "Juan Soto stole second base",
-    "transition": "error->other",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -8393,7 +8425,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0056,
+    "p": 0.0109,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -8489,8 +8521,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0538,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -8685,8 +8717,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0434,
-    "score": 4,
+    "p": 0.0285,
+    "score": 3,
     "kind": "out_of_fold"
    }
   },
@@ -8737,8 +8769,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0828,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -8789,8 +8821,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.04,
-    "score": 4,
+    "p": 0.0822,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -8841,8 +8873,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.1228,
+    "score": 12,
     "kind": "out_of_fold"
    }
   },
@@ -9117,8 +9149,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.042,
-    "score": 4,
+    "p": 0.2707,
+    "score": 27,
     "kind": "out_of_fold"
    }
   },
@@ -9139,15 +9171,15 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "cls": {
-    "kind": "ruling_change",
-    "initial": "other",
-    "final": "out",
+    "kind": "unclassified",
+    "initial": null,
+    "final": null,
     "initialHitType": null,
     "finalHitType": null,
-    "rule": "T1",
-    "oldPhrase": "Freeland to Tovar to second baseman Orlando Arcia to third baseman Kyle Karros",
-    "newPhrase": "baserunner Andy Pages is now out pitcher Kyle Freeland to shortstop Ezequiel Tovar",
-    "transition": "other->out",
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
     "flags": []
    },
    "link": {
@@ -9213,8 +9245,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
-    "score": 4,
+    "p": 0.0552,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -9355,7 +9387,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.007,
+    "p": 0.0136,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9407,8 +9439,8 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0041,
-    "score": 0,
+    "p": 0.0084,
+    "score": 1,
     "kind": "out_of_fold"
    }
   },
@@ -9547,7 +9579,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0077,
+    "p": 0.0141,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9575,7 +9607,7 @@
     "initialHitType": null,
     "finalHitType": "single",
     "rule": "T3",
-    "oldPhrase": "error",
+    "oldPhrase": "2nd inning, the error",
     "newPhrase": "a single for Mason McCoy",
     "transition": "error->hit",
     "flags": [
@@ -9599,8 +9631,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0434,
-    "score": 4,
+    "p": 0.0545,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -9653,8 +9685,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
-    "score": 4,
+    "p": 0.0626,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -9705,7 +9737,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0077,
+    "p": 0.014,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9801,8 +9833,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0401,
-    "score": 4,
+    "p": 0.0767,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -9897,8 +9929,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0415,
-    "score": 4,
+    "p": 0.0885,
+    "score": 9,
     "kind": "out_of_fold"
    }
   },
@@ -9949,7 +9981,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0058,
+    "p": 0.0108,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -10001,7 +10033,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.001,
+    "p": 0.0034,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -10099,7 +10131,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0003,
+    "p": 0.0002,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -10197,8 +10229,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0431,
-    "score": 4,
+    "p": 0.1234,
+    "score": 12,
     "kind": "out_of_fold"
    }
   }

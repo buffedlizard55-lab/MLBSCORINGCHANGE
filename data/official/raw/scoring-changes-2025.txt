@@ -1,6 +1,6 @@
 # Official MLB scoring changes — 2025
 # Source: https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes
-# Fetched: 2026-09-24T18:29:41.831Z  sha256(html)=3fb1bd59dc9bb5607b7e23198fe176dceca69009af377d18e8bf39a71eb34356
+# Fetched: 2026-09-24T18:38:55.418Z  sha256(html)=3fb1bd59dc9bb5607b7e23198fe176dceca69009af377d18e8bf39a71eb34356
 # Verbatim entry lines as extracted from the page (one per line).
 
 1) 3/27 CLE@KC -- In the bottom of the 8th inning, Kyle Isbel now has a SAC bunt. The error charged to pitcher Hunter Gaddis has been removed.
@@ -159,6 +159,7 @@
 154) 8/14 MIA@CLE -- In the bottom of the 7th inning, two runs have been changed from unearned to earned against Valente Bellozo.
 155) 8/7 MIA@ATL -- In the bottom of the 7th inning, Marcell Ozuna now reaches 2nd base on an error by shortstop Otto Lopez, instead of a single and an error.
 156) 8/12 MIA@CLE -- In the top of the 1st inning, Xavier Edwards now reaches on a single, instead of an error by third baseman Jose Ramirez.
+157) 8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single, instead of an error by third baseman Matt Chapman.
 158) 8/17 NYY@STL -- In the top of the 9th inning, Cody Bellinger is now credited with a single instead of a fielder's choice and an error charged to Thomas Saggese. As a result, Bellinger gets 2 RBIs and one run is changed to earned against Jojo Romero.
 159) 8/17 TB@SF -- In the bottom of the 6th inning, Dominic Smith is now credited with 2 RBIs on his single with the 3rd run scoring on a throw to 2nd base, instead of 3 RBIs.
 160) 8/19 STL@MIA -- In the top of the 7th inning, the run has been changed to earned against Cade Gibson.

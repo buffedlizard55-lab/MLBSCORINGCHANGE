@@ -1,8 +1,15 @@
 # Official MLB scoring changes — 2024
 # Source: https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes
-# Fetched: 2026-09-24T18:29:41.831Z  sha256(html)=3d9a56c5632dd1c7e33a9fdcc510ca7f724e36abcc6e8c5922fb12c437dac9b2
+# Fetched: 2026-09-24T18:38:55.418Z  sha256(html)=3d9a56c5632dd1c7e33a9fdcc510ca7f724e36abcc6e8c5922fb12c437dac9b2
 # Verbatim entry lines as extracted from the page (one per line).
 
+1) 3/20 LAD@SD - In the top of the 8th inning, pitcher Jhony Brito is now charged with two earned runs and pitcher Adrian Morejon is charged with no earned runs, instead of each pitcher being charged with one earned run.
+2) 3/21 SD@LAD - In the top of the 3rd inning, Fernando Tatis now has a single instead of an error charged to Max Muncy. As a result, one run in the inning is changed to earned against Michael Grove.
+3) 3/28 CLE@OAK - In the top of the 4th inning, after Austin Hedges' single, the missed catch error charged to Ryan Noda has been changed to a throwing error charged to Nick Allen.
+4) 3/28 CLE@OAK - In the bottom of the 4th inning, JJ Bleday now reaches on a throwing error charged to Brayan Rocchio instead of a missed catch error charged to Josh Naylor. Rocchio also loses an assist.
+5) 3/30 LAA@BAL - In the top of the 9th inning, after Nolan Schanuel's singe, the missed catch error charged to Mike Baumann has been changed to a throwing error charged to Ryan Mountcastle.
+6) 3/30 BOS@SEA - In the bottom of the 10th inning, the run scored by Josh Rojas has been changed to unearned against Joely Rodriguez.
+7) 3/31 CLE@OAK - In the bottom of the 6th inning, Ryan Noda is now credited with a sacrifice bunt and not charged a time at-bat.
 8) 3/30 MIL@NYM -- In the top of the 1st inning, the single for William Contreras has been changed to an error charged to Zack Short. As a result, 3 runs in the inning are changed to unearned against Luis Severino.
 9) 4/2 TOR@HOU -- In the bottom of the 8th inning, Jose Altuve is now charged with a caught stealing of 2nd base. The play had been scored as an out advancing.
 10) 3/30 ATL@PHI -- In the top of the 1st inning, the single for Ronald Acuna Jr has been changed to an error charged to Alec Bohm. As a result, 1 run in the inning has been changed to unearned against Aaron Nola.
@@ -72,6 +79,7 @@
 74) 5/17 NYM@MIA -- In the bottom of the 8th inning, Francisco Lindor now has an assist on the putout of Josh Bell, which followed Jake Burger's single.
 75) 5/16 NYM@PHI -- In the bottom of the 11th inning, Brandon Marsh now has a single instead of an error charged to Pete Alonso.
 76) 5/20 SD@ATL2 -- In the top of the 8th inning, during Jake Cronenworth's at-bat, Luis Arraez stole 3rd base between the 5th and 6th pitches.
+77) 5/20 ARI-LAD -- In the bottom of the 1st inning, Shohei Ohtani reaches on a throwing error by pitcher Joe Mantiply, instead of a bunt single to Mantiply.
 78) 5/19 OAK@KC -- In the bottom of the 8th inning, Dairon Blanco reaches on an infield single to second baseman Zack Gelof, instead of an error by Gelof.
 79) 5/19 SEA@BAL -- In the top of the 2nd inning, Luke Raley reaches on a two base fielding error by first baseman Ryan Mountcastle, instead of a double. As a result, the run scored by Raley is unearned to Corbin Burnes.
 80) 5/19 WAS@PHI -- In the bottom of the 8th inning, Johan Rojas advances to 2nd on defensive indifference, instead of a stolen base.
