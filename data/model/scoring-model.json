@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-09-24T20:15:36.810Z",
+ "generatedAt": "2026-09-24T20:20:51.737Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -18296,7 +18296,7 @@
   },
   {
    "name": "Live ruling capture (this project, from MLB Stats API playByPlay)",
-   "url": "data/capture/"
+   "url": "https://github.com/buffedlizard55-lab/MLBSCORINGCHANGE/tree/main/data/capture"
   }
  ],
  "effects": {
