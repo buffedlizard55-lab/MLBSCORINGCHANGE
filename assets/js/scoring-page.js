@@ -12,7 +12,8 @@
   const SM = window.MLBScoringModel || null;
   const OFFICIAL_PAGE = 'https://www.mlb.com/official-information/scoring-changes';
   const PAGE_SIZE = 100;
-  const SEASONS = [2026, 2025, 2024];
+  // Seasons come from the published pipeline report (no yearly code edits).
+  let SEASONS = [new Date().getFullYear()];
   const TABS = [
     ['watch', '🎯 Error Watch'],
     ['official', '📋 Official Changes'],
@@ -28,7 +29,8 @@
     irregularities: null,
     official: {},
     errors: [],
-    season: SEASONS[0],
+    season: null,
+    current: null,
     watchFilter: { q: '', status: 'all', sort: 'newest', shown: PAGE_SIZE },
     officialFilter: { q: '', type: 'all', shown: PAGE_SIZE },
   };
@@ -138,7 +140,7 @@
     const h = (window.location.hash || '').replace(/^#/, '');
     const [tab, season] = h.split('/');
     if (TABS.some(([k]) => k === tab)) state.tab = tab;
-    if (season && SEASONS.includes(Number(season))) state.season = Number(season);
+    if (season && /^20\d\d$/.test(season)) state.season = Number(season);
   }
   function writeHash() {
     const h = state.tab === 'official' ? `#official/${state.season}` : `#${state.tab}`;
@@ -150,7 +152,7 @@
     renderTabs();
     const [model, watch, report, irr] = await Promise.allSettled([
       getJSON('data/model/scoring-model.json'),
-      getJSON(`data/model/error-watch-${SEASONS[0]}.json`),
+      getJSON('data/model/error-watch.json'),
       getJSON('data/model/pipeline-report.json'),
       getJSON('data/official/irregularities.json'),
     ]);
@@ -158,6 +160,10 @@
     state.watch = watch.status === 'fulfilled' ? watch.value : null;
     state.report = report.status === 'fulfilled' ? report.value : null;
     state.irregularities = irr.status === 'fulfilled' ? irr.value : null;
+    const reported = state.report && state.report.seasons ? Object.keys(state.report.seasons).map(Number) : [];
+    if (reported.length) SEASONS = reported.sort((a, b) => b - a);
+    state.current = (state.watch && state.watch.season) || (state.report && state.report.currentSeason) || SEASONS[0];
+    if (!state.season || !SEASONS.includes(state.season)) state.season = state.current;
     [model, watch, report, irr].forEach((r) => { if (r.status === 'rejected') state.errors.push(String(r.reason && r.reason.message || r.reason)); });
     renderUpdated();
     renderSummary();
@@ -186,7 +192,9 @@
     box.appendChild(el('span', null, `Updated ${localDateTime(gen)} (${ago(gen)}) · refreshes every 3 hours · `));
     box.appendChild(ext('MLB official scoring changes', OFFICIAL_PAGE));
     const warnings = (state.report && state.report.warnings) || [];
-    if (state.report && state.report.fatal) warnings.unshift(`Last run failed: ${state.report.fatal}`);
+    if (state.report && state.report.fatal) {
+      warnings.unshift(`Last refresh failed${state.report.failedAt ? ` (${localDateTime(state.report.failedAt)})` : ''}: ${state.report.fatal} — showing the last good data`);
+    }
     if (warnings.length || state.errors.length) {
       const w = el('div', 'sc-warning', `⚠ ${[...warnings, ...state.errors].join(' · ')}`);
       box.appendChild(w);
@@ -204,13 +212,13 @@
   function renderSummary() {
     const wrap = clear($('#sc-summary'));
     const r = state.report;
-    const cur = r && r.seasons && r.seasons[SEASONS[0]];
+    const cur = r && r.seasons && r.seasons[state.current];
     const plays = (state.watch && state.watch.plays) || [];
     const changed = plays.filter((p) => p.status === 'changed_to_hit').length;
     const e = state.model && state.model.errorToHit;
-    wrap.appendChild(card(`Official changes ${SEASONS[0]}`, cur ? num(cur.officialEntries) : '—',
+    wrap.appendChild(card(`Official changes ${state.current}`, cur ? num(cur.officialEntries) : '—',
       cur ? `${cur.errorToHitEntries} error → hit · ${cur.hitToErrorEntries} hit → error` : null));
-    wrap.appendChild(card(`Errors ${SEASONS[0]}`, num(plays.length),
+    wrap.appendChild(card(`Errors ${state.current}`, num(plays.length),
       plays.length ? `${changed} changed to a hit (${pct(changed / plays.length)})` : null));
     wrap.appendChild(card('Error → hit model', e ? `AUC ${e.cv.auc.toFixed(2)}` : '—',
       e ? `out-of-time ${e.outOfTime ? e.outOfTime.auc.toFixed(2) : '—'} · base rate ${pct(e.baseRate)}` : null));
@@ -578,7 +586,8 @@
       });
       body.appendChild(fl);
       const links = el('div', 'sc-links');
-      links.appendChild(ext(it.season === SEASONS[0] ? 'MLB log' : `MLB log ${it.season} (archived)`, it.sourceUrl || OFFICIAL_PAGE));
+      const archived = it.sourceUrl && it.sourceUrl.includes('web.archive.org');
+      links.appendChild(ext(archived ? `MLB log ${it.season} (archived)` : 'MLB log', it.sourceUrl || OFFICIAL_PAGE));
       if (it.gamePk) {
         links.appendChild(ext('Gameday', gamedayUrl(it.gamePk)));
         links.appendChild(ext('StatsAPI', statsapiUrl(it.gamePk)));

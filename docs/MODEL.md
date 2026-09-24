@@ -173,9 +173,26 @@ each pending ruling's resolution, which allows calibrating this with real outcom
   triggers the alert sound and is not written to the feed log.
 - The official-log confirmation ("✓ Official MLB log #N") comes from
   `data/official/scoring-changes-<season>.json`, refreshed every 30 minutes.
+- Game pages (`game.html`): the Challenges & Reviews tab's scoring-change and pending cards get
+  the same model line through a guarded hook in `reviews.js` `renderReviewCard`; `game.js` scores
+  from the page's own live feed (which already carries `hitData`) via the shared pure
+  `MLBScoringModel.scoreReview`.
 - Without `assets/js/scoring-model.js` or the model file, everything renders as before.
 
-## 12. Reproduce
+## 12. Operations
+
+- **Season rollover:** seasons default to 2024 through the current year. The live page serves
+  every season it lists; archived seasons reuse their stored parse (the Internet Archive is
+  fetched once per capture); a season the live page stops listing is served from the stored copy.
+  The "current" season is the latest one with completed games. The site reads seasons from the
+  report and `data/model/error-watch.json`, so no yearly code edit is needed.
+- **Failures:** a failed run exits non-zero, leaves every data file untouched and keeps the last
+  good `pipeline-report.json`, adding `fatal` and `failedAt`; `scoring.html` shows the notice.
+  A live page with no season header at all (structure change) writes an excerpt to `_probe/`
+  and a warning.
+- **Freshness:** every 3 hours on `main`; the workflow also requests a GitHub Pages rebuild.
+
+## 13. Reproduce
 
 ```bash
 node tools/pipeline-offline-smoke.mjs   # end-to-end on a synthetic stub (offline)

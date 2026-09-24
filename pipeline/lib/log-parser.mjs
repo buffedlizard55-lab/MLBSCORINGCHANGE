@@ -196,6 +196,9 @@ export function parseLogText(text) {
   for (const line of lines) {
     const sm = line.match(SECTION_RE);
     if (sm && line.length < 80) {
+      // A header with no entries yet (e.g. a season that just started) is
+      // kept as an empty section rather than silently dropped.
+      if (pendingHeader) sections.push({ label: pendingHeader.label, season: pendingHeader.season, entries: [], issues: ['empty_section'] });
       pendingHeader = { label: line.trim(), season: Number(sm[1]) };
       continue;
     }
@@ -225,6 +228,7 @@ export function parseLogText(text) {
     const entry = parseEntryLine(line, current.season);
     if (entry) current.entries.push(entry);
   }
+  if (pendingHeader) sections.push({ label: pendingHeader.label, season: pendingHeader.season, entries: [], issues: ['empty_section'] });
   for (const sec of sections) {
     if (!sec.label) sec.issues.push('section_without_header');
     const seen = new Map();

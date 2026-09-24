@@ -57,7 +57,7 @@
 | --- | --- |
 | Exact copy; original untouched | Commit `ddca0b8` = original at `859e958`. Browser storage isolated (`mlbScoringChange.*` keys, `tools/storage-namespace-test.mjs`) because both sites share one origin. |
 | Score /100: error → single | `assets/js/scoring-model.js` `scoreErrorToHit`, shown on **🎯 Error Watch** rows and ✏️ Scoring Change rows (live feed) and on `scoring.html`. |
-| Pending ruling → single / error / FC / out … | ⚖️ Scoring Pending rows show "Likely final ruling" chances (`pendingDistribution`). |
+| Pending ruling → single / error / FC / out … | ⚖️ Scoring Pending rows (feed and game page) show "Likely final ruling" chances (`pendingDistribution`). |
 | Observed, captured and logged events | *Observed*: every live `field_error` play (Error Watch). *Captured*: rulings the feed saw change (✏️ rows). *Logged*: MLB's official log, parsed and linked play-by-play (`data/official/`). |
 | Expected chance **and** final result | Every row shows both: the pre-change chance and the live / official final ruling. |
 | Full list | `scoring.html` → Official Changes (every entry, 2024–2026) and Error Watch (every error of the season). |
@@ -81,7 +81,8 @@ plainly; every data problem found is either fixed at the source or flagged in pu
    0–100 chance of becoming a hit, the batted ball, the live final ruling and, once MLB posts it,
    the official-log confirmation. It never triggers sounds and is not saved into the feed log.
 2. **Model lines on existing rows** — ✏️ Scoring Change rows show the pre-change chance and the
-   final result; ⚖️ Scoring Pending rows show the chances of each final ruling.
+   final result; ⚖️ Scoring Pending rows show the chances of each final ruling — in the Replay
+   Feed and on each game page's Challenges & Reviews tab.
 3. **✏️ Scoring Changes page** (`scoring.html`) — Error Watch for the whole season, MLB's
    official list for 2024–2026 (verbatim, classified, linked to the exact play and checked against
    its current ruling), the model card (accuracy, calibration, what drives changes, limitations)
@@ -89,7 +90,9 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 4. **Official-data pipeline** (`pipeline/`, runs on GitHub Actions every 3 hours) — parses the
    official log (live page for 2026; Internet Archive captures for 2024 and 2025), scans every
    completed game's play-by-play, links and verifies each entry, fits the models, cross-checks
-   against Baseball Savant, and commits `data/official/*.json` and `data/model/*.json`.
+   against Baseball Savant, and commits `data/official/*.json` and `data/model/*.json`. It rolls
+   over to new seasons by itself, reuses the immutable archive captures, and after a failed run
+   keeps the last good data online with a visible failure notice.
 
 ## Current results (pipeline run of 2026-09-24; the site always shows the latest)
 

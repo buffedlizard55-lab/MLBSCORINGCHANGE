@@ -50,14 +50,20 @@ const args = Object.fromEntries(process.argv.slice(2).map((a) => {
   const m = a.match(/^--([^=]+)(?:=(.*))?$/);
   return m ? [m[1], m[2] ?? true] : [a, true];
 }));
-const SEASONS = String(args.seasons || '2024,2025,2026').split(',').map(Number).filter(Boolean);
+// Default: every season from 2024 through the current year, so the pipeline
+// keeps working across season rollovers without code changes.
+const FIRST_SEASON = 2024;
+const THIS_YEAR = new Date().getUTCFullYear();
+const SEASONS = String(args.seasons || Array.from({ length: THIS_YEAR - FIRST_SEASON + 1 }, (_, i) => FIRST_SEASON + i).join(','))
+  .split(',').map(Number).filter(Boolean);
 const MAX_GAMES = args['max-games'] ? Number(args['max-games']) : Infinity;
 
 const LOG_PAGE = 'https://www.mlb.com/official-information/scoring-changes';
-// Prior seasons: the last Internet Archive capture after each season ended,
-// found via https://web.archive.org/cdx/search/cdx?url=mlb.com/official-information/scoring-changes
-const LOG_SOURCES = {
-  2026: { kind: 'live', url: LOG_PAGE, page: LOG_PAGE },
+// The live page lists the current season. Seasons it no longer lists come
+// from (a) an Internet Archive capture taken after the season ended (found via
+// https://web.archive.org/cdx/search/cdx?url=mlb.com/official-information/scoring-changes)
+// or (b) this repo's stored copy from when the live page still listed them.
+const ARCHIVE_SOURCES = {
   2025: {
     kind: 'archive',
     url: `https://web.archive.org/web/20260210034254id_/${LOG_PAGE}`,
@@ -71,6 +77,7 @@ const LOG_SOURCES = {
     archivedAt: '2025-01-21T08:35:45Z',
   },
 };
+const LOG_SOURCES = ARCHIVE_SOURCES; // (name kept for the sources list below)
 const SAVANT_ERRORS_CSV = (season) => 'https://baseballsavant.mlb.com/statcast_search/csv?all=true'
   + `&hfAB=field%5C.%5C.error%7C&hfSea=${season}%7C&player_type=batter&type=details`;
 
@@ -107,48 +114,98 @@ const report = {
 const irregularities = [];
 
 /* ------------------------------------------------------------------ 1 logs */
-async function loadOfficialLog(season) {
-  const src = LOG_SOURCES[season];
-  const outFile = path.join(OUT_OFFICIAL, `scoring-changes-${season}.json`);
-  const previous = readJSON(outFile);
-  if (!src) return previous ? { fromPrevious: true, ...previous } : null;
+let livePage = null;
+async function getLivePage() {
+  if (livePage) return livePage;
   try {
-    const html = await fetchText(src.url, { timeoutMs: 90000 });
-    const sections = parseLogHtml(html).filter((s) => s.season === season);
-    const entries = sections.flatMap((s, si) => s.entries.map((e) => ({ ...e, section: s.label, sectionIndex: si })));
-    if (!entries.length) {
+    const html = await fetchText(LOG_PAGE, { timeoutMs: 90000 });
+    const sections = parseLogHtml(html);
+    livePage = { html, sections, sha256: sha256(html), bytes: html.length };
+    if (!sections.some((sec) => sec.label)) {
+      // No season header at all: the page structure changed. Keep an excerpt
+      // for diagnosis, never fail silently. (A header with no entries yet is
+      // normal at the start of a season.)
       fs.mkdirSync(PROBE_DIR, { recursive: true });
       const at = html.indexOf(' -- In the ');
-      fs.writeFileSync(path.join(PROBE_DIR, `log-${season}-excerpt.txt`),
+      fs.writeFileSync(path.join(PROBE_DIR, 'live-log-excerpt.txt'),
         `bytes=${html.length}\nfirst " -- In the " at ${at}\n\n${html.slice(Math.max(0, at - 3000), at + 3000)}`);
-      throw new Error(`no entries parsed for ${season} (excerpt written to _probe/)`);
+      report.warnings.push('official log: no season header found on the live page (excerpt written to _probe/)');
     }
-    const info = {
-      season,
-      source: {
-        kind: src.kind, url: src.page, fetchedUrl: src.url, archivedAt: src.archivedAt || null,
-        fetchedAt: NOW.toISOString(), sha256: sha256(html), bytes: html.length,
-      },
-      sections: sections.map((s) => ({ label: s.label, entries: s.entries.length, issues: s.issues })),
-      entries,
-    };
-    fs.mkdirSync(path.join(OUT_OFFICIAL, 'raw'), { recursive: true });
-    fs.writeFileSync(path.join(OUT_OFFICIAL, 'raw', `scoring-changes-${season}.txt`),
-      `# Official MLB scoring changes — ${season}\n# Source: ${src.page}\n# Fetched: ${info.source.fetchedAt}  sha256(html)=${info.source.sha256}\n`
-      + '# Verbatim entry lines as extracted from the page (one per line).\n\n'
-      + entries.map((e) => e.raw).join('\n') + '\n');
-    report.logs[season] = { ok: true, entries: entries.length, sections: info.sections, bytes: html.length };
-    return info;
   } catch (err) {
-    report.logs[season] = { ok: false, error: String(err && err.message || err), usedPrevious: !!previous };
-    report.warnings.push(`official log ${season}: ${err && err.message}`);
-    if (!previous) return null;
+    livePage = { error: String(err && err.message || err), sections: [] };
+    report.warnings.push(`official log: live page unavailable (${livePage.error})`);
+  }
+  return livePage;
+}
+
+function stripDerived(entries) {
+  return (entries || []).map(({ cls, link, model, ...rest }) => rest);
+}
+
+function buildLogInfo(season, sections, source) {
+  const entries = sections.flatMap((sec, si) => sec.entries.map((e) => ({ ...e, section: sec.label, sectionIndex: si })));
+  fs.mkdirSync(path.join(OUT_OFFICIAL, 'raw'), { recursive: true });
+  fs.writeFileSync(path.join(OUT_OFFICIAL, 'raw', `scoring-changes-${season}.txt`),
+    `# Official MLB scoring changes — ${season}\n# Source: ${source.url}\n# Fetched: ${source.fetchedAt}  sha256(html)=${source.sha256}\n`
+    + '# Verbatim entry lines as extracted from the page (one per line).\n\n'
+    + entries.map((e) => e.raw).join('\n') + '\n');
+  return {
+    season,
+    source,
+    sections: sections.map((sec) => ({ label: sec.label, entries: sec.entries.length, issues: sec.issues })),
+    entries,
+  };
+}
+
+async function loadOfficialLog(season) {
+  const outFile = path.join(OUT_OFFICIAL, `scoring-changes-${season}.json`);
+  const previous = readJSON(outFile);
+  const fromPrevious = (why) => {
+    report.logs[season] = { ok: true, source: 'stored', note: why, entries: previous.entries.length };
     return {
       season: previous.season, source: previous.source, sections: previous.sections,
-      entries: previous.entries.map(({ cls, link, model, ...rest }) => rest),
-      fromPrevious: true,
+      entries: stripDerived(previous.entries), fromPrevious: true,
     };
+  };
+  // 1. The live page, when it lists this season.
+  const live = await getLivePage();
+  const liveSections = (live.sections || []).filter((sec) => sec.season === season && sec.entries.length);
+  if (liveSections.length) {
+    const info = buildLogInfo(season, liveSections, {
+      kind: 'live', url: LOG_PAGE, fetchedUrl: LOG_PAGE, archivedAt: null,
+      fetchedAt: NOW.toISOString(), sha256: live.sha256, bytes: live.bytes,
+    });
+    report.logs[season] = { ok: true, source: 'live', entries: info.entries.length, sections: info.sections };
+    return info;
   }
+  // 2. An Internet Archive capture (immutable: reuse the stored parse).
+  const src = ARCHIVE_SOURCES[season];
+  if (src) {
+    if (previous && previous.source && previous.source.fetchedUrl === src.url && (previous.entries || []).length) {
+      return fromPrevious(`archive capture ${src.archivedAt} already stored`);
+    }
+    try {
+      const html = await fetchText(src.url, { timeoutMs: 90000 });
+      const sections = parseLogHtml(html).filter((sec) => sec.season === season && sec.entries.length);
+      if (!sections.length) throw new Error(`archive capture has no ${season} entries`);
+      const info = buildLogInfo(season, sections, {
+        kind: 'archive', url: src.page, fetchedUrl: src.url, archivedAt: src.archivedAt,
+        fetchedAt: NOW.toISOString(), sha256: sha256(html), bytes: html.length,
+      });
+      report.logs[season] = { ok: true, source: 'archive', entries: info.entries.length, sections: info.sections };
+      return info;
+    } catch (err) {
+      report.warnings.push(`official log ${season}: ${err && err.message}`);
+      if (previous) return fromPrevious('archive fetch failed; stored copy used');
+      report.logs[season] = { ok: false, error: String(err && err.message || err) };
+      return null;
+    }
+  }
+  // 3. This repo's stored copy (e.g. last season, no longer on the live page).
+  if (previous && (previous.entries || []).length) return fromPrevious('not on the live page; stored copy used');
+  report.logs[season] = { ok: !live.error, source: 'none', entries: 0,
+    note: live.error ? 'live page unavailable' : 'no entries published for this season yet' };
+  return null;
 }
 
 /* --------------------------------------------------------------- 2 plays */
@@ -291,7 +348,7 @@ async function savantCrossCheck(season, fieldErrorRecs, model) {
 /* ---------------------------------------------------------------- main */
 async function main() {
   log(`start; seasons=${SEASONS.join(',')} today=${TODAY} labelCutoff=${LABEL_CUTOFF}`);
-  const currentSeason = Math.max(...SEASONS);
+  let currentSeason = Math.max(...SEASONS);   // refined below: latest season with completed games
   const perSeason = new Map();
   const allBatted = [];
   const errorRows = []; const hitRows = [];
@@ -441,7 +498,7 @@ async function main() {
         }
       }
     }
-    perSeason.set(season, { logInfo, entries, fieldErrorRecs, abbr, gameById });
+    perSeason.set(season, { logInfo, entries, fieldErrorRecs, abbr, gameById, completedGames: games.length });
     report.seasons[season] = {
       ...report.seasons[season],
       plateAppearances: seasonPAs,
@@ -460,6 +517,11 @@ async function main() {
     };
     log(`${season}: ${entries.length} official entries, ${seasonFieldErrors} field_error PAs, linked ${report.seasons[season].linked}`);
   }
+
+  // The "current" season: the latest one with completed games (in the
+  // off-season before opening day, that is still last season).
+  currentSeason = Math.max(...[...perSeason.entries()].filter(([, v]) => v.completedGames > 0).map(([k]) => k), SEASONS[0]);
+  report.currentSeason = currentSeason;
 
   // 4b. model tables (surface excludes the plays the overturn models learn from)
   const excluded = new Set([...errorRows, ...hitRows].filter((r) => r.y === 1).map((r) => r.id));
@@ -613,11 +675,14 @@ async function main() {
       hitProb: round(hp.p, 4), hitProbSource: hp.source,
       p: s ? s.p : null, score: s ? s.score : null, scoreKind: s ? s.kind : null,
       labelFinal: r.labelFinal,
-      status: r.y === 1 ? 'changed_to_hit' : official.length ? 'changed_other' : 'stands',
+      // An error → error correction (e.g. fielding → throwing) still stands
+      // as an error; 'changed_other' = changed to FC / sacrifice / out.
+      status: r.y === 1 ? 'changed_to_hit' : (official.length && r.final !== 'error') ? 'changed_other' : 'stands',
       final: r.final, official,
     };
   }).sort((a, b) => (b.date || '').localeCompare(a.date || '') || b.gamePk - a.gamePk || b.ai - a.ai);
-  writeJSON(path.join(OUT_MODEL, `error-watch-${currentSeason}.json`), {
+  // Stable filename (the season is inside) so the site needs no yearly edit.
+  writeJSON(path.join(OUT_MODEL, 'error-watch.json'), {
     season: currentSeason, generatedAt: NOW.toISOString(), labelCutoff: LABEL_CUTOFF, plays: watch,
   });
 
@@ -658,8 +723,14 @@ async function main() {
 main().catch((err) => {
   console.error(err && err.stack || err);
   try {
-    report.fatal = String(err && err.message || err);
-    writeJSON(path.join(OUT_MODEL, 'pipeline-report.json'), report);
+    // Keep the last good report (the site's summary reads it) and add the
+    // failure on top, so a failed run is visible without blanking the page.
+    const file = path.join(OUT_MODEL, 'pipeline-report.json');
+    const previous = readJSON(file);
+    const failure = { fatal: String(err && err.message || err), failedAt: NOW.toISOString() };
+    writeJSON(file, previous && previous.seasons && Object.keys(previous.seasons).length
+      ? { ...previous, ...failure, warnings: report.warnings.length ? report.warnings : (previous.warnings || []) }
+      : { ...report, ...failure });
   } catch { /* ignore */ }
   process.exit(1);
 });

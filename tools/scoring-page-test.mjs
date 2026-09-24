@@ -85,7 +85,7 @@ const noJunk = (s, where) => {
 
 const model = readJSON('data/model/scoring-model.json');
 const report = readJSON('data/model/pipeline-report.json');
-const watch = readJSON('data/model/error-watch-2026.json');
+const watch = readJSON('data/model/error-watch.json');
 const off2026 = readJSON('data/official/scoring-changes-2026.json');
 const irr = readJSON('data/official/irregularities.json');
 

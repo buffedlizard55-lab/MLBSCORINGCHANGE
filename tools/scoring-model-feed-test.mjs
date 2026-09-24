@@ -194,7 +194,7 @@ text = listText();
 assert.match(text, /Field Error/);
 assert.match(text, /Pre-change chance this error becomes a hit/);
 assert.ok(text.includes(`${expected}/100`));
-assert.match(text, /Final result: Single — the change the model scored/);
+assert.match(text, /Final result: Single — the error became a hit/);
 windowStub.ReplayFeed.setFilter('errorwatch');
 text = listText();
 assert.match(text, /✏️ Now: Single/);

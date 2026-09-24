@@ -94,6 +94,53 @@
     return /challenge|review|instant replay/i.test(String(status.detailedState || ''));
   }
 
+  /* ------------------------------------------------ scoring-change model */
+  // Model line on this game's ✏️ scoring-change and ⚖️ pending cards
+  // (reviews.js renderReviewCard calls window.MLBScoringModelCard). Batted-ball
+  // data comes from this page's own live feed — no extra request. Inert
+  // without assets/js/scoring-model.js or data/model/scoring-model.json.
+  let scoringModel = null;
+  let scoringModelRequested = false;
+  function loadScoringModel() {
+    if (scoringModelRequested || !window.MLBScoringModel || typeof fetch !== 'function') return;
+    scoringModelRequested = true;
+    fetch('data/model/scoring-model.json', { cache: 'no-cache' })
+      .then((res) => (res && res.ok ? res.json() : null))
+      .then((m) => { if (m && m.errorToHit) { scoringModel = m; if (feed) renderAll(); } })
+      .catch(() => { /* scores simply stay hidden */ });
+  }
+  window.MLBScoringModelCard = function modelCardLine(review) {
+    const SMod = window.MLBScoringModel;
+    if (!SMod || !scoringModel || !feed) return null;
+    const plays = (feed.liveData && feed.liveData.plays && feed.liveData.plays.allPlays) || [];
+    const byAi = new Map();
+    plays.forEach((p) => { if (p && p.about && p.about.atBatIndex != null) byAi.set(p.about.atBatIndex, p); });
+    const home = gd().teams && gd().teams.home;
+    const out = SMod.scoreReview(scoringModel, review, (ai) => byAi.get(ai) || null, home ? home.id : null);
+    if (!out) return null;
+    const wrap = UI.el('div', 'feed-model');
+    if (out.kind === 'pending') {
+      const line = UI.el('div', 'feed-model-line feed-model-dist');
+      line.appendChild(UI.el('span', 'feed-model-label', 'Likely final ruling'));
+      out.distribution.distribution.slice(0, 4).forEach((d) => {
+        line.appendChild(UI.el('span', `model-outcome model-outcome-${d.outcome}`, `${d.label} ${d.scoreText}`));
+      });
+      wrap.appendChild(line);
+    } else {
+      const r = out.result;
+      const line = UI.el('div', 'feed-model-line');
+      line.appendChild(UI.el('span', 'feed-model-label', out.kind === 'errorToHit'
+        ? 'Pre-change chance this error becomes a hit' : 'Pre-change chance this hit becomes an error'));
+      const chip = UI.el('span', `model-score model-tone-${r.band.tone}`, `${r.scoreText}/100`);
+      chip.title = `Model probability ${(r.probability * 100).toFixed(1)}%`;
+      line.appendChild(chip);
+      line.appendChild(UI.el('span', `feed-model-band model-tone-${r.band.tone}`, r.band.label));
+      wrap.appendChild(line);
+    }
+    wrap.appendChild(UI.el('a', 'feed-model-official', 'How this is scored →', { href: 'scoring.html#model' }));
+    return wrap;
+  };
+
   /* ------------------------------------------------------------------ boot */
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -106,6 +153,7 @@
       return;
     }
     wireTabs();
+    loadScoringModel();
     $('#refresh-btn').addEventListener('click', () => load(true));
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) {

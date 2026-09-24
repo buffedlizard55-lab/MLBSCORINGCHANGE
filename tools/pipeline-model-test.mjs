@@ -345,6 +345,77 @@ test('team-code correction on the same date and wide date window (synthetic)', (
   assert.ok(wide.flags.includes('date_mismatch_wide'));
   const none = candidateGames({ away: 'XYZ', home: 'QRS', date: '2025-08-12' }, idx, games, byId);
   assert.equal(none.games.length, 0);
+  // A DATE typo must use the date fallback, never "correct" the opponent:
+  // CHC@PIT was on 6/1; on 6/2 PIT hosted CWS (teamCode "cha" shares "CH").
+  const t2 = [
+    { id: 112, abbreviation: 'CHC', teamCode: 'chn', fileCode: 'chc' },
+    { id: 145, abbreviation: 'CWS', teamCode: 'cha', fileCode: 'cws' },
+    { id: 134, abbreviation: 'PIT', teamCode: 'pit', fileCode: 'pit' },
+  ];
+  const g2 = [
+    { gamePk: 10, awayId: 112, homeId: 134, officialDate: '2026-06-01', gameNumber: 1 },
+    { gamePk: 11, awayId: 145, homeId: 134, officialDate: '2026-06-02', gameNumber: 1 },
+  ];
+  const typo = candidateGames({ away: 'CHC', home: 'PIT', date: '2026-06-02' }, buildTeamIndex(t2), g2, new Map(t2.map((t) => [t.id, t])));
+  assert.deepEqual(typo.games.map((g) => g.gamePk), [10], 'date fallback wins');
+  assert.deepEqual(typo.flags, ['date_mismatch']);
+});
+
+test('scoreReview: scoring-change and pending rows from StatsAPI plays (synthetic)', () => {
+  const surface = { evMin: 40, evStep: 40, nEv: 2, laMin: -60, laStep: 65, nLa: 2, rate: [0.05, 0.2, 0.3, 0.6] };
+  const model = {
+    hitProb: { surface, fallback: { overall: 0.3 } },
+    errorToHit: { terms: ['logit_hit_prob'], coef: [1], intercept: -2, baseRate: 0.05 },
+    hitToError: { terms: ['logit_hit_prob'], coef: [-1], intercept: -6, baseRate: 0.001 },
+    pending: { outcomes: ['hit', 'error', 'fc', 'out', 'sac', 'other'], evEdges: [85], laEdges: [10], minN: 1,
+      table: { R: { n: 100, p: [0.7, 0.2, 0.1, 0, 0, 0] }, O: { n: 100, p: [0, 0, 0, 1, 0, 0] } } },
+  };
+  const play = (ai, ls, la, batterOut) => ({
+    about: { atBatIndex: ai }, matchup: { batter: { id: 10 + ai } },
+    playEvents: [{ details: { isInPlay: true }, hitData: { launchSpeed: ls, launchAngle: la, trajectory: 'ground_ball', location: '6' } }],
+    runners: [{ movement: { isOut: batterOut }, details: { runner: { id: 10 + ai } } }],
+  });
+  const plays = new Map([[4, play(4, 95, 5, false)], [5, play(5, 50, 30, true)]]);
+  const lookup = (ai) => plays.get(ai) || null;
+  const e = SM.scoreReview(model, { typeKey: 'scoring_change', atBatIndex: 4, halfInning: 'top', initial: { eventType: 'field_error' } }, lookup, 147);
+  assert.equal(e.kind, 'errorToHit');
+  assert.ok(Math.abs(e.result.probability - sigmoid(-2 + Math.log(0.6 / 0.4))) < 1e-12);
+  assert.equal(e.battedBall.ls, 95);
+  assert.equal(SM.scoreReview(model, { typeKey: 'scoring_change', atBatIndex: 4, initial: { eventType: 'home_run' } }, lookup), null, 'no model for home runs');
+  assert.equal(SM.scoreReview(model, { typeKey: 'abs', atBatIndex: 4 }, lookup), null);
+  // os_ruling_pending_prior refers to the PREVIOUS plate appearance (ai 4: batter reached)
+  const prior = SM.scoreReview(model, { typeKey: 'pending_scoring', atBatIndex: 5, pendingCodes: ['os_ruling_pending_prior'] }, lookup);
+  assert.equal(prior.target, 4);
+  assert.equal(prior.distribution.key, 'R');
+  const primary = SM.scoreReview(model, { typeKey: 'pending_scoring', atBatIndex: 5, pendingCodes: ['os_ruling_pending_primary'] }, lookup);
+  assert.equal(primary.target, 5);
+  assert.equal(primary.distribution.key, 'O', 'batter out on the marker play');
+  assert.equal(SM.pendingTarget({ atBatIndex: 0, pendingCodes: ['os_ruling_pending_prior'] }), null);
+});
+
+test('linkEntry: date-fallback game without the batter → mistyped-code correction (synthetic)', () => {
+  const teams = [
+    { id: 141, abbreviation: 'TOR', teamCode: 'tor', fileCode: 'tor' },
+    { id: 108, abbreviation: 'LAA', teamCode: 'ana', fileCode: 'ana' },
+    { id: 119, abbreviation: 'LAD', teamCode: 'lan', fileCode: 'la' },
+  ];
+  const games = [
+    { gamePk: 21, awayId: 141, homeId: 108, officialDate: '2025-08-05', gameNumber: 1 },  // TOR@LAA 5 days earlier
+    { gamePk: 22, awayId: 141, homeId: 119, officialDate: '2025-08-10', gameNumber: 1 },  // TOR@LAD that day
+  ];
+  const playsByGame = new Map([
+    [21, [{ ty: 'atBat', g: 21, ai: 30, inn: 7, top: false, b: 1, bn: 'Someone Else', et: 'single' }]],
+    [22, [{ ty: 'atBat', g: 22, ai: 55, inn: 7, top: false, b: 2, bn: 'Teoscar Hernández', et: 'field_error' }]],
+  ]);
+  const entry = {
+    away: 'TOR', home: 'LAA', date: '2025-08-10', inning: 7, half: 'bottom',
+    body: 'In the bottom of the 7th inning, the single for Teoscar Hernandez has been changed to an error charged to Ernie Clement.',
+    cls: { final: 'error' },
+  };
+  const link = linkEntry(entry, { teamIndex: buildTeamIndex(teams), games, playsByGame, teamsById: new Map(teams.map((t) => [t.id, t])) });
+  assert.equal(link.gamePk, 22);
+  assert.equal(link.atBatIndex, 55);
+  assert.deepEqual(link.flags, ['team_code_corrected:LAA->LAD']);
 });
 
 console.log(`pipeline-model-test: ${passed} passed`);

@@ -111,15 +111,10 @@ export function candidateGames(entry, teamIndex, games, teamsById = new Map()) {
   const flags = [];
   const away = teamIndex.get(entry.away || '');
   const home = teamIndex.get(entry.home || '');
-  const exactPairExists = away && home && games.some((g) => g.awayId === away.id && g.homeId === home.id
-    && entry.date && g.officialDate === entry.date);
-  if (!exactPairExists) {
-    const fix = correctTeamCode(entry, teamIndex, games, teamsById);
-    if (fix && (!away || !home || fix.game.awayId !== away.id || fix.game.homeId !== home.id)) {
-      return { games: [fix.game], flags: [fix.flag] };
-    }
-  }
   if (!away || !home) {
+    // An invalid code: try the same-date correction, else give up (flagged).
+    const fix = correctTeamCode(entry, teamIndex, games, teamsById);
+    if (fix) return { games: [fix.game], flags: [fix.flag] };
     return { games: [], flags: [`unknown_team:${!away ? entry.away : entry.home}`] };
   }
   if (away.how !== 'abbreviation') flags.push(away.how.startsWith('team_alias') ? away.how : `team_code_via:${away.how}:${entry.away}`);
@@ -144,6 +139,14 @@ export function candidateGames(entry, teamIndex, games, teamsById = new Map()) {
   } else {
     list = pair.slice();
     if (list.length) flags.push('date_inferred');
+  }
+  if (!list.length && entry.date) {
+    // Both codes valid but no such game anywhere near the date: last resort,
+    // a mistyped (valid-looking) code — e.g. "TOR@LAA" for TOR@LAD. Tried
+    // only after every date fallback, so a date typo is never "corrected"
+    // into a different opponent.
+    const fix = correctTeamCode(entry, teamIndex, games, teamsById);
+    if (fix) return { games: [fix.game], flags: [fix.flag] };
   }
   if (entry.gameNumber && list.length > 1) {
     const byNum = list.filter((g) => g.gameNumber === entry.gameNumber);
@@ -235,18 +238,12 @@ export function rulingAgrees(finalCategory, finalHitType, eventType) {
  * @param {object} entry   parsed entry (+ .cls classification)
  * @param {object} ctx     {teamIndex, games, playsByGame: Map<gamePk, rec[]>}
  */
-export function linkEntry(entry, ctx) {
-  const { games, flags } = candidateGames(entry, ctx.teamIndex, ctx.games, ctx.teamsById);
-  const link = { gamePk: null, atBatIndex: null, batterName: null, currentEventType: null, method: null, flags: [...flags] };
-  if (!games.length) {
-    link.flags.push('no_game_found');
-    return link;
-  }
+/** Batters named in the entry text, per candidate game (see linkEntry). */
+function findCandidates(entry, games, playsByGame) {
   const normText = normalizeName(entry.body);
-  const cls = entry.cls || {};
   const candidates = [];
   for (const g of games) {
-    const plays = (ctx.playsByGame.get(g.gamePk) || []).filter((r) => r.ty === 'atBat');
+    const plays = (playsByGame.get(g.gamePk) || []).filter((r) => r.ty === 'atBat');
     const halfPlays = entry.inning != null
       ? plays.filter((r) => r.inn === entry.inning && (entry.half == null || r.top === (entry.half === 'top')))
       : plays;
@@ -270,6 +267,32 @@ export function linkEntry(entry, ctx) {
       if (!candidates.some((c) => c.game === g)) scan(plays, 'whole_game');
     } else {
       scan(plays, 'whole_game');
+    }
+  }
+  return candidates;
+}
+
+export function linkEntry(entry, ctx) {
+  let { games, flags } = candidateGames(entry, ctx.teamIndex, ctx.games, ctx.teamsById);
+  const link = { gamePk: null, atBatIndex: null, batterName: null, currentEventType: null, method: null, flags: [...flags] };
+  if (!games.length) {
+    link.flags.push('no_game_found');
+    return link;
+  }
+  const cls = entry.cls || {};
+  let candidates = findCandidates(entry, games, ctx.playsByGame);
+  if (!candidates.length && entry.date && flags.some((f) => /^date_mismatch/.test(f))) {
+    // The date fallback found the stated teams on another day, but the named
+    // batter is not there: try a mistyped-code correction on the stated
+    // date, kept only if the batter IS found in that game.
+    const fix = correctTeamCode(entry, ctx.teamIndex, ctx.games, ctx.teamsById || new Map());
+    if (fix) {
+      const retry = findCandidates(entry, [fix.game], ctx.playsByGame);
+      if (retry.length) {
+        games = [fix.game];
+        candidates = retry;
+        link.flags = [fix.flag];
+      }
     }
   }
   if (!candidates.length) {

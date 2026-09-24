@@ -59,6 +59,9 @@
       (hit vs. error vs. fielder's choice undecided) come from the API's own event-type
       registry — <code>os_ruling_pending_primary</code> / <code>os_ruling_pending_prior</code>,
       description "Official Scorer Ruling Pending" (<code>GET /api/v1/eventTypes</code>).
+      <strong>Scoring-change model</strong>: the 🎯 Error Watch tab and the chances shown on scoring-change and
+      pending rows come from a model fitted on MLB's official scoring-change log — methodology, accuracy and the
+      full season list on the <a href="scoring.html">✏️ Scoring Changes</a> page.
       A pending ruling decides how the play is charged and never removes a run from the score.
       Challenges-remaining counters are the official per-team
       values read directly from the StatsAPI (<code>review.away/home.used/remaining</code> for

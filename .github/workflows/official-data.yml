@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  pages: write
 
 concurrency:
   group: official-data-${{ github.ref }}
@@ -81,3 +82,12 @@ jobs:
           done
           echo "::error::could not push data commit"
           exit 1
+
+      # GitHub Pages is served from main ("Deploy from a branch"). Ask for a
+      # rebuild after a data commit in case bot pushes do not trigger one.
+      - name: Request a Pages rebuild
+        if: always() && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --jq '.status' || true

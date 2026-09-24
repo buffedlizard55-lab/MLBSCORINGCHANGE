@@ -1588,6 +1588,16 @@ const MLBReviews = (() => {
         body.appendChild(UI.el('p', 'review-resolved-text', `Resolved as: ${review.resolvedDescription}`));
       }
     }
+    // Scoring-change model line (game page). game.js provides the hook only
+    // when the model module + data are loaded; otherwise nothing renders, and
+    // a failing hook can never break the card.
+    if ((review.typeKey === 'scoring_change' || review.typeKey === 'pending_scoring') &&
+        typeof window !== 'undefined' && typeof window.MLBScoringModelCard === 'function') {
+      try {
+        const modelLine = window.MLBScoringModelCard(review);
+        if (modelLine) body.appendChild(modelLine);
+      } catch (_) { /* model line is optional */ }
+    }
     card.appendChild(body);
 
     // Footer: Batter / Pitcher context (only when a name actually exists —

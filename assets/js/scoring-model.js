@@ -310,6 +310,56 @@
     };
   }
 
+  /**
+   * The play a pending ruling is about: the marker's own plate appearance for
+   * os_ruling_pending_primary; the previous one for os_ruling_pending_prior
+   * (a base-running marker that refers to the prior play).
+   */
+  function pendingTarget(review) {
+    var codes = (review && review.pendingCodes) || [];
+    if (!review || review.atBatIndex == null) return null;
+    if (codes.indexOf('os_ruling_pending_primary') >= 0 || codes.indexOf('os_ruling_pending_prior') < 0) {
+      return review.atBatIndex;
+    }
+    return review.atBatIndex > 0 ? review.atBatIndex - 1 : null;
+  }
+
+  function assign(target, source) {
+    if (source) for (var k in source) if (Object.prototype.hasOwnProperty.call(source, k)) target[k] = source[k];
+    return target;
+  }
+
+  /**
+   * Score a scoring-change or pending review row from StatsAPI plays.
+   * lookupPlay(atBatIndex) → allPlays element (with playEvents / runners).
+   * Returns {kind: 'errorToHit'|'hitToError'|'pending', result|distribution,
+   * battedBall, target} or null when the model does not apply.
+   */
+  function scoreReview(model, review, lookupPlay, homeId) {
+    if (!model || !review || review.atBatIndex == null || typeof lookupPlay !== 'function') return null;
+    var top = review.halfInning === 'top' ? true : review.halfInning === 'bottom' ? false : null;
+    if (review.typeKey === 'scoring_change') {
+      var et = review.initial && review.initial.eventType;
+      var fromError = et === 'field_error';
+      var fromHit = !!HIT_EVENTS[et] && et !== 'home_run';
+      if (!fromError && !fromHit) return null;
+      var p = lookupPlay(review.atBatIndex);
+      var bb = p ? battedBallFromEvents(p.playEvents) : null;
+      var play = assign({ et: et, top: top, homeId: homeId != null ? homeId : null }, bb);
+      var res = fromError ? scoreErrorToHit(model, play) : scoreHitToError(model, play);
+      return res ? { kind: fromError ? 'errorToHit' : 'hitToError', result: res, battedBall: bb, target: review.atBatIndex } : null;
+    }
+    if (review.typeKey === 'pending_scoring') {
+      var target = pendingTarget(review);
+      if (target == null) return null;
+      var tp = lookupPlay(target);
+      var tbb = tp ? battedBallFromEvents(tp.playEvents) : null;
+      var dist = pendingDistribution(model, assign({ top: top, homeId: homeId != null ? homeId : null }, tbb), tp ? batterReached(tp) : null);
+      return dist ? { kind: 'pending', distribution: dist, battedBall: tbb, target: target } : null;
+    }
+    return null;
+  }
+
   var api = {
     OUTCOME_LABELS: OUTCOME_LABELS,
     DEFAULT_BANDS: DEFAULT_BANDS,
@@ -334,6 +384,8 @@
     batterReached: batterReached,
     playFromStatsApi: playFromStatsApi,
     playFromRecord: playFromRecord,
+    pendingTarget: pendingTarget,
+    scoreReview: scoreReview,
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = api;

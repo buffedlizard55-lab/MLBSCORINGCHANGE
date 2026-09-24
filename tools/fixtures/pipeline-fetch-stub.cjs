@@ -94,6 +94,13 @@ for (const season of SEASONS) {
   world.savant.set(season, `\uFEFF"game_pk","at_bat_number","launch_speed","launch_angle","estimated_ba_using_speedangle","events"\n${savantRows.map((x) => [x.game_pk, x.at_bat_number, x.launch_speed, x.launch_angle, x.estimated_ba_using_speedangle, x.events].map((v) => `"${v}"`).join(',')).join('\n')}\n`);
 }
 
+// Test controls: STUB_REQUEST_LOG = file to append requested URLs to;
+// STUB_LIVE_SEASON = season the live page lists (2027 simulates rollover:
+// a new header with no entries yet).
+const REQUEST_LOG = process.env.STUB_REQUEST_LOG || null;
+const LIVE_SEASON = Number(process.env.STUB_LIVE_SEASON || 2026);
+const fsNode = require('node:fs');
+
 function respond(body, type) {
   const text = typeof body === 'string' ? body : JSON.stringify(body);
   return Promise.resolve({ ok: true, status: 200, headers: { get: () => type }, text: async () => text, json: async () => JSON.parse(text) });
@@ -101,8 +108,12 @@ function respond(body, type) {
 
 globalThis.fetch = (input) => {
   const url = String(input && input.url ? input.url : input);
+  if (REQUEST_LOG) fsNode.appendFileSync(REQUEST_LOG, `${url}\n`);
   let m;
-  if ((m = url.match(/\/api\/v1\/teams\?sportId=1&season=(\d{4})/))) return respond({ teams: TEAMS });
+  if ((m = url.match(/\/api\/v1\/teams\?sportId=1&season=(\d{4})/))) {
+    if (process.env.STUB_FAIL_TEAMS) return Promise.resolve({ ok: false, status: 404, headers: { get: () => null }, text: async () => 'not found', json: async () => ({}) });
+    return respond({ teams: TEAMS });
+  }
   if ((m = url.match(/\/api\/v1\/schedule\?.*season=(\d{4}).*gameType=([A-Z])/))) {
     const games = m[2] === 'R' ? world.schedule.get(Number(m[1])) || [] : [];
     const byDate = new Map();
@@ -115,7 +126,10 @@ globalThis.fetch = (input) => {
   }
   if (url.includes('web.archive.org/web/20260210034254id_')) return respond(world.log.get(2025), 'text/html');
   if (url.includes('web.archive.org/web/20250121083545id_')) return respond(world.log.get(2024), 'text/html');
-  if (url.startsWith('https://www.mlb.com/official-information/scoring-changes')) return respond(world.log.get(2026), 'text/html');
+  if (url.startsWith('https://www.mlb.com/official-information/scoring-changes')) {
+    if (LIVE_SEASON !== 2026) return respond(`<html><body><p><strong>${LIVE_SEASON} Regular Season</strong></p><ol></ol></body></html>`, 'text/html');
+    return respond(world.log.get(2026), 'text/html');
+  }
   if ((m = url.match(/baseballsavant\.mlb\.com\/statcast_search\/csv\?.*hfSea=(\d{4})/))) return respond(world.savant.get(Number(m[1])) || '', 'text/csv');
   return Promise.resolve({ ok: false, status: 599, text: async () => `unstubbed ${url}`, json: async () => ({}) });
 };

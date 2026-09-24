@@ -3176,11 +3176,8 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
    * for os_ruling_pending_prior (a base-running marker about the prior play).
    */
   function pendingTargetIndex(r) {
-    const codes = Array.isArray(r.pendingCodes) ? r.pendingCodes : [];
-    if (codes.includes('os_ruling_pending_primary') || !codes.includes('os_ruling_pending_prior')) {
-      return r.atBatIndex;
-    }
-    return r.atBatIndex > 0 ? r.atBatIndex - 1 : null;
+    const SMod = scoringModelModule();
+    return SMod ? SMod.pendingTarget(r) : r.atBatIndex;
   }
 
   function gameHomeId(game) {
@@ -3370,8 +3367,11 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       line.appendChild(scoreChip(res));
       line.appendChild(el('span', `feed-model-band model-tone-${res.band.tone}`, res.band.label));
       block.appendChild(line);
+      const outcomeNote = fromError
+        ? (predictedHappened ? 'the error became a hit' : 'not a hit')
+        : (predictedHappened ? 'the hit became an error' : 'not an error');
       block.appendChild(el('div', 'feed-model-line feed-model-result',
-        `Final result: ${r.final ? r.final.label : 'changed'}${predictedHappened ? ' — the change the model scored' : ' — a different change than the one scored'}`));
+        `Final result: ${r.final ? r.final.label : 'changed'} — ${outcomeNote}`));
       block.appendChild(el('div', 'feed-model-line feed-model-bb', battedBallLine(entry.gamePk, r.atBatIndex)));
       const off = officialConfirmation(entry.gamePk, r.atBatIndex);
       if (off) block.appendChild(off);
