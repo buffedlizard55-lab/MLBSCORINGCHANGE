@@ -1,0 +1,38 @@
+name: API smoke test
+
+on:
+  workflow_dispatch:
+  schedule:
+    # nightly sanity check that the upstream data still matches our parsers
+    - cron: '17 4 * * *'
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate two-sided hit forecast model
+        run: node tools/hit-model-test.mjs
+
+      - name: Validate challenges and replay reviews
+        run: node tools/review-test.mjs
+
+      - name: Validate all-games replay feed diff helpers
+        run: node tools/reviews-feed-test.mjs
+
+      - name: Render all-games replay feed against captured API payloads
+        run: node tools/replay-feed-render-test.mjs
+
+      - name: Validate in-review lean probe signature
+        run: node tools/review-probe-test.mjs
+
+      - name: Validate official game-status review detection
+        run: node tools/review-status-test.mjs
+
+      - name: Validate the replay feed review-status watcher
+        run: node tools/review-watcher-test.mjs
+
+      - name: Run smoke test against live MLB StatsAPI
+        run: node tools/smoke-test.mjs

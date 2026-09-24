@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLB Live PBP — Replay Feed</title>
+  <meta name="description" content="Live replay review feed for every MLB game: manager challenges, crew chief reviews, umpire reviews, ABS pitch challenges and boundary calls across the whole schedule, chat-style.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23fff' stroke='%23e03131' stroke-width='6'/%3E%3Cpath d='M50 4 A46 46 0 0 1 96 50 M50 96 A46 46 0 0 1 4 50 M4 50 A46 46 0 0 1 50 4 M96 50 A46 46 0 0 1 50 96' stroke='%23e03131' stroke-width='2.5' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page-reviews">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-ball">⚾</span>
+      <span>MLB Live PBP</span>
+      <span class="brand-sub">replay feed · all games</span>
+    </div>
+    <a class="btn btn-ghost" href="index.html">← Scoreboard</a>
+    <div class="date-nav">
+      <button class="btn btn-ghost" onclick="ReplayFeed.prevDay()" title="Previous day">←</button>
+      <input type="date" id="date-picker" onchange="ReplayFeed.pickDate()" aria-label="Game date">
+      <button class="btn btn-ghost" onclick="ReplayFeed.nextDay()" title="Next day">→</button>
+      <button class="btn" onclick="ReplayFeed.today()">Today</button>
+    </div>
+    <div id="date-label" class="date-label"></div>
+    <div class="feed-controls">
+      <button id="sound-toggle-btn" class="btn btn-ghost" title="Toggle alert sound — a gentle raindrop chime for new challenges/reviews/boundary calls, official-scorer pending rulings and official scoring changes (not ABS), and the same chime whenever an active review could remove a run already on the scoreboard">🔇 Sound Off</button>
+      <button id="notify-toggle-btn" class="btn btn-ghost" title="Toggle desktop notifications for run-at-risk reviews — a popup the moment an active review could take a run off the scoreboard">⚪ Run Alerts Off</button>
+      <button id="refresh-btn" class="btn">Refresh</button>
+      <span class="countdown" id="countdown" title="Seconds until the next poll"></span>
+      <div class="live-pill" title="Polling the MLB StatsAPI">
+        <span id="live-dot" class="live-dot"></span><span>LIVE</span>
+      </div>
+    </div>
+  </header>
+
+  <div id="banner" class="banner"></div>
+
+  <main class="reviews-main">
+    <section id="active-strip" class="active-strip-wrap"></section>
+
+    <section id="feed-stats" class="reviews-summary-bar"></section>
+
+    <nav id="feed-tabs" class="tabs" aria-label="Filter feed"></nav>
+
+    <section id="feed-list" class="feed-list" aria-live="polite"></section>
+
+    <div id="status-line" class="status-line"></div>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      Unofficial fan project. Live data via the public MLB StatsAPI
+      (<a href="https://statsapi.mlb.com" target="_blank" rel="noopener">statsapi.mlb.com</a>) —
+      manager challenges, crew chief/umpire reviews and boundary calls come from the live game feed's
+      <code>reviewDetails</code>, ABS pitch challenges from <code>absChallenges</code> /
+      pitch-level review events, and <strong>official-scorer pending rulings</strong>
+      (hit vs. error vs. fielder's choice undecided) come from the API's own event-type
+      registry — <code>os_ruling_pending_primary</code> / <code>os_ruling_pending_prior</code>,
+      description "Official Scorer Ruling Pending" (<code>GET /api/v1/eventTypes</code>).
+      A pending ruling decides how the play is charged and never removes a run from the score.
+      Challenges-remaining counters are the official per-team
+      values read directly from the StatsAPI (<code>review.away/home.used/remaining</code> for
+      manager challenges; <code>gameData.absChallenges.away/home.usedSuccessful/usedFailed/remaining</code>
+      for ABS) — never derived by counting feed events, and never zero-filled when a counter is
+      absent (e.g. pre-ABS seasons). A used-counter that moves backwards between polls is flagged
+      as an irregularity on the affected rows instead of being corrected or hidden. The score tracker separates the observed call-on-field score,
+      conditional possibilities, and an attributable official score after resolution when exposed.
+      Possibilities use only runs tied to the reviewed event and are not predictions of the ruling
+      or runner placement.
+      A review is flagged <strong>Runs at Risk</strong> only when the official payload credits one or
+      more scoring movements to the very event under review, so an overturn could take those runs
+      back off the scoreboard. Unrelated runs from earlier in the same plate appearance (a steal of
+      home, a wild pitch) are excluded, and whether replay actually removes a run is never predicted.
+      <strong>Official scoring changes</strong> (a hit reclassified as an error or vice versa, a
+      single changed to a double or back, a base hit changed to a fielder's choice + error, an out
+      changed to a hit, and so on) are tracked in the ✏️ Scoring Changes tab and in the All feed by
+      snapshotting every completed play's official classification (<code>result.eventType</code> /
+      <code>result.isOut</code> / <code>count.outs</code> / error movements in <code>runners[]</code>)
+      on every poll and diffing it against the previous polls — the StatsAPI payload carries no
+      scoring-change marker, so the initial call and the final ruling are known only from
+      consecutive observations. Each row shows the observed initial call and the final ruling, the
+      official score after the play, and an attribution note. Changes that coincide with a replay
+      review stay on that review's row; everything else is attributed as an official scoring change
+      (per MLB's own log, changes are made by the Official Scorer, the Elias Sports Bureau, or after
+      a player/club review —
+      <a href="https://www.mlb.com/official-information/scoring-changes" target="_blank" rel="noopener">mlb.com/official-information/scoring-changes</a>).
+      A change can only be tracked when its initial call was observed before the change landed;
+      finals are re-scanned for 30 minutes after they end (at most every 30 seconds) to catch
+      rulings published after the game. Payload edits without a reclassification (description /
+      RBI / score only) and plays that vanish from the payload are flagged as irregularities for
+      review, never corrected or hidden.
+      Every tracked entry is also logged to this browser (one log per date, newest seven dates
+      kept, 500 most-recent rows) so a refresh or a later visit restores the feed rows, the
+      scoring baselines and the flagged irregularities before the first scan runs; the log holds
+      only observed payload data, and anything malformed in it is dropped with a console warning
+      rather than guessed.
+      Not affiliated with MLB or MLB Advanced Media.
+    </p>
+  </footer>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/ui.js"></script>
+  <script src="assets/js/reviews.js"></script>
+  <script src="assets/js/feed-log.js"></script>
+  <script src="assets/js/reviews-feed.js"></script>
+</body>
+</html>
