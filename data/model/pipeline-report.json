@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-24T20:00:24.134Z",
+ "generatedAt": "2026-09-24T20:13:44.443Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -61,7 +61,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/745444/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 2472,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2472,
     "scorers": 88
@@ -77,12 +77,12 @@
    "fieldErrorPlateAppearances": 1125,
    "officialEntries": 229,
    "entryKinds": {
-    "ruling_change": 159,
+    "ruling_change": 158,
     "baserunning": 18,
     "earned_run": 14,
     "fielding_credit": 10,
+    "rbi": 7,
     "wild_pitch_passed_ball": 7,
-    "rbi": 6,
     "sacrifice_credit": 5,
     "error_removed": 3,
     "error_added": 3,
@@ -95,9 +95,9 @@
     "hit->error": 36,
     "error->error": 9,
     "hit->hit+error": 4,
-    "error->hit+error": 4,
     "fc->error": 4,
     "out->out": 4,
+    "error->hit+error": 3,
     "hit->hit": 3,
     "hit+error->hit": 3,
     "hit->fc": 3,
@@ -120,20 +120,21 @@
     "team_code_via": 15,
     "ambiguous_plate_appearance": 9,
     "inning_mismatch": 8,
-    "current_ruling_mismatch": 8,
+    "current_ruling_mismatch": 7,
     "current_ruling_compatible": 6,
     "batter_not_found": 4,
     "teams_swapped": 2,
+    "runner_error_change": 1,
     "superseded_by": 1,
     "subject_not_first_mention": 1,
     "team_alias": 1
    },
-   "errorToHitEntries": 74,
+   "errorToHitEntries": 73,
    "hitToErrorEntries": 38,
    "unlinkedErrorToHit": 0,
    "chainsDroppedForDisagreement": 8,
-   "initialErrorPopulation": 1164,
-   "initialErrorToHit": 72
+   "initialErrorPopulation": 1163,
+   "initialErrorToHit": 71
   },
   "2025": {
    "teamsUrl": "https://statsapi.mlb.com/api/v1/teams?sportId=1&season=2025",
@@ -158,7 +159,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/778563/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 2477,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2477,
     "scorers": 92
@@ -187,13 +188,13 @@
     "pitching_decision": 1
    },
    "transitions": {
-    "error->hit": 57,
+    "error->hit": 56,
     "hit->error": 34,
+    "error->error": 7,
+    "hit+error->hit": 6,
     "hit+error->error": 6,
-    "error->error": 6,
-    "hit+error->hit": 5,
-    "error->hit+error": 5,
     "fc->hit": 5,
+    "error->hit+error": 4,
     "hit->fc": 3,
     "hit->fc+error": 3,
     "fc+error->hit": 3,
@@ -217,18 +218,18 @@
     "team_code_via": 7,
     "ambiguous_plate_appearance": 7,
     "current_ruling_mismatch": 6,
-    "subject_not_first_mention": 4,
+    "subject_not_first_mention": 5,
+    "current_ruling_compatible": 3,
     "date_inferred": 2,
-    "current_ruling_compatible": 2,
     "team_alias": 1,
     "team_code_corrected": 1
    },
-   "errorToHitEntries": 62,
+   "errorToHitEntries": 60,
    "hitToErrorEntries": 40,
    "unlinkedErrorToHit": 0,
    "chainsDroppedForDisagreement": 6,
-   "initialErrorPopulation": 1057,
-   "initialErrorToHit": 62
+   "initialErrorPopulation": 1056,
+   "initialErrorToHit": 60
   },
   "2026": {
    "teamsUrl": "https://statsapi.mlb.com/api/v1/teams?sportId=1&season=2026",
@@ -253,7 +254,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 2374,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2374,
     "scorers": 82
@@ -302,16 +303,17 @@
    "linkFlags": {
     "name_match": 24,
     "batter_not_found": 14,
-    "current_ruling_mismatch": 6,
     "team_code_via": 6,
     "ambiguous_plate_appearance": 6,
     "inning_mismatch": 5,
     "current_ruling_compatible": 5,
+    "current_ruling_mismatch": 5,
     "subject_not_first_mention": 4,
     "no_game_found": 3,
     "team_code_corrected": 1,
     "date_mismatch": 1,
-    "inning_missing_matched_game": 1
+    "inning_missing_matched_game": 1,
+    "runner_error_change": 1
    },
    "errorToHitEntries": 59,
    "hitToErrorEntries": 53,
@@ -385,12 +387,10 @@
   },
   "battedBalls": 375465,
   "errorKindCheck": {
-   "fielding|fielding": 1911,
+   "fielding|fielding": 1943,
    "throwing|throwing": 1063,
-   "missed_catch|missed_catch": 157,
-   "fielding|throwing": 32,
+   "missed_catch|missed_catch": 158,
    "shift_violation|shift_violation": 3,
-   "missed_catch|fielding": 1,
    "none|none": 1,
    "fielding|none": 1
   }
@@ -431,57 +431,57 @@
     "traj:popup",
     "traj:bunt"
    ],
-   "n": 3166,
-   "positives": 192,
+   "n": 3164,
+   "positives": 189,
    "cv": {
     "folds": 10,
-    "logLoss": 0.22249,
-    "baseLogLoss": 0.22874,
-    "auc": 0.62,
-    "brier": 0.05602,
-    "baseBrier": 0.05697,
+    "logLoss": 0.21974,
+    "baseLogLoss": 0.22624,
+    "auc": 0.6089,
+    "brier": 0.05485,
+    "baseBrier": 0.05617,
     "calibration": [
      {
       "band": "0–2",
-      "n": 50,
-      "predicted": 0.0151,
-      "observed": 0.04,
+      "n": 89,
+      "predicted": 0.0143,
+      "observed": 0.0225,
       "positives": 2
      },
      {
       "band": "2–5",
-      "n": 1175,
-      "predicted": 0.0391,
-      "observed": 0.0417,
-      "positives": 49
+      "n": 1231,
+      "predicted": 0.0384,
+      "observed": 0.0455,
+      "positives": 56
      },
      {
       "band": "5–10",
-      "n": 1753,
-      "predicted": 0.0683,
-      "observed": 0.0627,
-      "positives": 110
+      "n": 1632,
+      "predicted": 0.0679,
+      "observed": 0.06,
+      "positives": 98
      },
      {
       "band": "10–20",
-      "n": 174,
-      "predicted": 0.1261,
-      "observed": 0.1552,
-      "positives": 27
+      "n": 190,
+      "predicted": 0.124,
+      "observed": 0.1211,
+      "positives": 23
      },
      {
       "band": "20–35",
-      "n": 13,
-      "predicted": 0.2354,
-      "observed": 0.3077,
-      "positives": 4
+      "n": 21,
+      "predicted": 0.2459,
+      "observed": 0.4286,
+      "positives": 9
      },
      {
       "band": "35–50",
       "n": 1,
-      "predicted": 0.3531,
-      "observed": 0,
-      "positives": 0
+      "predicted": 0.3676,
+      "observed": 1,
+      "positives": 1
      },
      {
       "band": "50–100",
@@ -497,52 +497,52 @@
     "testSeason": 2026,
     "n": 945,
     "positives": 58,
-    "auc": 0.6155,
-    "logLoss": 0.22436,
-    "baseLogLoss": 0.23075,
-    "brier": 0.05658,
+    "auc": 0.6222,
+    "logLoss": 0.22167,
+    "baseLogLoss": 0.23078,
+    "brier": 0.05586,
     "baseBrier": 0.05761,
     "calibration": [
      {
       "band": "0–2",
-      "n": 15,
+      "n": 28,
       "predicted": 0.014,
-      "observed": 0.0667,
+      "observed": 0.0357,
       "positives": 1
      },
      {
       "band": "2–5",
-      "n": 342,
-      "predicted": 0.0386,
-      "observed": 0.0497,
-      "positives": 17
+      "n": 344,
+      "predicted": 0.0385,
+      "observed": 0.0523,
+      "positives": 18
      },
      {
       "band": "5–10",
-      "n": 538,
-      "predicted": 0.0674,
-      "observed": 0.0576,
-      "positives": 31
+      "n": 522,
+      "predicted": 0.0671,
+      "observed": 0.0575,
+      "positives": 30
      },
      {
       "band": "10–20",
-      "n": 44,
-      "predicted": 0.1299,
-      "observed": 0.1818,
-      "positives": 8
+      "n": 42,
+      "predicted": 0.1267,
+      "observed": 0.119,
+      "positives": 5
      },
      {
       "band": "20–35",
-      "n": 5,
-      "predicted": 0.2504,
-      "observed": 0.2,
-      "positives": 1
+      "n": 9,
+      "predicted": 0.2532,
+      "observed": 0.4444,
+      "positives": 4
      },
      {
       "band": "35–50",
-      "n": 1,
-      "predicted": 0.3529,
-      "observed": 0,
+      "n": 0,
+      "predicted": null,
+      "observed": null,
       "positives": 0
      },
      {
@@ -568,7 +568,7 @@
     "traj:popup",
     "traj:bunt"
    ],
-   "n": 100969,
+   "n": 100972,
    "positives": 120,
    "cv": {
     "folds": 10,
@@ -580,7 +580,7 @@
     "calibration": [
      {
       "band": "0–2",
-      "n": 100823,
+      "n": 100826,
       "predicted": 0.0012,
       "observed": 0.0012,
       "positives": 118
@@ -692,14 +692,19 @@
     ]
    }
   },
-  "surfaceBalls": 370691
+  "surfaceBalls": 370693
  },
  "warnings": [],
  "currentSeason": 2026,
  "capture": {
-  "files": [],
-  "plays": 0,
-  "errorsCaptured": 0,
+  "files": [
+   {
+    "file": "data/capture/rulings-2026-09.json",
+    "plays": 1
+   }
+  ],
+  "plays": 1,
+  "errorsCaptured": 1,
   "capturedAsOriginal": 0,
   "settled": 0,
   "changedToHit": 0,
@@ -708,11 +713,17 @@
   "unloggedChanges": 0,
   "pendingCaptured": 0,
   "pendingResolved": 0,
-  "firstCaptureAt": null,
-  "lastCaptureAt": null,
-  "lagMinutes": null,
+  "firstCaptureAt": "2026-09-24T20:00:22.458Z",
+  "lastCaptureAt": "2026-09-24T20:00:22.458Z",
+  "lagMinutes": {
+   "median": 77.6,
+   "p90": 77.6,
+   "n": 1
+  },
   "originalMaxLagMin": 30,
-  "byKind": {},
+  "byKind": {
+   "fielding": 1
+  },
   "adjust": {
    "status": "collecting",
    "n": 0,
@@ -733,42 +744,42 @@
    "scorer": {
     "test": {
      "groups": 101,
-     "plays": 3166,
-     "positives": 192,
-     "statistic": 106.317,
-     "dispersion": 1.053,
-     "pValue": 0.3023,
+     "plays": 3164,
+     "positives": 189,
+     "statistic": 105.591,
+     "dispersion": 1.045,
+     "pValue": 0.3238,
      "permutations": 2000,
      "seed": 20260924
     },
     "cv": {
      "tested": true,
      "groupsInCandidate": 28,
-     "logLoss": 0.22303,
-     "deltaVsBest": 0.001332,
-     "pairedSE": 0.001088,
+     "logLoss": 0.22113,
+     "deltaVsBest": 0.00139,
+     "pairedSE": 0.001103,
      "selected": false
     },
     "verdict": "no detectable difference — not used",
-    "playsWithScorer": 3166
+    "playsWithScorer": 3164
    },
    "homeClub": {
     "test": {
      "groups": 31,
-     "plays": 3166,
-     "positives": 192,
-     "statistic": 30.777,
-     "dispersion": 0.993,
-     "pValue": 0.4148,
+     "plays": 3164,
+     "positives": 189,
+     "statistic": 31.437,
+     "dispersion": 1.014,
+     "pValue": 0.3933,
      "permutations": 2000,
      "seed": 20260924
     },
     "cv": {
      "tested": true,
      "groupsInCandidate": 30,
-     "logLoss": 0.22401,
-     "deltaVsBest": 0.002314,
-     "pairedSE": 0.001555,
+     "logLoss": 0.22195,
+     "deltaVsBest": 0.002203,
+     "pairedSE": 0.001562,
      "selected": false
     },
     "verdict": "no detectable difference — not used"
@@ -783,11 +794,11 @@
    "scorer": {
     "test": {
      "groups": 103,
-     "plays": 100969,
+     "plays": 100972,
      "positives": 120,
      "statistic": 82.988,
      "dispersion": 0.806,
-     "pValue": 0.9102,
+     "pValue": 0.8962,
      "permutations": 500,
      "seed": 20260924
     },
@@ -796,16 +807,16 @@
      "selected": false
     },
     "verdict": "no detectable difference — not used",
-    "playsWithScorer": 100969
+    "playsWithScorer": 100972
    },
    "homeClub": {
     "test": {
      "groups": 31,
-     "plays": 100969,
+     "plays": 100972,
      "positives": 120,
      "statistic": 22.042,
      "dispersion": 0.711,
-     "pValue": 0.8663,
+     "pValue": 0.8483,
      "permutations": 500,
      "seed": 20260924
     },
