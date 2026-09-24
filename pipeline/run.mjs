@@ -931,7 +931,7 @@ async function main() {
   }]));
   model.sources.push(
     { name: 'MLB Stats API game feed (official scorer, venue)', url: 'https://statsapi.mlb.com/api/v1.1/game/{gamePk}/feed/live?fields=gameData,officialScorer,id,fullName,venue,name' },
-    { name: 'Live ruling capture (this project, from MLB Stats API playByPlay)', url: 'data/capture/' },
+    { name: 'Live ruling capture (this project, from MLB Stats API playByPlay)', url: 'https://github.com/buffedlizard55-lab/MLBSCORINGCHANGE/tree/main/data/capture' },
   );
   const capById = new Map(captured.map((e) => [e.id, e]));
 
