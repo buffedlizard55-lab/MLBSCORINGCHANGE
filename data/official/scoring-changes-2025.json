@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-09-24T23:29:43.758Z",
+ "generatedAt": "2026-09-24T23:53:46.776Z",
  "entries": [
   {
    "seq": 1,
@@ -10609,6 +10609,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-09-23",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -10645,13 +10652,6 @@
     "p": 0.0918,
     "score": 9,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2025-09-23",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10732,9 +10732,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.615,
+    "ls": 97.1,
+    "la": 7,
     "gameDate": "2025-09-26",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -10793,9 +10793,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.151,
+    "ls": 93.6,
+    "la": -13,
     "gameDate": "2025-09-28",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -10848,9 +10848,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.39,
+    "ls": 100.6,
+    "la": 22,
     "gameDate": "2025-09-27",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -10908,6 +10908,13 @@
    "issues": [],
    "section": "2025 Regular Season",
    "sectionIndex": 0,
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-09-28",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "hit+error",
@@ -10938,13 +10945,6 @@
     "gameType": "R",
     "away": "STL",
     "home": "CHC"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2025-09-28",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10963,6 +10963,13 @@
    "issues": [],
    "section": "2025 Postseason",
    "sectionIndex": 1,
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-10-04",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -10999,13 +11006,6 @@
     "p": 0.1305,
     "score": 13,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2025-10-04",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   }
  ]

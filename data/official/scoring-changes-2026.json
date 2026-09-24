@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-09-24T23:29:43.758Z",
-  "sha256": "b25c4339eb43b3c490bed096e0db945d7ae54c84a05a69c2da4cef8f2f9483c1",
+  "fetchedAt": "2026-09-24T23:53:46.776Z",
+  "sha256": "24d0e53fb33b46809119a98066a802ff154a47e435bf4e22814301051c6f7ebd",
   "bytes": 919598
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-24T23:29:43.758Z",
+ "generatedAt": "2026-09-24T23:53:46.776Z",
  "entries": [
   {
    "seq": 1,
@@ -63,13 +63,6 @@
     "gameType": "R",
     "away": "TB",
     "home": "MIL"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-03-31",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -118,13 +111,6 @@
     "gameType": "R",
     "away": "WSH",
     "home": "CHC"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-03-28",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -179,13 +165,6 @@
     "p": 0.0369,
     "score": 4,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.044,
-    "ls": 74,
-    "la": -25,
-    "gameDate": "2026-03-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -341,13 +320,6 @@
     "p": 0.069,
     "score": 7,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-03-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -404,13 +376,6 @@
     "p": 0.0127,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-03-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -459,13 +424,6 @@
     "gameType": "R",
     "away": "KC",
     "home": "ATL"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-03-28",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -1079,9 +1037,9 @@
     "home": "CIN"
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.131,
+    "ls": 95.5,
+    "la": 32,
     "gameDate": "2026-03-31",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -2888,13 +2846,6 @@
     "gameType": "R",
     "away": "LAA",
     "home": "KC"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-04-24",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -2952,13 +2903,6 @@
     "p": 0.0119,
     "score": 1,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-04-25",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3005,13 +2949,6 @@
     "gameType": "R",
     "away": "ATH",
     "home": "TEX"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 81.4,
-    "la": 68,
-    "gameDate": "2026-04-26",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3156,13 +3093,6 @@
     "gameType": "R",
     "away": "CLE",
     "home": "TOR"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-04-25",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3217,13 +3147,6 @@
     "p": 0.0904,
     "score": 9,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-04-25",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3270,13 +3193,6 @@
     "gameType": "R",
     "away": "AZ",
     "home": "MIL"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-04-28",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3377,13 +3293,6 @@
     "p": 0.0285,
     "score": 3,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-04-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3432,13 +3341,6 @@
     "gameType": "R",
     "away": "TOR",
     "home": "MIN"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-04-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -3877,9 +3779,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.142,
+    "ls": 103.2,
+    "la": -26,
     "gameDate": "2026-04-30",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -5481,13 +5383,6 @@
     "gameType": "R",
     "away": "MIN",
     "home": "CWS"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-05-25",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5536,13 +5431,6 @@
     "gameType": "R",
     "away": "TB",
     "home": "BAL"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 71.7,
-    "la": 51,
-    "gameDate": "2026-05-26",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5589,13 +5477,6 @@
     "gameType": "R",
     "away": "SD",
     "home": "WSH"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-05-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5642,13 +5523,6 @@
     "gameType": "R",
     "away": "SF",
     "home": "COL"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 72.5,
-    "la": 36,
-    "gameDate": "2026-05-31",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5747,13 +5621,6 @@
     "p": 0.0679,
     "score": 7,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 68.2,
-    "la": 45,
-    "gameDate": "2026-05-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5808,13 +5675,6 @@
     "p": 0.1069,
     "score": 11,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-05-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5923,13 +5783,6 @@
     "p": 0.0739,
     "score": 7,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.282,
-    "ls": 67.5,
-    "la": -48,
-    "gameDate": "2026-05-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -5984,13 +5837,6 @@
     "p": 0.2232,
     "score": 22,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.316,
-    "ls": 101.3,
-    "la": -9,
-    "gameDate": "2026-05-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -6037,13 +5883,6 @@
     "gameType": "R",
     "away": "MIN",
     "home": "CWS"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-05-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -7759,13 +7598,6 @@
     "gameType": "R",
     "away": "PHI",
     "home": "WSH"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-06-24",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8357,13 +8189,6 @@
     "p": 0.0632,
     "score": 6,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-06-26",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8418,13 +8243,6 @@
     "p": 0.2724,
     "score": 27,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-06-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8640,13 +8458,6 @@
     "gameType": "R",
     "away": "MIN",
     "home": "HOU"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-06-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8883,13 +8694,6 @@
     "gameType": "R",
     "away": "KC",
     "home": "CWS"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-06-28",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -8938,13 +8742,6 @@
     "gameType": "R",
     "away": "MIN",
     "home": "HOU"
-   },
-   "savant": {
-    "xba": 0.252,
-    "ls": 80.7,
-    "la": 4,
-    "gameDate": "2026-06-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10477,13 +10274,6 @@
     "p": 0.0474,
     "score": 5,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 85.6,
-    "la": 37,
-    "gameDate": "2026-07-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10587,13 +10377,6 @@
     "gameType": "R",
     "away": "BAL",
     "home": "DET"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-07-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10696,13 +10479,6 @@
     "gameType": "R",
     "away": "KC",
     "home": "DET"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-07-26",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10879,13 +10655,6 @@
     "p": 0.0948,
     "score": 9,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 65.2,
-    "la": -35,
-    "gameDate": "2026-07-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11045,13 +10814,6 @@
     "p": 0.0721,
     "score": 7,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-07-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12102,13 +11864,6 @@
     "gameType": "R",
     "away": "PIT",
     "home": "STL"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 67.9,
-    "la": 37,
-    "gameDate": "2026-08-28",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12155,13 +11910,6 @@
     "gameType": "R",
     "away": "SD",
     "home": "TB"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-08-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12210,13 +11958,6 @@
     "gameType": "R",
     "away": "SEA",
     "home": "TOR"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 90.3,
-    "la": -30,
-    "gameDate": "2026-08-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12319,13 +12060,6 @@
     "gameType": "R",
     "away": "SEA",
     "home": "TOR"
-   },
-   "savant": {
-    "xba": 0.049,
-    "ls": 71.6,
-    "la": -32,
-    "gameDate": "2026-08-28",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12374,13 +12108,6 @@
     "gameType": "R",
     "away": "BAL",
     "home": "COL"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-08-31",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12536,13 +12263,6 @@
     "gameType": "R",
     "away": "COL",
     "home": "ATL"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 81.4,
-    "la": 4,
-    "gameDate": "2026-08-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12689,13 +12409,6 @@
     "gameType": "R",
     "away": "BOS",
     "home": "NYY"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-08-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -13426,9 +13139,9 @@
     "kind": "model"
    },
    "savant": {
-    "xba": 0.14,
-    "ls": 59.6,
-    "la": -39,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2026-09-18",
     "source": "savant:estimated_ba_using_speedangle"
    }
