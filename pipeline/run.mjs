@@ -35,7 +35,7 @@ import {
 import { parseMonth } from './lib/capture-lib.mjs';
 import { capturedAdjustment, pendingCalibration } from './lib/adjust.mjs';
 import { heterogeneityTest, groupTable } from './lib/effects.mjs';
-import { buildTeamIndex, linkEntry, rulingAgrees } from './lib/link.mjs';
+import { buildTeamIndex, linkEntry, rulingAgrees, isVerifiedRunnerErrorChange } from './lib/link.mjs';
 import {
   buildHitProbSurface, buildHitProbFallback, buildPendingTable, selectAndFit, SM, isBattedBall,
 } from './lib/model-build.mjs';
@@ -431,6 +431,12 @@ async function main() {
         e.link.away = abbr.get(g.awayId) || null;
         e.link.home = abbr.get(g.homeId) || null;
       }
+      // Runner-level error reassignments: not a plate-appearance mismatch.
+      const mi = e.link.flags.indexOf('current_ruling_mismatch');
+      if (mi >= 0 && e.link.gamePk != null && e.link.atBatIndex != null) {
+        const rec = (playsByGame.get(e.link.gamePk) || []).find((p) => p.ai === e.link.atBatIndex);
+        if (isVerifiedRunnerErrorChange(e, rec)) e.link.flags[mi] = 'runner_error_change:verified';
+      }
       hist(kinds, e.cls.kind);
       if (e.cls.transition) hist(transitions, e.cls.transition);
     }
@@ -468,7 +474,7 @@ async function main() {
       // Link flags matter for ruling changes (they feed the model); for
       // bookkeeping-only entries (earned runs, RBIs, WP/PB) flag parse issues.
       const important = e.issues.length || (e.cls.kind === 'ruling_change'
-        && e.link.flags.some((f) => !/^team_alias|^team_code_via|^name_match:last_name|^superseded_by|^current_ruling_compatible/.test(f)));
+        && e.link.flags.some((f) => !/^team_alias|^team_code_via|^name_match:last_name|^superseded_by|^current_ruling_compatible|^runner_error_change:verified/.test(f)));
       if (important || e.cls.kind === 'unclassified') {
         irregularities.push({
           season, seq: e.seq, section: e.section, raw: e.raw, parseIssues: e.issues, linkFlags: e.link.flags,
@@ -701,7 +707,7 @@ async function main() {
   model.training = {
     seasons: SEASONS,
     labelCutoff: LABEL_CUTOFF,
-    note: 'Labels come from the official post-game scoring-change log. In-game changes are not in the log; the live site observes those directly.',
+    note: 'Labels come from MLB\'s official scoring-change log. Changes made during a game may not appear in it; the live capture (data/capture) records them directly.',
   };
   model.sources = [
     { name: 'MLB Official Scoring Changes', url: LOG_PAGE },
@@ -817,11 +823,11 @@ async function main() {
     }
     return recIndex.get(g).get(ai) || null;
   };
-  const lagOf = (e) => {
-    const a = Date.parse(e.states && e.states[0] && e.states[0].at); const b = Date.parse(e.end);
+  const isPendingEt = (et) => /^os_ruling_pending/.test(et || '');
+  const lagOf = (e, st) => {
+    const a = Date.parse(st && st.at); const b = Date.parse(e.end);
     return Number.isFinite(a) && Number.isFinite(b) ? (a - b) / 60000 : null;
   };
-  const isPendingEt = (et) => /^os_ruling_pending/.test(et || '');
   const capErrors = []; const capPending = []; const adjustRows = [];
   const capSummary = {
     files: captureFiles, plays: captured.length, errorsCaptured: 0, capturedAsOriginal: 0, settled: 0,
@@ -831,22 +837,26 @@ async function main() {
   const lags = [];
   for (const e of captured) {
     if (!e || !Array.isArray(e.states) || !e.states.length) continue;
-    const first = e.states[0];
-    if (!capSummary.firstCaptureAt || first.at < capSummary.firstCaptureAt) capSummary.firstCaptureAt = first.at;
+    if (!capSummary.firstCaptureAt || e.states[0].at < capSummary.firstCaptureAt) capSummary.firstCaptureAt = e.states[0].at;
     for (const st of e.states) if (!capSummary.lastCaptureAt || st.at > capSummary.lastCaptureAt) capSummary.lastCaptureAt = st.at;
-    const lag = lagOf(e);
+    // The first actual RULING (a play can be captured while its primary
+    // ruling is still pending: then the ruling seen as it was made counts).
+    const firstRuledIdx = e.states.findIndex((st) => st.et && !isPendingEt(st.et));
+    const first = firstRuledIdx >= 0 ? e.states[firstRuledIdx] : e.states[0];
+    const lag = lagOf(e, first);
+    const seenBeingMade = firstRuledIdx > 0;
     const rec = recFor(e.g, e.ai);
     const last = e.states[e.states.length - 1];
     const current = rec ? { et: rec.et, desc: rec.desc, source: 'final play-by-play' } : { et: last.et, desc: last.desc, source: 'last capture' };
     if (first.et === 'field_error') {
       capSummary.errorsCaptured += 1;
       if (lag != null) lags.push(lag);
-      const original = lag != null && lag <= ORIGINAL_MAX_LAG_MIN;
+      const original = seenBeingMade || (lag != null && lag <= ORIGINAL_MAX_LAG_MIN);
       if (original) capSummary.capturedAsOriginal += 1;
       const settled = !!e.date && e.date <= LABEL_CUTOFF && !!rec;
       const toHit = HIT_EVENTS.has(current.et);
       const changedOther = !toHit && current.et && current.et !== 'field_error' && !isPendingEt(current.et);
-      const seen = e.states.find((st, i) => i > 0 && st.et !== 'field_error');
+      const seen = e.states.find((st, i) => i > firstRuledIdx && st.et !== 'field_error' && !isPendingEt(st.et));
       if (toHit) capSummary.changedToHit += 1;
       if (changedOther) capSummary.changedOther += 1;
       if (seen) capSummary.changesSeenLive += 1;
@@ -855,6 +865,7 @@ async function main() {
       if (settled) capSummary.settled += 1;
       capErrors.push({
         id: e.id, g: e.g, ai: e.ai, date: e.date, kind: first.kind, pos: first.pos, firstAt: first.at, lagMin: lag != null ? round(lag, 1) : null,
+        afterPending: seenBeingMade,
         original, settled, current: current.et, currentSource: current.source, changeSeenAt: seen ? seen.at : null, logged,
         scoreAtCapture: e.score && e.score.e2h ? e.score.e2h.score : null,
       });
@@ -953,7 +964,8 @@ async function main() {
     // from the current ruling — valid only while the play still stands as an
     // error (a play changed to a hit no longer carries it).
     const cap = capById.get(r.id) || null;
-    const capFirst = cap && cap.states && cap.states[0] && cap.states[0].et === 'field_error' ? cap.states[0] : null;
+    const capRuled = cap && cap.states ? cap.states.find((st) => st.et && !/^os_ruling_pending/.test(st.et)) : null;
+    const capFirst = capRuled && capRuled.et === 'field_error' ? capRuled : null;
     const curKind = r.rec.et === 'field_error' ? SM.errorKindOfRecord(r.rec) : null;
     const errKind = capFirst ? capFirst.kind : curKind ? curKind.kind : null;
     const s = scoreFor(eFit, model.errorToHit, r, { errKind });
@@ -978,7 +990,7 @@ async function main() {
         firstAt: capFirst.at,
         lagMin: (() => { const a = Date.parse(capFirst.at); const b = Date.parse(cap.end); return Number.isFinite(a) && Number.isFinite(b) ? round((a - b) / 60000, 1) : null; })(),
         firstDescription: capFirst.desc,
-        changes: cap.states.slice(1).map((st) => ({ at: st.at, eventType: st.et, event: st.ev })),
+        changes: cap.states.slice(cap.states.indexOf(capFirst) + 1).map((st) => ({ at: st.at, eventType: st.et, event: st.ev })),
         scoreAtCapture: cap.score && cap.score.e2h ? cap.score.e2h.score : null,
       } : null,
     };

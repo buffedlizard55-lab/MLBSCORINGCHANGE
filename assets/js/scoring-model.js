@@ -119,14 +119,24 @@
     missed_catch: 'Missed-catch error',
     shift_violation: 'Shift-violation error',
   };
+  // The batter's own error is described first ("X reaches on a fielding error
+  // by …. X to 2nd on a throwing error by …"), so the EARLIEST phrase wins.
+  var ERROR_KIND_PHRASES = [
+    [/throwing error/, 'throwing'],
+    [/fielding error/, 'fielding'],
+    [/missed catch error|dropped (?:throw|ball|fly)[^.]*error/, 'missed_catch'],
+    [/shift violation/, 'shift_violation'],
+  ];
   function errorKindFromDescription(desc) {
     var d = String(desc || '').toLowerCase();
     if (!d) return null;
-    if (d.indexOf('throwing error') >= 0) return 'throwing';
-    if (d.indexOf('fielding error') >= 0) return 'fielding';
-    if (d.indexOf('missed catch error') >= 0 || /dropped (throw|ball|fly)[^.]*error/.test(d)) return 'missed_catch';
-    if (d.indexOf('shift violation') >= 0) return 'shift_violation';
-    return null;
+    var best = null;
+    var bestAt = Infinity;
+    for (var i = 0; i < ERROR_KIND_PHRASES.length; i += 1) {
+      var m = ERROR_KIND_PHRASES[i][0].exec(d);
+      if (m && m.index < bestAt) { bestAt = m.index; best = ERROR_KIND_PHRASES[i][1]; }
+    }
+    return best;
   }
   /** credits: [{credit, batter:boolean, pos}] → {kind, pos} or null. */
   function errorKindFromCredits(credits) {

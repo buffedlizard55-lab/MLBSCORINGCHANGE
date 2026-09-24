@@ -99,6 +99,7 @@
     current_ruling_mismatch: 'The linked play\u2019s current StatsAPI ruling does not match the new ruling in the official log (StatsAPI not updated, or a different play).',
     current_ruling_compatible: 'StatsAPI codes this ruling differently but compatibly (e.g. a sacrifice fielder\u2019s choice is coded sac_bunt).',
     superseded_by: 'A later official entry changed this same play again; the later entry is the final ruling.',
+    runner_error_change: 'The change concerns an error on a RUNNER (checked: the play carries a runner error in StatsAPI); the batter\u2019s own ruling is unchanged, so it is not a mismatch.',
     batter_not_found: 'No batter named in the entry batted in that half-inning of the game.',
     no_game_found: 'No game with these teams on (or near) this date exists in the official schedule.',
     unknown_team: 'A team code in the entry is not a valid MLB code.',
@@ -557,7 +558,7 @@
     const ul = el('ul', 'sc-ul');
     [
       'Discrimination for error → hit is modest (AUC ≈ 0.6): most errors, even on hard-hit balls, are never changed. Treat scores as a watch-list ranking, not a verdict.',
-      'Labels come from MLB\u2019s post-game log. Changes made during a game are not in the log; the live feed observes those directly.',
+      'Labels come from MLB\u2019s official log. Changes made during a game may not appear in it; the live capture sees them directly (see Live capture).',
       'The original error type (fielding / throwing / missed catch) of past plays changed to a hit is not in MLB\u2019s data any more, and StatsAPI\u2019s snapshots are rewritten after a change. The live capture records it from September 2026 on; it enters the scores only once enough captured errors have settled and cross-validation shows it helps.',
       '"Official Scorer Ruling Pending" markers are not kept in final play-by-play (0 of ~550,000 plate appearances in 2024–2026), so pending-ruling chances start from comparable batted balls; captured pending rulings recalibrate them once enough are resolved.',
       'The live capture polls every 2 minutes for about 6 of every 10 minutes during game hours, and GitHub can delay scheduled runs: very short-lived pending markers can be missed, so captured pending rulings lean toward longer decisions.',

@@ -38,7 +38,7 @@ export function splitSentences(text) {
     .filter(Boolean);
 }
 
-const HIT_RE = /\b(single|singles|singled|double|doubles|doubled|triple|triples|tripled|home run|homer|homered|base hit|infield hit|bunt hit|a hit)\b/i;
+const HIT_RE = /\b(single|singles|singled|singling|double|doubles|doubled|doubling|triple|triples|tripled|tripling|home run|homer|homered|homering|base hit|infield hit|bunt hit|a hit)\b/i;
 const NOT_HIT_RE = /\b(double play|double-play|triple play|triple-play|double switch|hit by (a )?pitch|hit into)\b/gi;
 const ERROR_RE = /\b(error|errors|E[1-9]|missed catch|dropped catch|dropped throw|dropped fly|muffed)\b/i;
 const FC_RE = /\bfielder'?s'?\s+choice\b|\bfielders\s+choice\b|\bfielders'\s+choice\b|\bFC\b/i;
@@ -48,6 +48,12 @@ const OUT_RE = /\b(ground ?out|groundout|grounded out|fly ?out|flyout|flied out|
 const OTHER_PA_RE = /\b(intentional walk|walk|base on balls|catcher'?s interference|catcher interference|hit by (a )?pitch)\b/i;
 // Clauses that name an error only to say it was taken away.
 const REMOVED_ERROR_RE = /,?\s*(?:removing|and removing|with the removal of|eliminating)\s+(?:the|an|his|her)\s+error[^,.;]*/gi;
+
+// A leading "on the <batter> single/double/…," clause (runner context).
+const RUNNER_CONTEXT_RE = /^\s*on the [^,]{2,60}?\b(?:single|double|triple|home run|hit|sacrifice fly|groundout|flyout)\s*,\s*/i;
+// An old phrase that STARTS with run credit ("one run batted in and …"):
+// it describes RBI bookkeeping, not the plate appearance's ruling.
+const RUN_CREDIT_ONLY_RE = /^\s*(?:one|two|three|four|a|an|\d+)\s+(?:runs?\s+batted\s+in|RBIs?)\b/i;
 
 /** Categorise one ruling phrase. */
 export function categorize(phrase) {
@@ -146,8 +152,15 @@ export function classifyEntry(body) {
     const body1 = stripInningPrefix(s);
     const idx = body1.search(/\binstead of\b/i);
     if (idx < 0) continue;
-    const newPhrase = body1.slice(0, idx);
+    // "on the Riley Adams single, Brady House now scores on a fielding error …
+    // instead of a throwing error …" — the hit is context for a RUNNER's
+    // ruling, not the new ruling of the plate appearance (2025 #128).
+    const newPhrase = body1.slice(0, idx).replace(RUNNER_CONTEXT_RE, '');
     const oldPhrase = body1.slice(idx).replace(/^instead of\s*/i, '');
+    // "… now has a two-run single …, instead of one run batted in and one run
+    // scoring on the error" — the old side describes run credit, not the
+    // plate appearance's ruling (2024 #49): not a ruling change.
+    if (RUN_CREDIT_ONLY_RE.test(oldPhrase) && !HIT_RE.test(oldPhrase) && !FC_RE.test(oldPhrase) && !SAC_RE.test(oldPhrase)) continue;
     // Both sides must be play rulings. "advances on a stolen base, instead of
     // an obstruction error" or "earned, instead of unearned" are bookkeeping.
     if (categorize(oldPhrase) === 'other' || categorize(newPhrase) === 'other') continue;

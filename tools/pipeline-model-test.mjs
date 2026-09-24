@@ -10,6 +10,7 @@ import {
 import { extractGamePlays, PBP_FIELDS, isCompleted } from '../pipeline/lib/statsapi.mjs';
 import {
   normalizeName, findNameInText, rulingAgrees, rulingAgreement, buildTeamIndex, candidateGames, linkEntry, levenshtein,
+  isVerifiedRunnerErrorChange,
 } from '../pipeline/lib/link.mjs';
 import {
   buildHitProbSurface, buildHitProbFallback, buildPendingTable, selectAndFit,
@@ -554,6 +555,15 @@ test('live StatsAPI play → error type flows into the model play', () => {
   });
   assert.equal(p.errKind, 'throwing', 'credits win over the description');
   assert.equal(SM.playFromStatsApi({ result: { eventType: 'single' } }).errKind, null);
+});
+
+test('runner-level error → error changes are recognised only with a runner error on the play', () => {
+  const entry = { cls: { transition: 'error->error' } };
+  assert.equal(isVerifiedRunnerErrorChange(entry, { et: 'single', cr: ['f_fielded_ball|RF|1|B', 'f_throwing_error|C|2|R'] }), true);
+  assert.equal(isVerifiedRunnerErrorChange(entry, { et: 'double', cr: [], re: 1 }), true);
+  assert.equal(isVerifiedRunnerErrorChange(entry, { et: 'single', cr: ['f_fielded_ball|RF|1|B'] }), false, 'no runner error → stays a mismatch');
+  assert.equal(isVerifiedRunnerErrorChange(entry, { et: 'field_error', cr: ['f_throwing_error|C|2|R'] }), false, 'plate-appearance error: not this case');
+  assert.equal(isVerifiedRunnerErrorChange({ cls: { transition: 'error->hit' } }, { et: 'single', re: 1 }), false);
 });
 
 console.log(`pipeline-model-test: ${passed} passed`);

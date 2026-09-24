@@ -334,3 +334,19 @@ export function linkEntry(entry, ctx) {
   }
   return link;
 }
+
+/**
+ * An error → error entry (e.g. "Kody Clemens … scores on a throwing error by
+ * catcher Salvador Perez, instead of a two-base throwing error …") often
+ * concerns a RUNNER's error, while the plate appearance keeps its own ruling
+ * (a single, a double …) — a plate-appearance "mismatch" that is not an
+ * irregularity. Verified independently: the linked play must carry an error
+ * charged on a runner (fielding credit "*_error" on a runner entry, or a
+ * runner movement coded as an error).
+ */
+export function isVerifiedRunnerErrorChange(entry, rec) {
+  if (!entry || !entry.cls || entry.cls.transition !== 'error->error' || !rec) return false;
+  if (rec.et === 'field_error') return false;
+  const runnerErrorCredit = (rec.cr || []).some((c) => /_error\|/.test(c) && c.endsWith('|R'));
+  return runnerErrorCredit || (rec.re || 0) > 0;
+}

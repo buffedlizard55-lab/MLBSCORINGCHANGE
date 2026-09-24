@@ -34,31 +34,37 @@ function runPipeline(extraEnv = {}, extraArgs = [], expectFailure = false) {
 }
 // A SYNTHETIC live-capture ledger (as pipeline/capture.mjs writes it) that
 // points at real plays of the stub's synthetic world: three errors captured
-// 5 minutes after the play, and one resolved pending ruling.
+// 5 minutes after the play, one resolved pending ruling, and one error whose
+// ruling was seen being made after a pending marker (45 minutes later).
 const { createRequire } = await import('node:module');
 createRequire(import.meta.url)(path.join(ROOT, 'tools/fixtures/pipeline-fetch-stub.cjs'));
 const capEntries = [];
-for (let i = 0; i < 24 && capEntries.length < 4; i += 1) {
+for (let i = 0; i < 24 && capEntries.length < 5; i += 1) {
   const pk = 2026 * 1000 + i;
   const pbp = await (await fetch(`https://statsapi.mlb.com/api/v1/game/${pk}/playByPlay`)).json();
   const sched = await (await fetch('https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=R')).json();
   const date = sched.dates.flatMap((d) => d.games).find((g) => g.gamePk === pk).officialDate;
   for (const p of pbp.allPlays) {
-    const want = capEntries.filter((e) => e.why[0] === 'error').length < 3 ? 'field_error' : 'single';
+    const nErr = capEntries.filter((e) => e.why[0] === 'error').length;
+    const nPend = capEntries.filter((e) => e.why[0] === 'pending').length;
+    const want = nErr < 3 ? 'field_error' : nPend < 1 ? 'single' : 'field_error';
+    const afterPending = nErr >= 3 && nPend >= 1;
     if (p.result.eventType !== want || capEntries.some((e) => e.g === pk)) continue;
     const st = (min, extra) => ({ at: `${date}T23:${String(min).padStart(2, '0')}:00.000Z`, et: p.result.eventType, ev: p.result.event, desc: p.result.description, kind: want === 'field_error' ? 'fielding' : null, pos: want === 'field_error' ? 'SS' : null, pend: null, gs: 'Live', ...extra });
     const pend = { codes: ['os_ruling_pending_prior'], onAi: p.about.atBatIndex + 1, atResult: false, marker: { eventType: 'os_ruling_pending_prior', event: null, description: 'Official Scorer Ruling Pending', type: 'action' } };
     capEntries.push({
       id: `${pk}:${p.about.atBatIndex}`, g: pk, ai: p.about.atBatIndex, date, gt: 'R', season: 2026, awayId: null, homeId: null,
       end: `${date}T23:05:00.000Z`, hd: null, br: 1,
-      why: [want === 'field_error' ? 'error' : 'pending'],
-      states: want === 'field_error' ? [st(10)] : [st(10, { pend }), st(14)],
+      why: afterPending ? ['pending', 'error'] : [want === 'field_error' ? 'error' : 'pending'],
+      states: afterPending
+        ? [st(8, { et: 'os_ruling_pending_primary', ev: 'Official Scorer Ruling Pending', kind: null, pos: null, pend: { ...pend, codes: ['os_ruling_pending_primary'], onAi: p.about.atBatIndex, atResult: true } }), st(50)]
+        : want === 'field_error' ? [st(10)] : [st(10, { pend }), st(14)],
       score: null,
     });
     break;
   }
 }
-assert.equal(capEntries.length, 4, 'synthetic capture fixture built');
+assert.equal(capEntries.length, 5, 'synthetic capture fixture built');
 fs.mkdirSync(path.join(tmp, 'data', 'capture'), { recursive: true });
 const { serializeMonth } = await import('../pipeline/lib/capture-lib.mjs');
 for (const month of new Set(capEntries.map((e) => e.date.slice(0, 7)))) {
@@ -71,16 +77,18 @@ const read = (rel) => JSON.parse(fs.readFileSync(path.join(tmp, 'data', rel), 'u
   // Live-capture join, scorer tests and error-type evidence (v2).
   const rep = read('model/pipeline-report.json');
   const mdl = read('model/scoring-model.json');
-  assert.equal(rep.capture.errorsCaptured, 3, 'captured errors joined');
-  assert.equal(rep.capture.capturedAsOriginal, 3, 'captured 5 min after the play = original call');
-  assert.equal(rep.capture.settled, 3);
-  assert.equal(rep.capture.pendingCaptured, 1);
-  assert.equal(rep.capture.pendingResolved, 1);
-  assert.equal(mdl.capture.pending[0].resolvedEt, 'single');
+  assert.equal(rep.capture.errorsCaptured, 4, 'captured errors joined (incl. one ruled after a pending marker)');
+  assert.equal(rep.capture.capturedAsOriginal, 4, 'within 30 min, or seen being made after a pending marker = original call');
+  assert.equal(rep.capture.settled, 4);
+  assert.equal(rep.capture.pendingCaptured, 2);
+  assert.equal(rep.capture.pendingResolved, 2);
+  assert.ok(mdl.capture.pending.some((x) => x.resolvedEt === 'single' && x.resolvedSource === 'live capture'));
+  assert.ok(mdl.capture.pending.some((x) => x.resolvedEt === 'field_error' && x.codes[0] === 'os_ruling_pending_primary'));
+  assert.ok(mdl.capture.recentErrors.some((x) => x.afterPending && x.lagMin === 45), 'error ruled 45 min after the play, after a pending marker');
   assert.equal(mdl.errorToHit.adjust.status, 'collecting', 'adjustment waits for enough captured changes');
-  assert.equal(mdl.errorToHit.adjust.n, 3);
+  assert.equal(mdl.errorToHit.adjust.n, 4);
   assert.equal(mdl.pending.calibration.status, 'collecting');
-  assert.equal(mdl.pending.calibration.resolved, 1);
+  assert.equal(mdl.pending.calibration.resolved, 2);
   for (const q of ['errorToHit', 'hitToError']) {
     for (const g of ['scorer', 'homeClub']) {
       const t = mdl.effects[q][g].test;
@@ -91,9 +99,9 @@ const read = (rel) => JSON.parse(fs.readFileSync(path.join(tmp, 'data', rel), 'u
   assert.ok(rep.seasons[2026].meta.withScorer === 24, 'official scorer looked up for every game');
   assert.ok(mdl.errorToHit.errorKind && mdl.errorToHit.errorKind.stoodByKind.fielding > 0);
   const w = read('model/error-watch.json');
-  const capIds = new Set(capEntries.filter((e) => e.why[0] === 'error').map((e) => e.id));
+  const capIds = new Set(capEntries.filter((e) => e.why.includes('error')).map((e) => e.id));
   const rows = w.plays.filter((p2) => capIds.has(p2.id));
-  assert.equal(rows.length, 3, 'captured errors appear on the Error Watch');
+  assert.equal(rows.length, 4, 'captured errors appear on the Error Watch');
   assert.ok(rows.every((r) => r.captured && r.errKindSource === 'captured' && r.errKind === 'fielding'));
   assert.ok(w.plays.some((p2) => p2.errKindSource === 'current_ruling'), 'other standing errors show their current error type');
 }

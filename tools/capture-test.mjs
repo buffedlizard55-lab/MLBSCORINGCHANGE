@@ -53,6 +53,8 @@ test('error type from credits (batter first) and from the description', () => {
   assert.equal(SM.errorKindFromDescription('X reaches on a missed catch error by first baseman Y.'), 'missed_catch');
   assert.equal(SM.errorKindFromDescription('X reaches on a fielding error by shortstop Y.'), 'fielding');
   assert.equal(SM.errorKindFromDescription('X singles.'), null);
+  // The batter's own error is described first: the earliest phrase wins.
+  assert.equal(SM.errorKindFromDescription('X reaches on a fielding error by shortstop Y. X to 2nd on a throwing error by catcher Z.'), 'fielding');
   assert.deepEqual(SM.errorKindOfRecord({ cr: ['f_assist|3B|1|R', 'f_error_dropped_ball|1B|2|B'] }), { kind: 'missed_catch', pos: '1B' });
 });
 

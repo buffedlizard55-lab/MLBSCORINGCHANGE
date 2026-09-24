@@ -19,6 +19,16 @@
 
 > Put this prompt into the repo readme and read it everytime we work on the project as a starting point to make sure we are building what we are aiming for and have a strong base to continue building and improving on making something useful for everyday use. It should solve the problem of having to manually check everything ourselves and having an up to date current feed.
 
+### Follow-up request — session 2 (verbatim)
+
+> 1. Train on the rulings your feed captures live (error type included). This is the biggest available accuracy gain for error→hit.
+> 2. Calibrate the pending chances with the outcomes the feed now logs.
+> 3. Re-test official-scorer (home park) effects as seasons accumulate; the data doesn't support them yet.
+
+(The first line quotes a suggestion made at the end of session 1. Session 2 found the evidence
+does not support "biggest gain" for error *type* itself — see *Current results* — but the live
+capture it required is built and running.)
+
 ### The xBA conversation that framed the model (condensed — not verbatim)
 
 - **Q:** *How is xBA calculated on Baseball Savant?* — **A (summary):** xBA asks "given how this
@@ -64,6 +74,9 @@
 | Up to date, no manual checking | `.github/workflows/official-data.yml` rebuilds everything from official sources every 3 hours; the live feed polls StatsAPI continuously. |
 | Official source links | Every row links to Gameday / Baseball Savant / StatsAPI / the official MLB log. |
 | Irregularities flagged | `data/official/irregularities.json` → `scoring.html` ⚑ Irregularities (e.g. log typos like `TBN@TOR`, games that do not exist on the stated date). |
+| Train on live-captured rulings, error type included (follow-up 1) | `pipeline/capture.mjs` + `.github/workflows/live-capture.yml` record every error call and pending marker as first called → `data/capture/`; the pipeline's captured-data adjustment (`pipeline/lib/adjust.mjs`) switches on by itself once enough captured errors settle and cross-validation shows a gain. Status on `scoring.html` → Model. |
+| Calibrate pending chances with logged outcomes (follow-up 2) | Captured pending rulings + resolutions → per-outcome weights, leave-one-out validated (`pendingCalibration`); applied in the feed and on game pages when active. |
+| Re-test official-scorer / home-park effects (follow-up 3) | Every pipeline run: official scorer of every game (`gameData.officialScorer`), permutation test + cross-validated candidate (`pipeline/lib/effects.mjs`); verdict and per-scorer table on `scoring.html` → Model. |
 
 ## 🧭 Arena Core Values — focal points
 
@@ -93,8 +106,20 @@ plainly; every data problem found is either fixed at the source or flagged in pu
    against Baseball Savant, and commits `data/official/*.json` and `data/model/*.json`. It rolls
    over to new seasons by itself, reuses the immutable archive captures, and after a failed run
    keeps the last good data online with a visible failure notice.
+5. **📡 Live ruling capture** (`pipeline/capture.mjs`, every 10 minutes during game hours on
+   GitHub Actions) — MLB StatsAPI rewrites its history after a scoring change (verified: its
+   time-stamped snapshots show the *new* ruling even for moments before the change), so the
+   original call of a play exists only if it is recorded before it changes. The capture records
+   every "reached on error" call — with its error type (fielding / throwing / missed catch) — and
+   every "Official Scorer Ruling Pending" marker as first seen, plus each later change, in
+   `data/capture/`. The pipeline turns that into a leakage-free training set (error-type
+   adjustment) and into the pending-ruling calibration; both switch on automatically once the data
+   supports them. Error Watch rows show the error type and when the call was captured.
+6. **Official scorer & home park re-tested every run** — the official scorer of every game is
+   looked up; a permutation test and a cross-validated candidate model decide whether scorer or
+   park terms belong in the scores (so far: no).
 
-## Current results (pipeline run of 2026-09-24; the site always shows the latest)
+## Current results (pipeline runs of 2026-09-24; the site always shows the latest)
 
 | | Error → hit | Hit → error |
 | --- | --- | --- |
@@ -111,16 +136,51 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 - Calibration (error → hit): plays scored 5–10 were changed 6.3% of the time; 10–20 → 15.5%.
 - Full methodology: [`docs/MODEL.md`](docs/MODEL.md).
 
+**Official scorer & home park (follow-up 3)** — official scorer found for all 7,323 completed
+games (88 / 92 / 82 scorers in 2024 / 2025 / 2026); re-tested on every run:
+
+| Question · grouping | Groups | Dispersion (1 = no difference) | Permutation p | Cross-validated candidate | Verdict |
+| --- | --- | --- | --- | --- | --- |
+| Error → hit · official scorer | 101 | 1.05 | 0.30 | log loss +0.0013 vs best (SE 0.0011) | not used |
+| Error → hit · home club | 31 | 0.99 | 0.41 | +0.0023 (SE 0.0016) | not used |
+| Hit → error · official scorer | 103 | 0.81 | 0.91 | — | not used |
+| Hit → error · home club | 31 | 0.71 | 0.87 | — | not used |
+
+**Error type (follow-up 1)** — early evidence from past seasons, descriptive only. The official
+log names the original error type for 56 of the 192 error → hit changes (fielding 28, throwing 22,
+missed catch 6; 120 say only "an error"). Compared with the errors that stood (fielding 61%,
+throwing 34%, missed catch 5%), throwing errors were **not** changed less often (ratio 1.16);
+missed-catch errors about twice as often (2.13, from only 6 changes). So error type is probably a
+modest signal, not the large one suggested at the end of session 1. The live capture now measures
+it properly; the adjustment turns on only if cross-validation confirms a gain.
+
+**Live capture** — first capture 2026-09-24 20:00 UTC (MIA @ CHC: Esteury Ruiz reaches on a
+fielding error by 3B Pedro Ramírez — recorded with its error type, batted ball and the 5/100 score
+shown then). Error-type adjustment and pending calibration: *collecting* until enough captured
+plays settle (≥ 8 changes for a shift; ≥ 15 changes and ≥ 150 errors for error-type terms;
+≥ 10 resolved pending rulings).
+
 ## Limitations (read before trusting a number)
 
 - Error → hit discrimination is **modest** (AUC ≈ 0.62). Scores rank a watch-list; they do not
   decide a play. Scores cluster between 2 and 30; bands ("Elevated", "High") are relative to the
   6% base rate.
 - "Official Scorer Ruling Pending" markers are **not kept** in final play-by-play (0 of 553,300
-  plate appearances), so pending-ruling chances come from how comparable batted balls were
-  scored, not from past pending rulings. The live feed now records each pending ruling's
-  resolution, which can calibrate this over time.
-- The official log only covers post-game changes; in-game changes are caught live by the feed.
+  plate appearances), so pending-ruling chances start from how comparable batted balls were
+  scored; the captured pending rulings recalibrate them once ≥ 10 are resolved and the
+  calibration wins a leave-one-out test.
+- The **original error type** of past plays that were changed to hits is gone from MLB's data
+  (StatsAPI's snapshots are rewritten), so it can only be learned from plays captured live from
+  2026-09-24 on. With about 6% of errors changed, it will take roughly a season of captures
+  before the error-type terms can be tested — the status is shown on the Model tab.
+- The capture polls every 2 minutes for about 6 of every 10 minutes, 15:00–08:59 UTC, March to
+  November; GitHub can delay scheduled runs. Very short-lived pending markers can be missed (so
+  captured pending rulings lean toward longer decisions), and games outside those hours (e.g.
+  Tokyo openers) are not captured. The feed's own browser log stays in each browser and is not
+  used for training.
+- Training labels come from MLB's official log. Changes made during a game may not appear in it
+  (not verified either way); the live capture now sees them directly and the Model tab counts
+  captured changes that are not (yet) in the log.
 - StatsAPI does not always apply a logged change (e.g. 2026 #13: the log says Alex Freeland now
   has a single, while StatsAPI still shows the original sacrifice). Entries whose play's current
   ruling disagrees with the log are flagged and kept out of training labels.
@@ -129,11 +189,13 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 
 ## Remaining work (next sessions)
 
-- Collect the live feed's captured initial rulings (error type, credits) as a leakage-free
-  training set — the biggest available accuracy gain for error → hit.
-- Calibrate the pending-ruling chances with the pending → final outcomes the feed now logs.
-- Add scorer-level (home park) effects once more seasons are available (tested; not yet
-  significant with 3 seasons).
+- Let the live capture run: check `data/capture/status.json` and the Model tab's *Live capture*
+  table after game days (plays captured, changes seen live, changes not in MLB's log).
+- When the error-type adjustment or the pending calibration turns *active*, review its
+  coefficients / weights and calibration on the Model tab before relying on it.
+- Scorer / park effects: nothing to do unless the verdict changes (it is re-tested every run).
+- Model headroom beyond error type: the log's own changes are ~6% of errors, so further gains
+  most likely need new inputs (fielder range / sprint speed from Savant, play description text).
 - Optional opt-in alert when an error's score is "High".
 
 ## Working on this repo
