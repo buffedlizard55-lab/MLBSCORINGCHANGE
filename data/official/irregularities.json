@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-24T23:24:48.184Z",
+ "generatedAt": "2026-09-24T23:29:43.758Z",
  "count": 79,
  "items": [
   {
@@ -1078,15 +1078,13 @@
     "date_typo:month",
     "date_recovery_decided_by:exact_ruling",
     "inning_mismatch",
-    "subject_not_first_mention",
-    "ambiguous_plate_appearance",
-    "current_ruling_compatible:force_out"
+    "subject_not_first_mention"
    ],
    "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit+error->error",
    "gamePk": 824983,
-   "atBatIndex": 31,
-   "currentEventType": "force_out"
+   "atBatIndex": 76,
+   "currentEventType": "field_error"
   },
   {
    "season": 2026,

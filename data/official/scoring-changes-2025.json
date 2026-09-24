@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-09-24T23:24:48.184Z",
+ "generatedAt": "2026-09-24T23:29:43.758Z",
  "entries": [
   {
    "seq": 1,
@@ -1022,7 +1022,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0035,
+    "p": 0.0034,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -1170,7 +1170,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1043,
+    "p": 0.1042,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -1751,7 +1751,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0045,
+    "p": 0.0044,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2159,7 +2159,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0033,
+    "p": 0.0032,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2510,7 +2510,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2199,
+    "p": 0.22,
     "score": 22,
     "kind": "out_of_fold"
    }
@@ -2789,7 +2789,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0048,
+    "p": 0.0047,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -2951,7 +2951,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0131,
+    "p": 0.0132,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3435,7 +3435,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0146,
+    "p": 0.0148,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3544,7 +3544,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.015,
+    "p": 0.0152,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -3841,7 +3841,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0526,
+    "p": 0.0527,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -3943,7 +3943,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0605,
+    "p": 0.0606,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -3997,7 +3997,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.091,
+    "p": 0.0909,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -4511,7 +4511,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0128,
+    "p": 0.0129,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4620,7 +4620,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0058,
+    "p": 0.0057,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -4674,7 +4674,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0977,
+    "p": 0.0976,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -4996,7 +4996,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0509,
+    "p": 0.051,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -5105,7 +5105,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0068,
+    "p": 0.0067,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5220,7 +5220,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0057,
+    "p": 0.0056,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5586,7 +5586,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0078,
+    "p": 0.0077,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -5967,7 +5967,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0171,
+    "p": 0.0173,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -6270,7 +6270,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0162,
+    "p": 0.0164,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -6377,7 +6377,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0127,
+    "p": 0.0128,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -6776,7 +6776,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1106,
+    "p": 0.1105,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -7865,7 +7865,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.005,
+    "p": 0.0049,
     "score": 0,
     "kind": "out_of_fold"
    }
@@ -9032,7 +9032,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0119,
+    "p": 0.012,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -9343,7 +9343,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0268,
+    "p": 0.0269,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -9793,7 +9793,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2597,
+    "p": 0.2596,
     "score": 26,
     "kind": "out_of_fold"
    }
@@ -10048,7 +10048,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0144,
+    "p": 0.0145,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -10645,6 +10645,13 @@
     "p": 0.0918,
     "score": 9,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-09-23",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10703,7 +10710,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0119,
+    "p": 0.012,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -10725,9 +10732,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.615,
-    "ls": 97.1,
-    "la": 7,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-09-26",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -10786,9 +10793,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.151,
-    "ls": 93.6,
-    "la": -13,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-09-28",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -10841,9 +10848,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.39,
-    "ls": 100.6,
-    "la": 22,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-09-27",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -10931,6 +10938,13 @@
     "gameType": "R",
     "away": "STL",
     "home": "CHC"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-09-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10982,9 +10996,16 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1306,
+    "p": 0.1305,
     "score": 13,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2025-10-04",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   }
  ]
