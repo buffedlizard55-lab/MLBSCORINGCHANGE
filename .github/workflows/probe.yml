@@ -1,7 +1,13 @@
 name: probe
-on: workflow_dispatch
+on:
+  push:
+    branches: ['arena/01a0d490-mlbscoringchange']
+    paths: ['.github/workflows/probe.yml']
 jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - run: curl -s -o /dev/null -w "%{http_code}\n" https://statsapi.mlb.com/api/v1/eventTypes
+      - run: |
+          curl -s -o /dev/null -w "statsapi %{http_code}\n" https://statsapi.mlb.com/api/v1/eventTypes
+          curl -s -o /dev/null -w "mlb.com %{http_code}\n" -A "Mozilla/5.0" https://www.mlb.com/official-information/scoring-changes
+          curl -s -o /dev/null -w "savant %{http_code}\n" -A "Mozilla/5.0" "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details"
