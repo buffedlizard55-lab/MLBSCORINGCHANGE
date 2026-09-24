@@ -49,3 +49,11 @@
     adjustment, the pending calibration and scorer / home-park terms switch on by themselves
     only when their data gate is met and cross-validation (or leave-one-out) shows a gain; the
     status (`collecting` / `not_selected` / `active`) is published on `scoring.html` → Model.
+13. **Hit → error changes never populate the primary alert system** (session-3 charter). A
+    non-home-run hit → `field_error` change is tracked, logged and persisted like any other
+    change, but lives only in the 📉 Hit → Error tab on the feed and the 📉 Hit → Error section
+    on `scoring.html` — never in the All feed, the ✏️ Scoring Changes tab, or alert sounds.
+    One definition everywhere: `isHitToErrorChange` (feed) ≡ `transitionFlags().hitToError`
+    (pipeline) ≡ the model's `hitToError` question. Do not add per-single tracking rows to
+    "catch" these earlier *in the feed* — bloat is exactly what the section exists to avoid;
+    earlier evidence belongs to the live-capture pipeline (`data/capture/`), not the alert UI.

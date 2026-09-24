@@ -99,7 +99,7 @@ noJunk(summary, 'summary');
 
 // Tabs
 assert.deepEqual(registry['#sc-tabs'].children.map((b) => b.textContent),
-  ['🎯 Error Watch', '📋 Official Changes', '📈 Model', '⚑ Irregularities']);
+  ['🎯 Error Watch', '📋 Official Changes', '📉 Hit → Error', '📈 Model', '⚑ Irregularities']);
 
 // Error Watch (default tab)
 let panel = text('#sc-panel');
@@ -147,8 +147,42 @@ assert.ok(text('#sc-panel').includes('Error → Hit'), 'official: classification
 assert.ok(text('#sc-panel').includes('pre-change'), 'official: model score on error→hit entries');
 noJunk(text('#sc-panel'), 'official');
 
-// Model card
+// 📉 Hit → Error (session-3 charter): its own section — the same entries the
+// official list flags hitToError, with pre-change chances and final rulings.
 registry['#sc-tabs'].children[2].dispatch('click');
+await settle();
+panel = text('#sc-panel');
+assert.match(windowStub.location.hash, /^#hiterror\/2026$/, 'hit→error: hash route');
+const h2eEntries = off2026.entries.filter((e) => e.cls.flags.includes('hitToError'));
+assert.ok(panel.includes(`of ${h2eEntries.length} entries`), `hit→error: all flagged entries (${h2eEntries.length})`);
+assert.ok(panel.includes('Hit → Error'), 'hit→error: classification label');
+assert.ok(panel.includes('first ruled a hit'), 'hit→error: section explains the segregation');
+assert.ok(!panel.includes('undefined') && !panel.includes('NaN'), 'hit→error: no junk');
+const h2eRows = findAll(registry['#sc-panel'], (n) => n.className.split(/\s+/).includes('sc-row'));
+assert.equal(h2eRows.length, Math.min(100, h2eEntries.length), 'hit→error: first page row count');
+if (h2eEntries.some((e) => e.model && typeof e.model.p === 'number')) {
+  assert.ok(panel.includes('/100'), 'hit→error: pre-change model scores rendered');
+  assert.ok(panel.includes('pre-change'), 'hit→error: out-of-fold note rendered');
+}
+assert.ok(find(registry['#sc-panel'], (n) => n.attrs.href === 'https://www.mlb.com/official-information/scoring-changes'),
+  'hit→error: MLB official log link');
+// Season switch keeps working inside the section.
+const h2eSeasonSelect = findAll(registry['#sc-panel'], (n) => n.tagName === 'SELECT')[0];
+assert.ok(h2eSeasonSelect, 'hit→error: season selector');
+h2eSeasonSelect.value = '2025';
+h2eSeasonSelect.dispatch('change');
+await settle();
+const off2025 = readJSON('data/official/scoring-changes-2025.json');
+const h2e2025 = off2025.entries.filter((e) => e.cls.flags.includes('hitToError')).length;
+assert.ok(text('#sc-panel').includes(`of ${h2e2025} entries`), `hit→error: 2025 season (${h2e2025} entries)`);
+h2eSeasonSelect.value = '2026';
+findAll(registry['#sc-panel'], (n) => n.tagName === 'SELECT')[0].value = '2026';
+findAll(registry['#sc-panel'], (n) => n.tagName === 'SELECT')[0].dispatch('change');
+await settle();
+noJunk(text('#sc-panel'), 'hit→error');
+
+// Model card
+registry['#sc-tabs'].children[3].dispatch('click');
 await settle();
 panel = text('#sc-panel');
 assert.ok(panel.includes(model.errorToHit.cv.auc.toFixed(3)), 'model: CV AUC');
@@ -175,7 +209,7 @@ if (model.effects) {
 noJunk(panel, 'model');
 
 // Irregularities
-registry['#sc-tabs'].children[3].dispatch('click');
+registry['#sc-tabs'].children[4].dispatch('click');
 await settle();
 panel = text('#sc-panel');
 assert.ok(panel.includes(`${irr.items.length} flagged entries`), 'irregularities: count');

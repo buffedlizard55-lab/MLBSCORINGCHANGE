@@ -17,6 +17,10 @@
   const TABS = [
     ['watch', '🎯 Error Watch'],
     ['official', '📋 Official Changes'],
+    // Session-3 charter: single → error changes get their own section. They
+    // stay OUT of the live feed's primary alert system (All feed, ✏️ tab,
+    // sounds); here they are a first-class, full-list section.
+    ['hiterror', '📉 Hit → Error'],
     ['model', '📈 Model'],
     ['irregularities', '⚑ Irregularities'],
   ];
@@ -33,6 +37,7 @@
     current: null,
     watchFilter: { q: '', status: 'all', kind: 'all', sort: 'newest', shown: PAGE_SIZE },
     officialFilter: { q: '', type: 'all', shown: PAGE_SIZE },
+    hitErrorFilter: { q: '', shown: PAGE_SIZE },
   };
 
   /* ------------------------------------------------------------ helpers */
@@ -144,7 +149,8 @@
     if (season && /^20\d\d$/.test(season)) state.season = Number(season);
   }
   function writeHash() {
-    const h = state.tab === 'official' ? `#official/${state.season}` : `#${state.tab}`;
+    const h = (state.tab === 'official' || state.tab === 'hiterror')
+      ? `#${state.tab}/${state.season}` : `#${state.tab}`;
     if (window.location.hash !== h) window.history.replaceState(null, '', h);
   }
 
@@ -247,6 +253,7 @@
     writeHash();
     if (state.tab === 'watch') return renderWatch(wrap);
     if (state.tab === 'official') return renderOfficial(wrap);
+    if (state.tab === 'hiterror') return renderHitError(wrap);
     if (state.tab === 'model') return renderModel(wrap);
     return renderIrregularities(wrap);
   }
@@ -376,6 +383,18 @@
   }
 
   /* --------------------------------------------------- official changes */
+  /**
+   * Entries worth a second look: pipeline parse issues, an unclassified
+   * kind, or a ruling change whose linked-play check flagged something
+   * (mismatch / no game / wrong inning / ambiguous / broken chain). Shared
+   * by the Official Changes and Hit → Error sections.
+   */
+  function isFlagged(e) {
+    const linkFlags = (e.link && e.link.flags) || [];
+    return (e.issues || []).length || (e.cls && e.cls.kind === 'unclassified') ||
+      (e.cls && e.cls.kind === 'ruling_change' && linkFlags.some((x) => /^(current_ruling_mismatch|batter_not_found|no_game_found|unknown_team|team_code_corrected|date_mismatch|inning_mismatch|ambiguous|chain)/.test(x)));
+  }
+
   async function renderOfficial(wrap) {
     const f = state.officialFilter;
     const season = state.season;
@@ -402,8 +421,6 @@
       return;
     }
     const q = f.q.trim().toLowerCase();
-    const isFlagged = (e) => (e.issues || []).length || (e.cls && e.cls.kind === 'unclassified') ||
-      (e.cls && e.cls.kind === 'ruling_change' && (e.link.flags || []).some((x) => /^(current_ruling_mismatch|batter_not_found|no_game_found|unknown_team|team_code_corrected|date_mismatch|inning_mismatch|ambiguous|chain)/.test(x)));
     const rows = (data.entries || []).filter((e) => {
       const flags = (e.cls && e.cls.flags) || [];
       if (f.type === 'errorToHit' && !flags.includes('errorToHit')) return false;
@@ -480,6 +497,65 @@
     body.appendChild(links);
     row.appendChild(body);
     return row;
+  }
+
+  /* ------------------------------------------- hit → error (own section)
+   * Session-3 charter: "track anytime a final scoring decision would change
+   * a single to an error … create a section for anything that changes a
+   * single to an error and keep it from populating the main primary alert
+   * system". These are the SAME entries the Official Changes list carries
+   * with the hitToError flag (pipeline/lib/log-classifier.mjs — a ruling
+   * change from a hit category to an error category), presented here as a
+   * first-class section so the reverse direction never has to flood the
+   * primary error → hit alert surfaces. Only confirmed, officially logged
+   * changes are listed — no every-single tracking, so no bloat. */
+  async function renderHitError(wrap) {
+    const f = state.hitErrorFilter;
+    const season = state.season;
+    const rerender = () => { f.shown = PAGE_SIZE; renderPanel(); };
+    const loading = el('div', 'empty', `Loading ${season} hit → error changes…`);
+    wrap.appendChild(loading);
+    const data = await loadSeason(season);
+    if (state.tab !== 'hiterror' || state.season !== season) return;
+    wrap.removeChild(loading);
+    const src = data.source || {};
+    const help = el('p', 'sc-help');
+    help.appendChild(el('span', null,
+      `Every play in ${season} first ruled a hit — usually a single — whose final official ruling is an error. ` +
+      'Each row keeps the pre-change chance the hit would become an error (out of 100, out-of-fold) and the final result, ' +
+      'linked to the exact play and checked against its current StatsAPI ruling. ' +
+      'By design these never appear in the live feed\u2019s All feed, ✏️ Scoring Changes tab or alert sounds — ' +
+      'they live in the feed\u2019s own 📉 Hit → Error tab and in this section, so the primary alert system stays ' +
+      'focused on error → hit and scoring-pending movement. Source: '));
+    help.appendChild(ext(src.archivedAt ? `Internet Archive capture (${src.archivedAt.slice(0, 10)}) of the MLB page` : 'mlb.com official scoring changes', src.url || OFFICIAL_PAGE));
+    if (src.fetchedAt) help.appendChild(el('span', null, ` · captured ${localDateTime(src.fetchedAt)}`));
+    wrap.appendChild(help);
+    wrap.appendChild(controls([
+      select(SEASONS.map((s) => [String(s), `${s} season`]), String(season), (v) => { state.season = Number(v); rerender(); }, 'Season'),
+      search(f.q, 'Search player, team or text…', (v) => { f.q = v; rerender(); }),
+    ]));
+    if (data.error) {
+      wrap.appendChild(el('div', 'empty', `This season\u2019s list is not available (${data.error}).`));
+      return;
+    }
+    const q = f.q.trim().toLowerCase();
+    const rows = (data.entries || [])
+      .filter((e) => e.cls && (e.cls.flags || []).includes('hitToError'))
+      .filter((e) => !q || String(e.raw).toLowerCase().includes(q))
+      .slice().reverse();
+    wrap.appendChild(el('div', 'sc-count', `Showing ${Math.min(rows.length, f.shown)} of ${rows.length} entries (newest first)`));
+    if (!rows.length) {
+      wrap.appendChild(el('div', 'empty', `No hit → error changes on MLB\u2019s official ${season} list.`));
+      return;
+    }
+    const list = el('div', 'sc-list');
+    rows.slice(0, f.shown).forEach((e) => list.appendChild(officialRow(e, src, isFlagged(e))));
+    wrap.appendChild(list);
+    if (rows.length > f.shown) {
+      const more = el('button', 'btn sc-more', `Show ${Math.min(PAGE_SIZE, rows.length - f.shown)} more`, { type: 'button' });
+      more.addEventListener('click', () => { f.shown += PAGE_SIZE; renderPanel(); });
+      wrap.appendChild(more);
+    }
   }
 
   /* ----------------------------------------------------------- model */

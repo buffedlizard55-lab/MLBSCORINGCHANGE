@@ -1918,6 +1918,10 @@ a:hover { text-decoration: underline; }
 }
 .stat-scoring-change .review-stat-label { color: #fcd34d; }
 .stat-scoring-change .review-stat-value { color: #fbbf24; }
+/* Hit → Error section: deliberately muted — tracked in its own tab, never
+   part of the primary alert system (session-3 charter). */
+.stat-hit-error .review-stat-label { color: #cdb4f6; }
+.stat-hit-error .review-stat-value { color: #c084fc; }
 
 .feed-scoring {
   margin-top: 6px;
