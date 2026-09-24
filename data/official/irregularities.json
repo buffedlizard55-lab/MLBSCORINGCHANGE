@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-09-24T20:15:36.810Z",
- "count": 55,
+ "generatedAt": "2026-09-24T23:16:47.918Z",
+ "count": 79,
  "items": [
   {
    "season": 2024,
@@ -73,6 +73,7 @@
    "raw": "59) 4/30 WSH@TEX -- In the bottom of the 7th inning, Nathaniel Lowe's single has been changed to a fielder's choice.",
    "parseIssues": [],
    "linkFlags": [
+    "date_recovery_unverified:3",
     "batter_not_found"
    ],
    "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
@@ -152,6 +153,7 @@
     "missing_inning"
    ],
    "linkFlags": [
+    "date_recovery_ambiguous:3",
     "batter_not_found"
    ],
    "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
@@ -205,6 +207,22 @@
    "gamePk": 745555,
    "atBatIndex": 23,
    "currentEventType": "single"
+  },
+  {
+   "season": 2024,
+   "seq": 139,
+   "section": "2024 Regular Season",
+   "raw": "139) 7/20 MIL@MIN -- In the top of the 11th inning, one run has been changed to unearned against Cole Sands.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:4",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 745880,
+   "atBatIndex": null,
+   "currentEventType": null
   },
   {
    "season": 2024,
@@ -314,6 +332,22 @@
   },
   {
    "season": 2025,
+   "seq": 13,
+   "section": "2025 Regular Season",
+   "raw": "13) 4/14 HOU@STL -- In the bottom of the 5th inning, all three runs charged to Framber Valdez are now earned, instead of only two of the runs being earned.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:3",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 778325,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2025,
    "seq": 27,
    "section": "2025 Regular Season",
    "raw": "27) 4/20 NYY@TB -- In the bottom of the 9th inning, Jose Caballero reached on a 2-base error, instead of a single and just advancing to second base on the error. This makes the run later scored by Caballero now unearned to Devin Williams .",
@@ -381,6 +415,54 @@
   },
   {
    "season": 2025,
+   "seq": 43,
+   "section": "2025 Regular Season",
+   "raw": "43) 5/11 BOS@KC -- In the bottom of the 3rd inning, the run is changed to earned against Lucas Giolitto.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:6",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 777965,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2025,
+   "seq": 69,
+   "section": "2025 Regular Season",
+   "raw": "69) 6/7 BOS@NYY -- In the bottom of the 8th inning, 1 run has been changed to unearned against Justin Wilson.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:16",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 777605,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2025,
+   "seq": 83,
+   "section": "2025 Regular Season",
+   "raw": "83) 6/15 CIN@DET -- In the top of the 8th inning, 3 runs have been changed to team unearned and are now earned against Will Vest.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:3",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 777505,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2025,
    "seq": 87,
    "section": "2025 Regular Season",
    "raw": "87) 6/14 CHW@TEX -- In the bottom of the 8th inning, Corey Seager reached on an infield since, instead of an error on Brooks Baldwin.",
@@ -393,6 +475,22 @@
    "gamePk": 777508,
    "atBatIndex": 68,
    "currentEventType": "single"
+  },
+  {
+   "season": 2025,
+   "seq": 92,
+   "section": "2025 Regular Season",
+   "raw": "92) 6/21 ATL@MIA -- In the top of the 8th inning, 1 run is changed to earned against Josh Simpson.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:13",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 777424,
+   "atBatIndex": null,
+   "currentEventType": null
   },
   {
    "season": 2025,
@@ -445,6 +543,22 @@
   },
   {
    "season": 2025,
+   "seq": 134,
+   "section": "2025 Regular Season",
+   "raw": "134) 7/26 CLE@KC GM1 -- In the top of the 10th inning, the run in the inning is now earned to Steven Cruz.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:13",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 777010,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2025,
    "seq": 136,
    "section": "2025 Regular Season",
    "raw": "136) CHC@CWS -- In the top of the 8th inning, on the rundown during Matt SHaw's at-bat, assists have been added for Edgar Quero, Miguel Vargas, Lenyn Sosa, and Mike Vasil. Additionally, the run has been changed to unearned against Vasil.",
@@ -471,6 +585,7 @@
     "missing_inning"
    ],
    "linkFlags": [
+    "date_recovery_ambiguous:13",
     "batter_not_found"
    ],
    "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
@@ -494,6 +609,22 @@
    "gamePk": 776972,
    "atBatIndex": 67,
    "currentEventType": "single"
+  },
+  {
+   "season": 2025,
+   "seq": 144,
+   "section": "2025 Regular Season",
+   "raw": "144) 8/5 CLE@NYM -- In the bottom of the 1st inning, the balk charged to Logan Allen has been changed to a pickoff attempt at 1st base and a throwing error on Allen. As a resuly, the run scored that inning is now unearned to Allen.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:3",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 776863,
+   "atBatIndex": null,
+   "currentEventType": null
   },
   {
    "season": 2025,
@@ -529,6 +660,22 @@
   },
   {
    "season": 2025,
+   "seq": 154,
+   "section": "2025 Regular Season",
+   "raw": "154) 8/14 MIA@CLE -- In the bottom of the 7th inning, two runs have been changed from unearned to earned against Valente Bellozo.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:3",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 776745,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2025,
    "seq": 157,
    "section": "2025 Regular Season",
    "raw": "157) 8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single, instead of an error by third baseman Matt Chapman.",
@@ -541,6 +688,22 @@
    "gamePk": 776780,
    "atBatIndex": 58,
    "currentEventType": "single"
+  },
+  {
+   "season": 2025,
+   "seq": 160,
+   "section": "2025 Regular Season",
+   "raw": "160) 8/19 STL@MIA -- In the top of the 7th inning, the run has been changed to earned against Cade Gibson.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:6",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 776686,
+   "atBatIndex": null,
+   "currentEventType": null
   },
   {
    "season": 2025,
@@ -584,6 +747,22 @@
    "gamePk": 823159,
    "atBatIndex": 9,
    "currentEventType": "double"
+  },
+  {
+   "season": 2026,
+   "seq": 10,
+   "section": "2026 Regular Season",
+   "raw": "10. 4/5 CHC@CLE2 -- In the top of the 9th, Scott Kingery is now credited with a stolen base. The advance had been ruled as defensive indifference.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:3",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "baserunning",
+   "gamePk": 824460,
+   "atBatIndex": null,
+   "currentEventType": null
   },
   {
    "season": 2026,
@@ -632,6 +811,39 @@
    "gamePk": 824133,
    "atBatIndex": 8,
    "currentEventType": "single"
+  },
+  {
+   "season": 2026,
+   "seq": 69,
+   "section": "2026 Regular Season",
+   "raw": "69. 5/2 KC@SEA -- In the top of the 9th, the run scored by Lane Thomas has been changed to earned against Andres Munoz.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovered:5/2->5/1",
+    "date_typo:day",
+    "inning_mismatch"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 823146,
+   "atBatIndex": 63,
+   "currentEventType": "single"
+  },
+  {
+   "season": 2026,
+   "seq": 71,
+   "section": "2026 Regular Season",
+   "raw": "71. 5/3 HOU@BOS -- In the top of the 10th, one run has been changed to unearned against Zack Kelly.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:6",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 824769,
+   "atBatIndex": null,
+   "currentEventType": null
   },
   {
    "season": 2026,
@@ -695,6 +907,54 @@
   },
   {
    "season": 2026,
+   "seq": 102,
+   "section": "2026 Regular Season",
+   "raw": "102. 5/22 PIT@TOR -- In the bottom of the 3rd, all 3 runs that scored are now unearned to Bubba Chandler, instead of 2 unearned and 1 earned.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:3",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 822816,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2026,
+   "seq": 108,
+   "section": "2026 Regular Season",
+   "raw": "108. 5/31 SF@COL -- In the top of the 8th, all three runs scored are now earned to Juan Mejia, instead of two earned and one unearned.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:13",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 824354,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2026,
+   "seq": 120,
+   "section": "2026 Regular Season",
+   "raw": "120. 6/6 LAA@LAD -- In the bottom of the 1st, Jack Kochanowicz is charged with 7 earned runs while Brent Suter is charged with 1 earned run, instead of 6 earned runs for Kochanowicz and 2 earned runs for Suter.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:6",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 823942,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2026,
    "seq": 131,
    "section": "2026 Regular Season",
    "raw": "131. 6/11 TEX@CIN -- The winning pitcher has been changed from Jacob Latz to Robby Ahlstrom. A save is now being credited to Latz.",
@@ -702,6 +962,7 @@
     "missing_inning"
    ],
    "linkFlags": [
+    "date_recovery_ambiguous:3",
     "no_game_found"
    ],
    "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
@@ -712,16 +973,65 @@
   },
   {
    "season": 2026,
+   "seq": 135,
+   "section": "2026 Regular Season",
+   "raw": "135. 6/16 DET@HOU -- In the bottom of the 8th, the run charged to Will Vest has been changed to a team unearned run, but is earned to Vest.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:7",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 824182,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2026,
    "seq": 140,
    "section": "2026 Regular Season",
    "raw": "140. 6/6 NYM@PHI -- In the bottom of the 9th, the single for Gabriel Rincones Jr has been changed to a throwing error charged to Bo Bichette. As a result, 1 run in the inning is hanged to unearned against Devin Williams.",
    "parseIssues": [],
    "linkFlags": [
-    "no_game_found"
+    "date_recovered:6/6->6/18",
+    "date_typo:day"
    ],
    "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit->error",
-   "gamePk": null,
+   "gamePk": 823448,
+   "atBatIndex": 76,
+   "currentEventType": "field_error"
+  },
+  {
+   "season": 2026,
+   "seq": 155,
+   "section": "2026 Regular Season",
+   "raw": "155. 6/27 LAD@SD -- In the top of the 6th, Randy Vasquez is charged with 4 earned runs and 3 unearned runs, instead of 5 earned and 2 unearned. Additionally, the 2 runs charged to Ron Marinaccio now team unearned runs, instead of unearned runs.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:12",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 823283,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2026,
+   "seq": 160,
+   "section": "2026 Regular Season",
+   "raw": "160. 7/1 STL@ATL -- In the bottom of the 8th, one run charged to Justin Bruihl has been changed to unearned.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:6",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 824905,
    "atBatIndex": null,
    "currentEventType": null
   },
@@ -763,11 +1073,28 @@
    "raw": "173. 9/4 MIA@ATH -- In the bottom of the 8th, Henry Bolte now reaches on an error instead of a single, advancing to 2nd on the error. As a result, 1 run is changed to unearned against Tyler Zuber.",
    "parseIssues": [],
    "linkFlags": [
+    "date_recovery_ambiguous:2",
     "no_game_found"
    ],
    "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
    "classification": "hit+error->error",
    "gamePk": null,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2026,
+   "seq": 179,
+   "section": "2026 Regular Season",
+   "raw": "179. 7/12 AZ@LAD -- In the top of the 6th, the run charged to pitcher Edgardo Henriquez is now unearned and the run charged to pitcher Emett Sheehan is earned, instead of the other way around.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:13",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 823925,
    "atBatIndex": null,
    "currentEventType": null
   },
@@ -789,6 +1116,38 @@
   },
   {
    "season": 2026,
+   "seq": 190,
+   "section": "2026 Regular Season",
+   "raw": "190. 7/22 WSH@COL -- In the top of the 7th, 1 run charged to Jimmy Herget has been changed to earned.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:7",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 824327,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2026,
+   "seq": 207,
+   "section": "2026 Regular Season",
+   "raw": "207. 7/31 DET@ATH -- In the top of the 8th, the one unearned run of the inning is now charged to pitcher Luis Morales, instead of to pitcher Brady Basso.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:6",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 824975,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2026,
    "seq": 210,
    "section": "2026 Regular Season",
    "raw": "210. 8/6 NYM@CLE -- In the top of the 7th A.J. Ewing's bunt groundout has been changed to a sacrifice bunt.",
@@ -801,6 +1160,38 @@
    "gamePk": 824401,
    "atBatIndex": 64,
    "currentEventType": "sac_bunt"
+  },
+  {
+   "season": 2026,
+   "seq": 214,
+   "section": "2026 Regular Season",
+   "raw": "214. 8/8 BAL@TEX -- In the bottom of the 2nd, 1 run has been changed to earned against Kyle Bradish.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:6",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 822864,
+   "atBatIndex": null,
+   "currentEventType": null
+  },
+  {
+   "season": 2026,
+   "seq": 222,
+   "section": "2026 Regular Season",
+   "raw": "222. 8/22 MIN@SD -- In the bottom of the 7th, San Diego scored four runs, one of them earned to pitcher Andrew Morris, instead of three of the runs being earned.",
+   "parseIssues": [],
+   "linkFlags": [
+    "date_recovery_ambiguous:3",
+    "batter_not_found"
+   ],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "earned_run",
+   "gamePk": 823261,
+   "atBatIndex": null,
+   "currentEventType": null
   },
   {
    "season": 2026,
