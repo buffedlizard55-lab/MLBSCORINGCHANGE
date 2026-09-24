@@ -4,6 +4,28 @@
 **Status:** ✅ Fully Implemented and Tested
 **Requirement:** Track plays whose official-scoring ruling CHANGES after the initial call (error↔hit, single↔double, double→single+error, triple+error↔homerun, …) — both the initial call and the final ruling — in the replay feed (reviews.html), as a dedicated ✏️ Scoring Changes tab AND in the All feed.
 
+> **Session-3 amendment (2026-09-24, verbatim):** "I think we should also track anytime a final
+> scoring decision would change a single to an error, but that would require tracking every
+> single hit, which would cause too much bloat in the primary alert system. We need to create a
+> section for anything that changes a single to an error and keep it from populating the main
+> primary alert system, which is error to a single, also for any scoring pending will be changed
+> to a single, error, out, fielders choice, out, etc."
+>
+> **What changed (implemented and tested):** a tracked change whose INITIAL call was a non-home-run
+> hit (single/double/triple) and whose FINAL ruling is a plate-appearance field error — exactly
+> the pipeline classifier's `hitToError` flag and the model's `hitToError` question — is still
+> detected, logged, persisted and restored like every other change, but it no longer renders in
+> the All feed, no longer renders in the ✏️ Scoring Changes tab and no longer triggers the alert
+> chime (`isHitToErrorChange` → `visibleInAllFeed` / `shouldAlertForReview` /
+> `matchesFilter('scoring')` in `assets/js/reviews-feed.js`). It renders in its own **📉 Hit →
+> Error** feed tab (pre-change chance + final result on every row, via the existing model block),
+> and the season-long official list lives on `scoring.html` → **📉 Hit → Error**. A hit changed
+> to a *fielder's choice + error* (official log #232 shape) is NOT moved — the final ruling is not
+> an error — and neither is a home-run change (no model exists for it): both stay in the primary
+> surface. Detection adds no per-single bloat: it reuses the compact baselines the tracker already
+> keeps for every completed play, and only a confirmed change mints a row. Every other scoring
+> change still shows in the All feed per the original requirement below.
+
 ## User Requirement (Verbatim)
 
 > Add tracking of plays whose official-scoring ruling CHANGES after the initial call — examples: error↔hit, single↔double, double→single(+error), triple+error↔homerun, etc. Track BOTH the initial call and the final ruling (what the official scorer changed it to). Lives in the existing "replay feed all games" (reviews.html). Must be a separate tab in the feed AND also show up in the All feed.
@@ -44,8 +66,8 @@ Each row (key `<gamePk>:scoring-<atBatIndex>`, one row per play however many rul
 
 ## Tests (all deterministic, live-verbatim fixtures)
 
-- `tools/scoring-change-test.mjs` — 13 sections: registry classification, baseline rules (pending/blank never baselined), single/double/multi-ruling chains with history, hit↔error/out/FC matrices, attribution (review-covered skip vs orphan review surface vs other-index non-capture vs pending_ruling), irregularities (RBI/score-after/description-only/vanished play) with dedupe, empty-payload blip, `mergeFeedEvents` cleanup protection, alert/All-feed visibility predicates, `finalScanDecision` truth table, malformed-input degradation.
-- `tools/replay-feed-render-test.mjs` §9 — end-to-end through the real boot path: baseline poll mints no row; the rescored poll renders the row in All with every line item; stats (`Scoring Changes 1`, `Events 3`), tabs (`✏️ Scoring Changes (1)`, `All (3)`), filter isolation (Under Review stays replay-only), idempotent re-poll. This section caught the `scoring.entries` no-op wiring defect the unit tests could not see.
+- `tools/scoring-change-test.mjs` — 14 sections: registry classification, baseline rules (pending/blank never baselined), single/double/multi-ruling chains with history, hit↔error/out/FC matrices, attribution (review-covered skip vs orphan review surface vs other-index non-capture vs pending_ruling), irregularities (RBI/score-after/description-only/vanished play) with dedupe, empty-payload blip, `mergeFeedEvents` cleanup protection, alert/All-feed visibility predicates, `finalScanDecision` truth table, malformed-input degradation, and §14 the hit→error segregation contract (`isHitToErrorChange` truth table: single/double/triple→error segregated; error→hit, hit→FC+error, HR→error, out→error and malformed rows stay primary).
+- `tools/replay-feed-render-test.mjs` §9 — end-to-end through the real boot path: baseline poll mints no row; the rescored poll (single → field error) renders the row ONLY in the 📉 Hit → Error tab with every line item — never in All (`All (2)`), never in ✏️ Scoring Changes (`✏️ Scoring Changes (0)`), stats (`Hit → Error 1`, `Events 2`, no `Scoring Changes` stat) — while the status line still counts it as tracked (`4 review events`, so it persists); Under Review stays replay-only; idempotent re-poll. This section caught the `scoring.entries` no-op wiring defect the unit tests could not see.
 - `tools/api-fields-test.mjs` — projection completeness for the third consumer.
 - `tools/official-scoring-test.mjs`, `tools/reviews-feed-test.mjs`, `tools/review-*.mjs` — regression (all green).
 

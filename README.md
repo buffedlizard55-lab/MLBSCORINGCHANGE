@@ -25,6 +25,10 @@
 > 2. Calibrate the pending chances with the outcomes the feed now logs.
 > 3. Re-test official-scorer (home park) effects as seasons accumulate; the data doesn't support them yet.
 
+### Follow-up request — session 3 (verbatim)
+
+> I think we should also track anytime a final scoring decision would change a single to an error, but that would require tracking every single hit, which would cause too much bloat in the primary alert system. We need to create a section for anything that changes a single to an error and keep it from populating the main primary alert system, which is error to a single, also for any scoring pending will be changed to a single, error, out, fielders choice, out, etc.
+
 (The first line quotes a suggestion made at the end of session 1. Session 2 found the evidence
 does not support "biggest gain" for error *type* itself — see *Current results* — but the live
 capture it required is built and running.)
@@ -77,6 +81,8 @@ capture it required is built and running.)
 | Train on live-captured rulings, error type included (follow-up 1) | `pipeline/capture.mjs` + `.github/workflows/live-capture.yml` record every error call and pending marker as first called → `data/capture/`; the pipeline's captured-data adjustment (`pipeline/lib/adjust.mjs`) switches on by itself once enough captured errors settle and cross-validation shows a gain. Status on `scoring.html` → Model. |
 | Calibrate pending chances with logged outcomes (follow-up 2) | Captured pending rulings + resolutions → per-outcome weights, leave-one-out validated (`pendingCalibration`); applied in the feed and on game pages when active. |
 | Re-test official-scorer / home-park effects (follow-up 3) | Every pipeline run: official scorer of every game (`gameData.officialScorer`), permutation test + cross-validated candidate (`pipeline/lib/effects.mjs`); verdict and per-scorer table on `scoring.html` → Model. |
+| Track single → error changes in their own section, OUT of the primary alert system (session 3) | Live feed: `isHitToErrorChange` (`assets/js/reviews-feed.js`) — a non-HR hit → `field_error` change is excluded from the All feed, the ✏️ Scoring Changes tab and the alert chime, and renders only in the **📉 Hit → Error** tab (with its pre-change chance /100 and the final result). Season list: `scoring.html` → **📉 Hit → Error** (every official hit→error change 2024–2026, each entry classified, linked to its play where found and checked against the play's current StatsAPI ruling — mismatches flagged, never hidden). Same definition everywhere: the pipeline's `hitToError` classifier flag. |
+| …without tracking every single (no bloat) | Detection reuses the compact per-play classification baselines the scoring tracker already keeps for every completed play (one small snapshot per play, never a feed row); only a *confirmed* change mints a row. Season-long confirmation comes from MLB's official log via the 3-hourly pipeline, not from scanning hits. |
 
 ## 🧭 Arena Core Values — focal points
 
@@ -96,6 +102,14 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 2. **Model lines on existing rows** — ✏️ Scoring Change rows show the pre-change chance and the
    final result; ⚖️ Scoring Pending rows show the chances of each final ruling — in the Replay
    Feed and on each game page's Challenges & Reviews tab.
+2a. **📉 Hit → Error sections** (session-3 charter) — a play first ruled a single (or
+   double/triple) whose final ruling is an error is tracked, logged and persisted like any
+   other change, but deliberately kept OUT of the primary alert system (the All feed, the ✏️
+   Scoring Changes tab and the alert chime). It lives in its own **📉 Hit → Error** tab on the
+   live feed — with the pre-change chance /100 and the final result on every row — and in the
+   **📉 Hit → Error** section of `scoring.html` (every officially logged hit→error change,
+   2024–2026). No every-single tracking: detection reuses the compact per-play baselines the
+   scoring tracker already keeps, so the feed never fills with single-by-single noise.
 3. **✏️ Scoring Changes page** (`scoring.html`) — Error Watch for the whole season, MLB's
    official list for 2024–2026 (verbatim, classified, linked to the exact play and checked against
    its current ruling), the model card (accuracy, calibration, what drives changes, limitations)
@@ -466,18 +480,27 @@ for archived games the request is scoped to the feed's game season.
 ├── index.html                 # Scoreboard page (all games for a date)
 ├── game.html                  # Game page (?gamePk=<id>)
 ├── reviews.html               # All-games Replay Feed (live chat-style review feed)
+├── scoring.html               # ✏️ Scoring Changes: Error Watch, Official Changes, 📉 Hit → Error, Model, Irregularities
 ├── 404.html
+├── server.mjs                 # Zero-dependency static server + cross-browser feed-log API
 ├── assets/
 │   ├── css/style.css          # Dark Gameday-style theme (responsive)
 │   └── js/
 │       ├── api.js             # MLB StatsAPI client (fetch, retry, fallbacks, formatters)
 │       ├── ui.js              # Shared UI: team logos, colors, count dots, runners diamond
 │       ├── reviews.js         # Challenge & replay review parser (Manager, Crew Chief, ABS)
-│       ├── reviews-feed.js    # All-games Replay Feed logic (diff helpers + page)
+│       ├── reviews-feed.js    # All-games Replay Feed logic (diff helpers + page; 📉 Hit → Error segregation)
 │       ├── scoreboard.js      # Scoreboard page logic
 │       ├── props.js           # Two-sided hit model, stat cache, Props & Matchup tab
+│       ├── feed-log.js        # Multi-tier feed-log client (memory → localStorage → server → static)
+│       ├── scoring-model.js   # Shared scoring-change model (error→hit, hit→error, pending chances)
+│       ├── scoring-page.js    # scoring.html renderer (pipeline outputs only)
 │       └── game.js            # Game page logic (live "at bat" module, linescore, box, PBP)
-└── docs/workflows/            # Optional GitHub Actions files (see deployment section)
+├── pipeline/                  # Official-data pipeline + live ruling capture (GitHub Actions)
+├── data/                      # Pipeline outputs (official lists, model, reports) + capture evidence + feed logs
+├── tools/                     # Deterministic test suites (node tools/*-test.mjs)
+└── docs/                      # Methodology (MODEL.md), verification reports, workflow notes
+    └── workflows/             # Optional GitHub Actions files (see deployment section)
 ```
 
 ## Run it locally
@@ -511,10 +534,21 @@ node tools/page-status-watcher-test.mjs        # 250ms watchers on the game page
 node tools/api-rate-limit-test.mjs             # HTTP-429 self-throttle (60s quiet period) in the API client
 node tools/official-scoring-test.mjs           # official-scorer pending rulings
 node tools/api-fields-test.mjs                 # playByPlay `fields` projection coverage
-node tools/scoring-change-test.mjs             # official scoring-change tracker (hit ↔ error ↔ out)
+node tools/scoring-change-test.mjs             # official scoring-change tracker (hit ↔ error ↔ out; hit→error segregation)
 node tools/feed-log-persistence-test.mjs       # replay feed log: every entry survives refresh/revisit
 node tools/cross-browser-persistence-test.mjs  # cross-browser & across-the-website persistence verification
+node tools/scoring-model-feed-test.mjs         # scoring-change model on live feed rows (error→hit, hit→error, pending)
+node tools/scoring-model-game-test.mjs         # scoring-change model on game-page rows
+node tools/scoring-page-test.mjs               # scoring.html renders the real pipeline outputs (all 5 sections)
+node tools/storage-namespace-test.mjs          # browser storage keys stay under 'mlbScoringChange.' (origin shared with the original site)
+node tools/pipeline-log-test.mjs               # official-log parser + classifier (ruling transitions, flags)
+node tools/pipeline-model-test.mjs             # model fitting / scoring / banding on synthetic populations
+node tools/capture-test.mjs                    # live ruling capture (first-call states, pending markers)
+node tools/pipeline-offline-smoke.mjs          # end-to-end pipeline run against stubbed official sources
 ```
+
+(The whole batch: `for t in tools/*-test.mjs tools/pipeline-offline-smoke.mjs; do node "$t" || break; done`.
+`tools/smoke-test.mjs` is the only suite that needs live network access.)
 
 Every entry tracked (challenges, reviews, scoring-pending rulings, scoring
 changes) is persistent across the website:

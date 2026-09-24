@@ -635,7 +635,12 @@ console.log('Replay-feed render test passed successfully!');
  * docs/scoring-changes.md; live-verified precedents: 2026 log change #230,
  * Vladimir Guerrero Jr. double→single on 8/30, and #232, Munetaka Muramoto
  * single→fielder's choice + error on 8/29). The play itself is deterministic
- * fixture data built on the verified live field vocabulary. */
+ * fixture data built on the verified live field vocabulary.
+ *
+ * SESSION-3 CHARTER: a hit → error change (exactly this fixture) lives in
+ * its own 📉 Hit → Error tab — it must NOT render in the All feed, NOT in
+ * the ✏️ Scoring Changes tab and NOT alert, while still being tracked,
+ * persisted and shown with its initial call, final ruling and model lines. */
 
 // A completed play with a real classification (deterministic, verified shape).
 const SCORING_PLAY_BASE = {
@@ -673,8 +678,10 @@ assert.equal(allRowsA.length, 2, 'a baseline observation mints no scoring-change
 assert.match(registry['#status-line'].textContent, /3 review events/,
   'baselines do not enter the event feed');
 
-// Poll B — the official scorer changes the single to a field error: the row
-// appears in the ALL feed with the observed initial call and final ruling.
+// Poll B — the official scorer changes the single to a field error. This is
+// a HIT → ERROR change, so per the session-3 charter it is tracked and
+// persisted but kept OUT of the All feed / ✏️ Scoring Changes tab / sounds:
+// it renders only in its own 📉 Hit → Error tab.
 pbpPayload = PBP_RESCORED;
 context.window.ReplayFeed.refresh();
 await new Promise((r) => setImmediate(r));
@@ -683,9 +690,18 @@ await new Promise((r) => setImmediate(r));
 assert.equal(callCounts.pbp, 4, 'poll B fetched the playByPlay once more');
 
 allRowsA = registry['#feed-list'].children.filter((c) => c.cls.includes('feed-row'));
-assert.equal(allRowsA.length, 3, 'the scoring-change row renders in the All feed');
-const scoringRow = allRowsA.find((row) => row.dataset.key === '823342:scoring-21');
-assert.ok(scoringRow, `scoring row carries the stable key, got: ${allRowsA.map((r) => r.dataset.key).join(', ')}`);
+assert.equal(allRowsA.length, 2, 'a hit → error change does NOT render in the All feed');
+assert.ok(!allRowsA.some((row) => row.dataset.key === '823342:scoring-21'),
+  'the All feed has no hit → error row');
+assert.match(registry['#status-line'].textContent, /4 review events/,
+  'the change is still tracked (and persisted) — 3 prior events + the hit → error row');
+
+// The row itself renders — fully formed — in its own 📉 Hit → Error tab.
+context.window.ReplayFeed.setFilter('hiterror');
+const hitErrorRows = registry['#feed-list'].children.filter((c) => c.cls.includes('feed-row'));
+assert.equal(hitErrorRows.length, 1, 'the 📉 Hit → Error tab shows exactly the hit → error row');
+const scoringRow = hitErrorRows[0];
+assert.equal(scoringRow.dataset.key, '823342:scoring-21', 'the row carries its stable key');
 const scoringStrings = [];
 collectStrings(scoringRow, scoringStrings);
 const scoringBlob = scoringStrings.join(' | ');
@@ -713,31 +729,37 @@ assert.equal(findIn(scoringRow, '.feed-scoring-call-hit') ? 'hit' : 'none', 'hit
   'the initial call chip carries its category class');
 assert.ok(findIn(scoringRow, '.feed-scoring-call-error'), 'the final ruling chip carries its category class');
 
-// Stats: the Scoring Changes stat appears; Events (the All count) includes it.
+// Stats: Events (the All count) does NOT include the hit → error row; the
+// ✏️ Scoring Changes stat stays absent; the dedicated Hit → Error stat = 1.
 const statPairsB = {};
 registry['#feed-stats'].children.forEach((item) => {
   const label = findIn(item, '.review-stat-label');
   const value = findIn(item, '.review-stat-value');
   if (label && value) statPairsB[label.text] = value.text;
 });
-assert.equal(statPairsB['Scoring Changes'], '1',
-  `Scoring Changes stat appears with its count, got: ${JSON.stringify(statPairsB)}`);
-assert.equal(statPairsB['Events'], '3', 'Events counts the All section including scoring changes');
+assert.equal(statPairsB['Events'], '2',
+  `Events counts the All section — hit → error excluded, got: ${JSON.stringify(statPairsB)}`);
+assert.equal(statPairsB['Hit → Error'], '1',
+  `the dedicated Hit → Error stat appears, got: ${JSON.stringify(statPairsB)}`);
+assert.ok(!('Scoring Changes' in statPairsB),
+  `no primary Scoring Changes stat for a hit → error row, got: ${JSON.stringify(statPairsB)}`);
 assert.equal(statPairsB['Scoring Pending'], '1', 'Scoring Pending unchanged');
 
-// Tabs: the ✏️ Scoring Changes tab exists, is wired, and shows the row.
+// Tabs: ✏️ Scoring Changes stays at 0, All stays 2, and the separate
+// 📉 Hit → Error tab renders at 1 with its setFilter wiring.
 const tabStringsB = [];
 collectStrings(registry['#feed-tabs'], tabStringsB);
-assert.ok(tabStringsB.some((s) => /^✏️ Scoring Changes \(1\)$/.test(s)),
-  `Scoring Changes tab renders with its count, got: ${JSON.stringify(tabStringsB)}`);
-assert.ok(tabStringsB.some((s) => /^All \(3\)$/.test(s)),
-  `All tab counts scoring changes in, got: ${JSON.stringify(tabStringsB)}`);
-assert.ok(tabStringsB.some((s) => s === "ReplayFeed.setFilter('scoring')"),
-  "Scoring Changes tab wires ReplayFeed.setFilter('scoring')");
+assert.ok(tabStringsB.some((s) => /^✏️ Scoring Changes \(0\)$/.test(s)),
+  `the ✏️ Scoring Changes tab stays at 0, got: ${JSON.stringify(tabStringsB)}`);
+assert.ok(tabStringsB.some((s) => /^All \(2\)$/.test(s)),
+  `the All tab does not count hit → error changes, got: ${JSON.stringify(tabStringsB)}`);
+assert.ok(tabStringsB.some((s) => /^📉 Hit → Error \(1\)$/.test(s)),
+  `the 📉 Hit → Error tab renders with its count, got: ${JSON.stringify(tabStringsB)}`);
+assert.ok(tabStringsB.some((s) => s === "ReplayFeed.setFilter('hiterror')"),
+  "the Hit → Error tab wires ReplayFeed.setFilter('hiterror')");
 context.window.ReplayFeed.setFilter('scoring');
-const scoringOnly = registry['#feed-list'].children.filter((c) => c.cls.includes('feed-row'));
-assert.equal(scoringOnly.length, 1, 'the Scoring Changes tab shows exactly the scoring row');
-assert.equal(scoringOnly[0].dataset.key, '823342:scoring-21');
+assert.equal(registry['#feed-list'].children.filter((c) => c.cls.includes('feed-row')).length, 0,
+  'the ✏️ Scoring Changes tab shows NO hit → error row (primary alert surface)');
 // A scoring change is a NOT a replay: the Under Review tab shows the
 // in-progress manager challenge (fixture idx 15) but never the scoring row.
 context.window.ReplayFeed.setFilter('live');
@@ -746,8 +768,8 @@ assert.equal(liveRows.length, 1, 'the Under Review tab stays replay-only');
 assert.notEqual(liveRows[0].dataset.key, '823342:scoring-21',
   'the scoring-change row never appears under Under Review');
 context.window.ReplayFeed.setFilter('all');
-assert.equal(registry['#feed-list'].children.filter((c) => c.cls.includes('feed-row')).length, 3,
-  'All restores the scoring row');
+assert.equal(registry['#feed-list'].children.filter((c) => c.cls.includes('feed-row')).length, 2,
+  'All stays clean of the hit → error row');
 
 // Poll C — idempotence: the same rescored payload again must not duplicate.
 context.window.ReplayFeed.refresh();
@@ -755,8 +777,11 @@ await new Promise((r) => setImmediate(r));
 await new Promise((r) => setImmediate(r));
 await new Promise((r) => setImmediate(r));
 const rowsAfterScoringReboot = registry['#feed-list'].children.filter((c) => c.cls.includes('feed-row'));
-assert.equal(rowsAfterScoringReboot.length, 3, 're-polling the rescored payload adds no rows');
-assert.equal(rowsAfterScoringReboot.filter((r) => r.dataset.key === '823342:scoring-21').length, 1,
-  'exactly one scoring-change row for the play');
+assert.equal(rowsAfterScoringReboot.length, 2, 're-polling the rescored payload adds no rows to All');
+context.window.ReplayFeed.setFilter('hiterror');
+const hitErrorRowsAfter = registry['#feed-list'].children.filter((c) => c.cls.includes('feed-row'));
+assert.equal(hitErrorRowsAfter.length, 1, 'still exactly one hit → error row for the play');
+assert.equal(hitErrorRowsAfter[0].dataset.key, '823342:scoring-21');
+context.window.ReplayFeed.setFilter('all');
 
-console.log('Official scoring-change render checks passed.');
+console.log('Official scoring-change render checks passed (hit → error segregation honored).');

@@ -81,7 +81,7 @@ const {
   buildScoringSnapshot, scoringSnapshotSignature, scoringCategory,
   scoringEventLabel, scoringInningLabel, scoringMechanism,
   scoringChangeSummary, mergeScoringChanges, finalScanDecision,
-  shouldAlertForReview, visibleInAllFeed, runsRemovableFromReview,
+  shouldAlertForReview, visibleInAllFeed, isHitToErrorChange, runsRemovableFromReview,
   buildEventKey, mergeFeedEvents,
 } = feedContext.module.exports;
 
@@ -637,5 +637,62 @@ assert.equal(scoringMechanism({ about: { atBatIndex: 3, hasReview: false } },
 assert.equal(scoringMechanism({ about: { atBatIndex: 4, hasReview: false } },
   { activeReviewIndexes: new Set(), pendingScoringIndexes: new Set(), teamLabels: {} }).key, 'scorer');
 assert.equal(scoringMechanism(null, null).key, 'scorer', 'malformed input degrades to the honest default');
+
+/* ==== 14. Hit → error segregation — the session-3 charter requirement ====
+ * "Track anytime a final scoring decision would change a single to an
+ * error … create a section for anything that changes a single to an error
+ * and keep it from populating the main primary alert system." The primary
+ * alert system = the All feed + the ✏️ Scoring Changes tab + the alert
+ * chime (error → hit and scoring-pending movement). Hit → error changes
+ * are still tracked, logged and persisted — segregation is display- and
+ * alert-level only (isHitToErrorChange in assets/js/reviews-feed.js). */
+
+// reviewHE (§6): Single → Field Error — exactly the charter direction.
+assert.equal(isHitToErrorChange(reviewHE), true, 'single → field error is a hit→error change');
+assert.equal(visibleInAllFeed(reviewHE), false, 'hit→error changes are kept OUT of the All feed');
+assert.equal(shouldAlertForReview(reviewHE), false, 'hit→error changes never trigger the alert chime');
+assert.equal(runsRemovableFromReview(reviewHE), 0, '…and never claim runs at risk');
+
+// Doubles/triples ruled errors are the same direction (a hit removed, an
+// error charged): the section covers them too.
+assert.equal(isHitToErrorChange({ ...reviewHE, initial: { ...reviewHE.initial, eventType: 'double' } }), true,
+  'double → error belongs to the section');
+assert.equal(isHitToErrorChange({ ...reviewHE, initial: { ...reviewHE.initial, eventType: 'triple' } }), true,
+  'triple → error belongs to the section');
+
+// The primary direction stays primary: reviewEH = Field Error → Single (§6).
+const reviewEH = errorToHit.added[0].review;
+assert.equal(isHitToErrorChange(reviewEH), false, 'error → hit is NOT a hit→error change');
+assert.equal(visibleInAllFeed(reviewEH), true, 'error → hit stays in the All feed');
+assert.equal(shouldAlertForReview(reviewEH), true, 'error → hit still chimes');
+
+// reviewFC (§6): Single → Fielders Choice + Error — official log #232. The
+// final ruling is a fielder's choice, NOT a plate-appearance error, so the
+// row stays in the primary surface — matching the pipeline's hitToFc flag
+// (the live feed and the official list must section the same play
+// identically; scoring.html's 📉 Hit → Error section uses the same
+// definition via transitionFlags().hitToError).
+assert.equal(isHitToErrorChange(reviewFC), false, 'hit → FC + error is not the single→error section');
+assert.equal(visibleInAllFeed(reviewFC), true, 'hit → FC + error stays in the All feed');
+assert.equal(shouldAlertForReview(reviewFC), true, 'hit → FC + error still chimes');
+
+// A home run → error change is outside the definition (the model's
+// scoreHitToError scores only non-home-run hits): it keeps the old
+// primary-surface behavior rather than carrying no model score.
+assert.equal(isHitToErrorChange({ ...reviewHE, initial: { ...reviewHE.initial, eventType: 'home_run' } }), false,
+  'home run → error is outside the hit→error definition');
+
+// Out → error (§6) stays in the primary surface.
+assert.equal(isHitToErrorChange(outToError.added[0].review), false, 'out → error stays primary');
+assert.equal(visibleInAllFeed(outToError.added[0].review), true, 'out → error stays in the All feed');
+
+// Malformed / legacy rows (e.g. a restored log row without snapshots) fail
+// open: visible, alertable, never silently hidden.
+assert.equal(isHitToErrorChange(null), false);
+assert.equal(isHitToErrorChange({}), false);
+assert.equal(isHitToErrorChange({ typeKey: 'scoring_change' }), false, 'no snapshots → not a hit→error change');
+assert.equal(visibleInAllFeed({ typeKey: 'scoring_change' }), true, 'a snapshot-less scoring change stays visible');
+assert.equal(shouldAlertForReview({ typeKey: 'scoring_change' }), true, '…and alertable');
+assert.equal(visibleInAllFeed(null), true, 'malformed entries fail open');
 
 console.log('Official scoring change tests passed successfully!');

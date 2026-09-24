@@ -556,17 +556,57 @@ function gameTeamsLabel(game, teamsById) {
 }
 
 /**
+ * Whether a tracked official scoring change is a "hit → error" reversal: the
+ * INITIAL call was a base hit (single / double / triple — never a home run,
+ * matching the model's hitToError question) and the FINAL ruling is a plate-
+ * appearance field error. This is precisely the direction of the session-3
+ * charter requirement: "track anytime a final scoring decision would change a
+ * single to an error … create a section for [it] and keep it from populating
+ * the main primary alert system".
+ *
+ * The definition mirrors the official-list classifier
+ * (pipeline/lib/log-classifier.mjs transitionFlags().hitToError: initial
+ * category hit → final category error) and scoring-model.js scoreReview's
+ * fromHit branch (a non-home-run hit changed to a field error), so the same
+ * play is sectioned identically on the live feed, on scoring.html and in the
+ * model — never in one section here and another there. A hit changed to a
+ * fielder's choice + error (official log #232 wording) is NOT this flag: the
+ * batter's final ruling is not an error, so the row stays in the primary ✏️
+ * Scoring Changes surface (that direction is hitToFc on the official list).
+ * Home runs are excluded: there is no hitToError model for them, so such a
+ * (practically impossible) row keeps the old primary-surface behavior.
+ *
+ * Read from the registry event types of the observed initial/final snapshots
+ * (never from descriptions), so restored feed-log rows classify identically.
+ * Pure — no DOM.
+ */
+function isHitToErrorChange(review) {
+  if (!review || review.typeKey !== SCORING_CHANGE_TYPE_KEY) return false;
+  const init = review.initial && review.initial.eventType;
+  const fin = review.final && review.final.eventType;
+  return typeof init === 'string' && typeof fin === 'string' &&
+    SCORING_HIT_EVENT_TYPES.has(init) && init !== 'home_run' &&
+    SCORING_PA_ERROR_EVENT_TYPES.has(fin);
+}
+
+/**
  * Whether a review should trigger the audio alert (gentle raindrop chime).
  * Requirement: challenges, reviews, boundary calls, official-scorer pending
- * rulings AND official scoring changes, but NOT ABS. ABS is typeKey 'abs'.
- * Everything else (manager, crew_chief, boundary, review, rules, umpire,
- * pending_scoring, scoring_change) qualifies — an official-scorer pending
- * ruling is exactly what the user wants to hear about immediately, and so is
- * a hit/error/out reclassification observed between polls. Pure — no DOM.
+ * rulings AND official scoring changes, but NOT ABS — and (session-3 charter)
+ * NOT hit → error reversals. ABS is typeKey 'abs'; hit → error changes are
+ * detected like every other change but deliberately live in their own
+ * section (the 📉 Hit → Error tab / the scoring.html Hit → Error list),
+ * silent, so they can never bloat the primary alert system whose job is
+ * error → hit movement and scoring-pending resolutions. Everything else
+ * (manager, crew_chief, boundary, review, rules, umpire, pending_scoring,
+ * scoring_change) qualifies — an official-scorer pending ruling is exactly
+ * what the user wants to hear about immediately, and so is an
+ * error/out/hit reclassification observed between polls. Pure — no DOM.
  */
 function shouldAlertForReview(review) {
   if (!review || typeof review.typeKey !== 'string') return false;
-  return review.typeKey !== 'abs';
+  if (review.typeKey === 'abs') return false;
+  return !isHitToErrorChange(review);
 }
 
 /**
@@ -588,9 +628,19 @@ function shouldAlertForReview(review) {
  *
  * Unknown / malformed entries fail open (visible in All): an unrecognized
  * event must never be silently hidden. Pure function — no DOM.
+ *
+ * Session-3 charter amendment: hit → error reversals (isHitToErrorChange —
+ * a single/double/triple whose final ruling is an error) are intentionally
+ * NOT in the All feed. They are tracked, logged and persisted exactly like
+ * every other change, but they render only in their own 📉 Hit → Error
+ * section so the primary alert system stays the error → hit and
+ * scoring-pending feed. Every other scoring change (error → hit, hit type
+ * changes, out ↔ anything, hit → fielder's choice + error, …) still shows
+ * in All, by the original explicit request.
  */
 function visibleInAllFeed(review) {
-  return !review || review.typeKey !== 'abs';
+  if (!review || review.typeKey !== 'abs') return !isHitToErrorChange(review);
+  return false;
 }
 
 /**
@@ -2928,8 +2978,12 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     // against what previous polls observed. A diff that survives the
     // signature comparison becomes a permanent feed row ("Single → Field
     // Error", "Double → Single", …) shown in the All feed and the ✏️ Scoring
-    // Changes tab. Annotation-only edits (description / RBI / score without a
-    // reclassification) are flagged as irregularities for review instead.
+    // Changes tab — EXCEPT a hit → error change ("Single → Field Error"),
+    // which renders only in its own 📉 Hit → Error tab (session-3 charter;
+    // segregation is render/alert-level, the row is minted and logged here
+    // like any other). Annotation-only edits (description / RBI / score
+    // without a reclassification) are flagged as irregularities for review
+    // instead.
     const scoring = mergeScoringChanges(
       gamePk,
       [...(Array.isArray(pbp.allPlays) ? pbp.allPlays : []), pbp.currentPlay],
@@ -2982,7 +3036,8 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     const needsCounts = hasEntries &&
       (eventsChanged || !tracked || !tracked.absAttempted);
     // Count new alertable events for the chime (challenges/reviews/boundary,
-    // official scoring changes — not ABS)
+    // official scoring changes — not ABS, and not hit → error changes,
+    // which stay silent in their own section by design)
     if (combined.added && combined.added.length) {
       const alertable = combined.added.filter((e) => {
         try {
@@ -3591,9 +3646,12 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
         'Detected only from the official StatsAPI event types os_ruling_pending_primary / os_ruling_pending_prior ("Official Scorer Ruling Pending", GET /api/v1/eventTypes).';
       wrap.appendChild(item);
     }
-    // Official scoring changes (hit ↔ error, single ↔ double, out ↔ hit,
-    // …) observed by diffing the official play-by-play between polls.
-    const scEntries = entries.filter((e) => e.review.typeKey === 'scoring_change');
+    // Official scoring changes (error → hit, hit type changes, out ↔
+    // anything, …) observed by diffing the official play-by-play between
+    // polls. Hit → error reversals are counted separately below: they live
+    // in their own section, never in the primary alert system (session-3
+    // charter).
+    const scEntries = entries.filter((e) => e.review.typeKey === 'scoring_change' && !isHitToErrorChange(e.review));
     if (scEntries.length) {
       let irregularTotal = 0;
       scoringIrregularities.forEach((notes) => { irregularTotal += notes.length; });
@@ -3603,6 +3661,15 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
         'Detected only by diffing the official play-by-play payload; the API carries no scoring-change marker. ' +
         `Official log: mlb.com/official-information/scoring-changes.` +
         (irregularTotal ? ` ${irregularTotal} irregularit${irregularTotal === 1 ? 'y' : 'ies'} flagged for review (see the Scoring Changes tab).` : '');
+      wrap.appendChild(item);
+    }
+    const h2eEntries = entries.filter((e) => isHitToErrorChange(e.review));
+    if (h2eEntries.length) {
+      const item = stat('Hit → Error', h2eEntries.length, 'stat-hit-error');
+      item.title = `${h2eEntries.length} play${h2eEntries.length === 1 ? '' : 's'} today first ruled a hit (usually a single) and officially changed to an error. ` +
+        'Tracked in their own 📉 Hit → Error tab — deliberately out of the All feed and the ✏️ Scoring Changes ' +
+        'alerts so the primary alert system stays focused on error → hit and scoring-pending movement. ' +
+        'Full season list: scoring.html → 📉 Hit → Error.';
       wrap.appendChild(item);
     }
     wrap.appendChild(stat('Overturned', entries.filter((e) => e.review.outcome === 'overturned').length, 'stat-overturned'));
@@ -3816,11 +3883,17 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       live: entries.filter((e) => e.review.inProgress && e.review.typeKey !== 'pending_scoring').length,
       runrisk: entries.filter((e) => runsRemovableFromReview(e.review) > 0).length,
       pending_scoring: entries.filter((e) => e.review.typeKey === 'pending_scoring').length,
-      scoring: entries.filter((e) => e.review.typeKey === 'scoring_change').length,
+      scoring: entries.filter((e) => e.review.typeKey === 'scoring_change' && !isHitToErrorChange(e.review)).length,
+      hiterror: entries.filter((e) => isHitToErrorChange(e.review)).length,
     };
     const tabs = [
       ['all', `All (${counts.all})`],
       ['scoring', `✏️ Scoring Changes (${counts.scoring})`],
+      // The hit → error section sits next to ✏️ Scoring Changes but never
+      // inside it (session-3 charter): a confirmed single → error reversal
+      // is listed here — with its pre-change chance and final ruling — and
+      // nowhere in the primary alert system.
+      ['hiterror', `📉 Hit → Error (${counts.hiterror})`],
       ['pending_scoring', `⚖️ Scoring Pending (${counts.pending_scoring})`],
       ...(scoringModelModule() ? [['errorwatch', `🎯 Error Watch (${errorWatch.size})`]] : []),
       ['abs', `ABS (${counts.abs})`],
@@ -3850,7 +3923,9 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
           ? 'No games scheduled for this date.'
           : filter === 'scoring'
             ? 'No official scoring changes observed yet — the tracker snapshots every completed play and diffs each poll; when the official scorer changes a hit/error/out ruling, the initial call and final ruling appear here.'
-            : 'No challenges or replay reviews in this category yet — events will appear here live.'));
+            : filter === 'hiterror'
+              ? 'No hit → error changes observed today — when a play first ruled a hit (usually a single) is officially changed to an error, it appears here with its pre-change chance and final ruling, and never in the primary alert feed.'
+              : 'No challenges or replay reviews in this category yet — events will appear here live.'));
       return;
     }
     if (filter === 'scoring') renderScoringIrregularities(wrap);
@@ -3890,17 +3965,20 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
   }
 
   function matchesFilter(entry) {
-    // The All section shows every category EXCEPT ABS pitch challenges:
-    // challenges, reviews, boundary calls, under review, runs at risk, and
-    // official scoring changes (which also have their own ✏️ tab below).
-    // ABS entries stay tracked in the feed state — they render under the
-    // "ABS" tab (and wherever else their category applies: the Under
-    // Review tab, active strip, run-at-risk surfaces).
+    // The All section shows every category EXCEPT ABS pitch challenges and
+    // hit → error scoring changes: challenges, reviews, boundary calls,
+    // under review, runs at risk, and official scoring changes (which also
+    // have their own ✏️ tab below). ABS entries stay tracked in the feed
+    // state — they render under the "ABS" tab (and wherever else their
+    // category applies: the Under Review tab, active strip, run-at-risk
+    // surfaces). Hit → error changes likewise stay tracked — they render
+    // only under the 📉 Hit → Error tab (session-3 charter).
     if (filter === 'all') return visibleInAllFeed(entry && entry.review);
     if (filter === 'live') return entry.review.inProgress && entry.review.typeKey !== 'pending_scoring';
     if (filter === 'runrisk') return runsRemovableFromReview(entry.review) > 0;
     if (filter === 'pending_scoring') return entry.review.typeKey === 'pending_scoring';
-    if (filter === 'scoring') return entry.review.typeKey === 'scoring_change';
+    if (filter === 'scoring') return entry.review.typeKey === 'scoring_change' && !isHitToErrorChange(entry.review);
+    if (filter === 'hiterror') return isHitToErrorChange(entry.review);
     return entry.review.typeKey === filter;
   }
 
@@ -4475,7 +4553,7 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       isUsableName, officialTeamName, gameSideTeam,
       pollIntervalMs, waitAfterScan, reviewFetchPriority, mapPool,
       isReviewStatusCode, reviewStatusFlips,
-      shouldAlertForReview, visibleInAllFeed,
+      shouldAlertForReview, visibleInAllFeed, isHitToErrorChange,
       runsRemovableFromReview, shouldRunRiskAlert, diffRunRiskKeys,
       normalizeChallengeCounts, challengeCountIrregularities,
       teamSideInGame, teamChallengeLine, gameChallengeLine,
