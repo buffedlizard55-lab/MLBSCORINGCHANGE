@@ -405,5 +405,5 @@ const repoCheck = verifyAgainstRepoData();
 const recCheck = verifyRecoveredLinksInRepoData();
 
 console.log(`pipeline-link-test: OK (${passed} sections; repo cross-check: ` +
-  `${repoCheck.skipped ? repoCheck.skipped : `${repoCheck.checked}/2 error-watch rows re-verified`}; ` +
+  `${repoCheck.skipped ? repoCheck.skipped : `${repoCheck.checked}/2 Error Watch rows re-verified (a recovered play starts as a hit, so it leaves Error Watch — see the recovered-links check)`}; ` +
   `real recovered links: ${recCheck.skipped || `${recCheck.checked}/2 verified`})`);

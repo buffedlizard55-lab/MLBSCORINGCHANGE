@@ -161,7 +161,8 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 | Log loss vs always-base-rate | 0.2199 vs 0.2264 | 0.0074 vs 0.0092 |
 
 - Coverage: 7,323 completed games; 553,370 plate appearances; 693 official entries
-  (229 + 211 + 253) with 662 linked to their exact play.
+  (229 + 211 + 253) with 665 linked to their exact play (session 4's date recovery
+  placed two more hit → error entries whose date in MLB's own list is wrong).
 - The xBA-style hit probability (370,696 batted balls) correlates **0.974** with Savant's
   `estimated_ba_using_speedangle` on the same plays; all 1,015 regular-season 2026 errors match
   Savant exactly. Savant's own xBA is also attached **per play** to every linked official entry and

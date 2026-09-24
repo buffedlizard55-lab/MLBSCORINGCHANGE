@@ -67,7 +67,12 @@ do not count as an error. After this pass: 1 / 2 / 0 unclassified entries (2024 
    game that day against a similarly coded opponent (`TBN@TOR` → TB; `TOR@LAA` → LAD), ±10 days.
 2. **Plate appearance:** a batter of that half-inning whose full name (or unique last name, or a
    last name within edit distance 2 — flagged) appears in the text; among candidates, prefer the
-   one whose current ruling agrees with the new ruling, then the earliest mention.
+   one whose current ruling **is** the new ruling (`exact`) over one StatsAPI codes in a documented
+   alternative way (`compatible` — the same batter can have several plate appearances in a game,
+   and only one of them is the entry's subject; verified on 2026 #173, where the compatible play is
+   a 4th-inning force out and the entry's play is the bottom-9th field error), then an uncheckable
+   one, then half-inning scope, the earliest mention and the lowest at-bat. A mismatch is ranked
+   last and reported (`current_ruling_mismatch`), never preferred.
 3. **Verification against StatsAPI's current ruling:** `exact`, `compatible` or `mismatch`.
    *Compatible* encodes conventions verified on linked plays: a sacrifice fielder's choice is
    coded `sac_bunt` (2026 #123, #186; 2025 #102); reaching on an error on a play with another
@@ -90,13 +95,13 @@ do not count as an error. After this pass: 1 / 2 / 0 unclassified entries (2024 
    Irregularities; nothing is guessed. An entry that cannot be placed at all keeps `no_game_found` /
    `batter_not_found`.
 
-Run of 2026-09-24: 662 of 693 entries linked to their exact play; every error → hit entry
-linked. Two 2026 hit → error entries (#140 "6/6 NYM@PHI", #173 "9/4 MIA@ATH") only became linkable
+Run of 2026-09-24 (linker v3): 665 of 693 entries linked to their exact play; every error → hit
+entry linked. Two 2026 hit → error entries (#140 "6/6 NYM@PHI", #173 "9/4 MIA@ATH") only became linkable
 with the date-recovery pass: the games were played on 6/18 (game 823448, Rincones Jr., bottom 9th)
 and 7/4 (game 824983, Bolte, bottom 9th) — MLB's own dates are wrong, which the linker flags
 (`date_recovered` / `date_typo`, #173's printed inning too) rather than rewriting. #173 needed the
 stronger tie-break as well: its stated pairing (MIA@ATH) played on 7/3 and 7/4, both games contain a
-Bolte plate appearance, and only the 7/4 play is an exact `field_error` — the 7/3 play is coded
+Bolte plate appearance (and Bolte has two plate appearances in the 7/4 game), and only the 7/4 play is an exact `field_error` — the 7/3 play is coded
 `fielders_choice`, which agrees only "compatibly", so the calendar-adjacent log-order hint could not
 separate them and the entry stayed unlinked (`date_recovery_ambiguous:2`) until the exact match was
 preferred. The Irregularities tab
