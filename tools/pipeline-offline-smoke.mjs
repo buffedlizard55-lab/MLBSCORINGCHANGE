@@ -192,6 +192,8 @@ const reportRun2 = (() => { const before = fs.readFileSync(path.join(tmp, 'data'
   assert.equal(rec.length, 2, `both mis-dated entries recovered (${JSON.stringify(rec)})`);
   assert.ok(rec.every((x) => x.verifiedBy === 'batter + ruling'), 'recovered only on the batter + ruling check');
   assert.ok(rec.every((x) => x.kind === 'month'), 'both are same-day-of-month month typos');
+  assert.ok(rec.every((x) => x.decidedBy === 'only game verified'),
+    `each recovery reports what decided it (${JSON.stringify(rec.map((x) => x.decidedBy))})`);
   assert.ok(rec.every((x) => x.gameDate === '2026-05-05'), 'both point at the game actually played');
   const seqs = new Set(rec.map((x) => x.seq));
   const recEntries = official.entries.filter((e) => seqs.has(e.seq));

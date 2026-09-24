@@ -77,22 +77,31 @@ do not count as an error. After this pass: 1 / 2 / 0 unclassified entries (2024 
 5. **Date recovery (session 4):** when the stated pairing has no game within ±10 days, the whole
    season is searched for it. A game is accepted only if the batter named in the entry batted in the
    stated half-inning **and** that play's current ruling does not contradict the entry's new ruling
-   (rules 2–4 applied to a recovered game). A tie between two games that both verify is broken only
-   by the dates of the neighbouring log entries (the list is published in order); a bookkeeping
-   entry that names no batter is accepted only when the pairing played exactly one game that season,
-   or when exactly one of its games is a strong single-field date typo (same day of another month,
-   or month and day swapped — a different *day* inside the same month is not evidence of a typo).
-   Every recovery stays flagged (`date_recovered:6/6->6/18`, `date_typo:day|month|transposed`,
-   `date_recovered_game_only`) and is listed in Irregularities; nothing is guessed. An entry that
-   cannot be placed at all keeps `no_game_found` / `batter_not_found`.
+   (rules 2–4 applied to a recovered game). When several games of the pairing pass those checks the
+   call is made only by evidence that separates them, strongest first: exactly one game whose play's
+   current ruling **is** the entry's new ruling (`exact` — stronger than the documented `compatible`
+   codings), else exactly one game inside the neighbouring entries' date window (the list is
+   published in order); two exact matches stay unlinked and flagged. A bookkeeping entry that names
+   no batter is accepted only when the pairing played exactly one game that season, or when exactly
+   one of its games is a strong single-field date typo (same day of another month, or month and day
+   swapped — a different *day* inside the same month is not evidence of a typo). Every recovery
+   stays flagged (`date_recovered:6/6->6/18`, `date_typo:day|month|transposed`,
+   `date_recovered_game_only`, `date_recovery_decided_by:exact_ruling|log_order`) and is listed in
+   Irregularities; nothing is guessed. An entry that cannot be placed at all keeps `no_game_found` /
+   `batter_not_found`.
 
 Run of 2026-09-24: 662 of 693 entries linked to their exact play; every error → hit entry
 linked. Two 2026 hit → error entries (#140 "6/6 NYM@PHI", #173 "9/4 MIA@ATH") only became linkable
 with the date-recovery pass: the games were played on 6/18 (game 823448, Rincones Jr., bottom 9th)
 and 7/4 (game 824983, Bolte, bottom 9th) — MLB's own dates are wrong, which the linker flags
-(`date_recovered` / `date_typo`, #173's printed inning too) rather than rewriting. The tab keeps
-every flagged entry, including genuine errors in MLB's log such as #140's date: on 6/6 PHI hosted
-CWS per [StatsAPI](https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=2026-06-05&endDate=2026-06-07&teamId=143).
+(`date_recovered` / `date_typo`, #173's printed inning too) rather than rewriting. #173 needed the
+stronger tie-break as well: its stated pairing (MIA@ATH) played on 7/3 and 7/4, both games contain a
+Bolte plate appearance, and only the 7/4 play is an exact `field_error` — the 7/3 play is coded
+`fielders_choice`, which agrees only "compatibly", so the calendar-adjacent log-order hint could not
+separate them and the entry stayed unlinked (`date_recovery_ambiguous:2`) until the exact match was
+preferred. The Irregularities tab
+keeps every flagged entry, including genuine errors in MLB's log such as #140's date: on 6/6 PHI
+hosted CWS per [StatsAPI](https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=2026-06-05&endDate=2026-06-07&teamId=143).
 
 ## 6. Labels
 

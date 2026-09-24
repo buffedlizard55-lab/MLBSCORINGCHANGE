@@ -22,9 +22,14 @@
  * the named batter appears in the play-by-play of the stated half-inning of
  * that game, and the play's current ruling does not contradict the entry's
  * new ruling (the same rules 3 and 4). Everything is flagged
- * (`date_recovered:MM/DD->MM/DD`, `date_typo:month|day|transposed`, or
+ * (`date_recovered:MM/DD->MM/DD`, `date_typo:month|day|transposed`,
+ * `date_recovery_decided_by:exact_ruling|log_order`, or
  * `date_recovery_ambiguous`) so a wrong log date is surfaced for review,
- * never silently fixed. Nothing is guessed when the check cannot decide.
+ * never silently fixed. Nothing is guessed when the check cannot decide:
+ * when several games of the pairing pass the batter + ruling check, the call
+ * is made only by evidence that separates them — one game whose play's
+ * current ruling IS the entry's new ruling (`exact`, stronger than the
+ * documented `compatible` codings), else the neighbouring entries' dates.
  * ==========================================================================*/
 
 import { HIT_EVENTS } from './statsapi.mjs';
@@ -308,20 +313,33 @@ export function recoverGameForEntry(entry, ctx, { orderHint = null } = {}) {
   const playsByGame = (ctx && ctx.playsByGame) || new Map();
   const away = teamIndex && teamIndex.get(entry.away || '');
   const home = teamIndex && teamIndex.get(entry.home || '');
-  if (!away || !home || !entry.date) return { game: null, candidates: [], flags: [] };
+  if (!away || !home || !entry.date) return { game: null, candidates: [], flags: [], decidedBy: null };
   const pairAll = games.filter((g) => (g.awayId === away.id && g.homeId === home.id)
     || (g.awayId === home.id && g.homeId === away.id));
-  if (!pairAll.length) return { game: null, candidates: [], flags: [] };
+  if (!pairAll.length) return { game: null, candidates: [], flags: [], decidedBy: null };
   const normText = normalizeName(entry.body);
   // Only games whose play-by-play actually names a player from the entry can
   // be candidates — the rest cannot pass rule 3.
   const mentioning = pairAll.filter((g) => (playsByGame.get(g.gamePk) || [])
     .some((r) => r.ty === 'atBat' && textMentionsName(normText, r.bn)));
+  const finalCat = entry.cls && entry.cls.final;
+  const finalHit = entry.cls && entry.cls.finalHitType;
   const scored = [];
   for (const g of mentioning) {
     const cands = findCandidates(entry, [g], playsByGame)
-      .filter((c) => rulingAgrees(entry.cls && entry.cls.final, entry.cls && entry.cls.finalHitType, c.rec.et) !== false);
-    if (cands.length) scored.push({ game: g, cands });
+      .filter((c) => rulingAgrees(finalCat, finalHit, c.rec.et) !== false);
+    if (!cands.length) continue;
+    // How well does this game agree? `exact` (the play's current ruling IS the
+    // entry's new ruling) is strictly stronger evidence than `compatible`
+    // (StatsAPI's documented alternative coding for a reached-on-error play,
+    // e.g. the fielder's-choice family). A same-series pairing can put a
+    // batter's compatible play in the game one day before the game the entry
+    // is really about — verified on the real 2026 data: #173's stated 9/4
+    // MIA@ATH pairing played on 7/3 and 7/4, and only the 7/4 play (game
+    // 824983, an exact field_error) is the entry's subject, while Bolte's 7/3
+    // play is coded `fielders_choice` and only agrees "compatibly".
+    const exact = cands.some((c) => rulingAgreement(finalCat, finalHit, c.rec.et) === 'exact');
+    scored.push({ game: g, cands, exact });
   }
   const inOrder = (g) => {
     if (!orderHint || !orderHint.prevDate || !orderHint.nextDate) return true;
@@ -331,7 +349,29 @@ export function recoverGameForEntry(entry, ctx, { orderHint = null } = {}) {
   };
   const pickFrom = (list) => (list.length === 1 ? list[0] : (list.filter((x) => inOrder(x.game)).length === 1
     ? list.filter((x) => inOrder(x.game))[0] : null));
-  let chosen = pickFrom(scored);
+  // Pick the game by the strongest discriminator that leaves exactly ONE
+  // candidate, and nothing weaker:
+  //   1. one single game passed the batter + ruling check at all;
+  //   2. exactly one game agrees EXACTLY (its play's current ruling IS the
+  //      entry's new ruling) — stronger evidence than the log's order, and the
+  //      only thing separating two verified games in a same-week series. Two
+  //      exact matches fall through — never guessed;
+  //   3. exactly one of the remaining candidates sits inside the neighbouring
+  //      entries' date window.
+  // Whatever decides it is reported in `decidedBy` / the flags.
+  const exacts = scored.filter((x) => x.exact);
+  let chosen = null;
+  let decidedBy = null;
+  if (scored.length === 1) {
+    chosen = scored[0];
+    decidedBy = 'only game verified';
+  } else if (exacts.length === 1) {
+    chosen = exacts[0];
+    decidedBy = 'exact ruling';
+  } else {
+    chosen = pickFrom(scored);
+    decidedBy = chosen ? 'log order' : null;
+  }
   let gameOnly = false;
   if (!chosen && !scored.length && !mentioning.length) {
     // No batter named anywhere in the season for this pairing (bookkeeping
@@ -355,7 +395,11 @@ export function recoverGameForEntry(entry, ctx, { orderHint = null } = {}) {
     const kind = dateTypoKind(entry.date, chosen.game.officialDate);
     if (kind) flags.push(`date_typo:${kind}`);
     if (gameOnly) flags.push('date_recovered_game_only');
-    return { game: chosen.game, candidates: scored.map((s) => s.game), flags };
+    // How the game was picked, when the entry's own text could not decide it
+    // alone — always reported, so a human can re-check the call.
+    if (decidedBy === 'exact ruling') flags.push('date_recovery_decided_by:exact_ruling');
+    else if (decidedBy === 'log order') flags.push('date_recovery_decided_by:log_order');
+    return { game: chosen.game, candidates: scored.map((s) => s.game), flags, decidedBy };
   }
   // Nothing verified. Report WHY so the entry can be reviewed by hand:
   //   ambiguous  — more than one game passed the batter + ruling check (they
@@ -365,12 +409,13 @@ export function recoverGameForEntry(entry, ctx, { orderHint = null } = {}) {
   //                not match the entry's new ruling anywhere (a contradicting
   //                current ruling is deliberately NOT a recovery: the ±10-day
   //                pass is where a `current_ruling_mismatch` is reported).
-  if (scored.length > 1) return { game: null, candidates: scored.map((s) => s.game), flags: [`date_recovery_ambiguous:${scored.length}`] };
-  if (mentioning.length) return { game: null, candidates: mentioning, flags: [`date_recovery_unverified:${mentioning.length}`] };
+  if (scored.length > 1) return { game: null, candidates: scored.map((s) => s.game), flags: [`date_recovery_ambiguous:${scored.length}`], decidedBy: null };
+  if (mentioning.length) return { game: null, candidates: mentioning, flags: [`date_recovery_unverified:${mentioning.length}`], decidedBy: null };
   return {
     game: null,
     candidates: pairAll,
     flags: pairAll.length ? [`date_recovery_ambiguous:${pairAll.length}`] : [],
+    decidedBy: null,
   };
 }
 

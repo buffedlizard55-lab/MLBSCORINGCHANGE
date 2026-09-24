@@ -269,6 +269,45 @@ test('the log-order hint is what separates two games that both verify', () => {
   assert.ok(withHint.flags.includes('date_recovered:4/1->5/13'));
 });
 
+test('an exact ruling beats a merely compatible one — and beats a misleading log order', () => {
+  // The shape of the REAL 2026 #173 ambiguity, which the log-order hint alone
+  // could not resolve: the stated 9/4 MIA@ATH pairing played on 7/3 and 7/4,
+  // the batter has a play in BOTH games, and only the 7/4 play (an exact
+  // field_error) is the entry's subject — the 7/3 play is coded
+  // `fielders_choice`, which agrees only "compatibly" (link.mjs
+  // rulingAgreement: StatsAPI's documented coding for a reached-on-error play).
+  const g = [
+    { gamePk: 900020, officialDate: '2026-07-03', awayId: 121, homeId: 143, gameType: 'R' },
+    { gamePk: 900021, officialDate: '2026-07-04', awayId: 121, homeId: 143, gameType: 'R' },
+  ];
+  const plays = new Map([
+    [900020, [play(900020, 50, 8, false, 997, 'Twin Batter', 'fielders_choice', 'Fielders Choice',
+      'Twin Batter reaches on a fielder\u2019s choice. A run scores. Fielding error by third baseman.')]],
+    [900021, [play(900021, 60, 9, false, 997, 'Twin Batter', 'field_error', 'Field Error',
+      'Twin Batter reaches on a fielding error by third baseman.')]],
+  ]);
+  const e = entryFor('10. 9/4 NYM@PHI -- In the bottom of the 8th, Twin Batter now reaches on an error instead of a single.');
+  const strict = linkEntry(e, { ...ctx, games: g, playsByGame: plays });
+  assert.equal(strict.gamePk, 900021, 'the game whose play IS the error the entry describes');
+  assert.equal(strict.atBatIndex, 60);
+  assert.ok(strict.flags.includes('date_recovery_decided_by:exact_ruling'), `decider reported (${strict.flags.join(', ')})`);
+  assert.ok(strict.flags.includes('date_recovered:9/4->7/4'));
+  assert.ok(strict.flags.includes('inning_mismatch'), 'the stated 8th inning is not the play’s inning');
+  // Even an order hint that points at the compatible game cannot override it:
+  // the log's order is weaker evidence than the ruling itself.
+  const hinted = linkEntry(e, {
+    ...ctx, games: g, playsByGame: plays,
+    orderHint: { prevDate: '2026-07-03', nextDate: '2026-07-03' },
+  });
+  assert.equal(hinted.gamePk, 900021, 'the log order does not outvote an exact ruling match');
+  assert.ok(hinted.flags.includes('date_recovery_decided_by:exact_ruling'));
+  // Two exact matches are still ambiguous — the tie-break never guesses.
+  const twoExact = new Map([[900020, plays.get(900021).map((p) => ({ ...p, g: 900020 }))], [900021, plays.get(900021)]]);
+  const both = linkEntry(e, { ...ctx, games: g, playsByGame: twoExact });
+  assert.equal(both.gamePk, null, 'two exact matches → nothing linked');
+  assert.ok(both.flags.includes('date_recovery_ambiguous:2'), `ambiguous (${both.flags.join(', ')})`);
+});
+
 test('the recovery never links a game whose current ruling contradicts the entry', () => {
   // Same teams, same batter, but the play is a single, not the error the entry
   // claims: the ruling check refuses it (the ±10-day pass would have flagged

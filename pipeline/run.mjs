@@ -494,6 +494,10 @@ async function main() {
           gamePk: e.link.gamePk, atBatIndex: e.link.atBatIndex,
           kind: (e.link.flags.find((f) => f.startsWith('date_typo:')) || '').split(':')[1] || null,
           verifiedBy: e.link.flags.includes('date_recovered_game_only') ? 'unique pairing' : 'batter + ruling',
+          // What separated the games when the entry's own text could not:
+          // 'only game verified' | 'exact ruling' | 'log order' (see
+          // pipeline/lib/link.mjs recoverGameForEntry).
+          decidedBy: (e.link.flags.find((f) => f.startsWith('date_recovery_decided_by:')) || '').split(':')[1] || 'only game verified',
           daysOff: e.date && e.link.officialDate
             ? Math.round((Date.parse(`${e.link.officialDate}T12:00:00Z`) - Date.parse(`${e.date}T12:00:00Z`)) / 86400000)
             : null,
