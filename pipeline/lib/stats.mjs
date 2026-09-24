@@ -7,7 +7,7 @@
 
 export const sigmoid = (z) => (z >= 0 ? 1 / (1 + Math.exp(-z)) : Math.exp(z) / (1 + Math.exp(z)));
 
-function solve(A, b) {
+export function solve(A, b) {
   // Gaussian elimination with partial pivoting (A is small and SPD-ish).
   const n = b.length;
   const M = A.map((row, i) => [...row, b[i]]);

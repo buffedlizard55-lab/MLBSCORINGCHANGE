@@ -5,6 +5,10 @@ name: Tests
 
 on:
   push:
+    # Bot data commits (pipeline every 3 h, live capture every 10 min during
+    # games) change only data/ — no code to test.
+    paths-ignore:
+      - 'data/**'
   pull_request:
 
 permissions:

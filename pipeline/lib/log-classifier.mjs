@@ -228,3 +228,25 @@ export function transitionFlags(c) {
     errorToError: c && c.kind === 'ruling_change' && init === 'error' && fin === 'error',
   };
 }
+
+/**
+ * Error type of the ORIGINAL call, when the log's wording states it — read
+ * only from the clause that describes the original call ("instead of …",
+ * "rather than …", "(was) originally …"), so the new ruling's own errors
+ * ("… and advances to second on a throwing error") are ignored. Returns
+ * 'fielding' | 'throwing' | 'missed_catch' | 'shift_violation', 'unspecified'
+ * (the clause names an error without its type) or null (no such clause).
+ * Used only for the descriptive "early evidence" table — not for scores.
+ */
+export function originalErrorKindFromLog(body) {
+  const text = String(body || '');
+  const m = text.match(/\b(?:instead of|rather than|originally)\b([^.;]*)/i);
+  if (!m) return null;
+  const clause = m[1].toLowerCase();
+  if (!/\berror\b/.test(clause)) return null;
+  if (/\bthrowing\b/.test(clause)) return 'throwing';
+  if (/\bfielding\b/.test(clause)) return 'fielding';
+  if (/\bmissed[- ]catch\b|\bcatching error\b|\bdropped[- ](?:throw|ball|fly|foul)\b/.test(clause)) return 'missed_catch';
+  if (/shift violation/.test(clause)) return 'shift_violation';
+  return 'unspecified';
+}

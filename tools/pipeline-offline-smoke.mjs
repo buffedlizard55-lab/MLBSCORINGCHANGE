@@ -32,8 +32,71 @@ function runPipeline(extraEnv = {}, extraArgs = [], expectFailure = false) {
   }
   return r;
 }
+// A SYNTHETIC live-capture ledger (as pipeline/capture.mjs writes it) that
+// points at real plays of the stub's synthetic world: three errors captured
+// 5 minutes after the play, and one resolved pending ruling.
+const { createRequire } = await import('node:module');
+createRequire(import.meta.url)(path.join(ROOT, 'tools/fixtures/pipeline-fetch-stub.cjs'));
+const capEntries = [];
+for (let i = 0; i < 24 && capEntries.length < 4; i += 1) {
+  const pk = 2026 * 1000 + i;
+  const pbp = await (await fetch(`https://statsapi.mlb.com/api/v1/game/${pk}/playByPlay`)).json();
+  const sched = await (await fetch('https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=R')).json();
+  const date = sched.dates.flatMap((d) => d.games).find((g) => g.gamePk === pk).officialDate;
+  for (const p of pbp.allPlays) {
+    const want = capEntries.filter((e) => e.why[0] === 'error').length < 3 ? 'field_error' : 'single';
+    if (p.result.eventType !== want || capEntries.some((e) => e.g === pk)) continue;
+    const st = (min, extra) => ({ at: `${date}T23:${String(min).padStart(2, '0')}:00.000Z`, et: p.result.eventType, ev: p.result.event, desc: p.result.description, kind: want === 'field_error' ? 'fielding' : null, pos: want === 'field_error' ? 'SS' : null, pend: null, gs: 'Live', ...extra });
+    const pend = { codes: ['os_ruling_pending_prior'], onAi: p.about.atBatIndex + 1, atResult: false, marker: { eventType: 'os_ruling_pending_prior', event: null, description: 'Official Scorer Ruling Pending', type: 'action' } };
+    capEntries.push({
+      id: `${pk}:${p.about.atBatIndex}`, g: pk, ai: p.about.atBatIndex, date, gt: 'R', season: 2026, awayId: null, homeId: null,
+      end: `${date}T23:05:00.000Z`, hd: null, br: 1,
+      why: [want === 'field_error' ? 'error' : 'pending'],
+      states: want === 'field_error' ? [st(10)] : [st(10, { pend }), st(14)],
+      score: null,
+    });
+    break;
+  }
+}
+assert.equal(capEntries.length, 4, 'synthetic capture fixture built');
+fs.mkdirSync(path.join(tmp, 'data', 'capture'), { recursive: true });
+const { serializeMonth } = await import('../pipeline/lib/capture-lib.mjs');
+for (const month of new Set(capEntries.map((e) => e.date.slice(0, 7)))) {
+  fs.writeFileSync(path.join(tmp, 'data', 'capture', `rulings-${month}.json`), serializeMonth(month, capEntries.filter((e) => e.date.startsWith(month)), '2026-09-24T00:00:00.000Z'));
+}
+
 runPipeline({}, ['--seasons=2024,2025,2026']);
 const read = (rel) => JSON.parse(fs.readFileSync(path.join(tmp, 'data', rel), 'utf8'));
+{
+  // Live-capture join, scorer tests and error-type evidence (v2).
+  const rep = read('model/pipeline-report.json');
+  const mdl = read('model/scoring-model.json');
+  assert.equal(rep.capture.errorsCaptured, 3, 'captured errors joined');
+  assert.equal(rep.capture.capturedAsOriginal, 3, 'captured 5 min after the play = original call');
+  assert.equal(rep.capture.settled, 3);
+  assert.equal(rep.capture.pendingCaptured, 1);
+  assert.equal(rep.capture.pendingResolved, 1);
+  assert.equal(mdl.capture.pending[0].resolvedEt, 'single');
+  assert.equal(mdl.errorToHit.adjust.status, 'collecting', 'adjustment waits for enough captured changes');
+  assert.equal(mdl.errorToHit.adjust.n, 3);
+  assert.equal(mdl.pending.calibration.status, 'collecting');
+  assert.equal(mdl.pending.calibration.resolved, 1);
+  for (const q of ['errorToHit', 'hitToError']) {
+    for (const g of ['scorer', 'homeClub']) {
+      const t = mdl.effects[q][g].test;
+      assert.ok(t.groups >= 2 && t.pValue > 0 && t.pValue <= 1, `${q} ${g} test ran`);
+      assert.ok(typeof mdl.effects[q][g].verdict === 'string');
+    }
+  }
+  assert.ok(rep.seasons[2026].meta.withScorer === 24, 'official scorer looked up for every game');
+  assert.ok(mdl.errorToHit.errorKind && mdl.errorToHit.errorKind.stoodByKind.fielding > 0);
+  const w = read('model/error-watch.json');
+  const capIds = new Set(capEntries.filter((e) => e.why[0] === 'error').map((e) => e.id));
+  const rows = w.plays.filter((p2) => capIds.has(p2.id));
+  assert.equal(rows.length, 3, 'captured errors appear on the Error Watch');
+  assert.ok(rows.every((r) => r.captured && r.errKindSource === 'captured' && r.errKind === 'fielding'));
+  assert.ok(w.plays.some((p2) => p2.errKindSource === 'current_ruling'), 'other standing errors show their current error type');
+}
 
 const report = read('model/pipeline-report.json');
 assert.equal(report.fatal, undefined, 'no fatal error');

@@ -3064,6 +3064,8 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     hitData: new Map(),           // gamePk → { at, byAi: Map(ai → battedBall|null), attempts }
     hitDataInFlight: new Set(),
     playFacts: new Map(),         // `${gamePk}:${ai}` → { reached, eventType, event, homeId }
+    scorers: new Map(),           // gamePk → official scorer id | null (only if the model uses scorer terms)
+    scorersInFlight: new Set(),
   };
   const errorWatch = new Map();   // `${gamePk}:${ai}` → Error Watch item (this date)
 
@@ -3170,6 +3172,24 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       .finally(() => modelState.hitDataInFlight.delete(gamePk));
   }
 
+  /** True when the published model has official-scorer terms (else no lookups at all). */
+  function modelUsesScorer() {
+    const m = modelState.model;
+    const specs = m ? [m.errorToHit, m.hitToError, m.errorToHit && m.errorToHit.adjust] : [];
+    return specs.some((x) => x && Array.isArray(x.terms) && x.terms.some((t) => String(t).indexOf('scorer:') === 0));
+  }
+
+  /** Lazily look up a game's official scorer (one tiny request per game). */
+  function ensureScorer(gamePk) {
+    if (!modelUsesScorer() || !MLB || typeof MLB.getOfficialScorer !== 'function') return;
+    if (modelState.scorers.has(gamePk) || modelState.scorersInFlight.has(gamePk)) return;
+    modelState.scorersInFlight.add(gamePk);
+    MLB.getOfficialScorer(gamePk)
+      .then((sc) => { modelState.scorers.set(gamePk, sc ? sc.id : null); renderFeed(); })
+      .catch(() => { /* unknown scorer: the model uses the average scorer effect */ })
+      .finally(() => modelState.scorersInFlight.delete(gamePk));
+  }
+
   /**
    * For a pending row, the play being ruled on: the marker's own plate
    * appearance for os_ruling_pending_primary; the previous plate appearance
@@ -3185,7 +3205,7 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     return t && t.id != null ? t.id : null;
   }
 
-  function newErrorWatchItem(game, gamePk, play, initialDescription, firstSeen) {
+  function newErrorWatchItem(game, gamePk, play, initialDescription, firstSeen, initialErrorKind) {
     const about = play.about || {};
     const res = play.result || {};
     const matchup = play.matchup || {};
@@ -3205,6 +3225,9 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       batter: matchup.batter && matchup.batter.fullName ? matchup.batter.fullName : null,
       pitcher: matchup.pitcher && matchup.pitcher.fullName ? matchup.pitcher.fullName : null,
       initialDescription,
+      // Error type of the call as FIRST seen by this page (fielding credits);
+      // a later change to a hit removes it from the data.
+      initialErrorKind: initialErrorKind || null,
       currentEventType: res.eventType || null,
       currentEvent: res.event || null,
       currentDescription: res.description || null,
@@ -3249,7 +3272,8 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       const key = `${gamePk}:${ai}`;
       let item = errorWatch.get(key);
       if (!item && res.eventType === 'field_error') {
-        item = newErrorWatchItem(game, gamePk, p, res.description || res.event || 'Field Error', Date.now());
+        const ek = SMod.errorKindOfStatsApiPlay ? SMod.errorKindOfStatsApiPlay(p) : null;
+        item = newErrorWatchItem(game, gamePk, p, res.description || res.event || 'Field Error', Date.now(), ek ? ek.kind : null);
         errorWatch.set(key, item);
         changed = true;
       }
@@ -3276,8 +3300,10 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
         const key = `${gamePk}:${r.atBatIndex}`;
         const p = byAi.get(r.atBatIndex);
         if (!errorWatch.has(key) && p && r.initial && r.initial.eventType === 'field_error') {
+          const initialDesc = r.initialDescription || (r.initial && r.initial.description) || '';
           errorWatch.set(key, newErrorWatchItem(game, gamePk, p,
-            r.initialDescription || r.initial.label || 'Field Error', entry.firstSeen || Date.now()));
+            r.initialDescription || r.initial.label || 'Field Error', entry.firstSeen || Date.now(),
+            SMod.errorKindFromDescription ? SMod.errorKindFromDescription(initialDesc) : null));
           changed = true;
         }
       } else if (r.typeKey === 'pending_scoring') {
@@ -3286,17 +3312,20 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       }
     });
     ensureHitData(gamePk, [...wanted]);
+    ensureScorer(gamePk);
     return changed;
   }
 
   /** The model's play shape for a plate appearance (+ its batted ball). */
-  function modelPlay(gamePk, ai, eventType, halfInning, homeId) {
+  function modelPlay(gamePk, ai, eventType, halfInning, homeId, extra) {
     const bb = hitDataFor(gamePk, ai);
+    const sc = modelState.scorers.get(gamePk);
     return Object.assign({
       et: eventType || null,
       top: halfInning === 'top' ? true : halfInning === 'bottom' ? false : null,
       homeId: homeId != null ? homeId : null,
-    }, bb || {});
+      scorerId: sc != null ? sc : null,
+    }, bb || {}, extra || {});
   }
 
   const FIELDER_NAMES = {
@@ -3355,7 +3384,9 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       const fromError = initialEt === 'field_error';
       const fromHit = SCORING_HIT_EVENT_TYPES.has(initialEt) && initialEt !== 'home_run';
       if (!fromError && !fromHit) return null;
-      const play = modelPlay(entry.gamePk, r.atBatIndex, initialEt, r.halfInning, homeId);
+      const initialDesc = r.initialDescription || (r.initial && r.initial.description) || '';
+      const play = modelPlay(entry.gamePk, r.atBatIndex, initialEt, r.halfInning, homeId,
+        fromError && SMod.errorKindFromDescription ? { errKind: SMod.errorKindFromDescription(initialDesc) } : null);
       const res = fromError ? SMod.scoreErrorToHit(model, play) : SMod.scoreHitToError(model, play);
       if (!res) return null;
       const finalEt = r.final && r.final.eventType;
@@ -3389,7 +3420,9 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       line.appendChild(el('span', 'feed-model-label', 'Likely final ruling'));
       dist.distribution.slice(0, 4).forEach((d) => {
         const chip = el('span', `model-outcome model-outcome-${d.outcome}`, `${d.label} ${d.scoreText}`);
-        chip.title = `${(d.probability * 100).toFixed(1)}% of comparable batted balls (n=${dist.n.toLocaleString()}) were scored this way.`;
+        chip.title = dist.calibrated
+          ? `${(d.probability * 100).toFixed(1)}% — comparable batted balls (n=${dist.n.toLocaleString()}; raw ${(d.rawProbability * 100).toFixed(1)}%), recalibrated with ${dist.calibrationN} captured pending rulings.`
+          : `${(d.probability * 100).toFixed(1)}% of comparable batted balls (n=${dist.n.toLocaleString()}) were scored this way.`;
         line.appendChild(chip);
       });
       block.appendChild(line);
@@ -3433,7 +3466,8 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       changed ? `✏️ Now: ${item.currentEvent || item.currentEventType}` : 'Stands as error'));
     body.appendChild(head);
     if (SMod && model) {
-      const res = SMod.scoreErrorToHit(model, modelPlay(item.gamePk, item.atBatIndex, 'field_error', item.halfInning, item.homeId));
+      const res = SMod.scoreErrorToHit(model, modelPlay(item.gamePk, item.atBatIndex, 'field_error', item.halfInning, item.homeId,
+        { errKind: item.initialErrorKind || null }));
       if (res) {
         const line = el('div', 'feed-model-line');
         line.appendChild(el('span', 'feed-model-label', 'Chance this error becomes a hit'));
@@ -3445,6 +3479,10 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       body.appendChild(el('div', 'feed-model-line feed-model-bb', 'Model loading…'));
     }
     body.appendChild(el('div', 'feed-scoring-line feed-scoring-initial', `Initial call: ${item.initialDescription}`));
+    if (item.initialErrorKind && SMod && SMod.ERROR_KIND_LABELS) {
+      body.appendChild(el('div', 'feed-model-line feed-model-kind',
+        `Error type (as first called): ${SMod.ERROR_KIND_LABELS[item.initialErrorKind] || item.initialErrorKind}`));
+    }
     if (changed && item.currentDescription) {
       body.appendChild(el('div', 'feed-scoring-line feed-scoring-final',
         `Final ruling${toHit ? ' (changed to a hit)' : ''}: ${item.currentDescription}`));

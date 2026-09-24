@@ -95,6 +95,87 @@
     return { p: isFiniteNumber(fb.overall) ? fb.overall : null, source: 'overall' };
   }
 
+  /**
+   * Error type of a play scored as an error. StatsAPI states it in the
+   * fielding credits of runners[] (credit codes seen in 2024–2026 data:
+   * f_fielding_error, f_throwing_error, f_error_dropped_ball,
+   * f_defensive_shift_violation_error) and in the description ("fielding
+   * error", "throwing error", "missed catch error", ...). Credits on the
+   * batter's own runner entry win; the description is the fallback.
+   * IMPORTANT: this is the type of the ruling *as it currently stands*. A play
+   * later changed to a hit no longer carries its original error type, so the
+   * type is only a leakage-free model input when it was captured before any
+   * change (data/capture, see pipeline/capture.mjs).
+   */
+  var ERROR_KIND_BY_CREDIT = {
+    f_fielding_error: 'fielding',
+    f_throwing_error: 'throwing',
+    f_error_dropped_ball: 'missed_catch',
+    f_defensive_shift_violation_error: 'shift_violation',
+  };
+  var ERROR_KIND_LABELS = {
+    fielding: 'Fielding error',
+    throwing: 'Throwing error',
+    missed_catch: 'Missed-catch error',
+    shift_violation: 'Shift-violation error',
+  };
+  function errorKindFromDescription(desc) {
+    var d = String(desc || '').toLowerCase();
+    if (!d) return null;
+    if (d.indexOf('throwing error') >= 0) return 'throwing';
+    if (d.indexOf('fielding error') >= 0) return 'fielding';
+    if (d.indexOf('missed catch error') >= 0 || /dropped (throw|ball|fly)[^.]*error/.test(d)) return 'missed_catch';
+    if (d.indexOf('shift violation') >= 0) return 'shift_violation';
+    return null;
+  }
+  /** credits: [{credit, batter:boolean, pos}] → {kind, pos} or null. */
+  function errorKindFromCredits(credits) {
+    var list = credits || [];
+    var pick = null;
+    for (var pass = 0; pass < 2 && !pick; pass += 1) {
+      for (var i = 0; i < list.length; i += 1) {
+        var c = list[i] || {};
+        if (!ERROR_KIND_BY_CREDIT[c.credit]) continue;
+        if (pass === 0 && !c.batter) continue;
+        pick = c;
+        break;
+      }
+    }
+    return pick ? { kind: ERROR_KIND_BY_CREDIT[pick.credit], pos: pick.pos || null } : null;
+  }
+  /** Error type of a StatsAPI allPlays element → {kind, pos} or null. */
+  function errorKindOfStatsApiPlay(apiPlay) {
+    var batterId = apiPlay && apiPlay.matchup && apiPlay.matchup.batter && apiPlay.matchup.batter.id;
+    var credits = [];
+    var runners = (apiPlay && apiPlay.runners) || [];
+    for (var i = 0; i < runners.length; i += 1) {
+      var r = runners[i] || {};
+      var isBatter = !!(r.details && r.details.runner && batterId != null && r.details.runner.id === batterId);
+      var cr = r.credits || [];
+      for (var j = 0; j < cr.length; j += 1) {
+        var c = cr[j] || {};
+        credits.push({ credit: c.credit, batter: isBatter, pos: c.position ? (c.position.abbreviation || c.position.code || null) : null });
+      }
+    }
+    var fromCredits = errorKindFromCredits(credits);
+    if (fromCredits) return fromCredits;
+    var kind = errorKindFromDescription(apiPlay && apiPlay.result && apiPlay.result.description);
+    return kind ? { kind: kind, pos: null } : null;
+  }
+  /** Error type of a pipeline compact record (cr = "credit|pos|playerId|B/R"). */
+  function errorKindOfRecord(rec) {
+    var credits = [];
+    var cr = (rec && rec.cr) || [];
+    for (var i = 0; i < cr.length; i += 1) {
+      var parts = String(cr[i]).split('|');
+      credits.push({ credit: parts[0], pos: parts[1] || null, batter: parts[3] === 'B' });
+    }
+    var fromCredits = errorKindFromCredits(credits);
+    if (fromCredits) return fromCredits;
+    var kind = errorKindFromDescription(rec && rec.desc);
+    return kind ? { kind: kind, pos: null } : null;
+  }
+
   var INFIELD = { P: 1, C: 1, '1B': 1, '2B': 1, '3B': 1, SS: 1 };
 
   function featureValue(term, hp, play) {
@@ -108,13 +189,47 @@
     if (term.indexOf('traj:') === 0) return trajGroup(play.traj) === term.slice(5) ? 1 : 0;
     // Home club (the official scorer is assigned by the home park).
     if (term.indexOf('home:') === 0) return play.homeId != null && String(play.homeId) === term.slice(5) ? 1 : 0;
+    // Official scorer of the game (StatsAPI gameData.officialScorer.id).
+    if (term.indexOf('scorer:') === 0) return play.scorerId != null && String(play.scorerId) === term.slice(7) ? 1 : 0;
+    // Error type of the ruling as first captured (only in the captured-data adjustment).
+    if (term.indexOf('kind:') === 0) return play.errKind === term.slice(5) ? 1 : 0;
     throw new Error('Unknown model term: ' + term);
+  }
+  /**
+   * Inputs that can be unknown at prediction time (the game's official scorer
+   * before it is loaded, the error type of a play already changed to a hit)
+   * use the term's training-data mean instead of 0, i.e. the average effect —
+   * never silently the effect of the reference group.
+   */
+  function missingInput(term, play) {
+    if (term.indexOf('scorer:') === 0) return play.scorerId == null;
+    if (term.indexOf('kind:') === 0) return play.errKind == null;
+    return false;
   }
 
   function featureVector(spec, hp, play) {
     var out = [];
-    for (var j = 0; j < spec.terms.length; j += 1) out.push(featureValue(spec.terms[j], hp, play));
+    var means = spec.termMeans || null;
+    for (var j = 0; j < spec.terms.length; j += 1) {
+      var term = spec.terms[j];
+      if (missingInput(term, play)) out.push(means && isFiniteNumber(means[term]) ? means[term] : 0);
+      else out.push(featureValue(term, hp, play));
+    }
     return out;
+  }
+  /**
+   * Captured-data adjustment (spec.adjust, fitted by the pipeline on rulings
+   * captured live before any change): a logit shift plus error-type terms on
+   * top of the main model. Applied only when the pipeline marked it active
+   * (enough captured changes AND a cross-validated improvement).
+   */
+  function adjustmentFor(spec, play) {
+    var a = spec && spec.adjust;
+    if (!a || !a.active || !a.terms) return null;
+    var z = isFiniteNumber(a.intercept) ? a.intercept : 0;
+    var x = featureVector(a, null, play);
+    for (var j = 0; j < x.length; j += 1) z += a.coef[j] * x[j];
+    return { logit: z, terms: a.terms.slice(), values: x };
   }
 
   /** 0–100 integer score from a probability. */
@@ -157,6 +272,8 @@
       z += spec.coef[j] * x[j];
       contributions.push(spec.coef[j] * x[j]);
     }
+    var adj = adjustmentFor(spec, play);
+    if (adj) z += adj.logit;
     var p = sigmoid(z);
     var score = toScore(p);
     return {
@@ -173,6 +290,8 @@
       terms: spec.terms.slice(),
       values: x,
       contributions: contributions,
+      adjustment: adj,
+      errorKind: play.errKind || null,
     };
   }
 
@@ -210,18 +329,45 @@
     for (var k = 0; k < keys.length; k += 1) {
       var row = t.table[keys[k]];
       if (row && row.n >= (t.minN || 1)) {
+        var probs = calibratePending(t, row.p);
         var dist = [];
         for (var o = 0; o < t.outcomes.length; o += 1) {
           var name = t.outcomes[o];
-          var p = row.p[o];
+          var p = probs.p[o];
           if (!(p > 0)) continue;
-          dist.push({ outcome: name, label: OUTCOME_LABELS[name] || name, probability: p, score: toScore(p), scoreText: scoreText(p) });
+          dist.push({
+            outcome: name, label: OUTCOME_LABELS[name] || name, probability: p, score: toScore(p), scoreText: scoreText(p),
+            rawProbability: row.p[o],
+          });
         }
         dist.sort(function (a, b) { return b.probability - a.probability; });
-        return { key: keys[k], level: k, n: row.n, distribution: dist };
+        return { key: keys[k], level: k, n: row.n, distribution: dist, calibrated: probs.calibrated, calibrationN: probs.n };
       }
     }
     return null;
+  }
+  /**
+   * Pending-ruling calibration (model.pending.calibration, fitted by the
+   * pipeline on pending rulings captured live and their resolutions): the
+   * comparable-ball distribution is re-weighted per outcome, w_o =
+   * (observed_o + a) / (expected_o + a), then renormalised. Applied only when
+   * the pipeline marked it active (enough resolved rulings AND a
+   * leave-one-out improvement).
+   */
+  function calibratePending(table, p) {
+    var c = table && table.calibration;
+    if (!c || !c.active || !c.weights) return { p: p, calibrated: false, n: 0 };
+    var out = [];
+    var s = 0;
+    for (var o = 0; o < table.outcomes.length; o += 1) {
+      var w = c.weights[table.outcomes[o]];
+      var v = (p[o] || 0) * (isFiniteNumber(w) && w > 0 ? w : 1);
+      out.push(v);
+      s += v;
+    }
+    if (!(s > 0)) return { p: p, calibrated: false, n: 0 };
+    for (var i = 0; i < out.length; i += 1) out[i] /= s;
+    return { p: out, calibrated: true, n: c.resolved || 0 };
   }
 
   /** Map a ruling eventType to a pending-outcome category. */
@@ -279,6 +425,7 @@
     var res = (apiPlay && apiPlay.result) || {};
     var about = (apiPlay && apiPlay.about) || {};
     var bb = hitDataOverride || battedBallFromEvents(apiPlay && apiPlay.playEvents) || {};
+    var ek = res.eventType === 'field_error' ? errorKindOfStatsApiPlay(apiPlay) : null;
     return {
       et: res.eventType || null,
       ev: res.event || null,
@@ -290,6 +437,9 @@
       traj: bb.traj || null,
       loc: bb.loc || null,
       dist: bb.dist != null ? bb.dist : null,
+      // Live, the ruling on screen IS the original call, so its error type
+      // is a legitimate input (see errorKindOfStatsApiPlay).
+      errKind: ek ? ek.kind : null,
     };
   }
 
@@ -335,9 +485,10 @@
    * Returns {kind: 'errorToHit'|'hitToError'|'pending', result|distribution,
    * battedBall, target} or null when the model does not apply.
    */
-  function scoreReview(model, review, lookupPlay, homeId) {
+  function scoreReview(model, review, lookupPlay, homeId, scorerId) {
     if (!model || !review || review.atBatIndex == null || typeof lookupPlay !== 'function') return null;
     var top = review.halfInning === 'top' ? true : review.halfInning === 'bottom' ? false : null;
+    var sid = scorerId != null ? scorerId : null;
     if (review.typeKey === 'scoring_change') {
       var et = review.initial && review.initial.eventType;
       var fromError = et === 'field_error';
@@ -345,7 +496,12 @@
       if (!fromError && !fromHit) return null;
       var p = lookupPlay(review.atBatIndex);
       var bb = p ? battedBallFromEvents(p.playEvents) : null;
-      var play = assign({ et: et, top: top, homeId: homeId != null ? homeId : null }, bb);
+      // The tracked INITIAL call carries the original error type.
+      var initialDesc = review.initialDescription || (review.initial && review.initial.description) || null;
+      var play = assign({
+        et: et, top: top, homeId: homeId != null ? homeId : null, scorerId: sid,
+        errKind: fromError ? errorKindFromDescription(initialDesc) : null,
+      }, bb);
       var res = fromError ? scoreErrorToHit(model, play) : scoreHitToError(model, play);
       return res ? { kind: fromError ? 'errorToHit' : 'hitToError', result: res, battedBall: bb, target: review.atBatIndex } : null;
     }
@@ -354,7 +510,7 @@
       if (target == null) return null;
       var tp = lookupPlay(target);
       var tbb = tp ? battedBallFromEvents(tp.playEvents) : null;
-      var dist = pendingDistribution(model, assign({ top: top, homeId: homeId != null ? homeId : null }, tbb), tp ? batterReached(tp) : null);
+      var dist = pendingDistribution(model, assign({ top: top, homeId: homeId != null ? homeId : null, scorerId: sid }, tbb), tp ? batterReached(tp) : null);
       return dist ? { kind: 'pending', distribution: dist, battedBall: tbb, target: target } : null;
     }
     return null;
@@ -363,6 +519,14 @@
   var api = {
     OUTCOME_LABELS: OUTCOME_LABELS,
     DEFAULT_BANDS: DEFAULT_BANDS,
+    ERROR_KIND_BY_CREDIT: ERROR_KIND_BY_CREDIT,
+    ERROR_KIND_LABELS: ERROR_KIND_LABELS,
+    errorKindFromDescription: errorKindFromDescription,
+    errorKindFromCredits: errorKindFromCredits,
+    errorKindOfStatsApiPlay: errorKindOfStatsApiPlay,
+    errorKindOfRecord: errorKindOfRecord,
+    adjustmentFor: adjustmentFor,
+    calibratePending: calibratePending,
     sigmoid: sigmoid,
     logit: logit,
     locationGroup: locationGroup,

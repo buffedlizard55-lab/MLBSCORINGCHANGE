@@ -1,0 +1,57 @@
+# Live ruling capture: records every "reached on error" call and every
+# "Official Scorer Ruling Pending" marker AS FIRST CALLED (error type
+# included), plus later changes → data/capture/*.json. StatsAPI rewrites its
+# history after a scoring change, so these first calls exist nowhere else.
+# One run polls for ~6 minutes (4 polls, 2 minutes apart), every 10 minutes
+# during MLB game hours (15:00–08:59 UTC, March–November). A run with no live
+# games exits in seconds and commits nothing.
+name: Live ruling capture
+
+on:
+  schedule:
+    - cron: '4-59/10 15-23,0-8 * 3-11 *'   # default branch only
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - 'pipeline/capture.mjs'
+      - 'pipeline/lib/capture-lib.mjs'
+      - '.github/workflows/live-capture.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: live-capture-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Capture live rulings
+        run: node pipeline/capture.mjs --polls=4 --interval=120
+
+      - name: Commit captured rulings
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/capture
+          if git diff --cached --quiet; then
+            echo "No new rulings."
+            exit 0
+          fi
+          git commit -m "capture: live rulings [run ${{ github.run_id }}]"
+          for attempt in 1 2 3 4; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((attempt * 7))
+          done
+          echo "::error::could not push capture commit"
+          exit 1

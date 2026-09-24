@@ -141,6 +141,24 @@ panel = text('#sc-panel');
 assert.ok(panel.includes(model.errorToHit.cv.auc.toFixed(3)), 'model: CV AUC');
 assert.ok(panel.includes('Limitations'), 'model: limitations');
 assert.ok(panel.includes('Comparable-ball hit rate'), 'model: rate table');
+// v2 sections render whenever the pipeline has published their data.
+if (model.capture) {
+  assert.ok(panel.includes('Live capture — rulings as first called'), 'model: live capture section');
+  assert.ok(panel.includes(model.capture.plays.toLocaleString()), 'model: captured count');
+  assert.ok(summary.includes('Live capture') || text('#sc-summary').includes('Live capture'), 'summary: live capture card');
+}
+if (model.errorToHit.adjust) {
+  assert.ok(panel.includes('Error type (fielding / throwing / missed catch)'), 'model: error type section');
+  assert.ok(/Status: (Collecting|Tested|Active)/.test(panel), 'model: adjustment status shown');
+}
+if (model.pending && model.pending.calibration) assert.ok(panel.includes('Pending rulings — calibration'), 'model: pending calibration section');
+if (model.effects) {
+  assert.ok(panel.includes('Official scorer & home park'), 'model: scorer section');
+  for (const q of ['errorToHit', 'hitToError']) {
+    const pv = model.effects[q].scorer.test.pValue;
+    if (pv != null) assert.ok(panel.includes(String(pv)), `model: ${q} scorer p-value shown`);
+  }
+}
 noJunk(panel, 'model');
 
 // Irregularities

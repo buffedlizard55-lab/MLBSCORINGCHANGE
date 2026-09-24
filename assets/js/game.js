@@ -116,7 +116,9 @@
     const byAi = new Map();
     plays.forEach((p) => { if (p && p.about && p.about.atBatIndex != null) byAi.set(p.about.atBatIndex, p); });
     const home = gd().teams && gd().teams.home;
-    const out = SMod.scoreReview(scoringModel, review, (ai) => byAi.get(ai) || null, home ? home.id : null);
+    const scorer = gd().officialScorer;   // full feed/live carries it (no extra request)
+    const out = SMod.scoreReview(scoringModel, review, (ai) => byAi.get(ai) || null, home ? home.id : null,
+      scorer && scorer.id != null ? scorer.id : null);
     if (!out) return null;
     const wrap = UI.el('div', 'feed-model');
     if (out.kind === 'pending') {
