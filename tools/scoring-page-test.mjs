@@ -117,6 +117,19 @@ await settle();
 const changed = watch.plays.filter((p) => p.status === 'changed_to_hit').length;
 assert.ok(text('#sc-panel').includes(`of ${changed.toLocaleString()} plays`), 'watch: status filter');
 assert.ok(text('#sc-panel').includes('Official log #') || changed === 0, 'watch: changed plays show their official entry');
+// Error-type filter (v2): only when the data carries error types.
+if (watch.plays.some((p) => p.errKind)) {
+  const kindSelect = find(registry['#sc-panel'], (n) => n.tagName === 'SELECT' && n.children.some((o) => o.attrs.value === 'throwing'));
+  assert.ok(kindSelect, 'watch: error-type filter');
+  kindSelect.value = 'throwing';
+  kindSelect.dispatch('change');
+  assert.ok(text('#sc-panel').includes('of 0 plays'), 'watch: changed-to-hit plays carry no error type (it is gone from the data)');
+  const statusSelect = find(registry['#sc-panel'], (n) => n.tagName === 'SELECT' && n.children.some((o) => o.attrs.value === 'changed_to_hit'));
+  statusSelect.value = 'all';
+  statusSelect.dispatch('change');
+  const nThrow = watch.plays.filter((p) => p.errKind === 'throwing').length;
+  assert.ok(nThrow > 0 && text('#sc-panel').includes(`of ${nThrow.toLocaleString()} plays`), `watch: error-type filter (${nThrow} throwing errors)`);
+}
 
 // Official Changes
 registry['#sc-tabs'].children[1].dispatch('click');

@@ -536,6 +536,11 @@ async function main() {
           if (rulingAgrees(last.cls.final, last.cls.finalHitType, rec.et) === false) {
             chainsDropped += 1;
             chain = null;
+          } else if (chain[0].cls.initial === 'error' && last.cls.final === 'error' && rec.et !== 'field_error') {
+            // An error → error entry on a play that is not itself scored an
+            // error concerns a runner's error (e.g. 2025 #128): it says nothing
+            // about this plate appearance's ruling, so it gives no label.
+            chain = null;
           }
         }
         let initial; let final; let initialHitType;

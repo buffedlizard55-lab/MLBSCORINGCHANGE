@@ -31,7 +31,7 @@
     errors: [],
     season: null,
     current: null,
-    watchFilter: { q: '', status: 'all', sort: 'newest', shown: PAGE_SIZE },
+    watchFilter: { q: '', status: 'all', kind: 'all', sort: 'newest', shown: PAGE_SIZE },
     officialFilter: { q: '', type: 'all', shown: PAGE_SIZE },
   };
 
@@ -300,6 +300,8 @@
       search(f.q, 'Search player, team or play…', (v) => { f.q = v; rerender(); }),
       select([['all', 'All statuses'], ['stands', 'Stands as error'], ['changed_to_hit', 'Changed to a hit'], ['changed_other', 'Changed (other)']],
         f.status, (v) => { f.status = v; rerender(); }, 'Status'),
+      select([['all', 'All error types'], ['fielding', 'Fielding errors'], ['throwing', 'Throwing errors'], ['missed_catch', 'Missed-catch errors'], ['unknown', 'Type unknown (changed plays)']],
+        f.kind, (v) => { f.kind = v; rerender(); }, 'Error type'),
       select([['newest', 'Newest first'], ['score', 'Highest chance first']], f.sort, (v) => { f.sort = v; rerender(); }, 'Sort'),
     ]));
     if (!all.length) {
@@ -308,6 +310,7 @@
     }
     const q = f.q.trim().toLowerCase();
     let rows = all.filter((p) => (f.status === 'all' || p.status === f.status) &&
+      (f.kind === 'all' || (f.kind === 'unknown' ? !p.errKind : p.errKind === f.kind)) &&
       (!q || [p.batter, p.away, p.home, p.description, p.event].some((s) => String(s || '').toLowerCase().includes(q))));
     if (f.sort === 'score') rows = rows.slice().sort((a, b) => (b.p || 0) - (a.p || 0));
     wrap.appendChild(el('div', 'sc-count', `Showing ${Math.min(rows.length, f.shown).toLocaleString()} of ${rows.length.toLocaleString()} plays`));
@@ -490,7 +493,10 @@
     const tb = el('tbody');
     rows.forEach((r) => {
       const row = el('tr');
-      r.forEach((c) => row.appendChild(el('td', null, c == null ? '—' : String(c))));
+      r.forEach((c) => {
+        if (c && typeof c === 'object') { const td = el('td'); td.appendChild(c); row.appendChild(td); return; }
+        row.appendChild(el('td', null, c == null ? '—' : String(c)));
+      });
       tb.appendChild(row);
     });
     t.appendChild(tb);
@@ -597,6 +603,14 @@
   function gameLink(pk, text) {
     return el('a', null, text || `Game ${pk}`, { href: `game.html?gamePk=${pk}` });
   }
+  /** "Game page · Gameday" links for one play (official source + this site). */
+  function playLinks(pk, ai) {
+    const w = el('span', 'sc-cell-links');
+    w.appendChild(gameLink(pk, `${pk} · PA ${ai}`));
+    w.appendChild(el('span', null, ' · '));
+    w.appendChild(ext('Gameday', gamedayUrl(pk)));
+    return w;
+  }
 
   function renderCaptureSection(wrap, m) {
     const c = m.capture;
@@ -626,7 +640,7 @@
     if ((c.recentErrors || []).length) {
       s.appendChild(el('p', 'sc-help', 'Most recent captured errors (score = what the model said when the play was captured):'));
       s.appendChild(table(['Captured', 'Game', 'Error type', 'Score then', 'Now'], c.recentErrors.slice(0, 15).map((r) => [
-        localDateTime(r.firstAt), `${r.g} · PA ${r.ai}`, (SM && SM.ERROR_KIND_LABELS[r.kind]) || r.kind || '—',
+        localDateTime(r.firstAt), playLinks(r.g, r.ai), (SM && SM.ERROR_KIND_LABELS[r.kind]) || r.kind || '—',
         r.scoreAtCapture != null ? `${r.scoreAtCapture}/100` : '—', r.current || '—',
       ])));
     }
@@ -695,7 +709,7 @@
     if (rows.length) {
       s.appendChild(el('p', 'sc-help', 'Captured pending rulings — the chance shown live and the final result:'));
       s.appendChild(table(['Pending since', 'Game · PA', 'Marker', 'Chance shown then (top 2)', 'Final ruling', 'Resolved'], rows.map((r) => [
-        localDateTime(r.pendingAt), `${r.g} · ${r.ai}`, (r.codes || []).join(' + '),
+        localDateTime(r.pendingAt), playLinks(r.g, r.ai), (r.codes || []).join(' + '),
         (r.predictedAtCapture || []).slice(0, 2).map((d) => `${(SM && SM.OUTCOME_LABELS[d.o]) || d.o} ${Math.round(d.p * 100)}`).join(' · ') || '—',
         r.resolvedEt || 'still pending', r.resolvedAt ? localDateTime(r.resolvedAt) : (r.resolvedSource || '—'),
       ])));
