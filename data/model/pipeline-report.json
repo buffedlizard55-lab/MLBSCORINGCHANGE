@@ -1,0 +1,664 @@
+{
+ "generatedAt": "2026-09-24T19:33:03.185Z",
+ "pipelineVersion": 1,
+ "settings": {
+  "seasons": [
+   2024,
+   2025,
+   2026
+  ],
+  "refreshDays": 21,
+  "labelLagDays": 14,
+  "labelCutoff": "2026-09-10"
+ },
+ "logs": {
+  "2024": {
+   "ok": true,
+   "source": "stored",
+   "note": "archive capture 2025-01-21T08:35:45Z already stored",
+   "entries": 229
+  },
+  "2025": {
+   "ok": true,
+   "source": "stored",
+   "note": "archive capture 2026-02-10T03:42:54Z already stored",
+   "entries": 211
+  },
+  "2026": {
+   "ok": true,
+   "source": "live",
+   "entries": 253,
+   "sections": [
+    {
+     "label": "2026 Regular Season",
+     "entries": 253,
+     "issues": []
+    }
+   ]
+  }
+ },
+ "seasons": {
+  "2024": {
+   "teamsUrl": "https://statsapi.mlb.com/api/v1/teams?sportId=1&season=2024",
+   "scheduleUrls": [
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2024&gameType=R",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2024&gameType=F",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2024&gameType=D",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2024&gameType=L",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2024&gameType=W"
+   ],
+   "scheduled": 2473,
+   "completed": 2472,
+   "gamesWithPlays": 2472,
+   "fetched": 0,
+   "failed": 0,
+   "failures": [],
+   "selfCheck": {
+    "gamePk": 745444,
+    "projectedUrl": "https://statsapi.mlb.com/api/v1/game/745444/playByPlay?fields=allPlays,result,type,event,eventType,description,rbi,awayScore,homeScore,isOut,about,atBatIndex,inning,isTopInning,halfInning,hasReview,startTime,matchup,batter,pitcher,id,fullName,batSide,pitchHand,code,splits,menOnBase,count,outs,playEvents,details,isInPlay,index,hitData,launchSpeed,launchAngle,totalDistance,trajectory,hardness,location,coordinates,coordX,coordY,runners,movement,originBase,start,end,outBase,runner,credits,credit,player,position,abbreviation,isScoringEvent",
+    "equal": true,
+    "plays": 79
+   },
+   "byGameType": {
+    "R": 2429,
+    "D": 18,
+    "L": 11,
+    "F": 9,
+    "W": 5
+   },
+   "plateAppearances": 186175,
+   "fieldErrorPlateAppearances": 1125,
+   "officialEntries": 229,
+   "entryKinds": {
+    "ruling_change": 159,
+    "baserunning": 18,
+    "earned_run": 14,
+    "fielding_credit": 10,
+    "wild_pitch_passed_ball": 7,
+    "rbi": 6,
+    "sacrifice_credit": 5,
+    "error_removed": 3,
+    "error_added": 3,
+    "pitching_decision": 2,
+    "unclassified": 1,
+    "double_play_credit": 1
+   },
+   "transitions": {
+    "error->hit": 70,
+    "hit->error": 36,
+    "error->error": 9,
+    "hit->hit+error": 4,
+    "error->hit+error": 4,
+    "fc->error": 4,
+    "out->out": 4,
+    "hit->hit": 3,
+    "hit+error->hit": 3,
+    "hit->fc": 3,
+    "hit->fc+error": 3,
+    "hit+error->error": 2,
+    "out->sac": 2,
+    "fc+error->hit": 2,
+    "fc->hit": 2,
+    "error->sac": 2,
+    "hit->sac+error": 1,
+    "sac->fc": 1,
+    "sac+error->error": 1,
+    "sac+error->hit": 1,
+    "other_pa->out": 1,
+    "error->fc+error": 1
+   },
+   "linked": 225,
+   "linkFlags": {
+    "name_match": 17,
+    "team_code_via": 15,
+    "ambiguous_plate_appearance": 9,
+    "inning_mismatch": 8,
+    "current_ruling_mismatch": 8,
+    "current_ruling_compatible": 6,
+    "batter_not_found": 4,
+    "teams_swapped": 2,
+    "superseded_by": 1,
+    "subject_not_first_mention": 1,
+    "team_alias": 1
+   },
+   "errorToHitEntries": 74,
+   "hitToErrorEntries": 38,
+   "unlinkedErrorToHit": 0,
+   "chainsDroppedForDisagreement": 8,
+   "initialErrorPopulation": 1164,
+   "initialErrorToHit": 72
+  },
+  "2025": {
+   "teamsUrl": "https://statsapi.mlb.com/api/v1/teams?sportId=1&season=2025",
+   "scheduleUrls": [
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2025&gameType=R",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2025&gameType=F",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2025&gameType=D",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2025&gameType=L",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2025&gameType=W"
+   ],
+   "scheduled": 2477,
+   "completed": 2477,
+   "gamesWithPlays": 2477,
+   "fetched": 0,
+   "failed": 0,
+   "failures": [],
+   "selfCheck": {
+    "gamePk": 778563,
+    "projectedUrl": "https://statsapi.mlb.com/api/v1/game/778563/playByPlay?fields=allPlays,result,type,event,eventType,description,rbi,awayScore,homeScore,isOut,about,atBatIndex,inning,isTopInning,halfInning,hasReview,startTime,matchup,batter,pitcher,id,fullName,batSide,pitchHand,code,splits,menOnBase,count,outs,playEvents,details,isInPlay,index,hitData,launchSpeed,launchAngle,totalDistance,trajectory,hardness,location,coordinates,coordX,coordY,runners,movement,originBase,start,end,outBase,runner,credits,credit,player,position,abbreviation,isScoringEvent",
+    "equal": true,
+    "plays": 74
+   },
+   "byGameType": {
+    "R": 2430,
+    "D": 18,
+    "F": 11,
+    "L": 11,
+    "W": 7
+   },
+   "plateAppearances": 187029,
+   "fieldErrorPlateAppearances": 1029,
+   "officialEntries": 211,
+   "entryKinds": {
+    "ruling_change": 143,
+    "earned_run": 22,
+    "baserunning": 12,
+    "fielding_credit": 10,
+    "sacrifice_credit": 6,
+    "rbi": 6,
+    "wild_pitch_passed_ball": 4,
+    "error_removed": 3,
+    "error_added": 2,
+    "unclassified": 2,
+    "pitching_decision": 1
+   },
+   "transitions": {
+    "error->hit": 57,
+    "hit->error": 34,
+    "hit+error->error": 6,
+    "error->error": 6,
+    "hit+error->hit": 5,
+    "error->hit+error": 5,
+    "fc->hit": 5,
+    "hit->fc": 3,
+    "hit->fc+error": 3,
+    "fc+error->hit": 3,
+    "hit->hit": 2,
+    "fc+error->fc": 2,
+    "hit->hit+error": 2,
+    "error->fc+error": 2,
+    "hit->sac+error": 2,
+    "fc->sac": 1,
+    "error->out": 1,
+    "out->fc+error": 1,
+    "sac+error->hit": 1,
+    "error->fc": 1,
+    "out->sac": 1
+   },
+   "linked": 201,
+   "linkFlags": {
+    "name_match": 14,
+    "batter_not_found": 10,
+    "inning_mismatch": 8,
+    "team_code_via": 7,
+    "ambiguous_plate_appearance": 7,
+    "current_ruling_mismatch": 6,
+    "subject_not_first_mention": 4,
+    "date_inferred": 2,
+    "current_ruling_compatible": 2,
+    "team_alias": 1,
+    "team_code_corrected": 1
+   },
+   "errorToHitEntries": 62,
+   "hitToErrorEntries": 40,
+   "unlinkedErrorToHit": 0,
+   "chainsDroppedForDisagreement": 6,
+   "initialErrorPopulation": 1057,
+   "initialErrorToHit": 62
+  },
+  "2026": {
+   "teamsUrl": "https://statsapi.mlb.com/api/v1/teams?sportId=1&season=2026",
+   "scheduleUrls": [
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=R",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=F",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=D",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=L",
+    "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=W"
+   ],
+   "scheduled": 2483,
+   "completed": 2374,
+   "gamesWithPlays": 2374,
+   "fetched": 275,
+   "failed": 0,
+   "failures": [],
+   "selfCheck": {
+    "gamePk": 823543,
+    "projectedUrl": "https://statsapi.mlb.com/api/v1/game/823543/playByPlay?fields=allPlays,result,type,event,eventType,description,rbi,awayScore,homeScore,isOut,about,atBatIndex,inning,isTopInning,halfInning,hasReview,startTime,matchup,batter,pitcher,id,fullName,batSide,pitchHand,code,splits,menOnBase,count,outs,playEvents,details,isInPlay,index,hitData,launchSpeed,launchAngle,totalDistance,trajectory,hardness,location,coordinates,coordX,coordY,runners,movement,originBase,start,end,outBase,runner,credits,credit,player,position,abbreviation,isScoringEvent",
+    "equal": true,
+    "plays": 58
+   },
+   "byGameType": {
+    "R": 2374
+   },
+   "plateAppearances": 180166,
+   "fieldErrorPlateAppearances": 1015,
+   "officialEntries": 253,
+   "entryKinds": {
+    "ruling_change": 167,
+    "earned_run": 28,
+    "fielding_credit": 20,
+    "baserunning": 15,
+    "rbi": 7,
+    "wild_pitch_passed_ball": 5,
+    "sacrifice_credit": 5,
+    "double_play_credit": 3,
+    "error_removed": 1,
+    "pitching_decision": 1,
+    "error_added": 1
+   },
+   "transitions": {
+    "error->hit": 59,
+    "hit->error": 46,
+    "fc->hit": 9,
+    "error->error": 9,
+    "hit+error->error": 7,
+    "hit->hit": 7,
+    "hit->fc+error": 5,
+    "fc+error->hit": 5,
+    "hit->fc": 5,
+    "error->fc+error": 2,
+    "fc->sac": 2,
+    "fc+error->fc+error": 2,
+    "hit+error->hit": 2,
+    "out->sac": 2,
+    "hit+error->sac+error": 1,
+    "other_pa->error": 1,
+    "hit+error->hit+error": 1,
+    "hit->other": 1,
+    "hit->hit+error": 1
+   },
+   "linked": 236,
+   "linkFlags": {
+    "name_match": 24,
+    "batter_not_found": 14,
+    "current_ruling_mismatch": 6,
+    "team_code_via": 6,
+    "ambiguous_plate_appearance": 6,
+    "inning_mismatch": 5,
+    "current_ruling_compatible": 5,
+    "subject_not_first_mention": 4,
+    "no_game_found": 3,
+    "team_code_corrected": 1,
+    "date_mismatch": 1,
+    "inning_missing_matched_game": 1
+   },
+   "errorToHitEntries": 59,
+   "hitToErrorEntries": 53,
+   "unlinkedErrorToHit": 0,
+   "chainsDroppedForDisagreement": 6,
+   "initialErrorPopulation": 1026,
+   "initialErrorToHit": 58
+  }
+ },
+ "discovery": {
+  "creditCodes": {
+   "f_putout": 389788,
+   "f_assist": 123525,
+   "f_fielded_ball": 103898,
+   "f_deflection": 3905,
+   "f_throwing_error": 3746,
+   "f_fielding_error": 3104,
+   "f_assist_of": 1953,
+   "f_error_dropped_ball": 339,
+   "c_catcher_interf": 270,
+   "f_touch": 98,
+   "f_interference": 17,
+   "f_defensive_shift_violation_error": 3
+  },
+  "fieldErrorBatterCredits": {
+   "f_fielding_error": 1946,
+   "f_throwing_error": 1081,
+   "f_assist": 185,
+   "f_error_dropped_ball": 158,
+   "f_putout": 10,
+   "f_fielded_ball": 9,
+   "f_assist_of": 3,
+   "f_defensive_shift_violation_error": 3,
+   "f_interference": 1
+  },
+  "pendingMarkerCounts": {},
+  "pendingExamples": [],
+  "pendingPriorPairs": [],
+  "pendingPriorPairOutcomes": {},
+  "unresolvedPendingResults": [],
+  "scoringAdvisories": [],
+  "battedBallLocations": {
+   "1": 13251,
+   "2": 3655,
+   "3": 28314,
+   "4": 43692,
+   "5": 39268,
+   "6": 45154,
+   "7": 61670,
+   "8": 68976,
+   "9": 63832,
+   "78": 3288,
+   "89": 3074,
+   "null": 1291
+  },
+  "battedBallTrajectories": {
+   "ground_ball": 155763,
+   "fly_ball": 99856,
+   "line_drive": 89148,
+   "popup": 26555,
+   "bunt_grounder": 3762,
+   "bunt_popup": 336,
+   "bunt_line_drive": 28,
+   "null": 17
+  },
+  "fieldErrorCoverage": {
+   "total": 3169,
+   "withEvLa": 3136,
+   "withTraj": 3169,
+   "withLoc": 3169
+  },
+  "battedBalls": 375465
+ },
+ "savant": {
+  "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
+  "rowsAllGameTypes": 1370,
+  "rowsByGameType": {
+   "R": 1015,
+   "S": 321,
+   "E": 34
+  },
+  "rows": 1015,
+  "statsapiFieldErrors": 1015,
+  "matched": 1015,
+  "onlySavant": 0,
+  "onlySavantExamples": [],
+  "onlyStatsApiExamples": [],
+  "exitVelocityAgreement": 1,
+  "launchAngleAgreement": 1,
+  "hitProbVsSavantXba": {
+   "n": 1003,
+   "pearson": 0.9736,
+   "meanAbsDiff": 0.0289
+  }
+ },
+ "model": {
+  "errorToHit": {
+   "terms": [
+    "logit_hit_prob",
+    "loc:P",
+    "loc:C",
+    "loc:1B",
+    "loc:3B",
+    "loc:OF",
+    "traj:line_drive",
+    "traj:fly_ball",
+    "traj:popup",
+    "traj:bunt"
+   ],
+   "n": 3166,
+   "positives": 192,
+   "cv": {
+    "folds": 10,
+    "logLoss": 0.22249,
+    "baseLogLoss": 0.22874,
+    "auc": 0.62,
+    "brier": 0.05602,
+    "baseBrier": 0.05697,
+    "calibration": [
+     {
+      "band": "0–2",
+      "n": 50,
+      "predicted": 0.0151,
+      "observed": 0.04,
+      "positives": 2
+     },
+     {
+      "band": "2–5",
+      "n": 1175,
+      "predicted": 0.0391,
+      "observed": 0.0417,
+      "positives": 49
+     },
+     {
+      "band": "5–10",
+      "n": 1753,
+      "predicted": 0.0683,
+      "observed": 0.0627,
+      "positives": 110
+     },
+     {
+      "band": "10–20",
+      "n": 174,
+      "predicted": 0.1261,
+      "observed": 0.1552,
+      "positives": 27
+     },
+     {
+      "band": "20–35",
+      "n": 13,
+      "predicted": 0.2354,
+      "observed": 0.3077,
+      "positives": 4
+     },
+     {
+      "band": "35–50",
+      "n": 1,
+      "predicted": 0.3531,
+      "observed": 0,
+      "positives": 0
+     },
+     {
+      "band": "50–100",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     }
+    ]
+   },
+   "outOfTime": {
+    "trainSeasons": "< 2026",
+    "testSeason": 2026,
+    "n": 945,
+    "positives": 58,
+    "auc": 0.6155,
+    "logLoss": 0.22436,
+    "baseLogLoss": 0.23075,
+    "brier": 0.05658,
+    "baseBrier": 0.05761,
+    "calibration": [
+     {
+      "band": "0–2",
+      "n": 15,
+      "predicted": 0.014,
+      "observed": 0.0667,
+      "positives": 1
+     },
+     {
+      "band": "2–5",
+      "n": 342,
+      "predicted": 0.0386,
+      "observed": 0.0497,
+      "positives": 17
+     },
+     {
+      "band": "5–10",
+      "n": 538,
+      "predicted": 0.0674,
+      "observed": 0.0576,
+      "positives": 31
+     },
+     {
+      "band": "10–20",
+      "n": 44,
+      "predicted": 0.1299,
+      "observed": 0.1818,
+      "positives": 8
+     },
+     {
+      "band": "20–35",
+      "n": 5,
+      "predicted": 0.2504,
+      "observed": 0.2,
+      "positives": 1
+     },
+     {
+      "band": "35–50",
+      "n": 1,
+      "predicted": 0.3529,
+      "observed": 0,
+      "positives": 0
+     },
+     {
+      "band": "50–100",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     }
+    ]
+   }
+  },
+  "hitToError": {
+   "terms": [
+    "logit_hit_prob",
+    "infield",
+    "traj:line_drive",
+    "traj:fly_ball",
+    "traj:popup",
+    "traj:bunt"
+   ],
+   "n": 100969,
+   "positives": 120,
+   "cv": {
+    "folds": 10,
+    "logLoss": 0.00735,
+    "baseLogLoss": 0.00919,
+    "auc": 0.9125,
+    "brier": 0.00118,
+    "baseBrier": 0.00119,
+    "calibration": [
+     {
+      "band": "0–2",
+      "n": 100823,
+      "predicted": 0.0012,
+      "observed": 0.0012,
+      "positives": 118
+     },
+     {
+      "band": "2–5",
+      "n": 140,
+      "predicted": 0.026,
+      "observed": 0.0143,
+      "positives": 2
+     },
+     {
+      "band": "5–10",
+      "n": 6,
+      "predicted": 0.0613,
+      "observed": 0,
+      "positives": 0
+     },
+     {
+      "band": "10–20",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     },
+     {
+      "band": "20–35",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     },
+     {
+      "band": "35–50",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     },
+     {
+      "band": "50–100",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     }
+    ]
+   },
+   "outOfTime": {
+    "trainSeasons": "< 2026",
+    "testSeason": 2026,
+    "n": 30982,
+    "positives": 46,
+    "auc": 0.9343,
+    "logLoss": 0.00882,
+    "baseLogLoss": 0.01123,
+    "brier": 0.00147,
+    "baseBrier": 0.00148,
+    "calibration": [
+     {
+      "band": "0–2",
+      "n": 30917,
+      "predicted": 0.001,
+      "observed": 0.0015,
+      "positives": 46
+     },
+     {
+      "band": "2–5",
+      "n": 65,
+      "predicted": 0.0288,
+      "observed": 0,
+      "positives": 0
+     },
+     {
+      "band": "5–10",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     },
+     {
+      "band": "10–20",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     },
+     {
+      "band": "20–35",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     },
+     {
+      "band": "35–50",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     },
+     {
+      "band": "50–100",
+      "n": 0,
+      "predicted": null,
+      "observed": null,
+      "positives": 0
+     }
+    ]
+   }
+  },
+  "surfaceBalls": 370691
+ },
+ "warnings": [],
+ "currentSeason": 2026
+}

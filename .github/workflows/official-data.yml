@@ -1,0 +1,93 @@
+# Official-data pipeline: official MLB scoring-change logs + StatsAPI play data
+# → data/official/*.json and data/model/*.json (committed back to the branch).
+# Runs on GitHub-hosted runners because MLB hosts are reachable from there.
+name: Official data pipeline
+
+on:
+  schedule:
+    - cron: '23 */3 * * *'   # every 3 hours (default branch only)
+  workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - 'pipeline/**'
+      - 'assets/js/scoring-model.js'
+      - '.github/workflows/official-data.yml'
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: official-data-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Restore play-by-play cache
+        uses: actions/cache/restore@v6
+        with:
+          path: pipeline-cache
+          key: pbp-v2-${{ github.run_id }}
+          restore-keys: pbp-v2-
+
+      - name: Pipeline unit tests
+        run: |
+          node tools/pipeline-log-test.mjs
+          node tools/pipeline-model-test.mjs
+
+      - name: Run pipeline
+        env:
+          NODE_OPTIONS: --max-old-space-size=6144
+        run: node pipeline/run.mjs
+
+      - name: Save play-by-play cache
+        if: always()
+        uses: actions/cache/save@v6
+        with:
+          path: pipeline-cache
+          key: pbp-v2-${{ github.run_id }}
+
+      - name: Summarise run
+        if: always()
+        run: |
+          if [ -f data/model/pipeline-report.json ]; then
+            node -e "const r=require('./data/model/pipeline-report.json');console.log('::notice title=pipeline::'+JSON.stringify({warnings:r.warnings,fatal:r.fatal||null,model:r.model&&{e:r.model.errorToHit&&r.model.errorToHit.cv,h:r.model.hitToError&&r.model.hitToError.cv}}).slice(0,3500))"
+          fi
+
+      - name: Commit outputs
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/official data/model
+          if [ -d _probe ]; then git add _probe; fi
+          if git diff --cached --quiet; then
+            echo "No data changes."
+            exit 0
+          fi
+          git commit -m "data: refresh official scoring data and model [run ${{ github.run_id }}]"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((attempt * 10))
+          done
+          echo "::error::could not push data commit"
+          exit 1
+
+      # GitHub Pages is served from main ("Deploy from a branch"). Ask for a
+      # rebuild after a data commit in case bot pushes do not trigger one.
+      - name: Request a Pages rebuild
+        if: always() && github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --jq '.status' || true

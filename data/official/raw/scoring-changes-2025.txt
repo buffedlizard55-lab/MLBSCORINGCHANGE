@@ -1,0 +1,216 @@
+# Official MLB scoring changes — 2025
+# Source: https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes
+# Fetched: 2026-09-24T18:53:52.117Z  sha256(html)=3fb1bd59dc9bb5607b7e23198fe176dceca69009af377d18e8bf39a71eb34356
+# Verbatim entry lines as extracted from the page (one per line).
+
+1) 3/27 CLE@KC -- In the bottom of the 8th inning, Kyle Isbel now has a SAC bunt. The error charged to pitcher Hunter Gaddis has been removed.
+2) 3/27 PHI@WAS -- In the bottom of the 7th inning, Luis Garcia now reaches on a double, instead of a single and an error by second baseman Bryson Stott.
+3) 3/30 BAL@TOR -- In the bottom of the 6th inning, Will Wagner reached on an error by shortstop Jorge Mateo. Now pitcher Matt Bowman gets credit for an assist on the play.
+4) 4/4 BAL@KC -- In the bottom of the 8th inning, Kyle Isbel is now credited with a sacrifice bunt, instead of just hitting into a fielders choice.
+5) 4/6 STL@BOS GM2 -- In the bottom of the 5th inning, Jarren Duran reaches on a two base fielding error by first baseman Alec Burleson, instead of a double. As a result, the run scored by Duran is now unearned to Gordon Graceffo.
+6) 4/4 STL@BOS -- In the top of the 9th inning, Nolan Arenado reached on what was originally scored a failed fielder’s choice and throwing error by third baseman Alex Bregman for the additional advancements. This has been changed to a base hit and throwing error on Bregman. As a result, one more run in the inning is earned to Cooper Criswell.
+7) 4/6 BAL@KC -- In the bottom of the 1st inning, Bobby Witt reaches on a three-base error by center fielder Jorge Mateo, instead of a triple. As a result, all 3 runs in the inning are now unearned to Cade Povich.
+8) 4/6 BAL@KC -- In the top of the 7th inning, Ryan Mountcastle reaches on a three-base error by right fielder Hunter Renfroe. As a result, the run scored by Mountcastle is now unearned to Kris Bubic.
+9) 4/6 BAL@KC -- In the top of the 7th inning, Ryan Mountcastle scores on a passed ball by Freddy Fermin, instead of a wild pitch by Kris Bubic.
+10) 4/10 MIL@COL -- In the bottom of the 3rd inning, Brenton Doyle now has a single instead of a throwing error charged to Brice Turang.
+11) LAA@HOU -- In the bottom of the 6th inning, with Jeremy Pena batting, the passed ball charged to Logan O'Hoppe has been changed to a wild pitch charged to Michael Darrell-Hicks.
+12) 4/8 BAL@ARI -- In the top of the 7th inning, the final out of the inning goes catcher Gabriel Moreno to third baseman Eugenio Suarez to second baseman Garrett Hampson, instead of Moreno to Suarez.
+13) 4/14 HOU@STL -- In the bottom of the 5th inning, all three runs charged to Framber Valdez are now earned, instead of only two of the runs being earned.
+14) 4/9 SD@ATH -- In the top of the 1st inning, Xander Bogaerts now reaches on a double, instead of a single and en error by left fielder Miguel Andujar.
+15) 4/11 LAA@HOU -- In the top of the 4th inning, Jorge Soler now reaches on a single, instead of an error by shortstop Jeremy Pena.
+16) 4/11 LAA@HOU -- In the bottom of the 3rd inning, Jose Altuve now reaches on a single, instead of on an error by right fielder Mike Trout.
+17) 4/12 NYM@ATH -- In the top of the 1st inning, Francisco LIndor now reaches on a single, instead of an error by second baseman Max Muncy.
+18) 4/5 CLE@LAA -- In the bottom of the 3rd inning, Jorge Soler now reaches on a single, instead of on an error by third baseman Jose Ramirez.
+19) 4/12 TOR@BAL -- In the bottom of the 6th inning, Jordan Westburg reaches on an error by first baseman Vladimir Guerrero Jr., with an assist from shortstop Bo Bichette, instead of reaching on a single. As a result, the runs scored by Westburh and Ryan O' Hearn later in the inning are now unearned for pitcher Bowden Francis, instead of earned.
+20) 4/15 AZ@MIA -- In the top of the 6th inning, Garrett Hampson now has a single. He was originally ruled to have reached on a fielder's choice.
+21) 4/15 ATL@TOR -- In the top of the 3rd inning, the caught stealing of Nick Allen at 2nd base has been changed to an out advancing.
+22) 4/14 CHC@SD -- In the bottom of the 5th inning, Jose Iglesias now has a single instead of an error charged to Matt Shaw.
+23) 4/18 CLE@PIT -- In the bottom of the 9th inning, the double for Enmanuel Valdez has been changed to a single. The advance to 2nd base is on the throw.
+24) 4/17 SEA@CIN -- In the top of the 5th inning, Cal Raleigh is now credited with an RBI single, instead of reaching on a fielder error by shortstop Elly De La Cruz. As a result, one run in the inning is now earned to Brady Singer.
+25) 4/20 ATH@MIL -- In the bottom of the 4th inning, William Contreras reaches on an infield single instead of a throwing error on shortstop Jacob Wilson.
+26) 4/21 SD@DET -- In the top of the 5th inning, after Oscar Gonzalez's single, the assist for Trey Sweeney has been removed.
+27) 4/20 NYY@TB -- In the bottom of the 9th inning, Jose Caballero reached on a 2-base error, instead of a single and just advancing to second base on the error. This makes the run later scored by Caballero now unearned to Devin Williams .
+28) 4/21 MIL@SF -- In the bottom of the 5th inning, the throwing error charged to Brice Turang has been changed to a missed catcher error charged to Rhys Hoskins.
+29) 4/24 MIL@SF -- In the top of the 4th inning, one run charged to Landen Roupp has been changed to unearned.
+30) 4/22 LAD@CHC -- In the top of the 1st inning, the error charged to Gage Workman has been changed to a single for Shohei Ohtani. As a result, three runs are changed to earned against Shota Imanaga.
+31) 4/26 MIL@STL -- In the top of the 7th inning, an assist has been added for William Contreras on the groundball hit by Christian Yelich.
+32) 4/27 TOR@NYY(GM1) -- In the top of the 1st inning, Bo Bichette now reaches on a two-base error by third baseman Oswaldo Cabrera, instead of on a single and an error. As a result, the run scored by Bichette in the inning is now unearned for pitcher Max Fried, instead of earned.
+33) 4/25 TEX@SF -- In the top of the 6th inning, Josh Smith reaches on a fielder error by shortstop Willy Adames, instead of reaching on an infield single. As a result, the run scored by Smith is now unearned to Justin Verlander.
+34) 5/1 STL@CIN -- In the top of the 3rd inning, the run scored by Brendan Donovan is now unearned for pitcher Andrew Abbott, instead of earned.
+35) 5/2 COL@SF -- In the top of the 1st inning, Brenton Doyle is out advancing at second, instead of a caught stealing.
+36) 5/2 NYM@STL -- In the top of the 5th inning, Mark Vientos RBI is removed as without the error the inning would have ended
+37) 4/29 ATH@TEX -- In the bottom of the 3rd inning, following Jake Burger's single, the error has been removed for right fielder Lawrence Butler. Marcus Semien advanced to 3rd base on the single.
+38) 5/4 CLE@TOR -- In the bottom of the 9th inning, an additional error has been charged to pitcher Emmanuel Clase for the throw allowing Andres Gimenez to advance to 2nd base. Gimenez still reaches on an error by Clase, who now has two on the play.
+39) 5/7 NYM@ARI -- In the top of the 9th inning, Francisco Lindor steals third base, instead of reaching third on defensive indifference.
+40) 5/5 NYM@ARI -- In the top of the 9th inning, Alek Thomas reaches on an infield single to first baseman Pete Alonso, instead of a throwing error on Alonso.
+41) 5/6 NYM@ARI -- In the bottom of the 4th inning, Randal Grichuk reaches on a two-base fielding error by third baseman Mark Vientos, instead of a double. As a result, both runs in the inning are now unearned to David Peterson.
+42) 5/9 LAD@AZ -- In the top of the 3rd inning, the error charged to first baseman Josh Naylor has been changed to an assumed out at home plate. As a result, Outman loses an RBI and the runs scored by Enrique Hernandez and Miguel Rojas have been changed to unearned against Eduardo Rodriguez.
+43) 5/11 BOS@KC -- In the bottom of the 3rd inning, the run is changed to earned against Lucas Giolitto.
+44) 5/8 CIN@ATL -- In the top of the 5th inning, the single for Santiago Espinal has been changed to a force-out error charged to Austin Riley. As a result, the run scoring that inning is now unearned against Spencer Schwellenbach.
+45) 5/9 CIN@HOU -- In the bottom of the 7th inning, the error charged to Elly De La Cruz has been changed to a single for Mauricio Dubon.
+46) 5/12 WSH@ATL -- In the top of the 9th inning, Dylan Crews is now credited with a single. The error charged to Nick Allen remains for allowing further advances. As a result, Crews now has an RBI and the run is earned against Raisel Iglesias.
+47) 5/12 PIT@NYM -- In the top of the 9th inning, the single for Ke'Bryan Hayes has been changed to a fielder's choice.
+48) 5/12 PIT@NYM -- In the bottom of the 9th inning, Francisco Lindor now has a single instead of an error charged to Isiah Kiner-Falefa. As a result, the run in the inning is now unearned against David Bednar.
+49) 5/11 ATL@PIT -- In the bottom of the 9th inning, Joey Bart now has a single instead of reaching on a fielder's choice.
+50) 5/9 SD@COL -- In the bottom of the 8th inning, the single for Adael Amador has been changed to an error charged to Jake Cronenworth. As a result, one run in the inning is now unearned to Wandy Peralta.
+51) 5/4 SEA@TEX -- In the bottom of the 3rd inning, the single for Wyatt Langford has been changed to a fielder's choice error charged to Ben Williamson. As a result, five runs in the inning are now unearned against Logan Evans.
+52) 5/11 SF@MIN -- In the bottom of the 4th inning, Trevor Larnach reaches on a throwing error by first baseman LaMonte Wade Jr., instead of a single. As a result, the run scored by Larnach in the inning is now unearned to Landen Roupp.
+53) 5/13 PIT@NYM -- In the top of the 6th inning, Jared Triolo reaches on a two-base fielding error by third baseman Mark Vientos, instead of a double. As a result, the run in the inning is now unearned to Kodai Senga.
+54) 5/17 WSH@BAL -- In the bottom of the 7th inning, Heston Kjerstad now reaches on an error by first baseman Nathaniel Lowe and Ramon Urias advances to 3rd base on a second error by Lowe, instead of there only being one error charged to Lowe on the play.
+55) 5/17 CLE@CIN -- In the bottom of the 6th inning, Austin Hays doubled and advanced to third base on the throw home, instead of doubling and advancing to third base on a throwing error by Jose Ramirez.
+56) 5/16 TB@MIA -- In the top of the 5th inning, Chandler Simpson reached on an error, instead of reaching first base on a single and advancing to second base on the same error.
+57) 5/21 LAA@ATH -- In the bottom of the 2nd inning, Seth Brown singled, instead of reaching first base on an error by Tim Anderson. As a result, the run later scored by Brown is now earned to Jack Kochanowicz.
+58) 5/23 MIA@LAA -- In the bottom of the 6th inning, Jorge Soler now has an RBI for being awarded 1st base on catcher's interference with the bases loaded.
+59) 5/24 TEX@CWS -- In the bottom of the 6th inning, the triple for Austin Slater has been changed to an error charged to Wyatt Langford. As a result, 2 runs in the inning are now unearned against Hoby Milner.
+60) 5/24 PHI@ATH -- In the bottom of the 5th inning, the error charged to Trea Turner has been changed to a single for Shea Langeliers. As a result, one run in the inning is changed to earned against Christopher Sanchez.
+61) 5/25 TEX@CWS -- In the top of the 9th inning, Kyle Higashioka now has a single instead of a dropped catch error charged to Lenyn Sosa. As a result, Miguel Vargas loses an assist and one run in the inning is changed to earned against Jordan Leasure.
+62) 5/24 SEA@HOU -- In the bottom of the 1st inning, the error charged to Leo Rivas has been changed to a single for Victor Caratini. Caratini gets an RBI and two runs in the inning and changed to earned against Bryan Woo.
+63) 5/27 LAD@CLE -- In the bottom of the 9th inning, Jose Ramirez reached on an infield single, instead of eaching on an error by Luis Garcia with an assist for Freddie Freeman. This makes the two runs that scored later in the inning, now earned to Luis Garcia.
+64) 5/30 DET@KC -- In the top of the 4th inning, Zach McKinstry advances to second base on a caught stealing error by second baseman Jonathan India with an assist to catcher Salvador Perez, instead of a stolen base.
+65) 6/3 LAA@BOS -- In the top of the 5th inning, Zach Neto reaches on a throwing error by third baseman Abraham Toro, instead of an infield single.
+66) 6/4 PHI@TOR -- In the bottom of the 9th inning, Alejandro Kirk now has a double instead of a single.
+67) 6/3 CHC@WSH -- In the bottom of the 3rd inning, the double for Daylen Lile has been changed to an error charged to Michael Busch. As a result, two runs in the inning are changed to unearned against Cade Horton.
+68) 6/1 SF@MIA -- in the bottom of the 3rd inning, Xavier Edwards is now credited with a double, instead of a single and to second on a fielding error by center fielder Luis Matos.
+69) 6/7 BOS@NYY -- In the bottom of the 8th inning, 1 run has been changed to unearned against Justin Wilson.
+70) 6/3 SD@SF -- In the bottom of the 6th inning, the error charged to Manny Machado has been changed to a single for Jerar Encarnacion.
+71) 6/9 CIN@CLE -- In the top of the 7th inning, the run scored has been changed to unearned against Jakob Junis.
+72) 6/9 LAD@SD -- In the bottom of the 10th inning, there is no defensive indifference during Jackson Merrill's at-bat. Luis Arraez scored from 2nd base. There are no boxscore-level changes changes.
+73) 6/5 AZ@ATL -- In the bottom of the 3rd inning, the error charged to Ketel Marte has been changed to a single for Drake Baldwin. As a result, one run in the inning is changed to earned against Brandon Pfaadt.
+74) 6/7 CHC@DET -- In the bottom of the 5th inning, Jake Rogers now has a single. He was originally ruled to have reached on a fielder's choice.
+75) 6/8 TEX@WSH -- In the bottom of the 8th inning, the error charged to Josh Smith has been changed to a single for Alex Call.
+76) 6/6 SEA@LAA-- In the bottom of the 1st inning, the error charged to Ben Williamson has been changed to a single for Zach Neto.
+77) 6/12 NYY@KC -- In the top of the 8th inning, first baseman Vinnie Pasquantino is credited with an assist on the play where pitcher Lucas Erceg was charged with an error that allowed Pablo Reyes to score.
+78) 6/7 TEX@WSH -- In the top of the 1st inning, the error charged to Robert Hassel III now accounts for both runners advancing. As a result, Marcus Semien loses an RBI and one run charged to Mitchell Parker is changed to unearned.
+79) 6/10 TEX@MIN -- In the top of the 2nd inning, Adolis Garcia now has a single instead of a throwing error charged to Royve Lewis.
+80) 6/11 TOR@STL -- In the top of the 3rd inning, Tyler Heineman now reaches on a single and an error by second baseman Nolan Gorman, instead of on a two-base error on Gorman.
+81) 6/14 ATH@KC -- In the bottom of the 3rd inning, Maikel Garcia has been awarded a steal of 3rd base instead of advancing on a disengagememt violation.
+82) 6/14 COL@ATL -- In the bottom of the 6th inning. there are now 2 errors charged to Chase Dollander, one allowing Drake Baldwin to reach 1st and another to account for subsequent advancements. The play was originally a two-base error charged to Dollander.
+83) 6/15 CIN@DET -- In the top of the 8th inning, 3 runs have been changed to team unearned and are now earned against Will Vest.
+84) 6/9 MIA@PIT -- In the top of the 5th inning, Xavier Edwards reaches on an infield single to second baseman Nick Gonzales, instead of a fielding error on Gonzales.
+85) 6/11 SF@COL -- In the top of the 2nd inning, Tyler Fitzgerald reaches on an infield single to third baseman Orlando Arcia, instead of a throwing error on Arcia.
+86) 6/11 LAD@SD -- In the top of the 6th inning, Freddie Freeman reaches on a fielding error by pitcher Adrian Morejon, instead of an infield single. As a result, the run scored by Freeman in the inning is now unearned to Morejon.
+87) 6/14 CHW@TEX -- In the bottom of the 8th inning, Corey Seager reached on an infield since, instead of an error on Brooks Baldwin.
+88) 6/15 ATH@KC -- In the bottom of the 9th inning, Drew Waters reached on an error by second baseman Max Schuemann instead of a single.
+89) 6/15 COL@ATL -- In the top of the 3rd inning, Ryan Ritter reaches base on a single and advanced to 2nd on a throwing error by pitcher Grant Holmes, instead of two errors by Holmes.
+90) 6/13 TOR@PHI -- In the top of the 2nd inning, Ernie Clement reaches on an infield single to first baseman Otto Kemp, instead of a fielding error on Kemp.
+91) 6/17 PHI@MIA -- In the bottom of the 6th inning, Xavier Edwards reaches on a fielding error by right fielder Max Kepler, instead of a single. As a result of this change, Edwards loses an RBI and the run is now unearned to Tanner Banks.
+92) 6/21 ATL@MIA -- In the top of the 8th inning, 1 run is changed to earned against Josh Simpson.
+93) 6/24 LAD@COL -- In the top of the 4th inning, four runs have been changed to unearned against German Marquez.
+94) 6/20 CIN@STL -- In the top of the 4th inning, Gavin Lux now reaches on a single, instead of on an error by second baseman Brendan Donovan.
+95) 6/22 CIN@STL -- In the bottom of the 2nd inning, Thomas Saggese now reaches on a single, instead of on an error by second baseman Matt McLain.
+96) 6/21 DET@TB -- In the top of the 8th inning, Javier Baez now reaches on a single, instead of a fielders choice with an error on second baseman Brandon Lowe. As a result, the runs scored by Wenceel Perez and Baez later in the inning are now earned for pitcher Mason Montgomery, instead of unearned.
+97) 6/25 CHC@STL -- In the top of the 5th inning, the single for Michael Busch has been changed to an error charged to Yohel Pozo.
+98) 6/25 AZ@CWS -- In the top of the 8th inning, Pavin Smith singles to pitcher Grant Taylor instead of a fielding error on Taylor. As a result, one run in the inning is now earned to Taylor.
+99) 6/25 PHI@HOU -- In the bottom of the 1st inning, the single for Isaac Paredes has been changed to a fielding error on shortstop Trea Turner. As a result, Paredes loses an RBI and one run in the inning is now unearned to Zack Wheeler.
+100) 6/24 ATH@DET -- In the bottom of the 7th inning, both runs scored on a missed catch error by catcher Austin Wynns, assist to left fielder Tyler Soderstrom, instead of a throwing error by Soderstrom. As a result, both runs charged to Hogan Harris become unearned instead of just one run, and Zach McKinstry loses an RBI.
+101) 6/23 NYY@CIN -- In the bottom of the 8th inning, Jose Trevino reaches on a throwing error by shortstop Anthony Volpe, instead of an RBI single. As a result, the run is unearned to Mark Leiter.
+102) 6/20 CLE @ ATH -- In the bottom of the 2nd inning, Austin Wynns reached on a fielder's choice sac bunt, instead of reaching on a fielder's choice error by third baseman Jose Ramirez. As a result, the run in the inning is now earned to Tanner Bibee.
+103) 6/27 ATH@NYY -- In the top of the 6th inning, Tyler Soderstrom reaches on an infield single to third, instead of reaching on an error by third baseman Jazz Chisholm Jr.
+104) 6/29 ATH@NYY -- In the bottom of the 3rd inning, Jazz Chisholm Jr. is now credited with a double and two RBI and reaching third on a fielding error by center fielder Denzel Clarke, instead of a triple and three RBI. As a result, two runs in the inning are now unearned to Luis Severino.
+105) 6/30 ATH@TB -- In the bottom of the 4th inning, during the Jose Cabalerro at-bat, Jake Mangum is now charged a caught stealing, safe on throwing error.
+106) 6/29 WAS@LAA -- In the top of the 9th inning, Daylen Lile reaches on a fielding error by first baseman Nolan Schanuel, instead of a double. As a result, the run in the inning is now unearned to Kenley Jansen.
+107) 6/26 ATH@DET -- In the bottom of the 3rd inning, Jahmai Jones reaches on a fielder's choice and a fielder error by third baseman Max Muncy, instead of a double. As a result, Jones loses 2 RBI and both runs in the inning are now unearned to Jeffrey Springs.
+108) 6/30 CIN@BOS -- In the top of the 5th inning, Santiago Espinal now reaches on a single, instead of on an error by shortstop Trevor Story. As a result, the run scored by Espinal that inning is now earned to Garrett Crochet.
+109) 7/1 HOU@COL -- In the top of the 8th inning, Christian Walker singles instead of reaching on a fielding error by first baseman Michael Toglia.
+110) 7/4 STL@CHC -- In the top of the 7th inning, Nolan Arenado singles instead of reaching on a fielding error by first baseman Michael Busch.
+111) 7/7 MIA@CIN -- In the top of the 6th inning, during Derek Hill's at-bat, the fielders choice throwing error by third baseman Noelvi Marte is now an assumed out at home plate, instead of an assumed out at second base. As a result, the run scored by Eric Wagaman is now unearned for pitcher Lyon Richardson, instead of earned. Hill also no longer is credited with a run batted in on the play.
+112) 7/8 COL@BOS -- In the bottom of the 7th inning, Marcelo Mayer reaches on a fielding error by shortstop Ryan Ritter, instead of an infield single. As a result, the run scored by Mayer is now unearned to Jake Bird and the run scored by Duran is now a team unearned run.
+113) 7/8 SEA@NYY -- In the bottom of the 5th inning, Oswald Peraza reaches on a fielding error by second baseman Cole Young, instead of an infield single. As a result, the run is now unearned to Logan Gilbert and Peraza loses an RBI.
+114) 7/11 MIA@BAL -- In the top of the 3rd inning, the sacrifice has been removed for Xavier Edwards.
+115) 7/11 CLE@CWS GM2 -- In the bottom of the 11th inning, Mike Tauchman reaches on a fielder's choice to shortstop Brayan Rocchio, instead of an infield single to Rocchio.
+116) 7/11 PHI@SD -- In the bottom of the 2nd inning, Jackson Merrill now reaches on a single, instead of on a sacrifice and an error by pitcher Ranger Suarez. Now the error by Suarez only allows Xander Bogaerts to advance to 3rd base. As a result, all of the runs are now earned in the inning to Suarez, instead of just one run.
+117) 7/12 COL@CIN -- In the bottom of the 9th inning, Noelvi Marte now reaches on a fielders choice and gets credit for a run batted in that scored Will Benson, instead of the run scoring on an error by second baseman Orlando Arcia and Marte not getting a run batted in. As a result, the run scored by Benson is now an earned run for pitcher Victor Vodnik, instead of unearned.
+118) 7/13 COL@CIN -- In the bottom of the 7th inning, Austin Hays now reaches on a single, instead of on an error by second baseman Kyle Farmer.
+119) 7/13 TOR@ATH -- In the bottom of the 7th inning, the single for Jacob Wilson has been changed to a throwing error charged to Addison Barger. The error was originally charged only for allowing Wilson to advance to 2nd base.
+120) 7/20 BOS@CHC -- In the top of the 6th inning, the interference error charged to Nico Hoerner, following the Roman Anthony single, has been removed.
+121) 7/20 MIL@LAD -- In the bottom of the 9th inning, the single for Dalton Rushing has been changed to a dropped throw error charged to Andrew Vaughn, with an assist for Joey Ortiz. As a result, Rushing loses an RBI and one run is now unearned against Abner Uribe.
+122) 7/20 KC@MIA -- In the top of the 5th inning, during Bobby Witt Jr's at-bat, the wild pitch charged to Jason Junk has been changed to a passed ball charged to Agustin Ramirez. As a result, one tun in the inning is now unearned against Junk.
+123) 7/21 STL@COL -- In the bottom of the 3rd inning, the run scored by Mickey Moniak has been changed to an unearned run charged to Michael McGreevy.
+124) 7/19 BAL@TB -- In the bottom of the 8th inning, the run scored by Chandler Simpson has been changed from earned to unearned for pitcher Seranthony Dominguez as the fielders choice error by first baseman Ryan O' Hearn is now assumed to go to home plate instead of second base.
+125) 7/22 MIN@LAD -- In the top of the 7th inning, pitcher Edgardo Henriquez is now charged with two errors during the Royce Lewis at-bat, instead of just one.
+126) 7/23 CIN@WSH-- In the bottom of the 8th inning, the double for Luis Garcia Jr has been changed to a single, advancing to 2nd on an error charged to Elly De La Cruz.
+127) 7/22 MIL@SEA -- In the top of the 7th inning, Jackson Chourio reaches on an infield single, instead of reaching on a drop catch error by first baseman Luke Raley.
+128) 7/22 CIN@WAS -- In the bottom of the 6th inning, on the Riley Adams single, Brady House now scores on a fielding error by catcher Tyler Stephenson, instead of a throwing error by right fielder Jake Fraley.
+129) 7/20 LAA@PHI -- In the top of the 3rd inning, Luis Rengifo reaches on an infield single, instead of a fielding error by third baseman Otto Kemp.
+130) 7/21 LAA@NYM -- In the bottom of the 8th inning, on the Ronny Mauricio fielder's choice, Brett Baty now scores on a throwing error by third baseman Yoán Moncada, instead of a drop catch error by catcher Logan O'Hoppe.
+131) 7/21 MIL@SEA -- In the top of the 3rd inning, Anthony Seigler steals second base, instead of reaching second on a caught stealing and drop catch error by second baseman Cole Young.
+132) 7/25 CHC@CWS -- In the bottom of the 5th inning, the run scored by Austin Slater has been changed to unearned against Chris Flexen.
+133) 7/25 ATH@HOU -- In the top of the 3rd inning, Lawrence Butler is now credited with a sacrifice bunt, instead of a regular bunt ground out.
+134) 7/26 CLE@KC GM1 -- In the top of the 10th inning, the run in the inning is now earned to Steven Cruz.
+135) 7/26 SD@STL -- In the top of the 4th inning, Bryce Johnson is now credited with a bunt single, instead of reaching on a sacrifice fielder's choice.
+136) CHC@CWS -- In the top of the 8th inning, on the rundown during Matt SHaw's at-bat, assists have been added for Edgar Quero, Miguel Vargas, Lenyn Sosa, and Mike Vasil. Additionally, the run has been changed to unearned against Vasil.
+137) 7/22 MIN@LAD -- In the top of the 2nd inning, Royce Lewis now has a single instead of a fielders's choice with an error charged to Miguel Rojas. As a result, 2 runs in the inning are changed to earned against Yoshinobu Yamamoto.
+138) 7/26 SEA@LAA -- In the top of the 6th inning, J.P. Crawford now has a single instead of an error charged to Luis Rengifo. As a result, Crawford gets an RBI and the run is earned against Connor Brogdon.
+139) 7/29 TEX@LAA -- The winning pitcher is now Brock Burke, instead of Reid Detmers.
+140) 7/28 PHI@CWS -- In the bottom of the 8th inning, Seth Johnson is now credited with an error instead of Bryce Harper on Colson Montgomery's single.
+141) 7/29 CHC@MIL -- In the bottom of the 1st inning, William Contreras now has a single, instead of reaching on an error by Matt Shaw.
+142) 8/3 HOU@BOS -- In the bottom of the 4th inning, the error has been removed for Framber Valdez on Wilyer Abreu's SAC bunt. Abreu is now ruled to have reached on a fielder's choice. As a result, 1 run in the inning is changed to earned against Valdez.
+143) 8/3 KC@TOR -- In the top of the 10th inning, Tyler Tolbert is now credited with a steal of 2nd base.
+144) 8/5 CLE@NYM -- In the bottom of the 1st inning, the balk charged to Logan Allen has been changed to a pickoff attempt at 1st base and a throwing error on Allen. As a resuly, the run scored that inning is now unearned to Allen.
+145) 8/7 MIA@ATL -- In the bottom of the 2nd inning, an assist has been added for Graham Pauley following the single by Jonathan Ornelas.
+146) 8/7 MIA@ATL -- In the bottom of the 7th inning, the run scored by Jurickson Profar has been changed to earned against Josh Simpson.
+147) 8/8 CLE@CWS -- In the bottom of the 3rd inning, Lenyn Sosa now grounds out second baseman Brayan Rocchio to first baseman Carlos Santana, instead of shortstop Gabriel Arias also getting an assist on the play before Rocchio.
+148) 8/10 ATH@BAL -- In the bottom of the 8th inning, Gunnar Henderson is now credited with a double, instead of a single and an fielding error on left fielder JJ Bleday.
+149) 8/11 AZ@TEX -- In the bottom of the 10th inning, Corey Seager is now credited eith a stolen base. He had been ruled to have advanced on defensive indifference.
+150) 8/9 NYM@MIL -- In the bottom of the 7th inning, Isaac Collins now reaches on an error by third baseman Ronny Mauricio, instead of on a single. As a result, Collins no longer is credited with a run batted in, and the final three runs scored in the inning are now unearned for pitchers Ryne Stanek (one run) and Ryan Helsley (two runs).
+151) 8/10 TOR@LAA -- In the bottom of the 7th inning, the single for Teoscar Hernandez has been changed to an error charged to Ernie Clement.
+152) 8/9 NYM@MIL -- In the bottom of the 2nd inning, Joey Ortiz is now ruled to have reached on a fielder's choice chioice error, assumed out at 2nd base, instead of a straight error. There are no staistical changes.
+153) 8/11 COL@STL -- In the top of the 3rd inning, the throwing error charged to Nolan Gorman has been changed to a dropped catch error charged to Willson Contreras. Gorman now has an assist on the play.
+154) 8/14 MIA@CLE -- In the bottom of the 7th inning, two runs have been changed from unearned to earned against Valente Bellozo.
+155) 8/7 MIA@ATL -- In the bottom of the 7th inning, Marcell Ozuna now reaches 2nd base on an error by shortstop Otto Lopez, instead of a single and an error.
+156) 8/12 MIA@CLE -- In the top of the 1st inning, Xavier Edwards now reaches on a single, instead of an error by third baseman Jose Ramirez.
+157) 8/11 SD at SF -- In the top of the 8th inning, Xander Bogaerts now reaches on a single, instead of an error by third baseman Matt Chapman.
+158) 8/17 NYY@STL -- In the top of the 9th inning, Cody Bellinger is now credited with a single instead of a fielder's choice and an error charged to Thomas Saggese. As a result, Bellinger gets 2 RBIs and one run is changed to earned against Jojo Romero.
+159) 8/17 TB@SF -- In the bottom of the 6th inning, Dominic Smith is now credited with 2 RBIs on his single with the 3rd run scoring on a throw to 2nd base, instead of 3 RBIs.
+160) 8/19 STL@MIA -- In the top of the 7th inning, the run has been changed to earned against Cade Gibson.
+161) 8/19 SEA@PHI -- In the bottom of the 7th inning, the assist has been removed for Josh Naylor on the ground ball hit by Kyle Schwarber.
+162) 8/17 PHI@WSH -- In the top of the 5th inning, Trea Turner now has a single instead of a throwing error charged to Orlando Ribalta.
+163) 8/20 MIL@CHC -- In the top of the 6th inning, Anthony Seigler now has a sacrifice bunt.
+164) 8/18 SEA@PHI -- In the bottom of the 4th inning, Alec Bohm now has a single instead of a throwing error charged to Cole Young.
+165) 8/20 SEA@PHI -- In the bottom of the 7th inning, the run scored by Kyle Schwarber is now an unearned run charged to Tayler Saucedo, instead of an earned run.
+166) 8/19 STL@MIA -- In the bottom of the 4th inning, Xavier Edwards reaches on a fielding error by Masyn Winn, instead of an infield single. As a result, the run scored by Edwards is now unearned to Michael McGreevy.
+167) 8/19 ATH@MIN -- In the top of the 4th inning, Darell Hernaiz reaches on an infield single to third, instead of reaching on a dropped catch error by first baseman Kody Clemens. As a result, all three runs in the inning are now earned to Joe Ryan.
+168) 8/23 BOS@NYY -- In the top of the 2nd inning, Ceddanne Rafaela is out advancing at second instead of caught stealing.
+169) 8/23 TOR@MIA -- In the top of the 7th inning, Alejandro Kirk now has a single instead of an error charged to Agustin Ramirez.
+170) 8/23 SF@MIL -- In the top of the 6th inning, Luis Matos now is credited with a run batted in on the fielders choice with an error he reached base on, instead of not having a run batted in.
+171) 8/21 SF@SD -- In the bottom of the 5th inning, Freddy Fermin now reaches first base on an error by third baseman Casey Schmitt and is credited with a sacrifice, instead of reaching on a single. As a result, pitcher Justin Verlander is now charged with one earned run, instead of two, and the run charged to pitcher Matt Gage is now a team unearned run, instead of an earned run.
+172) 8/22 TOR@MIA -- In the top of the 2nd inning, Nathan Lukes now reaches on a single, instead of on an error by shortstop Maximo Acosta.
+173) 8/25 PHI@NYM -- In the bottom of the 5th inning, Juan Soto stole second base, instead of advancing to second on a missed catch error by Bryson Stott with assists to Cristopher Sánchez and Bryce Harper. As a result, the run scored by Juan Soto later in the inning is now earned to Christopher Sanchez.
+174) 8/30 SD@MIN -- In the bottom of the 3rd inning, James Outman reached on a throwing error by Ryan O'Hearn, instead of an infield single. This makes the run scored by Outman later in the inning now unearned to Nick Pivetta.
+175) 7/30 TB@NYY -- In the bottom of the 9th inning, the sacrifice bunt for Trent Grisham has been rescinded and the play is now ruled a reverse-ground-double-play.
+176) 8/29 TEX@ATH -- In the top of the 7th inning, Rowdy Tellez reached on an infield single, instead of an error by Darell Hernaiz. As a result, the run scored by Tellez later in the inning is now earned to Michael Kelly.
+177) 9/3 TOR@CIN -- In the top of the 8th inning, the earned/unearned runs have been adjusted. One run has been changed to earned against Lyon Richardson. One run has been changed to unearned against Yosver Zulueta.
+178) 9/3 TEX@AZ -- In the top of the 7th inning, the error charged to shortstop Geraldo Perdomo, following Rowdy Tellez' single, has been removed.
+179) 8/31 BAL@SF -- In the top of the 9th inning, Daniel Johnson reaches on a two-base fielding error by right fielder Luis Matos, instead of a double. As a result, the run scored by Johnson is now unearned to Spencer Bivens.
+180) 8/27 SD@SEA -- In the bottom of the 8th inning, Victor Robles reaches on an infield single to shortstop Xander Bogaerts, instead of a fielding error on Bogaerts.
+181) 9/1 ATH@STL -- In the top of the 5th inning, Lawrence Butler is now credited with a single, instead of reaching on a fielder error by second baseman Thomas Saggese.
+182) 9/1 ATH@STL -- In the top of the 8th inning, JJ Bleday reaches on an infield single to second baseman Thomas Saggese, instead of a fielding error by Saggese. As a result, all four runs in the inning are now earned, instead of unearned.
+183) 9/3 CLE@BOS -- In the top of the 2nd inning, Kyle Manzardo now reaches on a single, instead of an error by left fielder Jarren Duran. As a result, Manzardo now gets credit for a run batted in.
+184) 9/5 ATH@LAA -- In the top of the 3rd inning, Lawrence Butler reaches on a fielder's choice to first baseman Oswald Peraza, instead of an infield single.
+185) 9/3 TOR@CIN -- In the top of the 8th inning, Bo Bichette now reaches on a fielders choice, instead of on a fielders choice error by first baseman Spencer Steer. As a result, Bichette is now credited with a run batted in, and the two runs charged to pitcher Yosver Zulueta are now earned, instead of unearned.
+186) 9/7 LAD@BAL -- In the top of the 4th inning, the run scored by Miguel Rojas has been changed from earned to unearned for pitcher Tomoyuki Sugano, due to an out being assumed on the pickoff throw error on the catcher Alex Jackson.
+187) 9/8 WSH@MIA -- In the top of the 4th inning, Dylan Crews is now credited with a double. He has been credited with a single, advancing to 2nd base on the throw.
+188) 9/7 SEA@ATL -- In the top of the 3rd inning, the double for Julio Rodriguez has been changed to a fielder's choice with an error charged to Nacho Alvarez. As a result, Rodriguez loses 3 RBIs; two of the runs charged to Joey Wentz has been changed to unearned, and one run charged to Dylan Dodd has been changed to team unearned.
+189) 9/9 CHC@ATL -- In the top of the 8th inning, Matt Shaw singled to center fielder Michael Harris II and advanced to second on a throwing error by Harris II, instead of a fielding error by third baseman Nacho Alvarez Jr.
+190) 9/10 COL@LAD -- In the bottom of the 4th inning, baserunner Andy Pages is now out pitcher Kyle Freeland to shortstop Ezequiel Tovar, instead of Freeland to Tovar to second baseman Orlando Arcia to third baseman Kyle Karros.
+191) 9/8 MIN@LAA -- In the top of the 8th inning, Royce Lewis now reaches base on a single, instead of on an error by third baseman Yoan Moncada., As a result, Lewis is now credited with a run batted in, and the run that scored is now earned for pitcher Sammy Peralta, instead of unearned.
+192) 9/9 HOU@TOR -- In the bottom of the 10th inning, Tyler Heineman now reaches on a single, instead of a fielders choice.
+193) 9/12 DET@MIA -- In the top of the 7th inning, Kerry Carpenter scores on a wild pitch by Sandy Alcantara, instead of a passed ball on Agustín Ramírez. As a result, the run scored by Carpenter is now earned to Alcantara.
+194) 9/10 KC@CLE -- In the top of the 1st inning, Maikel Garcia reaches on a throwing error by Brayan Rocchio, instead of an infield hit. As a result, the run later scored by Garcia is now unearned to Logan Allen.
+195) 9/11 TB@CWS -- In the bottom of the 1st inning, Chase Meidroth reaches on a fielding error byTristan Gray, instead of an infield hit. As a result, the run later scored by Meidroth is now unearned to Ian Seymour.
+196) 9/12 STL@MIL -- In the bottom of the 3rd inning, Joey Ortiz reaches on a sac bunt throwing error by pitcher Andre Pallante, instead of an infield hit. As a result, 3 of the 4 runs scored that inning are uneanred to Pallante, instead of just 1 of 4 being unearned.
+197) 9/12 BAL@TOR -- In the bottom of the 6th inning, the run scored by Isiah Kiner-Falefa is now ruled unearned to Dietrick Enns.
+198) 9/13 STL@MIL -- In the top of the 6th inning, Brendan Donovan reaches on a throwing error by Caleb Durbin, instead of a single plus error.
+199) 9/14 COL@SD -- In the top of the bottom of the 2nd inning, the error charged to Ezequiel Tovar has been changed to a single for Mason McCoy. As a result, one run has been changed to earned against German Marquez.
+200) 9/16 ATL@WSH -- In the bottom of the 1st inning, the error charged to Vidal Brujan has been changed to a single for CJ Abrams.
+201) 9/17 CHC@PIT -- In the bottom of the 6th inning, Nick Gonzales reached base on what was originally ruled a hit and an error. This has been changed to a straight throwing error on Matt Shaw.
+202) 9/16 SEA @ KC -- In the bottom of the 3rd inning, Vinnie Pasquantino reached on what was ruled a fielder's choice and an error. This has been changed to a base hit, removing the error for Jorge Polanco.
+203) 9/15 TOR@TB -- In the top of the 3rd inning, the error charged to Tristan Gray has been changed to a double for George Springer.
+204) 9/11 HOU@TOR -- In the bottom of the 8th inning, Addison Barger no longer has a sacrifice fly. As a result, Barger loses an RBI and the run that scored on his at-bat is now unearned to Lance McCulllers.
+205) 9/23 MIN@TEX -- In the top of the 4th inning, Carson McCusker hits an infield single, instead of reaching on a throwing error by Jake Burger.
+206) 9/26 MIN@PHI -- In the bottom of the 1st inning, Kyle Schwarber reaches on a missed catch error by first baseman Edouard Julien, assist to shortstop Brooks Lee, instead of an infield single. This makes the run score by Schwarber later in the inning now unearned to Joe Ryan.
+207) 9/26 COL@SF -- In the top of the 5th inning, Brenton Doyle reaches on a fielding error by second baseman Casey Schmitt, instead of an infield hit. As a result, all 3 runs scored later in the inning are now unearned to Trevor McDonald.
+208) 9/28 KC@ATH -- In in the top of the 7th inning, Michael Massey reaches on a missed catch error by pitcher Michael Kelly, assist to second baseman Darell Hernaiz,instead of a throwing error by Hernaiz.
+209) 9/27 CWS@WSH -- In the bottom of the 4th inning, Josh Bell now reaches on an error by left fielder Brooks Baldwin, instead of on a double. As a result, the run scored by Bell later in the inning is now unearned for pitcher Sean Burke, instead of earned.
+210) 9/28 STL@CHC -- In the top of the 9th inning, Thomas Saggese is now credited with a double, instead of a single and a fielding error on left fielder Kevin Alcántara.
+211) 10/4 LAD@PHI -- In the bottom of the 7th inning, J.T. Realmuto reaches on an infield single, instead of a throwing error by Max Muncy.
