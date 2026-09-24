@@ -6,3 +6,7 @@ Thumbs.db
 node_modules/
 .vscode/
 .idea/
+
+# Official-data pipeline: play-by-play cache lives in the GitHub Actions cache,
+# never in git (it is large and fully re-derivable from MLB StatsAPI).
+pipeline-cache/
