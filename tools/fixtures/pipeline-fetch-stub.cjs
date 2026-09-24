@@ -120,6 +120,16 @@ globalThis.fetch = (input) => {
     for (const g of games) { if (!byDate.has(g.officialDate)) byDate.set(g.officialDate, []); byDate.get(g.officialDate).push(g); }
     return respond({ dates: [...byDate.entries()].map(([date, gs]) => ({ date, games: gs })) });
   }
+  // Official scorer + venue (feed/live projection): two SYNTHETIC scorers per
+  // home club, alternating by game.
+  if ((m = url.match(/\/api\/v1\.1\/game\/(\d+)\/feed\/live\?fields=gameData,officialScorer/))) {
+    const pk = Number(m[1]);
+    const g = [...world.schedule.values()].flat().find((x) => x.gamePk === pk);
+    if (!g) return Promise.resolve({ ok: false, status: 404, text: async () => 'nf', json: async () => ({}) });
+    const homeId = g.teams.home.team.id;
+    const sid = homeId * 10 + (pk % 2);
+    return respond({ gameData: { venue: { id: homeId + 5000, name: `${g.teams.home.team.name} Park` }, officialScorer: { id: sid, fullName: `Scorer ${sid}` } } });
+  }
   if ((m = url.match(/\/api\/v1\/game\/(\d+)\/playByPlay/))) {
     const g = world.games.get(Number(m[1]));
     return g ? respond(g) : Promise.resolve({ ok: false, status: 404, text: async () => 'nf', json: async () => ({}) });

@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-09-24T19:33:03.185Z",
+ "generatedAt": "2026-09-24T20:15:36.810Z",
  "entries": [
   {
    "seq": 1,
@@ -303,7 +303,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0725,
+    "p": 0.0733,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -495,8 +495,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0757,
-    "score": 8,
+    "p": 0.0733,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -735,7 +735,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0692,
+    "p": 0.0673,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -787,8 +787,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0878,
-    "score": 9,
+    "p": 0.0655,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -839,7 +839,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0598,
+    "p": 0.0574,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -891,7 +891,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.069,
+    "p": 0.0697,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -1085,7 +1085,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1011,
+    "p": 0.1042,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -1183,8 +1183,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.134,
-    "score": 13,
+    "p": 0.2066,
+    "score": 21,
     "kind": "out_of_fold"
    }
   },
@@ -1235,7 +1235,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0432,
+    "p": 0.0411,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -1482,7 +1482,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0799,
+    "p": 0.0815,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -1954,8 +1954,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0549,
-    "score": 5,
+    "p": 0.0563,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -2204,7 +2204,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.027,
+    "p": 0.0251,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -2346,8 +2346,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1235,
-    "score": 12,
+    "p": 0.2198,
+    "score": 22,
     "kind": "out_of_fold"
    }
   },
@@ -2663,17 +2663,15 @@
    "sectionIndex": 0,
    "cls": {
     "kind": "ruling_change",
-    "initial": "error",
+    "initial": "hit+error",
     "final": "hit",
     "initialHitType": "double",
     "finalHitType": "double",
     "rule": "T1",
     "oldPhrase": "doubling and advancing to third base on a throwing error by Jose Ramirez",
     "newPhrase": "Austin Hays doubled and advanced to third base on the throw home",
-    "transition": "error->hit",
-    "flags": [
-     "errorToHit"
-    ]
+    "transition": "hit+error->hit",
+    "flags": []
    },
    "link": {
     "gamePk": 777892,
@@ -2689,12 +2687,6 @@
     "gameType": "R",
     "away": "CLE",
     "home": "CIN"
-   },
-   "model": {
-    "question": "errorToHit",
-    "p": 0.0567,
-    "score": 6,
-    "kind": "out_of_fold"
    }
   },
   {
@@ -2796,8 +2788,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0899,
-    "score": 9,
+    "p": 0.0471,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -2944,7 +2936,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0905,
+    "p": 0.0879,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -2996,7 +2988,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0819,
+    "p": 0.0837,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -3048,7 +3040,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0992,
+    "p": 0.0968,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -3100,7 +3092,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0372,
+    "p": 0.0377,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3580,8 +3572,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0552,
-    "score": 6,
+    "p": 0.0526,
+    "score": 5,
     "kind": "out_of_fold"
    }
   },
@@ -3678,7 +3670,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0584,
+    "p": 0.0605,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -3730,7 +3722,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0888,
+    "p": 0.0909,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -3870,7 +3862,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0448,
+    "p": 0.0447,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -3922,7 +3914,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.024,
+    "p": 0.0222,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -4107,8 +4099,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0656,
-    "score": 7,
+    "p": 0.0633,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -4159,7 +4151,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0283,
+    "p": 0.028,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -4361,8 +4353,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0823,
-    "score": 8,
+    "p": 0.0977,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -4413,8 +4405,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0538,
-    "score": 5,
+    "p": 0.0554,
+    "score": 6,
     "kind": "out_of_fold"
    }
   },
@@ -4606,7 +4598,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0949,
+    "p": 0.0929,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -4658,7 +4650,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0532,
+    "p": 0.0509,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4808,7 +4800,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0448,
+    "p": 0.0432,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -5059,7 +5051,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0725,
+    "p": 0.0734,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -5303,7 +5295,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0406,
+    "p": 0.0382,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -5355,8 +5347,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1197,
-    "score": 12,
+    "p": 0.1256,
+    "score": 13,
     "kind": "out_of_fold"
    }
   },
@@ -5407,7 +5399,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1052,
+    "p": 0.1115,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -5790,7 +5782,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0597,
+    "p": 0.0573,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -6212,7 +6204,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0791,
+    "p": 0.078,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -6236,39 +6228,35 @@
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
-    "final": "hit+error",
+    "final": "error",
     "initialHitType": null,
-    "finalHitType": "single",
+    "finalHitType": null,
     "rule": "T1",
     "oldPhrase": "a throwing error by right fielder Jake Fraley",
-    "newPhrase": "on the Riley Adams single, Brady House now scores on a fielding error by catcher Tyler Stephenson",
-    "transition": "error->hit+error",
+    "newPhrase": "Brady House now scores on a fielding error by catcher Tyler Stephenson",
+    "transition": "error->error",
     "flags": [
-     "errorToHit"
+     "errorToError"
     ]
    },
    "link": {
     "gamePk": 777042,
-    "atBatIndex": 48,
-    "batterName": "Riley Adams",
-    "currentEventType": "single",
+    "atBatIndex": 46,
+    "batterName": "Brady House",
+    "currentEventType": "force_out",
     "method": "full_name",
     "flags": [
-     "team_code_via:teamCode:WAS"
+     "team_code_via:teamCode:WAS",
+     "subject_not_first_mention",
+     "current_ruling_compatible:force_out"
     ],
-    "batterId": 656180,
-    "currentEvent": "Single",
-    "currentDescription": "Riley Adams singles on a line drive to right fielder Jake Fraley. Nathaniel Lowe scores. Luis García Jr. scores. Brady House scores. Riley Adams to 2nd. Fielding error by catcher Tyler Stephenson.",
+    "batterId": 691781,
+    "currentEvent": "Forceout",
+    "currentDescription": "Brady House grounds into a force out, pitcher Chase Burns to catcher Tyler Stephenson. Josh Bell out at home. Nathaniel Lowe to 3rd. Luis García Jr. to 2nd. Brady House to 1st.",
     "officialDate": "2025-07-22",
     "gameType": "R",
     "away": "CIN",
     "home": "WSH"
-   },
-   "model": {
-    "question": "errorToHit",
-    "p": 0.1419,
-    "score": 14,
-    "kind": "out_of_fold"
    }
   },
   {
@@ -6318,7 +6306,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1074,
+    "p": 0.1106,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -6687,8 +6675,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0643,
-    "score": 6,
+    "p": 0.0651,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -6739,7 +6727,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0704,
+    "p": 0.0684,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -6891,7 +6879,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.06,
+    "p": 0.0606,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -7595,7 +7583,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0665,
+    "p": 0.0674,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -7649,7 +7637,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0906,
+    "p": 0.0927,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -7878,7 +7866,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0381,
+    "p": 0.0357,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -7974,7 +7962,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0382,
+    "p": 0.0362,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8122,7 +8110,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0638,
+    "p": 0.0646,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8218,7 +8206,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0491,
+    "p": 0.0467,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -8358,7 +8346,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0424,
+    "p": 0.0401,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8550,7 +8538,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0539,
+    "p": 0.0514,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -8746,7 +8734,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.029,
+    "p": 0.0268,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -8798,7 +8786,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0824,
+    "p": 0.0807,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -8850,7 +8838,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0819,
+    "p": 0.0802,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -8902,8 +8890,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1226,
-    "score": 12,
+    "p": 0.1119,
+    "score": 11,
     "kind": "out_of_fold"
    }
   },
@@ -9178,8 +9166,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2671,
-    "score": 27,
+    "p": 0.2598,
+    "score": 26,
     "kind": "out_of_fold"
    }
   },
@@ -9274,7 +9262,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0582,
+    "p": 0.0587,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -9660,8 +9648,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0543,
-    "score": 5,
+    "p": 0.0255,
+    "score": 3,
     "kind": "out_of_fold"
    }
   },
@@ -9714,7 +9702,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0658,
+    "p": 0.0666,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -9864,7 +9852,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0793,
+    "p": 0.0813,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -9960,7 +9948,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0879,
+    "p": 0.0918,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -10260,7 +10248,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.127,
+    "p": 0.1306,
     "score": 13,
     "kind": "out_of_fold"
    }

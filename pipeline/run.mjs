@@ -12,8 +12,12 @@
  *     hit→error logistic models, pending-ruling outcome tables).
  *  5. Write data/official/*.json, data/model/*.json with provenance, a
  *     pipeline report and an irregularities list.
+ *  6. Join the live-captured rulings (data/capture, pipeline/capture.mjs)
+ *     with the final rulings: error-type adjustment, pending calibration.
+ *  7. Re-test official-scorer and home-park effects (gameData.officialScorer).
  *
  * Flags: --seasons=2024,2025,2026  --max-games=N  --skip-fetch  --no-savant
+ *        --no-meta (skip the per-game official-scorer lookups)
  * ==========================================================================*/
 
 import fs from 'node:fs';
@@ -23,12 +27,15 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { fetchText, pool } from './lib/http.mjs';
 import { parseLogHtml } from './lib/log-parser.mjs';
-import { classifyEntry, transitionFlags } from './lib/log-classifier.mjs';
+import { classifyEntry, transitionFlags, originalErrorKindFromLog } from './lib/log-classifier.mjs';
 import {
   getTeams, getSeasonSchedule, isCompleted, getPlayByPlay, extractGamePlays, samePlays,
-  HIT_EVENTS, playByPlayUrl,
+  HIT_EVENTS, playByPlayUrl, getGameMeta, gameMetaUrl,
 } from './lib/statsapi.mjs';
-import { buildTeamIndex, linkEntry, rulingAgrees } from './lib/link.mjs';
+import { parseMonth } from './lib/capture-lib.mjs';
+import { capturedAdjustment, pendingCalibration } from './lib/adjust.mjs';
+import { heterogeneityTest, groupTable } from './lib/effects.mjs';
+import { buildTeamIndex, linkEntry, rulingAgrees, isVerifiedRunnerErrorChange } from './lib/link.mjs';
 import {
   buildHitProbSurface, buildHitProbFallback, buildPendingTable, selectAndFit, SM, isBattedBall,
 } from './lib/model-build.mjs';
@@ -41,6 +48,10 @@ const OUT_OFFICIAL = path.join(OUT_BASE, 'official');
 const OUT_MODEL = path.join(OUT_BASE, 'model');
 const PROBE_DIR = process.env.PIPELINE_PROBE_DIR || path.join(ROOT, '_probe');
 const CACHE_VERSION = 2;
+const META_CACHE_VERSION = 1;
+// A captured call counts as the ORIGINAL call only if it was first seen
+// within this many minutes of the end of the play.
+const ORIGINAL_MAX_LAG_MIN = 30;
 const REFRESH_DAYS = 21;      // re-fetch recent games: rulings can still change
 const LABEL_LAG_DAYS = 14;    // training uses games at least this old
 const FETCH_CONCURRENCY = 8;
@@ -210,6 +221,18 @@ async function loadOfficialLog(season) {
 
 /* --------------------------------------------------------------- 2 plays */
 function cacheFile(season) { return path.join(CACHE_DIR, `plays-${season}.json.gz`); }
+function metaFile(season) { return path.join(CACHE_DIR, `meta-${season}.json.gz`); }
+function loadMeta(season) {
+  try {
+    const j = JSON.parse(zlib.gunzipSync(fs.readFileSync(metaFile(season))).toString('utf8'));
+    if (j.version === META_CACHE_VERSION) return j;
+  } catch { /* fresh */ }
+  return { version: META_CACHE_VERSION, season, games: {} };
+}
+function saveMeta(season, meta) {
+  fs.mkdirSync(CACHE_DIR, { recursive: true });
+  fs.writeFileSync(metaFile(season), zlib.gzipSync(JSON.stringify(meta)));
+}
 function loadCache(season) {
   try {
     const j = JSON.parse(zlib.gunzipSync(fs.readFileSync(cacheFile(season))).toString('utf8'));
@@ -267,6 +290,22 @@ async function loadSeasonPlays(season) {
     }
   }
   saveCache(season, cache);
+  // Official scorer + venue per game (tiny feed/live projection, cached for
+  // good; a missing scorer on a recent game is looked up again).
+  const meta = loadMeta(season);
+  const needMeta = args['no-meta'] || args['skip-fetch'] ? [] : completed.filter((g) => {
+    const c = meta.games[g.gamePk];
+    return !c || (c.scorerId == null && g.officialDate >= REFRESH_CUTOFF);
+  }).slice(0, Number.isFinite(MAX_GAMES) ? MAX_GAMES : undefined);
+  let metaFetched = 0; let metaFailed = 0;
+  await pool(needMeta, 12, async (g) => {
+    try {
+      meta.games[g.gamePk] = { ...(await getGameMeta(g.gamePk)), fetchedAt: new Date().toISOString() };
+      metaFetched += 1;
+    } catch { metaFailed += 1; }
+  });
+  saveMeta(season, meta);
+  const metaByGame = new Map(completed.map((g) => [g.gamePk, meta.games[g.gamePk] || null]));
   const playsByGame = new Map();
   for (const g of completed) {
     const c = cache.games[g.gamePk];
@@ -276,12 +315,18 @@ async function loadSeasonPlays(season) {
     teamsUrl, scheduleUrls: sched.urls,
     scheduled: sched.games.length, completed: completed.length,
     gamesWithPlays: playsByGame.size, fetched, failed, failures, selfCheck,
+    meta: {
+      url: completed[0] ? gameMetaUrl(completed[0].gamePk) : null,
+      fetched: metaFetched, failed: metaFailed,
+      withScorer: completed.filter((g) => meta.games[g.gamePk] && meta.games[g.gamePk].scorerId != null).length,
+      scorers: new Set(completed.map((g) => meta.games[g.gamePk] && meta.games[g.gamePk].scorerId).filter((v) => v != null)).size,
+    },
     byGameType: histObj(completed.reduce((m, g) => hist(m, g.gameType), new Map())),
   };
   if (playsByGame.size < completed.length) {
     report.warnings.push(`${season}: ${completed.length - playsByGame.size} completed games have no play data`);
   }
-  return { teams, games: completed, playsByGame };
+  return { teams, games: completed, playsByGame, metaByGame };
 }
 
 /* ----------------------------------------------------------- helpers */
@@ -356,11 +401,17 @@ async function main() {
     creditCodes: new Map(), fieldErrorBatterCredits: new Map(), pendingExamples: [], pendingCounts: new Map(),
     pendingPairs: [], advisories: [], locations: new Map(), trajectories: new Map(), unresolvedPendingResults: [],
     fieldErrorCoverage: { total: 0, withEvLa: 0, withTraj: 0, withLoc: 0 },
+    errorKindCheck: new Map(),
   };
+  // Cross-season lookups for the live-capture join and the scorer tests.
+  const gameInfoAll = new Map();   // gamePk → {officialDate, season, gameType, homeId, away, home}
+  const chainsAll = new Map();     // "gamePk:ai" → official log entries (ruling changes)
+  const playsByGameAll = new Map();
+  const metaAll = new Map();       // gamePk → {scorerId, scorerName, venueId, venueName}
 
   for (const season of SEASONS) {
     const logInfo = await loadOfficialLog(season);
-    const { teams, games, playsByGame } = await loadSeasonPlays(season);
+    const { teams, games, playsByGame, metaByGame } = await loadSeasonPlays(season);
     const teamIndex = buildTeamIndex(teams);
     const teamsById = new Map(teams.map((t) => [t.id, t]));
     const abbr = new Map(teams.map((t) => [t.id, t.abbreviation]));
@@ -380,6 +431,12 @@ async function main() {
         e.link.away = abbr.get(g.awayId) || null;
         e.link.home = abbr.get(g.homeId) || null;
       }
+      // Runner-level error reassignments: not a plate-appearance mismatch.
+      const mi = e.link.flags.indexOf('current_ruling_mismatch');
+      if (mi >= 0 && e.link.gamePk != null && e.link.atBatIndex != null) {
+        const rec = (playsByGame.get(e.link.gamePk) || []).find((p) => p.ai === e.link.atBatIndex);
+        if (isVerifiedRunnerErrorChange(e, rec)) e.link.flags[mi] = 'runner_error_change:verified';
+      }
       hist(kinds, e.cls.kind);
       if (e.cls.transition) hist(transitions, e.cls.transition);
     }
@@ -393,6 +450,15 @@ async function main() {
       chains.get(key).push(e);
     }
     for (const list of chains.values()) list.sort((a, b) => a.seq - b.seq);
+    for (const [key, list] of chains) chainsAll.set(key, list);
+    for (const g of games) {
+      gameInfoAll.set(g.gamePk, {
+        officialDate: g.officialDate, season, gameType: g.gameType, homeId: g.homeId,
+        away: abbr.get(g.awayId) || null, home: abbr.get(g.homeId) || null,
+      });
+      if (metaByGame.get(g.gamePk)) metaAll.set(g.gamePk, metaByGame.get(g.gamePk));
+    }
+    for (const [pk, plays] of playsByGame) playsByGameAll.set(pk, plays);
     // An earlier entry whose ruling a later entry on the same play replaced
     // is not a mismatch: annotate it (the chain's last entry is what counts).
     for (const list of chains.values()) {
@@ -408,7 +474,7 @@ async function main() {
       // Link flags matter for ruling changes (they feed the model); for
       // bookkeeping-only entries (earned runs, RBIs, WP/PB) flag parse issues.
       const important = e.issues.length || (e.cls.kind === 'ruling_change'
-        && e.link.flags.some((f) => !/^team_alias|^team_code_via|^name_match:last_name|^superseded_by|^current_ruling_compatible/.test(f)));
+        && e.link.flags.some((f) => !/^team_alias|^team_code_via|^name_match:last_name|^superseded_by|^current_ruling_compatible|^runner_error_change:verified/.test(f)));
       if (important || e.cls.kind === 'unclassified') {
         irregularities.push({
           season, seq: e.seq, section: e.section, raw: e.raw, parseIssues: e.issues, linkFlags: e.link.flags,
@@ -436,6 +502,10 @@ async function main() {
           if (rec.hd && rec.hd.traj) disc.fieldErrorCoverage.withTraj += 1;
           if (rec.hd && rec.hd.loc) disc.fieldErrorCoverage.withLoc += 1;
           for (const c of rec.cr || []) if (c.endsWith('|B')) hist(disc.fieldErrorBatterCredits, c.split('|')[0]);
+          // Error type from credits vs from the description (verification of
+          // SM.errorKindOfRecord's two sources).
+          const fromCredits = SM.errorKindFromCredits((rec.cr || []).map((c) => { const [credit, pos, , who] = c.split('|'); return { credit, pos, batter: who === 'B' }; }));
+          hist(disc.errorKindCheck, `${fromCredits ? fromCredits.kind : 'none'}|${SM.errorKindFromDescription(rec.desc) || 'none'}`);
         }
         for (const c of rec.cr || []) hist(disc.creditCodes, c.split('|')[0]);
         if (rec.pend) {
@@ -466,6 +536,11 @@ async function main() {
           if (rulingAgrees(last.cls.final, last.cls.finalHitType, rec.et) === false) {
             chainsDropped += 1;
             chain = null;
+          } else if (chain[0].cls.initial === 'error' && last.cls.final === 'error' && rec.et !== 'field_error') {
+            // An error → error entry on a play that is not itself scored an
+            // error concerns a runner's error (e.g. 2025 #128): it says nothing
+            // about this plate appearance's ruling, so it gives no label.
+            chain = null;
           }
         }
         let initial; let final; let initialHitType;
@@ -484,6 +559,7 @@ async function main() {
           initialHitType = HIT_EVENTS.has(rec.et) ? rec.et : null;
         }
         const labelFinal = !!g && g.officialDate <= LABEL_CUTOFF;
+        const gm = metaByGame.get(gamePk) || null;
         const base = {
           id: key, gamePk, season, rec, chain: chain || null, labelFinal,
           date: g ? g.officialDate : null,
@@ -491,6 +567,8 @@ async function main() {
           home: g ? abbr.get(g.homeId) : null,
           homeId: g ? g.homeId : null,
           gameType: g ? g.gameType : null,
+          scorerId: gm ? gm.scorerId : null,
+          scorerName: gm ? gm.scorerName : null,
         };
         if (initial === 'error') errorRows.push({ ...base, y: isHitCat(final) ? 1 : 0, final });
         if (isHitCat(initial) && initialHitType !== 'home_run' && rec.et !== 'home_run') {
@@ -536,8 +614,13 @@ async function main() {
   };
   model.pending = buildPendingTable(allBatted);
 
-  const playOf = (r) => ({ ...SM.playFromRecord(r.rec), homeId: r.homeId });
-  const toRow = (r) => ({ id: r.id, gamePk: r.gamePk, season: r.season, y: r.y, play: playOf(r), home: r.home });
+  // NOTE: no error type here — for plays already changed to a hit it is gone
+  // from the data, so using it on historical rows would leak the label.
+  const playOf = (r) => ({ ...SM.playFromRecord(r.rec), homeId: r.homeId, scorerId: r.scorerId });
+  const toRow = (r) => ({
+    id: r.id, gamePk: r.gamePk, season: r.season, y: r.y, play: playOf(r), home: r.home,
+    scorerId: r.scorerId, scorerName: r.scorerName,
+  });
   const eTrain = errorRows.filter((r) => r.labelFinal).map(toRow);
   const hTrain = hitRows.filter((r) => r.labelFinal).map(toRow);
   const E_SETS = [
@@ -554,6 +637,11 @@ async function main() {
   const homeCounts = eTrain.reduce((m, r) => hist(m, r.play.homeId), new Map());
   const HOME_TERMS = [...homeCounts.entries()].filter(([id, n]) => id != null && n >= 40).map(([id]) => `home:${id}`).sort();
   if (HOME_TERMS.length) E_SETS.push([...E_SETS[4], ...HOME_TERMS]);
+  // Official-scorer terms (StatsAPI gameData.officialScorer) for scorers
+  // with enough plays — the same test, at the level where rulings are made.
+  const scorerCounts = eTrain.reduce((m, r) => hist(m, r.play.scorerId), new Map());
+  const SCORER_TERMS = [...scorerCounts.entries()].filter(([id, n]) => id != null && n >= 40).map(([id]) => `scorer:${id}`).sort();
+  if (SCORER_TERMS.length) E_SETS.push([...E_SETS[4], ...SCORER_TERMS]);
   const H_SETS = [
     [],
     ['logit_hit_prob'],
@@ -624,7 +712,7 @@ async function main() {
   model.training = {
     seasons: SEASONS,
     labelCutoff: LABEL_CUTOFF,
-    note: 'Labels come from the official post-game scoring-change log. In-game changes are not in the log; the live site observes those directly.',
+    note: 'Labels come from MLB\'s official scoring-change log. Changes made during a game may not appear in it; the live capture (data/capture) records them directly.',
   };
   model.sources = [
     { name: 'MLB Official Scoring Changes', url: LOG_PAGE },
@@ -633,12 +721,226 @@ async function main() {
     { name: 'Baseball Savant Statcast search (cross-check)', url: SAVANT_ERRORS_CSV(currentSeason) },
   ];
 
+  // 6. Official-scorer and home-park effects — re-tested on every run over all
+  //    seasons, so the verdict updates itself as seasons accumulate.
+  const hasGroupTerm = (terms) => terms.some((t) => /^(home|scorer):/.test(t));
+  const baseOof = (fit) => {
+    const sets = fit.oofBySet.filter(Boolean).filter((x) => !hasGroupTerm(x.terms));
+    const own = sets.find((x) => x.setIndex === fit.spec.selectedSetIndex);
+    return own || sets.reduce((a, b) => (b.logLoss < a.logLoss ? b : a));
+  };
+  const effectsFor = (question, fit, rows, permutations) => {
+    const base = baseOof(fit);
+    const names = new Map();
+    for (const r of rows) if (r.scorerId != null && r.scorerName) names.set(String(r.scorerId), r.scorerName);
+    const mk = (groupOf) => rows.map((r, i) => ({ g: groupOf(r), y: r.y, p: base.oof[i] }));
+    const scorerRows = mk((r) => (r.scorerId != null ? r.scorerId : null));
+    const homeRows = mk((r) => r.home || (r.play.homeId != null ? String(r.play.homeId) : null));
+    const cvFor = (prefix) => {
+      const ev = (fit.spec.selection || []).filter((e) => e.terms.some((t) => t.startsWith(prefix)));
+      if (!ev.length) return { tested: false, selected: false };
+      const b = ev.reduce((a, c) => (c.logLoss < a.logLoss ? c : a));
+      return {
+        tested: true,
+        groupsInCandidate: b.terms.filter((t) => t.startsWith(prefix)).length,
+        logLoss: b.logLoss, deltaVsBest: b.deltaVsBest, pairedSE: b.pairedSE,
+        selected: fit.spec.terms.some((t) => t.startsWith(prefix)),
+      };
+    };
+    const verdict = (test, cv) => {
+      if (!test || test.pValue == null) return 'not enough data';
+      if (cv && cv.selected) return 'used in scores (selected by cross-validation)';
+      return test.pValue < 0.05
+        ? 'groups differ (p < 0.05) but adding them does not improve out-of-sample predictions — not used'
+        : 'no detectable difference — not used';
+    };
+    const sTest = heterogeneityTest(scorerRows, { permutations });
+    const hTest = heterogeneityTest(homeRows, { permutations });
+    const sCv = cvFor('scorer:'); const hCv = cvFor('home:');
+    return {
+      question,
+      seasons: [...new Set(rows.map((r) => r.season))].sort(),
+      baseModelTerms: base.terms,
+      method: 'permutation test (group labels shuffled across plays) of Σ (observed − expected)² / variance, expected from out-of-fold model probabilities; plus a cross-validated candidate model with one term per group (≥ 40 plays)',
+      scorer: {
+        playsWithScorer: scorerRows.filter((r) => r.g != null).length,
+        test: sTest, cv: sCv, verdict: verdict(sTest, sCv),
+        table: groupTable(scorerRows, (k) => names.get(k) || `Scorer ${k}`).filter((r) => r.n >= 20).slice(0, 80),
+      },
+      homeClub: {
+        test: hTest, cv: hCv, verdict: verdict(hTest, hCv),
+        table: groupTable(homeRows).slice(0, 40),
+      },
+    };
+  };
+  log('testing official-scorer and home-park effects');
+  model.effects = {
+    errorToHit: effectsFor('errorToHit', eFit, eTrain, 2000),
+    hitToError: effectsFor('hitToError', hFit, hTrain, 500),
+  };
+  // The hit → error scorer table is large and very sparse (120 changes in
+  // ~100,000 hits): publish its test only.
+  model.effects.hitToError.scorer.table = [];
+  model.effects.hitToError.homeClub.table = [];
+
+  // 7. Error type — what the data can say today (descriptive; not in scores).
+  const stood = new Map();
+  for (const r of errorRows) {
+    if (!r.labelFinal || r.y !== 0 || r.final !== 'error') continue;
+    const ek = SM.errorKindOfRecord(r.rec);
+    hist(stood, ek ? ek.kind : 'unknown');
+  }
+  const wording = new Map();
+  for (const r of errorRows) {
+    if (r.y !== 1 || !r.chain || !r.labelFinal) continue;
+    hist(wording, originalErrorKindFromLog(r.chain[0].body) || 'no_clause');
+  }
+  const KINDS = ['fielding', 'throwing', 'missed_catch'];
+  const statedTotal = KINDS.reduce((acc, k) => acc + (wording.get(k) || 0), 0);
+  const stoodTotal = KINDS.reduce((acc, k) => acc + (stood.get(k) || 0), 0);
+  model.errorToHit.errorKind = {
+    stoodByKind: histObj(stood),
+    changedToHitLogWording: histObj(wording),
+    impliedRelativeRate: statedTotal && stoodTotal ? Object.fromEntries(KINDS.map((k) => {
+      const a = (wording.get(k) || 0) / statedTotal; const b = (stood.get(k) || 0) / stoodTotal;
+      return [k, { shareOfChangedWithStatedType: round(a, 3), shareOfErrorsThatStood: round(b, 3), ratio: b ? round(a / b, 2) : null, changedStated: wording.get(k) || 0 }];
+    })) : null,
+    note: 'Early evidence only: the original error type of a play changed to a hit is not in StatsAPI any more (verified), and the official log names it for only part of the changes. The ratio compares the share of each type among changes whose log wording states it with the share among errors that stood — it assumes the wording does not depend on the type. Not used in scores; the live capture measures it properly.',
+  };
+
+  // 8. Live-captured rulings (data/capture, written by pipeline/capture.mjs).
+  const captureDir = path.join(OUT_BASE, 'capture');
+  const captured = [];
+  const captureFiles = [];
+  if (fs.existsSync(captureDir)) {
+    for (const f of fs.readdirSync(captureDir).filter((x) => /^rulings-\d{4}-\d{2}\.json$/.test(x)).sort()) {
+      const list = parseMonth(fs.readFileSync(path.join(captureDir, f), 'utf8'));
+      captureFiles.push({ file: `data/capture/${f}`, plays: list.length });
+      captured.push(...list);
+    }
+  }
+  const recIndex = new Map();
+  const recFor = (g, ai) => {
+    if (!recIndex.has(g)) {
+      const m = new Map();
+      for (const rec of playsByGameAll.get(g) || []) m.set(rec.ai, rec);
+      recIndex.set(g, m);
+    }
+    return recIndex.get(g).get(ai) || null;
+  };
+  const isPendingEt = (et) => /^os_ruling_pending/.test(et || '');
+  const lagOf = (e, st) => {
+    const a = Date.parse(st && st.at); const b = Date.parse(e.end);
+    return Number.isFinite(a) && Number.isFinite(b) ? (a - b) / 60000 : null;
+  };
+  const capErrors = []; const capPending = []; const adjustRows = [];
+  const capSummary = {
+    files: captureFiles, plays: captured.length, errorsCaptured: 0, capturedAsOriginal: 0, settled: 0,
+    changedToHit: 0, changedOther: 0, changesSeenLive: 0, unloggedChanges: 0, pendingCaptured: 0, pendingResolved: 0,
+    firstCaptureAt: null, lastCaptureAt: null, lagMinutes: null, originalMaxLagMin: ORIGINAL_MAX_LAG_MIN,
+  };
+  const lags = [];
+  for (const e of captured) {
+    if (!e || !Array.isArray(e.states) || !e.states.length) continue;
+    if (!capSummary.firstCaptureAt || e.states[0].at < capSummary.firstCaptureAt) capSummary.firstCaptureAt = e.states[0].at;
+    for (const st of e.states) if (!capSummary.lastCaptureAt || st.at > capSummary.lastCaptureAt) capSummary.lastCaptureAt = st.at;
+    // The first actual RULING (a play can be captured while its primary
+    // ruling is still pending: then the ruling seen as it was made counts).
+    const firstRuledIdx = e.states.findIndex((st) => st.et && !isPendingEt(st.et));
+    const first = firstRuledIdx >= 0 ? e.states[firstRuledIdx] : e.states[0];
+    const lag = lagOf(e, first);
+    const seenBeingMade = firstRuledIdx > 0;
+    const rec = recFor(e.g, e.ai);
+    const last = e.states[e.states.length - 1];
+    const current = rec ? { et: rec.et, desc: rec.desc, source: 'final play-by-play' } : { et: last.et, desc: last.desc, source: 'last capture' };
+    if (first.et === 'field_error') {
+      capSummary.errorsCaptured += 1;
+      if (lag != null) lags.push(lag);
+      const original = seenBeingMade || (lag != null && lag <= ORIGINAL_MAX_LAG_MIN);
+      if (original) capSummary.capturedAsOriginal += 1;
+      const settled = !!e.date && e.date <= LABEL_CUTOFF && !!rec;
+      const toHit = HIT_EVENTS.has(current.et);
+      const changedOther = !toHit && current.et && current.et !== 'field_error' && !isPendingEt(current.et);
+      const seen = e.states.find((st, i) => i > firstRuledIdx && st.et !== 'field_error' && !isPendingEt(st.et));
+      if (toHit) capSummary.changedToHit += 1;
+      if (changedOther) capSummary.changedOther += 1;
+      if (seen) capSummary.changesSeenLive += 1;
+      const logged = chainsAll.has(e.id);
+      if ((toHit || changedOther) && !logged) capSummary.unloggedChanges += 1;
+      if (settled) capSummary.settled += 1;
+      capErrors.push({
+        id: e.id, g: e.g, ai: e.ai, date: e.date, kind: first.kind, pos: first.pos, firstAt: first.at, lagMin: lag != null ? round(lag, 1) : null,
+        afterPending: seenBeingMade,
+        original, settled, current: current.et, currentSource: current.source, changeSeenAt: seen ? seen.at : null, logged,
+        scoreAtCapture: e.score && e.score.e2h ? e.score.e2h.score : null,
+      });
+      if (original && settled) {
+        const gi = gameInfoAll.get(e.g) || {};
+        const gm = metaAll.get(e.g) || {};
+        const play = { ...SM.playFromRecord({ ...rec, et: 'field_error' }), homeId: gi.homeId ?? e.homeId, scorerId: gm.scorerId ?? null };
+        const oof = eFit.oofById.get(e.id);
+        const p0 = oof != null ? oof : (SM.scoreWith(model.errorToHit, model, play) || {}).probability;
+        if (Number.isFinite(p0)) adjustRows.push({ id: e.id, gamePk: e.g, y: toHit ? 1 : 0, z0: SM.logit(p0), kind: first.kind || null });
+      }
+    }
+    const pi = e.states.findIndex((st) => st.pend);
+    if (pi >= 0) {
+      capSummary.pendingCaptured += 1;
+      const after = e.states.slice(pi + 1).find((st) => !st.pend && st.et && !isPendingEt(st.et));
+      const resolvedEt = after ? after.et : (rec && rec.et && !isPendingEt(rec.et) ? rec.et : null);
+      const row = {
+        id: e.id, g: e.g, ai: e.ai, date: e.date, codes: e.states[pi].pend.codes, marker: e.states[pi].pend.marker || null,
+        pendingAt: e.states[pi].at, rulingWhenPending: e.states[pi].et, resolvedEt, resolvedAt: after ? after.at : null,
+        resolvedSource: after ? 'live capture' : resolvedEt ? 'final play-by-play' : null,
+        predictedAtCapture: e.score && e.score.pending ? e.score.pending.dist : null,
+      };
+      if (resolvedEt) {
+        capSummary.pendingResolved += 1;
+        const bb = rec && rec.hd ? rec.hd : e.hd || {};
+        const d = SM.pendingDistribution(model, { ls: bb.ls, la: bb.la, traj: bb.traj, loc: bb.loc }, e.br === 1 ? true : e.br === 0 ? false : null);
+        if (d) {
+          row.probs = Object.fromEntries(d.distribution.map((x) => [x.outcome, x.probability]));
+          row.outcome = SM.outcomeOf(resolvedEt);
+        }
+      }
+      capPending.push(row);
+    }
+  }
+  lags.sort((a, b) => a - b);
+  capSummary.lagMinutes = lags.length ? { median: round(lags[Math.floor(lags.length / 2)], 1), p90: round(lags[Math.floor(lags.length * 0.9)], 1), n: lags.length } : null;
+  capSummary.byKind = histObj(capErrors.reduce((m, r) => hist(m, r.kind || 'unknown'), new Map()));
+  model.capture = {
+    ...capSummary,
+    source: 'data/capture/rulings-YYYY-MM.json — pipeline/capture.mjs polls MLB StatsAPI playByPlay during live games (GitHub Actions, every 10 minutes during game hours)',
+    whyNeeded: 'StatsAPI rewrites history: timecode snapshots and diffPatch show the current ruling even for moments before a change (verified on 2026 official log #3 and #6), so an original call can only be known if it was recorded before it changed.',
+    recentErrors: capErrors.slice().sort((a, b) => String(b.firstAt).localeCompare(String(a.firstAt))).slice(0, 40),
+    pending: capPending.slice().sort((a, b) => String(b.pendingAt).localeCompare(String(a.pendingAt))).slice(0, 60)
+      .map(({ probs, ...rest }) => rest),
+  };
+  model.errorToHit.adjust = capturedAdjustment(adjustRows);
+  model.pending.calibration = pendingCalibration(capPending.filter((r) => r.probs && r.outcome), model.pending.outcomes);
+  report.capture = {
+    ...capSummary,
+    adjust: { status: model.errorToHit.adjust.status, n: model.errorToHit.adjust.n, positives: model.errorToHit.adjust.positives },
+    pendingCalibration: { status: model.pending.calibration.status, resolved: model.pending.calibration.resolved },
+  };
+  report.effects = Object.fromEntries(Object.entries(model.effects).map(([q, v]) => [q, {
+    seasons: v.seasons,
+    scorer: { test: v.scorer.test, cv: v.scorer.cv, verdict: v.scorer.verdict, playsWithScorer: v.scorer.playsWithScorer },
+    homeClub: { test: v.homeClub.test, cv: v.homeClub.cv, verdict: v.homeClub.verdict },
+  }]));
+  model.sources.push(
+    { name: 'MLB Stats API game feed (official scorer, venue)', url: 'https://statsapi.mlb.com/api/v1.1/game/{gamePk}/feed/live?fields=gameData,officialScorer,id,fullName,venue,name' },
+    { name: 'Live ruling capture (this project, from MLB Stats API playByPlay)', url: 'data/capture/' },
+  );
+  const capById = new Map(captured.map((e) => [e.id, e]));
+
   // 5. outputs — official lists with links + out-of-fold model scores
-  const scoreFor = (fitResult, spec, row) => {
+  const scoreFor = (fitResult, spec, row, extra = null) => {
     if (!row) return null;
     const oof = fitResult.oofById.get(row.id);
     if (oof != null) return { p: round(oof, 4), score: SM.toScore(oof), kind: 'out_of_fold' };
-    const s = SM.scoreWith(spec, model, playOf(row));
+    const s = SM.scoreWith(spec, model, extra ? { ...playOf(row), ...extra } : playOf(row));
     return s ? { p: round(s.probability, 4), score: s.score, kind: 'model' } : null;
   };
   const errById = new Map(errorRows.map((r) => [r.id, r]));
@@ -663,7 +965,15 @@ async function main() {
 
   // Error watch: every current-season play that was scored reached-on-error.
   const watch = errorRows.filter((r) => r.season === currentSeason).map((r) => {
-    const s = scoreFor(eFit, model.errorToHit, r);
+    // Error type: as captured live (the original call) when available; else
+    // from the current ruling — valid only while the play still stands as an
+    // error (a play changed to a hit no longer carries it).
+    const cap = capById.get(r.id) || null;
+    const capRuled = cap && cap.states ? cap.states.find((st) => st.et && !/^os_ruling_pending/.test(st.et)) : null;
+    const capFirst = capRuled && capRuled.et === 'field_error' ? capRuled : null;
+    const curKind = r.rec.et === 'field_error' ? SM.errorKindOfRecord(r.rec) : null;
+    const errKind = capFirst ? capFirst.kind : curKind ? curKind.kind : null;
+    const s = scoreFor(eFit, model.errorToHit, r, { errKind });
     const hp = SM.hitProbability(model, SM.playFromRecord(r.rec));
     const official = (r.chain || []).map((e) => ({ seq: e.seq, transition: e.cls.transition, raw: e.raw }));
     return {
@@ -679,6 +989,15 @@ async function main() {
       // as an error; 'changed_other' = changed to FC / sacrifice / out.
       status: r.y === 1 ? 'changed_to_hit' : (official.length && r.final !== 'error') ? 'changed_other' : 'stands',
       final: r.final, official,
+      errKind, errKindSource: capFirst ? 'captured' : curKind ? 'current_ruling' : null,
+      scorer: r.scorerName || null,
+      captured: capFirst ? {
+        firstAt: capFirst.at,
+        lagMin: (() => { const a = Date.parse(capFirst.at); const b = Date.parse(cap.end); return Number.isFinite(a) && Number.isFinite(b) ? round((a - b) / 60000, 1) : null; })(),
+        firstDescription: capFirst.desc,
+        changes: cap.states.slice(cap.states.indexOf(capFirst) + 1).map((st) => ({ at: st.at, eventType: st.et, event: st.ev })),
+        scoreAtCapture: cap.score && cap.score.e2h ? cap.score.e2h.score : null,
+      } : null,
     };
   }).sort((a, b) => (b.date || '').localeCompare(a.date || '') || b.gamePk - a.gamePk || b.ai - a.ai);
   // Stable filename (the season is inside) so the site needs no yearly edit.
@@ -706,9 +1025,15 @@ async function main() {
     battedBallTrajectories: histObj(disc.trajectories),
     fieldErrorCoverage: disc.fieldErrorCoverage,
     battedBalls: allBatted.length,
+    // "creditKind|descriptionKind" counts on field_error plays: checks that the
+    // fielding-credit codes and the description agree on the error type.
+    errorKindCheck: histObj(disc.errorKindCheck),
   };
   report.model = {
-    errorToHit: { terms: model.errorToHit.terms, n: model.errorToHit.n, positives: model.errorToHit.positives, cv: model.errorToHit.cv, outOfTime: model.errorToHit.outOfTime || null },
+    errorToHit: {
+      terms: model.errorToHit.terms, n: model.errorToHit.n, positives: model.errorToHit.positives, cv: model.errorToHit.cv, outOfTime: model.errorToHit.outOfTime || null,
+      adjust: { status: model.errorToHit.adjust.status, active: model.errorToHit.adjust.active },
+    },
     hitToError: { terms: model.hitToError.terms, n: model.hitToError.n, positives: model.hitToError.positives, cv: model.hitToError.cv, outOfTime: model.hitToError.outOfTime || null },
     surfaceBalls: model.hitProb.surface.nBalls,
   };

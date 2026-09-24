@@ -285,6 +285,19 @@ const MLB = (() => {
   }
 
   /**
+   * Official scorer of one game (scoring model only — used when the published
+   * model contains official-scorer terms): a ~100-byte projection of
+   * feed/live, gameData.officialScorer {id, fullName} (verified 2026-09-24
+   * on games 824943 and 745444).
+   */
+  async function getOfficialScorer(gamePk, options = {}) {
+    const fields = 'fields=gameData,officialScorer,id,fullName';
+    const data = await getJSON(`${V11}/game/${gamePk}/feed/live?${fields}`, { timeout: 4000, ...options });
+    const sc = data && data.gameData && data.gameData.officialScorer;
+    return sc && sc.id != null ? { id: sc.id, fullName: sc.fullName || null } : null;
+  }
+
+  /**
    * Play-by-play only for one game (allPlays + currentPlay + scoringPlays).
    * Much leaner than feed/live (no boxscore/players), and carries the same
    * review data: play-level reviewDetails, event-level details.hasReview and
@@ -481,7 +494,7 @@ const MLB = (() => {
 
   return {
     getSchedule, getReviewStatus, getGameStatus, getLiveFeed, getPlayByPlay,
-    getTeams, getChallengeCounts, getPlayHitData,
+    getTeams, getChallengeCounts, getPlayHitData, getOfficialScorer,
     rateLimitedForMs,
     teamLogoUrl, teamLogoFallbackUrl, headshotUrl,
     ordinal, localTime, localDate, localDateTime,

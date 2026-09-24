@@ -208,3 +208,24 @@ export function extractGamePlays(pbp, gamePk) {
 export function samePlays(a, b) {
   return JSON.stringify(a) === JSON.stringify(b);
 }
+
+export const API11 = 'https://statsapi.mlb.com/api/v1.1';
+// Official scorer + venue of one game: a ~150-byte projection of feed/live
+// (verified 2026-09-24 on games 824943 and 745444: gameData.officialScorer
+// {id, fullName}, gameData.venue {id, name}).
+export const META_FIELDS = 'gameData,officialScorer,id,fullName,venue,name';
+export function gameMetaUrl(gamePk) {
+  return `${API11}/game/${gamePk}/feed/live?fields=${META_FIELDS}`;
+}
+export async function getGameMeta(gamePk) {
+  const d = await fetchJSON(gameMetaUrl(gamePk), { timeoutMs: 30000 });
+  const gd = (d && d.gameData) || {};
+  const sc = gd.officialScorer || null;
+  const v = gd.venue || null;
+  return {
+    scorerId: sc && sc.id != null ? sc.id : null,
+    scorerName: (sc && sc.fullName) || null,
+    venueId: v && v.id != null ? v.id : null,
+    venueName: (v && v.name) || null,
+  };
+}

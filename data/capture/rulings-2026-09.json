@@ -1,0 +1,10 @@
+{
+ "schema": 1,
+ "month": "2026-09",
+ "source": "MLB StatsAPI /api/v1/game/{gamePk}/playByPlay polled during live games by pipeline/capture.mjs",
+ "updatedAt": "2026-09-24T20:06:23.884Z",
+ "count": 1,
+ "plays": [
+{"id":"824623:9","g":824623,"ai":9,"date":"2026-09-24","gt":"R","season":2026,"awayId":146,"homeId":112,"away":"MIA","home":"CHC","inn":2,"top":true,"b":665923,"bn":"Esteury Ruiz","end":"2026-09-24T18:42:45.109Z","hd":{"ls":56.6,"la":-18,"traj":"ground_ball","loc":"5"},"br":1,"why":["error"],"states":[{"at":"2026-09-24T20:00:22.458Z","et":"field_error","ev":"Field Error","desc":"Esteury Ruiz reaches on a fielding error by third baseman Pedro Ramírez. Javier Sanoja to 2nd.","kind":"fielding","pos":"3B","pend":null,"gs":"Live"}],"score":{"e2h":{"p":0.0527,"score":5,"modelAt":"2026-09-24T19:33:03.185Z"}}}
+ ]
+}

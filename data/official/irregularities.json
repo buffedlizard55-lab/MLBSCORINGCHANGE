@@ -1,22 +1,7 @@
 {
- "generatedAt": "2026-09-24T19:33:03.185Z",
- "count": 56,
+ "generatedAt": "2026-09-24T20:15:36.810Z",
+ "count": 55,
  "items": [
-  {
-   "season": 2024,
-   "seq": 3,
-   "section": "2024 Regular Season",
-   "raw": "3) 3/28 CLE@OAK - In the top of the 4th inning, after Austin Hedges' single, the missed catch error charged to Ryan Noda has been changed to a throwing error charged to Nick Allen.",
-   "parseIssues": [],
-   "linkFlags": [
-    "current_ruling_mismatch"
-   ],
-   "sourceUrl": "https://web.archive.org/web/20250121083545/https://www.mlb.com/official-information/scoring-changes",
-   "classification": "error->error",
-   "gamePk": 745687,
-   "atBatIndex": 27,
-   "currentEventType": "single"
-  },
   {
    "season": 2024,
    "seq": 5,
@@ -443,6 +428,23 @@
   },
   {
    "season": 2025,
+   "seq": 128,
+   "section": "2025 Regular Season",
+   "raw": "128) 7/22 CIN@WAS -- In the bottom of the 6th inning, on the Riley Adams single, Brady House now scores on a fielding error by catcher Tyler Stephenson, instead of a throwing error by right fielder Jake Fraley.",
+   "parseIssues": [],
+   "linkFlags": [
+    "team_code_via:teamCode:WAS",
+    "subject_not_first_mention",
+    "current_ruling_compatible:force_out"
+   ],
+   "sourceUrl": "https://web.archive.org/web/20260210034254/https://www.mlb.com/official-information/scoring-changes",
+   "classification": "error->error",
+   "gamePk": 777042,
+   "atBatIndex": 46,
+   "currentEventType": "force_out"
+  },
+  {
+   "season": 2025,
    "seq": 136,
    "section": "2025 Regular Season",
    "raw": "136) CHC@CWS -- In the top of the 8th inning, on the rundown during Matt SHaw's at-bat, assists have been added for Edgar Quero, Miguel Vargas, Lenyn Sosa, and Mike Vasil. Additionally, the run has been changed to unearned against Vasil.",
@@ -847,22 +849,6 @@
    "classification": "error->error",
    "gamePk": 824875,
    "atBatIndex": 46,
-   "currentEventType": "single"
-  },
-  {
-   "season": 2026,
-   "seq": 242,
-   "section": "2026 Regular Season",
-   "raw": "242. 9/2 NYM@TB -- In the top of the 1st inning, the missed catch error by catcher Liam Hicks has been changed to a throwing error by Victor Mesa Jr. This now gives Young 1 RBI on the play and makes all runs in the inning now earned to Griffin Jax.",
-   "parseIssues": [],
-   "linkFlags": [
-    "name_match:last_name",
-    "current_ruling_mismatch"
-   ],
-   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
-   "classification": "error->error",
-   "gamePk": 822931,
-   "atBatIndex": 4,
    "currentEventType": "single"
   },
   {

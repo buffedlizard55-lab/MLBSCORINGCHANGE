@@ -325,4 +325,22 @@ test('classifier on real entries: possessive changes, "originally", other PA res
   assert.equal(c202.final, 'hit', '"removing the error" does not make the new ruling hit+error');
 });
 
+test('runner / RBI changes on a hit are not error → hit (real 2024–2025 wording)', () => {
+  // 2025 #55: the batter doubled either way; only the error on his advance was removed.
+  const a = classifyEntry('In the bottom of the 6th inning, Austin Hays doubled and advanced to third base on the throw home, instead of doubling and advancing to third base on a throwing error by Jose Ramirez.');
+  assert.equal(a.transition, 'hit+error->hit');
+  assert.equal(transitionFlags(a).errorToHit, false);
+  // 2025 #128: a runner's error reassigned; "on the Riley Adams single" is context.
+  const b = classifyEntry('In the bottom of the 6th inning, on the Riley Adams single, Brady House now scores on a fielding error by catcher Tyler Stephenson, instead of a throwing error by right fielder Jake Fraley.');
+  assert.equal(b.transition, 'error->error');
+  assert.equal(transitionFlags(b).errorToHit, false);
+  // 2024 #49: RBI credit on the same single.
+  const c = classifyEntry('In the bottom of the 6th inning, Jonah Heim now has a two-run single and advances to third on error by right fielder Mitch Haniger, instead of one run batted in and one run scoring on the error.');
+  assert.notEqual(c.kind, 'ruling_change');
+  // Counter-examples that must keep their ruling change (2025 #101, #117, #191 — verbatim).
+  assert.equal(classifyEntry('In the bottom of the 8th inning, Jose Trevino reaches on a throwing error by shortstop Anthony Volpe, instead of an RBI single. As a result, the run is unearned to Mark Leiter.').transition, 'hit->error');
+  assert.equal(classifyEntry('In the bottom of the 9th inning, Noelvi Marte now reaches on a fielders choice and gets credit for a run batted in that scored Will Benson, instead of the run scoring on an error by second baseman Orlando Arcia and Marte not getting a run batted in. As a result, the run scored by Benson is now an earned run for pitcher Victor Vodnik, instead of unearned.').transition, 'error->fc');
+  assert.equal(classifyEntry('In the top of the 8th inning, Royce Lewis now reaches base on a single, instead of on an error by third baseman Yoan Moncada., As a result, Lewis is now credited with a run batted in, and the run that scored is now earned for pitcher Sammy Peralta, instead of unearned.').transition, 'error->hit');
+});
+
 console.log(`pipeline-log-test: ${passed} passed`);

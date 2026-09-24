@@ -10,11 +10,15 @@ import {
 import { extractGamePlays, PBP_FIELDS, isCompleted } from '../pipeline/lib/statsapi.mjs';
 import {
   normalizeName, findNameInText, rulingAgrees, rulingAgreement, buildTeamIndex, candidateGames, linkEntry, levenshtein,
+  isVerifiedRunnerErrorChange,
 } from '../pipeline/lib/link.mjs';
 import {
   buildHitProbSurface, buildHitProbFallback, buildPendingTable, selectAndFit,
 } from '../pipeline/lib/model-build.mjs';
 import { parseCSV } from '../pipeline/lib/csv.mjs';
+import { fitLogisticOffset, capturedAdjustment, pendingCalibration } from '../pipeline/lib/adjust.mjs';
+import { heterogeneityTest, groupTable } from '../pipeline/lib/effects.mjs';
+import { originalErrorKindFromLog } from '../pipeline/lib/log-classifier.mjs';
 
 const require = createRequire(import.meta.url);
 const SM = require('../assets/js/scoring-model.js');
@@ -416,6 +420,150 @@ test('linkEntry: date-fallback game without the batter → mistyped-code correct
   assert.equal(link.gamePk, 22);
   assert.equal(link.atBatIndex, 55);
   assert.deepEqual(link.flags, ['team_code_corrected:LAA->LAD']);
+});
+
+/* ---------------- live-capture models, scorer effects, error type (v2) */
+
+test('offset logistic fit recovers a known shift and error-type effect', () => {
+  const r = rng(11);
+  const X = []; const y = []; const off = [];
+  for (let i = 0; i < 20000; i += 1) {
+    const thr = r() < 0.4 ? 1 : 0;
+    const o = -2.5 + (r() - 0.5);
+    X.push([thr]); off.push(o);
+    y.push(r() < sigmoid(o + 0.5 - 1.0 * thr) ? 1 : 0);
+  }
+  const fit = fitLogisticOffset(X, y, off, { lambda: 0.01 });
+  assert.ok(Math.abs(fit.intercept - 0.5) < 0.12, `shift ${fit.intercept}`);
+  assert.ok(Math.abs(fit.coef[0] + 1.0) < 0.15, `throwing ${fit.coef[0]}`);
+  const shrunk = fitLogisticOffset(X, y, off, { lambda: 1e6 });
+  assert.ok(Math.abs(shrunk.intercept) < 0.01 && Math.abs(shrunk.coef[0]) < 0.01, 'huge penalty → no adjustment');
+});
+
+function capturedRows(n, { throwEffect = 0, shift = 0, seed = 5 } = {}) {
+  const r = rng(seed);
+  const rows = [];
+  for (let i = 0; i < n; i += 1) {
+    const kind = r() < 0.55 ? 'fielding' : r() < 0.85 ? 'throwing' : 'missed_catch';
+    const z0 = -2.6 + 1.2 * (r() - 0.5);
+    const y = r() < sigmoid(z0 + shift + (kind === 'throwing' ? throwEffect : 0)) ? 1 : 0;
+    rows.push({ id: `g${i}`, gamePk: 700000 + i, y, z0, kind });
+  }
+  return rows;
+}
+
+test('captured adjustment stays off below its data gate', () => {
+  const a = capturedAdjustment(capturedRows(40));
+  assert.equal(a.status, 'collecting');
+  assert.equal(a.active, false);
+  assert.ok(a.byKind.length > 0 && a.byKind.every((k) => k.n > 0));
+  const b = capturedAdjustment([]);
+  assert.equal(b.status, 'collecting');
+  assert.equal(b.n, 0);
+});
+
+test('captured adjustment finds a real error-type effect and ignores a null one', () => {
+  const strong = capturedAdjustment(capturedRows(6000, { throwEffect: -1.6, seed: 7 }));
+  assert.equal(strong.status, 'active', JSON.stringify(strong.cv));
+  assert.ok(strong.terms.includes('kind:throwing'));
+  assert.ok(strong.coef[strong.terms.indexOf('kind:throwing')] < -0.5);
+  const nullFx = capturedAdjustment(capturedRows(3000, { seed: 9 }));
+  assert.ok(nullFx.status === 'not_selected' || (nullFx.status === 'active' && nullFx.terms.length === 0),
+    `no effect → no error-type terms (${nullFx.status} ${nullFx.terms})`);
+  // Browser application: active adjustment moves the score the right way.
+  const spec = { terms: [], coef: [], intercept: -2.6, adjust: strong };
+  const thr = SM.scoreWith(spec, {}, { errKind: 'throwing' });
+  const fld = SM.scoreWith(spec, {}, { errKind: 'fielding' });
+  const unk = SM.scoreWith(spec, {}, { errKind: null });
+  assert.ok(thr.probability < unk.probability && unk.probability < fld.probability, 'unknown type = average effect');
+  assert.ok(thr.adjustment && thr.adjustment.terms.includes('kind:throwing'));
+});
+
+test('pending calibration: collecting → leave-one-out-validated weights', () => {
+  const outcomes = ['hit', 'error', 'fc', 'out', 'sac', 'other'];
+  const probs = { hit: 0.4, error: 0.1, fc: 0.1, out: 0.4, sac: 0, other: 0 };
+  const few = pendingCalibration([{ probs, outcome: 'error' }], outcomes);
+  assert.equal(few.status, 'collecting');
+  assert.equal(few.active, false);
+  // Pending rulings are really hit-vs-error decisions: errors far more often
+  // than comparable balls suggest → weight on "error" rises, LOO improves.
+  const rows = [];
+  for (let i = 0; i < 60; i += 1) rows.push({ probs, outcome: i % 2 ? 'error' : 'hit' });
+  const cal = pendingCalibration(rows, outcomes);
+  assert.equal(cal.status, 'active');
+  assert.ok(cal.weights.error > 2 && cal.weights.out < 0.5, JSON.stringify(cal.weights));
+  assert.ok(cal.metrics.calibratedLeaveOneOut.logLoss < cal.metrics.raw.logLoss);
+  const t = { outcomes, calibration: cal };
+  const c = SM.calibratePending(t, outcomes.map((o) => probs[o]));
+  assert.equal(c.calibrated, true);
+  assert.ok(Math.abs(c.p.reduce((a, b) => a + b, 0) - 1) < 1e-9);
+  assert.ok(c.p[1] > 0.1, 'error share raised');
+  // Calibration that does not help is not used.
+  const fine = pendingCalibration(Array.from({ length: 50 }, (_, i) => ({ probs, outcome: ['hit', 'out', 'hit', 'out', 'error', 'fc', 'hit', 'out', 'hit', 'out'][i % 10] })), outcomes);
+  assert.equal(fine.active, false, 'already calibrated → not_better');
+});
+
+test('scorer heterogeneity test: reproducible, calm under the null, sensitive to a real effect', () => {
+  const make = (effect, seed) => {
+    const r = rng(seed);
+    const rows = [];
+    for (let i = 0; i < 4000; i += 1) {
+      const g = `s${Math.floor(r() * 40)}`;
+      const p = 0.06;
+      const bump = effect && Number(g.slice(1)) < 8 ? effect : 0;
+      rows.push({ g, p, y: r() < Math.min(0.9, p * (1 + bump)) ? 1 : 0 });
+    }
+    return rows;
+  };
+  const nul = heterogeneityTest(make(0, 3), { permutations: 400 });
+  const again = heterogeneityTest(make(0, 3), { permutations: 400 });
+  assert.deepEqual(nul, again, 'same data + seed → same p-value');
+  assert.ok(nul.pValue > 0.01, `null p ${nul.pValue}`);
+  const fx = heterogeneityTest(make(2.5, 3), { permutations: 400 });
+  assert.ok(fx.pValue < 0.01, `effect p ${fx.pValue}`);
+  assert.ok(fx.dispersion > nul.dispersion);
+  const tbl = groupTable(make(2.5, 3), (k) => `Scorer ${k}`);
+  assert.ok(tbl[0].n >= tbl[tbl.length - 1].n);
+  assert.ok(tbl.every((t) => t.shrunkRatio > 0));
+  assert.equal(heterogeneityTest([{ g: 'a', y: 1, p: 0.1 }]).pValue, null, 'one group → no test');
+});
+
+test('scorer / error-type terms use training means when the input is unknown', () => {
+  const spec = { terms: ['scorer:42'], coef: [2], intercept: -3, termMeans: { 'scorer:42': 0.25 } };
+  const known = SM.scoreWith(spec, {}, { scorerId: 42 });
+  const other = SM.scoreWith(spec, {}, { scorerId: 7 });
+  const unknown = SM.scoreWith(spec, {}, { scorerId: null });
+  assert.deepEqual([known.values[0], other.values[0], unknown.values[0]], [1, 0, 0.25]);
+  assert.ok(other.probability < unknown.probability && unknown.probability < known.probability);
+});
+
+test('original error type from the official log wording (clause after "instead of" / "originally")', () => {
+  // Real wording from MLB's official scoring-change log (2024 #48, 2024 #40, 2025 #189, 2026 #3).
+  assert.equal(originalErrorKindFromLog('In the top of the 4th inning, Harrison Bader reaches on an infield single to third base Matt Chapman and advances to second on a throwing error by Chapman. It was originally a two-base throwing error.'), 'throwing');
+  assert.equal(originalErrorKindFromLog('In the top of the 1st inning, Jurickson Profar singles on a bunt ground ball to pitcher Wade Miley, instead of reaching on a dropped throw error by first baseman Jake Bauers. As a result, the run scored by Profar is now earned to Miley.'), 'missed_catch');
+  assert.equal(originalErrorKindFromLog('In the top of the 8th inning, Matt Shaw singled to center fielder Michael Harris II and advanced to second on a throwing error by Harris II, instead of a fielding error by third baseman Nacho Alvarez Jr.'), 'fielding');
+  assert.equal(originalErrorKindFromLog('In the bottom of the 4th, Ozzie Albies now has a single instead of a reaching on an error charged to Max Muncy.'), 'unspecified');
+  assert.equal(originalErrorKindFromLog('In the top of the 5th, the run is now unearned.'), null);
+});
+
+test('live StatsAPI play → error type flows into the model play', () => {
+  const p = SM.playFromStatsApi({
+    result: { eventType: 'field_error', description: 'X reaches on a fielding error by shortstop Y.' },
+    about: { atBatIndex: 3, isTopInning: true },
+    matchup: { batter: { id: 1 } },
+    runners: [{ details: { runner: { id: 1 } }, credits: [{ credit: 'f_throwing_error', position: { abbreviation: 'SS' } }] }],
+  });
+  assert.equal(p.errKind, 'throwing', 'credits win over the description');
+  assert.equal(SM.playFromStatsApi({ result: { eventType: 'single' } }).errKind, null);
+});
+
+test('runner-level error → error changes are recognised only with a runner error on the play', () => {
+  const entry = { cls: { transition: 'error->error' } };
+  assert.equal(isVerifiedRunnerErrorChange(entry, { et: 'single', cr: ['f_fielded_ball|RF|1|B', 'f_throwing_error|C|2|R'] }), true);
+  assert.equal(isVerifiedRunnerErrorChange(entry, { et: 'double', cr: [], re: 1 }), true);
+  assert.equal(isVerifiedRunnerErrorChange(entry, { et: 'single', cr: ['f_fielded_ball|RF|1|B'] }), false, 'no runner error → stays a mismatch');
+  assert.equal(isVerifiedRunnerErrorChange(entry, { et: 'field_error', cr: ['f_throwing_error|C|2|R'] }), false, 'plate-appearance error: not this case');
+  assert.equal(isVerifiedRunnerErrorChange({ cls: { transition: 'error->hit' } }, { et: 'single', re: 1 }), false);
 });
 
 console.log(`pipeline-model-test: ${passed} passed`);

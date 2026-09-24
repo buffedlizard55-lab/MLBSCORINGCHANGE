@@ -31,7 +31,7 @@
     errors: [],
     season: null,
     current: null,
-    watchFilter: { q: '', status: 'all', sort: 'newest', shown: PAGE_SIZE },
+    watchFilter: { q: '', status: 'all', kind: 'all', sort: 'newest', shown: PAGE_SIZE },
     officialFilter: { q: '', type: 'all', shown: PAGE_SIZE },
   };
 
@@ -99,6 +99,7 @@
     current_ruling_mismatch: 'The linked play\u2019s current StatsAPI ruling does not match the new ruling in the official log (StatsAPI not updated, or a different play).',
     current_ruling_compatible: 'StatsAPI codes this ruling differently but compatibly (e.g. a sacrifice fielder\u2019s choice is coded sac_bunt).',
     superseded_by: 'A later official entry changed this same play again; the later entry is the final ruling.',
+    runner_error_change: 'The change concerns an error on a RUNNER (checked: the play carries a runner error in StatsAPI); the batter\u2019s own ruling is unchanged, so it is not a mismatch.',
     batter_not_found: 'No batter named in the entry batted in that half-inning of the game.',
     no_game_found: 'No game with these teams on (or near) this date exists in the official schedule.',
     unknown_team: 'A team code in the entry is not a valid MLB code.',
@@ -225,6 +226,11 @@
     const sv = r && r.savant;
     wrap.appendChild(card('Cross-check', sv && sv.matched != null ? `${num(sv.matched)} / ${num(sv.rows)}` : '—',
       sv && sv.matched != null ? 'errors matched on Baseball Savant' : null));
+    const cap = state.model && state.model.capture;
+    if (cap) {
+      wrap.appendChild(card('Live capture', num(cap.plays),
+        cap.plays ? `rulings recorded as first called · last ${ago(cap.lastCaptureAt)}` : 'starts with the next live game'));
+    }
   }
 
   function renderTabs() {
@@ -294,6 +300,8 @@
       search(f.q, 'Search player, team or play…', (v) => { f.q = v; rerender(); }),
       select([['all', 'All statuses'], ['stands', 'Stands as error'], ['changed_to_hit', 'Changed to a hit'], ['changed_other', 'Changed (other)']],
         f.status, (v) => { f.status = v; rerender(); }, 'Status'),
+      select([['all', 'All error types'], ['fielding', 'Fielding errors'], ['throwing', 'Throwing errors'], ['missed_catch', 'Missed-catch errors'], ['unknown', 'Type unknown (changed plays)']],
+        f.kind, (v) => { f.kind = v; rerender(); }, 'Error type'),
       select([['newest', 'Newest first'], ['score', 'Highest chance first']], f.sort, (v) => { f.sort = v; rerender(); }, 'Sort'),
     ]));
     if (!all.length) {
@@ -302,6 +310,7 @@
     }
     const q = f.q.trim().toLowerCase();
     let rows = all.filter((p) => (f.status === 'all' || p.status === f.status) &&
+      (f.kind === 'all' || (f.kind === 'unknown' ? !p.errKind : p.errKind === f.kind)) &&
       (!q || [p.batter, p.away, p.home, p.description, p.event].some((s) => String(s || '').toLowerCase().includes(q))));
     if (f.sort === 'score') rows = rows.slice().sort((a, b) => (b.p || 0) - (a.p || 0));
     wrap.appendChild(el('div', 'sc-count', `Showing ${Math.min(rows.length, f.shown).toLocaleString()} of ${rows.length.toLocaleString()} plays`));
@@ -328,12 +337,30 @@
     head.appendChild(el('a', 'sc-matchup', `${p.away || '?'} @ ${p.home || '?'}`, { href: `game.html?gamePk=${p.gamePk}` }));
     head.appendChild(el('span', 'sc-inning', `${p.half === 'top' ? 'Top' : 'Bot'} ${p.inning}`));
     if (p.batter) head.appendChild(el('span', 'sc-player', p.batter));
+    if (p.errKind) {
+      const label = (SM && SM.ERROR_KIND_LABELS && SM.ERROR_KIND_LABELS[p.errKind]) || p.errKind;
+      head.appendChild(el('span', 'sc-kind', label, {
+        title: p.errKindSource === 'captured'
+          ? 'Error type of the original call, recorded live before any change'
+          : 'Error type of the current ruling (StatsAPI fielding credits)',
+      }));
+    }
     const statusText = p.status === 'changed_to_hit' ? `✏️ Changed to ${p.event || 'a hit'}`
       : p.status === 'changed_other' ? `✏️ Changed: ${p.event || p.final}` : 'Stands as error';
     head.appendChild(el('span', `review-outcome-pill ${p.status === 'stands' ? 'outcome-stands' : 'outcome-changed'}`, statusText));
     if (!p.labelFinal && p.status === 'stands') head.appendChild(el('span', 'sc-recent', 'recent — may still change'));
     body.appendChild(head);
     body.appendChild(el('div', 'sc-desc', p.description || ''));
+    if (p.captured) {
+      const c = p.captured;
+      const parts = [`📡 Captured live ${localDateTime(c.firstAt)}${typeof c.lagMin === 'number' ? ` (${Math.max(0, Math.round(c.lagMin))} min after the play)` : ''}`];
+      if (typeof c.scoreAtCapture === 'number') parts.push(`model said ${c.scoreAtCapture}/100 then`);
+      (c.changes || []).forEach((ch) => parts.push(`→ ${ch.event || ch.eventType} at ${localDateTime(ch.at)} (seen live)`));
+      body.appendChild(el('div', 'sc-captured', parts.join(' · ')));
+      if (c.firstDescription && c.firstDescription !== p.description) {
+        body.appendChild(el('div', 'sc-captured sc-captured-first', `First call: ${c.firstDescription}`));
+      }
+    }
     (p.official || []).forEach((o) => {
       body.appendChild(el('div', 'sc-official-text', `Official log #${o.seq}: ${o.raw.replace(/^\d+[.)]\s*/, '')}`));
     });
@@ -466,7 +493,10 @@
     const tb = el('tbody');
     rows.forEach((r) => {
       const row = el('tr');
-      r.forEach((c) => row.appendChild(el('td', null, c == null ? '—' : String(c))));
+      r.forEach((c) => {
+        if (c && typeof c === 'object') { const td = el('td'); td.appendChild(c); row.appendChild(td); return; }
+        row.appendChild(el('td', null, c == null ? '—' : String(c)));
+      });
       tb.appendChild(row);
     });
     t.appendChild(tb);
@@ -515,6 +545,11 @@
     s2.appendChild(table(['Trajectory', 'Errors', 'Changed to hit', 'Rate'], rateRows(e.rates.byTrajectory.filter((r) => r.n >= 10))));
     wrap.appendChild(s2);
 
+    renderCaptureSection(wrap, m);
+    renderErrorTypeSection(wrap, m);
+    renderPendingSection(wrap, m);
+    renderEffectsSection(wrap, m);
+
     const s3 = section('How it works',
       `Hit probability comes from ${num(m.hitProb.surface.nBalls)} batted balls (exit velocity × launch angle cells, smoothed); ` +
       `it correlates ${state.report && state.report.savant && state.report.savant.hitProbVsSavantXba ? state.report.savant.hitProbVsSavantXba.pearson : '—'} ` +
@@ -529,9 +564,10 @@
     const ul = el('ul', 'sc-ul');
     [
       'Discrimination for error → hit is modest (AUC ≈ 0.6): most errors, even on hard-hit balls, are never changed. Treat scores as a watch-list ranking, not a verdict.',
-      'Labels come from MLB\u2019s post-game log. Changes made during a game are not in the log; the live feed observes those directly.',
-      'The initial error type (fielding vs throwing) is not used: after a change to a hit it is no longer in the data, so using it would leak the answer.',
-      '"Official Scorer Ruling Pending" markers are not kept in final play-by-play (0 of ~550,000 plate appearances in 2024–2026), so pending-ruling chances are based on comparable batted balls, not on past pending rulings.',
+      'Labels come from MLB\u2019s official log. Changes made during a game may not appear in it; the live capture sees them directly (see Live capture).',
+      'The original error type (fielding / throwing / missed catch) of past plays changed to a hit is not in MLB\u2019s data any more, and StatsAPI\u2019s snapshots are rewritten after a change. The live capture records it from September 2026 on; it enters the scores only once enough captured errors have settled and cross-validation shows it helps.',
+      '"Official Scorer Ruling Pending" markers are not kept in final play-by-play (0 of ~550,000 plate appearances in 2024–2026), so pending-ruling chances start from comparable batted balls; captured pending rulings recalibrate them once enough are resolved.',
+      'The live capture polls every 2 minutes for about 6 of every 10 minutes during game hours, and GitHub can delay scheduled runs: very short-lived pending markers can be missed, so captured pending rulings lean toward longer decisions.',
       'StatsAPI does not always reflect a logged change (flagged under Irregularities); such plays are kept out of the training labels.',
       'Hit probability uses exit velocity and launch angle only (no sprint speed or fielder positioning), so it approximates rather than reproduces Savant\u2019s xBA.',
     ].forEach((t) => ul.appendChild(el('li', null, t)));
@@ -552,6 +588,165 @@
     });
     s5.appendChild(ul2);
     wrap.appendChild(s5);
+  }
+
+  /* ------------------------------------ live capture & model upgrades */
+  const STATUS_TEXT = {
+    collecting: 'Collecting data — not used in scores yet',
+    not_selected: 'Tested — no out-of-sample improvement, not used',
+    not_better: 'Tested — no leave-one-out improvement, not used',
+    active: 'Active — used in scores',
+  };
+  function statusPill(status) {
+    return el('span', `sc-status-pill sc-status-${status || 'collecting'}`, STATUS_TEXT[status] || status || '—');
+  }
+  function gameLink(pk, text) {
+    return el('a', null, text || `Game ${pk}`, { href: `game.html?gamePk=${pk}` });
+  }
+  /** "Game page · Gameday" links for one play (official source + this site). */
+  function playLinks(pk, ai) {
+    const w = el('span', 'sc-cell-links');
+    w.appendChild(gameLink(pk, `${pk} · PA ${ai}`));
+    w.appendChild(el('span', null, ' · '));
+    w.appendChild(ext('Gameday', gamedayUrl(pk)));
+    return w;
+  }
+
+  function renderCaptureSection(wrap, m) {
+    const c = m.capture;
+    const s = section('Live capture — rulings as first called',
+      'MLB Stats API rewrites its history: after a scoring change, even its time-stamped snapshots show the new ruling for moments before the change ' +
+      '(checked on official log 2026 #3 and #6 — links below). So the original call of a play, and its error type, exist only if someone recorded them ' +
+      'before they changed. Every 10 minutes during game hours a GitHub Actions job polls live games and records each "reached on error" call and each ' +
+      '"Official Scorer Ruling Pending" marker as first seen, plus every later change.');
+    if (!c) { s.appendChild(el('div', 'empty', 'Live capture data is not published yet.')); wrap.appendChild(s); return; }
+    s.appendChild(table(['What', 'Count'], [
+      ['Plays recorded', num(c.plays)],
+      ['Errors captured', num(c.errorsCaptured)],
+      [`…first seen within ${c.originalMaxLagMin} min of the play (count as the original call)`, num(c.capturedAsOriginal)],
+      ['…settled (game ≥ 14 days old) — usable for training', num(c.settled)],
+      ['…changed to a hit / changed to something else', `${num(c.changedToHit)} / ${num(c.changedOther)}`],
+      ['…changes seen live by the capture', num(c.changesSeenLive)],
+      ['…changes not (yet) in MLB\u2019s official log', num(c.unloggedChanges)],
+      ['Pending rulings captured / resolved', `${num(c.pendingCaptured)} / ${num(c.pendingResolved)}`],
+      ['First / latest capture', c.firstCaptureAt ? `${localDateTime(c.firstCaptureAt)} / ${localDateTime(c.lastCaptureAt)}` : '—'],
+      ['Median minutes from play to capture (90th pct)', c.lagMinutes ? `${c.lagMinutes.median} (${c.lagMinutes.p90})` : '—'],
+    ]));
+    const links = el('div', 'sc-links');
+    links.appendChild(ext('Check: game 824943 at-bat 36, 84 s after the play', 'https://statsapi.mlb.com/api/v1.1/game/824943/feed/live?timecode=20260331_003000&fields=liveData,plays,allPlays,result,eventType,description,atBatIndex'));
+    links.appendChild(ext('Check: same moment via diffPatch', 'https://statsapi.mlb.com/api/v1.1/game/824943/feed/live/diffPatch?startTimecode=20260331_002822&endTimecode=20260331_002835'));
+    links.appendChild(ext('Official log (2026 #3: "instead of … an error")', OFFICIAL_PAGE));
+    s.appendChild(links);
+    if ((c.recentErrors || []).length) {
+      s.appendChild(el('p', 'sc-help', 'Most recent captured errors (score = what the model said when the play was captured):'));
+      s.appendChild(table(['Captured', 'Game', 'Error type', 'Score then', 'Now'], c.recentErrors.slice(0, 15).map((r) => [
+        localDateTime(r.firstAt), playLinks(r.g, r.ai), (SM && SM.ERROR_KIND_LABELS[r.kind]) || r.kind || '—',
+        r.scoreAtCapture != null ? `${r.scoreAtCapture}/100` : '—', r.current || '—',
+      ])));
+    }
+    wrap.appendChild(s);
+  }
+
+  function renderErrorTypeSection(wrap, m) {
+    const e = m.errorToHit;
+    const a = e.adjust || {};
+    const k = e.errorKind || {};
+    const s = section('Error type (fielding / throwing / missed catch)',
+      'The error type of a play changed to a hit disappears from MLB\u2019s data, so it cannot be learned from past seasons without leaking the answer. ' +
+      'The live capture records it before any change; once enough captured errors have settled, the pipeline tests an adjustment ' +
+      '(a shift plus error-type terms on top of the main model) with cross-validation and uses it only if it predicts better.');
+    const p = el('p', 'sc-help');
+    p.appendChild(el('strong', null, 'Status: '));
+    p.appendChild(statusPill(a.status));
+    const g = a.gates || {};
+    p.appendChild(el('span', null, ` — ${num(a.n || 0)} settled captured errors, ${num(a.positives || 0)} changed to a hit. ` +
+      `Needs ≥ ${g.minChangedShift || 8} changes to test a shift and ≥ ${g.minChangedKind || 15} changes (≥ ${g.minPlaysKind || 150} errors) to test error-type terms.`));
+    s.appendChild(p);
+    if (a.active) {
+      s.appendChild(table(['Adjustment term', 'Coefficient'], [['shift', a.intercept], ...a.terms.map((t, i) => [t, a.coef[i]])]));
+    }
+    if ((a.byKind || []).length) {
+      s.appendChild(table(['Captured error type', 'Errors', 'Changed to hit', 'Rate', 'Expected (main model)'],
+        a.byKind.map((r) => [(SM && SM.ERROR_KIND_LABELS[r.kind]) || r.kind, num(r.n), num(r.changed), pct(r.rate), r.expected])));
+    }
+    const rr = k.impliedRelativeRate;
+    if (rr) {
+      s.appendChild(el('p', 'sc-help', 'Early evidence from past seasons (descriptive only — not used in scores): the official log states the original error type for only some ' +
+        'changes, in its own wording. Share of each type among those changes vs among errors that stood; a ratio above 1 means that type was changed to a hit more often.'));
+      s.appendChild(table(['Error type', 'Changes stating it', 'Share of those changes', 'Share of errors that stood', 'Ratio'],
+        Object.entries(rr).map(([kind, v]) => [(SM && SM.ERROR_KIND_LABELS[kind]) || kind, num(v.changedStated), pct(v.shareOfChangedWithStatedType), pct(v.shareOfErrorsThatStood), v.ratio])));
+      const w = k.changedToHitLogWording || {};
+      s.appendChild(el('p', 'sc-help', `Log wording of the changes: ${Object.entries(w).map(([kk, v]) => `${kk.replace(/_/g, ' ')} ${v}`).join(' · ')}. ${k.note || ''}`));
+    }
+    wrap.appendChild(s);
+  }
+
+  function renderPendingSection(wrap, m) {
+    const c = (m.pending && m.pending.calibration) || {};
+    const cap = m.capture || {};
+    const s = section('Pending rulings — calibration',
+      'Pending-ruling chances start from how comparable batted balls were scored. A pending ruling is a harder call than an average ball, so the captured ' +
+      'pending rulings and their resolutions re-weight each outcome, w = (observed + 5) / (expected + 5). The weights are used only with ≥ ' +
+      `${c.minResolved || 10} resolved rulings and a better leave-one-out log loss.`);
+    const p = el('p', 'sc-help');
+    p.appendChild(el('strong', null, 'Status: '));
+    p.appendChild(statusPill(c.status));
+    p.appendChild(el('span', null, ` — ${num(c.resolved || 0)} resolved pending rulings captured.`));
+    s.appendChild(p);
+    if (c.resolved) {
+      const outs = Object.keys(c.observed || {});
+      s.appendChild(table(['Outcome', 'Observed', 'Expected', 'Weight'], outs.map((o) => [
+        (SM && SM.OUTCOME_LABELS[o]) || o, num(c.observed[o]), c.expected[o], c.weights[o]])));
+      const mt = c.metrics || {};
+      if (mt.raw) {
+        s.appendChild(table(['Distribution', 'Log loss', 'Brier', 'Top pick right'], [
+          ['Comparable balls (raw)', mt.raw.logLoss, mt.raw.brier, pct(mt.raw.top1)],
+          ['Calibrated (leave-one-out)', mt.calibratedLeaveOneOut ? mt.calibratedLeaveOneOut.logLoss : '—', mt.calibratedLeaveOneOut ? mt.calibratedLeaveOneOut.brier : '—', mt.calibratedLeaveOneOut ? pct(mt.calibratedLeaveOneOut.top1) : '—'],
+        ]));
+      }
+    }
+    const rows = (cap.pending || []).slice(0, 20);
+    if (rows.length) {
+      s.appendChild(el('p', 'sc-help', 'Captured pending rulings — the chance shown live and the final result:'));
+      s.appendChild(table(['Pending since', 'Game · PA', 'Marker', 'Chance shown then (top 2)', 'Final ruling', 'Resolved'], rows.map((r) => [
+        localDateTime(r.pendingAt), playLinks(r.g, r.ai), (r.codes || []).join(' + '),
+        (r.predictedAtCapture || []).slice(0, 2).map((d) => `${(SM && SM.OUTCOME_LABELS[d.o]) || d.o} ${Math.round(d.p * 100)}`).join(' · ') || '—',
+        r.resolvedEt || 'still pending', r.resolvedAt ? localDateTime(r.resolvedAt) : (r.resolvedSource || '—'),
+      ])));
+    }
+    wrap.appendChild(s);
+  }
+
+  function renderEffectsSection(wrap, m) {
+    const fx = m.effects;
+    if (!fx) return;
+    const s = section('Official scorer & home park — do they matter?',
+      'Re-tested on every refresh over all seasons, using the official scorer of each game (MLB Stats API gameData.officialScorer). ' +
+      'Test: shuffle the scorer (or home club) labels across plays and compare how far each group\u2019s changes are from what the batted balls predict ' +
+      '(dispersion ≈ 1 means no difference). Scorer or park terms enter the scores only if a cross-validated model with them predicts better.');
+    const row = (q, g, v) => {
+      const t = v.test || {};
+      const cv = v.cv || {};
+      return [q, g, num(t.groups), num(t.plays), num(t.positives), t.dispersion != null ? t.dispersion : '—',
+        t.pValue != null ? t.pValue : '—',
+        cv.tested ? `${cv.deltaVsBest != null ? `+${cv.deltaVsBest}` : '—'} (SE ${cv.pairedSE != null ? cv.pairedSE : '—'})` : 'not tested',
+        v.verdict || '—'];
+    };
+    s.appendChild(table(['Question', 'Grouping', 'Groups', 'Plays', 'Changes', 'Dispersion', 'p-value', 'CV log loss vs best (paired SE)', 'Verdict'], [
+      row('Error → hit', 'Official scorer', fx.errorToHit.scorer),
+      row('Error → hit', 'Home club', fx.errorToHit.homeClub),
+      row('Hit → error', 'Official scorer', fx.hitToError.scorer),
+      row('Hit → error', 'Home club', fx.hitToError.homeClub),
+    ]));
+    s.appendChild(el('p', 'sc-help', `Seasons: ${(fx.errorToHit.seasons || []).join(', ')} · ${num(fx.errorToHit.scorer.playsWithScorer)} error plays with a known official scorer.`));
+    const tbl = (fx.errorToHit.scorer.table || []).slice(0, 30);
+    if (tbl.length) {
+      s.appendChild(el('p', 'sc-help', 'Error → hit by official scorer (≥ 20 errors; O/E = changes ÷ changes the batted balls predict; "shrunk" pulls small samples toward 1). ' +
+        'Read with the test above: when it finds no difference, the spread here is mostly chance.'));
+      s.appendChild(table(['Official scorer', 'Errors', 'Changed to hit', 'Expected', 'O/E', 'O/E shrunk'], tbl.map((r) => [
+        r.label, num(r.n), num(r.observed), r.expected, r.ratio, r.shrunkRatio])));
+    }
+    wrap.appendChild(s);
   }
 
   /* --------------------------------------------------- irregularities */

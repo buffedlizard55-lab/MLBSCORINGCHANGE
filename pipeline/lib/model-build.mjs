@@ -158,7 +158,7 @@ export function selectAndFit(rows, candidateSets, model, {
   const folds = rows.map((r) => foldOf(r.gamePk, k));
   const evaluations = [];
   const fits = [];
-  for (const terms of candidateSets) {
+  for (const [setIndex, terms] of candidateSets.entries()) {
     const X = designFor(terms);
     for (const lambda of terms.length ? lambdas : [1]) {
       const oof = new Array(rows.length);
@@ -185,7 +185,7 @@ export function selectAndFit(rows, candidateSets, model, {
         se: sd / Math.sqrt(foldLoss.length),
       };
       evaluations.push(ev);
-      fits.push({ ev, oof, X });
+      fits.push({ ev, oof, X, setIndex });
     }
   }
   // One-standard-error rule on PAIRED differences: every candidate is
@@ -214,11 +214,18 @@ export function selectAndFit(rows, candidateSets, model, {
   const final = best.ev.terms.length
     ? fitLogistic(best.X, y, { lambda: best.ev.lambda })
     : { intercept: Math.log(base / (1 - base)), coef: [] };
+  // Training mean of every chosen term: the value used when an input is
+  // unknown at prediction time (see SM.featureVector / missingInput).
+  const termMeans = {};
+  best.ev.terms.forEach((t, j) => {
+    termMeans[t] = round(best.X.reduce((acc, row) => acc + row[j], 0) / Math.max(1, best.X.length), 5);
+  });
   const result = {
     terms: best.ev.terms,
     lambda: best.ev.lambda,
     intercept: round(final.intercept, 6),
     coef: final.coef.map((c) => round(c, 6)),
+    termMeans,
     baseRate: round(base, 5),
     n: rows.length,
     positives: y.reduce((s, v) => s + v, 0),
@@ -269,5 +276,14 @@ export function selectAndFit(rows, candidateSets, model, {
     }
   }
   const oofById = new Map(rows.map((r, i) => [r.id, best.oof[i]]));
-  return { spec: result, oofById };
+  // Out-of-fold predictions of every candidate set at its best lambda (the
+  // scorer / home-park tests need the best model WITHOUT group terms).
+  const oofBySet = candidateSets.map((terms, si) => {
+    const list = fits.filter((f) => f.setIndex === si);
+    if (!list.length) return null;
+    const b = list.reduce((a, c) => (c.ev.logLoss < a.ev.logLoss ? c : a));
+    return { setIndex: si, terms: b.ev.terms, lambda: b.ev.lambda, logLoss: b.ev.logLoss, oof: b.oof };
+  });
+  result.selectedSetIndex = best.setIndex;
+  return { spec: result, oofById, oofBySet };
 }
