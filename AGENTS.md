@@ -1,0 +1,35 @@
+# AGENTS.md — rules for anyone (human or AI) working on this repository
+
+1. **Start with the charter.** Read the "📌 Start here — project charter" section of
+   [README.md](README.md) at the beginning of every session. It holds the owner's request
+   verbatim and the acceptance checklist. Build toward it; do not drift.
+2. **Core Values are the decision framework**: *Maximize P(Win)* and *Own the Outcome*
+   (verbatim in the README). Prefer what makes the everyday tool more useful and more
+   trustworthy; own problems end to end; treat failures as signals.
+3. **Never touch the original site.** This repo is a copy of
+   `buffedlizard55-lab/MLB-Live-PBP`. Do not push to, open PRs against, or change settings of
+   the original. Both sites share the origin `buffedlizard55-lab.github.io`, so browser storage
+   keys here must start with `mlbScoringChange.` (enforced by `tools/storage-namespace-test.mjs`).
+4. **No hallucinated facts.** Every number and claim must come from an official or verified
+   source (MLB official scoring-changes page, MLB StatsAPI, Baseball Savant, Internet Archive
+   captures of the MLB page) or from this repo's pipeline outputs — with a link for manual
+   review. Test fixtures that are not real data must be labelled SYNTHETIC.
+5. **Flag, don't fix silently.** Data problems (log typos, impossible dates, rulings StatsAPI
+   never applied) are recorded with a flag and surfaced on `scoring.html` → Irregularities.
+   Heuristic recoveries (e.g. `team_code_corrected`) must stay flagged and verified by an
+   independent check (the named batter batted in that half-inning).
+6. **No label leakage in the model.** Only use information known when the play happened.
+   Features that exist only because of the final ruling (e.g. the error type after a change to
+   a hit) are forbidden. Report accuracy out-of-sample (grouped CV + out-of-time), with calibration.
+7. **Keep the hot path intact.** `assets/js/api.js` `PBP_FIELDS` is pinned by
+   `tools/api-fields-test.mjs`; model data comes from the separate lazy `getPlayHitData`.
+   The model must stay inert when its module or data file is missing, and must never trigger
+   alerts on its own.
+8. **Tests before every push.** `for t in tools/*-test.mjs tools/pipeline-offline-smoke.mjs; do node "$t" || break; done`
+   (skip `tools/smoke-test.mjs` offline; it needs live network). CI runs the same suites
+   (`.github/workflows/tests.yml`).
+9. **Data pipeline.** `pipeline/run.mjs` runs on GitHub Actions
+   (`.github/workflows/official-data.yml`, every 3 hours) because MLB hosts are reachable
+   there. Outputs: `data/official/*.json`, `data/model/*.json`, `data/model/pipeline-report.json`
+   (check `warnings` / `fatal` first). The play-by-play cache lives in the Actions cache,
+   never in git. Methodology: [docs/MODEL.md](docs/MODEL.md).

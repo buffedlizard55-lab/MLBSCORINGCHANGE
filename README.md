@@ -1,9 +1,157 @@
-# ⚾ MLB Live PBP — Live MLB Scoreboard & Play-by-Play
+# ⚾ MLB Scoring Changes — MLB Live PBP + scoring-change model
 
-> ### 🛑 **CHECKPOINT NOTICE: `v1.0.0-stable-checkpoint`** 🛑
-> **This tag marks a safe, working baseline of the code. If any experimental changes break the app, you can instantly revert back to this stable state by running:**
+**Live site (this copy):** <https://buffedlizard55-lab.github.io/MLBSCORINGCHANGE/> ·
+[Replay Feed](https://buffedlizard55-lab.github.io/MLBSCORINGCHANGE/reviews.html) ·
+[✏️ Scoring Changes](https://buffedlizard55-lab.github.io/MLBSCORINGCHANGE/scoring.html)
+**Original site (never modified from here):** <https://buffedlizard55-lab.github.io/MLB-Live-PBP/reviews.html>
+
+---
+
+## 📌 Start here — project charter
+
+> **Read this section at the start of every work session.** It is the project's starting
+> point: what we are building, for whom, and how we decide. Everything below it is
+> reference material.
+
+### The request (verbatim)
+
+> Review the repo. We are going to reverse engineer this site https://buffedlizard55-lab.github.io/MLB-Live-PBP/reviews.html Basically just copy the entire repo since it functionally works very well and i use it everyday. I don't want to break anything on this site so I want to create a copy that I can work on. Let's create a scoring-change model and integrate it into observed, captured, and any logged events that the alert system detects. We should aim to provide a score out of 100 whether the observed, captured, and logged event will be overturned from an error to a single, also for any scoring pending will be changed to a single, error, out, fielders choice, out, etc. We should include both the expected chance it will be overturned as well as the final result of the event.
+
+> Put this prompt into the repo readme and read it everytime we work on the project as a starting point to make sure we are building what we are aiming for and have a strong base to continue building and improving on making something useful for everyday use. It should solve the problem of having to manually check everything ourselves and having an up to date current feed.
+
+### The xBA conversation that framed the model (condensed — not verbatim)
+
+- **Q:** *How is xBA calculated on Baseball Savant?* — **A (summary):** xBA asks "given how this
+  ball was hit, how often do comparable balls become hits?", using historical Statcast data
+  (exit velocity, launch angle, and sprint speed on weakly hit balls); each batted ball gets a
+  probability (e.g. 105 mph / 20° → .850, 75 mph / 5° → .080), strikeouts count as outs, and it
+  removes positioning, range and luck. Savant exposes it as `estimated_ba_using_speedangle`.
+- **Q (the flaw):** *Both of those balls were ruled outs — but suppose both reached base on a play
+  first ruled an **error**. What is the chance the final ruling becomes a **hit**?* — **A (summary):**
+  xBA is not the chance an official scorer overturns a ruling. That needs its own model,
+  P(final hit | initial error, exit velocity, launch angle, location, fielder, play type, …),
+  learned from historical changed rulings; the answer's illustration ("Play A .080 → 5%,
+  Play B .850 → 70%") was hypothetical. Initial ruling → later ruling (groundout → error,
+  error → single, single → error, fielding error → hit) is a scoring-change model.
+- **What the official data actually shows (this project, 2024–2026):** errors on balls that
+  comparable batted balls turn into hits 50–70% of the time were changed to hits **12.6%**
+  of the time (36 of 285); errors on weak contact (under 10%) **4.0%** (38 of 950). A real,
+  roughly 3× effect — but most errors, even on well-struck balls, stand.
+
+### Standing instructions (from the same request)
+
+- Copy the **entire** source repo; never break or modify the original site.
+- Work line by line; verify from official / trusted sources and give links for manual review;
+  **no hallucinations**.
+- Work autonomously (no manual input needed); **flag irregularities** for review, never hide them.
+- "The goal of this project is to get a full list that follow our requirements."
+- Keep Arena's Core Values **Maximize P(Win)** and **Own the Outcome** as focal points.
+- GitHub Pages site: clean, user friendly, simple, organized, all relevant information easy to
+  read, with official verified source links.
+- Work in passes (implement → review for bugs / gaps / wrong assumptions → re-check against
+  this charter); open a PR, merge to `main`, and report remaining work and limitations.
+
+### Acceptance checklist — where each requirement lives
+
+| Requirement | Where it is implemented |
+| --- | --- |
+| Exact copy; original untouched | Commit `ddca0b8` = original at `859e958`. Browser storage isolated (`mlbScoringChange.*` keys, `tools/storage-namespace-test.mjs`) because both sites share one origin. |
+| Score /100: error → single | `assets/js/scoring-model.js` `scoreErrorToHit`, shown on **🎯 Error Watch** rows and ✏️ Scoring Change rows (live feed) and on `scoring.html`. |
+| Pending ruling → single / error / FC / out … | ⚖️ Scoring Pending rows show "Likely final ruling" chances (`pendingDistribution`). |
+| Observed, captured and logged events | *Observed*: every live `field_error` play (Error Watch). *Captured*: rulings the feed saw change (✏️ rows). *Logged*: MLB's official log, parsed and linked play-by-play (`data/official/`). |
+| Expected chance **and** final result | Every row shows both: the pre-change chance and the live / official final ruling. |
+| Full list | `scoring.html` → Official Changes (every entry, 2024–2026) and Error Watch (every error of the season). |
+| Up to date, no manual checking | `.github/workflows/official-data.yml` rebuilds everything from official sources every 3 hours; the live feed polls StatsAPI continuously. |
+| Official source links | Every row links to Gameday / Baseball Savant / StatsAPI / the official MLB log. |
+| Irregularities flagged | `data/official/irregularities.json` → `scoring.html` ⚑ Irregularities (e.g. log typos like `TBN@TOR`, games that do not exist on the stated date). |
+
+## 🧭 Arena Core Values — focal points
+
+- **Maximize P(Win)** — “Maximize the Probability of Winning”: our decision making framework. In every decision, we weigh tradeoffs, assess risk, and choose the path that maximizes the probability that Arena succeeds. We set aside our emotions and make tough decisions in order to maximize P(Win). “Maximize P(Win)” frees us from constraints and clarifies that we must put Arena first.
+- **Own the Outcome** — We own results end to end — not just our individual slice of the work. When problems arise and we have the means to act, we do so without waiting for permission or assignment. We treat failure and success as signals and use them to improve. At Arena, we stay accountable to the final outcome.
+
+How they shaped this project: we optimise for what actually helps the daily user (a ranked
+watch-list plus the final result, refreshed automatically) rather than impressive-looking
+numbers; accuracy is reported out-of-sample, with calibration, and weak spots are stated
+plainly; every data problem found is either fixed at the source or flagged in public.
+
+## What this copy adds
+
+1. **🎯 Error Watch** (live feed tab) — every play scored "reached on error" today, with its
+   0–100 chance of becoming a hit, the batted ball, the live final ruling and, once MLB posts it,
+   the official-log confirmation. It never triggers sounds and is not saved into the feed log.
+2. **Model lines on existing rows** — ✏️ Scoring Change rows show the pre-change chance and the
+   final result; ⚖️ Scoring Pending rows show the chances of each final ruling.
+3. **✏️ Scoring Changes page** (`scoring.html`) — Error Watch for the whole season, MLB's
+   official list for 2024–2026 (verbatim, classified, linked to the exact play and checked against
+   its current ruling), the model card (accuracy, calibration, what drives changes, limitations)
+   and the irregularities list.
+4. **Official-data pipeline** (`pipeline/`, runs on GitHub Actions every 3 hours) — parses the
+   official log (live page for 2026; Internet Archive captures for 2024 and 2025), scans every
+   completed game's play-by-play, links and verifies each entry, fits the models, cross-checks
+   against Baseball Savant, and commits `data/official/*.json` and `data/model/*.json`.
+
+## Current results (pipeline run of 2026-09-24; the site always shows the latest)
+
+| | Error → hit | Hit → error |
+| --- | --- | --- |
+| Settled plays / changed | 3,166 / 192 (6.1%) | 100,969 / 120 (0.12%) |
+| Cross-validated AUC (by game) | 0.620 | 0.913 |
+| Out-of-time AUC (fit 2024–25 → predict 2026) | 0.615 | 0.934 |
+| Log loss vs always-base-rate | 0.2225 vs 0.2287 | 0.0074 vs 0.0092 |
+
+- Coverage: 7,322 completed games; 553,300 plate appearances; 693 official entries
+  (229 + 211 + 253) with 662 linked to their exact play.
+- The xBA-style hit probability (370,650 batted balls) correlates **0.974** with Savant's
+  `estimated_ba_using_speedangle` on the same plays; all 1,015 regular-season 2026 errors match
+  Savant exactly.
+- Calibration (error → hit): plays scored 5–10 were changed 6.3% of the time; 10–20 → 15.5%.
+- Full methodology: [`docs/MODEL.md`](docs/MODEL.md).
+
+## Limitations (read before trusting a number)
+
+- Error → hit discrimination is **modest** (AUC ≈ 0.62). Scores rank a watch-list; they do not
+  decide a play. Scores cluster between 2 and 30; bands ("Elevated", "High") are relative to the
+  6% base rate.
+- "Official Scorer Ruling Pending" markers are **not kept** in final play-by-play (0 of 553,300
+  plate appearances), so pending-ruling chances come from how comparable batted balls were
+  scored, not from past pending rulings. The live feed now records each pending ruling's
+  resolution, which can calibrate this over time.
+- The official log only covers post-game changes; in-game changes are caught live by the feed.
+- StatsAPI does not always apply a logged change (e.g. 2026 #13: the log says Alex Freeland now
+  has a single, while StatsAPI still shows the original sacrifice). Entries whose play's current
+  ruling disagrees with the log are flagged and kept out of training labels.
+- Prior seasons depend on Internet Archive captures of MLB's page (2025: 2026-02-10 capture;
+  2024: 2025-01-21 capture).
+
+## Remaining work (next sessions)
+
+- Collect the live feed's captured initial rulings (error type, credits) as a leakage-free
+  training set — the biggest available accuracy gain for error → hit.
+- Calibrate the pending-ruling chances with the pending → final outcomes the feed now logs.
+- Add scorer-level (home park) effects once more seasons are available (tested; not yet
+  significant with 3 seasons).
+- Optional opt-in alert when an error's score is "High".
+
+## Working on this repo
+
+1. Read the charter above. 2. Check the latest pipeline report
+   (`data/model/pipeline-report.json`: warnings, `fatal`) and `data/official/irregularities.json`.
+3. Run the tests: `for t in tools/*-test.mjs tools/pipeline-offline-smoke.mjs; do node "$t"; done`
+   (skip `tools/smoke-test.mjs` offline — it needs live network). 4. See [`AGENTS.md`](AGENTS.md)
+   for the rules this project follows.
+
+---
+
+# ⚾ MLB Live PBP — Live MLB Scoreboard & Play-by-Play (original README, copied)
+
+> ### 🛑 **Safe baseline for this copy** 🛑
+> *[copy note]* The original repository's `v1.0.0-stable-checkpoint` tag exists only in
+> [buffedlizard55-lab/MLB-Live-PBP](https://github.com/buffedlizard55-lab/MLB-Live-PBP) (it points to `94ed9ad`, 2026-08-07).
+> In **this** repository the safe baseline is commit `ddca0b8` — a byte-for-byte copy of the original
+> site at `859e958` (2026-09-23), before any scoring-model change. To return this copy to it:
 > ```bash
-> git reset --hard v1.0.0-stable-checkpoint
+> git reset --hard ddca0b8
 > ```
 
 A zero-dependency, static web app that pulls **live MLB game data** straight from the
