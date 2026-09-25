@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-25T05:04:00.423Z",
+ "generatedAt": "2026-09-25T11:57:00.542Z",
  "count": 79,
  "items": [
   {
@@ -1011,7 +1011,7 @@
    "raw": "155. 6/27 LAD@SD -- In the top of the 6th, Randy Vasquez is charged with 4 earned runs and 3 unearned runs, instead of 5 earned and 2 unearned. Additionally, the 2 runs charged to Ron Marinaccio now team unearned runs, instead of unearned runs.",
    "parseIssues": [],
    "linkFlags": [
-    "date_recovery_ambiguous:12",
+    "date_recovery_ambiguous:13",
     "batter_not_found"
    ],
    "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
