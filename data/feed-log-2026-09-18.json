@@ -1,7 +1,7 @@
 {
   "v": 1,
   "date": "2026-09-18",
-  "savedAt": 1790289196012,
+  "savedAt": 1790295588564,
   "entries": [
     {
       "gamePk": 822847,
@@ -50,7 +50,7 @@
         "flags": [],
         "initialScoreAfter": null,
         "scoreAfter": null,
-        "timestamp": "2026-09-24T22:33:16.012Z",
+        "timestamp": "2026-09-25T00:19:48.564Z",
         "initialObservedAt": null,
         "isPitch": false,
         "pitchVelo": null,
@@ -58,7 +58,10 @@
           "id": 694671,
           "fullName": "Wyatt Langford"
         },
-        "pitcher": null,
+        "pitcher": {
+          "id": 573009,
+          "fullName": "Joe Mantiply"
+        },
         "countBefore": null,
         "countAfter": null,
         "atBatCount": null,
@@ -70,10 +73,46 @@
           "date": "2026-09-18",
           "raw": "253. 9/18 TOR@TEX -- In the bottom of the 8th, the single for Wyatt Langford has been changed to a throwing error charged to Kazuma Okamoto. As a result, 1 run is now unearned against Joe Mantiply. Okamoto already had an error for allowing Langford to advance to 2nd base.",
           "url": "https://www.mlb.com/official-information/scoring-changes"
-        }
+        },
+        "stats": {
+          "batting": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Wyatt Langford",
+              "playerId": 694671,
+              "evidence": "single → a throwing error charged to Kazuma Okamoto"
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Joe Mantiply",
+              "playerId": 573009,
+              "evidence": "single → a throwing error charged to Kazuma Okamoto"
+            },
+            {
+              "stat": "ER",
+              "delta": -1,
+              "player": "Joe Mantiply",
+              "playerId": null,
+              "evidence": "As a result, 1 run is now unearned against Joe Mantiply."
+            },
+            {
+              "stat": "UER",
+              "delta": 1,
+              "player": "Joe Mantiply",
+              "playerId": null,
+              "evidence": "As a result, 1 run is now unearned against Joe Mantiply."
+            }
+          ],
+          "source": "official_log"
+        },
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=5c98f208-d4f3-32ef-a86d-467eabffb987"
       },
       "firstSeen": 1790289195946,
-      "lastSeen": 1790289196012,
+      "lastSeen": 1790295588564,
       "matchupLabel": "TOR @ TEX"
     }
   ],

@@ -1,7 +1,7 @@
 {
   "v": 1,
   "date": "2026-09-14",
-  "savedAt": 1790289196012,
+  "savedAt": 1790295588564,
   "entries": [
     {
       "gamePk": 823656,
@@ -50,7 +50,7 @@
         "flags": [],
         "initialScoreAfter": null,
         "scoreAfter": null,
-        "timestamp": "2026-09-24T22:33:16.012Z",
+        "timestamp": "2026-09-25T00:19:48.564Z",
         "initialObservedAt": null,
         "isPitch": false,
         "pitchVelo": null,
@@ -58,7 +58,10 @@
           "id": 641355,
           "fullName": "Cody Bellinger"
         },
-        "pitcher": null,
+        "pitcher": {
+          "id": 621345,
+          "fullName": "A.J. Minter"
+        },
         "countBefore": null,
         "countAfter": null,
         "atBatCount": null,
@@ -70,10 +73,46 @@
           "date": "2026-09-14",
           "raw": "252. 9/14 NYY@MIN -- In the top of the 8th, Cody Bellinger now reaches on an error by pitcher A.J. Minter, instead of on a single. As a result, the run scored by Bellinger is now unearned for Minter, instead of earned.",
           "url": "https://www.mlb.com/official-information/scoring-changes"
-        }
+        },
+        "stats": {
+          "batting": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Cody Bellinger",
+              "playerId": 641355,
+              "evidence": "on a single → Cody Bellinger now reaches on an error by pitcher AJ Minter"
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "A.J. Minter",
+              "playerId": 621345,
+              "evidence": "on a single → Cody Bellinger now reaches on an error by pitcher AJ Minter"
+            },
+            {
+              "stat": "ER",
+              "delta": -1,
+              "player": "Minter",
+              "playerId": null,
+              "evidence": "As a result, the run scored by Bellinger is now unearned for Minter, instead of earned."
+            },
+            {
+              "stat": "UER",
+              "delta": 1,
+              "player": "Minter",
+              "playerId": null,
+              "evidence": "As a result, the run scored by Bellinger is now unearned for Minter, instead of earned."
+            }
+          ],
+          "source": "official_log"
+        },
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=780ad5a5-7939-3b9b-8fa4-b194b4f9d666"
       },
       "firstSeen": 1790289195946,
-      "lastSeen": 1790289196012,
+      "lastSeen": 1790295588564,
       "matchupLabel": "NYY @ MIN"
     }
   ],
