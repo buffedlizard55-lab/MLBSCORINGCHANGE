@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-09-25T11:57:00.542Z",
-  "sha256": "6f4643c9f8aa2e3c8bc1a473fdcb147d1b93f42e887a1a62cf14512e6e02a767",
+  "fetchedAt": "2026-09-25T17:17:26.426Z",
+  "sha256": "fb6a76ef32b7d02bec3ff19b44616deddd5d6480441d6d43fc9333c8dd9c1bca",
   "bytes": 919894
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-25T11:57:00.542Z",
+ "generatedAt": "2026-09-25T17:17:26.426Z",
  "entries": [
   {
    "seq": 1,
@@ -1690,9 +1690,9 @@
     "pitchingChange": false
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.131,
+    "ls": 95.5,
+    "la": 32,
     "gameDate": "2026-03-31",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -6434,9 +6434,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.142,
+    "ls": 103.2,
+    "la": -26,
     "gameDate": "2026-04-30",
     "source": "savant:estimated_ba_using_speedangle"
    }

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-25T11:57:00.542Z",
+ "generatedAt": "2026-09-25T17:17:26.426Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -267,7 +267,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 1,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2385,
     "scorers": 82
@@ -456,8 +456,8 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": false,
-  "fetchedThisRun": true,
+  "cached": true,
+  "fetchedThisRun": false,
   "fetchedAt": "2026-09-25T11:57:24.689Z",
   "rowsAllGameTypes": 1374,
   "rowsByGameType": {
@@ -481,12 +481,12 @@
   "perPlay": {
    "needed": 1561,
    "excludedNoBattedBall": 56,
-   "matched": 1006,
-   "matchedNoXba": 131,
-   "unavailable": 119,
+   "matched": 1097,
+   "matchedNoXba": 51,
+   "unavailable": 179,
    "notIndexedYet": 0,
-   "pending": 305,
-   "coverage": 0.6445,
+   "pending": 234,
+   "coverage": 0.7028,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -494,54 +494,70 @@
      "season": 2026,
      "month": null,
      "rows": 1374,
-     "fromCache": false,
+     "fromCache": true,
      "asked": 0,
      "found": 1009,
      "missed": 0,
      "integrity": null
     },
     {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-05-01&game_date_lt=2026-05-31",
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-10-01&game_date_lt=2025-10-31",
      "kind": "month",
-     "season": 2026,
-     "month": "2026-05",
-     "rows": 25000,
+     "season": 2025,
+     "month": "2025-10",
+     "rows": 12739,
      "fromCache": false,
-     "asked": 30,
-     "found": 169,
-     "missed": 21,
-     "integrity": {
-      "kept": 25000,
-      "outsideRange": 0,
-      "missingDate": 0
-     }
-    },
-    {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-04-01&game_date_lt=2026-04-30",
-     "kind": "month",
-     "season": 2026,
-     "month": "2026-04",
-     "rows": 25000,
-     "fromCache": false,
-     "asked": 39,
-     "found": 160,
-     "missed": 32,
-     "integrity": {
-      "kept": 25000,
-      "outsideRange": 0,
-      "missingDate": 0
-     }
-    },
-    {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-03-01&game_date_lt=2026-03-31",
-     "kind": "month",
-     "season": 2026,
-     "month": "2026-03",
-     "rows": 25000,
-     "fromCache": false,
-     "asked": 6,
-     "found": 137,
+     "asked": 1,
+     "found": 5,
      "missed": 0,
+     "integrity": {
+      "kept": 12739,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-09-01&game_date_lt=2025-09-30",
+     "kind": "month",
+     "season": 2025,
+     "month": "2025-09",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 22,
+     "found": 21,
+     "missed": 20,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-08-01&game_date_lt=2025-08-31",
+     "kind": "month",
+     "season": 2025,
+     "month": "2025-08",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 22,
+     "found": 9,
+     "missed": 20,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-07-01&game_date_lt=2025-07-31",
+     "kind": "month",
+     "season": 2025,
+     "month": "2025-07",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 26,
+     "found": 13,
+     "missed": 20,
      "integrity": {
       "kept": 25000,
       "outsideRange": 0,
@@ -549,21 +565,21 @@
      }
     }
    ],
-   "queriesDeferred": 16,
+   "queriesDeferred": 12,
    "failures": [],
    "requests": 4,
-   "cacheHits": 0,
+   "cacheHits": 1,
    "budgetExhausted": true
   },
   "client": {
    "requests": 4,
-   "cacheHits": 0,
+   "cacheHits": 1,
    "budget": 4,
    "budgetExhausted": true,
    "rateLimited": false,
    "failures": [],
    "notes": [],
-   "cachedQueries": 8
+   "cachedQueries": 12
   }
  },
  "model": {
