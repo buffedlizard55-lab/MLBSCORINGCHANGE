@@ -199,6 +199,15 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 
 ## Current results (pipeline runs of 2026-09-24; the site always shows the latest)
 
+**Session-5 run (Actions run 36076652510, 2026-09-25 UTC):** the game-by-game scan covered
+**every completed game** — 2024: 2,472 games / 2,634 error plays; 2025: 2,477 / 2,485;
+2026 (to date): 2,378 / 2,424. **Every error play has a Savant video link.** The official scoring
+changes split as follows (batting R/H/RBI → main alerts; pitching-only → separate section; no stat change → Other):
+2024: 134 / 25 / 70 · 2025: 129 / 27 / 55 · 2026: 147 / 33 / 73. No sentences were left unparsed.
+Spot check (2026 #249, CIN@MIL 9/11, bottom 1st): the Vaughn double with an error on LF Bleday
+(runner Turang) → Vaughn RBI −1 (main alerts), Abbott ER −1 / unearned +1 (pitching section),
+video `playId=8552c454-…`.
+
 | | Error → hit | Hit → error |
 | --- | --- | --- |
 | Settled plays / changed | 3,161 / 189 (6.0%) | 100,972 / 120 (0.12%) |
@@ -309,9 +318,9 @@ plays settle (≥ 8 changes for a shift; ≥ 15 changes and ≥ 150 errors for e
 - Watch `.github/workflows/official-feed-log.yml` after a game day: the static feed logs should
   gain that day's confirmed changes, and a run with nothing new must commit nothing.
 - Optional opt-in alert when an error's score is "High".
-- After the first session-5 pipeline run (the play-by-play cache is rebuilt once — `CACHE_VERSION`
-  3), check `pipeline-report.json` → `errorEvents` (games scanned = completed games) and the
-  per-season `battingStatEntries` / `pitchingStatEntries` / `statUnparsedEntries`.
+- Pitchers named only in the official text (e.g. "unearned against Andrew Abbott") carry the
+  name but no MLBAM id (~600 pitching stat lines), so they have no player link. Resolving the name
+  against the linked game's boxscore would add the id.
 - Paste the verbatim session-5 request into the charter (see above).
 
 ## Working on this repo
