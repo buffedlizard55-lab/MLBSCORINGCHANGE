@@ -2328,3 +2328,25 @@ a.sc-matchup:hover { text-decoration: underline; }
 .sc-status-active { color: #8ff0ac; border-color: rgba(34, 197, 94, 0.6); background: rgba(34, 197, 94, 0.12); }
 .sc-status-collecting { color: #fcd34d; border-color: rgba(251, 191, 36, 0.5); background: rgba(251, 191, 36, 0.1); }
 .feed-model-kind { color: #bfdbfe; font-size: 12px; }
+
+/* Session 5: stat lines on a scoring-change row (batting = main-alert
+   criterion; pitching = the silent 🧮 section). */
+.feed-stat-lines { margin-top: 6px; display: flex; flex-direction: column; gap: 2px; font-size: 0.82rem; }
+.feed-stat-line { padding: 2px 6px; border-radius: 4px; width: fit-content; max-width: 100%; }
+.feed-stat-batting { background: rgba(96, 165, 250, 0.14); color: #bfdbfe; border: 1px solid rgba(96, 165, 250, 0.4); }
+.feed-stat-pitching { background: rgba(167, 139, 250, 0.12); color: #ddd6fe; border: 1px solid rgba(167, 139, 250, 0.35); }
+
+/* Session 5 — scoring.html: stat lines (📊 batting / 🧮 pitching) and the
+   📅 Error Log coverage line. */
+.sc-stat-line { font-size: 13px; margin-top: 4px; padding: 2px 8px; border-radius: 4px; width: fit-content; max-width: 100%; cursor: help; }
+.sc-stat-batting { background: rgba(96, 165, 250, 0.14); color: #bfdbfe; border: 1px solid rgba(96, 165, 250, 0.4); }
+.sc-stat-pitching { background: rgba(167, 139, 250, 0.12); color: #ddd6fe; border: 1px solid rgba(167, 139, 250, 0.35); }
+.sc-coverage { font-size: 13px; margin: 6px 0 10px; color: #cbd5e1; }
+/* Session 5 — Error Watch sources (observed / captured / logged / scanned). */
+.feed-ew-sources { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.ew-src { font-size: 0.75rem; padding: 1px 6px; border-radius: 999px; border: 1px solid rgba(148, 163, 184, 0.4); color: #cbd5e1; cursor: help; }
+.ew-src-observed { border-color: rgba(52, 211, 153, 0.5); color: #6ee7b7; }
+.ew-src-captured { border-color: rgba(96, 165, 250, 0.5); color: #93c5fd; }
+.ew-src-logged { border-color: rgba(250, 204, 21, 0.5); color: #fde68a; }
+.ew-src-video { border-color: rgba(248, 113, 113, 0.5); color: #fca5a5; cursor: pointer; text-decoration: none; }
+.ew-pending-head { margin-top: 14px; font-weight: 600; }

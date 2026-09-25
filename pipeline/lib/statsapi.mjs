@@ -30,7 +30,15 @@ export const PBP_FIELDS = [
   'hardness', 'location', 'coordinates', 'coordX', 'coordY', 'runners',
   'movement', 'originBase', 'start', 'end', 'outBase', 'runner', 'credits',
   'credit', 'player', 'position', 'abbreviation', 'isScoringEvent',
+  // session 5: video evidence (Baseball Savant sporty-videos?playId=…), the
+  // event each runner movement happened on, and earned / unearned runs.
+  'playId', 'playIndex', 'isPitch', 'earned', 'teamUnearned',
 ].join(',');
+
+/** StatsAPI fielding-credit codes that are errors (seen in 2024–2026 data:
+ * pipeline-report.json → discovery.creditCodes). Catcher's interference is
+ * charged as an error to the catcher (Official Baseball Rules 9.12). */
+export const ERROR_CREDIT_RE = /error|^c_catcher_interf$/;
 
 export function playByPlayUrl(gamePk, projected = true) {
   return `${API}/game/${gamePk}/playByPlay${projected ? `?fields=${PBP_FIELDS}` : ''}`;
@@ -151,6 +159,21 @@ export function extractGamePlays(pbp, gamePk) {
       if (et === 'game_advisory' && /scor/i.test(d.description || '')) adv.push(d.description);
     }
 
+    // Video evidence: the playId of the play's final pitch/event (Savant
+    // https://baseballsavant.mlb.com/sporty-videos?playId=<vid>).
+    let vid = null;
+    for (let k = events.length - 1; k >= 0 && !vid; k -= 1) {
+      const ev = events[k];
+      if (ev && typeof ev.playId === 'string' && ev.playId) vid = ev.playId;
+    }
+    const vidAt = (pi) => {
+      if (pi == null) return null;
+      const ev = events.find((e) => e && e.index === pi);
+      return ev && typeof ev.playId === 'string' && ev.playId ? ev.playId : null;
+    };
+    const errs = [];
+    const errSeen = new Set();
+    let er = 0; let ur = 0; let tu = 0;
     const cr = [];
     let re = 0;
     let batterSeen = false;
@@ -163,9 +186,26 @@ export function extractGamePlays(pbp, gamePk) {
         if (r.movement && r.movement.isOut) batterOut = true;
       }
       if (/error/i.test(det.eventType || '')) re += 1;
+      if (det.isScoringEvent === true) {
+        if (det.earned === true) er += 1; else ur += 1;
+        if (det.teamUnearned === true) tu += 1;
+      }
       for (const c of Array.isArray(r.credits) ? r.credits : []) {
         const pos = (c.position && (c.position.abbreviation || c.position.code)) || '?';
         cr.push(`${c.credit}|${pos}|${(c.player && c.player.id) || ''}|${isBatter ? 'B' : 'R'}`);
+        if (ERROR_CREDIT_RE.test(String(c.credit || ''))) {
+          const pi = det.playIndex ?? null;
+          const key = `${c.credit}|${(c.player && c.player.id) || ''}|${pi}`;
+          if (!errSeen.has(key)) {
+            errSeen.add(key);
+            errs.push({
+              k: c.credit, pos, f: (c.player && c.player.id) ?? null,
+              r: (det.runner && det.runner.id) ?? null, rn: (det.runner && det.runner.fullName) || null,
+              b: isBatter ? 1 : 0, pi, vid: vidAt(pi),
+              ev: det.eventType || null,
+            });
+          }
+        }
       }
     }
 
@@ -195,6 +235,11 @@ export function extractGamePlays(pbp, gamePk) {
       br: batterSeen ? (batterOut ? 0 : 1) : null,
       hd: battedBall(events),
     };
+    if (vid) rec.vid = vid;
+    if (errs.length) rec.errs = errs;
+    if (er) rec.er = er;
+    if (ur) rec.ur = ur;
+    if (tu) rec.tu = tu;
     if (cr.length) rec.cr = cr;
     if (re) rec.re = re;
     if (pend.length) rec.pend = pend;

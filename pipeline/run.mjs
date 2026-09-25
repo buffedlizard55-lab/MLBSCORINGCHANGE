@@ -49,6 +49,8 @@ import {
   collectPlayXba, createSavantClient, SAVANT_SEARCH_URL,
 } from './lib/savant.mjs';
 import { LINKER_VERSION } from './lib/link.mjs';
+import { statEffects } from './lib/stat-effects.mjs';
+import { buildErrorEvents, gameScanRow } from './lib/error-events.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CACHE_DIR = process.env.PIPELINE_CACHE_DIR || path.join(ROOT, 'pipeline-cache');
@@ -56,7 +58,7 @@ const OUT_BASE = process.env.PIPELINE_OUT_DIR || path.join(ROOT, 'data');
 const OUT_OFFICIAL = path.join(OUT_BASE, 'official');
 const OUT_MODEL = path.join(OUT_BASE, 'model');
 const PROBE_DIR = process.env.PIPELINE_PROBE_DIR || path.join(ROOT, '_probe');
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 3;   // v3 (session 5): + vid / errs / er / ur / tu per play
 const META_CACHE_VERSION = 1;
 // A captured call counts as the ORIGINAL call only if it was first seen
 // within this many minutes of the end of the play.
@@ -110,6 +112,29 @@ const round = (v, d = 4) => (Number.isFinite(v) ? Number(v.toFixed(d)) : null);
 function writeJSON(file, data) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, `${JSON.stringify(data, null, 1)}\n`);
+}
+/**
+ * Large generated lists (data/model/error-events-<season>.json): compact JSON
+ * with ONE array item per line, so git stores small line deltas between runs
+ * instead of a new multi-MB line. The file is left untouched when nothing but
+ * `generatedAt` changed (past seasons are stable), so a run commits nothing
+ * for them.
+ */
+function writeJSONLines(file, data, arrayKeys) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const prev = readJSON(file, null);
+  if (prev) {
+    const strip = (o) => JSON.stringify({ ...o, generatedAt: null });
+    if (strip(prev) === strip(data)) return false;
+  }
+  const head = Object.fromEntries(Object.entries(data).filter(([k]) => !arrayKeys.includes(k)));
+  const parts = Object.entries(head).map(([k, v]) => `${JSON.stringify(k)}:${JSON.stringify(v)}`);
+  for (const k of arrayKeys) {
+    const list = Array.isArray(data[k]) ? data[k] : [];
+    parts.push(`${JSON.stringify(k)}:[${list.length ? `\n${list.map((x) => JSON.stringify(x)).join(',\n')}\n` : ''}]`);
+  }
+  fs.writeFileSync(file, `{${parts.join(',\n')}}\n`);
+  return true;
 }
 function readJSON(file, fallback = null) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; }
@@ -478,9 +503,54 @@ async function main() {
       }
       // Runner-level error reassignments: not a plate-appearance mismatch.
       const mi = e.link.flags.indexOf('current_ruling_mismatch');
-      if (mi >= 0 && e.link.gamePk != null && e.link.atBatIndex != null) {
-        const rec = (playsByGame.get(e.link.gamePk) || []).find((p) => p.ai === e.link.atBatIndex);
-        if (isVerifiedRunnerErrorChange(e, rec)) e.link.flags[mi] = 'runner_error_change:verified';
+      const linkedRec = e.link.gamePk != null && e.link.atBatIndex != null
+        ? (playsByGame.get(e.link.gamePk) || []).find((p) => p.ai === e.link.atBatIndex) || null
+        : null;
+      if (mi >= 0 && linkedRec) {
+        if (isVerifiedRunnerErrorChange(e, linkedRec)) e.link.flags[mi] = 'runner_error_change:verified';
+      }
+      // Session 5: facts of the linked play (StatsAPI, current state) — the
+      // pitcher, the video evidence and the play's CURRENT RBI / earned /
+      // unearned runs — so each stat change can be checked by hand.
+      if (linkedRec) {
+        e.link.pitcherName = linkedRec.pn || null;
+        e.link.pitcherId = linkedRec.p ?? null;
+        e.link.playId = linkedRec.vid || null;
+        e.link.currentRbi = linkedRec.rbi ?? null;
+        e.link.currentEarnedRuns = linkedRec.er || 0;
+        e.link.currentUnearnedRuns = linkedRec.ur || 0;
+      }
+      const trusted = linkedRec && !e.link.flags.includes('current_ruling_mismatch');
+      e.stats = statEffects(e, trusted ? {
+        batterName: e.link.batterName || null, batterId: e.link.batterId ?? null,
+        pitcherName: e.link.pitcherName, pitcherId: e.link.pitcherId,
+        currentEventType: e.link.currentEventType || null,
+      } : { currentEventType: linkedRec ? e.link.currentEventType || null : null });
+      // RBI stated only as a total ("now has an RBI") or only on the original
+      // ruling: compare with / settle from the play's CURRENT StatsAPI RBI.
+      if (trusted && typeof e.link.currentRbi === 'number') {
+        for (const d of e.stats.batting) {
+          if (d.stat !== 'RBI') continue;
+          if (d.now != null) d.statsapiAgrees = d.now === e.link.currentRbi;
+          if (d.delta == null && d.old != null && d.rule === 'rbi:only_in_original_ruling' && d.old !== e.link.currentRbi) {
+            d.delta = e.link.currentRbi - d.old;
+            d.sign = Math.sign(d.delta);
+            d.now = e.link.currentRbi;
+            d.nowSource = 'statsapi';
+            d.rule += '+statsapi_now';
+          }
+        }
+      }
+      if (e.stats.battingChange) e.cls.flags.push('battingStat');
+      if (e.stats.pitchingChange) e.cls.flags.push('pitchingStat');
+      if (e.stats.unparsed.length) {
+        irregularities.push({
+          season, seq: e.seq, section: e.section, raw: e.raw, parseIssues: [], linkFlags: ['stat_effect_unparsed'],
+          sourceUrl: logInfo && logInfo.source ? logInfo.source.url : null,
+          classification: e.cls.kind === 'ruling_change' ? e.cls.transition : e.cls.kind,
+          gamePk: e.link.gamePk, atBatIndex: e.link.atBatIndex, currentEventType: e.link.currentEventType || null,
+          note: `stat wording not understood: ${e.stats.unparsed.join(' | ')}`,
+        });
       }
       hist(kinds, e.cls.kind);
       if (e.cls.transition) hist(transitions, e.cls.transition);
@@ -651,7 +721,7 @@ async function main() {
         }
       }
     }
-    perSeason.set(season, { logInfo, entries, fieldErrorRecs, abbr, gameById, completedGames: games.length });
+    perSeason.set(season, { logInfo, entries, fieldErrorRecs, abbr, gameById, completedGames: games.length, games, playsByGame });
     report.seasons[season] = {
       ...report.seasons[season],
       plateAppearances: seasonPAs,
@@ -663,6 +733,9 @@ async function main() {
       linkFlags: histObj(linkFlags),
       dateRecoveries,
       errorToHitEntries: entries.filter((e) => e.cls.flags.includes('errorToHit')).length,
+      battingStatEntries: entries.filter((e) => e.cls.flags.includes('battingStat')).length,
+      pitchingStatEntries: entries.filter((e) => e.cls.flags.includes('pitchingStat')).length,
+      statUnparsedEntries: entries.filter((e) => e.stats && e.stats.unparsed.length).length,
       hitToErrorEntries: entries.filter((e) => e.cls.flags.includes('hitToError')).length,
       unlinkedErrorToHit,
       unlinkedHitToError,
@@ -1112,6 +1185,9 @@ async function main() {
       savant: sv ? { xba: sv.xba, ls: sv.ls, la: sv.la, source: 'savant:estimated_ba_using_speedangle' } : undefined,
       away: r.away, home: r.home, inning: r.rec.inn, half: r.rec.top ? 'top' : 'bottom',
       batter: r.rec.bn, batterId: r.rec.b, eventType: r.rec.et, event: r.rec.ev, description: r.rec.desc,
+      // Session 5: pitcher of the play and the video evidence (Savant
+      // sporty-videos?playId=…) — facts of the StatsAPI play, never inferred.
+      pitcher: r.rec.pn || null, pitcherId: r.rec.p ?? null, vid: r.rec.vid || null,
       ls: r.rec.hd ? r.rec.hd.ls : null, la: r.rec.hd ? r.rec.hd.la : null,
       traj: r.rec.hd ? r.rec.hd.traj : null, loc: r.rec.hd ? r.rec.hd.loc : null,
       hitProb: round(hp.p, 4), hitProbSource: hp.source,
@@ -1136,6 +1212,53 @@ async function main() {
   writeJSON(path.join(OUT_MODEL, 'error-watch.json'), {
     season: currentSeason, generatedAt: NOW.toISOString(), labelCutoff: LABEL_CUTOFF, plays: watch,
   });
+
+  // Session 5: every error of every completed game, per season, with scan
+  // coverage for each game and the video evidence of each play
+  // (data/model/error-events-<season>.json; pipeline/lib/error-events.mjs).
+  report.errorEvents = {};
+  const watchScoreById = new Map(watch.filter((w) => w.score != null).map((w) => [w.id, { p: w.p, score: w.score, kind: w.scoreKind }]));
+  for (const [season, info] of perSeason) {
+    if (!info.games || !info.playsByGame) continue;
+    const officialByPlay = new Map();
+    for (const e of info.entries) {
+      if (!e.link || e.link.gamePk == null || e.link.atBatIndex == null) continue;
+      const key = `${e.link.gamePk}:${e.link.atBatIndex}`;
+      if (!officialByPlay.has(key)) officialByPlay.set(key, []);
+      officialByPlay.get(key).push({ seq: e.seq, kind: e.cls.kind, transition: e.cls.transition, flags: e.cls.flags, raw: e.raw });
+    }
+    const errorRowById = new Map(errorRows.filter((r) => r.season === season).map((r) => [r.id, r]));
+    const built = buildErrorEvents({
+      games: info.games, playsByGame: info.playsByGame, abbr: info.abbr, officialByPlay, errorRowById,
+      // Same score as the Error Watch row when there is one (it uses the
+      // live-captured error type); otherwise the error type of the current
+      // ruling, exactly as Error Watch does for an uncaptured play.
+      scoreById: (row) => {
+        if (watchScoreById.has(row.id)) return watchScoreById.get(row.id);
+        const curKind = row.rec.et === 'field_error' ? SM.errorKindOfRecord(row.rec) : null;
+        return scoreFor(eFit, model.errorToHit, row, { errKind: curKind ? curKind.kind : null });
+      },
+      savantById: savantXbaPlays,
+    });
+    const byScope = built.events.reduce((m, ev) => { m[ev.scope] = (m[ev.scope] || 0) + 1; return m; }, {});
+    report.errorEvents[season] = {
+      games: built.games.length,
+      gamesScanned: built.games.filter((g) => g.scanned).length,
+      plateAppearances: built.games.reduce((n, g) => n + g.pas, 0),
+      events: built.events.length,
+      byScope,
+      withVideo: built.events.filter((ev) => ev.vid).length,
+      errorCredits: built.events.reduce((n, ev) => n + ev.errors.length, 0),
+    };
+    // One game / event per line (a few thousand events a season).
+    writeJSONLines(path.join(OUT_MODEL, `error-events-${season}.json`), {
+      season, generatedAt: NOW.toISOString(),
+      source: 'MLB StatsAPI /api/v1/game/{gamePk}/playByPlay (final state), every completed game; video: baseballsavant.mlb.com/sporty-videos?playId=',
+      summary: report.errorEvents[season],
+      games: built.games,
+      events: built.events,
+    }, ['games', 'events']);
+  }
 
   // Savant cross-check (current season, field_error plays).
   if (!args['no-savant']) {

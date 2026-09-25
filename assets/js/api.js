@@ -355,6 +355,10 @@ const MLB = (() => {
     // movement signature reads originBase → end / outBase)
     'runners', 'movement', 'start', 'end', 'outBase', 'originBase',
     'runner', 'isScoringEvent', 'playIndex',
+    // scoring runners' earned flag (runners[].details.earned — verified on
+    // game 823736 at-bat 7, 2026-09-11): the scoring-change tracker's
+    // earned / unearned run counts (pitching ER ↔ UER changes, 🧮 tab).
+    'earned',
   ];
 
   /**

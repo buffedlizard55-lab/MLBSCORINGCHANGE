@@ -590,6 +590,40 @@ function isHitToErrorChange(review) {
 }
 
 /**
+ * Session-5 charter — the Error Watch integrates every source of an error on
+ * the selected date into ONE list, keyed by play (`gamePk:atBatIndex`):
+ *   observed  — seen live on this page (the feed's own poll),
+ *   captured  — recorded as first called by the live-capture pipeline
+ *               (data/capture → error-watch.json `captured`),
+ *   logged    — MLB's official scoring-changes log entries for the play,
+ *   scanned   — the pipeline's game-by-game scan (data/model/error-watch.json).
+ * Only plays first scored reached-on-error are listed (the Error Watch
+ * population); pending rulings are listed separately by the caller. Pure.
+ */
+function mergeErrorWatchSources(liveItems, pipelinePlays, dateStr) {
+  const out = new Map();
+  (Array.isArray(liveItems) ? liveItems : []).forEach((it) => {
+    if (!it || it.gamePk == null || it.atBatIndex == null) return;
+    out.set(`${it.gamePk}:${it.atBatIndex}`, { key: `${it.gamePk}:${it.atBatIndex}`, live: it, pipe: null });
+  });
+  (Array.isArray(pipelinePlays) ? pipelinePlays : []).forEach((p) => {
+    if (!p || p.date !== dateStr || p.gamePk == null || p.ai == null) return;
+    const k = `${p.gamePk}:${p.ai}`;
+    const cur = out.get(k);
+    if (cur) cur.pipe = p; else out.set(k, { key: k, live: null, pipe: p });
+  });
+  return [...out.values()].map((r) => ({
+    ...r,
+    sources: {
+      observed: !!r.live,
+      captured: !!(r.pipe && r.pipe.captured),
+      logged: r.pipe && Array.isArray(r.pipe.official) ? r.pipe.official.map((o) => o.seq) : [],
+      scanned: !!r.pipe,
+    },
+  }));
+}
+
+/**
  * Whether a review should trigger the audio alert (gentle raindrop chime).
  * Requirement: challenges, reviews, boundary calls, official-scorer pending
  * rulings AND official scoring changes, but NOT ABS — and (session-3 charter)
@@ -606,7 +640,12 @@ function isHitToErrorChange(review) {
 function shouldAlertForReview(review) {
   if (!review || typeof review.typeKey !== 'string') return false;
   if (review.typeKey === 'abs') return false;
-  return !isHitToErrorChange(review);
+  // Session-5 charter: a scoring change reaches the main alert system only
+  // when it alters batting Runs / Hits / RBI (isBattingStatChange also keeps
+  // hit → error out). Pitching-only and other rulings stay silent in their
+  // own tabs (🧮 Pitching Stats, 🗂️ Other Rulings).
+  if (review.typeKey === SCORING_CHANGE_TYPE_KEY) return isBattingStatChange(review);
+  return true;
 }
 
 /**
@@ -639,7 +678,8 @@ function shouldAlertForReview(review) {
  * in All, by the original explicit request.
  */
 function visibleInAllFeed(review) {
-  if (!review || review.typeKey !== 'abs') return !isHitToErrorChange(review);
+  if (review && review.typeKey === SCORING_CHANGE_TYPE_KEY) return isBattingStatChange(review);
+  if (!review || review.typeKey !== 'abs') return true;
   return false;
 }
 
@@ -983,11 +1023,23 @@ function buildScoringSnapshot(play) {
   const runners = Array.isArray(play.runners) ? play.runners : [];
   let errorMovements = 0;
   const movements = [];
+  // Session 5: runs scored on the play and how many of them are charged as
+  // earned to a pitcher (runners[].details.earned — the pitcher-level flag;
+  // teamUnearned is team-level and not a pitcher stat). Counts are stated
+  // only when EVERY scoring runner carries the flag (an older projection
+  // without `earned` leaves them null — never guessed).
+  let runsScored = 0; let earned = 0; let unearned = 0; let earnedKnown = true;
   runners.forEach((runner) => {
     if (!runner || typeof runner !== 'object') return;
     const details = runner.details || {};
     const movement = runner.movement || {};
     const detType = typeof details.eventType === 'string' ? details.eventType : '';
+    if (movement.end === 'score' && movement.isOut !== true) {
+      runsScored += 1;
+      if (details.earned === true) earned += 1;
+      else if (details.earned === false) unearned += 1;
+      else earnedKnown = false;
+    }
     // Runner-level error advances only count when the plate appearance
     // itself is NOT the error: on a field_error play the runners carry the
     // same field_error code for the batter and every forced advance
@@ -1018,6 +1070,9 @@ function buildScoringSnapshot(play) {
     awayScore: typeof result.awayScore === 'number' ? result.awayScore : null,
     homeScore: typeof result.homeScore === 'number' ? result.homeScore : null,
     rbi: typeof result.rbi === 'number' ? result.rbi : null,
+    runsScored,
+    earnedRuns: earnedKnown ? earned : null,
+    unearnedRuns: earnedKnown ? unearned : null,
     errorMovements,
     movementSig: movements.join('|'),
     hasReview: about.hasReview === true,
@@ -1037,6 +1092,117 @@ function scoringSnapshotSignature(snapshot) {
     snapshot.errorMovements,
     snapshot.movementSig || '',
   ].join('|');
+}
+
+/**
+ * Session-5 charter: the MAIN alert system carries only scoring changes that
+ * alter a batter's Runs, Hits or RBI; pitching stat changes (hits allowed,
+ * BB, K, earned / unearned runs) live in their own silent 🧮 section.
+ *
+ * Stat deltas between two observed snapshots of ONE play, read only from the
+ * snapshot fields (registry event types, result.rbi, the scoring runners and
+ * their earned flag). Nothing is estimated: a count missing on either side
+ * (null) is simply not compared. Pure.
+ */
+const SCORING_WALK_EVENT_TYPES = new Set(['walk', 'intent_walk']);
+const SCORING_STRIKEOUT_EVENT_TYPES = new Set(['strikeout', 'strikeout_double_play', 'strikeout_triple_play']);
+function scoringStatDeltas(from, to) {
+  const batting = [];
+  const pitching = [];
+  if (!from || !to) return { batting, pitching };
+  const num = (v) => typeof v === 'number' && Number.isFinite(v);
+  const flag = (set, snap) => (set.has(snap.eventType) ? 1 : 0);
+  const push = (list, stat, a, b) => { if (a !== b) list.push({ stat, from: a, to: b, delta: b - a }); };
+  const hA = flag(SCORING_HIT_EVENT_TYPES, from); const hB = flag(SCORING_HIT_EVENT_TYPES, to);
+  push(batting, 'H', hA, hB);
+  if (num(from.runsScored) && num(to.runsScored)) push(batting, 'R', from.runsScored, to.runsScored);
+  if (num(from.rbi) && num(to.rbi)) push(batting, 'RBI', from.rbi, to.rbi);
+  push(pitching, 'H', hA, hB);
+  push(pitching, 'BB', flag(SCORING_WALK_EVENT_TYPES, from), flag(SCORING_WALK_EVENT_TYPES, to));
+  push(pitching, 'K', flag(SCORING_STRIKEOUT_EVENT_TYPES, from), flag(SCORING_STRIKEOUT_EVENT_TYPES, to));
+  if (num(from.earnedRuns) && num(to.earnedRuns)) push(pitching, 'ER', from.earnedRuns, to.earnedRuns);
+  if (num(from.unearnedRuns) && num(to.unearnedRuns)) push(pitching, 'UER', from.unearnedRuns, to.unearnedRuns);
+  return { batting, pitching };
+}
+
+/** "RBI 1 → 0 · R 1 → 0" — the observed deltas in plain words. */
+function scoringStatHeadline(list) {
+  return (list || []).map((d) => `${d.stat} ${d.from} → ${d.to}`).join(' · ');
+}
+
+/**
+ * Which stat families a scoring-change row alters: { batting, pitching }.
+ * A row carries `review.stats` (observed deltas, or the official log's own
+ * words parsed by pipeline/lib/stat-effects.mjs); a row restored from an
+ * older log without it falls back to its initial/final registry event types
+ * — the same facts, so every writer classifies the row the same way.
+ */
+function scoringStatImpact(review) {
+  if (!review || review.typeKey !== SCORING_CHANGE_TYPE_KEY) return { batting: false, pitching: false };
+  const st = review.stats;
+  if (st && Array.isArray(st.batting) && Array.isArray(st.pitching)) {
+    return { batting: st.batting.length > 0, pitching: st.pitching.length > 0 };
+  }
+  const i = review.initial || {};
+  const f = review.final || {};
+  // Malformed / unknown row: fail OPEN (main feed) — an unrecognized change
+  // must never be silently hidden (the feed's standing rule).
+  if (typeof i.eventType !== 'string' || typeof f.eventType !== 'string') return { batting: true, pitching: false, unknown: true };
+  const d = scoringStatDeltas({ eventType: i.eventType }, { eventType: f.eventType });
+  return { batting: d.batting.length > 0, pitching: d.pitching.length > 0 };
+}
+
+/**
+ * Plain-words stat lines for a row: { batting, pitching } strings or null.
+ * Observed deltas read "RBI 1 → 0"; the official log's deltas read "RBI −1"
+ * (the log states the change, not the totals) and a change the log states
+ * without a count reads "ER changed" — never a guessed number. The player is
+ * the one the delta names, else the play's batter / pitcher. Pure.
+ */
+function scoringStatLines(review) {
+  const st = review && review.stats;
+  if (!st) return { batting: null, pitching: null };
+  const signed = (n) => (n > 0 ? `+${n}` : n < 0 ? `\u2212${Math.abs(n)}` : '0');
+  const fmt = (d) => (typeof d.from === 'number' && typeof d.to === 'number'
+    ? `${d.stat} ${d.from} → ${d.to}`
+    : typeof d.delta === 'number' ? `${d.stat} ${signed(d.delta)}` : `${d.stat} changed`);
+  const line = (list, fallback) => {
+    if (!Array.isArray(list) || !list.length) return null;
+    const byPlayer = new Map();
+    list.forEach((d) => {
+      const who = d.player || fallback || '';
+      if (!byPlayer.has(who)) byPlayer.set(who, []);
+      byPlayer.get(who).push(fmt(d));
+    });
+    return [...byPlayer.entries()].map(([who, parts]) => `${who ? `${who}: ` : ''}${parts.join(' · ')}`).join('; ');
+  };
+  return {
+    batting: line(st.batting, review.batter && review.batter.fullName),
+    pitching: line(st.pitching, review.pitcher && review.pitcher.fullName),
+  };
+}
+
+/** Main alert system: a scoring change that alters batting R / H / RBI. */
+function isBattingStatChange(review) {
+  if (!review || review.typeKey !== SCORING_CHANGE_TYPE_KEY) return false;
+  if (isHitToErrorChange(review)) return false;
+  return scoringStatImpact(review).batting;
+}
+
+/** 🧮 Pitching Stats: alters pitching stats only (never the main alerts). */
+function isPitchingOnlyStatChange(review) {
+  if (!review || review.typeKey !== SCORING_CHANGE_TYPE_KEY) return false;
+  if (isHitToErrorChange(review)) return false;
+  const imp = scoringStatImpact(review);
+  return !imp.batting && imp.pitching;
+}
+
+/** 🗂️ Other rulings: no R/H/RBI or pitching-stat change (e.g. single → double). */
+function isOtherScoringChange(review) {
+  if (!review || review.typeKey !== SCORING_CHANGE_TYPE_KEY) return false;
+  if (isHitToErrorChange(review)) return false;
+  const imp = scoringStatImpact(review);
+  return !imp.batting && !imp.pitching;
 }
 
 /** Hit / error / out / other — from the official registry flags + result.isOut. */
@@ -1190,7 +1356,15 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
       return;
     }
 
-    if (tracked.signature === signature) {
+    // Session 5: a change of batting R / RBI or of the pitcher's earned /
+    // unearned runs WITHOUT a hit/error/out reclassification is a real
+    // scoring change too (MLB's log: "Vaughn loses an RBI and 1 run is
+    // changed to unearned") — it gets a row, like a reclassification.
+    const lastSnap = tracked.snapshot;
+    const statOnly = tracked.signature === signature
+      ? scoringStatDeltas(lastSnap, snapshot) : null;
+    const statOnlyChange = !!statOnly && (statOnly.batting.length > 0 || statOnly.pitching.length > 0);
+    if (tracked.signature === signature && !statOnlyChange) {
       // Classification unchanged. Annotation-only edits are irregularities
       // for review, not scoring-change rows.
       const notes = [];
@@ -1225,8 +1399,18 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
     const initialSnapshot = history.length ? history[0].from : tracked.snapshot;
     const previousSnapshot = history.length ? history[history.length - 1].to : tracked.snapshot;
     const summary = scoringChangeSummary(previousSnapshot, snapshot);
+    if (statOnlyChange) {
+      const step = [scoringStatHeadline(statOnly.batting), scoringStatHeadline(statOnly.pitching.filter((d) => d.stat !== 'H'))]
+        .filter(Boolean).join(' · ');
+      summary.headline = `${scoringEventLabel(snapshot)}: ${step}`;
+    }
     history.push({ at: now, from: initialSnapshot, to: snapshot, summary });
     const mechanism = scoringMechanism(play, context);
+    // Row id: `scoring-<ai>` for a reclassification (the id the official
+    // pipeline row uses for a ruling change), `stat-<ai>` for a stat-only
+    // change (the official pipeline's stat row id). Once a row exists it keeps
+    // its id, so later polls update the same row.
+    const rowId = tracked.rowId || `${statOnlyChange ? 'stat' : 'scoring'}-${idx}`;
 
     snapshots.set(String(idx), {
       snapshot,
@@ -1235,6 +1419,7 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
       lastObservedAt: now,
       history,
       rowCreated: tracked.rowCreated,
+      rowId,
     });
 
     const reviewedBefore = context.reviewedPlays instanceof Set &&
@@ -1262,8 +1447,14 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
     // The ROW always reads initial call → latest ruling (baseline → now);
     // the chain steps live in history / previousHeadline.
     const rowSummary = scoringChangeSummary(initialSnapshot, snapshot);
+    // Observed stat deltas, baseline → now (the row's classification for the
+    // main alerts vs the 🧮 Pitching Stats tab — scoringStatImpact).
+    const deltas = scoringStatDeltas(initialSnapshot, snapshot);
+    const statLine = [scoringStatHeadline(deltas.batting), scoringStatHeadline(deltas.pitching.filter((d) => d.stat !== 'H'))]
+      .filter(Boolean).join(' · ');
+    const classificationChanged = scoringSnapshotSignature(initialSnapshot) !== signature;
     const review = {
-      id: `scoring-${idx}`,
+      id: rowId,
       atBatIndex: idx,
       inning: typeof about.inning === 'number' ? about.inning : (initialSnapshot.inning || 1),
       halfInning: half || initialSnapshot.halfInning || 'top',
@@ -1278,7 +1469,10 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
       isOverturned: null,
       outcome: 'changed',
       outcomeLabel: 'Rescored',
-      reason: rowSummary.headline,
+      reason: classificationChanged
+        ? rowSummary.headline
+        : `${scoringEventLabel(snapshot)}: ${statLine || 'stat change'}`,
+      stats: { batting: deltas.batting, pitching: deltas.pitching, source: 'observed' },
       description: snapshot.description || snapshot.event,
       initialDescription: initialSnapshot.description || initialSnapshot.event || null,
       initial: rowSummary.initial,
@@ -3123,6 +3317,28 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     scorersInFlight: new Set(),
   };
   const errorWatch = new Map();   // `${gamePk}:${ai}` → Error Watch item (this date)
+  // Session 5: the pipeline's Error Watch file (every error of the season,
+  // with capture + official-log facts, /100 score and final status) —
+  // fetched lazily, relative URL (works on GitHub Pages), cached 10 min.
+  const pipelineWatch = { data: null, at: 0, loading: null };
+  function loadPipelineWatch() {
+    if (pipelineWatch.loading) return pipelineWatch.loading;
+    if (pipelineWatch.data && Date.now() - pipelineWatch.at < 10 * 60 * 1000) return Promise.resolve(pipelineWatch.data);
+    if (typeof fetch !== 'function') return Promise.resolve(null);
+    pipelineWatch.loading = fetch('data/model/error-watch.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null)
+      .then((d) => {
+        pipelineWatch.data = d; pipelineWatch.at = Date.now(); pipelineWatch.loading = null;
+        if (filter === 'errorwatch') { renderTabs(); renderFeed(); }
+        return d;
+      });
+    return pipelineWatch.loading;
+  }
+  function errorWatchRowsForDate() {
+    const plays = pipelineWatch.data && Array.isArray(pipelineWatch.data.plays) ? pipelineWatch.data.plays : [];
+    return mergeErrorWatchSources([...errorWatch.values()], plays, dateStr);
+  }
 
   function scoringModelModule() {
     return typeof window !== 'undefined' && window.MLBScoringModel ? window.MLBScoringModel : null;
@@ -3555,19 +3771,103 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     return row;
   }
 
+  /** Source badges: observed live / captured / official log / pipeline scan. */
+  function errorWatchSourceLine(sources, pipe) {
+    const line = el('div', 'feed-model-line feed-ew-sources');
+    const badge = (txt, cls, title) => { const b = el('span', `ew-src ${cls}`, txt); b.title = title; line.appendChild(b); };
+    if (sources.observed) badge('👁 Observed live', 'ew-src-observed', 'Seen on this page while polling the official play-by-play.');
+    if (sources.captured) {
+      const c = pipe.captured;
+      badge(`📡 Captured${typeof c.lagMin === 'number' ? ` ${Math.max(0, Math.round(c.lagMin))} min after the play` : ''}`, 'ew-src-captured',
+        'Recorded as first called by the live-capture pipeline (data/capture) — evidence that survives StatsAPI rewriting its history.' +
+        (c.firstDescription ? ` First call: ${c.firstDescription}` : ''));
+    }
+    if (sources.logged.length) badge(`📜 MLB log #${sources.logged.join(', #')}`, 'ew-src-logged', 'Listed on MLB\u2019s official scoring-changes log.');
+    if (sources.scanned) badge('🗂️ Pipeline scan', 'ew-src-scanned', 'Found by the official-data pipeline\u2019s game-by-game play-by-play scan (every 3 hours).');
+    if (pipe && pipe.vid) {
+      line.appendChild(el('a', 'ew-src ew-src-video', '🎬 Video', {
+        href: `https://baseballsavant.mlb.com/sporty-videos?playId=${encodeURIComponent(pipe.vid)}`, target: '_blank', rel: 'noopener',
+        title: 'The play\u2019s broadcast video on Baseball Savant',
+      }));
+    }
+    return line;
+  }
+
+  /** A play the pipeline logged that this page did not observe live. */
+  function pipelineWatchRow(pipe, sources) {
+    const changed = pipe.status === 'changed_to_hit' || pipe.status === 'changed_other';
+    const row = el('div', `feed-row feed-type-error_watch ${changed ? 'feed-outcome-changed' : 'feed-outcome-stands'}`);
+    row.dataset.key = `ew:${pipe.gamePk}:${pipe.ai}`;
+    const time = el('div', 'feed-time');
+    time.appendChild(el('span', 'feed-time-txt', pipe.date || ''));
+    row.appendChild(time);
+    const body = el('div', 'feed-body');
+    const head = el('div', 'feed-head');
+    const link = el('a', 'feed-game', '', { href: `game.html?gamePk=${pipe.gamePk}` });
+    link.appendChild(el('span', 'feed-game-txt', `${pipe.away || '?'} @ ${pipe.home || '?'}`));
+    head.appendChild(link);
+    head.appendChild(el('span', 'chip-review-type chip-error_watch', 'Error Watch'));
+    head.appendChild(el('span', 'feed-inn', `${pipe.half === 'top' ? '▲ Top' : '▼ Bot'} ${pipe.inning}`));
+    head.appendChild(el('span', `review-outcome-pill ${changed ? 'outcome-changed' : 'outcome-stands'}`,
+      pipe.status === 'changed_to_hit' ? `✏️ Now: ${pipe.event || 'a hit'}` : changed ? `✏️ Now: ${pipe.event || pipe.final}` : 'Stands as error'));
+    body.appendChild(head);
+    if (typeof pipe.score === 'number') {
+      const line = el('div', 'feed-model-line');
+      line.appendChild(el('span', 'feed-model-label', 'Chance this error becomes a hit'));
+      const chip = el('span', 'model-score', `${pipe.score}/100`);
+      chip.title = `Model probability ${typeof pipe.p === 'number' ? `${(pipe.p * 100).toFixed(1)}%` : '—'} (${pipe.scoreKind === 'out_of_fold' ? 'out-of-fold: this play was not used to fit the model that scored it' : 'in-sample'}), from the pipeline\u2019s last refresh.`;
+      line.appendChild(chip);
+      body.appendChild(line);
+    }
+    body.appendChild(el('div', 'feed-model-line feed-model-result',
+      `Final result: ${pipe.status === 'changed_to_hit' ? `changed to ${pipe.event || 'a hit'}` : changed ? `changed (${pipe.event || pipe.final})` : 'stands as an error'}` +
+      (!pipe.labelFinal && pipe.status === 'stands' ? ' — recent, may still change' : '')));
+    body.appendChild(el('div', 'feed-scoring-line', pipe.description || ''));
+    body.appendChild(errorWatchSourceLine(sources, pipe));
+    if (pipe.batter || pipe.pitcher) {
+      const foot = el('div', 'feed-foot');
+      if (pipe.batter) foot.appendChild(el('span', 'feed-player', `Batter: ${pipe.batter}`));
+      if (pipe.pitcher) foot.appendChild(el('span', 'feed-player', `Pitcher: ${pipe.pitcher}`));
+      body.appendChild(foot);
+    }
+    row.appendChild(body);
+    return row;
+  }
+
   function renderErrorWatch(wrap) {
+    loadPipelineWatch();
     const intro = el('div', 'model-note');
     intro.appendChild(el('span', null,
-      'Every play scored "reached on error" today, with the model\u2019s chance (0–100) that the official scorer changes it to a hit. Final rulings update live. '));
-    intro.appendChild(el('a', null, 'Season list, methodology & accuracy →', { href: 'scoring.html' }));
+      'Errors only: every play scored "reached on error" on this date — observed live on this page, captured by the live-capture pipeline, ' +
+      'listed on MLB\u2019s official log or found by the pipeline\u2019s game-by-game scan — with the model\u2019s chance (0–100) that the official scorer ' +
+      'changes it to a hit and its final result. Pending official-scorer rulings are listed below with their likely final ruling (single / error / out / fielder\u2019s choice …). '));
+    intro.appendChild(el('a', null, 'Season list, error log, methodology & accuracy →', { href: 'scoring.html' }));
     wrap.appendChild(intro);
-    const items = [...errorWatch.values()];
-    if (!items.length) {
-      wrap.appendChild(el('div', 'empty', 'No errors recorded yet for this date — they appear here as they happen.'));
+    const rows = errorWatchRowsForDate();
+    const pending = [...feedState.seen.values()].filter((e) => e.review && e.review.typeKey === 'pending_scoring');
+    if (!rows.length && !pending.length) {
+      wrap.appendChild(el('div', 'empty', pipelineWatch.loading
+        ? 'Loading the pipeline\u2019s error list…'
+        : 'No errors recorded yet for this date — they appear here as they happen.'));
       return;
     }
-    items.sort((a, b) => String(b.timestamp || '').localeCompare(String(a.timestamp || '')))
-      .forEach((item) => wrap.appendChild(errorWatchRow(item)));
+    rows.sort((a, b) => String((b.live && b.live.timestamp) || (b.pipe && b.pipe.date) || '')
+      .localeCompare(String((a.live && a.live.timestamp) || (a.pipe && a.pipe.date) || '')))
+      .forEach((r) => {
+        if (r.live) {
+          const node = errorWatchRow(r.live);
+          const body = node.children && node.children[1] ? node.children[1] : null;
+          if (body && body.appendChild) body.appendChild(errorWatchSourceLine(r.sources, r.pipe));
+          wrap.appendChild(node);
+        } else {
+          wrap.appendChild(pipelineWatchRow(r.pipe, r.sources));
+        }
+      });
+    if (pending.length) {
+      wrap.appendChild(el('div', 'model-note ew-pending-head',
+        `⚖️ Official-scorer pending rulings (${pending.length}) — chance of each final ruling, then the result once ruled`));
+      sortFeedEntries(pending).forEach((entry) => wrap.appendChild(feedRow(entry)));
+    }
   }
 
   /* -------------------------------------------------- run-at-risk tracking */
@@ -3651,16 +3951,24 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     // polls. Hit → error reversals are counted separately below: they live
     // in their own section, never in the primary alert system (session-3
     // charter).
-    const scEntries = entries.filter((e) => e.review.typeKey === 'scoring_change' && !isHitToErrorChange(e.review));
+    const scEntries = entries.filter((e) => isBattingStatChange(e.review));
     if (scEntries.length) {
       let irregularTotal = 0;
       scoringIrregularities.forEach((notes) => { irregularTotal += notes.length; });
       const item = stat('Scoring Changes', scEntries.length, 'stat-scoring-change');
-      item.title = `${scEntries.length} official scoring change${scEntries.length === 1 ? '' : 's'} tracked today — plays whose official hit/error/out ` +
-        'classification changed between polls (initial call and final ruling both observed). ' +
+      item.title = `${scEntries.length} official scoring change${scEntries.length === 1 ? '' : 's'} today that alter a batter\u2019s Runs, Hits or RBI — ` +
+        'the only scoring changes in the main alert system (session-5 charter). Initial call and final ruling both observed. ' +
         'Detected only by diffing the official play-by-play payload; the API carries no scoring-change marker. ' +
         `Official log: mlb.com/official-information/scoring-changes.` +
         (irregularTotal ? ` ${irregularTotal} irregularit${irregularTotal === 1 ? 'y' : 'ies'} flagged for review (see the Scoring Changes tab).` : '');
+      wrap.appendChild(item);
+    }
+    const pitchEntries = entries.filter((e) => isPitchingOnlyStatChange(e.review));
+    if (pitchEntries.length) {
+      const item = stat('Pitching Stats', pitchEntries.length, 'stat-pitching-change');
+      item.title = `${pitchEntries.length} scoring change${pitchEntries.length === 1 ? '' : 's'} today that alter only pitching stats ` +
+        '(hits allowed, walks, strikeouts, earned / unearned runs). Tracked in the 🧮 Pitching Stats tab — silent, ' +
+        'never in the main alerts, which carry only batting Runs / Hits / RBI changes.';
       wrap.appendChild(item);
     }
     const h2eEntries = entries.filter((e) => isHitToErrorChange(e.review));
@@ -3883,19 +4191,26 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       live: entries.filter((e) => e.review.inProgress && e.review.typeKey !== 'pending_scoring').length,
       runrisk: entries.filter((e) => runsRemovableFromReview(e.review) > 0).length,
       pending_scoring: entries.filter((e) => e.review.typeKey === 'pending_scoring').length,
-      scoring: entries.filter((e) => e.review.typeKey === 'scoring_change' && !isHitToErrorChange(e.review)).length,
+      scoring: entries.filter((e) => isBattingStatChange(e.review)).length,
       hiterror: entries.filter((e) => isHitToErrorChange(e.review)).length,
+      pitchstats: entries.filter((e) => isPitchingOnlyStatChange(e.review)).length,
+      otherrulings: entries.filter((e) => isOtherScoringChange(e.review)).length,
     };
     const tabs = [
       ['all', `All (${counts.all})`],
-      ['scoring', `✏️ Scoring Changes (${counts.scoring})`],
+      ['scoring', `✏️ Scoring Changes · R/H/RBI (${counts.scoring})`],
       // The hit → error section sits next to ✏️ Scoring Changes but never
       // inside it (session-3 charter): a confirmed single → error reversal
       // is listed here — with its pre-change chance and final ruling — and
       // nowhere in the primary alert system.
       ['hiterror', `📉 Hit → Error (${counts.hiterror})`],
+      // Session-5 charter: pitching stat changes (hits allowed, BB, K, earned
+      // / unearned runs) in their own silent section — never main alerts —
+      // and rulings that change no stat (e.g. single → double) likewise.
+      ['pitchstats', `🧮 Pitching Stats (${counts.pitchstats})`],
+      ['otherrulings', `🗂️ Other Rulings (${counts.otherrulings})`],
       ['pending_scoring', `⚖️ Scoring Pending (${counts.pending_scoring})`],
-      ...(scoringModelModule() ? [['errorwatch', `🎯 Error Watch (${errorWatch.size})`]] : []),
+      ...(scoringModelModule() ? [['errorwatch', `🎯 Error Watch (${errorWatchRowsForDate().length})`]] : []),
       ['abs', `ABS (${counts.abs})`],
       ['manager', `Challenges (${counts.manager})`],
       ['crew', `Reviews (${counts.crew})`],
@@ -3925,7 +4240,11 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
             ? 'No official scoring changes observed yet — the tracker snapshots every completed play and diffs each poll; when the official scorer changes a hit/error/out ruling, the initial call and final ruling appear here.'
             : filter === 'hiterror'
               ? 'No hit → error changes observed today — when a play first ruled a hit (usually a single) is officially changed to an error, it appears here with its pre-change chance and final ruling, and never in the primary alert feed.'
-              : 'No challenges or replay reviews in this category yet — events will appear here live.'));
+              : filter === 'pitchstats'
+                ? 'No pitching-only stat changes observed today — changes to hits allowed, walks, strikeouts or earned/unearned runs that leave the batter\u2019s runs, hits and RBI alone appear here, silently (never in the main alerts).'
+                : filter === 'otherrulings'
+                  ? 'No other rulings observed today — reclassifications that change no batting or pitching stat (e.g. a double changed to a single) appear here, silently.'
+                  : 'No challenges or replay reviews in this category yet — events will appear here live.'));
       return;
     }
     if (filter === 'scoring') renderScoringIrregularities(wrap);
@@ -3977,8 +4296,10 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     if (filter === 'live') return entry.review.inProgress && entry.review.typeKey !== 'pending_scoring';
     if (filter === 'runrisk') return runsRemovableFromReview(entry.review) > 0;
     if (filter === 'pending_scoring') return entry.review.typeKey === 'pending_scoring';
-    if (filter === 'scoring') return entry.review.typeKey === 'scoring_change' && !isHitToErrorChange(entry.review);
+    if (filter === 'scoring') return isBattingStatChange(entry.review);
     if (filter === 'hiterror') return isHitToErrorChange(entry.review);
+    if (filter === 'pitchstats') return isPitchingOnlyStatChange(entry.review);
+    if (filter === 'otherrulings') return isOtherScoringChange(entry.review);
     return entry.review.typeKey === filter;
   }
 
@@ -4074,6 +4395,18 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       // replaces the generic reason/description lines (which would only
       // duplicate the final ruling).
       body.appendChild(scoringChangeBlock(r));
+      // Session 5: what the change does to the box score — batting R/H/RBI
+      // (the main-alert criterion) and pitching stats (🧮 section).
+      const lines = scoringStatLines(r);
+      if (lines.batting || lines.pitching) {
+        const box = el('div', 'feed-stat-lines');
+        if (lines.batting) box.appendChild(el('div', 'feed-stat-line feed-stat-batting', `📊 Batting — ${lines.batting}`));
+        if (lines.pitching) box.appendChild(el('div', 'feed-stat-line feed-stat-pitching', `🧮 Pitching — ${lines.pitching}`));
+        box.title = r.stats && r.stats.source === 'official_log'
+          ? 'As stated in MLB\u2019s official scoring-changes log (parsed by the pipeline; the log\u2019s own words are on the row).'
+          : 'Observed: the play\u2019s official StatsAPI values before and after the change (result.rbi, scoring runners and their earned flag).';
+        body.appendChild(box);
+      }
       const model = modelBlockForEntry(entry);
       if (model) body.appendChild(model);
     } else {
@@ -4227,6 +4560,24 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       flag.title = 'Flagged for review — shown exactly as observed, never corrected or guessed.';
       block.appendChild(flag);
     }
+    // Session 5: links for manual review — the official log line this row
+    // came from, and the play's video (Savant sporty-videos). Only the two
+    // official hosts are ever linked.
+    const links = el('div', 'feed-scoring-line feed-scoring-links');
+    const safe = (u) => typeof u === 'string' && /^https:\/\/(www\.mlb\.com|baseballsavant\.mlb\.com)\//.test(u);
+    let nLinks = 0;
+    if (r.official && safe(r.official.url)) {
+      const a = el('a', null, `📜 MLB official log #${r.official.seq}`, { href: r.official.url, target: '_blank', rel: 'noopener' });
+      if (r.official.raw) a.title = r.official.raw;
+      links.appendChild(a);
+      nLinks += 1;
+    }
+    if (safe(r.video)) {
+      if (nLinks) links.appendChild(el('span', null, ' · '));
+      links.appendChild(el('a', null, '🎬 Video (Baseball Savant)', { href: r.video, target: '_blank', rel: 'noopener', title: 'The play\u2019s broadcast video on baseballsavant.mlb.com' }));
+      nLinks += 1;
+    }
+    if (nLinks) block.appendChild(links);
     return block;
   }
 
@@ -4564,6 +4915,11 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       buildScoringSnapshot, scoringSnapshotSignature, scoringCategory,
       scoringEventLabel, scoringInningLabel, scoringMechanism,
       scoringChangeSummary, mergeScoringChanges, finalScanDecision,
+      // Session 5: stat impact (main alerts = batting R/H/RBI only)
+      scoringStatDeltas, scoringStatHeadline, scoringStatImpact, scoringStatLines,
+      isBattingStatChange, isPitchingOnlyStatChange, isOtherScoringChange,
+      mergeErrorWatchSources,
+      SCORING_WALK_EVENT_TYPES, SCORING_STRIKEOUT_EVENT_TYPES,
       // Feed-log persistence (pure layer — every tracked entry survives a
       // refresh / revisit via a per-date localStorage log)
       FEED_LOG_VERSION, FEED_LOG_KEY_PREFIX, FEED_LOG_INDEX_KEY,

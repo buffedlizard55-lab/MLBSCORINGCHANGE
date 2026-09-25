@@ -102,13 +102,78 @@ const FLAG_TEXT = {
 const SHOWN_FLAG = /^(current_ruling_mismatch|batter_not_found|no_game_found|date_mismatch|date_recovered|inning_mismatch|unknown_team|ambiguous|chain)/;
 
 /**
+ * The official log's stat effects (pipeline/lib/stat-effects.mjs, stored on
+ * the entry as `stats`) in the feed row's shape: { batting, pitching,
+ * source: 'official_log' }. Each delta keeps the log clause it came from.
+ * Null when the entry was not parsed (older data) — the feed then classifies
+ * the row from its registry event types (scoringStatImpact).
+ */
+function statsForRow(entry) {
+  const st = entry && entry.stats;
+  if (!st || !Array.isArray(st.batting) || !Array.isArray(st.pitching)) return null;
+  const pick = (d) => ({
+    stat: d.stat,
+    delta: typeof d.delta === 'number' ? d.delta : null,
+    ...(typeof d.old === 'number' ? { from: d.old } : {}),
+    ...(typeof d.now === 'number' ? { to: d.now } : {}),
+    player: d.player || null,
+    playerId: d.playerId ?? null,
+    evidence: d.evidence || null,
+  });
+  return { batting: st.batting.map(pick), pitching: st.pitching.map(pick), source: 'official_log' };
+}
+
+/** "RBI −1 · ER −1 · UER +1" from the log's deltas (pitching H is implied by batting H). */
+function statSummary(stats) {
+  const signed = (n) => (n > 0 ? `+${n}` : n < 0 ? `\u2212${Math.abs(n)}` : '0');
+  const one = (d) => (typeof d.delta === 'number' ? `${d.stat} ${signed(d.delta)}` : `${d.stat} changed`);
+  const seen = new Set(stats.batting.map((d) => d.stat));
+  return [...stats.batting.map(one), ...stats.pitching.filter((d) => !(d.stat === 'H' && seen.has('H'))).map(one)].join(' · ');
+}
+
+/** Entry kinds that restate a ruling — everything else can be a stat row. */
+const STAT_ROW_KINDS = new Set(['earned_run', 'rbi', 'error_added', 'error_removed', 'baserunning',
+  'wild_pitch_passed_ball', 'sacrifice_credit', 'fielding_credit', 'double_play_credit', 'unclassified']);
+
+/**
+ * Session 5: a verified official entry that changes batting R/H/RBI or
+ * pitching stats WITHOUT a hit/error/out reclassification (e.g. 2026 #249,
+ * "Vaughn loses an RBI and 1 run is changed to unearned against Andrew
+ * Abbott") becomes its own row, id `stat-<atBatIndex>` — the id the live
+ * feed mints for a stat-only change on the same play, so the two merge.
+ * The ruling shown is the play's CURRENT StatsAPI ruling on both sides.
+ */
+export function buildOfficialStatRow(entry, { season, sourceUrl = null, now = Date.now() } = {}) {
+  const cls = entry && entry.cls;
+  const link = entry && entry.link;
+  if (!cls || !STAT_ROW_KINDS.has(cls.kind) || !link) return null;
+  if (link.gamePk == null || link.atBatIndex == null) return null;
+  if ((link.flags || []).includes('current_ruling_mismatch')) return null;
+  const stats = statsForRow(entry);
+  if (!stats || (!stats.batting.length && !stats.pitching.length)) return null;
+  const base = buildOfficialFeedRow({
+    ...entry,
+    cls: { ...cls, kind: 'ruling_change', initial: 'stat', final: 'stat', initialHitType: null, finalHitType: null, flags: [] },
+  }, { season, sourceUrl, now, statRow: true });
+  if (!base) return null;
+  const side = sideFor(null, null, link.currentEvent || null, false, link.currentEventType || null);
+  base.review.id = `stat-${link.atBatIndex}`;
+  base.review.initial = { ...side };
+  base.review.final = { ...side };
+  base.review.reason = `${side.label}: ${statSummary(stats)}`;
+  base.review.outcomeLabel = 'Stat change';
+  base.review.stats = stats;
+  return base;
+}
+
+/**
  * Build one feed-log row for one official entry, or null when the entry is not
  * a verified ruling change (the caller counts and reports those).
  *
  * @param {object} entry    one entry of data/official/scoring-changes-<s>.json
  * @param {object} opts     { season, sourceUrl, now }
  */
-export function buildOfficialFeedRow(entry, { season, sourceUrl = null, now = Date.now() } = {}) {
+export function buildOfficialFeedRow(entry, { season, sourceUrl = null, now = Date.now(), statRow = false } = {}) {
   const cls = entry && entry.cls;
   const link = entry && entry.link;
   if (!cls || cls.kind !== 'ruling_change' || !link) return null;
@@ -131,7 +196,7 @@ export function buildOfficialFeedRow(entry, { season, sourceUrl = null, now = Da
   // reads the classifier) lists the entry; the feed's own hit → error rule
   // reads observed event types only, so the row says what the log ruled and
   // what StatsAPI coded instead of hiding either.
-  if (cls.flags.includes('hitToError') && final.eventType !== 'field_error') {
+  if (!statRow && cls.flags.includes('hitToError') && final.eventType !== 'field_error') {
     flags.push(`MLB’s official log rules this a fielding error; StatsAPI codes the play as `
       + `${link.currentEvent || final.eventType || 'another event'} (compatible coding) — the log’s ruling puts it in the Hit → Error section`);
   }
@@ -199,12 +264,18 @@ export function buildOfficialFeedRow(entry, { season, sourceUrl = null, now = Da
     isPitch: false,
     pitchVelo: null,
     batter: link.batterName ? { id: link.batterId != null ? link.batterId : null, fullName: link.batterName } : null,
-    pitcher: null,
+    // The linked play's pitcher (StatsAPI matchup.pitcher, set by the
+    // pipeline on link.pitcherName) — a fact of the play, never inferred.
+    pitcher: link.pitcherName ? { id: link.pitcherId != null ? link.pitcherId : null, fullName: link.pitcherName } : null,
     countBefore: null,
     countAfter: null,
     atBatCount: null,
     challenger: null,
     scoreImpact: null,
+    // Session 5: the official log's stat effects (null for older data), and
+    // the play's video evidence (Savant sporty-videos?playId=…).
+    ...(statsForRow(entry) && !statRow ? { stats: statsForRow(entry) } : {}),
+    ...(link.playId ? { video: `https://baseballsavant.mlb.com/sporty-videos?playId=${encodeURIComponent(link.playId)}` } : {}),
     // Provenance (additive): the official line this row was built from.
     official: {
       season,
@@ -238,6 +309,8 @@ export function rowsFromOfficialSeason(data, { season, now = Date.now() } = {}) 
   for (const e of entries) {
     const row = buildOfficialFeedRow(e, { season, sourceUrl, now });
     if (row) { rows.push(row); continue; }
+    const statRow = buildOfficialStatRow(e, { season, sourceUrl, now });
+    if (statRow) { rows.push(statRow); continue; }
     if (!e || !e.cls) { bump('no classification'); continue; }
     if (e.cls.kind !== 'ruling_change') { bump(`${e.cls.kind} (not a ruling change)`); continue; }
     const flags = (e.link && e.link.flags) || [];
@@ -253,9 +326,17 @@ export function rowsFromOfficialSeason(data, { season, now = Date.now() } = {}) 
     const prev = byKey.get(key);
     const seq = (row.review.official && row.review.official.seq) || 0;
     const prevSeq = prev && prev.review.official ? prev.review.official.seq : -1;
+    // Two official entries on one play (e.g. an RBI entry and an earned-run
+    // entry) each state part of the change: their stat deltas are unioned
+    // (each keeps its own evidence clause), never one dropped for the other.
+    const unionStats = (a, b) => (a && b
+      ? { batting: [...a.batting, ...b.batting], pitching: [...a.pitching, ...b.pitching], source: 'official_log' }
+      : a || b || null);
     if (!prev || seq >= prevSeq) {
       const changeCount = (prev ? prev.review.changeCount : 0) + 1;
       if (prev) {
+        const u = unionStats(prev.review.stats, row.review.stats);
+        if (u) row.review.stats = u;
         row.review.changeCount = changeCount;
         row.review.previousHeadline = prev.review.reason;
         row.review.flags = row.review.flags.concat(prev.review.flags)
@@ -267,6 +348,8 @@ export function rowsFromOfficialSeason(data, { season, now = Date.now() } = {}) 
     } else {
       prev.review.changeCount += 1;
       prev.review.previousHeadline = row.review.reason;
+      const u = unionStats(prev.review.stats, row.review.stats);
+      if (u) prev.review.stats = u;
     }
   }
   return { rows: [...byKey.values()], skipped };
@@ -281,7 +364,8 @@ function entryKey(entry) {
 }
 
 /** Fields an incoming row never claims when it cannot state them. */
-const KEEP_EXISTING_WHEN_NULL = ['initial', 'final', 'description', 'initialDescription', 'official', 'previousHeadline'];
+const KEEP_EXISTING_WHEN_NULL = ['initial', 'final', 'description', 'initialDescription', 'official', 'previousHeadline',
+  'batter', 'pitcher', 'stats', 'video'];
 /** Fields a merge unions instead of replacing. */
 const UNION_FIELDS = ['flags'];
 

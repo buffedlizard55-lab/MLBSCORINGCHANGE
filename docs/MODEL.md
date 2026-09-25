@@ -341,3 +341,52 @@ changed. `pipeline/capture.mjs` does that:
 - **Per-scorer table** on the site: plays, changes, expected, O/E and O/E shrunk toward 1
   ((O + 10) / (E + 10)). Read it with the test: when the test finds no difference, the spread is
   mostly chance.
+
+## 18. Stat effects of each change (session 5)
+
+**Question.** Which box-score stats does a scoring change alter? The session-5 charter puts only
+changes to a batter's **Runs, Hits or RBI** in the main alert system, and pitching changes (hits
+allowed, BB, K, earned / unearned runs) in a separate section.
+
+**Official log** (`pipeline/lib/stat-effects.mjs`, run on every entry by `pipeline/run.mjs`, stored
+as `entry.stats`). Each sentence of the entry is read for stated effects — *"loses an RBI"*, *"now
+has 2 RBI"*, *"1 run is changed to unearned against Andrew Abbott"*, *"is no longer charged with a
+walk"*, … — and every delta keeps the clause it came from (`evidence`) and the rule that matched
+(`rule`). A ruling change also implies stats by its categories (error → single: H +1 for the batter
+and hits allowed +1 for the pitcher; walk → hit by pitch: BB −1). Nothing is guessed: a stated
+change without a count is `delta: null`; a run made unearned **for the team** only changes no
+pitcher's line; a sentence the parser does not understand becomes the `stat_effect_unparsed`
+irregularity. RBI stated as a total (*"now has an RBI"*) is compared with the play's current
+StatsAPI `result.rbi` (`statsapiAgrees`), and an RBI stated only on the original ruling is settled
+from StatsAPI (`rule: …+statsapi_now`). Players come from the text; the linked play's batter and
+pitcher are used only when the link is verified (no `current_ruling_mismatch`). Results at the time
+of writing: 693 entries, 410 with a batting change, 479 with a pitching change, 0 unparsed
+(`tools/stat-effects-test.mjs`, real entries including 2026 #249, #90 and 2024 #181, #196).
+
+**Live** (`assets/js/reviews-feed.js`). The tracker's per-play snapshot now also holds the runs
+scored on the play and how many are earned (`runners[].details.earned`, the pitcher-level flag —
+verified on game 823736, where Turang's run is `earned:false` and `teamUnearned:true`).
+`scoringStatDeltas(before, after)` compares two observed snapshots: H (hit ↔ not), R (runs scored),
+RBI (`result.rbi`), and for pitching H, BB, K, ER, UER. A change of RBI / R / earned runs without a
+reclassification now mints a row (`stat-<ai>`). Counts missing on either side are not compared.
+
+**One classification** (`scoringStatImpact`): a row's `stats` decide; without them (older logs)
+the registry event types do; a malformed row fails open. `isBattingStatChange` → main feed and chime;
+`isPitchingOnlyStatChange` → 🧮 (silent); `isOtherScoringChange` → 🗂️ (silent); hit → error keeps its
+own 📉 section.
+
+## 19. Error Log — every error of every game (session 5)
+
+For each season, `pipeline/lib/error-events.mjs` reads the pipeline's compact play-by-play records of
+**every completed game** (the same records the models use) and writes
+`data/model/error-events-<season>.json`: one scan row per game (plate appearances, error plays,
+errors; `scanned: false` when the game's play-by-play could not be fetched — retried next run) and
+one event per play with an error credit (`f_fielding_error`, `f_throwing_error`,
+`f_error_dropped_ball`, `c_catcher_interf`, `f_defensive_shift_violation_error` — every error code
+seen in 2024–2026) or whose original ruling was a batter-reached error. Each event has its scope
+(batter reached / on a hit / other), the credited position and fielder id, the runner, the pitcher,
+earned / unearned / team-unearned runs on the play, its official-log entries, Savant xBA when
+fetched, and `vid` — the StatsAPI `playEvents[].playId`, whose Baseball Savant clip
+(`https://baseballsavant.mlb.com/sporty-videos?playId=<vid>`) is the video evidence. Batter-reached
+events carry exactly the Error Watch score (same model, same captured error type) and final status.
+Verified end to end on the real game 823736 (`tools/error-events-test.mjs`).

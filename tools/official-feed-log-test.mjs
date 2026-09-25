@@ -25,8 +25,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import {
-  buildOfficialFeedRow, mergeRowsIntoFeedLog, payloadEquals, rowsFromOfficialSeason,
+  buildOfficialFeedRow, buildOfficialStatRow, mergeRowsIntoFeedLog, payloadEquals, rowsFromOfficialSeason,
 } from '../pipeline/lib/official-feed-row.mjs';
+import { extractGamePlays } from '../pipeline/lib/statsapi.mjs';
+import { statEffects } from '../pipeline/lib/stat-effects.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const readJSON = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'));
@@ -66,12 +68,17 @@ assert.ok(rows.length > 100, `rows built (${rows.length})`);
 assert.ok(Object.keys(skipped).length > 0, 'entries deliberately left out are counted, not silently dropped');
 for (const row of rows) {
   assert.equal(typeof row.review.id, 'string');
-  assert.ok(row.review.id.startsWith('scoring-'), 'id matches the browser’s own scheme');
-  assert.equal(row.review.id, `scoring-${row.review.atBatIndex}`, 'id is derived from the at-bat index');
+  assert.ok(/^(scoring|stat)-/.test(row.review.id), 'id matches the browser’s own scheme');
+  assert.ok(row.review.id === `scoring-${row.review.atBatIndex}` || row.review.id === `stat-${row.review.atBatIndex}`,
+    'id is derived from the at-bat index (scoring- = reclassification, stat- = stat-only change)');
   assert.equal(row.review.typeKey, 'scoring_change');
   assert.equal(row.gamePk, row.review.official && row.gamePk, 'the row belongs to the linked game');
   assert.ok(row.gameDate && /^\d{4}-\d{2}-\d{2}$/.test(row.gameDate), 'game date present');
-  assert.equal(row.review.pitcher, null, 'no pitcher is invented');
+  {
+    const src = official2026.entries.find((x) => x.seq === row.review.official.seq);
+    assert.equal(row.review.pitcher ? row.review.pitcher.fullName : null, (src && src.link.pitcherName) || null,
+      'the pitcher is the linked play’s StatsAPI pitcher or nothing — never invented');
+  }
   assert.equal(row.review.scoreAfter, null, 'no score is invented');
   assert.equal(row.review.initialScoreAfter, null);
   assert.equal(row.review.initialDescription, null, 'no initial-call description is invented');
@@ -133,6 +140,69 @@ for (const row of h2eRows) {
 for (const row of e2hRows) {
   assert.equal(feed.visibleInAllFeed(row.review), true, 'an error → hit row stays in the All feed');
   assert.equal(feed.shouldAlertForReview(row.review), true, 'error → hit keeps the primary alert');
+}
+
+section('session 5: stat changes — batting R/H/RBI in the main alerts, pitching in 🧮 only');
+{
+  // REAL: official 2026 #249 (the user's own example) + the REAL linked play
+  // (tools/fixtures/statsapi-823736-pbp-ab6-7.json, at-bat 7). The link
+  // facts the session-5 pipeline adds are taken from that play verbatim.
+  const fx = readJSON('tools/fixtures/statsapi-823736-pbp-ab6-7.json');
+  const [rec] = extractGamePlays(fx, 823736).filter((p) => p.ai === 7);
+  const e249 = JSON.parse(JSON.stringify(official2026.entries.find((e) => e.seq === 249)));
+  Object.assign(e249.link, {
+    pitcherName: rec.pn, pitcherId: rec.p, playId: rec.vid,
+    currentRbi: rec.rbi, currentEarnedRuns: rec.er || 0, currentUnearnedRuns: rec.ur || 0,
+  });
+  e249.stats = statEffects(e249, {
+    batterName: e249.link.batterName, batterId: e249.link.batterId,
+    pitcherName: rec.pn, pitcherId: rec.p, currentEventType: e249.link.currentEventType,
+  });
+  assert.equal(e249.cls.kind, 'error_added');
+  assert.equal(buildOfficialFeedRow(e249, { season: 2026 }), null, 'not a ruling change → no scoring- row');
+  const row = buildOfficialStatRow(e249, { season: 2026, sourceUrl: official2026.source.url, now: Date.UTC(2026, 8, 24) });
+  assert.ok(row, 'a verified stat-changing entry becomes a stat row');
+  assert.equal(row.review.id, 'stat-7');
+  assert.equal(row.gamePk, 823736);
+  assert.equal(row.review.reason, 'Double: RBI \u22121 · ER \u22121 · UER +1');
+  assert.equal(row.review.batter.fullName, 'Andrew Vaughn');
+  assert.equal(row.review.pitcher.fullName, 'Andrew Abbott', 'the linked play\u2019s StatsAPI pitcher');
+  assert.equal(row.review.video, 'https://baseballsavant.mlb.com/sporty-videos?playId=8552c454-1f49-3d56-a8cc-b6fd75ccb380');
+  assert.equal(row.review.official.seq, 249);
+  assert.equal(row.review.stats.source, 'official_log');
+  assert.deepEqual(row.review.stats.batting.map((d) => [d.stat, d.delta, d.player]), [['RBI', -1, 'Andrew Vaughn']]);
+  assert.deepEqual(row.review.stats.pitching.map((d) => [d.stat, d.delta, d.player]), [['ER', -1, 'Andrew Abbott'], ['UER', 1, 'Andrew Abbott']]);
+  assert.ok(row.review.stats.batting[0].evidence, 'each delta keeps the log clause it came from');
+  // The browser (restored from the static log) classifies it exactly as the
+  // pipeline flagged it: battingStat → main alerts.
+  const payload = mergeRowsIntoFeedLog(null, [row], '2026-09-11', Date.UTC(2026, 8, 24));
+  const restored = feed.restoreFeedLog(payload, '2026-09-11');
+  assert.equal(restored.entries.length, 1);
+  const rr = restored.entries[0].review;
+  assert.equal(e249.stats.battingChange, true);
+  assert.equal(feed.isBattingStatChange(rr), true, 'Vaughn loses an RBI → main alert system');
+  assert.equal(feed.shouldAlertForReview(rr), true);
+  assert.equal(feed.visibleInAllFeed(rr), true);
+  assert.equal(feed.scoringStatLines(rr).batting, 'Andrew Vaughn: RBI \u22121');
+  assert.equal(feed.scoringStatLines(rr).pitching, 'Andrew Abbott: ER \u22121 · UER +1');
+  // The same entry reduced to its pitching clause → 🧮 only, silent.
+  const pOnly = JSON.parse(JSON.stringify(e249));
+  pOnly.stats = { ...pOnly.stats, batting: [], battingChange: false };
+  const prow = buildOfficialStatRow(pOnly, { season: 2026 });
+  const pr = feed.restoreFeedLog(mergeRowsIntoFeedLog(null, [prow], '2026-09-11', 1), '2026-09-11').entries[0].review;
+  assert.equal(feed.isPitchingOnlyStatChange(pr), true);
+  assert.equal(feed.shouldAlertForReview(pr), false, 'pitching stat changes never populate the main alerts');
+  assert.equal(feed.visibleInAllFeed(pr), false);
+  // A second official entry on the same play unions its deltas.
+  const again = JSON.parse(JSON.stringify(e249));
+  again.seq = 250; again.stats.batting = [{ stat: 'R', delta: -1, player: 'Brice Turang' }]; again.stats.pitching = [];
+  const both = rowsFromOfficialSeason({ entries: [e249, again], source: official2026.source }, { season: 2026 }).rows;
+  assert.equal(both.length, 1, 'one row per play');
+  assert.deepEqual(both[0].review.stats.batting.map((d) => d.stat), ['RBI', 'R'], 'deltas of both entries kept');
+  // An entry whose play did not verify never becomes a stat row.
+  const unverified = JSON.parse(JSON.stringify(e249));
+  unverified.link.flags = ['current_ruling_mismatch'];
+  assert.equal(buildOfficialStatRow(unverified, { season: 2026 }), null);
 }
 
 section('the browser restores every appended row');

@@ -156,6 +156,7 @@ const REQUIRED = [
   ['runner', 'reviews.js:618 (runner.details.runner.fullName); reviews-feed.js footer/scoring labels'],
   ['isScoringEvent', 'reviews.js:517'],
   ['playIndex', 'reviews.js:531,534,541'],
+  ['earned', 'reviews-feed.js buildScoringSnapshot earnedRuns/unearnedRuns (runners[].details.earned — pitching ER ↔ UER changes)'],
 ];
 
 /* `fields` is a whitelist applied at any depth; extra leaf names are cheap

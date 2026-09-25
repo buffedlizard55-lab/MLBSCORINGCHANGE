@@ -25,7 +25,7 @@
     </div>
     <div id="date-label" class="date-label"></div>
     <div class="feed-controls">
-      <button id="sound-toggle-btn" class="btn btn-ghost" title="Toggle alert sound — a gentle raindrop chime for new challenges/reviews/boundary calls, official-scorer pending rulings and official scoring changes (not ABS, and hit → error changes stay silent in their own 📉 Hit → Error tab), and the same chime whenever an active review could remove a run already on the scoreboard">🔇 Sound Off</button>
+      <button id="sound-toggle-btn" class="btn btn-ghost" title="Toggle alert sound — a gentle raindrop chime for new challenges/reviews/boundary calls, official-scorer pending rulings and official scoring changes that alter a batter's runs, hits or RBI (not ABS; hit → error, pitching-only and stat-less changes stay silent in their own tabs), and the same chime whenever an active review could remove a run already on the scoreboard">🔇 Sound Off</button>
       <button id="notify-toggle-btn" class="btn btn-ghost" title="Toggle desktop notifications for run-at-risk reviews — a popup the moment an active review could take a run off the scoreboard">⚪ Run Alerts Off</button>
       <button id="refresh-btn" class="btn">Refresh</button>
       <span class="countdown" id="countdown" title="Seconds until the next poll"></span>
@@ -85,6 +85,12 @@
       scoring-change marker, so the initial call and the final ruling are known only from
       consecutive observations. Each row shows the observed initial call and the final ruling, the
       official score after the play, and an attribution note.
+      <strong>Main alerts = batting Runs / Hits / RBI.</strong> A scoring change reaches the All
+      feed, the ✏️ Scoring Changes · R/H/RBI tab and the chime only when it alters a batter's runs,
+      hits or RBI (e.g. an error changed to a single, or a batter losing an RBI). Changes that alter
+      only pitching stats — hits allowed, walks, strikeouts, earned / unearned runs — are listed
+      silently in 🧮 Pitching Stats, and rulings that change no stat (e.g. a double changed to a
+      single) in 🗂️ Other Rulings. Every scoring-change row shows its stat lines.
       <strong>Hit → error changes</strong> (a play first ruled a single, double or triple whose final
       ruling is an error) are the one scoring-change category kept OUT of the All feed, the ✏️
       Scoring Changes tab and the alert sounds: they live in their own 📉 Hit → Error tab — with

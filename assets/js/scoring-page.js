@@ -16,7 +16,14 @@
   let SEASONS = [new Date().getFullYear()];
   const TABS = [
     ['watch', '🎯 Error Watch'],
+    // Session 5: every error of every completed game (game-by-game scan),
+    // each with its video evidence.
+    ['errorlog', '📅 Error Log'],
     ['official', '📋 Official Changes'],
+    // Session-5 charter: batting R / H / RBI changes (the main alert
+    // criterion) and pitching stat changes, each in its own section.
+    ['stats', '📊 Stat Changes'],
+    ['pitching', '🧮 Pitching Stats'],
     // Session-3 charter: single → error changes get their own section. They
     // stay OUT of the live feed's primary alert system (All feed, ✏️ tab,
     // sounds); here they are a first-class, full-list section.
@@ -38,6 +45,10 @@
     watchFilter: { q: '', status: 'all', kind: 'all', sort: 'newest', shown: PAGE_SIZE },
     officialFilter: { q: '', type: 'all', shown: PAGE_SIZE },
     hitErrorFilter: { q: '', shown: PAGE_SIZE },
+    statFilter: { q: '', stat: 'all', shown: PAGE_SIZE },
+    pitchFilter: { q: '', stat: 'all', shown: PAGE_SIZE },
+    errorLog: {},
+    errorLogFilter: { q: '', scope: 'all', status: 'all', shown: PAGE_SIZE },
   };
 
   /* ------------------------------------------------------------ helpers */
@@ -61,6 +72,9 @@
   const gamedayUrl = (pk) => `https://www.mlb.com/gameday/${pk}`;
   const savantUrl = (pk) => `https://baseballsavant.mlb.com/gamefeed?gamePk=${pk}`;
   const statsapiUrl = (pk) => `https://statsapi.mlb.com/api/v1/game/${pk}/playByPlay`;
+  // Video evidence: the play's broadcast clip on Baseball Savant, from the
+  // StatsAPI playEvents[].playId (verified: game 823736 at-bat 7).
+  const videoUrl = (playId) => `https://baseballsavant.mlb.com/sporty-videos?playId=${encodeURIComponent(playId)}`;
   const scheduleUrl = (date) => `https://statsapi.mlb.com/api/v1/schedule?sportId=1&date=${date}`;
   const pct = (x, d = 1) => (typeof x === 'number' ? `${(x * 100).toFixed(d)}%` : '—');
   const num = (x) => (typeof x === 'number' ? x.toLocaleString() : '—');
@@ -149,7 +163,7 @@
     if (season && /^20\d\d$/.test(season)) state.season = Number(season);
   }
   function writeHash() {
-    const h = (state.tab === 'official' || state.tab === 'hiterror')
+    const h = ['official', 'hiterror', 'stats', 'pitching', 'errorlog'].includes(state.tab)
       ? `#${state.tab}/${state.season}` : `#${state.tab}`;
     if (window.location.hash !== h) window.history.replaceState(null, '', h);
   }
@@ -257,6 +271,9 @@
     if (state.tab === 'watch') return renderWatch(wrap);
     if (state.tab === 'official') return renderOfficial(wrap);
     if (state.tab === 'hiterror') return renderHitError(wrap);
+    if (state.tab === 'stats') return renderStatChanges(wrap, 'batting');
+    if (state.tab === 'pitching') return renderStatChanges(wrap, 'pitching');
+    if (state.tab === 'errorlog') return renderErrorLog(wrap);
     if (state.tab === 'model') return renderModel(wrap);
     return renderIrregularities(wrap);
   }
@@ -391,6 +408,7 @@
     const xba = savantXbaText(p.savant);
     if (xba) body.appendChild(el('div', 'sc-bb sc-savant-xba', xba));
     const links = el('div', 'sc-links');
+    if (p.vid) links.appendChild(ext('🎬 Video', videoUrl(p.vid)));
     links.appendChild(ext('Gameday', gamedayUrl(p.gamePk)));
     links.appendChild(ext('Savant', savantUrl(p.gamePk)));
     links.appendChild(ext('StatsAPI', statsapiUrl(p.gamePk)));
@@ -459,7 +477,19 @@
     }
   }
 
-  function officialRow(e, src, flagged) {
+  /** "RBI −1 · ER −1" for one family of an entry's parsed stat effects. */
+  function statLine(list) {
+    const signed = (n) => (n > 0 ? `+${n}` : n < 0 ? `\u2212${Math.abs(n)}` : '0');
+    const byPlayer = new Map();
+    (list || []).forEach((d) => {
+      const who = d.player || '';
+      if (!byPlayer.has(who)) byPlayer.set(who, []);
+      byPlayer.get(who).push(typeof d.delta === 'number' ? `${d.stat} ${signed(d.delta)}` : `${d.stat} changed`);
+    });
+    return [...byPlayer.entries()].map(([who, parts]) => `${who ? `${who}: ` : ''}${parts.join(' · ')}`).join('; ');
+  }
+
+  function officialRow(e, src, flagged, family = null) {
     const row = el('article', `sc-row sc-official ${flagged ? 'sc-flagged' : ''}`);
     const left = el('div', 'sc-row-score');
     if (e.model && typeof e.model.p === 'number') {
@@ -487,6 +517,22 @@
     body.appendChild(el('div', 'sc-desc', e.raw.replace(/^\d+[.)]\s*/, '')));
     const xba = savantXbaText(e.savant);
     if (xba) body.appendChild(el('div', 'sc-bb sc-savant-xba', xba));
+    // Session 5: what the entry changes in the box score, parsed from the
+    // log's own words (pipeline/lib/stat-effects.mjs; each delta keeps its
+    // clause as evidence — hover). Batting first (the main-alert criterion).
+    if (e.stats) {
+      const fams = family ? [family] : ['batting', 'pitching'];
+      fams.forEach((fam) => {
+        const list = e.stats[fam] || [];
+        if (!list.length) return;
+        const line = el('div', `sc-stat-line sc-stat-${fam}`, `${fam === 'batting' ? '📊 Batting' : '🧮 Pitching'} — ${statLine(list)}`);
+        line.title = list.map((d) => `${d.stat}: “${d.evidence || ''}”${d.statsapiAgrees === true ? ' — StatsAPI agrees' : d.statsapiAgrees === false ? ' — StatsAPI differs (flag)' : ''}`).join('\n');
+        body.appendChild(line);
+      });
+      if (e.stats.unparsed && e.stats.unparsed.length) {
+        body.appendChild(el('div', 'sc-warn', `⚑ Stat wording not understood: ${e.stats.unparsed.join(' | ')}`));
+      }
+    }
     const v = el('div', 'sc-verify');
     const L = e.link || {};
     if (L.atBatIndex != null) {
@@ -508,6 +554,7 @@
     body.appendChild(v);
     const links = el('div', 'sc-links');
     links.appendChild(ext('MLB log', src.url || OFFICIAL_PAGE));
+    if (L.playId) links.appendChild(ext('🎬 Video', videoUrl(L.playId)));
     if (L.gamePk) {
       links.appendChild(ext('Gameday', gamedayUrl(L.gamePk)));
       links.appendChild(ext('StatsAPI', statsapiUrl(L.gamePk)));
@@ -577,6 +624,211 @@
       more.addEventListener('click', () => { f.shown += PAGE_SIZE; renderPanel(); });
       wrap.appendChild(more);
     }
+  }
+
+  /* ------------------------------------ stat changes (session 5 charter)
+   * 📊 Stat Changes: official entries that alter a batter's Runs, Hits or
+   * RBI — the only scoring changes the live feed puts in its main alert
+   * system (hit → error entries stay in 📉 Hit → Error). 🧮 Pitching Stats:
+   * every entry that alters a pitching stat (hits allowed, BB, K, earned /
+   * unearned runs) — a separate section that never feeds the main alerts. */
+  async function renderStatChanges(wrap, family) {
+    const f = family === 'batting' ? state.statFilter : state.pitchFilter;
+    const tab = family === 'batting' ? 'stats' : 'pitching';
+    const season = state.season;
+    const rerender = () => { f.shown = PAGE_SIZE; renderPanel(); };
+    const loading = el('div', 'empty', `Loading ${season} official scoring changes…`);
+    wrap.appendChild(loading);
+    const data = await loadSeason(season);
+    if (state.tab !== tab || state.season !== season) return;
+    wrap.removeChild(loading);
+    const src = data.source || {};
+    const help = el('p', 'sc-help');
+    help.appendChild(el('span', null, family === 'batting'
+      ? `Every official ${season} scoring change that alters a batter\u2019s Runs, Hits or RBI — the only scoring changes in the live feed\u2019s main alert system. ` +
+        'The change is read from MLB\u2019s own words (hover a stat line for the clause it came from); an RBI stated as a new total is checked against the play\u2019s current StatsAPI RBI. ' +
+        'Hit → error changes are listed in their own 📉 section instead. Source: '
+      : `Every official ${season} scoring change that alters a pitching stat — hits allowed, walks, strikeouts, earned and unearned runs. ` +
+        'Kept in this separate section by design: pitching-only changes never populate the live feed\u2019s main alerts (its silent 🧮 Pitching Stats tab carries them live). ' +
+        'A run made unearned for the team only changes no pitcher\u2019s line and is not listed. Source: '));
+    help.appendChild(ext(src.archivedAt ? `Internet Archive capture (${src.archivedAt.slice(0, 10)}) of the MLB page` : 'mlb.com official scoring changes', src.url || OFFICIAL_PAGE));
+    wrap.appendChild(help);
+    const statOptions = family === 'batting'
+      ? [['all', 'R, H and RBI'], ['R', 'Runs'], ['H', 'Hits'], ['RBI', 'RBI']]
+      : [['all', 'All pitching stats'], ['ER', 'Earned runs'], ['UER', 'Unearned runs'], ['H', 'Hits allowed'], ['BB', 'Walks'], ['K', 'Strikeouts']];
+    wrap.appendChild(controls([
+      select(SEASONS.map((s) => [String(s), `${s} season`]), String(season), (v) => { state.season = Number(v); rerender(); }, 'Season'),
+      select(statOptions, f.stat, (v) => { f.stat = v; rerender(); }, 'Stat'),
+      search(f.q, 'Search player, team or text…', (v) => { f.q = v; rerender(); }),
+    ]));
+    if (data.error) {
+      wrap.appendChild(el('div', 'empty', `This season\u2019s list is not available (${data.error}).`));
+      return;
+    }
+    const parsed = (data.entries || []).some((e) => e.stats);
+    if (!parsed) {
+      wrap.appendChild(el('div', 'empty', 'Stat effects have not been published for this season yet — they appear after the next pipeline refresh.'));
+      return;
+    }
+    const q = f.q.trim().toLowerCase();
+    const rows = (data.entries || []).filter((e) => {
+      if (!e.stats) return false;
+      const flags = (e.cls && e.cls.flags) || [];
+      if (family === 'batting' && (!flags.includes('battingStat') || flags.includes('hitToError'))) return false;
+      if (family === 'pitching' && !flags.includes('pitchingStat')) return false;
+      if (f.stat !== 'all' && !(e.stats[family] || []).some((d) => d.stat === f.stat)) return false;
+      return !q || String(e.raw).toLowerCase().includes(q);
+    }).slice().reverse();
+    const total = rows.reduce((m, e) => { (e.stats[family] || []).forEach((d) => { m[d.stat] = (m[d.stat] || 0) + 1; }); return m; }, {});
+    wrap.appendChild(el('div', 'sc-count', `Showing ${Math.min(rows.length, f.shown)} of ${rows.length} entries (newest first)` +
+      (Object.keys(total).length ? ` · ${Object.entries(total).map(([k, n]) => `${k} ${n}`).join(' · ')}` : '')));
+    if (!rows.length) {
+      wrap.appendChild(el('div', 'empty', 'No entries match.'));
+      return;
+    }
+    const list = el('div', 'sc-list');
+    rows.slice(0, f.shown).forEach((e) => list.appendChild(officialRow(e, src, isFlagged(e), family)));
+    wrap.appendChild(list);
+    if (rows.length > f.shown) {
+      const more = el('button', 'btn sc-more', `Show ${Math.min(PAGE_SIZE, rows.length - f.shown)} more`, { type: 'button' });
+      more.addEventListener('click', () => { f.shown += PAGE_SIZE; renderPanel(); });
+      wrap.appendChild(more);
+    }
+  }
+
+  /* --------------------------------------------- error log (session 5)
+   * Every error of every completed game of the season, from a game-by-game
+   * scan of the final play-by-play (data/model/error-events-<season>.json,
+   * pipeline/lib/error-events.mjs), with each game's scan coverage and the
+   * video evidence of each play. Plays the batter reached on keep the same
+   * /100 chance and final status as Error Watch. */
+  async function loadErrorLog(season) {
+    if (state.errorLog[season]) return state.errorLog[season];
+    try {
+      state.errorLog[season] = await getJSON(`data/model/error-events-${season}.json`);
+    } catch (err) {
+      state.errorLog[season] = { error: String(err.message || err), events: [], games: [] };
+    }
+    return state.errorLog[season];
+  }
+  const SCOPE_TEXT = {
+    batter_reached: 'Batter reached on the error',
+    on_hit: 'Error on a hit (runner advanced / scored)',
+    other: 'Error on another play',
+  };
+  const CREDIT_TEXT = {
+    fielding: 'fielding error', throwing: 'throwing error', missed_catch: 'missed-catch error',
+    catcher_interference: 'catcher\u2019s interference', shift_violation: 'defensive-shift violation',
+  };
+  async function renderErrorLog(wrap) {
+    const f = state.errorLogFilter;
+    const season = state.season;
+    const rerender = () => { f.shown = PAGE_SIZE; renderPanel(); };
+    const loading = el('div', 'empty', `Loading the ${season} error log…`);
+    wrap.appendChild(loading);
+    const data = await loadErrorLog(season);
+    if (state.tab !== 'errorlog' || state.season !== season) return;
+    wrap.removeChild(loading);
+    const help = el('p', 'sc-help');
+    help.appendChild(el('span', null,
+      `Every error charged in every completed ${season} game, found by scanning each game\u2019s final official play-by-play (MLB StatsAPI) play by play — ` +
+      'errors the batter reached on, errors on hits that let a runner advance or score, and errors on other plays. ' +
+      'Each play links to its video on Baseball Savant and to the official log entry when MLB changed it. ' +
+      'Plays whose batter reached on an error carry the same chance of becoming a hit (out of 100) and final status as 🎯 Error Watch.'));
+    wrap.appendChild(help);
+    wrap.appendChild(controls([
+      select(SEASONS.map((s) => [String(s), `${s} season`]), String(season), (v) => { state.season = Number(v); rerender(); }, 'Season'),
+      select([['all', 'All errors'], ['batter_reached', 'Batter reached on error'], ['on_hit', 'Error on a hit'], ['other', 'Other plays'], ['official', 'In MLB\u2019s official log']],
+        f.scope, (v) => { f.scope = v; rerender(); }, 'Kind'),
+      select([['all', 'Any status'], ['stands', 'Stands as error'], ['changed_to_hit', 'Changed to a hit'], ['changed_other', 'Changed (other)']],
+        f.status, (v) => { f.status = v; rerender(); }, 'Status'),
+      search(f.q, 'Search player, team or play…', (v) => { f.q = v; rerender(); }),
+    ]));
+    if (data.error) {
+      wrap.appendChild(el('div', 'empty', `The ${season} error log is not available yet (${data.error}) — it is published by the next pipeline refresh.`));
+      return;
+    }
+    const sm = data.summary || {};
+    const unscanned = (data.games || []).filter((g) => !g.scanned);
+    const cov = el('div', 'sc-coverage');
+    cov.appendChild(el('span', unscanned.length ? 'sc-warn' : 'sc-ok',
+      `${unscanned.length ? '⚑' : '✓'} ${num(sm.gamesScanned)} of ${num(sm.games)} completed games scanned play by play`));
+    cov.appendChild(el('span', null, ` · ${num(sm.plateAppearances)} plate appearances · ${num(sm.events)} error plays · ${num(sm.errorCredits)} errors charged · ${num(sm.withVideo)} with video`));
+    if (data.generatedAt) cov.appendChild(el('span', null, ` · as of ${localDateTime(data.generatedAt)}`));
+    wrap.appendChild(cov);
+    if (unscanned.length) {
+      const miss = el('div', 'sc-warning', `⚑ ${unscanned.length} game(s) could not be scanned this refresh and are retried on the next: ` +
+        unscanned.slice(0, 12).map((g) => `${g.date} ${g.away || '?'}@${g.home || '?'} (${g.gamePk})`).join(', ') + (unscanned.length > 12 ? ', …' : ''));
+      wrap.appendChild(miss);
+    }
+    const q = f.q.trim().toLowerCase();
+    const rows = (data.events || []).filter((ev) => {
+      if (f.scope === 'official' ? !(ev.official || []).length : (f.scope !== 'all' && ev.scope !== f.scope)) return false;
+      if (f.status !== 'all' && ev.status !== f.status) return false;
+      return !q || [ev.batter, ev.pitcher, ev.away, ev.home, ev.description, ev.event, ...(ev.errors || []).map((x) => x.runner)]
+        .some((t) => String(t || '').toLowerCase().includes(q));
+    });
+    wrap.appendChild(el('div', 'sc-count', `Showing ${Math.min(rows.length, f.shown).toLocaleString()} of ${rows.length.toLocaleString()} error plays (newest first)`));
+    const bands = state.model && state.model.errorToHit && state.model.errorToHit.bands;
+    const list = el('div', 'sc-list');
+    rows.slice(0, f.shown).forEach((ev) => list.appendChild(errorLogRow(ev, bands)));
+    wrap.appendChild(list);
+    if (rows.length > f.shown) {
+      const more = el('button', 'btn sc-more', `Show ${Math.min(PAGE_SIZE, rows.length - f.shown)} more`, { type: 'button' });
+      more.addEventListener('click', () => { f.shown += PAGE_SIZE; renderPanel(); });
+      wrap.appendChild(more);
+    }
+  }
+
+  function errorLogRow(ev, bands) {
+    const row = el('article', `sc-row sc-errorlog ${ev.status ? `sc-status-${ev.status}` : ''}`);
+    const left = el('div', 'sc-row-score');
+    if (ev.model && typeof ev.model.p === 'number') {
+      const { chip, band } = scoreChip(ev.model.p, bands, 'Chance this error is changed to a hit');
+      left.appendChild(chip);
+      if (band) left.appendChild(el('div', `sc-band model-tone-${band.tone}`, band.label));
+    } else {
+      left.appendChild(el('span', 'sc-seq', ev.scope === 'on_hit' ? 'on hit' : ev.scope === 'other' ? 'other' : '—'));
+    }
+    row.appendChild(left);
+    const body = el('div', 'sc-row-body');
+    const head = el('div', 'sc-row-head');
+    head.appendChild(el('span', 'sc-date', shortDate(ev.date)));
+    head.appendChild(el('a', 'sc-matchup', `${ev.away || '?'} @ ${ev.home || '?'}`, { href: `game.html?gamePk=${ev.gamePk}` }));
+    head.appendChild(el('span', 'sc-inning', `${ev.half === 'top' ? 'Top' : 'Bot'} ${ev.inning}`));
+    if (ev.batter) head.appendChild(el('span', 'sc-player', ev.batter));
+    head.appendChild(el('span', 'sc-kind', SCOPE_TEXT[ev.scope] || ev.scope));
+    if (ev.status) {
+      const statusText = ev.status === 'changed_to_hit' ? `✏️ Changed to ${ev.event || 'a hit'}`
+        : ev.status === 'changed_other' ? `✏️ Changed: ${ev.event || ev.final}` : 'Stands as error';
+      head.appendChild(el('span', `review-outcome-pill ${ev.status === 'stands' ? 'outcome-stands' : 'outcome-changed'}`, statusText));
+    }
+    body.appendChild(head);
+    body.appendChild(el('div', 'sc-desc', ev.description || ev.event || ''));
+    const errs = (ev.errors || []).map((x) => `${CREDIT_TEXT[x.kind] || String(x.credit || '').replace(/_/g, ' ')}${x.pos ? ` (${x.pos})` : ''}` +
+      `${x.onBatter ? ' — batter reached' : x.runner ? ` — runner ${x.runner}` : ''}`);
+    const facts = [];
+    if (errs.length) facts.push(`Charged: ${errs.join('; ')}`);
+    else if (ev.status) facts.push('No error on the play now (the ruling was changed)');
+    if (ev.pitcher) facts.push(`Pitcher: ${ev.pitcher}`);
+    const runs = [];
+    if (ev.er) runs.push(`${ev.er} earned`);
+    if (ev.ur) runs.push(`${ev.ur} unearned${ev.tu ? ` (${ev.tu} team-unearned)` : ''}`);
+    if (runs.length) facts.push(`Runs on the play: ${runs.join(', ')}`);
+    body.appendChild(el('div', 'sc-bb', facts.join(' · ')));
+    const xba = savantXbaText(ev.savant);
+    if (xba) body.appendChild(el('div', 'sc-bb sc-savant-xba', xba));
+    (ev.official || []).forEach((o) => {
+      body.appendChild(el('div', 'sc-official-text', `Official log #${o.seq}: ${String(o.raw || '').replace(/^\d+[.)]\s*/, '')}`));
+    });
+    const links = el('div', 'sc-links');
+    if (ev.vid) links.appendChild(ext('🎬 Video', videoUrl(ev.vid)));
+    links.appendChild(ext('Gameday', gamedayUrl(ev.gamePk)));
+    links.appendChild(ext('StatsAPI', statsapiUrl(ev.gamePk)));
+    if ((ev.official || []).length) links.appendChild(ext(`MLB log #${ev.official.map((o) => o.seq).join(', #')}`, OFFICIAL_PAGE));
+    body.appendChild(links);
+    row.appendChild(body);
+    return row;
   }
 
   /* ----------------------------------------------------------- model */

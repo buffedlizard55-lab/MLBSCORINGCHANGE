@@ -183,3 +183,17 @@ scoring changes straight into those files:
 ## Verification limits (flagged for review)
 
 - **No live re-verification was possible in this session:** the sandbox has no external network (`curl https://statsapi.mlb.com/api/v1/eventTypes` → exit 35; `fetch` fails), so the registry/payload shapes above could not be re-fetched. All checks rest on the repo's live-verbatim fixtures (eventTypes + playByPlay captures of 2026-09-04, scoring log entries #230/#232) and the deterministic suites, which are all green (11/11). If the upstream registry or the scoring-changes log vocabulary drifts, the nightly API smoke test (`docs/workflows/smoke.yml`) is the tripwire — treat any smoke failure as an irregularity for review before trusting new rows.
+
+## Session-5 addition — stat changes decide the alert
+
+Only a scoring change that alters a batter's **Runs, Hits or RBI** reaches the main alert system
+(All feed, ✏️ Scoring Changes · R/H/RBI, chime). Pitching-only changes are tracked silently in
+🧮 Pitching Stats; rulings that change no stat (e.g. double → single, real 2026 #230) in 🗂️ Other
+Rulings; hit → error keeps its own 📉 tab. Rows carry `review.stats` — observed deltas
+(`source: 'observed'`, from the play's StatsAPI values before and after) or the official log's parsed
+deltas (`source: 'official_log'`, each with its evidence clause) — and show them as stat lines.
+An RBI / run / earned-run change without a reclassification is a row with id `stat-<atBatIndex>`;
+the pipeline's `buildOfficialStatRow` writes the same id for the official entry, so the two merge.
+The official rows also carry the linked play's pitcher (StatsAPI) and its Savant video link.
+Tests: `tools/scoring-change-test.mjs` §11 (incl. the real #249 play), `tools/official-feed-log-test.mjs`
+("session 5" section).

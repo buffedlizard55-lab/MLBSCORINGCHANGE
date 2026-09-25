@@ -33,6 +33,30 @@
 does not support "biggest gain" for error *type* itself — see *Current results* — but the live
 capture it required is built and running.)
 
+### Follow-up request — session 5 (recorded summary — **not verbatim**)
+
+> ⚠️ The owner's exact wording for this session was not preserved in the repository, so it is
+> summarised here point by point rather than quoted. **Owner: please paste the original text in
+> this section** so the charter stays verbatim.
+
+1. The owner's example (MLB official log 2026 #249, CIN @ MIL, 9/11): *"In the bottom of the 1st,
+   following the double for Andrew Vaughn, an error has been charged to JJ Bleday for allowing Brice
+   Turang to score. As a result, Vaughn loses an RBI and 1 run is changed to unearned against Andrew
+   Abbott."* The alert system must track scoring changes that alter **batting Runs, Hits or RBI —
+   and only those — in the main alert system**. **Pitching** stat changes (walks, strikeouts,
+   unearned / earned runs, hits allowed) are tracked in a **separate section** and must not populate
+   the main alerts.
+2. The Error Watch scoring-change history is missing events the owner knows exist: do a complete,
+   thorough **game-by-game play-by-play scan of every game**, record the events historically, each
+   with a **link to its video evidence**.
+3. Error Watch scoreboard section: **only errors** tracked, integrated into the observed, captured
+   and logged events, with a score out of 100 for error → single, pending → single / error / out /
+   fielder's choice …, and both the expected chance and the final result.
+4. Keep hit → error (single → error) changes in their own section, out of the primary alert system.
+5. Use **Baseball Savant** (in-game play-by-play batted-ball data, xBA) for the probability model.
+6. Keep the GitHub Pages site clean, simple and organised with official source links; work in
+   multiple passes; open a PR and merge to `main`; report remaining work and limitations.
+
 ### The xBA conversation that framed the model (condensed — not verbatim)
 
 - **Q:** *How is xBA calculated on Baseball Savant?* — **A (summary):** xBA asks "given how this
@@ -82,6 +106,10 @@ capture it required is built and running.)
 | Calibrate pending chances with logged outcomes (follow-up 2) | Captured pending rulings + resolutions → per-outcome weights, leave-one-out validated (`pendingCalibration`); applied in the feed and on game pages when active. |
 | Re-test official-scorer / home-park effects (follow-up 3) | Every pipeline run: official scorer of every game (`gameData.officialScorer`), permutation test + cross-validated candidate (`pipeline/lib/effects.mjs`); verdict and per-scorer table on `scoring.html` → Model. |
 | Track single → error changes in their own section, OUT of the primary alert system (session 3) | Live feed: `isHitToErrorChange` (`assets/js/reviews-feed.js`) — a non-HR hit → `field_error` change is excluded from the All feed, the ✏️ Scoring Changes tab and the alert chime, and renders only in the **📉 Hit → Error** tab (with its pre-change chance /100 and the final result). Season list: `scoring.html` → **📉 Hit → Error** (every official hit→error change 2024–2026, each entry classified, linked to its play where found and checked against the play's current StatsAPI ruling — mismatches flagged, never hidden). Same definition everywhere: the pipeline's `hitToError` classifier flag. |
+| Main alerts = batting R / H / RBI changes only (session 5) | Live feed: `isBattingStatChange` gates the All feed, the ✏️ **Scoring Changes · R/H/RBI** tab and the chime. Each scoring-change row carries its stat deltas (`review.stats`): observed ones from the play's own StatsAPI values before/after (`result.rbi`, scoring runners, `runners[].details.earned`) and official ones parsed from MLB's words (`pipeline/lib/stat-effects.mjs`, every delta keeping its clause as evidence). A change of RBI / runs / earned runs *without* a reclassification (the #249 shape) is now a row too (`stat-<ai>`), not just an irregularity note. Season list: `scoring.html` → **📊 Stat Changes**. |
+| Pitching stat changes in a separate section, never in the main alerts (session 5) | Live feed: silent **🧮 Pitching Stats** tab (`isPitchingOnlyStatChange` — hits allowed, BB, K, ER, UER); rulings that change no stat (e.g. double → single) go to the silent **🗂️ Other Rulings** tab. Season list: `scoring.html` → **🧮 Pitching Stats**. A run made unearned for the *team* only changes no pitcher's line and is not counted. |
+| Complete game-by-game scan of every game, historically, with video evidence (session 5) | `pipeline/lib/error-events.mjs` → `data/model/error-events-<season>.json`: every completed game's scan coverage (plate appearances, error plays, errors) and **every error credit of every play** (batter reached / on a hit / other), each with the play's Baseball Savant video (`sporty-videos?playId=` from StatsAPI `playEvents[].playId`), pitcher, earned / unearned runs and its official-log entries. `scoring.html` → **📅 Error Log** (games that could not be scanned are listed, never hidden). |
+| Error Watch integrates observed, captured and logged events — errors only (session 5) | Live feed **🎯 Error Watch**: one row per error play of the date, merging what this page observed live, what the live-capture pipeline recorded, MLB's official log and the pipeline scan (`mergeErrorWatchSources`), with source badges, the /100 chance, the final result and the video; pending official-scorer rulings listed below with their likely final ruling. |
 | …without tracking every single (no bloat) | Detection reuses the compact per-play classification baselines the scoring tracker already keeps for every completed play (one small snapshot per play, never a feed row); only a *confirmed* change mints a row. Season-long confirmation comes from MLB's official log via the 3-hourly pipeline, not from scanning hits. |
 
 ## 🧭 Arena Core Values — focal points
@@ -99,6 +127,9 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 1. **🎯 Error Watch** (live feed tab) — every play scored "reached on error" today, with its
    0–100 chance of becoming a hit, the batted ball, the live final ruling and, once MLB posts it,
    the official-log confirmation. It never triggers sounds and is not saved into the feed log.
+   Session 5: errors only, merging what the page observed with the pipeline's captured / logged /
+   scanned errors of the date (source badges, video link), plus pending rulings with their likely
+   final ruling.
 2. **Model lines on existing rows** — ✏️ Scoring Change rows show the pre-change chance and the
    final result; ⚖️ Scoring Pending rows show the chances of each final ruling — in the Replay
    Feed and on each game page's Challenges & Reviews tab.
@@ -145,13 +176,37 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 7. **📄 Confirmed changes without a server** (session-4 item 2) — `pipeline/sync-feed-log.mjs`
    appends every *verified* official ruling change (linked play, StatsAPI ruling not contradicting
    the log) into the committed `data/feed-log-<date>.json` files, using the same row ids and merge
-   rules the browser and `server.mjs` use and carrying facts only — no invented scores, pitchers or
-   observation times — plus the log's verbatim line and URL and the flags it raised. A visitor on
+   rules the browser and `server.mjs` use and carrying facts only — no invented scores or
+   observation times; the pitcher is the linked play's StatsAPI pitcher or nothing — plus the log's
+   verbatim line and URL, the flags it raised, the parsed stat effects and the play's video link.
+   Session 5: an entry that changes batting R/H/RBI or pitching stats without a reclassification
+   (e.g. #249) is appended as its own `stat-<ai>` row — the id the live feed mints for the same
+   change — and classified by the same rule (batting → main feed; pitching only → 🧮). A visitor on
    GitHub Pages (no `server.mjs`, so no `/api/feed-log`) still sees recent confirmed changes, and
    the file only changes when MLB actually posts something new
    (`.github/workflows/official-feed-log.yml`; see `docs/scoring-changes.md`).
 
+8. **📊 Stat changes & 🧮 pitching section** (session 5) — every scoring change is classified by
+   what it does to the box score. Only changes to a batter's **Runs, Hits or RBI** reach the main
+   alert system (All feed, ✏️ tab, chime); pitching-only changes (hits allowed, BB, K, earned /
+   unearned runs) are listed silently under 🧮 Pitching Stats, and rulings that change no stat
+   under 🗂️ Other Rulings. Rows show the stat lines (e.g. *Andrew Vaughn: RBI −1*, *Andrew Abbott:
+   ER −1 · UER +1*). `scoring.html` has the season lists (📊 Stat Changes, 🧮 Pitching Stats).
+9. **📅 Error Log** (session 5) — a game-by-game scan of every completed game's final play-by-play
+   records every error charged (batter reached on it, on a hit, or on another play) with scan
+   coverage per game and a link to the play's video on Baseball Savant; the live 🎯 Error Watch now
+   merges observed, captured, logged and scanned errors into one list with source badges.
+
 ## Current results (pipeline runs of 2026-09-24; the site always shows the latest)
+
+**Session-5 run (Actions run 36076652510, 2026-09-25 UTC):** the game-by-game scan covered
+**every completed game** — 2024: 2,472 games / 2,634 error plays; 2025: 2,477 / 2,485;
+2026 (to date): 2,378 / 2,424. **Every error play has a Savant video link.** The official scoring
+changes split as follows (batting R/H/RBI → main alerts; pitching-only → separate section; no stat change → Other):
+2024: 134 / 25 / 70 · 2025: 129 / 27 / 55 · 2026: 147 / 33 / 73. No sentences were left unparsed.
+Spot check (2026 #249, CIN@MIL 9/11, bottom 1st): the Vaughn double with an error on LF Bleday
+(runner Turang) → Vaughn RBI −1 (main alerts), Abbott ER −1 / unearned +1 (pitching section),
+video `playId=8552c454-…`.
 
 | | Error → hit | Hit → error |
 | --- | --- | --- |
@@ -232,6 +287,24 @@ plays settle (≥ 8 changes for a shift; ≥ 15 changes and ≥ 150 errors for e
   written. Until then the date's file simply has no row (the feed shows nothing rather than a guess).
 - Prior seasons depend on Internet Archive captures of MLB's page (2025: 2026-02-10 capture;
   2024: 2025-01-21 capture).
+- **Stat changes (session 5).** Official deltas are read from MLB's own sentences; a count the log
+  does not state is recorded as "changed", never guessed, and wording the parser does not understand
+  is flagged (`stat_effect_unparsed` on ⚑ Irregularities; 0 of 693 entries at the time of writing).
+  Live, earned / unearned counts come from StatsAPI's `earned` flag, which can be re-evaluated later
+  in an inning while the official scorer reconstructs it — such a flip lands in the silent 🧮 tab,
+  never in the main alerts. A run is attributed to the play it scored on; a log sentence about a run
+  that scored on a *different* play of the inning is kept with its evidence but cannot be checked
+  against the linked play.
+- **Two rows for one play, rarely.** A change the page observes live as a reclassification
+  (`scoring-<ai>`, e.g. "Double → Double + Error") that MLB's log states as a non-ruling entry
+  (an error added, an RBI removed) is written by the pipeline as a `stat-<ai>` row, so that one play
+  can show two rows in a browser that watched it live. Both carry the same facts; nothing is lost.
+- **Error Log coverage.** The scan covers every completed game whose play-by-play the pipeline could
+  fetch; a game that failed is listed as not scanned and retried on the next run. The error credit
+  of a play later changed to a hit is gone from StatsAPI, so such plays are kept from the model's
+  population (original ruling) with their final status, without the original fielder credit. Video
+  links are Baseball Savant's clip pages for the play's `playId`; Savant's page title can be wrong
+  (a known quirk) while the clip is right.
 
 ## Remaining work (next sessions)
 
@@ -245,6 +318,10 @@ plays settle (≥ 8 changes for a shift; ≥ 15 changes and ≥ 150 errors for e
 - Watch `.github/workflows/official-feed-log.yml` after a game day: the static feed logs should
   gain that day's confirmed changes, and a run with nothing new must commit nothing.
 - Optional opt-in alert when an error's score is "High".
+- Pitchers named only in the official text (e.g. "unearned against Andrew Abbott") carry the
+  name but no MLBAM id (~600 pitching stat lines), so they have no player link. Resolving the name
+  against the linked game's boxscore would add the id.
+- Paste the verbatim session-5 request into the charter (see above).
 
 ## Working on this repo
 

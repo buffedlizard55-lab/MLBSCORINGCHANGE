@@ -1,7 +1,7 @@
 {
   "v": 1,
   "date": "2026-09-11",
-  "savedAt": 1790289196012,
+  "savedAt": 1790295588564,
   "entries": [
     {
       "gamePk": 823817,
@@ -50,7 +50,7 @@
         "flags": [],
         "initialScoreAfter": null,
         "scoreAfter": null,
-        "timestamp": "2026-09-24T22:33:16.012Z",
+        "timestamp": "2026-09-25T00:19:48.564Z",
         "initialObservedAt": null,
         "isPitch": false,
         "pitchVelo": null,
@@ -58,7 +58,10 @@
           "id": 681715,
           "fullName": "Heriberto Hernández"
         },
-        "pitcher": null,
+        "pitcher": {
+          "id": 592779,
+          "fullName": "Brock Stewart"
+        },
         "countBefore": null,
         "countAfter": null,
         "atBatCount": null,
@@ -70,15 +73,143 @@
           "date": "2026-09-11",
           "raw": "251. 9/11 LAD@MIA -- In the bottom of the 7th, Heriberto Hernandez now reaches on an error by third baseman Max Muncy, instead of on a single.",
           "url": "https://www.mlb.com/official-information/scoring-changes"
-        }
+        },
+        "stats": {
+          "batting": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Heriberto Hernández",
+              "playerId": 681715,
+              "evidence": "on a single → Heriberto Hernandez now reaches on an error by third baseman Max Muncy"
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Brock Stewart",
+              "playerId": 592779,
+              "evidence": "on a single → Heriberto Hernandez now reaches on an error by third baseman Max Muncy"
+            }
+          ],
+          "source": "official_log"
+        },
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=8e03ac2a-48cf-3b92-a433-7e35335d11e4"
       },
       "firstSeen": 1790289195946,
-      "lastSeen": 1790289196012,
+      "lastSeen": 1790295588564,
       "matchupLabel": "LAD @ MIA"
+    },
+    {
+      "gamePk": 823736,
+      "review": {
+        "id": "stat-7",
+        "atBatIndex": 7,
+        "inning": 1,
+        "halfInning": "bottom",
+        "inningLabel": "▼ Bot 1st",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "home",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "MIL",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Stat change",
+        "reason": "Double: RBI −1 · ER −1 · UER +1",
+        "description": "Andrew Vaughn doubles (18) on a line drive to left fielder JJ Bleday. Brice Turang scores. Fielding error by left fielder JJ Bleday.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "double",
+          "event": "Double",
+          "label": "Double",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "final": {
+          "eventType": "double",
+          "event": "Double",
+          "label": "Double",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-09-25T00:19:48.564Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 683734,
+          "fullName": "Andrew Vaughn"
+        },
+        "pitcher": {
+          "id": 671096,
+          "fullName": "Andrew Abbott"
+        },
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=8552c454-1f49-3d56-a8cc-b6fd75ccb380",
+        "official": {
+          "season": 2026,
+          "seq": 249,
+          "date": "2026-09-11",
+          "raw": "249. 9/11 CIN@MIL -- In the bottom of the 1st, following the double for Andrew Vaughn, an error has been charged to JJ Bleday for allowing Brice Turang to score. As a result, Vaughn loses an RBI and 1 run is changed to unearned against Andrew Abbott.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        },
+        "stats": {
+          "batting": [
+            {
+              "stat": "RBI",
+              "delta": -1,
+              "player": "Andrew Vaughn",
+              "playerId": 683734,
+              "evidence": "As a result, Vaughn loses an RBI and 1 run is changed to unearned against Andrew Abbott."
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "ER",
+              "delta": -1,
+              "player": "Andrew Abbott",
+              "playerId": null,
+              "evidence": "As a result, Vaughn loses an RBI and 1 run is changed to unearned against Andrew Abbott."
+            },
+            {
+              "stat": "UER",
+              "delta": 1,
+              "player": "Andrew Abbott",
+              "playerId": null,
+              "evidence": "As a result, Vaughn loses an RBI and 1 run is changed to unearned against Andrew Abbott."
+            }
+          ],
+          "source": "official_log"
+        }
+      },
+      "firstSeen": 1790295588564,
+      "lastSeen": 1790295588564,
+      "matchupLabel": "CIN @ MIL"
     }
   ],
   "order": [
-    "823817:scoring-60"
+    "823817:scoring-60",
+    "823736:stat-7"
   ],
   "snapshots": {},
   "irregularities": {},
