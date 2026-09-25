@@ -5,19 +5,19 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-09-25T00:15:05.569Z",
-  "sha256": "e0e79c4c51c9943f1b0235bfe96d6c067944fa53d8f1ebf492db4fdee59e076e",
-  "bytes": 919598
+  "fetchedAt": "2026-09-25T05:04:00.423Z",
+  "sha256": "e61b5e7c5786fdeff20e6db65c82569d9bdee680f911e4fb6385245f38def9d0",
+  "bytes": 919894
  },
  "sections": [
   {
    "label": "2026 Regular Season",
-   "entries": 253,
+   "entries": 254,
    "issues": []
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-25T00:15:05.569Z",
+ "generatedAt": "2026-09-25T05:04:00.423Z",
  "entries": [
   {
    "seq": 1,
@@ -479,7 +479,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0689,
+    "p": 0.0688,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -1958,7 +1958,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0512,
+    "p": 0.0511,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -2263,7 +2263,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0342,
+    "p": 0.0341,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -2994,7 +2994,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1713,
+    "p": 0.1711,
     "score": 17,
     "kind": "out_of_fold"
    }
@@ -3148,7 +3148,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0995,
+    "p": 0.0994,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -4257,7 +4257,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0524,
+    "p": 0.0526,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -5237,7 +5237,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0903,
+    "p": 0.0904,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -9184,13 +9184,6 @@
     "flags": [],
     "battingChange": false,
     "pitchingChange": false
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-05-25",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9298,13 +9291,6 @@
     "flags": [],
     "battingChange": true,
     "pitchingChange": true
-   },
-   "savant": {
-    "xba": null,
-    "ls": 71.7,
-    "la": 51,
-    "gameDate": "2026-05-26",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9389,13 +9375,6 @@
     "flags": [],
     "battingChange": false,
     "pitchingChange": true
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-05-30",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9457,13 +9436,6 @@
     "flags": [],
     "battingChange": false,
     "pitchingChange": false
-   },
-   "savant": {
-    "xba": null,
-    "ls": 72.5,
-    "la": 36,
-    "gameDate": "2026-05-31",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9653,13 +9625,6 @@
     "p": 0.0676,
     "score": 7,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 68.2,
-    "la": 45,
-    "gameDate": "2026-05-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9784,13 +9749,6 @@
     "p": 0.1066,
     "score": 11,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-05-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -9997,13 +9955,6 @@
     "p": 0.0737,
     "score": 7,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.282,
-    "ls": 67.5,
-    "la": -48,
-    "gameDate": "2026-05-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10125,16 +10076,9 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.223,
+    "p": 0.2228,
     "score": 22,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.316,
-    "ls": 101.3,
-    "la": -9,
-    "gameDate": "2026-05-29",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10196,13 +10140,6 @@
     "flags": [],
     "battingChange": false,
     "pitchingChange": false
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2026-05-27",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11122,7 +11059,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0527,
+    "p": 0.0528,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -11452,7 +11389,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0088,
+    "p": 0.0087,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -11885,7 +11822,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0622,
+    "p": 0.0623,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -13500,7 +13437,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0934,
+    "p": 0.0933,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -13918,7 +13855,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0773,
+    "p": 0.0772,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -14098,7 +14035,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1047,
+    "p": 0.1046,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -14691,7 +14628,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0065,
+    "p": 0.0066,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -15862,7 +15799,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.073,
+    "p": 0.0731,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -18069,7 +18006,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.342,
+    "p": 0.3416,
     "score": 34,
     "kind": "out_of_fold"
    }
@@ -18704,7 +18641,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0946,
+    "p": 0.0945,
     "score": 9,
     "kind": "out_of_fold"
    },
@@ -19978,7 +19915,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0857,
+    "p": 0.0856,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -20091,7 +20028,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0119,
+    "p": 0.0117,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -20500,7 +20437,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0828,
+    "p": 0.0827,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -20719,7 +20656,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2532,
+    "p": 0.2533,
     "score": 25,
     "kind": "out_of_fold"
    }
@@ -22372,7 +22309,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1095,
+    "p": 0.1094,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -23167,10 +23104,81 @@
     "kind": "model"
    },
    "savant": {
-    "xba": 0.14,
-    "ls": 59.6,
-    "la": -39,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2026-09-18",
+    "source": "savant:estimated_ba_using_speedangle"
+   }
+  },
+  {
+   "seq": 254,
+   "raw": "254. 9/23 MIN@SF -- In the top of the 9th, the assist by Shay Whitcomb on Josh Bell's groundout has been removed.",
+   "date": "2026-09-23",
+   "month": 9,
+   "day": 23,
+   "away": "MIN",
+   "home": "SF",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the top of the 9th, the assist by Shay Whitcomb on Josh Bell's groundout has been removed.",
+   "half": "top",
+   "inning": 9,
+   "issues": [],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "fielding_credit",
+    "initial": null,
+    "final": null,
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
+    "flags": []
+   },
+   "link": {
+    "gamePk": 823168,
+    "atBatIndex": 18,
+    "batterName": "Shay Whitcomb",
+    "currentEventType": "single",
+    "method": "full_name",
+    "flags": [
+     "inning_mismatch",
+     "ambiguous_plate_appearance"
+    ],
+    "batterId": 694376,
+    "currentEvent": "Single",
+    "currentDescription": "Shay Whitcomb singles on a fly ball to left fielder Alan Roden.",
+    "inning": 3,
+    "half": "bottom",
+    "officialDate": "2026-09-23",
+    "gameType": "R",
+    "away": "MIN",
+    "home": "SF",
+    "pitcherName": "Connor Prielipp",
+    "pitcherId": 687570,
+    "playId": "142e00f0-c3a8-3248-8c3d-298c690969f9",
+    "currentRbi": 0,
+    "currentEarnedRuns": 0,
+    "currentUnearnedRuns": 0
+   },
+   "stats": {
+    "batting": [],
+    "pitching": [],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": false,
+    "pitchingChange": false
+   },
+   "savant": {
+    "xba": null,
+    "ls": 83.7,
+    "la": 53,
+    "gameDate": "2026-09-23",
     "source": "savant:estimated_ba_using_speedangle"
    }
   }
