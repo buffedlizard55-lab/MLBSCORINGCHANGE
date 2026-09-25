@@ -79,7 +79,7 @@ for (const season of SEASONS) {
         logLines.push({ date: `${season}-08-05`, away, home, top, inning, text: `${batterName} reaches on a fielding error by shortstop ${fld.abbreviation}ss Fielder, instead of a single.` });
         logLines.push({ date: `${season}-07-05`, away, home, top, inning, text: `the single for ${batterName} has been changed to a fielding error charged to ${fld.abbreviation}ss Fielder.` });
       }
-      const events = inPlay ? [{ index: 0, isPitch: true, details: { isInPlay: true }, hitData: { launchSpeed: Number(ls.toFixed(1)), launchAngle: Math.round(la), totalDistance: 100, trajectory: la < 8 ? 'ground_ball' : la < 25 ? 'line_drive' : 'fly_ball', hardness: 'medium', location: String(1 + Math.floor(r() * 9)), coordinates: { coordX: 100, coordY: 120 } } }] : [{ index: 0, isPitch: true, details: { isInPlay: false } }];
+      const events = inPlay ? [{ index: 0, isPitch: true, playId: `syn-${gamePk}-${ai}`, details: { isInPlay: true }, hitData: { launchSpeed: Number(ls.toFixed(1)), launchAngle: Math.round(la), totalDistance: 100, trajectory: la < 8 ? 'ground_ball' : la < 25 ? 'line_drive' : 'fly_ball', hardness: 'medium', location: String(1 + Math.floor(r() * 9)), coordinates: { coordX: 100, coordY: 120 } } }] : [{ index: 0, isPitch: true, details: { isInPlay: false } }];
       if (ai === 5 && season === 2026) events.push({ index: 1, details: { eventType: 'os_ruling_pending_prior', description: 'Official Scorer Ruling Pending' } });
       const reached = et === 'single' || et === 'field_error';
       allPlays.push({

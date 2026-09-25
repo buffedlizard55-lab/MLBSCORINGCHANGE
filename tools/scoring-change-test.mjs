@@ -84,6 +84,7 @@ const {
   shouldAlertForReview, visibleInAllFeed, isHitToErrorChange, runsRemovableFromReview,
   buildEventKey, mergeFeedEvents,
 } = feedContext.module.exports;
+const RF = feedContext.module.exports;
 
 /* ------------------------------------- load reviews.js (registry cross-check) */
 
@@ -507,16 +508,32 @@ assert.match(i2.irregularities[0], /play 36: official description edited without
 assert.ok(!i2.irregularities.some((n) => /disappeared/.test(n)), 'no phantom vanish note');
 
 // RBI changed without reclassification (real-world example: official change
-// #204 removed an RBI) → irregularity.
+// #204 removed an RBI). Before session 5 this was only an irregularity note;
+// the session-5 charter makes it a MAIN-alert scoring change (batting RBI):
+// a `stat-<ai>` row with the observed delta, and no irregularity note.
 const RBI_REMOVED = {
   ...PLAY_SINGLE_FINAL_230,
   result: { ...PLAY_SINGLE_FINAL_230.result, rbi: 0 },
 };
 let i3 = mergeScoringChanges(16, [PLAY_SINGLE_FINAL_230], new Map(), NOW, emptyCtx());
 let i4 = mergeScoringChanges(16, [RBI_REMOVED], i3.snapshots, NOW + 1000, emptyCtx());
-assert.equal(i4.added.length, 0);
-assert.equal(i4.irregularities.length, 1);
-assert.match(i4.irregularities[0], /play 36: RBI 1 → 0 without a hit\/error\/out reclassification/);
+assert.equal(i4.added.length, 1, 'an RBI-only change is a scoring-change row');
+assert.equal(i4.irregularities.length, 0, '…not an irregularity');
+{
+  const r = i4.added[0].review;
+  assert.equal(r.id, 'stat-36');
+  assert.equal(r.typeKey, 'scoring_change');
+  const plain = (v) => JSON.parse(JSON.stringify(v)); // vm cross-realm objects
+  assert.deepEqual(plain(r.stats.batting), [{ stat: 'RBI', from: 1, to: 0, delta: -1 }]);
+  assert.deepEqual(plain(r.stats.pitching), []);
+  assert.equal(r.stats.source, 'observed');
+  assert.equal(r.reason, 'Single: RBI 1 → 0');
+  assert.equal(r.initial.eventType, 'single');
+  assert.equal(r.final.eventType, 'single');
+  assert.equal(RF.isBattingStatChange(r), true);
+  assert.equal(RF.shouldAlertForReview(r), true, 'batting RBI change → main alert');
+  assert.equal(RF.visibleInAllFeed(r), true);
+}
 
 // Score after the play changed without reclassification → irregularity
 // (a retroactive score fix must never be silently swallowed).
@@ -531,8 +548,11 @@ assert.equal(i6.irregularities.length, 1);
 assert.match(i6.irregularities[0], /score after play .* → 2-3 without a hit\/error\/out reclassification/);
 
 // Irregularities dedupe across polls (the same note is not re-added forever).
-let i7 = mergeScoringChanges(16, [RBI_REMOVED], i4.snapshots, NOW + 2000, emptyCtx());
+let i7 = mergeScoringChanges(17, [SCORE_FIXED], i6.snapshots, NOW + 2000, emptyCtx());
 assert.equal(i7.irregularities.length, 0, 'no repeat of an already-flagged note');
+// …and a stat-only row is not re-minted on the next identical poll.
+let i8 = mergeScoringChanges(16, [RBI_REMOVED], i4.snapshots, NOW + 2000, emptyCtx());
+assert.equal(i8.added.length + i8.updated.length, 0, 'unchanged poll → no new row');
 
 // A tracked play VANISHING from the payload is an irregularity, never a
 // silent deletion.
@@ -590,11 +610,104 @@ assert.equal(finalScanDecision({ firstFinalObservedAt: 0, lastScanAt: 0 }, true,
 
 /* ===================== 11. Feed integration contracts (All feed, alerts) == */
 
+// Session-5 charter: "The alert system must track scoring changes that alter
+// batting Runs, Hits, RBI ONLY in the main alert system"; pitching stat
+// changes live in a separate section and must not populate main alerts.
 const scoringReview = r3.added[0].review;
-assert.equal(visibleInAllFeed({ typeKey: 'scoring_change' }), true,
-  'scoring changes appear in the All feed (explicit requirement)');
-assert.equal(shouldAlertForReview({ typeKey: 'scoring_change' }), true,
-  'a new scoring change triggers the alert chime (not ABS)');
+{
+  const plain = (v) => JSON.parse(JSON.stringify(v));
+  // Real #230 (double → single): a hit either way, same run and RBI — no
+  // batting R/H/RBI change and no pitching change → 🗂️ Other Rulings, silent.
+  assert.deepEqual(plain(scoringReview.stats), { batting: [], pitching: [], source: 'observed' });
+  assert.equal(RF.isOtherScoringChange(scoringReview), true);
+  assert.equal(visibleInAllFeed(scoringReview), false, 'double → single is not an R/H/RBI change');
+  assert.equal(shouldAlertForReview(scoringReview), false);
+  // Error → single: batting H +1 → main alerts (All, ✏️, chime).
+  const e2h = { typeKey: 'scoring_change', initial: { eventType: 'field_error' }, final: { eventType: 'single' } };
+  assert.equal(RF.isBattingStatChange(e2h), true);
+  assert.equal(visibleInAllFeed(e2h), true);
+  assert.equal(shouldAlertForReview(e2h), true);
+  // Single → error stays in 📉 Hit → Error (session 3), even though H changes.
+  const h2e = { typeKey: 'scoring_change', initial: { eventType: 'single' }, final: { eventType: 'field_error' } };
+  assert.equal(isHitToErrorChange(h2e), true);
+  assert.equal(RF.isBattingStatChange(h2e), false);
+  assert.equal(shouldAlertForReview(h2e), false);
+  assert.equal(visibleInAllFeed(h2e), false);
+  // Strikeout → reached on error: pitching K −1 only → 🧮, silent.
+  const k2e = { typeKey: 'scoring_change', initial: { eventType: 'strikeout' }, final: { eventType: 'field_error' } };
+  assert.equal(RF.isPitchingOnlyStatChange(k2e), true);
+  assert.equal(shouldAlertForReview(k2e), false, 'pitching stat changes never populate the main alerts');
+  assert.equal(visibleInAllFeed(k2e), false);
+  // Walk → hit by pitch: pitching BB −1 → 🧮.
+  assert.equal(RF.isPitchingOnlyStatChange({ typeKey: 'scoring_change', initial: { eventType: 'walk' }, final: { eventType: 'hit_by_pitch' } }), true);
+  // Official-log rows carry the log's parsed stats, which win over event types.
+  const erOnly = { typeKey: 'scoring_change', initial: { eventType: 'double' }, final: { eventType: 'double' },
+    stats: { batting: [], pitching: [{ stat: 'ER', delta: -1 }, { stat: 'UER', delta: 1 }], source: 'official_log' } };
+  assert.equal(RF.isPitchingOnlyStatChange(erOnly), true);
+  assert.equal(shouldAlertForReview(erOnly), false);
+  // A malformed scoring row fails OPEN (never silently hidden).
+  assert.equal(visibleInAllFeed({ typeKey: 'scoring_change' }), true, 'unknown scoring row stays visible');
+  assert.equal(shouldAlertForReview({ typeKey: 'scoring_change' }), true);
+}
+
+// The user's own example (2026 #249, CIN @ MIL 9/11, at-bat 7). AFTER is the
+// REAL StatsAPI play (tools/fixtures/statsapi-823736-pbp-ab6-7.json: rbi 0,
+// Turang scores on JJ Bleday's error, earned:false). BEFORE is SYNTHETIC —
+// the same play as the official log says it stood before the change (no
+// error: Turang scored on the double, Vaughn had the RBI, the run was earned)
+// — because StatsAPI rewrites history and no pre-change copy exists.
+{
+  const plain = (v) => JSON.parse(JSON.stringify(v));
+  const fx = JSON.parse(readFileSync(new URL('./fixtures/statsapi-823736-pbp-ab6-7.json', import.meta.url), 'utf8'));
+  const after = { ...fx.allPlays.find((p) => p.about.atBatIndex === 7) };
+  after.about = { ...after.about, isComplete: true };
+  const before = JSON.parse(JSON.stringify(after));
+  before.result.rbi = 1;
+  before.runners.forEach((r) => {
+    if (r.movement && r.movement.end === 'score') {
+      Object.assign(r.details, { earned: true, eventType: 'double', event: 'Double' });
+      r.credits = [];
+    }
+  });
+  const snapA = buildScoringSnapshot(after);
+  assert.equal(snapA.rbi, 0);
+  assert.equal(snapA.runsScored, 1);
+  assert.equal(snapA.earnedRuns, 0);
+  assert.equal(snapA.unearnedRuns, 1);
+  const v1 = mergeScoringChanges(823736, [before], new Map(), NOW, emptyCtx());
+  const v2 = mergeScoringChanges(823736, [after], v1.snapshots, NOW + 60000, emptyCtx());
+  assert.equal(v2.added.length, 1, 'the RBI / earned-run change is one row');
+  const r = v2.added[0].review;
+  assert.equal(r.id, 'scoring-7', 'a runner-error reclassification (Double → Double + Error)');
+  assert.deepEqual(plain(r.stats.batting), [{ stat: 'RBI', from: 1, to: 0, delta: -1 }]);
+  assert.deepEqual(plain(r.stats.pitching), [{ stat: 'ER', from: 1, to: 0, delta: -1 }, { stat: 'UER', from: 0, to: 1, delta: 1 }]);
+  assert.equal(r.reason, 'Double → Double + Error');
+  assert.equal(r.pitcher.fullName, 'Andrew Abbott');
+  assert.equal(RF.isBattingStatChange(r), true, 'Vaughn loses an RBI → main alert');
+  assert.equal(shouldAlertForReview(r), true);
+  // RBI-only change on the REAL play (no reclassification) → stat row.
+  const rbiBack = JSON.parse(JSON.stringify(after));
+  rbiBack.result.rbi = 1;
+  const s1 = mergeScoringChanges(823736, [rbiBack], new Map(), NOW, emptyCtx());
+  const s2 = mergeScoringChanges(823736, [after], s1.snapshots, NOW + 60000, emptyCtx());
+  assert.equal(s2.added[0].review.id, 'stat-7', 'stat-only row id (the pipeline\u2019s official stat row uses the same id)');
+  assert.equal(s2.added[0].review.reason, 'Double + Error: RBI 1 → 0');
+  // ONLY the earned-run change on the real play → pitching section only.
+  const erBack = JSON.parse(JSON.stringify(after));
+  erBack.runners.forEach((x) => { if (x.movement && x.movement.end === 'score') x.details.earned = true; });
+  const w1 = mergeScoringChanges(823736, [erBack], new Map(), NOW, emptyCtx());
+  const w2 = mergeScoringChanges(823736, [after], w1.snapshots, NOW + 60000, emptyCtx());
+  const rp = w2.added[0].review;
+  assert.equal(rp.reason, 'Double + Error: ER 1 → 0 · UER 0 → 1');
+  assert.deepEqual(plain(rp.stats.batting), []);
+  assert.equal(RF.isPitchingOnlyStatChange(rp), true);
+  assert.equal(shouldAlertForReview(rp), false, '1 run changed to unearned alone never alerts');
+  assert.equal(visibleInAllFeed(rp), false);
+  // A payload without the `earned` flag never invents ER/UER counts.
+  const noFlag = JSON.parse(JSON.stringify(after));
+  noFlag.runners.forEach((x) => { delete x.details.earned; });
+  assert.equal(buildScoringSnapshot(noFlag).earnedRuns, null);
+}
 assert.equal(runsRemovableFromReview(scoringReview), 0,
   'a scoring change never claims runs at risk (not a replay review)');
 assert.equal(runsRemovableFromReview({ typeKey: 'scoring_change', inProgress: false }), 0);
@@ -682,9 +795,18 @@ assert.equal(shouldAlertForReview(reviewFC), true, 'hit → FC + error still chi
 assert.equal(isHitToErrorChange({ ...reviewHE, initial: { ...reviewHE.initial, eventType: 'home_run' } }), false,
   'home run → error is outside the hit→error definition');
 
-// Out → error (§6) stays in the primary surface.
-assert.equal(isHitToErrorChange(outToError.added[0].review), false, 'out → error stays primary');
-assert.equal(visibleInAllFeed(outToError.added[0].review), true, 'out → error stays in the All feed');
+// Out → error (§6): not a hit → error change. Session-5 charter: it alters
+// no batting Runs / Hits / RBI (an at-bat, no hit, either way), so it is NOT
+// in the main alert system — it is listed under 🗂️ Other Rulings (or
+// 🧮 Pitching Stats when an earned run moved).
+assert.equal(JSON.stringify(outToError.added[0].review.stats),
+  JSON.stringify({ batting: [], pitching: [{ stat: 'K', from: 1, to: 0, delta: -1 }], source: 'observed' }),
+  'strikeout → error: pitching K −1 only');
+assert.equal(RF.isPitchingOnlyStatChange(outToError.added[0].review), true, '→ 🧮 Pitching Stats');
+assert.equal(isHitToErrorChange(outToError.added[0].review), false, 'out → error is not a hit→error change');
+assert.equal(RF.isBattingStatChange(outToError.added[0].review), false, 'out → error alters no batting R/H/RBI');
+assert.equal(visibleInAllFeed(outToError.added[0].review), false, 'out → error is not in the main feed');
+assert.equal(shouldAlertForReview(outToError.added[0].review), false, '…and does not chime');
 
 // Malformed / legacy rows (e.g. a restored log row without snapshots) fail
 // open: visible, alertable, never silently hidden.
@@ -694,5 +816,27 @@ assert.equal(isHitToErrorChange({ typeKey: 'scoring_change' }), false, 'no snaps
 assert.equal(visibleInAllFeed({ typeKey: 'scoring_change' }), true, 'a snapshot-less scoring change stays visible');
 assert.equal(shouldAlertForReview({ typeKey: 'scoring_change' }), true, '…and alertable');
 assert.equal(visibleInAllFeed(null), true, 'malformed entries fail open');
+
+/* ================ 14. Error Watch integrates observed / captured / logged */
+{
+  const live = [{ gamePk: 823736, atBatIndex: 7, timestamp: '2026-09-11T23:40:00Z' }, { gamePk: 1, atBatIndex: 2 }];
+  const pipe = [
+    { gamePk: 823736, ai: 7, date: '2026-09-11', captured: { lagMin: 4 }, official: [{ seq: 249 }], vid: 'x' },
+    { gamePk: 823736, ai: 30, date: '2026-09-11', official: [] },
+    { gamePk: 9, ai: 1, date: '2026-09-10' },
+  ];
+  const rows = RF.mergeErrorWatchSources(live, pipe, '2026-09-11');
+  assert.equal(rows.length, 3, 'one row per play: live ∪ pipeline plays of this date');
+  const a = rows.find((r) => r.key === '823736:7');
+  assert.equal(JSON.stringify(a.sources), JSON.stringify({ observed: true, captured: true, logged: [249], scanned: true }));
+  const b = rows.find((r) => r.key === '823736:30');
+  assert.equal(b.live, null);
+  assert.equal(JSON.stringify(b.sources), JSON.stringify({ observed: false, captured: false, logged: [], scanned: true }));
+  const c = rows.find((r) => r.key === '1:2');
+  assert.equal(c.sources.observed, true);
+  assert.equal(c.sources.scanned, false, 'observed live, not yet in the pipeline');
+  assert.ok(!rows.some((r) => r.key === '9:1'), 'other dates are not mixed in');
+  assert.equal(RF.mergeErrorWatchSources(null, null, '2026-09-11').length, 0);
+}
 
 console.log('Official scoring change tests passed successfully!');

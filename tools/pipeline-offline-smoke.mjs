@@ -140,6 +140,36 @@ assert.ok(watch.plays.every((p) => p.score == null || (p.score >= 0 && p.score <
 assert.ok(report.savant.matched > 0, 'savant cross-check matched rows');
 assert.equal(report.savant.fetchedThisRun, true, 'the cross-check ran on this run\'s fetch of the season error list');
 
+// Session 5: the game-by-game error scan. Every completed game is listed
+// with its scan coverage; every error credit of every play is an event;
+// Error Watch rows (batter reached on error) are all among them, with the
+// same status/score and the Savant video link built from the play's playId.
+{
+  const ee = read('model/error-events-2026.json');
+  assert.equal(ee.season, 2026);
+  assert.equal(ee.games.length, report.seasons['2026'].completed, 'every completed game is listed');
+  assert.ok(ee.games.every((g) => g.scanned && g.pas > 0), 'every game scanned play by play');
+  assert.equal(report.errorEvents['2026'].events, ee.events.length);
+  assert.ok(ee.events.length > 0);
+  const byId = new Map(ee.events.map((ev) => [ev.id, ev]));
+  const watch26 = watch.plays.filter((p) => p.season === 2026);
+  for (const w of watch26) {
+    const ev = byId.get(w.id);
+    assert.ok(ev, `watch play ${w.id} is in the error-events log`);
+    assert.equal(ev.status, w.status === 'changed_to_hit' ? 'changed_to_hit' : ev.status);
+    if (w.score != null) assert.equal(ev.model && ev.model.score, w.score, 'same /100 score as Error Watch');
+    assert.equal(ev.scope, 'batter_reached');
+  }
+  // A play since changed to a hit no longer carries the credit in StatsAPI;
+  // it is still logged (from the model population) with its final status.
+  assert.ok(ee.events.every((ev) => ev.errors.length > 0 || ev.status === 'changed_to_hit' || ev.status === 'changed_other'), 'every standing event carries its error credits');
+  assert.ok(ee.events.some((ev) => ev.status === 'changed_to_hit' && ev.errors.length === 0), 'changed plays are kept in the historical log');
+  assert.ok(ee.events.filter((ev) => ev.eventType === 'field_error').every((ev) => ev.errors.some((x) => x.onBatter && x.kind === 'fielding')), 'batter-reached credit parsed');
+  const withVid = ee.events.filter((ev) => ev.vid);
+  assert.ok(withVid.length > 0 && withVid.every((ev) => /^syn-\d+-\d+$/.test(ev.vid) && ev.vid === `syn-${ev.gamePk}-${ev.ai}`), 'video id is the play\'s own playId');
+  assert.ok(watch.plays.some((p) => p.vid), 'Error Watch rows carry the playId too');
+}
+
 // Per-play Savant xBA (session 4, item 3): the pipeline attaches true
 // estimated_ba_using_speedangle values to the plays the site can surface —
 // linked official entries and Error Watch rows. Requests are budgeted (4 per

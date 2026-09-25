@@ -70,3 +70,22 @@
     these files; `tools/official-feed-log-test.mjs` pins the contract. Likewise, Baseball Savant's
     per-play xBA comes only from the pipeline (`pipeline/lib/savant.mjs` — cached, budgeted, politely
     spaced); no page may fetch Savant, and a row without xBA shows none.
+15. **Main alerts = batting Runs / Hits / RBI changes only** (session-5 charter). A scoring-change
+    row reaches the All feed, the ✏️ tab and the chime only when `isBattingStatChange` is true
+    (hit → error still excluded); pitching-only changes (hits allowed, BB, K, ER, UER) live in the
+    silent 🧮 Pitching Stats tab, stat-less rulings in 🗂️ Other Rulings. One rule for every writer:
+    a row's `review.stats` (observed deltas — `scoringStatDeltas` — or the official log's parsed
+    deltas — `pipeline/lib/stat-effects.mjs`) wins; without it the registry event types decide; a
+    malformed row fails open. Stat rows without a reclassification use id `stat-<atBatIndex>`.
+    Official deltas are read from MLB's own words with the clause kept as `evidence`; a count the
+    log does not state is `delta: null`, never guessed; a team-unearned run changes no pitcher.
+    Pinned by `tools/scoring-change-test.mjs`, `tools/official-feed-log-test.mjs`,
+    `tools/stat-effects-test.mjs`.
+16. **Error Log = every error of every completed game.** `pipeline/lib/error-events.mjs` writes
+    `data/model/error-events-<season>.json` (compact JSON) from the pipeline's play-by-play records:
+    per-game scan coverage (a game that could not be fetched is `scanned: false`, never dropped) and
+    every error credit (`ERROR_CREDIT_RE` in `pipeline/lib/statsapi.mjs`) with the play's video id
+    (`vid` = StatsAPI `playEvents[].playId`; link
+    `https://baseballsavant.mlb.com/sporty-videos?playId=<vid>`). Batter-reached rows carry the
+    same score/status as Error Watch. Pinned by `tools/error-events-test.mjs` (real game 823736)
+    and `tools/pipeline-offline-smoke.mjs`.

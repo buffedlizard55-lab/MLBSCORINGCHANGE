@@ -749,7 +749,7 @@ assert.equal(statPairsB['Scoring Pending'], '1', 'Scoring Pending unchanged');
 // 📉 Hit → Error tab renders at 1 with its setFilter wiring.
 const tabStringsB = [];
 collectStrings(registry['#feed-tabs'], tabStringsB);
-assert.ok(tabStringsB.some((s) => /^✏️ Scoring Changes \(0\)$/.test(s)),
+assert.ok(tabStringsB.some((s) => /^✏️ Scoring Changes · R\/H\/RBI \(0\)$/.test(s)),
   `the ✏️ Scoring Changes tab stays at 0, got: ${JSON.stringify(tabStringsB)}`);
 assert.ok(tabStringsB.some((s) => /^All \(2\)$/.test(s)),
   `the All tab does not count hit → error changes, got: ${JSON.stringify(tabStringsB)}`);

@@ -10,6 +10,9 @@
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import vm from 'node:vm';
+import { statEffects } from '../pipeline/lib/stat-effects.mjs';
+import { extractGamePlays } from '../pipeline/lib/statsapi.mjs';
+import { buildErrorEvents } from '../pipeline/lib/error-events.mjs';
 
 const ROOT = new URL('../', import.meta.url);
 const readJSON = (rel) => JSON.parse(readFileSync(new URL(rel, ROOT), 'utf8'));
@@ -60,11 +63,37 @@ const documentStub = {
 // the file, and for 📉 Hit → Error the last linked hit → error entry. That
 // keeps the expected value deterministic however the data refreshes.
 const SAVANT_FIXTURE = { xba: 0.329, ls: 95.1, la: -3, source: 'savant:estimated_ba_using_speedangle' };
+// Session 5: until the pipeline has re-published the season files, entries
+// carry no parsed `stats`. The stub then adds them with the SAME function the
+// pipeline runs (pipeline/lib/stat-effects.mjs, run.mjs's trusted-link rule)
+// on the real entries — so the 📊 / 🧮 sections render real log wording.
+function withStats(entry) {
+  if (entry.stats) return entry;
+  const L = entry.link || {};
+  const trusted = L.atBatIndex != null && !(L.flags || []).includes('current_ruling_mismatch');
+  entry.stats = statEffects(entry, trusted
+    ? { batterName: L.batterName || null, batterId: L.batterId ?? null, pitcherName: L.pitcherName || null, pitcherId: L.pitcherId ?? null, currentEventType: L.currentEventType || null }
+    : { currentEventType: L.atBatIndex != null ? L.currentEventType || null : null });
+  if (entry.stats.battingChange && !entry.cls.flags.includes('battingStat')) entry.cls.flags.push('battingStat');
+  if (entry.stats.pitchingChange && !entry.cls.flags.includes('pitchingStat')) entry.cls.flags.push('pitchingStat');
+  return entry;
+}
+// The 📅 Error Log file, when the pipeline has not published one yet: built by
+// the pipeline's own builder from the REAL StatsAPI fixture of game 823736.
+function errorEventsFixture(season) {
+  const fx = JSON.parse(readFileSync(new URL('tools/fixtures/statsapi-823736-pbp-ab6-7.json', ROOT), 'utf8'));
+  const game = { gamePk: 823736, officialDate: '2026-09-11', gameType: 'R', awayId: 113, homeId: 158 };
+  const built = buildErrorEvents({ games: [game], playsByGame: new Map([[823736, extractGamePlays(fx, 823736)]]), abbr: new Map([[113, 'CIN'], [158, 'MIL']]) });
+  return { season, generatedAt: '2026-09-24T00:00:00.000Z', summary: { games: 1, gamesScanned: 1, plateAppearances: 2, events: built.events.length, errorCredits: 1, withVideo: 1 }, ...built };
+}
 const fetchStub = async (url) => {
   const u = new URL(String(url), ROOT);
+  const ee = /error-events-(\d{4})\.json$/.exec(u.pathname);
+  if (ee && !existsSync(u)) return { ok: true, status: 200, json: async () => errorEventsFixture(Number(ee[1])) };
   if (!existsSync(u)) return { ok: false, status: 404, json: async () => ({}) };
   const body = readFileSync(u, 'utf8');
   const data = JSON.parse(body);
+  if (/scoring-changes-\d{4}\.json$/.test(u.pathname) && data.entries) data.entries.forEach(withStats);
   if (/error-watch\.json$/.test(u.pathname) && data.plays && data.plays[0]) data.plays[0].savant = { ...SAVANT_FIXTURE };
   if (/scoring-changes-\d{4}\.json$/.test(u.pathname) && data.entries) {
     const linked = data.entries.filter((x) => x.link && x.link.atBatIndex != null);
@@ -122,7 +151,12 @@ noJunk(summary, 'summary');
 
 // Tabs
 assert.deepEqual(registry['#sc-tabs'].children.map((b) => b.textContent),
-  ['🎯 Error Watch', '📋 Official Changes', '📉 Hit → Error', '📈 Model', '⚑ Irregularities']);
+  ['🎯 Error Watch', '📅 Error Log', '📋 Official Changes', '📊 Stat Changes', '🧮 Pitching Stats', '📉 Hit → Error', '📈 Model', '⚑ Irregularities']);
+const clickTab = (label) => {
+  const b = registry['#sc-tabs'].children.find((x) => x.textContent === label);
+  assert.ok(b, `tab ${label}`);
+  b.dispatch('click');
+};
 
 // Error Watch (default tab)
 let panel = text('#sc-panel');
@@ -160,7 +194,7 @@ if (watch.plays.some((p) => p.errKind)) {
 }
 
 // Official Changes
-registry['#sc-tabs'].children[1].dispatch('click');
+clickTab('📋 Official Changes');
 await settle();
 panel = text('#sc-panel');
 assert.ok(panel.includes(`of ${off2026.entries.length} entries`), 'official: all entries');
@@ -182,7 +216,7 @@ noJunk(text('#sc-panel'), 'official');
 
 // 📉 Hit → Error (session-3 charter): its own section — the same entries the
 // official list flags hitToError, with pre-change chances and final rulings.
-registry['#sc-tabs'].children[2].dispatch('click');
+clickTab('📉 Hit → Error');
 await settle();
 panel = text('#sc-panel');
 assert.match(windowStub.location.hash, /^#hiterror\/2026$/, 'hit→error: hash route');
@@ -217,7 +251,7 @@ await settle();
 noJunk(text('#sc-panel'), 'hit→error');
 
 // Model card
-registry['#sc-tabs'].children[3].dispatch('click');
+clickTab('📈 Model');
 await settle();
 panel = text('#sc-panel');
 assert.ok(panel.includes(model.errorToHit.cv.auc.toFixed(3)), 'model: CV AUC');
@@ -244,10 +278,67 @@ if (model.effects) {
 noJunk(panel, 'model');
 
 // Irregularities
-registry['#sc-tabs'].children[4].dispatch('click');
+clickTab('⚑ Irregularities');
 await settle();
 panel = text('#sc-panel');
 assert.ok(panel.includes(`${irr.items.length} flagged entries`), 'irregularities: count');
 noJunk(panel, 'irregularities');
+
+// 📊 Stat Changes (session-5 charter): entries that alter batting R/H/RBI,
+// hit → error excluded (own section); each shows its batting stat line.
+{
+  const served = JSON.parse(readFileSync(new URL('data/official/scoring-changes-2026.json', ROOT), 'utf8'));
+  served.entries.forEach(withStats);
+  const bat = served.entries.filter((e) => e.cls.flags.includes('battingStat') && !e.cls.flags.includes('hitToError'));
+  const pit = served.entries.filter((e) => e.cls.flags.includes('pitchingStat'));
+  clickTab('📊 Stat Changes');
+  await settle();
+  panel = text('#sc-panel');
+  assert.match(windowStub.location.hash, /^#stats\/2026$/);
+  assert.ok(bat.length > 0 && panel.includes(`of ${bat.length} entries`), `stats: every batting R/H/RBI entry (${bat.length})`);
+  assert.ok(panel.includes('📊 Batting — '), 'stats: batting stat line rendered');
+  assert.ok(!panel.includes('🧮 Pitching — '), 'stats: the batting section shows batting lines only');
+  const e249 = served.entries.find((e) => e.seq === 249);
+  if (e249 && bat.includes(e249)) assert.ok(panel.includes('Andrew Vaughn: RBI \u22121'), 'stats: #249 — Vaughn loses an RBI');
+  const statSelect = findAll(registry['#sc-panel'], (n) => n.tagName === 'SELECT')[1];
+  statSelect.value = 'RBI';
+  statSelect.dispatch('change');
+  await settle();
+  const nRbi = bat.filter((e) => e.stats.batting.some((d) => d.stat === 'RBI')).length;
+  assert.ok(text('#sc-panel').includes(`of ${nRbi} entries`), `stats: RBI filter (${nRbi})`);
+  noJunk(text('#sc-panel'), 'stats');
+  // 🧮 Pitching Stats: its own section.
+  clickTab('🧮 Pitching Stats');
+  await settle();
+  panel = text('#sc-panel');
+  assert.match(windowStub.location.hash, /^#pitching\/2026$/);
+  assert.ok(pit.length > 0 && panel.includes(`of ${pit.length} entries`), `pitching: every pitching-stat entry (${pit.length})`);
+  assert.ok(panel.includes('🧮 Pitching — '), 'pitching: pitching stat line rendered');
+  assert.ok(!panel.includes('📊 Batting — '), 'pitching: the pitching section shows pitching lines only');
+  if (e249 && pit.includes(e249)) assert.ok(panel.includes('Andrew Abbott: ER \u22121 · UER +1'), 'pitching: #249 — 1 run changed to unearned against Abbott');
+  noJunk(panel, 'pitching');
+}
+
+// 📅 Error Log (session 5): game-by-game scan coverage + every error play
+// with its video evidence.
+{
+  clickTab('📅 Error Log');
+  await settle();
+  panel = text('#sc-panel');
+  assert.match(windowStub.location.hash, /^#errorlog\/2026$/);
+  const served = existsSync(new URL('data/model/error-events-2026.json', ROOT))
+    ? readJSON('data/model/error-events-2026.json') : errorEventsFixture(2026);
+  assert.ok(panel.includes(`${served.summary.gamesScanned.toLocaleString()} of ${served.summary.games.toLocaleString()} completed games scanned play by play`), 'error log: scan coverage');
+  assert.ok(panel.includes(`of ${served.events.length.toLocaleString()} error plays`), 'error log: every error play');
+  const video = find(registry['#sc-panel'], (n) => n.attrs.href && n.attrs.href.startsWith('https://baseballsavant.mlb.com/sporty-videos?playId='));
+  assert.ok(video, 'error log: video evidence link');
+  if (!existsSync(new URL('data/model/error-events-2026.json', ROOT))) {
+    assert.equal(video.attrs.href, 'https://baseballsavant.mlb.com/sporty-videos?playId=8552c454-1f49-3d56-a8cc-b6fd75ccb380');
+    assert.ok(panel.includes('fielding error (LF) — runner Brice Turang'), 'error log: the Bleday error on Turang');
+    assert.ok(panel.includes('Pitcher: Andrew Abbott'));
+    assert.ok(panel.includes('1 unearned (1 team-unearned)'));
+  }
+  noJunk(panel, 'error log');
+}
 
 console.log(`scoring-page-test: OK (${watch.plays.length} errors, ${off2026.entries.length} official entries, ${irr.items.length} irregularities)`);
