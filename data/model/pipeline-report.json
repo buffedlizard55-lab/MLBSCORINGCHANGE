@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-26T21:16:03.368Z",
+ "generatedAt": "2026-09-26T23:39:34.137Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -254,9 +254,9 @@
     "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=W"
    ],
    "scheduled": 2483,
-   "completed": 2404,
-   "gamesWithPlays": 2404,
-   "fetched": 280,
+   "completed": 2407,
+   "gamesWithPlays": 2407,
+   "fetched": 283,
    "failed": 0,
    "failures": [],
    "selfCheck": {
@@ -267,16 +267,16 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 2,
+    "fetched": 3,
     "failed": 0,
-    "withScorer": 2404,
+    "withScorer": 2407,
     "scorers": 82
    },
    "byGameType": {
-    "R": 2404
+    "R": 2407
    },
-   "plateAppearances": 182429,
-   "fieldErrorPlateAppearances": 1029,
+   "plateAppearances": 182656,
+   "fieldErrorPlateAppearances": 1030,
    "officialEntries": 255,
    "entryKinds": {
     "ruling_change": 167,
@@ -378,19 +378,19 @@
    "unlinkedErrorToHit": 0,
    "unlinkedHitToError": 0,
    "chainsDroppedForDisagreement": 6,
-   "initialErrorPopulation": 1037,
+   "initialErrorPopulation": 1038,
    "initialErrorToHit": 58
   }
  },
  "discovery": {
   "creditCodes": {
-   "f_putout": 391365,
-   "f_assist": 124013,
-   "f_fielded_ball": 104322,
-   "f_deflection": 3918,
+   "f_putout": 391527,
+   "f_assist": 124060,
+   "f_fielded_ball": 104363,
+   "f_deflection": 3919,
    "f_throwing_error": 3761,
-   "f_fielding_error": 3118,
-   "f_assist_of": 1961,
+   "f_fielding_error": 3121,
+   "f_assist_of": 1962,
    "f_error_dropped_ball": 343,
    "c_catcher_interf": 270,
    "f_touch": 98,
@@ -398,7 +398,7 @@
    "f_defensive_shift_violation_error": 3
   },
   "fieldErrorBatterCredits": {
-   "f_fielding_error": 1955,
+   "f_fielding_error": 1956,
    "f_throwing_error": 1084,
    "f_assist": 189,
    "f_error_dropped_ball": 160,
@@ -415,38 +415,38 @@
   "unresolvedPendingResults": [],
   "scoringAdvisories": [],
   "battedBallLocations": {
-   "1": 13298,
-   "2": 3671,
-   "3": 28430,
-   "4": 43864,
-   "5": 39418,
-   "6": 45348,
-   "7": 61917,
-   "8": 69246,
-   "9": 64093,
-   "78": 3304,
-   "89": 3085,
-   "null": 1294
+   "1": 13304,
+   "2": 3672,
+   "3": 28444,
+   "4": 43884,
+   "5": 39433,
+   "6": 45368,
+   "7": 61945,
+   "8": 69268,
+   "9": 64115,
+   "78": 3307,
+   "89": 3086,
+   "null": 1295
   },
   "battedBallTrajectories": {
-   "ground_ball": 156367,
-   "fly_ball": 100258,
-   "line_drive": 89499,
-   "popup": 26682,
-   "bunt_grounder": 3780,
+   "ground_ball": 156427,
+   "fly_ball": 100304,
+   "line_drive": 89530,
+   "popup": 26697,
+   "bunt_grounder": 3781,
    "bunt_popup": 337,
    "bunt_line_drive": 28,
    "null": 17
   },
   "fieldErrorCoverage": {
-   "total": 3183,
-   "withEvLa": 3149,
-   "withTraj": 3183,
-   "withLoc": 3183
+   "total": 3184,
+   "withEvLa": 3150,
+   "withTraj": 3184,
+   "withLoc": 3184
   },
-  "battedBalls": 376968,
+  "battedBalls": 377121,
   "errorKindCheck": {
-   "fielding|fielding": 1952,
+   "fielding|fielding": 1953,
    "throwing|throwing": 1066,
    "missed_catch|missed_catch": 160,
    "shift_violation|shift_violation": 3,
@@ -456,8 +456,8 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": false,
-  "fetchedThisRun": true,
+  "cached": true,
+  "fetchedThisRun": false,
   "fetchedAt": "2026-09-26T21:16:19.914Z",
   "rowsAllGameTypes": 1382,
   "rowsByGameType": {
@@ -466,13 +466,14 @@
    "E": 34
   },
   "rows": 1027,
-  "statsapiFieldErrors": 1029,
+  "statsapiFieldErrors": 1030,
   "matched": 1027,
   "onlySavant": 0,
   "onlySavantExamples": [],
   "onlyStatsApiExamples": [
    "822678:58",
-   "822678:71"
+   "822678:71",
+   "822759:39"
   ],
   "exitVelocityAgreement": 1,
   "launchAngleAgreement": 1,
@@ -482,14 +483,14 @@
    "meanAbsDiff": 0.0289
   },
   "perPlay": {
-   "needed": 1572,
+   "needed": 1573,
    "excludedNoBattedBall": 56,
    "matched": 1095,
    "matchedNoXba": 117,
    "unavailable": 358,
-   "notIndexedYet": 2,
+   "notIndexedYet": 3,
    "pending": 0,
-   "coverage": 0.6966,
+   "coverage": 0.6961,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -497,22 +498,22 @@
      "season": 2026,
      "month": null,
      "rows": 1382,
-     "fromCache": false,
-     "asked": 2,
+     "fromCache": true,
+     "asked": 1,
      "found": 1017,
-     "missed": 2,
+     "missed": 1,
      "integrity": null
     }
    ],
    "queriesDeferred": 0,
    "failures": [],
-   "requests": 1,
-   "cacheHits": 0,
+   "requests": 0,
+   "cacheHits": 1,
    "budgetExhausted": false
   },
   "client": {
-   "requests": 1,
-   "cacheHits": 0,
+   "requests": 0,
+   "cacheHits": 1,
    "budget": 4,
    "budgetExhausted": false,
    "rateLimited": false,
@@ -554,17 +555,17 @@
      },
      {
       "band": "2–5",
-      "n": 1236,
-      "predicted": 0.0384,
-      "observed": 0.0461,
-      "positives": 57
+      "n": 1235,
+      "predicted": 0.0383,
+      "observed": 0.0453,
+      "positives": 56
      },
      {
       "band": "5–10",
-      "n": 1638,
+      "n": 1639,
       "predicted": 0.0678,
-      "observed": 0.0598,
-      "positives": 98
+      "observed": 0.0604,
+      "positives": 99
      },
      {
       "band": "10–20",
@@ -576,14 +577,14 @@
      {
       "band": "20–35",
       "n": 21,
-      "predicted": 0.2456,
+      "predicted": 0.2455,
       "observed": 0.4286,
       "positives": 9
      },
      {
       "band": "35–50",
       "n": 1,
-      "predicted": 0.3676,
+      "predicted": 0.3675,
       "observed": 1,
       "positives": 1
      },
@@ -616,16 +617,16 @@
      },
      {
       "band": "2–5",
-      "n": 346,
-      "predicted": 0.0385,
-      "observed": 0.052,
+      "n": 347,
+      "predicted": 0.0386,
+      "observed": 0.0519,
       "positives": 18
      },
      {
       "band": "5–10",
-      "n": 527,
+      "n": 526,
       "predicted": 0.0672,
-      "observed": 0.0569,
+      "observed": 0.057,
       "positives": 30
      },
      {
@@ -678,7 +679,7 @@
     "folds": 10,
     "logLoss": 0.00744,
     "baseLogLoss": 0.00935,
-    "auc": 0.9143,
+    "auc": 0.9144,
     "brier": 0.0012,
     "baseBrier": 0.00121,
     "calibration": [
@@ -796,7 +797,7 @@
     ]
    }
   },
-  "surfaceBalls": 372183
+  "surfaceBalls": 372335
  },
  "warnings": [],
  "currentSeason": 2026,
@@ -807,29 +808,29 @@
   "files": [
    {
     "file": "data/capture/rulings-2026-09.json",
-    "plays": 12
+    "plays": 16
    }
   ],
-  "plays": 12,
-  "errorsCaptured": 12,
+  "plays": 16,
+  "errorsCaptured": 15,
   "capturedAsOriginal": 2,
   "settled": 0,
   "changedToHit": 0,
   "changedOther": 0,
   "changesSeenLive": 0,
   "unloggedChanges": 0,
-  "pendingCaptured": 0,
-  "pendingResolved": 0,
+  "pendingCaptured": 1,
+  "pendingResolved": 1,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-09-26T05:32:37.803Z",
+  "lastCaptureAt": "2026-09-26T21:29:37.858Z",
   "lagMinutes": {
    "median": 94.9,
    "p90": 179.5,
-   "n": 12
+   "n": 15
   },
   "originalMaxLagMin": 30,
   "byKind": {
-   "fielding": 7,
+   "fielding": 10,
    "throwing": 3,
    "missed_catch": 2
   },
@@ -840,7 +841,7 @@
   },
   "pendingCalibration": {
    "status": "collecting",
-   "resolved": 0
+   "resolved": 1
   }
  },
  "effects": {
@@ -855,9 +856,9 @@
      "groups": 101,
      "plays": 3171,
      "positives": 189,
-     "statistic": 105.814,
+     "statistic": 105.815,
      "dispersion": 1.048,
-     "pValue": 0.3238,
+     "pValue": 0.3243,
      "permutations": 2000,
      "seed": 20260924
     },
@@ -877,7 +878,7 @@
      "groups": 31,
      "plays": 3171,
      "positives": 189,
-     "statistic": 31.617,
+     "statistic": 31.618,
      "dispersion": 1.02,
      "pValue": 0.3838,
      "permutations": 2000,
@@ -905,7 +906,7 @@
      "groups": 103,
      "plays": 101445,
      "positives": 123,
-     "statistic": 85.806,
+     "statistic": 85.809,
      "dispersion": 0.833,
      "pValue": 0.8343,
      "permutations": 500,
@@ -923,7 +924,7 @@
      "groups": 31,
      "plays": 101445,
      "positives": 123,
-     "statistic": 23.674,
+     "statistic": 23.676,
      "dispersion": 0.764,
      "pValue": 0.7864,
      "permutations": 500,
@@ -965,17 +966,17 @@
    "errorCredits": 2458
   },
   "2026": {
-   "games": 2404,
-   "gamesScanned": 2404,
-   "plateAppearances": 182429,
-   "events": 2454,
+   "games": 2407,
+   "gamesScanned": 2407,
+   "plateAppearances": 182656,
+   "events": 2457,
    "byScope": {
-    "other": 814,
-    "batter_reached": 1089,
+    "other": 816,
+    "batter_reached": 1090,
     "on_hit": 551
    },
-   "withVideo": 2454,
-   "errorCredits": 2439
+   "withVideo": 2457,
+   "errorCredits": 2442
   }
  }
 }
