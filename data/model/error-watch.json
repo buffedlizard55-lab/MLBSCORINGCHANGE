@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-09-26T05:06:39.427Z",
+ "generatedAt": "2026-09-26T11:31:54.308Z",
  "labelCutoff": "2026-09-12",
  "plays": [
   {
@@ -9,6 +9,12 @@
    "gamePk": 824947,
    "ai": 23,
    "gameType": "R",
+   "savant": {
+    "xba": 0.437,
+    "ls": 83.5,
+    "la": 8,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "HOU",
    "home": "ATH",
    "inning": 3,
@@ -35,9 +41,15 @@
    "final": "error",
    "official": [],
    "errKind": "fielding",
-   "errKindSource": "current_ruling",
+   "errKindSource": "captured",
    "scorer": "Mark Honbo",
-   "captured": null
+   "captured": {
+    "firstAt": "2026-09-26T05:32:37.770Z",
+    "lagMin": 179.5,
+    "firstDescription": "Shea Langeliers reaches on a fielding error by third baseman Isaac Paredes. Lawrence Butler to 3rd. Shea Langeliers to 2nd.",
+    "changes": [],
+    "scoreAtCapture": 9
+   }
   },
   {
    "id": "824058:52",
@@ -45,6 +57,12 @@
    "gamePk": 824058,
    "ai": 52,
    "gameType": "R",
+   "savant": {
+    "xba": 0.34,
+    "ls": 59.6,
+    "la": 23,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CLE",
    "home": "KC",
    "inning": 5,
@@ -71,9 +89,15 @@
    "final": "error",
    "official": [],
    "errKind": "fielding",
-   "errKindSource": "current_ruling",
+   "errKindSource": "captured",
    "scorer": "Max Utsler",
-   "captured": null
+   "captured": {
+    "firstAt": "2026-09-26T05:32:37.732Z",
+    "lagMin": 203,
+    "firstDescription": "Michael Massey reaches on a fielding error by third baseman José Ramírez.",
+    "changes": [],
+    "scoreAtCapture": 8
+   }
   },
   {
    "id": "824058:1",
@@ -81,6 +105,12 @@
    "gamePk": 824058,
    "ai": 1,
    "gameType": "R",
+   "savant": {
+    "xba": 0.273,
+    "ls": 102.6,
+    "la": -11,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CLE",
    "home": "KC",
    "inning": 1,
@@ -123,6 +153,12 @@
    "gamePk": 823816,
    "ai": 1,
    "gameType": "R",
+   "savant": {
+    "xba": 0.409,
+    "ls": 88,
+    "la": 5,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "ATL",
    "home": "MIA",
    "inning": 1,
@@ -165,6 +201,12 @@
    "gamePk": 823489,
    "ai": 27,
    "gameType": "R",
+   "savant": {
+    "xba": 0.78,
+    "ls": 94.1,
+    "la": 16,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "BAL",
    "home": "NYY",
    "inning": 4,
@@ -207,6 +249,12 @@
    "gamePk": 823409,
    "ai": 25,
    "gameType": "R",
+   "savant": {
+    "xba": 0.086,
+    "ls": 79,
+    "la": -12,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "TB",
    "home": "PHI",
    "inning": 4,
@@ -249,6 +297,12 @@
    "gamePk": 823167,
    "ai": 55,
    "gameType": "R",
+   "savant": {
+    "xba": 0.206,
+    "ls": 83.5,
+    "la": 1,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "LAD",
    "home": "SF",
    "inning": 9,
@@ -275,9 +329,15 @@
    "final": "error",
    "official": [],
    "errKind": "fielding",
-   "errKindSource": "current_ruling",
+   "errKindSource": "captured",
    "scorer": "Chris Thoms",
-   "captured": null
+   "captured": {
+    "firstAt": "2026-09-26T05:32:37.795Z",
+    "lagMin": 95.6,
+    "firstDescription": "Freddie Freeman reaches on a fielding error by first baseman Brett Harris.",
+    "changes": [],
+    "scoreAtCapture": 8
+   }
   },
   {
    "id": "823085:11",
@@ -285,6 +345,12 @@
    "gamePk": 823085,
    "ai": 11,
    "gameType": "R",
+   "savant": {
+    "xba": 0.052,
+    "ls": 85.5,
+    "la": -33,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "LAA",
    "home": "SEA",
    "inning": 2,
@@ -311,9 +377,15 @@
    "final": "error",
    "official": [],
    "errKind": "throwing",
-   "errKindSource": "current_ruling",
+   "errKindSource": "captured",
    "scorer": "Eric Radovich",
-   "captured": null
+   "captured": {
+    "firstAt": "2026-09-26T05:32:37.803Z",
+    "lagMin": 174.1,
+    "firstDescription": "Michael Arroyo reaches on a throwing error by third baseman Vaughn Grissom. Michael Arroyo to 2nd.",
+    "changes": [],
+    "scoreAtCapture": 4
+   }
   },
   {
    "id": "824707:59",
@@ -25936,7 +26008,7 @@
    "ai": 26,
    "gameType": "R",
    "savant": {
-    "xba": 0.394,
+    "xba": 0.368,
     "ls": 100.1,
     "la": -1,
     "source": "savant:estimated_ba_using_speedangle"

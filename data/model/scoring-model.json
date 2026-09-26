@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-09-26T05:06:39.427Z",
+ "generatedAt": "2026-09-26T11:31:54.308Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -19417,11 +19417,11 @@
   "files": [
    {
     "file": "data/capture/rulings-2026-09.json",
-    "plays": 8
+    "plays": 12
    }
   ],
-  "plays": 8,
-  "errorsCaptured": 8,
+  "plays": 12,
+  "errorsCaptured": 12,
   "capturedAsOriginal": 2,
   "settled": 0,
   "changedToHit": 0,
@@ -19431,21 +19431,93 @@
   "pendingCaptured": 0,
   "pendingResolved": 0,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-09-26T00:43:02.272Z",
+  "lastCaptureAt": "2026-09-26T05:32:37.803Z",
   "lagMinutes": {
-   "median": 77.6,
-   "p90": 108.4,
-   "n": 8
+   "median": 94.9,
+   "p90": 179.5,
+   "n": 12
   },
   "originalMaxLagMin": 30,
   "byKind": {
-   "fielding": 4,
-   "throwing": 2,
+   "fielding": 7,
+   "throwing": 3,
    "missed_catch": 2
   },
   "source": "data/capture/rulings-YYYY-MM.json — pipeline/capture.mjs polls MLB StatsAPI playByPlay during live games (GitHub Actions, every 10 minutes during game hours)",
   "whyNeeded": "StatsAPI rewrites history: timecode snapshots and diffPatch show the current ruling even for moments before a change (verified on 2026 official log #3 and #6), so an original call can only be known if it was recorded before it changed.",
   "recentErrors": [
+   {
+    "id": "823085:11",
+    "g": 823085,
+    "ai": 11,
+    "date": "2026-09-25",
+    "kind": "throwing",
+    "pos": "3B",
+    "firstAt": "2026-09-26T05:32:37.803Z",
+    "lagMin": 174.1,
+    "afterPending": false,
+    "original": false,
+    "settled": false,
+    "current": "field_error",
+    "currentSource": "final play-by-play",
+    "changeSeenAt": null,
+    "logged": false,
+    "scoreAtCapture": 4
+   },
+   {
+    "id": "823167:55",
+    "g": 823167,
+    "ai": 55,
+    "date": "2026-09-25",
+    "kind": "fielding",
+    "pos": "1B",
+    "firstAt": "2026-09-26T05:32:37.795Z",
+    "lagMin": 95.6,
+    "afterPending": false,
+    "original": false,
+    "settled": false,
+    "current": "field_error",
+    "currentSource": "final play-by-play",
+    "changeSeenAt": null,
+    "logged": false,
+    "scoreAtCapture": 8
+   },
+   {
+    "id": "824947:23",
+    "g": 824947,
+    "ai": 23,
+    "date": "2026-09-25",
+    "kind": "fielding",
+    "pos": "3B",
+    "firstAt": "2026-09-26T05:32:37.770Z",
+    "lagMin": 179.5,
+    "afterPending": false,
+    "original": false,
+    "settled": false,
+    "current": "field_error",
+    "currentSource": "final play-by-play",
+    "changeSeenAt": null,
+    "logged": false,
+    "scoreAtCapture": 9
+   },
+   {
+    "id": "824058:52",
+    "g": 824058,
+    "ai": 52,
+    "date": "2026-09-25",
+    "kind": "fielding",
+    "pos": "3B",
+    "firstAt": "2026-09-26T05:32:37.732Z",
+    "lagMin": 203,
+    "afterPending": false,
+    "original": false,
+    "settled": false,
+    "current": "field_error",
+    "currentSource": "final play-by-play",
+    "changeSeenAt": null,
+    "logged": false,
+    "scoreAtCapture": 8
+   },
    {
     "id": "824058:1",
     "g": 824058,

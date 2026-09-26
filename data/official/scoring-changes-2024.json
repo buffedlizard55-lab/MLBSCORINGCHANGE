@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-09-26T05:06:39.427Z",
+ "generatedAt": "2026-09-26T11:31:54.308Z",
  "entries": [
   {
    "seq": 1,
@@ -9728,6 +9728,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-06-25",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10254,6 +10261,13 @@
     "p": 0.0471,
     "score": 5,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-06-24",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10361,6 +10375,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-06-25",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10456,9 +10477,9 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.011,
-    "ls": 84.9,
-    "la": 51,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2024-06-26",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -10609,6 +10630,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-06-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10670,6 +10698,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-06-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -10777,6 +10812,13 @@
     "currentRbi": 1,
     "currentEarnedRuns": 2,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-06-27",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11018,6 +11060,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": 0.497,
+    "ls": 105.5,
+    "la": 0,
+    "gameDate": "2024-06-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11113,6 +11162,13 @@
     "p": 0.057,
     "score": 6,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-06-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11220,6 +11276,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-06-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -11307,6 +11370,13 @@
     "currentRbi": 1,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 1
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-06-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -12833,6 +12903,13 @@
     "currentRbi": 1,
     "currentEarnedRuns": 1,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-07-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -13038,9 +13115,9 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.201,
-    "ls": 95.1,
-    "la": -13,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2024-07-27",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -13480,6 +13557,13 @@
     "p": 0.1064,
     "score": 11,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-07-31",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -16395,6 +16479,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-08-26",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -16456,6 +16547,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-08-28",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -16814,6 +16912,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-08-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -16877,6 +16982,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 1
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-08-30",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -16938,6 +17050,13 @@
     "currentRbi": 0,
     "currentEarnedRuns": 0,
     "currentUnearnedRuns": 0
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-08-31",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -16957,9 +17076,9 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.07,
-    "ls": 54.4,
-    "la": -20,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2024-08-28",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -17142,6 +17261,13 @@
     "p": 0.0771,
     "score": 8,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-08-29",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -17428,6 +17554,13 @@
     "p": 0.1701,
     "score": 17,
     "kind": "out_of_fold"
+   },
+   "savant": {
+    "xba": 0.059,
+    "ls": 58.2,
+    "la": -24,
+    "gameDate": "2024-08-31",
+    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -20022,6 +20155,13 @@
     "battingChange": true,
     "pitchingChange": true
    },
+   "savant": {
+    "xba": 0.463,
+    "ls": 108.4,
+    "la": 17,
+    "gameDate": "2024-09-26",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -20066,13 +20206,6 @@
     "p": 0.1458,
     "score": 15,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": 0.463,
-    "ls": 108.4,
-    "la": 17,
-    "gameDate": "2024-09-26",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -20153,6 +20286,13 @@
     "battingChange": true,
     "pitchingChange": true
    },
+   "savant": {
+    "xba": null,
+    "ls": 72.1,
+    "la": 30,
+    "gameDate": "2024-09-26",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -20197,13 +20337,6 @@
     "p": 0.1313,
     "score": 13,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": 72.1,
-    "la": 30,
-    "gameDate": "2024-09-26",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -20368,6 +20501,13 @@
     "battingChange": true,
     "pitchingChange": true
    },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-10-05",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "fc+error",
@@ -20406,13 +20546,6 @@
     "currentRbi": 1,
     "currentEarnedRuns": 1,
     "currentUnearnedRuns": 0
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2024-10-05",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -20462,6 +20595,13 @@
     "battingChange": true,
     "pitchingChange": true
    },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-10-14",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -20506,13 +20646,6 @@
     "p": 0.0403,
     "score": 4,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2024-10-14",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   },
   {
@@ -20562,6 +20695,13 @@
     "battingChange": true,
     "pitchingChange": true
    },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2024-10-17",
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "cls": {
     "kind": "ruling_change",
     "initial": "error",
@@ -20606,13 +20746,6 @@
     "p": 0.1249,
     "score": 12,
     "kind": "out_of_fold"
-   },
-   "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
-    "gameDate": "2024-10-17",
-    "source": "savant:estimated_ba_using_speedangle"
    }
   }
  ]
