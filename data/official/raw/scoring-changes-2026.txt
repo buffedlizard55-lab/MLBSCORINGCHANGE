@@ -1,6 +1,6 @@
 # Official MLB scoring changes — 2026
 # Source: https://www.mlb.com/official-information/scoring-changes
-# Fetched: 2026-09-26T11:31:54.308Z  sha256(html)=fb6a76ef32b7d02bec3ff19b44616deddd5d6480441d6d43fc9333c8dd9c1bca
+# Fetched: 2026-09-26T16:28:52.360Z  sha256(html)=686cbf6ee362c75995add3e90c5a2dfe15c43625220cfe33848660f10006fcb0
 # Verbatim entry lines as extracted from the page (one per line).
 
 1. 3/31 TB@MIL -- In the bottom of the 5th, assists have been added for Jake Fraley, Jonathan Aranda, Carson Williams, and Ben Williamson on the Brice Turang single.
@@ -257,3 +257,4 @@
 252. 9/14 NYY@MIN -- In the top of the 8th, Cody Bellinger now reaches on an error by pitcher A.J. Minter, instead of on a single. As a result, the run scored by Bellinger is now unearned for Minter, instead of earned.
 253. 9/18 TOR@TEX -- In the bottom of the 8th, the single for Wyatt Langford has been changed to a throwing error charged to Kazuma Okamoto. As a result, 1 run is now unearned against Joe Mantiply. Okamoto already had an error for allowing Langford to advance to 2nd base.
 254. 9/23 MIN@SF -- In the top of the 9th, the assist by Shay Whitcomb on Josh Bell's groundout has been removed.
+255. 9/25 NYM@WAS -- In the bottom of the 1st, Dylan Crews advances to second on a wild pitch by Jefry Yan, instead of a stolen base. Crews as he was not running on the pitch and did not break until the ball hit the dirt.
