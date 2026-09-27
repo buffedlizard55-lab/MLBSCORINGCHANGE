@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-27T05:24:37.387Z",
+ "generatedAt": "2026-09-27T06:04:11.778Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -267,7 +267,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 8,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2415,
     "scorers": 82
@@ -456,8 +456,8 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": false,
-  "fetchedThisRun": true,
+  "cached": true,
+  "fetchedThisRun": false,
   "fetchedAt": "2026-09-27T05:24:55.784Z",
   "rowsAllGameTypes": 1382,
   "rowsByGameType": {
@@ -502,22 +502,22 @@
      "season": 2026,
      "month": null,
      "rows": 1382,
-     "fromCache": false,
-     "asked": 4,
+     "fromCache": true,
+     "asked": 0,
      "found": 1017,
-     "missed": 4,
+     "missed": 0,
      "integrity": null
     }
    ],
    "queriesDeferred": 0,
    "failures": [],
-   "requests": 1,
-   "cacheHits": 0,
+   "requests": 0,
+   "cacheHits": 1,
    "budgetExhausted": false
   },
   "client": {
-   "requests": 1,
-   "cacheHits": 0,
+   "requests": 0,
+   "cacheHits": 1,
    "budget": 4,
    "budgetExhausted": false,
    "rateLimited": false,
@@ -947,39 +947,39 @@
    "games": 2472,
    "gamesScanned": 2472,
    "plateAppearances": 186175,
-   "events": 2634,
+   "events": 2645,
    "byScope": {
-    "other": 823,
+    "other": 829,
     "batter_reached": 1198,
-    "on_hit": 613
+    "on_hit": 618
    },
-   "withVideo": 2634,
+   "withVideo": 2645,
    "errorCredits": 2597
   },
   "2025": {
    "games": 2477,
    "gamesScanned": 2477,
    "plateAppearances": 187029,
-   "events": 2485,
+   "events": 2492,
    "byScope": {
     "batter_reached": 1092,
-    "other": 785,
-    "on_hit": 608
+    "on_hit": 610,
+    "other": 790
    },
-   "withVideo": 2485,
+   "withVideo": 2492,
    "errorCredits": 2458
   },
   "2026": {
    "games": 2415,
    "gamesScanned": 2415,
    "plateAppearances": 183299,
-   "events": 2471,
+   "events": 2478,
    "byScope": {
-    "other": 821,
-    "batter_reached": 1094,
-    "on_hit": 556
+    "on_hit": 558,
+    "other": 826,
+    "batter_reached": 1094
    },
-   "withVideo": 2471,
+   "withVideo": 2478,
    "errorCredits": 2456
   }
  }
