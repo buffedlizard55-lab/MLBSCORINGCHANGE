@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-09-27T06:04:11.778Z",
+ "generatedAt": "2026-09-27T12:10:24.323Z",
  "labelCutoff": "2026-09-13",
  "plays": [
   {
@@ -9,6 +9,12 @@
    "gamePk": 824543,
    "ai": 0,
    "gameType": "R",
+   "savant": {
+    "xba": 0.049,
+    "ls": 83.5,
+    "la": -29,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "COL",
    "home": "CWS",
    "inning": 1,
@@ -51,6 +57,12 @@
    "gamePk": 824057,
    "ai": 10,
    "gameType": "R",
+   "savant": {
+    "xba": 0.301,
+    "ls": 85.7,
+    "la": 1,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CLE",
    "home": "KC",
    "inning": 2,
@@ -93,6 +105,12 @@
    "gamePk": 823407,
    "ai": 64,
    "gameType": "R",
+   "savant": {
+    "xba": 0.466,
+    "ls": 91.2,
+    "la": 6,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "TB",
    "home": "PHI",
    "inning": 7,
@@ -119,9 +137,15 @@
    "final": "error",
    "official": [],
    "errKind": "fielding",
-   "errKindSource": "current_ruling",
+   "errKindSource": "captured",
    "scorer": "Dick Shute",
-   "captured": null
+   "captured": {
+    "firstAt": "2026-09-27T07:59:09.054Z",
+    "lagMin": 342.2,
+    "firstDescription": "Justin Crawford reaches on a fielding error by second baseman Richie Palacios. Bryson Stott scores. Bryan De La Cruz to 3rd. Garrett Stubbs to 2nd.",
+    "changes": [],
+    "scoreAtCapture": 8
+   }
   },
   {
    "id": "823407:57",
@@ -129,6 +153,12 @@
    "gamePk": 823407,
    "ai": 57,
    "gameType": "R",
+   "savant": {
+    "xba": 0.066,
+    "ls": 66.3,
+    "la": -11,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "TB",
    "home": "PHI",
    "inning": 7,
@@ -155,9 +185,15 @@
    "final": "error",
    "official": [],
    "errKind": "throwing",
-   "errKindSource": "current_ruling",
+   "errKindSource": "captured",
    "scorer": "Dick Shute",
-   "captured": null
+   "captured": {
+    "firstAt": "2026-09-27T07:59:09.054Z",
+    "lagMin": 355.6,
+    "firstDescription": "Ryan Vilade reaches on a throwing error by third baseman Alec Bohm. Ryan Vilade to 2nd.",
+    "changes": [],
+    "scoreAtCapture": 4
+   }
   },
   {
    "id": "822759:39",
@@ -165,6 +201,12 @@
    "gamePk": 822759,
    "ai": 39,
    "gameType": "R",
+   "savant": {
+    "xba": 0.252,
+    "ls": 31.1,
+    "la": -31,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CIN",
    "home": "TOR",
    "inning": 5,
@@ -207,6 +249,12 @@
    "gamePk": 822678,
    "ai": 71,
    "gameType": "R",
+   "savant": {
+    "xba": 0.341,
+    "ls": 99.3,
+    "la": -4,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "NYM",
    "home": "WSH",
    "inning": 9,
@@ -249,6 +297,12 @@
    "gamePk": 822678,
    "ai": 58,
    "gameType": "R",
+   "savant": {
+    "xba": 0.113,
+    "ls": 76.2,
+    "la": -4,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "NYM",
    "home": "WSH",
    "inning": 8,
@@ -628,7 +682,7 @@
    "ai": 11,
    "gameType": "R",
    "savant": {
-    "xba": 0.052,
+    "xba": 0.057,
     "ls": 85.5,
     "la": -33,
     "source": "savant:estimated_ba_using_speedangle"

@@ -5,19 +5,19 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-09-27T06:04:11.778Z",
-  "sha256": "ba236736de718b3581b9786fd42dd89069becd826953f80c14a02c9f47968a4a",
-  "bytes": 920403
+  "fetchedAt": "2026-09-27T12:10:24.323Z",
+  "sha256": "1a0a9f2038939b18cc0eb61fb32f34b5de59b8b995398d503b9d3fa517350439",
+  "bytes": 920550
  },
  "sections": [
   {
    "label": "2026 Regular Season",
-   "entries": 255,
+   "entries": 256,
    "issues": []
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-27T06:04:11.778Z",
+ "generatedAt": "2026-09-27T12:10:24.323Z",
  "entries": [
   {
    "seq": 1,
@@ -23345,7 +23345,7 @@
   },
   {
    "seq": 255,
-   "raw": "255. 9/25 NYM@WAS -- In the bottom of the 1st, Dylan Crews advances to second on a wild pitch by Jefry Yan, instead of a stolen base. Crews as he was not running on the pitch and did not break until the ball hit the dirt.",
+   "raw": "255. 9/25 NYM@WAS -- In the bottom of the 1st, Dylan Crews advances to second on a wild pitch by Jefry Yan, instead of a stolen base.",
    "date": "2026-09-25",
    "month": 9,
    "day": 25,
@@ -23353,7 +23353,7 @@
    "home": "WAS",
    "suffix": "",
    "gameNumber": null,
-   "body": "In the bottom of the 1st, Dylan Crews advances to second on a wild pitch by Jefry Yan, instead of a stolen base. Crews as he was not running on the pitch and did not break until the ball hit the dirt.",
+   "body": "In the bottom of the 1st, Dylan Crews advances to second on a wild pitch by Jefry Yan, instead of a stolen base.",
    "half": "bottom",
    "inning": 1,
    "issues": [],
@@ -23411,6 +23411,93 @@
     "la": 74,
     "gameDate": "2026-09-25",
     "source": "savant:estimated_ba_using_speedangle"
+   }
+  },
+  {
+   "seq": 256,
+   "raw": "256. 9/25 HOU@ATH -- In the bottom of the 6th, the run charged to AJ Blubaugh is now Team Unearned. It remains earned to Blubaugh.",
+   "date": "2026-09-25",
+   "month": 9,
+   "day": 25,
+   "away": "HOU",
+   "home": "ATH",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the bottom of the 6th, the run charged to AJ Blubaugh is now Team Unearned. It remains earned to Blubaugh.",
+   "half": "bottom",
+   "inning": 6,
+   "issues": [],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "earned_run",
+    "initial": null,
+    "final": null,
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
+    "flags": [
+     "pitchingStat"
+    ]
+   },
+   "link": {
+    "gamePk": 824947,
+    "atBatIndex": null,
+    "batterName": null,
+    "currentEventType": null,
+    "method": null,
+    "flags": [
+     "date_recovery_ambiguous:12",
+     "batter_not_found"
+    ],
+    "officialDate": "2026-09-25",
+    "gameType": "R",
+    "away": "HOU",
+    "home": "ATH"
+   },
+   "stats": {
+    "batting": [],
+    "pitching": [
+     {
+      "stat": "UER",
+      "delta": null,
+      "sign": 0,
+      "player": "AJ Blubaugh",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "In the bottom of the 6th, the run charged to AJ Blubaugh is now Team Unearned.",
+      "rule": "earned:team_unearned",
+      "teamOnly": true
+     },
+     {
+      "stat": "ER",
+      "delta": null,
+      "sign": 1,
+      "player": "Blubaugh",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "It remains earned to Blubaugh.",
+      "rule": "earned:earned"
+     },
+     {
+      "stat": "UER",
+      "delta": null,
+      "sign": -1,
+      "player": "Blubaugh",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "It remains earned to Blubaugh.",
+      "rule": "earned:earned"
+     }
+    ],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": false,
+    "pitchingChange": true
    }
   }
  ]
