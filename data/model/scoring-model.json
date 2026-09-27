@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-09-27T05:24:37.387Z",
+ "generatedAt": "2026-09-27T12:10:24.323Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -19425,11 +19425,11 @@
   "files": [
    {
     "file": "data/capture/rulings-2026-09.json",
-    "plays": 18
+    "plays": 20
    }
   ],
-  "plays": 18,
-  "errorsCaptured": 17,
+  "plays": 20,
+  "errorsCaptured": 19,
   "capturedAsOriginal": 3,
   "settled": 0,
   "changedToHit": 0,
@@ -19439,21 +19439,57 @@
   "pendingCaptured": 1,
   "pendingResolved": 1,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-09-26T23:47:29.980Z",
+  "lastCaptureAt": "2026-09-27T07:59:09.054Z",
   "lagMinutes": {
-   "median": 89.3,
-   "p90": 179.5,
-   "n": 17
+   "median": 94.9,
+   "p90": 342.2,
+   "n": 19
   },
   "originalMaxLagMin": 30,
   "byKind": {
-   "fielding": 11,
-   "throwing": 3,
+   "fielding": 12,
+   "throwing": 4,
    "missed_catch": 3
   },
   "source": "data/capture/rulings-YYYY-MM.json — pipeline/capture.mjs polls MLB StatsAPI playByPlay during live games (GitHub Actions, every 10 minutes during game hours)",
   "whyNeeded": "StatsAPI rewrites history: timecode snapshots and diffPatch show the current ruling even for moments before a change (verified on 2026 official log #3 and #6), so an original call can only be known if it was recorded before it changed.",
   "recentErrors": [
+   {
+    "id": "823407:57",
+    "g": 823407,
+    "ai": 57,
+    "date": "2026-09-26",
+    "kind": "throwing",
+    "pos": "3B",
+    "firstAt": "2026-09-27T07:59:09.054Z",
+    "lagMin": 355.6,
+    "afterPending": false,
+    "original": false,
+    "settled": false,
+    "current": "field_error",
+    "currentSource": "final play-by-play",
+    "changeSeenAt": null,
+    "logged": false,
+    "scoreAtCapture": 4
+   },
+   {
+    "id": "823407:64",
+    "g": 823407,
+    "ai": 64,
+    "date": "2026-09-26",
+    "kind": "fielding",
+    "pos": "2B",
+    "firstAt": "2026-09-27T07:59:09.054Z",
+    "lagMin": 342.2,
+    "afterPending": false,
+    "original": false,
+    "settled": false,
+    "current": "field_error",
+    "currentSource": "final play-by-play",
+    "changeSeenAt": null,
+    "logged": false,
+    "scoreAtCapture": 8
+   },
    {
     "id": "824057:10",
     "g": 824057,
