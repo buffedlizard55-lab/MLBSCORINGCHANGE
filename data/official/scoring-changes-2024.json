@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-09-27T17:02:19.351Z",
+ "generatedAt": "2026-09-27T21:24:58.164Z",
  "entries": [
   {
    "seq": 1,
@@ -989,7 +989,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0938,
+    "p": 0.0939,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -1843,7 +1843,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0635,
+    "p": 0.0636,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -2356,7 +2356,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2869,
+    "p": 0.287,
     "score": 29,
     "kind": "out_of_fold"
    }
@@ -8995,7 +8995,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.3675,
+    "p": 0.3677,
     "score": 37,
     "kind": "out_of_fold"
    }
@@ -10678,7 +10678,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0298,
+    "p": 0.0297,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -11278,7 +11278,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0569,
+    "p": 0.057,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -17497,7 +17497,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0158,
+    "p": 0.0157,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -18768,7 +18768,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0546,
+    "p": 0.0545,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -20855,7 +20855,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1247,
+    "p": 0.1248,
     "score": 12,
     "kind": "out_of_fold"
    }
