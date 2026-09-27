@@ -81,8 +81,9 @@ const {
   buildScoringSnapshot, scoringSnapshotSignature, scoringCategory,
   scoringEventLabel, scoringInningLabel, scoringMechanism,
   scoringChangeSummary, mergeScoringChanges, finalScanDecision,
-  shouldAlertForReview, visibleInAllFeed, isHitToErrorChange, runsRemovableFromReview,
-  buildEventKey, mergeFeedEvents,
+  shouldAlertForReview, visibleInAllFeed, isHitToErrorChange, isAlertableAssociatedScoringChange,
+  runsRemovableFromReview,
+  buildEventKey, mergeFeedEvents, applyAssociatedScoringUpdates,
 } = feedContext.module.exports;
 const RF = feedContext.module.exports;
 
@@ -256,6 +257,25 @@ const doubleSnap = buildScoringSnapshot(PLAY_DOUBLE_INITIAL_230);
 assert.equal(scoringEventLabel(doubleSnap), 'Double');
 assert.equal(scoringCategory(doubleSnap), 'hit');
 
+// Batter H/RBI and a runner's R are separate player stats. A team run is not
+// counted as the batter's R; only the identity of the runner crossing home is
+// compared. These are synthetic snapshots, labelled here because no official
+// before/after sample is used for this unit assertion.
+{
+  const before = { eventType: 'double', rbi: 0, scoringRunners: [{ key: 'id:10', id: '10', player: 'Runner One' }] };
+  const after = { eventType: 'double', rbi: 0, scoringRunners: [] };
+  assert.deepEqual(JSON.parse(JSON.stringify(RF.scoringStatDeltas(before, after).batting)),
+    [{ stat: 'R', from: 1, to: 0, delta: -1, player: 'Runner One' }]);
+  const sameRunner = { ...before, runsScored: 0 };
+  assert.deepEqual(JSON.parse(JSON.stringify(RF.scoringStatDeltas(before, sameRunner).batting)), [],
+    'team-run metadata differences do not become a batter R change when the runner is unchanged');
+  const unidentifiedBefore = { eventType: 'single', runsScored: 0, scoringRunners: [] };
+  const unidentifiedAfter = { eventType: 'single', runsScored: 1, scoringRunners: [{ key: null, player: null }] };
+  assert.match(RF.scoringRunsAttributionNote(unidentifiedBefore, unidentifiedAfter),
+    /player-level Runs delta could not be attributed/,
+    'a team-run movement without stable runner identity is surfaced, not attributed to the batter');
+}
+
 // No ruling yet → no snapshot, no baseline, no row. Ever.
 assert.equal(buildScoringSnapshot(PLAY_PENDING_RESULT), null,
   'a result still carrying the official-scorer pending marker is not classifiable');
@@ -412,6 +432,10 @@ let s9 = mergeScoringChanges(4, [atIndex(PLAY_SINGLE_FINAL_230, 53)], new Map(),
 let hitToFc = mergeScoringChanges(4, [atIndex(PLAY_FC_PLUS_ERROR, 53)], s9.snapshots, NOW + 1000, emptyCtx());
 let reviewFC = assertChangeRow(hitToFc, { from: 'Single', to: 'Fielders Choice + Error', mechanism: 'scorer' });
 assert.equal(reviewFC.final.errorMovements, 1, 'the error movement is part of the final ruling');
+assert.ok(reviewFC.stats.batting.some((d) => d.stat === 'H' && d.delta === -1),
+  'single → fielder\u2019s choice + error removes the batter\u2019s hit');
+assert.equal(RF.isBattingStatChange(reviewFC), true,
+  'the hit loss is a batting-stat scoring change and remains in the primary alert surface');
 
 // Out → hit: strikeout baseline, then a single.
 let s10 = mergeScoringChanges(5, [atIndex(PLAY_STRIKEOUT, 54)], new Map(), NOW, emptyCtx());
@@ -435,6 +459,60 @@ assert.equal(reviewed.added.length, 0,
   'a rescore covered by an existing replay-review row is not double-tracked');
 assert.equal(reviewed.snapshots.get('42').history.length, 1,
   'the change is still recorded in the play\u2019s history');
+assert.equal(reviewed.associatedReviews.length, 1,
+  'the observed rescore and stat deltas are returned for the existing review row');
+assert.equal(reviewed.associatedReviews[0].observed.initial.label, 'Field Error');
+assert.equal(reviewed.associatedReviews[0].observed.final.label, 'Single');
+assert.ok(Array.isArray(reviewed.associatedReviews[0].observed.stats.batting));
+
+// Applying the association updates the existing replay-review row in place,
+// remains idempotent on later polls, and does not attach a change to ABS.
+const associatedEntry = {
+  gamePk: 9,
+  review: { id: 'manager-review-42', typeKey: 'manager', atBatIndex: 42, inProgress: false },
+  firstSeen: NOW,
+  lastSeen: NOW,
+};
+const associatedSeen = new Map([[buildEventKey(9, associatedEntry.review), associatedEntry]]);
+const attached = applyAssociatedScoringUpdates(reviewed.associatedReviews, associatedSeen, NOW + 2000);
+assert.equal(attached.length, 1);
+assert.equal(attached[0], associatedEntry, 'the original review row is updated, not replaced');
+assert.equal(associatedEntry.review.observedScoringChange.final.label, 'Single');
+assert.equal(associatedEntry.lastSeen, NOW + 2000);
+assert.equal(applyAssociatedScoringUpdates(reviewed.associatedReviews, associatedSeen, NOW + 3000).length, 0,
+  'unchanged associated evidence does not emit a repeated update');
+const refreshedReview = { ...associatedEntry.review, reason: 'Review result refreshed' };
+const refreshResult = mergeFeedEvents(
+  { seen: associatedSeen, order: [buildEventKey(9, refreshedReview)] }, 9, [refreshedReview], new Map());
+assert.equal(refreshResult.updated.length, 1);
+assert.equal(associatedEntry.review.observedScoringChange.final.label, 'Single',
+  'later review-parser updates must not discard the attached rescore evidence');
+const persistedAssociation = RF.serializeFeedLog({
+  dateStr: '2026-09-04', now: NOW + 3000,
+  feedSeen: associatedSeen, feedOrder: [buildEventKey(9, associatedEntry.review)],
+});
+const restoredAssociation = RF.restoreFeedLog(JSON.parse(JSON.stringify(persistedAssociation)), '2026-09-04');
+assert.equal(restoredAssociation.entries[0].review.observedScoringChange.final.label, 'Single',
+  'the attached replay-review scoring evidence survives feed-log persistence');
+assert.equal(isAlertableAssociatedScoringChange(associatedEntry.review), true,
+  'observed batting R/H/RBI deltas on an existing replay review are alertable');
+assert.equal(isAlertableAssociatedScoringChange({ observedScoringChange: {
+  initial: { eventType: 'single' }, final: { eventType: 'field_error' },
+  stats: { batting: [{ stat: 'H', from: 1, to: 0 }] },
+} }), false, 'hit → error remains outside the primary alert system');
+assert.equal(isAlertableAssociatedScoringChange({ observedScoringChange: {
+  initial: { eventType: 'single' }, final: { eventType: 'double' },
+  stats: { batting: [], pitching: [{ stat: 'H', from: 1, to: 0 }] },
+} }), false, 'pitching-only associated changes do not chime');
+const absEntry = {
+  gamePk: 9,
+  review: { id: 'abs-review-42', typeKey: 'abs', atBatIndex: 42, inProgress: true },
+  firstSeen: NOW,
+  lastSeen: NOW,
+};
+assert.equal(applyAssociatedScoringUpdates(reviewed.associatedReviews,
+  new Map([[buildEventKey(9, absEntry.review), absEntry]]), NOW + 4000).length, 0,
+  'ABS rows are not used as replay-review attribution targets');
 
 // hasReview on the play but NO review row was ever observed (e.g. the page
 // opened mid-review): the change IS surfaced, labelled as review-attributed.
@@ -672,8 +750,13 @@ const scoringReview = r3.added[0].review;
   const snapA = buildScoringSnapshot(after);
   assert.equal(snapA.rbi, 0);
   assert.equal(snapA.runsScored, 1);
+  assert.deepEqual(plain(snapA.scoringRunners), [{ key: 'id:668930', player: 'Brice Turang', id: '668930' }]);
   assert.equal(snapA.earnedRuns, 0);
   assert.equal(snapA.unearnedRuns, 1);
+  const noExplicitRbi = JSON.parse(JSON.stringify(PLAY_FC_PLUS_ERROR));
+  delete noExplicitRbi.result.rbi;
+  assert.equal(buildScoringSnapshot(noExplicitRbi).rbi, 1,
+    'when the result count is absent, an explicit scoring-runner RBI flag is used, not guessed');
   const v1 = mergeScoringChanges(823736, [before], new Map(), NOW, emptyCtx());
   const v2 = mergeScoringChanges(823736, [after], v1.snapshots, NOW + 60000, emptyCtx());
   assert.equal(v2.added.length, 1, 'the RBI / earned-run change is one row');
@@ -817,7 +900,7 @@ assert.equal(visibleInAllFeed({ typeKey: 'scoring_change' }), true, 'a snapshot-
 assert.equal(shouldAlertForReview({ typeKey: 'scoring_change' }), true, '…and alertable');
 assert.equal(visibleInAllFeed(null), true, 'malformed entries fail open');
 
-/* ================ 14. Error Watch integrates observed / captured / logged */
+/* ============== 14. Error Watch: all error scopes + source union ========== */
 {
   const live = [{ gamePk: 823736, atBatIndex: 7, timestamp: '2026-09-11T23:40:00Z' }, { gamePk: 1, atBatIndex: 2 }];
   const pipe = [
@@ -825,18 +908,56 @@ assert.equal(visibleInAllFeed(null), true, 'malformed entries fail open');
     { gamePk: 823736, ai: 30, date: '2026-09-11', official: [] },
     { gamePk: 9, ai: 1, date: '2026-09-10' },
   ];
-  const rows = RF.mergeErrorWatchSources(live, pipe, '2026-09-11');
-  assert.equal(rows.length, 3, 'one row per play: live ∪ pipeline plays of this date');
+  const allErrorEvents = [
+    { gamePk: 823736, ai: 7, date: '2026-09-11', scope: 'on_hit', errors: [{ kind: 'fielding', fielder: 'JJ Bleday' }], official: [{ seq: 249 }] },
+    { gamePk: 823736, ai: 31, date: '2026-09-11', scope: 'other', eventType: 'fielders_choice', errors: [{ kind: 'throwing', runner: 'Runner A' }], vid: 'video-fc' },
+    { gamePk: 823736, ai: 30, date: '2026-09-11', scope: 'batter_reached', errors: [], status: 'changed_to_hit' },
+    { gamePk: 9, ai: 1, date: '2026-09-10', scope: 'other', errors: [{ kind: 'fielding' }] },
+  ];
+  const rows = RF.mergeErrorWatchSources(live, pipe, '2026-09-11', allErrorEvents);
+  assert.equal(rows.length, 4, 'one row per play across live, model-watch and all-credit scan records');
   const a = rows.find((r) => r.key === '823736:7');
   assert.equal(JSON.stringify(a.sources), JSON.stringify({ observed: true, captured: true, logged: [249], scanned: true }));
+  assert.equal(a.errorEvent.errors[0].fielder, 'JJ Bleday');
   const b = rows.find((r) => r.key === '823736:30');
   assert.equal(b.live, null);
+  assert.equal(b.errorEvent.status, 'changed_to_hit', 'original errors remain represented after current error credit disappears');
   assert.equal(JSON.stringify(b.sources), JSON.stringify({ observed: false, captured: false, logged: [], scanned: true }));
+  const fc = rows.find((r) => r.key === '823736:31');
+  assert.equal(fc.errorEvent.eventType, 'fielders_choice', 'fielder\u2019s-choice + runner error is included');
+  assert.equal(fc.sources.scanned, true);
   const c = rows.find((r) => r.key === '1:2');
   assert.equal(c.sources.observed, true);
   assert.equal(c.sources.scanned, false, 'observed live, not yet in the pipeline');
   assert.ok(!rows.some((r) => r.key === '9:1'), 'other dates are not mixed in');
   assert.equal(RF.mergeErrorWatchSources(null, null, '2026-09-11').length, 0);
+}
+
+/* ==================== 15. live runner-error evidence (FC / out / hit) ===== */
+{
+  const fc = RF.liveErrorEvidence(PLAY_FC_PLUS_ERROR);
+  assert.equal(fc.scope, 'other');
+  assert.equal(fc.primaryError, false, 'FC + error is not a batter-reached field_error');
+  assert.equal(fc.movements.length, 1);
+  assert.equal(fc.movements[0].runner, 'Myles Straw');
+  assert.equal(fc.movements[0].eventType, 'error');
+  const out = RF.liveErrorEvidence(PLAY_FORCEOUT_PLUS_ERROR);
+  assert.equal(out.scope, 'other');
+  assert.equal(out.movements.length, 1, 'force out with error is tracked');
+  assert.equal(RF.liveErrorEvidence(PLAY_SINGLE_FINAL_230), null, 'plain hit has no error movement');
+  const primary = RF.liveErrorEvidence(PLAY_FIELD_ERROR);
+  assert.equal(primary.scope, 'batter_reached');
+  assert.equal(primary.primaryError, true);
+  // SYNTHETIC shape using the official c_catcher_interf credit vocabulary.
+  const catcherInterference = RF.liveErrorEvidence({
+    result: { eventType: 'catcher_interf', event: 'Catcher Interference' },
+    runners: [{ details: { runner: { fullName: 'Batter Name' } }, credits: [{
+      credit: 'c_catcher_interf', player: { fullName: 'Catcher Name' },
+      position: { abbreviation: 'C' },
+    }] }],
+  });
+  assert.equal(catcherInterference.scope, 'other', 'catcher interference is tracked without an error→hit model score');
+  assert.equal(catcherInterference.credits[0].fielder, 'Catcher Name');
 }
 
 console.log('Official scoring change tests passed successfully!');

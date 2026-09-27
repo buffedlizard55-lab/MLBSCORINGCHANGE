@@ -76,7 +76,10 @@
     silent 🧮 Pitching Stats tab, stat-less rulings in 🗂️ Other Rulings. One rule for every writer:
     a row's `review.stats` (observed deltas — `scoringStatDeltas` — or the official log's parsed
     deltas — `pipeline/lib/stat-effects.mjs`) wins; without it the registry event types decide; a
-    malformed row fails open. Stat rows without a reclassification use id `stat-<atBatIndex>`.
+    malformed row fails open. Observed batting R is attributed to the runner who scored, by stable
+    runner identity; never treat the play's total runs as the batter's R. A pending→final delta is
+    shown only when both observed snapshots provide the fields. Stat rows without a
+    reclassification use id `stat-<atBatIndex>`.
     Official deltas are read from MLB's own words with the clause kept as `evidence`; a count the
     log does not state is `delta: null`, never guessed; a team-unearned run changes no pitcher.
     Pinned by `tools/scoring-change-test.mjs`, `tools/official-feed-log-test.mjs`,
@@ -89,3 +92,10 @@
     `https://baseballsavant.mlb.com/sporty-videos?playId=<vid>`). Batter-reached rows carry the
     same score/status as Error Watch. Pinned by `tools/error-events-test.mjs` (real game 823736)
     and `tools/pipeline-offline-smoke.mjs`.
+17. **Error Watch lists every error scope, not only batter-reached errors.** Join the date's live
+    observations, captured / official-log evidence, batter-reached model rows, and the all-credit
+    `data/model/error-events-<season>.json` scan by `<gamePk>:<atBatIndex>`. Include runner errors on
+    hits, fielder's choices, outs and other plays; dedupe to one row per play. The error→hit score
+    applies only to a batter-reached-on-error ruling. Never assign that score to a runner error or
+    infer a missing fielder / stat delta. Main chime/feed constraints in #15 and hit→error
+    separation in #13 remain unchanged.

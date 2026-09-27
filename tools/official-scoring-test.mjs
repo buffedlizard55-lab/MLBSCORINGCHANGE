@@ -361,7 +361,7 @@ assert.equal(state.seen.get('822688:osp-10').review.inProgress, true);
 // Test with playsByAtBatIndex: when a pending marker clears, the resolved
 // play's description should be captured.
 const state2 = { seen: new Map(), order: [] };
-const poll5 = mergeFeedEvents(state2, 822688, [pend], new Map([['10', resolvedPrimaryPlay]]));
+const poll5 = mergeFeedEvents(state2, 822688, [pend], new Map([['10', pendingPrimaryPlay]]));
 assert.equal(poll5.added.length, 1, 'pending ruling is added on first observation');
 // Now simulate the marker clearing: no pending entry in reviews, but playsByAtBatIndex has the resolved play.
 const poll6 = mergeFeedEvents(state2, 822688, [], new Map([['10', resolvedPrimaryPlay]]));
@@ -374,6 +374,49 @@ assert.equal(resolved2.resolvedWhenMarkerCleared, true);
 assert.equal(resolved2.resolvedDescription,
   'Anthony Seigler reaches on a fielding error by third baseman.',
   'resolved description is captured from the resolved play');
+assert.ok(resolved2.resolvedStats.unavailable.includes('H'),
+  'when the pending payload has no initial event classification, the hit delta stays unknown');
+
+// SYNTHETIC transition: the pending payload contains a provisional field-error
+// classification and runner-level facts; the resolved payload contains a
+// single, one RBI, and the same runner now earned. Only observed before/after
+// fields are compared; no score or RBI is inferred from wording.
+const pendingWithStats = JSON.parse(JSON.stringify(pendingPrimaryPlay));
+pendingWithStats.result = { type: 'atBat', eventType: 'field_error', rbi: 0, isOut: false };
+pendingWithStats.runners = [{
+  movement: { originBase: '3B', end: 'score', isOut: false },
+  details: { eventType: 'field_error', runner: { id: 900001, fullName: 'SYNTHETIC Runner' }, rbi: false, earned: false },
+}];
+const finalWithStats = JSON.parse(JSON.stringify(pendingWithStats));
+finalWithStats.result = { type: 'atBat', eventType: 'single', event: 'Single', description: 'SYNTHETIC single', rbi: 1, isOut: false };
+finalWithStats.runners[0].details = { eventType: 'single', runner: { id: 900001, fullName: 'SYNTHETIC Runner' }, rbi: true, earned: true };
+const statPendingState = { seen: new Map(), order: [] };
+mergeFeedEvents(statPendingState, 822688, [pend], new Map([['10', pendingWithStats]]));
+const statResolved = mergeFeedEvents(statPendingState, 822688, [], new Map([['10', finalWithStats]]));
+assert.equal(statResolved.updated.length, 1);
+const pendingDeltas = statPendingState.seen.get('822688:osp-10').review.resolvedStats;
+assert.deepEqual(JSON.parse(JSON.stringify(pendingDeltas.batting)), [
+  { stat: 'H', from: 0, to: 1, delta: 1 },
+  { stat: 'RBI', from: 0, to: 1, delta: 1 },
+]);
+assert.deepEqual(JSON.parse(JSON.stringify(pendingDeltas.pitching)), [
+  { stat: 'H', from: 0, to: 1, delta: 1 },
+  { stat: 'ER', from: 0, to: 1, delta: 1 },
+  { stat: 'UER', from: 1, to: 0, delta: -1 },
+]);
+
+// SYNTHETIC outcome branch: strikeout → fielder's choice removes the pitcher's
+// K, but does not create a batting R/H/RBI alert when none changed.
+const pendingStrikeout = { ...pendingPrimaryPlay,
+  result: { type: 'atBat', eventType: 'strikeout', rbi: 0, isOut: true }, runners: [] };
+const finalFieldersChoice = { ...pendingPrimaryPlay,
+  result: { type: 'atBat', eventType: 'fielders_choice', event: 'Fielders Choice', rbi: 0, isOut: false }, runners: [] };
+const kPendingState = { seen: new Map(), order: [] };
+mergeFeedEvents(kPendingState, 822688, [pend], new Map([['10', pendingStrikeout]]));
+mergeFeedEvents(kPendingState, 822688, [], new Map([['10', finalFieldersChoice]]));
+const kDeltas = kPendingState.seen.get('822688:osp-10').review.resolvedStats;
+assert.deepEqual(JSON.parse(JSON.stringify(kDeltas.batting)), []);
+assert.deepEqual(JSON.parse(JSON.stringify(kDeltas.pitching)), [{ stat: 'K', from: 1, to: 0, delta: -1 }]);
 
 /* ----------------------- 7. completePendingScoringReview (pure helper) */
 

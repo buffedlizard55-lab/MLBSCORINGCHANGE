@@ -200,6 +200,7 @@ export function extractGamePlays(pbp, gamePk) {
             errSeen.add(key);
             errs.push({
               k: c.credit, pos, f: (c.player && c.player.id) ?? null,
+              fn: (c.player && c.player.fullName) || null,
               r: (det.runner && det.runner.id) ?? null, rn: (det.runner && det.runner.fullName) || null,
               b: isBatter ? 1 : 0, pi, vid: vidAt(pi),
               ev: det.eventType || null,

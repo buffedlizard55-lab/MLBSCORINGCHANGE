@@ -10,8 +10,8 @@
  *
  * Asserts:
  *   1. a field_error play appears on the 🎯 Error Watch tab with a 0–100
- *      score computed by MLBScoringModel from the lazily fetched hitData,
- *      its batted ball, and the official-log confirmation link;
+ *      score computed by MLBScoringModel from lazily fetched hitData, while
+ *      a scanned fielder's-choice + runner-error row joins without that score;
  *   2. an Official Scorer Ruling Pending row shows the final-ruling
  *      distribution;
  *   3. when the error is rescored as a single, the scoring-change row shows
@@ -120,9 +120,17 @@ const MODEL = {
   pending: { outcomes: ['hit', 'error', 'fc', 'out', 'sac', 'other'], evEdges: [85], laEdges: [10], minN: 1, table: { R: { n: 1000, p: [0.7, 0.2, 0.1, 0, 0, 0] } } },
 };
 const OFFICIAL = { entries: [{ seq: 7, raw: '7. (synthetic) SYA@SYH -- Synthetic Batter now has a single instead of an error.', cls: { kind: 'ruling_change', transition: 'error->hit' }, link: { gamePk: GAME_PK, atBatIndex: 0 } }] };
+const ERROR_EVENTS = { events: [{
+  id: `${GAME_PK}:2`, date: today, gamePk: GAME_PK, ai: 2, away: 'SYA', home: 'SYH',
+  inning: 1, half: 'bottom', batter: 'Synthetic Runner Batter', eventType: 'fielders_choice', event: 'Fielders Choice',
+  description: 'Synthetic Runner Batter reaches on a fielder\u2019s choice; a runner advances on a throwing error.',
+  scope: 'other', errorMovements: 1, errors: [{ kind: 'throwing', fielder: 'Synthetic Shortstop', pos: 'SS', runner: 'Synthetic Runner' }],
+  vid: 'synthetic-video-id', official: [],
+}] };
 const fetchStub = async (url) => {
   calls.fetch.push(String(url));
   if (String(url) === 'data/model/scoring-model.json') return { ok: true, json: async () => MODEL };
+  if (/^data\/model\/error-events-\d{4}\.json$/.test(String(url))) return { ok: true, json: async () => ERROR_EVENTS };
   if (/^data\/official\/scoring-changes-\d{4}\.json$/.test(String(url))) return { ok: true, json: async () => OFFICIAL };
   return { ok: false, json: async () => ({}) };
 };
@@ -162,18 +170,25 @@ const tabText = () => strings(registry['#feed-tabs']).join(' | ');
 const listText = () => strings(registry['#feed-list']).join(' | ');
 
 // 1. Error Watch tab + row
-assert.match(tabText(), /🎯 Error Watch \(1\)/);
+assert.match(tabText(), /🎯 Error Watch \(1\)/, 'before the lazy all-error scan loads, the live error is already visible');
 assert.match(tabText(), /All \(1\)/, 'Error Watch items are not feed entries (All counts the pending row only)');
 windowStub.ReplayFeed.setFilter('errorwatch');
+await settle();
+assert.match(tabText(), /🎯 Error Watch \(2\)/, 'all scanned runner-error scopes join the observed Error Watch row');
 let text = listText();
-assert.match(text, /Chance this error becomes a hit/);
+assert.match(text, /Chance this batter-reached error becomes a hit/);
 // surface cell (95 mph, 5°) = 0.6 → z = -2 + logit(0.6) → p ≈ 0.169 → 17/100
 const expected = Math.round(100 / (1 + Math.exp(-(-2 + Math.log(0.6 / 0.4)))));
 assert.ok(text.includes(`${expected}/100`), `score ${expected}/100 shown`);
-assert.match(text, /Stands as error/);
+assert.match(text, /Stands as batter-reached error/);
 assert.match(text, /95\.0 mph · 5° · ground ball · to shortstop/);
 assert.match(text, /comparable batted balls became hits 60% of the time/);
 assert.match(text, /✓ Official MLB log #7/);
+assert.match(text, /Fielders Choice \+ error/);
+assert.match(text, /No error-to-hit score: error scope is other/,
+  'runner-error / fielder\u2019s-choice rows are tracked without an inapplicable batter-reached model score');
+assert.match(text, /Synthetic Shortstop: throwing on Synthetic Runner/);
+assert.match(text, /synthetic-video-id/);
 assert.match(text, /https:\/\/www\.mlb\.com\/official-information\/scoring-changes/);
 assert.equal(calls.hitData, 1, 'hitData requested once for the game');
 

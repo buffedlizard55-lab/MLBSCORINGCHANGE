@@ -57,6 +57,10 @@ capture it required is built and running.)
 6. Keep the GitHub Pages site clean, simple and organised with official source links; work in
    multiple passes; open a PR and merge to `main`; report remaining work and limitations.
 
+### Follow-up request — session 6 (verbatim)
+
+> need to work on tracking all errors and all possibilities that can happen when an error is recorded and fielders choices too.  there are a lot of possibilities that can happen, we need to think of all the ways that stats can be changed when a play is either pending a scoring review or if there is an error.  sometimes errors are changed to plays that add or remove an RBI or a hit.  think about it, make the changes so that the alert system is tracking it and that we are tracking all errors especially.  work line by line verifying everything no hallucinations.
+
 ### The xBA conversation that framed the model (condensed — not verbatim)
 
 - **Q:** *How is xBA calculated on Baseball Savant?* — **A (summary):** xBA asks "given how this
@@ -96,9 +100,9 @@ capture it required is built and running.)
 | Exact copy; original untouched | Commit `ddca0b8` = original at `859e958`. Browser storage isolated (`mlbScoringChange.*` keys, `tools/storage-namespace-test.mjs`) because both sites share one origin. |
 | Score /100: error → single | `assets/js/scoring-model.js` `scoreErrorToHit`, shown on **🎯 Error Watch** rows and ✏️ Scoring Change rows (live feed) and on `scoring.html`. |
 | Pending ruling → single / error / FC / out … | ⚖️ Scoring Pending rows (feed and game page) show "Likely final ruling" chances (`pendingDistribution`). |
-| Observed, captured and logged events | *Observed*: every live `field_error` play (Error Watch). *Captured*: rulings the feed saw change (✏️ rows). *Logged*: MLB's official log, parsed and linked play-by-play (`data/official/`). |
+| Observed, captured and logged events | *Observed*: live plate-appearance errors plus runner-level error movements / error credits when present in StatsAPI (Error Watch). *Captured*: original batter-reached error calls and pending markers (live-capture pipeline). *Logged/scanned*: MLB's official scoring log and every final-play-by-play error credit / movement (`data/model/error-events-<season>.json`). |
 | Expected chance **and** final result | Every row shows both: the pre-change chance and the live / official final ruling. |
-| Full list | `scoring.html` → Official Changes (every entry, 2024–2026) and Error Watch (every error of the season). |
+| Full list | `scoring.html` → Official Changes (every entry, 2024–2026), Error Watch (batter-reached model population) and **Error Log** (every charged error credit, plus runner error movements when the payload exposes them, including on hits / fielder's choices / outs). |
 | Up to date, no manual checking | `.github/workflows/official-data.yml` rebuilds everything from official sources every 3 hours; `.github/workflows/official-feed-log.yml` then appends each newly confirmed change to the committed `data/feed-log-<date>.json` files (visible on GitHub Pages, where there is no API server); the live feed polls StatsAPI continuously. |
 | Official source links | Every row links to Gameday / Baseball Savant / StatsAPI / the official MLB log. |
 | Irregularities flagged | `data/official/irregularities.json` → `scoring.html` ⚑ Irregularities (e.g. log typos like `TBN@TOR`, games that do not exist on the stated date). |
@@ -106,10 +110,10 @@ capture it required is built and running.)
 | Calibrate pending chances with logged outcomes (follow-up 2) | Captured pending rulings + resolutions → per-outcome weights, leave-one-out validated (`pendingCalibration`); applied in the feed and on game pages when active. |
 | Re-test official-scorer / home-park effects (follow-up 3) | Every pipeline run: official scorer of every game (`gameData.officialScorer`), permutation test + cross-validated candidate (`pipeline/lib/effects.mjs`); verdict and per-scorer table on `scoring.html` → Model. |
 | Track single → error changes in their own section, OUT of the primary alert system (session 3) | Live feed: `isHitToErrorChange` (`assets/js/reviews-feed.js`) — a non-HR hit → `field_error` change is excluded from the All feed, the ✏️ Scoring Changes tab and the alert chime, and renders only in the **📉 Hit → Error** tab (with its pre-change chance /100 and the final result). Season list: `scoring.html` → **📉 Hit → Error** (every official hit→error change 2024–2026, each entry classified, linked to its play where found and checked against the play's current StatsAPI ruling — mismatches flagged, never hidden). Same definition everywhere: the pipeline's `hitToError` classifier flag. |
-| Main alerts = batting R / H / RBI changes only (session 5) | Live feed: `isBattingStatChange` gates the All feed, the ✏️ **Scoring Changes · R/H/RBI** tab and the chime. Each scoring-change row carries its stat deltas (`review.stats`): observed ones from the play's own StatsAPI values before/after (`result.rbi`, scoring runners, `runners[].details.earned`) and official ones parsed from MLB's words (`pipeline/lib/stat-effects.mjs`, every delta keeping its clause as evidence). A change of RBI / runs / earned runs *without* a reclassification (the #249 shape) is now a row too (`stat-<ai>`), not just an irregularity note. Season list: `scoring.html` → **📊 Stat Changes**. |
+| Main alerts = batting R / H / RBI changes only (session 5; session 6 coverage) | Live feed: `isBattingStatChange` gates the All feed, the ✏️ **Scoring Changes · R/H/RBI** tab and the chime. Observed deltas distinguish batter H/RBI from each scoring runner's R by stable runner identity; team runs are never assigned to the batter. Pending→final deltas are attached to the pending row only when both StatsAPI snapshots state the values, with unknown categories called out. Official deltas are parsed from MLB's words (`pipeline/lib/stat-effects.mjs`, every delta keeping its clause as evidence). A change of RBI / runs / earned runs *without* a reclassification (the #249 shape) is a row too (`stat-<ai>`), not just an irregularity note. Season list: `scoring.html` → **📊 Stat Changes**. |
 | Pitching stat changes in a separate section, never in the main alerts (session 5) | Live feed: silent **🧮 Pitching Stats** tab (`isPitchingOnlyStatChange` — hits allowed, BB, K, ER, UER); rulings that change no stat (e.g. double → single) go to the silent **🗂️ Other Rulings** tab. Season list: `scoring.html` → **🧮 Pitching Stats**. A run made unearned for the *team* only changes no pitcher's line and is not counted. |
 | Complete game-by-game scan of every game, historically, with video evidence (session 5) | `pipeline/lib/error-events.mjs` → `data/model/error-events-<season>.json`: every completed game's scan coverage (plate appearances, error plays, errors) and **every error credit of every play** (batter reached / on a hit / other), each with the play's Baseball Savant video (`sporty-videos?playId=` from StatsAPI `playEvents[].playId`), pitcher, earned / unearned runs and its official-log entries. `scoring.html` → **📅 Error Log** (games that could not be scanned are listed, never hidden). |
-| Error Watch integrates observed, captured and logged events — errors only (session 5) | Live feed **🎯 Error Watch**: one row per error play of the date, merging what this page observed live, what the live-capture pipeline recorded, MLB's official log and the pipeline scan (`mergeErrorWatchSources`), with source badges, the /100 chance, the final result and the video; pending official-scorer rulings listed below with their likely final ruling. |
+| Error Watch integrates all observed, captured and logged error scopes (sessions 5–6) | Live feed **🎯 Error Watch**: one row per error play of the date, merging live observation, captured calls, official-log links, the batter-reached model watch and `error-events-<season>.json` (all final-play-by-play error credits). Includes runner errors on hits and on fielder's-choice / out plays; only batter-reached errors receive the error→hit score. Rows show known fielder/runner details, source badges and video when available. Pending official-scorer rulings stay visible below with likely final ruling; observed batting/pitching deltas appear on the linked scoring-change row, never guessed when the pre-ruling baseline is unavailable. |
 | …without tracking every single (no bloat) | Detection reuses the compact per-play classification baselines the scoring tracker already keeps for every completed play (one small snapshot per play, never a feed row); only a *confirmed* change mints a row. Season-long confirmation comes from MLB's official log via the 3-hourly pipeline, not from scanning hits. |
 
 ## 🧭 Arena Core Values — focal points
@@ -124,12 +128,12 @@ plainly; every data problem found is either fixed at the source or flagged in pu
 
 ## What this copy adds
 
-1. **🎯 Error Watch** (live feed tab) — every play scored "reached on error" today, with its
-   0–100 chance of becoming a hit, the batted ball, the live final ruling and, once MLB posts it,
-   the official-log confirmation. It never triggers sounds and is not saved into the feed log.
-   Session 5: errors only, merging what the page observed with the pipeline's captured / logged /
-   scanned errors of the date (source badges, video link), plus pending rulings with their likely
-   final ruling.
+1. **🎯 Error Watch** (live feed tab) — every error play found for the selected date, including
+   batter-reached errors, errors attached to hits, and runner errors on fielder's-choice / out plays.
+   It merges live observation with captured / official-log / final-play-by-play scan evidence and
+   links video where available. The /100 error→hit chance is shown only for batter-reached errors;
+   other scopes are tracked but are not fed to an inapplicable model. Pending scorer rulings remain
+   listed with their likely final ruling. Error Watch is silent and is not persisted as an alert row.
 2. **Model lines on existing rows** — ✏️ Scoring Change rows show the pre-change chance and the
    final result; ⚖️ Scoring Pending rows show the chances of each final ruling — in the Replay
    Feed and on each game page's Challenges & Reviews tab.

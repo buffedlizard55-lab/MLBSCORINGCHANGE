@@ -805,11 +805,15 @@
     }
     body.appendChild(head);
     body.appendChild(el('div', 'sc-desc', ev.description || ev.event || ''));
-    const errs = (ev.errors || []).map((x) => `${CREDIT_TEXT[x.kind] || String(x.credit || '').replace(/_/g, ' ')}${x.pos ? ` (${x.pos})` : ''}` +
+    const errs = (ev.errors || []).map((x) => `${CREDIT_TEXT[x.kind] || String(x.credit || '').replace(/_/g, ' ')}` +
+      `${x.fielder ? ` — ${x.fielder}` : ''}${x.pos ? ` (${x.pos})` : ''}` +
       `${x.onBatter ? ' — batter reached' : x.runner ? ` — runner ${x.runner}` : ''}`);
     const facts = [];
     if (errs.length) facts.push(`Charged: ${errs.join('; ')}`);
-    else if (ev.status) facts.push('No error on the play now (the ruling was changed)');
+    else if (ev.status) facts.push('No error credit on the current play (the ruling was changed)');
+    if (!errs.length && ev.errorMovements > 0) {
+      facts.push(`${ev.errorMovements} runner error movement${ev.errorMovements === 1 ? '' : 's'} in the play data; no separate fielder-credit detail was available`);
+    }
     if (ev.pitcher) facts.push(`Pitcher: ${ev.pitcher}`);
     const runs = [];
     if (ev.er) runs.push(`${ev.er} earned`);
