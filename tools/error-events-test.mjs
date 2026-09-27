@@ -76,6 +76,20 @@ t('error kinds and scope', () => {
   assert.equal(savantVideoUrl(null), null);
 });
 
+t('fielder names are carried when StatsAPI supplies them (SYNTHETIC augmentation)', () => {
+  const synthetic = JSON.parse(JSON.stringify(pbp));
+  const errorMovement = synthetic.allPlays.find((p) => p.about.atBatIndex === 7)
+    .runners.flatMap((r) => r.credits || []).find((c) => c.credit === 'f_fielding_error');
+  errorMovement.player.fullName = 'SYNTHETIC Fielder Name';
+  const syntheticPlay = extractGamePlays(synthetic, 823736).find((p) => p.ai === 7);
+  assert.equal(syntheticPlay.errs[0].fn, 'SYNTHETIC Fielder Name');
+  const built = buildErrorEvents({
+    games: [{ gamePk: 823736, officialDate: '2026-09-11', gameType: 'R', awayId: 113, homeId: 158 }],
+    playsByGame: new Map([[823736, [syntheticPlay]]]), abbr: new Map([[113, 'CIN'], [158, 'MIL']]),
+  });
+  assert.equal(built.events[0].errors[0].fielder, 'SYNTHETIC Fielder Name');
+});
+
 const game = { gamePk: 823736, officialDate: '2026-09-11', gameType: 'R', awayId: 113, homeId: 158 };
 const abbr = new Map([[113, 'CIN'], [158, 'MIL']]);
 const raw249 = '249. 9/11 CIN@MIL -- In the bottom of the 1st, following the double for Andrew Vaughn, an error has been charged to JJ Bleday for allowing Brice Turang to score. As a result, Vaughn loses an RBI and 1 run is changed to unearned against Andrew Abbott.';
@@ -103,13 +117,20 @@ t('buildErrorEvents: the Bleday error is logged with its video, official entry a
   assert.equal(ev.status, null);
 });
 
-t('gameScanRow: a game whose play-by-play is missing is listed as NOT scanned', () => {
+t('gameScanRow: missing scans stay visible; runner error movements are retained without inventing credits', () => {
   const r = gameScanRow(game, null, abbr);
   assert.equal(r.scanned, false);
   assert.equal(r.pas, 0);
   const { games, events } = buildErrorEvents({ games: [game], playsByGame: new Map(), abbr });
   assert.equal(games[0].scanned, false);
   assert.equal(events.length, 0);
+  const movementOnly = { ...ab7, ai: 8, et: 'fielders_choice', ev: 'Fielders Choice', errs: undefined, re: 1 };
+  const scanned = buildErrorEvents({ games: [game], playsByGame: new Map([[823736, [movementOnly]]]), abbr });
+  assert.equal(scanned.games[0].errorPlays, 1);
+  assert.equal(scanned.games[0].errors, 0, 'error movement is not mislabeled as a fielder error credit');
+  assert.equal(scanned.events.length, 1);
+  assert.equal(scanned.events[0].errorMovements, 1);
+  assert.deepEqual(scanned.events[0].errors, []);
 });
 
 t('statEffects on 2026 #249 with the linked play: batting RBI −1 (Vaughn); pitching ER −1 / UER +1 (Abbott)', () => {

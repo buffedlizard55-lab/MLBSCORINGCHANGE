@@ -15,10 +15,12 @@
  *   rec.vid                 playId of the play's final pitch/event
  *   rec.rbi / er / ur       RBI, earned and unearned runs scored on the play
  * An event is minted for a plate appearance when it carries at least one
- * error credit NOW, or when its ORIGINAL ruling was a batter-reached-on-error
- * (an error the official log later changed to a hit carries no error credit
- * any more — `initialErrorIds`). Nothing is inferred: fields the data does not
- * carry are null.
+ * error credit NOW, an error-coded runner movement, or when its ORIGINAL
+ * ruling was a batter-reached-on-error (an error the official log later
+ * changed to a hit carries no error credit any more — `initialErrorIds`).
+ * A movement without a credit is retained as movement evidence, not relabeled
+ * as a fielder credit. Nothing is inferred: fields the data does not carry
+ * are null.
  *
  * Video evidence: https://baseballsavant.mlb.com/sporty-videos?playId=<vid>
  * (verified 2026-09-24 for playId 8552c454-1f49-3d56-a8cc-b6fd75ccb380 →
@@ -55,7 +57,8 @@ export function errorScope(rec, initiallyError = false) {
 export function gameScanRow(g, plays, abbr) {
   const list = Array.isArray(plays) ? plays : null;
   const pas = list ? list.filter((r) => r.ty === 'atBat').length : 0;
-  const errorPlays = list ? list.filter((r) => r.ty === 'atBat' && ((r.errs && r.errs.length) || r.et === 'field_error')).length : 0;
+  const errorPlays = list ? list.filter((r) => r.ty === 'atBat' &&
+    ((r.errs && r.errs.length) || r.re || r.et === 'field_error')).length : 0;
   const errors = list ? list.reduce((n, r) => n + (r.errs ? r.errs.length : 0), 0) : 0;
   return {
     gamePk: g.gamePk,
@@ -98,7 +101,8 @@ export function buildErrorEvents({
       const id = `${g.gamePk}:${rec.ai}`;
       const errRow = errorRowById.get(id) || null;
       const errs = Array.isArray(rec.errs) ? rec.errs : [];
-      if (!errs.length && !errRow && rec.et !== 'field_error') continue;
+      const errorMovements = Number.isFinite(rec.re) ? rec.re : 0;
+      if (!errs.length && !errRow && rec.et !== 'field_error' && errorMovements === 0) continue;
       const scope = errorScope(rec, !!errRow);
       const official = officialByPlay.get(id) || [];
       let status = null; let final = null;
@@ -133,11 +137,13 @@ export function buildErrorEvents({
         ur: rec.ur || 0,
         tu: rec.tu || 0,
         scope,
+        errorMovements,
         errors: errs.map((x) => ({
           kind: errorKindOfCredit(x.k),
           credit: x.k,
           pos: x.pos || null,
           fielderId: x.f ?? null,
+          fielder: x.fn || null,
           runner: x.rn || null,
           runnerId: x.r ?? null,
           onBatter: x.b === 1,

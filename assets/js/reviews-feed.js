@@ -191,8 +191,81 @@ function reviewChanged(previousReview, nextReview) {
     previousReview.reason !== nextReview.reason ||
     previousReview.description !== nextReview.description ||
     previousReview.resolvedDescription !== nextReview.resolvedDescription ||
+    JSON.stringify(previousReview.pendingStats || null) !== JSON.stringify(nextReview.pendingStats || null) ||
+    JSON.stringify(previousReview.resolvedStats || null) !== JSON.stringify(nextReview.resolvedStats || null) ||
+    JSON.stringify(previousReview.observedScoringChange || null) !== JSON.stringify(nextReview.observedScoringChange || null) ||
     JSON.stringify(previousReview.scoreImpact || null) !== JSON.stringify(nextReview.scoreImpact || null);
 }
+
+  /** Snapshot only the StatsAPI scoring facts actually present during an OS pending marker. */
+  function pendingScoringStatSnapshot(play) {
+    if (!play || typeof play !== 'object') return null;
+    const result = play.result || {};
+    const rawType = typeof result.eventType === 'string' ? result.eventType : null;
+    const eventType = rawType && !SCORING_PENDING_EVENT_TYPES.has(rawType) ? rawType : null;
+    const runners = Array.isArray(play.runners) ? play.runners : null;
+    const scored = [];
+    let earned = 0; let unearned = 0; let earnedKnown = !!runners;
+    let rbi = typeof result.rbi === 'number' && Number.isFinite(result.rbi) ? result.rbi : null;
+    let rbiFromRunners = 0; let rbiKnown = !!runners; let scoringCount = 0;
+    let runsKnown = !!runners;
+    (runners || []).forEach((runner) => {
+      const details = runner && runner.details || {};
+      const movement = runner && runner.movement || {};
+      if (movement.end !== 'score' || movement.isOut === true) return;
+      scoringCount += 1;
+      const who = details.runner || {};
+      const id = who.id != null ? String(who.id) : null;
+      const name = typeof who.fullName === 'string' ? who.fullName : null;
+      const key = id ? `id:${id}` : name ? `name:${name}` : null;
+      if (!key) runsKnown = false;
+      scored.push({ key, id, player: name });
+      if (details.rbi === true) rbiFromRunners += 1;
+      else if (details.rbi !== false) rbiKnown = false;
+      if (details.earned === true) earned += 1;
+      else if (details.earned === false) unearned += 1;
+      else earnedKnown = false;
+    });
+    if (rbi == null && scoringCount > 0 && rbiKnown) rbi = rbiFromRunners;
+    return {
+      eventType, rbi, scoringRunners: scored, runsKnown,
+      earnedRuns: earnedKnown ? earned : null,
+      unearnedRuns: earnedKnown ? unearned : null,
+    };
+  }
+
+  /** Compare only pending-to-final StatsAPI facts known on both sides. */
+  function pendingScoringStatDeltas(before, after) {
+    const batting = []; const pitching = []; const unavailable = [];
+    if (!before || !after) return { batting, pitching, unavailable: ['initial pending stats'] };
+    const push = (list, stat, from, to, player) => {
+      if (from !== to) list.push({ stat, from, to, delta: to - from, ...(player ? { player } : {}) });
+    };
+    if (before.eventType && after.eventType) {
+      const oldHit = SCORING_HIT_EVENT_TYPES.has(before.eventType) ? 1 : 0;
+      const newHit = SCORING_HIT_EVENT_TYPES.has(after.eventType) ? 1 : 0;
+      push(batting, 'H', oldHit, newHit);
+      push(pitching, 'H', oldHit, newHit);
+      push(pitching, 'BB', SCORING_WALK_EVENT_TYPES.has(before.eventType) ? 1 : 0,
+        SCORING_WALK_EVENT_TYPES.has(after.eventType) ? 1 : 0);
+      push(pitching, 'K', SCORING_STRIKEOUT_EVENT_TYPES.has(before.eventType) ? 1 : 0,
+        SCORING_STRIKEOUT_EVENT_TYPES.has(after.eventType) ? 1 : 0);
+    } else unavailable.push('H', 'pitching H', 'BB', 'K');
+    if (before.runsKnown && after.runsKnown) {
+      const oldRuns = new Map((before.scoringRunners || []).filter((r) => r.key).map((r) => [r.key, r]));
+      const newRuns = new Map((after.scoringRunners || []).filter((r) => r.key).map((r) => [r.key, r]));
+      const ids = new Set([...oldRuns.keys(), ...newRuns.keys()]);
+      ids.forEach((id) => push(batting, 'R', oldRuns.has(id) ? 1 : 0, newRuns.has(id) ? 1 : 0,
+        (newRuns.get(id) || oldRuns.get(id)).player));
+    } else unavailable.push('R');
+    if (typeof before.rbi === 'number' && typeof after.rbi === 'number') push(batting, 'RBI', before.rbi, after.rbi);
+    else unavailable.push('RBI');
+    for (const [stat, field] of [['ER', 'earnedRuns'], ['UER', 'unearnedRuns']]) {
+      if (typeof before[field] === 'number' && typeof after[field] === 'number') push(pitching, stat, before[field], after[field]);
+      else unavailable.push(stat);
+    }
+    return { batting, pitching, unavailable };
+  }
 
   /**
    * Transition an official-scorer-pending entry to its observed RESOLUTION.
@@ -220,6 +293,9 @@ function reviewChanged(previousReview, nextReview) {
     // Preserve any existing resolvedDescription if we already captured it
     // (e.g., from a previous poll), so we don't lose the ruling text.
     const existingResolvedDesc = review.resolvedDescription || null;
+    const finalStats = pendingScoringStatSnapshot(resolvedPlay);
+    const observedDeltas = review.pendingStats && finalStats
+      ? pendingScoringStatDeltas(review.pendingStats, finalStats) : null;
     return {
       ...review,
       inProgress: false,
@@ -230,6 +306,11 @@ function reviewChanged(previousReview, nextReview) {
       // The original pending description remains in `description`; this new
       // field carries what the scorer actually ruled.
       resolvedDescription: existingResolvedDesc || resolvedDesc,
+      // Deltas are attached only when both pending and final StatsAPI facts
+      // exist. Unknown categories are listed, never filled with estimates.
+      resolvedStats: observedDeltas ? { ...observedDeltas, source: 'observed_pending_resolution' }
+        : review.pendingStats ? { batting: [], pitching: [], unavailable: ['resolved stats'] }
+          : { batting: [], pitching: [], unavailable: ['initial pending stats'] },
     };
   }
 
@@ -281,14 +362,37 @@ function mergeFeedEvents(state, gamePk, reviews, playsByAtBatIndex) {
       }
     }
     if (!prev) {
-      const entry = { gamePk, review, firstSeen: now, lastSeen: now };
+      let firstReview = review;
+      if (review && review.officialScoringPending === true) {
+        const play = playsByAtBatIndex && review.atBatIndex != null
+          ? playsByAtBatIndex.get(String(review.atBatIndex)) : null;
+        firstReview = { ...review, pendingStats: pendingScoringStatSnapshot(play) };
+      }
+      const entry = { gamePk, review: firstReview, firstSeen: now, lastSeen: now };
       seen.set(key, entry);
       order.push(key);
       added.push(entry);
       return;
     }
     prev.lastSeen = now;
-    const reconciledReview = reconcileScoreImpact(prev.review, review);
+    let reconciledReview = reconcileScoreImpact(prev.review, review);
+    // This same-play rescore is feed-enriched observed evidence, not a field
+    // in extractReviews(). Keep it when the parser refreshes the review row.
+    if (prev.review.observedScoringChange && !reconciledReview.observedScoringChange) {
+      reconciledReview = { ...reconciledReview, observedScoringChange: prev.review.observedScoringChange };
+    }
+    if (prev.review.officialScoringPending === true && prev.review.pendingStats &&
+        !reconciledReview.pendingStats) {
+      reconciledReview = { ...reconciledReview, pendingStats: prev.review.pendingStats };
+    } else if (review.officialScoringPending === true && !reconciledReview.pendingStats) {
+      // An older persisted pending row may predate stat-baseline capture. The
+      // current poll is still a real pending-state observation, so retain it
+      // as the comparison baseline rather than permanently losing coverage.
+      const play = playsByAtBatIndex && review.atBatIndex != null
+        ? playsByAtBatIndex.get(String(review.atBatIndex)) : null;
+      const pendingStats = pendingScoringStatSnapshot(play);
+      if (pendingStats) reconciledReview = { ...reconciledReview, pendingStats };
+    }
     if (reviewChanged(prev.review, reconciledReview)) {
       prev.review = reconciledReview;
       updated.push(prev);
@@ -311,12 +415,13 @@ function mergeFeedEvents(state, gamePk, reviews, playsByAtBatIndex) {
     const prev = seen.get(key);
     const pendingReview = prev && prev.review;
     if (pendingReview && pendingReview.officialScoringPending === true) {
-      if (!pendingReview.resolvedWhenMarkerCleared) {
-        // Look up the resolved play by atBatIndex to capture the actual ruling.
-        const resolvedPlay = playsByAtBatIndex && pendingReview.atBatIndex != null
-          ? playsByAtBatIndex.get(String(pendingReview.atBatIndex))
-          : null;
-        prev.review = completePendingScoringReview(pendingReview, resolvedPlay);
+      // Look up the resolved play by atBatIndex for the official result and
+      // any stat facts that have populated since the pending marker cleared.
+      const resolvedPlay = playsByAtBatIndex && pendingReview.atBatIndex != null
+        ? playsByAtBatIndex.get(String(pendingReview.atBatIndex)) : null;
+      const nextPending = completePendingScoringReview(pendingReview, resolvedPlay);
+      if (!pendingReview.resolvedWhenMarkerCleared || reviewChanged(pendingReview, nextPending)) {
+        prev.review = nextPending;
         prev.lastSeen = now;
         updated.push(prev);
       }
@@ -336,6 +441,28 @@ function mergeFeedEvents(state, gamePk, reviews, playsByAtBatIndex) {
   });
 
   return { added, updated, ended };
+}
+
+/** Attach observed same-play rescoring deltas to the existing replay-review row. */
+function applyAssociatedScoringUpdates(items, seen, now = Date.now()) {
+  const updated = [];
+  const entries = seen instanceof Map ? [...seen.values()] : [];
+  (Array.isArray(items) ? items : []).forEach((item) => {
+    if (!item || item.atBatIndex == null || !item.observed) return;
+    const candidates = entries.filter((entry) => {
+      const r = entry && entry.review;
+      return entry.gamePk === item.gamePk &&
+        r && r.atBatIndex != null && String(r.atBatIndex) === String(item.atBatIndex) &&
+        ![SCORING_CHANGE_TYPE_KEY, 'pending_scoring', 'abs'].includes(r.typeKey);
+    });
+    if (!candidates.length) return;
+    const target = candidates.find((entry) => entry.review.inProgress) || candidates[candidates.length - 1];
+    if (JSON.stringify(target.review.observedScoringChange || null) === JSON.stringify(item.observed)) return;
+    target.review = { ...target.review, observedScoringChange: item.observed };
+    target.lastSeen = now;
+    updated.push(target);
+  });
+  return updated;
 }
 
 /**
@@ -589,36 +716,122 @@ function isHitToErrorChange(review) {
     SCORING_PA_ERROR_EVENT_TYPES.has(fin);
 }
 
+/** A same-play replay rescore chimes only for batting R/H/RBI changes, never hit → error. */
+function isAlertableAssociatedScoringChange(review) {
+  const observed = review && review.observedScoringChange;
+  if (!observed || !observed.stats || !Array.isArray(observed.stats.batting) ||
+      observed.stats.batting.length === 0) return false;
+  return !isHitToErrorChange({
+    typeKey: SCORING_CHANGE_TYPE_KEY,
+    initial: observed.initial,
+    final: observed.final,
+  });
+}
+
 /**
- * Session-5 charter — the Error Watch integrates every source of an error on
- * the selected date into ONE list, keyed by play (`gamePk:atBatIndex`):
- *   observed  — seen live on this page (the feed's own poll),
- *   captured  — recorded as first called by the live-capture pipeline
- *               (data/capture → error-watch.json `captured`),
- *   logged    — MLB's official scoring-changes log entries for the play,
- *   scanned   — the pipeline's game-by-game scan (data/model/error-watch.json).
- * Only plays first scored reached-on-error are listed (the Error Watch
- * population); pending rulings are listed separately by the caller. Pure.
+ * Live evidence that a play contains an error. The plate-appearance ruling
+ * and runner-level error movements are separate StatsAPI fields: a batter can
+ * be ruled a fielder's choice while a runner's advance is charged as an error.
+ * Keep that case in Error Watch without treating it as a batter-reached error
+ * or assigning it the error-to-hit model score. Pure, reads only the supplied
+ * play payload.
  */
-function mergeErrorWatchSources(liveItems, pipelinePlays, dateStr) {
+function liveErrorEvidence(play) {
+  if (!play || typeof play !== 'object') return null;
+  const result = play.result || {};
+  const eventType = typeof result.eventType === 'string' ? result.eventType : null;
+  const primaryError = eventType === 'field_error';
+  const runners = Array.isArray(play.runners) ? play.runners : [];
+  const movements = runners.flatMap((runner) => {
+    const details = runner && runner.details || {};
+    const type = typeof details.eventType === 'string' ? details.eventType : '';
+    if (!SCORING_RUNNER_ERROR_EVENT_TYPES.has(type)) return [];
+    const movement = runner.movement || {};
+    const player = details.runner || {};
+    return [{
+      eventType: type,
+      event: details.event || type,
+      runner: typeof player.fullName === 'string' ? player.fullName : null,
+      from: movement.originBase || movement.start || null,
+      to: movement.end || (movement.outBase ? `out at ${movement.outBase}` : null),
+      isOut: movement.isOut === true,
+    }];
+  });
+  // When the API projection carries runner credits, use only the official
+  // error-credit code shape also recognized by the pipeline. This catches
+  // catcher interference and other credits that are not `field_error`.
+  const credits = runners.flatMap((runner) => {
+    const details = runner && runner.details || {};
+    const person = details.runner || {};
+    return (Array.isArray(runner && runner.credits) ? runner.credits : []).flatMap((credit) => {
+      const code = String(credit && credit.credit || '');
+      if (!/error|^c_catcher_interf$/i.test(code)) return [];
+      const position = credit.position || {};
+      const fielder = credit.player || {};
+      return [{
+        credit: code,
+        kind: code === 'c_catcher_interf' ? 'catcher_interference' : 'error',
+        fielder: typeof fielder.fullName === 'string' ? fielder.fullName : null,
+        pos: position.abbreviation || position.code || null,
+        runner: typeof person.fullName === 'string' ? person.fullName : null,
+      }];
+    });
+  });
+  const catcherInterference = eventType === 'catcher_interf';
+  if (!primaryError && !movements.length && !credits.length && !catcherInterference) return null;
+  const hit = SCORING_HIT_EVENT_TYPES.has(eventType);
+  return {
+    scope: primaryError ? 'batter_reached' : hit ? 'on_hit' : 'other',
+    primaryError,
+    eventType,
+    movements,
+    credits,
+  };
+}
+
+/**
+ * The Error Watch integrates observed, captured, logged and scanned evidence
+ * into ONE list, keyed by play (`gamePk:atBatIndex`). `pipelinePlays` carries
+ * the batter-reached model rows; `errorEvents` carries every charged error
+ * credit from the game's final play-by-play, including runner errors on hits
+ * and fielder's-choice plays. Pending scorer rulings remain a separate list.
+ * Pure.
+ */
+function mergeErrorWatchSources(liveItems, pipelinePlays, dateStr, errorEvents) {
   const out = new Map();
   (Array.isArray(liveItems) ? liveItems : []).forEach((it) => {
     if (!it || it.gamePk == null || it.atBatIndex == null) return;
-    out.set(`${it.gamePk}:${it.atBatIndex}`, { key: `${it.gamePk}:${it.atBatIndex}`, live: it, pipe: null });
+    const key = `${it.gamePk}:${it.atBatIndex}`;
+    out.set(key, { key, live: it, pipe: null, errorEvent: null });
   });
   (Array.isArray(pipelinePlays) ? pipelinePlays : []).forEach((p) => {
     if (!p || p.date !== dateStr || p.gamePk == null || p.ai == null) return;
-    const k = `${p.gamePk}:${p.ai}`;
-    const cur = out.get(k);
-    if (cur) cur.pipe = p; else out.set(k, { key: k, live: null, pipe: p });
+    const key = `${p.gamePk}:${p.ai}`;
+    const cur = out.get(key) || { key, live: null, pipe: null, errorEvent: null };
+    cur.pipe = p;
+    out.set(key, cur);
+  });
+  (Array.isArray(errorEvents) ? errorEvents : []).forEach((event) => {
+    if (!event || event.date !== dateStr || event.gamePk == null || event.ai == null) return;
+    // This file also contains original batter-errors later rescored as hits;
+    // those remain valid Error Watch evidence even though the final play has
+    // no current error credit. Do not admit unrelated rows from malformed data.
+    if (!(event.scope === 'batter_reached' || event.errorMovements > 0 ||
+          (Array.isArray(event.errors) && event.errors.length))) return;
+    const key = `${event.gamePk}:${event.ai}`;
+    const cur = out.get(key) || { key, live: null, pipe: null, errorEvent: null };
+    cur.errorEvent = event;
+    out.set(key, cur);
   });
   return [...out.values()].map((r) => ({
     ...r,
     sources: {
       observed: !!r.live,
       captured: !!(r.pipe && r.pipe.captured),
-      logged: r.pipe && Array.isArray(r.pipe.official) ? r.pipe.official.map((o) => o.seq) : [],
-      scanned: !!r.pipe,
+      logged: r.pipe && Array.isArray(r.pipe.official) && r.pipe.official.length
+        ? r.pipe.official.map((o) => o.seq)
+        : r.errorEvent && Array.isArray(r.errorEvent.official) ? r.errorEvent.official.map((o) => o.seq) : [],
+      scanned: !!(r.pipe || r.errorEvent),
     },
   }));
 }
@@ -1029,6 +1242,8 @@ function buildScoringSnapshot(play) {
   // only when EVERY scoring runner carries the flag (an older projection
   // without `earned` leaves them null — never guessed).
   let runsScored = 0; let earned = 0; let unearned = 0; let earnedKnown = true;
+  let rbiFromRunners = 0; let rbiKnown = true; let scoringRunnerCount = 0;
+  const scoringRunners = [];
   runners.forEach((runner) => {
     if (!runner || typeof runner !== 'object') return;
     const details = runner.details || {};
@@ -1036,6 +1251,14 @@ function buildScoringSnapshot(play) {
     const detType = typeof details.eventType === 'string' ? details.eventType : '';
     if (movement.end === 'score' && movement.isOut !== true) {
       runsScored += 1;
+      scoringRunnerCount += 1;
+      const runner = details.runner || {};
+      const runnerId = runner.id != null ? String(runner.id) : null;
+      const runnerName = typeof runner.fullName === 'string' ? runner.fullName : null;
+      const playerKey = runnerId ? `id:${runnerId}` : runnerName ? `name:${runnerName}` : null;
+      scoringRunners.push({ key: playerKey, player: runnerName, id: runnerId });
+      if (details.rbi === true) rbiFromRunners += 1;
+      else if (details.rbi !== false) rbiKnown = false;
       if (details.earned === true) earned += 1;
       else if (details.earned === false) unearned += 1;
       else earnedKnown = false;
@@ -1069,8 +1292,13 @@ function buildScoringSnapshot(play) {
     outsAfter: play.count && typeof play.count.outs === 'number' ? play.count.outs : null,
     awayScore: typeof result.awayScore === 'number' ? result.awayScore : null,
     homeScore: typeof result.homeScore === 'number' ? result.homeScore : null,
-    rbi: typeof result.rbi === 'number' ? result.rbi : null,
+    // Prefer StatsAPI's explicit RBI count. Only fall back to runner-level
+    // RBI booleans when every scoring runner states one; otherwise preserve
+    // unknown rather than treating team runs as a batter's RBI.
+    rbi: typeof result.rbi === 'number' ? result.rbi
+      : scoringRunnerCount > 0 && rbiKnown ? rbiFromRunners : null,
     runsScored,
+    scoringRunners,
     earnedRuns: earnedKnown ? earned : null,
     unearnedRuns: earnedKnown ? unearned : null,
     errorMovements,
@@ -1100,9 +1328,11 @@ function scoringSnapshotSignature(snapshot) {
  * BB, K, earned / unearned runs) live in their own silent 🧮 section.
  *
  * Stat deltas between two observed snapshots of ONE play, read only from the
- * snapshot fields (registry event types, result.rbi, the scoring runners and
- * their earned flag). Nothing is estimated: a count missing on either side
- * (null) is simply not compared. Pure.
+ * snapshot fields (registry event types, result.rbi, scoring-runner identities
+ * and the runners' earned flags). Batter H/RBI and each scoring runner's R are
+ * kept distinct: a team run is never mislabeled as the batter's run. Nothing
+ * is estimated: a count missing on either side (null) is simply not compared.
+ * Pure.
  */
 const SCORING_WALK_EVENT_TYPES = new Set(['walk', 'intent_walk']);
 const SCORING_STRIKEOUT_EVENT_TYPES = new Set(['strikeout', 'strikeout_double_play', 'strikeout_triple_play']);
@@ -1112,10 +1342,27 @@ function scoringStatDeltas(from, to) {
   if (!from || !to) return { batting, pitching };
   const num = (v) => typeof v === 'number' && Number.isFinite(v);
   const flag = (set, snap) => (set.has(snap.eventType) ? 1 : 0);
-  const push = (list, stat, a, b) => { if (a !== b) list.push({ stat, from: a, to: b, delta: b - a }); };
+  const push = (list, stat, a, b, player) => {
+    if (a !== b) list.push({ stat, from: a, to: b, delta: b - a, ...(player ? { player } : {}) });
+  };
   const hA = flag(SCORING_HIT_EVENT_TYPES, from); const hB = flag(SCORING_HIT_EVENT_TYPES, to);
   push(batting, 'H', hA, hB);
-  if (num(from.runsScored) && num(to.runsScored)) push(batting, 'R', from.runsScored, to.runsScored);
+  // Runs belong to the runner who crossed home, not automatically to the
+  // batter. Compare identities only when both snapshots provide a stable key.
+  if (Array.isArray(from.scoringRunners) && Array.isArray(to.scoringRunners)) {
+    const scored = (list) => {
+      const map = new Map();
+      list.forEach((r) => { if (r && r.key != null) map.set(String(r.key), r); });
+      return map;
+    };
+    const before = scored(from.scoringRunners); const after = scored(to.scoringRunners);
+    const keys = new Set([...before.keys(), ...after.keys()]);
+    keys.forEach((key) => {
+      const oldRunner = before.get(key); const newRunner = after.get(key);
+      const who = (newRunner && newRunner.player) || (oldRunner && oldRunner.player) || null;
+      push(batting, 'R', oldRunner ? 1 : 0, newRunner ? 1 : 0, who);
+    });
+  }
   if (num(from.rbi) && num(to.rbi)) push(batting, 'RBI', from.rbi, to.rbi);
   push(pitching, 'H', hA, hB);
   push(pitching, 'BB', flag(SCORING_WALK_EVENT_TYPES, from), flag(SCORING_WALK_EVENT_TYPES, to));
@@ -1123,6 +1370,14 @@ function scoringStatDeltas(from, to) {
   if (num(from.earnedRuns) && num(to.earnedRuns)) push(pitching, 'ER', from.earnedRuns, to.earnedRuns);
   if (num(from.unearnedRuns) && num(to.unearnedRuns)) push(pitching, 'UER', from.unearnedRuns, to.unearnedRuns);
   return { batting, pitching };
+}
+
+/** Flag a team-run movement when player identities do not support a batter-level R delta. */
+function scoringRunsAttributionNote(from, to) {
+  if (!from || !to || from.runsScored === to.runsScored) return null;
+  const deltas = scoringStatDeltas(from, to);
+  if (deltas.batting.some((d) => d.stat === 'R')) return null;
+  return `play ${to.atBatIndex}: the number of runners recorded scoring changed (${from.runsScored} → ${to.runsScored}), but a player-level Runs delta could not be attributed from stable runner identities — flagged, not guessed`;
 }
 
 /** "RBI 1 → 0 · R 1 → 0" — the observed deltas in plain words. */
@@ -1170,7 +1425,7 @@ function scoringStatLines(review) {
     if (!Array.isArray(list) || !list.length) return null;
     const byPlayer = new Map();
     list.forEach((d) => {
-      const who = d.player || fallback || '';
+      const who = d.player || (d.stat === 'R' ? '' : fallback || '');
       if (!byPlayer.has(who)) byPlayer.set(who, []);
       byPlayer.get(who).push(fmt(d));
     });
@@ -1320,6 +1575,7 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
   const added = [];
   const updated = [];
   const irregularities = [];
+  const associatedReviews = [];
   const context = ctx || {};
   const teamLabels = context.teamLabels || {};
   const seenIdx = new Set();
@@ -1329,7 +1585,7 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
   const list = Array.isArray(plays) ? plays : [];
   if (!list.length) {
     prev.forEach((tracked, key) => snapshots.set(key, tracked));
-    return { snapshots, added, updated, irregularities };
+    return { snapshots, added, updated, irregularities, associatedReviews };
   }
 
   list.forEach((play) => {
@@ -1385,6 +1641,8 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
           `${snapshot.awayScore}-${snapshot.homeScore} without a hit/error/out ` +
           'reclassification');
       }
+      const runNote = scoringRunsAttributionNote(tracked.snapshot, snapshot);
+      if (runNote) notes.push(runNote);
       notes.forEach((note) => { if (!irregularities.includes(note)) irregularities.push(note); });
       snapshots.set(String(idx), { ...tracked, snapshot, lastObservedAt: now });
       return;
@@ -1399,6 +1657,11 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
     const initialSnapshot = history.length ? history[0].from : tracked.snapshot;
     const previousSnapshot = history.length ? history[history.length - 1].to : tracked.snapshot;
     const summary = scoringChangeSummary(previousSnapshot, snapshot);
+    const rowSummary = scoringChangeSummary(initialSnapshot, snapshot);
+    const deltas = scoringStatDeltas(initialSnapshot, snapshot);
+    const runNote = scoringRunsAttributionNote(initialSnapshot, snapshot);
+    const statLine = [scoringStatHeadline(deltas.batting), scoringStatHeadline(deltas.pitching.filter((d) => d.stat !== 'H'))]
+      .filter(Boolean).join(' · ');
     if (statOnlyChange) {
       const step = [scoringStatHeadline(statOnly.batting), scoringStatHeadline(statOnly.pitching.filter((d) => d.stat !== 'H'))]
         .filter(Boolean).join(' · ');
@@ -1422,6 +1685,8 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
       rowId,
     });
 
+    const about = (play && play.about) || {};
+    const matchup = (play && play.matchup) || {};
     const reviewedBefore = context.reviewedPlays instanceof Set &&
       (context.reviewedPlays.has(String(idx)) || context.reviewedPlays.has(idx));
     if (mechanism.key === 'replay_review') {
@@ -1431,11 +1696,26 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
       // double-count one fact. When NO review row for the play was ever
       // observed (e.g. the page opened mid-review), the change IS surfaced
       // here, honestly labelled as review-attributed.
-      if (reviewedBefore || activeHasIdx(context, idx)) return;
+      if (reviewedBefore || activeHasIdx(context, idx)) {
+        // Keep a single feed row for the reviewed play, but move the observed
+        // scoring/stat delta onto that row so the review result is not hidden
+        // from batting or pitching change tracking.
+        if (deltas.batting.length || deltas.pitching.length || runNote) {
+          const observed = {
+            initial: rowSummary.initial,
+            final: rowSummary.final,
+            headline: rowSummary.headline,
+            stats: { batting: deltas.batting, pitching: deltas.pitching, source: 'observed_replay_review' },
+            batter: matchup.batter ? { id: matchup.batter.id, fullName: matchup.batter.fullName } : null,
+            pitcher: matchup.pitcher ? { id: matchup.pitcher.id, fullName: matchup.pitcher.fullName } : null,
+            flags: runNote ? [runNote] : [],
+          };
+          associatedReviews.push({ gamePk, atBatIndex: idx, observed });
+        }
+        return;
+      }
     }
 
-    const about = (play && play.about) || {};
-    const matchup = (play && play.matchup) || {};
     const half = String(about.halfInning || '').toLowerCase();
     const battingSide = half === 'top' ? 'away' : half === 'bottom' ? 'home' : null;
     const battingTeam = battingSide ? teamLabels[battingSide] : null;
@@ -1446,12 +1726,8 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
     const prior = history.length > 1 ? history[history.length - 2].summary : null;
     // The ROW always reads initial call → latest ruling (baseline → now);
     // the chain steps live in history / previousHeadline.
-    const rowSummary = scoringChangeSummary(initialSnapshot, snapshot);
-    // Observed stat deltas, baseline → now (the row's classification for the
-    // main alerts vs the 🧮 Pitching Stats tab — scoringStatImpact).
-    const deltas = scoringStatDeltas(initialSnapshot, snapshot);
-    const statLine = [scoringStatHeadline(deltas.batting), scoringStatHeadline(deltas.pitching.filter((d) => d.stat !== 'H'))]
-      .filter(Boolean).join(' · ');
+    // Observed stat deltas above are likewise baseline → latest ruling.
+    if (runNote) flags.push(runNote);
     const classificationChanged = scoringSnapshotSignature(initialSnapshot) !== signature;
     const review = {
       id: rowId,
@@ -1526,7 +1802,7 @@ function mergeScoringChanges(gamePk, plays, prevMap, now, ctx) {
     });
   }
 
-  return { snapshots, added, updated, irregularities };
+  return { snapshots, added, updated, irregularities, associatedReviews };
 }
 
 function activeHasIdx(ctx, idx) {
@@ -3016,9 +3292,9 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
   /**
    * Attribution + team-label context for one game's scoring-change diff,
    * read entirely from the feed's own observed state:
-   *   reviewedPlays        — at-bats that EVER had a replay-review entry in
-   *                          this feed (the change likely belongs to that
-   *                          review, whose row already exists)
+   *   reviewedPlays        — at-bats that EVER had a non-ABS replay-review
+   *                          entry in this feed (the change's stats can be
+   *                          attached to that existing row)
    *   activeReviewIndexes  — at-bats with a review IN PROGRESS right now
    *   pendingScoringIndexes — at-bats carrying an official-scorer PENDING
    *                          marker right now (the change is the ruling)
@@ -3032,14 +3308,13 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     feedState.seen.forEach((entry) => {
       if (!entry || entry.gamePk !== gamePk || !entry.review) return;
       const r = entry.review;
-      if (r.atBatIndex == null || r.typeKey === SCORING_CHANGE_TYPE_KEY) return;
+      if (r.atBatIndex == null || r.typeKey === SCORING_CHANGE_TYPE_KEY || r.typeKey === 'abs') return;
       if (r.typeKey === 'pending_scoring') {
         if (r.inProgress) pendingScoringIndexes.add(r.atBatIndex);
         return;
       }
-      // Any replay-review entry ever observed for this at-bat (active or
-      // resolved): a classification change on the same play is attributed
-      // to that review rather than double-tracked as a scorer change.
+      // Any non-ABS replay-review entry ever observed for this at-bat (active
+      // or resolved): a same-play rescore is attached to that review row.
       reviewedPlays.add(r.atBatIndex);
       if (r.inProgress) activeReviewIndexes.add(r.atBatIndex);
     });
@@ -3197,13 +3472,19 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     // ({gamePk, review} pairs); admit merges them into feedState idempotently
     // by stable key.
     const scoringResult = admitScoringEntries([...scoring.added, ...scoring.updated], game);
+    const associatedReviewUpdates = applyAssociatedScoringUpdates(
+      scoring.associatedReviews, feedState.seen, Date.now());
     // Scoring-change model inputs + Error Watch (inert without the model
     // module; never alerts). Runs after the merges so pending / scoring rows
     // of this poll are known.
     const watchChanged = updateModelInputs(game, gamePk, pbp);
+    const updatedByKey = new Map();
+    [...result.updated, ...scoringResult.updated, ...associatedReviewUpdates].forEach((entry) => {
+      updatedByKey.set(buildEventKey(entry.gamePk, entry.review), entry);
+    });
     const combined = {
       added: [...result.added, ...scoringResult.added],
-      updated: [...result.updated, ...scoringResult.updated],
+      updated: [...updatedByKey.values()],
       ended: result.ended,
     };
     // Log every tracked entry: any poll that adds, updates, ends, or flags
@@ -3245,6 +3526,24 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       }).length;
       if (alertable > 0) pendingAlertableCount += alertable;
     }
+    // A pending scorer row already alerts when first seen. Its resolution is
+    // a second sound only when the observed pending→final comparison changes
+    // batting R/H/RBI; a pitching-only/no-stat resolution remains silent.
+    const resolvedBattingChanges = (combined.updated || []).filter((e) => {
+      const r = e && e.review;
+      return r && r.typeKey === 'pending_scoring' && r.inProgress === false &&
+        r.resolvedWhenMarkerCleared === true && r.resolvedStats &&
+        Array.isArray(r.resolvedStats.batting) && r.resolvedStats.batting.length > 0;
+    }).length;
+    pendingAlertableCount += resolvedBattingChanges;
+    // Replay-review rows also carry a same-play observed rescore instead of
+    // minting a duplicate scoring row. Alert once on its batting impact, but
+    // do not double-chime if the review itself was first added this poll.
+    const addedEventKeys = new Set((combined.added || []).map((e) => buildEventKey(e.gamePk, e.review)));
+    const associatedBattingChanges = associatedReviewUpdates.filter((entry) =>
+      !addedEventKeys.has(buildEventKey(entry.gamePk, entry.review)) &&
+      isAlertableAssociatedScoringChange(entry.review)).length;
+    pendingAlertableCount += associatedBattingChanges;
     // Stamp the official matchup on every entry for this game so a later
     // render does not depend on re-finding the schedule object.
     const matchupLabel = gameTeamsLabel(game, teamsById);
@@ -3320,16 +3619,34 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
   // Session 5: the pipeline's Error Watch file (every error of the season,
   // with capture + official-log facts, /100 score and final status) —
   // fetched lazily, relative URL (works on GitHub Pages), cached 10 min.
-  const pipelineWatch = { data: null, at: 0, loading: null };
+  const pipelineWatch = { data: null, at: 0, loading: null, loaded: false };
+  const pipelineErrorLog = new Map(); // season → {data, at, loading}
+  function loadPipelineErrorLog(season) {
+    const key = String(season);
+    let state = pipelineErrorLog.get(key);
+    if (!state) { state = { data: null, at: 0, loading: null, loaded: false }; pipelineErrorLog.set(key, state); }
+    if (state.loading) return state.loading;
+    if (state.loaded && Date.now() - state.at < 10 * 60 * 1000) return Promise.resolve(state.data);
+    if (typeof fetch !== 'function') return Promise.resolve(null);
+    state.loading = fetch(`data/model/error-events-${encodeURIComponent(key)}.json`, { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .catch(() => null)
+      .then((data) => {
+        state.data = data; state.at = Date.now(); state.loading = null; state.loaded = true;
+        if (filter === 'errorwatch') { renderTabs(); renderFeed(); }
+        return data;
+      });
+    return state.loading;
+  }
   function loadPipelineWatch() {
     if (pipelineWatch.loading) return pipelineWatch.loading;
-    if (pipelineWatch.data && Date.now() - pipelineWatch.at < 10 * 60 * 1000) return Promise.resolve(pipelineWatch.data);
+    if (pipelineWatch.loaded && Date.now() - pipelineWatch.at < 10 * 60 * 1000) return Promise.resolve(pipelineWatch.data);
     if (typeof fetch !== 'function') return Promise.resolve(null);
     pipelineWatch.loading = fetch('data/model/error-watch.json', { cache: 'no-cache' })
       .then((r) => (r.ok ? r.json() : null))
       .catch(() => null)
       .then((d) => {
-        pipelineWatch.data = d; pipelineWatch.at = Date.now(); pipelineWatch.loading = null;
+        pipelineWatch.data = d; pipelineWatch.at = Date.now(); pipelineWatch.loading = null; pipelineWatch.loaded = true;
         if (filter === 'errorwatch') { renderTabs(); renderFeed(); }
         return d;
       });
@@ -3337,7 +3654,10 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
   }
   function errorWatchRowsForDate() {
     const plays = pipelineWatch.data && Array.isArray(pipelineWatch.data.plays) ? pipelineWatch.data.plays : [];
-    return mergeErrorWatchSources([...errorWatch.values()], plays, dateStr);
+    const season = /^\d{4}-/.test(dateStr) ? dateStr.slice(0, 4) : null;
+    const logState = season ? pipelineErrorLog.get(season) : null;
+    const events = logState && logState.data && Array.isArray(logState.data.events) ? logState.data.events : [];
+    return mergeErrorWatchSources([...errorWatch.values()], plays, dateStr, events);
   }
 
   function scoringModelModule() {
@@ -3476,7 +3796,7 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     return t && t.id != null ? t.id : null;
   }
 
-  function newErrorWatchItem(game, gamePk, play, initialDescription, firstSeen, initialErrorKind) {
+  function newErrorWatchItem(game, gamePk, play, initialDescription, firstSeen, initialErrorKind, evidence) {
     const about = play.about || {};
     const res = play.result || {};
     const matchup = play.matchup || {};
@@ -3496,8 +3816,16 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       batter: matchup.batter && matchup.batter.fullName ? matchup.batter.fullName : null,
       pitcher: matchup.pitcher && matchup.pitcher.fullName ? matchup.pitcher.fullName : null,
       initialDescription,
-      // Error type of the call as FIRST seen by this page (fielding credits);
-      // a later change to a hit removes it from the data.
+      // The batter-reached model applies only to a plate-appearance field
+      // error. Runner-level errors (including fielder's choice + error) are
+      // tracked with their observed scope but are never scored as error→hit.
+      initialErrorScope: evidence && evidence.scope ? evidence.scope : 'batter_reached',
+      initialEventType: res.eventType || null,
+      initialErrorMovements: evidence && Array.isArray(evidence.movements) ? evidence.movements : [],
+      initialErrorCredits: evidence && Array.isArray(evidence.credits) ? evidence.credits : [],
+      currentErrorEvidence: evidence || null,
+      // Error type of the call as FIRST seen by this page (description-derived
+      // only when StatsAPI text identifies it; never read from final history).
       initialErrorKind: initialErrorKind || null,
       currentEventType: res.eventType || null,
       currentEvent: res.event || null,
@@ -3507,9 +3835,10 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
   }
 
   /**
-   * After each playByPlay poll: track every plate appearance scored a field
-   * error (Error Watch), remember the facts the model needs, and request
-   * batted-ball data for those plays. Returns true when the watch changed.
+   * After each playByPlay poll: track plate-appearance and runner-level error
+   * evidence (including fielder's-choice + error), remember facts needed by
+   * the model, and request batted-ball data only for model-eligible plays.
+   * Returns true when the watch changed.
    */
   function updateModelInputs(game, gamePk, pbp) {
     const SMod = scoringModelModule();
@@ -3542,23 +3871,32 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       if (ai == null || res.type !== 'atBat' || about.isComplete === false) return;
       const key = `${gamePk}:${ai}`;
       let item = errorWatch.get(key);
-      if (!item && res.eventType === 'field_error') {
-        const ek = SMod.errorKindOfStatsApiPlay ? SMod.errorKindOfStatsApiPlay(p) : null;
-        item = newErrorWatchItem(game, gamePk, p, res.description || res.event || 'Field Error', Date.now(), ek ? ek.kind : null);
+      const evidence = liveErrorEvidence(p);
+      if (!item && evidence) {
+        const ek = evidence.primaryError && SMod.errorKindOfStatsApiPlay
+          ? SMod.errorKindOfStatsApiPlay(p) : null;
+        item = newErrorWatchItem(game, gamePk, p,
+          res.description || res.event || 'Error recorded in the official play data',
+          Date.now(), ek ? ek.kind : null, evidence);
         errorWatch.set(key, item);
         changed = true;
       }
       if (!item) return;
       const et = res.eventType || null;
       const desc = res.description || null;
-      if (item.currentEventType !== et || item.currentDescription !== desc) {
+      const evidenceKey = JSON.stringify(evidence || null);
+      if (item.currentEventType !== et || item.currentDescription !== desc ||
+          JSON.stringify(item.currentErrorEvidence || null) !== evidenceKey) {
         if (item.currentEventType !== et) item.changedAt = Date.now();
         item.currentEventType = et;
         item.currentEvent = res.event || null;
         item.currentDescription = desc;
+        item.currentErrorEvidence = evidence;
         changed = true;
       }
-      remember(ai);
+      // Statcast is needed only for plays initially charged as a batter-reached
+      // field error. Runner errors are still listed, but have no error→hit score.
+      if (item.initialErrorScope === 'batter_reached') remember(ai);
     });
     feedState.seen.forEach((entry) => {
       const r = entry && entry.review;
@@ -3710,12 +4048,18 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     return null;
   }
 
-  /** One Error Watch row: overturn chance + live final ruling. */
+  /** One Error Watch row: all observed error scopes, score only if eligible. */
   function errorWatchRow(item) {
     const SMod = scoringModelModule();
     const model = modelState.model;
-    const changed = item.currentEventType && item.currentEventType !== 'field_error';
-    const toHit = changed && SCORING_HIT_EVENT_TYPES.has(item.currentEventType);
+    const modelEligible = item.initialErrorScope === 'batter_reached' && item.initialEventType === 'field_error';
+    const rulingChanged = !!(item.currentEventType && item.initialEventType &&
+      item.currentEventType !== item.initialEventType);
+    const errorStillRecorded = !!(item.currentErrorEvidence &&
+      (item.currentErrorEvidence.primaryError || (item.currentErrorEvidence.movements || []).length ||
+       (item.currentErrorEvidence.credits || []).length));
+    const changed = modelEligible ? rulingChanged : !errorStillRecorded;
+    const toHit = modelEligible && rulingChanged && SCORING_HIT_EVENT_TYPES.has(item.currentEventType);
     const row = el('div', `feed-row feed-type-error_watch ${changed ? 'feed-outcome-changed' : 'feed-outcome-stands'}`);
     row.dataset.key = `ew:${item.key}`;
     const time = el('div', 'feed-time');
@@ -3733,30 +4077,55 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     head.appendChild(el('span', 'chip-review-type chip-error_watch', 'Error Watch'));
     if (item.battingLabel) head.appendChild(el('span', 'feed-batting', `Batting: ${item.battingLabel}`));
     if (item.inningLabel) head.appendChild(el('span', 'feed-inn', item.inningLabel));
-    head.appendChild(el('span', `review-outcome-pill ${changed ? 'outcome-changed' : 'outcome-stands'}`,
-      changed ? `✏️ Now: ${item.currentEvent || item.currentEventType}` : 'Stands as error'));
+    const outcomeText = modelEligible
+      ? (rulingChanged ? `✏️ Now: ${item.currentEvent || item.currentEventType}` : 'Stands as batter-reached error')
+      : errorStillRecorded
+        ? `Error recorded on ${item.currentEvent || item.currentEventType || 'play'}`
+        : 'Error no longer present in current play data';
+    head.appendChild(el('span', `review-outcome-pill ${changed ? 'outcome-changed' : 'outcome-stands'}`, outcomeText));
     body.appendChild(head);
-    if (SMod && model) {
+    if (modelEligible && SMod && model) {
       const res = SMod.scoreErrorToHit(model, modelPlay(item.gamePk, item.atBatIndex, 'field_error', item.halfInning, item.homeId,
         { errKind: item.initialErrorKind || null }));
       if (res) {
         const line = el('div', 'feed-model-line');
-        line.appendChild(el('span', 'feed-model-label', 'Chance this error becomes a hit'));
+        line.appendChild(el('span', 'feed-model-label', 'Chance this batter-reached error becomes a hit'));
         line.appendChild(scoreChip(res));
         line.appendChild(el('span', `feed-model-band model-tone-${res.band.tone}`, res.band.label));
         body.appendChild(line);
       }
+    } else if (modelEligible) {
+      body.appendChild(el('div', 'feed-model-line feed-model-bb', 'Error-to-hit model loading…'));
     } else {
-      body.appendChild(el('div', 'feed-model-line feed-model-bb', 'Model loading…'));
+      body.appendChild(el('div', 'feed-model-line feed-model-bb',
+        `No error-to-hit score: this is an error ${item.initialErrorScope === 'on_hit' ? 'on a hit' : 'on another play'}, not a batter-reached-on-error ruling.`));
     }
     body.appendChild(el('div', 'feed-scoring-line feed-scoring-initial', `Initial call: ${item.initialDescription}`));
+    if (item.initialErrorMovements && item.initialErrorMovements.length) {
+      const details = item.initialErrorMovements.map((m) =>
+        `${m.runner || 'Runner'}: ${m.event || m.eventType}${m.from || m.to ? ` (${[m.from, m.to].filter(Boolean).join(' → ')})` : ''}`);
+      body.appendChild(el('div', 'feed-model-line feed-model-kind', `Runner error movement: ${details.join('; ')}`));
+    }
+    if (item.initialErrorCredits && item.initialErrorCredits.length) {
+      const details = item.initialErrorCredits.map((c) =>
+        `${c.fielder || c.pos || 'Fielder not named'}: ${c.kind}${c.runner ? ` on ${c.runner}` : ''}`);
+      body.appendChild(el('div', 'feed-model-line feed-model-kind', `Error credit: ${details.join('; ')}`));
+    }
     if (item.initialErrorKind && SMod && SMod.ERROR_KIND_LABELS) {
       body.appendChild(el('div', 'feed-model-line feed-model-kind',
         `Error type (as first called): ${SMod.ERROR_KIND_LABELS[item.initialErrorKind] || item.initialErrorKind}`));
     }
-    if (changed && item.currentDescription) {
+    if (rulingChanged && item.currentDescription) {
       body.appendChild(el('div', 'feed-scoring-line feed-scoring-final',
         `Final ruling${toHit ? ' (changed to a hit)' : ''}: ${item.currentDescription}`));
+    }
+    const associatedChange = [...feedState.seen.values()].find((entry) =>
+      entry.gamePk === item.gamePk && entry.review && entry.review.typeKey === SCORING_CHANGE_TYPE_KEY &&
+      String(entry.review.atBatIndex) === String(item.atBatIndex));
+    if (associatedChange) {
+      const lines = scoringStatLines(associatedChange.review);
+      if (lines.batting) body.appendChild(el('div', 'feed-model-line feed-model-result', `Batting stat changes: ${lines.batting}`));
+      if (lines.pitching) body.appendChild(el('div', 'feed-model-line feed-model-result', `Pitching stat changes: ${lines.pitching}`));
     }
     body.appendChild(el('div', 'feed-model-line feed-model-bb', battedBallLine(item.gamePk, item.atBatIndex)));
     const off = officialConfirmation(item.gamePk, item.atBatIndex);
@@ -3772,7 +4141,7 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
   }
 
   /** Source badges: observed live / captured / official log / pipeline scan. */
-  function errorWatchSourceLine(sources, pipe) {
+  function errorWatchSourceLine(sources, pipe, errorEvent) {
     const line = el('div', 'feed-model-line feed-ew-sources');
     const badge = (txt, cls, title) => { const b = el('span', `ew-src ${cls}`, txt); b.title = title; line.appendChild(b); };
     if (sources.observed) badge('👁 Observed live', 'ew-src-observed', 'Seen on this page while polling the official play-by-play.');
@@ -3784,50 +4153,87 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
     }
     if (sources.logged.length) badge(`📜 MLB log #${sources.logged.join(', #')}`, 'ew-src-logged', 'Listed on MLB\u2019s official scoring-changes log.');
     if (sources.scanned) badge('🗂️ Pipeline scan', 'ew-src-scanned', 'Found by the official-data pipeline\u2019s game-by-game play-by-play scan (every 3 hours).');
-    if (pipe && pipe.vid) {
+    const videoId = (pipe && pipe.vid) || (errorEvent && errorEvent.vid);
+    if (videoId) {
       line.appendChild(el('a', 'ew-src ew-src-video', '🎬 Video', {
-        href: `https://baseballsavant.mlb.com/sporty-videos?playId=${encodeURIComponent(pipe.vid)}`, target: '_blank', rel: 'noopener',
+        href: `https://baseballsavant.mlb.com/sporty-videos?playId=${encodeURIComponent(videoId)}`, target: '_blank', rel: 'noopener',
         title: 'The play\u2019s broadcast video on Baseball Savant',
       }));
     }
     return line;
   }
 
-  /** A play the pipeline logged that this page did not observe live. */
-  function pipelineWatchRow(pipe, sources) {
-    const changed = pipe.status === 'changed_to_hit' || pipe.status === 'changed_other';
+  /** A play known from the pipeline but not observed live on this page. */
+  function pipelineWatchRow(pipe, sources, errorEvent) {
+    const rowData = pipe || {};
+    const eventData = errorEvent || {};
+    const status = rowData.status || eventData.status || 'stands';
+    const changed = status === 'changed_to_hit' || status === 'changed_other';
+    const eventType = rowData.eventType || eventData.eventType || null;
+    const event = rowData.event || eventData.event || eventType || 'error play';
+    const score = typeof rowData.score === 'number' ? rowData.score
+      : eventData.model && typeof eventData.model.score === 'number' ? eventData.model.score : null;
+    const probability = typeof rowData.p === 'number' ? rowData.p
+      : eventData.model && typeof eventData.model.p === 'number' ? eventData.model.p : null;
+    const scope = eventData.scope || (rowData.eventType === 'field_error' ? 'batter_reached' : null);
     const row = el('div', `feed-row feed-type-error_watch ${changed ? 'feed-outcome-changed' : 'feed-outcome-stands'}`);
-    row.dataset.key = `ew:${pipe.gamePk}:${pipe.ai}`;
+    row.dataset.key = `ew:${rowData.gamePk || eventData.gamePk}:${rowData.ai || eventData.ai}`;
     const time = el('div', 'feed-time');
-    time.appendChild(el('span', 'feed-time-txt', pipe.date || ''));
+    time.appendChild(el('span', 'feed-time-txt', rowData.date || eventData.date || ''));
     row.appendChild(time);
     const body = el('div', 'feed-body');
     const head = el('div', 'feed-head');
-    const link = el('a', 'feed-game', '', { href: `game.html?gamePk=${pipe.gamePk}` });
-    link.appendChild(el('span', 'feed-game-txt', `${pipe.away || '?'} @ ${pipe.home || '?'}`));
+    const gamePk = rowData.gamePk || eventData.gamePk;
+    const link = el('a', 'feed-game', '', { href: `game.html?gamePk=${gamePk}` });
+    link.appendChild(el('span', 'feed-game-txt', `${rowData.away || eventData.away || '?'} @ ${rowData.home || eventData.home || '?'}`));
     head.appendChild(link);
     head.appendChild(el('span', 'chip-review-type chip-error_watch', 'Error Watch'));
-    head.appendChild(el('span', 'feed-inn', `${pipe.half === 'top' ? '▲ Top' : '▼ Bot'} ${pipe.inning}`));
-    head.appendChild(el('span', `review-outcome-pill ${changed ? 'outcome-changed' : 'outcome-stands'}`,
-      pipe.status === 'changed_to_hit' ? `✏️ Now: ${pipe.event || 'a hit'}` : changed ? `✏️ Now: ${pipe.event || pipe.final}` : 'Stands as error'));
+    head.appendChild(el('span', 'feed-inn', `${(rowData.half || eventData.half) === 'top' ? '▲ Top' : '▼ Bot'} ${rowData.inning || eventData.inning || ''}`));
+    const statusText = status === 'changed_to_hit' ? `✏️ Now: ${event}`
+      : status === 'changed_other' ? `✏️ Now: ${event}`
+        : scope === 'on_hit' ? `Error on ${event}` : scope === 'other' ? `${event} + error` : 'Stands as error';
+    head.appendChild(el('span', `review-outcome-pill ${changed ? 'outcome-changed' : 'outcome-stands'}`, statusText));
     body.appendChild(head);
-    if (typeof pipe.score === 'number') {
+    if (typeof score === 'number' && scope === 'batter_reached') {
       const line = el('div', 'feed-model-line');
-      line.appendChild(el('span', 'feed-model-label', 'Chance this error becomes a hit'));
-      const chip = el('span', 'model-score', `${pipe.score}/100`);
-      chip.title = `Model probability ${typeof pipe.p === 'number' ? `${(pipe.p * 100).toFixed(1)}%` : '—'} (${pipe.scoreKind === 'out_of_fold' ? 'out-of-fold: this play was not used to fit the model that scored it' : 'in-sample'}), from the pipeline\u2019s last refresh.`;
+      line.appendChild(el('span', 'feed-model-label', 'Chance this batter-reached error becomes a hit'));
+      const chip = el('span', 'model-score', `${score}/100`);
+      chip.title = `Model probability ${probability != null ? `${(probability * 100).toFixed(1)}%` : '—'} (${rowData.scoreKind === 'out_of_fold' ? 'out-of-fold: this play was not used to fit the model that scored it' : 'pipeline model score'}), from the pipeline\u2019s last refresh.`;
       line.appendChild(chip);
       body.appendChild(line);
+    } else if (scope && scope !== 'batter_reached') {
+      body.appendChild(el('div', 'feed-model-line feed-model-bb',
+        `No error-to-hit score: error scope is ${scope.replace(/_/g, ' ')}.`));
     }
     body.appendChild(el('div', 'feed-model-line feed-model-result',
-      `Final result: ${pipe.status === 'changed_to_hit' ? `changed to ${pipe.event || 'a hit'}` : changed ? `changed (${pipe.event || pipe.final})` : 'stands as an error'}` +
-      (!pipe.labelFinal && pipe.status === 'stands' ? ' — recent, may still change' : '')));
-    body.appendChild(el('div', 'feed-scoring-line', pipe.description || ''));
-    body.appendChild(errorWatchSourceLine(sources, pipe));
-    if (pipe.batter || pipe.pitcher) {
+      `Final result: ${status === 'changed_to_hit' ? `changed to ${event}` : status === 'changed_other' ? `changed (${event})` : 'error recorded'}` +
+      (!rowData.labelFinal && status === 'stands' && rowData ? ' — recent, may still change' : '')));
+    body.appendChild(el('div', 'feed-scoring-line', rowData.description || eventData.description || ''));
+    const errors = Array.isArray(eventData.errors) ? eventData.errors : [];
+    if (errors.length) {
+      const labels = errors.map((e) => {
+        const who = e.fielder || e.pos || 'fielder not named in this record';
+        const runner = e.runner ? ` on ${e.runner}` : '';
+        return `${who}: ${e.kind || e.credit || 'error'}${runner}`;
+      });
+      body.appendChild(el('div', 'feed-model-line feed-model-kind', `Error charged: ${labels.join('; ')}`));
+    } else if (eventData.errorMovements > 0) {
+      body.appendChild(el('div', 'feed-model-line feed-model-kind',
+        `${eventData.errorMovements} runner error movement${eventData.errorMovements === 1 ? '' : 's'} recorded; no separate fielder-credit detail is present in this record.`));
+    }
+    body.appendChild(errorWatchSourceLine(sources, rowData, eventData));
+    const official = Array.isArray(rowData.official) && rowData.official.length
+      ? rowData.official : Array.isArray(eventData.official) ? eventData.official : [];
+    official.forEach((o) => {
+      if (o && o.raw) body.appendChild(el('div', 'feed-scoring-line feed-scoring-final',
+        `MLB official log #${o.seq}: ${String(o.raw).replace(/^\d+[.)]\s*/, '')}`));
+    });
+    const batter = rowData.batter || eventData.batter;
+    const pitcher = rowData.pitcher || eventData.pitcher;
+    if (batter || pitcher) {
       const foot = el('div', 'feed-foot');
-      if (pipe.batter) foot.appendChild(el('span', 'feed-player', `Batter: ${pipe.batter}`));
-      if (pipe.pitcher) foot.appendChild(el('span', 'feed-player', `Pitcher: ${pipe.pitcher}`));
+      if (batter) foot.appendChild(el('span', 'feed-player', `Batter: ${batter}`));
+      if (pitcher) foot.appendChild(el('span', 'feed-player', `Pitcher: ${pitcher}`));
       body.appendChild(foot);
     }
     row.appendChild(body);
@@ -3836,31 +4242,31 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
 
   function renderErrorWatch(wrap) {
     loadPipelineWatch();
+    if (/^\d{4}-/.test(dateStr)) loadPipelineErrorLog(dateStr.slice(0, 4));
     const intro = el('div', 'model-note');
     intro.appendChild(el('span', null,
-      'Errors only: every play scored "reached on error" on this date — observed live on this page, captured by the live-capture pipeline, ' +
-      'listed on MLB\u2019s official log or found by the pipeline\u2019s game-by-game scan — with the model\u2019s chance (0–100) that the official scorer ' +
-      'changes it to a hit and its final result. Pending official-scorer rulings are listed below with their likely final ruling (single / error / out / fielder\u2019s choice …). '));
+      'Errors only: all error plays recorded on this date, including batter-reached errors, errors on hits and runner errors on other plays (such as a fielder\u2019s choice + error). Observed live rows are merged with the live-capture, official-log and game-by-game pipeline records. The 0–100 error-to-hit score is shown only when the batter was ruled reached on an error; other error scopes are tracked without an inapplicable score. Pending official-scorer rulings are listed below with their likely final ruling (hit / error / out / fielder\u2019s choice …). '));
     intro.appendChild(el('a', null, 'Season list, error log, methodology & accuracy →', { href: 'scoring.html' }));
     wrap.appendChild(intro);
     const rows = errorWatchRowsForDate();
     const pending = [...feedState.seen.values()].filter((e) => e.review && e.review.typeKey === 'pending_scoring');
     if (!rows.length && !pending.length) {
-      wrap.appendChild(el('div', 'empty', pipelineWatch.loading
+      const loading = !!(pipelineWatch.loading || [...pipelineErrorLog.values()].some((x) => x.loading));
+      wrap.appendChild(el('div', 'empty', loading
         ? 'Loading the pipeline\u2019s error list…'
         : 'No errors recorded yet for this date — they appear here as they happen.'));
       return;
     }
-    rows.sort((a, b) => String((b.live && b.live.timestamp) || (b.pipe && b.pipe.date) || '')
-      .localeCompare(String((a.live && a.live.timestamp) || (a.pipe && a.pipe.date) || '')))
+    rows.sort((a, b) => String((b.live && b.live.timestamp) || (b.pipe && b.pipe.date) || (b.errorEvent && b.errorEvent.date) || '')
+      .localeCompare(String((a.live && a.live.timestamp) || (a.pipe && a.pipe.date) || (a.errorEvent && a.errorEvent.date) || '')))
       .forEach((r) => {
         if (r.live) {
           const node = errorWatchRow(r.live);
           const body = node.children && node.children[1] ? node.children[1] : null;
-          if (body && body.appendChild) body.appendChild(errorWatchSourceLine(r.sources, r.pipe));
+          if (body && body.appendChild) body.appendChild(errorWatchSourceLine(r.sources, r.pipe, r.errorEvent));
           wrap.appendChild(node);
         } else {
-          wrap.appendChild(pipelineWatchRow(r.pipe, r.sources));
+          wrap.appendChild(pipelineWatchRow(r.pipe, r.sources, r.errorEvent));
         }
       });
     if (pending.length) {
@@ -4421,12 +4827,58 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       const desc = el('div', 'feed-desc', r.description);
       body.appendChild(desc);
 
+      // A same-play replay rescore is attached to this review rather than
+      // duplicated as a scoring-change row. Show the observed call transition
+      // and its actual StatsAPI batting/pitching deltas on the review itself.
+      if (r.observedScoringChange) {
+        const observed = r.observedScoringChange;
+        const before = observed.initial && observed.initial.label;
+        const after = observed.final && observed.final.label;
+        if (before || after) {
+          body.appendChild(el('div', 'feed-resolved',
+            `Observed scoring change: ${before || 'initial call'} → ${after || 'updated call'}`));
+        }
+        const lines = scoringStatLines({
+          stats: observed.stats || {},
+          batter: observed.batter || r.batter,
+          pitcher: observed.pitcher || r.pitcher,
+        });
+        if (lines.batting || lines.pitching) {
+          const box = el('div', 'feed-stat-lines');
+          if (lines.batting) box.appendChild(el('div', 'feed-stat-line feed-stat-batting', `📊 Observed batting changes — ${lines.batting}`));
+          if (lines.pitching) box.appendChild(el('div', 'feed-stat-line feed-stat-pitching', `🧮 Observed pitching changes — ${lines.pitching}`));
+          box.title = 'Observed: StatsAPI values on this play before and after the change. The change is attributed to this replay-review row; it is not an additional review event.';
+          body.appendChild(box);
+        }
+        if (Array.isArray(observed.flags) && observed.flags.length) {
+          body.appendChild(el('div', 'feed-model-line feed-model-bb', observed.flags.join('; ')));
+        }
+      }
+
       // Official-scorer pending rulings: show both the pending description and
       // the resolved ruling (hit/error/fielder's choice) when available.
       if (r.typeKey === 'pending_scoring' && r.resolvedDescription) {
         const resolved = el('div', 'feed-resolved', `Resolved as: ${r.resolvedDescription}`);
         resolved.title = 'Official scorer ruling: the play was charged as shown above.';
         body.appendChild(resolved);
+      }
+      if (r.typeKey === 'pending_scoring' && r.resolvedStats) {
+        const stats = r.resolvedStats;
+        const lines = scoringStatLines({
+          stats: { batting: stats.batting || [], pitching: stats.pitching || [] },
+          batter: r.batter, pitcher: r.pitcher,
+        });
+        if (lines.batting || lines.pitching) {
+          const box = el('div', 'feed-stat-lines');
+          if (lines.batting) box.appendChild(el('div', 'feed-stat-line feed-stat-batting', `📊 Observed batting changes — ${lines.batting}`));
+          if (lines.pitching) box.appendChild(el('div', 'feed-stat-line feed-stat-pitching', `🧮 Observed pitching changes — ${lines.pitching}`));
+          box.title = 'Compared the StatsAPI values captured while the scorer ruling was pending with the values after it resolved.';
+          body.appendChild(box);
+        }
+        if (stats.unavailable && stats.unavailable.length) {
+          body.appendChild(el('div', 'feed-model-line feed-model-bb',
+            `Stat comparison unavailable for: ${stats.unavailable.join(', ')}. No value was inferred.`));
+        }
       }
       if (r.typeKey === 'pending_scoring') {
         const model = modelBlockForEntry(entry);
@@ -4898,13 +5350,13 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
   /* Node test export (pure helpers only). */
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-      buildEventKey, mergeFeedEvents, reconcileScoreImpact, reviewChanged,
+      buildEventKey, mergeFeedEvents, applyAssociatedScoringUpdates, reconcileScoreImpact, reviewChanged,
       completePendingScoringReview,
       sortFeedEntries, gameTeamsLabel,
       isUsableName, officialTeamName, gameSideTeam,
       pollIntervalMs, waitAfterScan, reviewFetchPriority, mapPool,
       isReviewStatusCode, reviewStatusFlips,
-      shouldAlertForReview, visibleInAllFeed, isHitToErrorChange,
+      shouldAlertForReview, visibleInAllFeed, isHitToErrorChange, isAlertableAssociatedScoringChange,
       runsRemovableFromReview, shouldRunRiskAlert, diffRunRiskKeys,
       normalizeChallengeCounts, challengeCountIrregularities,
       teamSideInGame, teamChallengeLine, gameChallengeLine,
@@ -4916,9 +5368,9 @@ function pruneFeedLogIndex(index, keepDateStr, maxDates) {
       scoringEventLabel, scoringInningLabel, scoringMechanism,
       scoringChangeSummary, mergeScoringChanges, finalScanDecision,
       // Session 5: stat impact (main alerts = batting R/H/RBI only)
-      scoringStatDeltas, scoringStatHeadline, scoringStatImpact, scoringStatLines,
+      scoringStatDeltas, scoringRunsAttributionNote, scoringStatHeadline, scoringStatImpact, scoringStatLines,
       isBattingStatChange, isPitchingOnlyStatChange, isOtherScoringChange,
-      mergeErrorWatchSources,
+      liveErrorEvidence, mergeErrorWatchSources,
       SCORING_WALK_EVENT_TYPES, SCORING_STRIKEOUT_EVENT_TYPES,
       // Feed-log persistence (pure layer — every tracked entry survives a
       // refresh / revisit via a per-date localStorage log)
