@@ -1,0 +1,130 @@
+{
+  "v": 1,
+  "date": "2026-09-19",
+  "savedAt": 1790630231164,
+  "entries": [
+    {
+      "gamePk": 823003,
+      "review": {
+        "id": "scoring-44",
+        "atBatIndex": 44,
+        "inning": 6,
+        "halfInning": "top",
+        "inningLabel": "▲ Top 6th",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "away",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "WSH",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Rescored",
+        "reason": "Single → Field Error",
+        "description": "Andrés Chaparro reaches on a throwing error by third baseman José Fermín. Jorbit Vivas to 2nd.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "single",
+          "event": "Single",
+          "label": "Single",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "final": {
+          "eventType": "field_error",
+          "event": "Field Error",
+          "label": "Field Error",
+          "category": "error",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-09-28T21:17:11.164Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 665953,
+          "fullName": "Andrés Chaparro"
+        },
+        "pitcher": {
+          "id": 703725,
+          "fullName": "Luis Gastelum"
+        },
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "stats": {
+          "batting": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Andrés Chaparro",
+              "playerId": 665953,
+              "evidence": "an infield single → Andrés Chaparro reaches on a throwing error by third baseman José Fermín"
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Luis Gastelum",
+              "playerId": 703725,
+              "evidence": "an infield single → Andrés Chaparro reaches on a throwing error by third baseman José Fermín"
+            },
+            {
+              "stat": "ER",
+              "delta": -1,
+              "player": "Justin Bruihl",
+              "playerId": null,
+              "evidence": "As a result, the run in the inning is unearned to Justin Bruihl."
+            },
+            {
+              "stat": "UER",
+              "delta": 1,
+              "player": "Justin Bruihl",
+              "playerId": null,
+              "evidence": "As a result, the run in the inning is unearned to Justin Bruihl."
+            }
+          ],
+          "source": "official_log"
+        },
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=35c47dfe-6cc1-38cc-bf61-9a7f09f74c6b",
+        "official": {
+          "season": 2026,
+          "seq": 257,
+          "date": "2026-09-19",
+          "raw": "257. 9/19 WAS@STL -- In the top of the 6th, Andrés Chaparro reaches on a throwing error by third baseman José Fermín, instead of an infield single. As a result, the run in the inning is unearned to Justin Bruihl.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        }
+      },
+      "firstSeen": 1790630231164,
+      "lastSeen": 1790630231164,
+      "matchupLabel": "WSH @ STL"
+    }
+  ],
+  "order": [
+    "823003:scoring-44"
+  ],
+  "snapshots": {},
+  "irregularities": {},
+  "grace": {},
+  "settled": [],
+  "trimmed": {
+    "entries": 0,
+    "snapshots": 0
+  }
+}
