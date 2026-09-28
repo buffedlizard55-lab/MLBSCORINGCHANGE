@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-09-28T05:31:52.324Z",
+ "generatedAt": "2026-09-28T14:06:23.970Z",
  "labelCutoff": "2026-09-14",
  "plays": [
   {
@@ -9,6 +9,12 @@
    "gamePk": 824705,
    "ai": 59,
    "gameType": "R",
+   "savant": {
+    "xba": 0.164,
+    "ls": 85,
+    "la": -50,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CHC",
    "home": "BOS",
    "inning": 8,
@@ -51,6 +57,12 @@
    "gamePk": 824542,
    "ai": 50,
    "gameType": "R",
+   "savant": {
+    "xba": 0.353,
+    "ls": 98.8,
+    "la": -6,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "COL",
    "home": "CWS",
    "inning": 6,
@@ -93,6 +105,12 @@
    "gamePk": 824055,
    "ai": 37,
    "gameType": "R",
+   "savant": {
+    "xba": 0.153,
+    "ls": 58,
+    "la": -38,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CLE",
    "home": "KC",
    "inning": 5,
@@ -135,6 +153,12 @@
    "gamePk": 823814,
    "ai": 66,
    "gameType": "R",
+   "savant": {
+    "xba": 0.116,
+    "ls": 101.6,
+    "la": -24,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "ATL",
    "home": "MIA",
    "inning": 9,
@@ -177,6 +201,12 @@
    "gamePk": 823164,
    "ai": 23,
    "gameType": "R",
+   "savant": {
+    "xba": 0.594,
+    "ls": 95.6,
+    "la": 8,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "LAD",
    "home": "SF",
    "inning": 4,
@@ -219,6 +249,12 @@
    "gamePk": 823084,
    "ai": 48,
    "gameType": "R",
+   "savant": {
+    "xba": 0.195,
+    "ls": 67.5,
+    "la": -44,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "LAA",
    "home": "SEA",
    "inning": 6,
@@ -261,6 +297,12 @@
    "gamePk": 822679,
    "ai": 64,
    "gameType": "R",
+   "savant": {
+    "xba": 0.48,
+    "ls": 93.4,
+    "la": 3,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "NYM",
    "home": "WSH",
    "inning": 8,
