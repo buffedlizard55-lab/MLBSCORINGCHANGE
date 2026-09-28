@@ -1,6 +1,6 @@
 # Official MLB scoring changes — 2026
 # Source: https://www.mlb.com/official-information/scoring-changes
-# Fetched: 2026-09-28T14:06:23.970Z  sha256(html)=b190018a0f1e35790113fa157d3e4bcbd877e030c7df243ac3ae8ee8b679c013
+# Fetched: 2026-09-28T21:15:58.347Z  sha256(html)=5f591c9866b62ca6e5b64536ea40333b59206c7865dcf039d188dbf26dcc725d
 # Verbatim entry lines as extracted from the page (one per line).
 
 1. 3/31 TB@MIL -- In the bottom of the 5th, assists have been added for Jake Fraley, Jonathan Aranda, Carson Williams, and Ben Williamson on the Brice Turang single.
@@ -259,3 +259,4 @@
 254. 9/23 MIN@SF -- In the top of the 9th, the assist by Shay Whitcomb on Josh Bell's groundout has been removed.
 255. 9/25 NYM@WAS -- In the bottom of the 1st, Dylan Crews advances to second on a wild pitch by Jefry Yan, instead of a stolen base.
 256. 9/25 HOU@ATH -- In the bottom of the 6th, the run charged to AJ Blubaugh is now Team Unearned. It remains earned to Blubaugh.
+257. 9/19 WAS@STL -- In the top of the 6th, Andrés Chaparro reaches on a throwing error by third baseman José Fermín, instead of an infield single. As a result, the run in the inning is unearned to Justin Bruihl.

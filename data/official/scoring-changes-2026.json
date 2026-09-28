@@ -5,19 +5,19 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-09-28T14:06:23.970Z",
-  "sha256": "b190018a0f1e35790113fa157d3e4bcbd877e030c7df243ac3ae8ee8b679c013",
-  "bytes": 920550
+  "fetchedAt": "2026-09-28T21:15:58.347Z",
+  "sha256": "5f591c9866b62ca6e5b64536ea40333b59206c7865dcf039d188dbf26dcc725d",
+  "bytes": 921041
  },
  "sections": [
   {
    "label": "2026 Regular Season",
-   "entries": 256,
+   "entries": 257,
    "issues": []
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-09-28T14:06:23.970Z",
+ "generatedAt": "2026-09-28T21:15:58.347Z",
  "entries": [
   {
    "seq": 1,
@@ -3344,7 +3344,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0643,
+    "p": 0.0642,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -8263,7 +8263,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0838,
+    "p": 0.0839,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -20817,7 +20817,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2525,
+    "p": 0.2526,
     "score": 25,
     "kind": "out_of_fold"
    }
@@ -23498,6 +23498,121 @@
     "flags": [],
     "battingChange": false,
     "pitchingChange": true
+   }
+  },
+  {
+   "seq": 257,
+   "raw": "257. 9/19 WAS@STL -- In the top of the 6th, Andrés Chaparro reaches on a throwing error by third baseman José Fermín, instead of an infield single. As a result, the run in the inning is unearned to Justin Bruihl.",
+   "date": "2026-09-19",
+   "month": 9,
+   "day": 19,
+   "away": "WAS",
+   "home": "STL",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the top of the 6th, Andrés Chaparro reaches on a throwing error by third baseman José Fermín, instead of an infield single. As a result, the run in the inning is unearned to Justin Bruihl.",
+   "half": "top",
+   "inning": 6,
+   "issues": [],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "hit",
+    "final": "error",
+    "initialHitType": "single",
+    "finalHitType": null,
+    "rule": "T1",
+    "oldPhrase": "an infield single",
+    "newPhrase": "Andrés Chaparro reaches on a throwing error by third baseman José Fermín",
+    "transition": "hit->error",
+    "flags": [
+     "hitToError",
+     "battingStat",
+     "pitchingStat"
+    ]
+   },
+   "link": {
+    "gamePk": 823003,
+    "atBatIndex": 44,
+    "batterName": "Andrés Chaparro",
+    "currentEventType": "field_error",
+    "method": "full_name",
+    "flags": [
+     "team_code_via:teamCode:WAS"
+    ],
+    "batterId": 665953,
+    "currentEvent": "Field Error",
+    "currentDescription": "Andrés Chaparro reaches on a throwing error by third baseman José Fermín. Jorbit Vivas to 2nd.",
+    "inning": 6,
+    "half": "top",
+    "officialDate": "2026-09-19",
+    "gameType": "R",
+    "away": "WSH",
+    "home": "STL",
+    "pitcherName": "Luis Gastelum",
+    "pitcherId": 703725,
+    "playId": "35c47dfe-6cc1-38cc-bf61-9a7f09f74c6b",
+    "currentRbi": 0,
+    "currentEarnedRuns": 0,
+    "currentUnearnedRuns": 0
+   },
+   "stats": {
+    "batting": [
+     {
+      "stat": "H",
+      "delta": -1,
+      "sign": -1,
+      "player": "Andrés Chaparro",
+      "playerId": 665953,
+      "playerSource": "linked_play_batter",
+      "evidence": "an infield single → Andrés Chaparro reaches on a throwing error by third baseman José Fermín",
+      "rule": "transition:hit"
+     }
+    ],
+    "pitching": [
+     {
+      "stat": "H",
+      "delta": -1,
+      "sign": -1,
+      "player": "Luis Gastelum",
+      "playerId": 703725,
+      "playerSource": "linked_play_pitcher",
+      "evidence": "an infield single → Andrés Chaparro reaches on a throwing error by third baseman José Fermín",
+      "rule": "transition:hit"
+     },
+     {
+      "stat": "ER",
+      "delta": -1,
+      "sign": -1,
+      "player": "Justin Bruihl",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "As a result, the run in the inning is unearned to Justin Bruihl.",
+      "rule": "earned:unearned"
+     },
+     {
+      "stat": "UER",
+      "delta": 1,
+      "sign": 1,
+      "player": "Justin Bruihl",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "As a result, the run in the inning is unearned to Justin Bruihl.",
+      "rule": "earned:unearned"
+     }
+    ],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": true,
+    "pitchingChange": true
+   },
+   "model": {
+    "question": "hitToError",
+    "p": 0.0079,
+    "score": 1,
+    "kind": "model"
    }
   }
  ]
