@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-27T21:24:58.164Z",
+ "generatedAt": "2026-09-28T05:31:52.324Z",
  "count": 80,
  "items": [
   {
@@ -1253,7 +1253,7 @@
    "raw": "256. 9/25 HOU@ATH -- In the bottom of the 6th, the run charged to AJ Blubaugh is now Team Unearned. It remains earned to Blubaugh.",
    "parseIssues": [],
    "linkFlags": [
-    "date_recovery_ambiguous:12",
+    "date_recovery_ambiguous:13",
     "batter_not_found"
    ],
    "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
