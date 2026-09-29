@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-29T01:02:11.696Z",
+ "generatedAt": "2026-09-29T09:56:16.577Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -456,62 +456,60 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": true,
-  "fetchedThisRun": false,
-  "fetchedAt": "2026-09-28T21:16:23.549Z",
-  "rowsAllGameTypes": 1396,
+  "cached": false,
+  "fetchedThisRun": true,
+  "fetchedAt": "2026-09-29T09:56:37.635Z",
+  "rowsAllGameTypes": 1397,
   "rowsByGameType": {
-   "R": 1041,
+   "R": 1042,
    "S": 321,
    "E": 34
   },
-  "rows": 1041,
+  "rows": 1042,
   "statsapiFieldErrors": 1042,
-  "matched": 1041,
+  "matched": 1042,
   "onlySavant": 0,
   "onlySavantExamples": [],
-  "onlyStatsApiExamples": [
-   "823003:44"
-  ],
+  "onlyStatsApiExamples": [],
   "exitVelocityAgreement": 1,
   "launchAngleAgreement": 1,
   "hitProbVsSavantXba": {
-   "n": 1028,
+   "n": 1029,
    "pearson": 0.9739,
    "meanAbsDiff": 0.0289
   },
   "perPlay": {
    "needed": 1585,
    "excludedNoBattedBall": 56,
-   "matched": 1109,
+   "matched": 1110,
    "matchedNoXba": 117,
-   "unavailable": 359,
+   "unavailable": 358,
    "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.6997,
+   "coverage": 0.7003,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
      "kind": "season_errors",
      "season": 2026,
      "month": null,
-     "rows": 1396,
-     "fromCache": true,
+     "rows": 1397,
+     "fromCache": false,
      "asked": 0,
-     "found": 1031,
+     "found": 1032,
      "missed": 0,
      "integrity": null
     }
    ],
    "queriesDeferred": 0,
    "failures": [],
-   "requests": 0,
-   "cacheHits": 1,
+   "requests": 1,
+   "cacheHits": 0,
    "budgetExhausted": false
   },
   "client": {
-   "requests": 0,
-   "cacheHits": 1,
+   "requests": 1,
+   "cacheHits": 0,
    "budget": 4,
    "budgetExhausted": false,
    "rateLimited": false,

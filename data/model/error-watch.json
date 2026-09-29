@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-09-29T01:02:11.696Z",
+ "generatedAt": "2026-09-29T09:56:16.577Z",
  "labelCutoff": "2026-09-15",
  "plays": [
   {
@@ -23740,7 +23740,7 @@
    "ai": 60,
    "gameType": "R",
    "savant": {
-    "xba": 0.249,
+    "xba": 0.229,
     "ls": 41,
     "la": -73,
     "source": "savant:estimated_ba_using_speedangle"
