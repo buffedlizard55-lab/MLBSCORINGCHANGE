@@ -52,10 +52,11 @@ jobs:
           key: dump-rows-${{ github.run_id }}
 
       - name: Commit dump
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add analysis/model-rows.json.gz analysis/model-rows.meta.json
+          git add analysis/model-rows.json.gz analysis/model-rows.meta.json || true
           if git diff --cached --quiet; then
             echo "No dump changes."
             exit 0
