@@ -195,6 +195,19 @@
     if (term === 'ev_missing') return isFiniteNumber(play.ls) && isFiniteNumber(play.la) ? 0 : 1;
     if (term === 'batting_home') return play.top === false ? 1 : 0;
     if (term === 'infield') return INFIELD[locationGroup(play.loc)] ? 1 : 0;
+    // Exit-velocity extremes (U-shaped effect, 2024–2026 settled errors: balls
+    // under ~70 mph and over ~105 mph are changed to hits about half again as
+    // often as mid-speed balls — the "beaten-out roller" and the "hot shot"):
+    // indicators, so the effect does not have to be linear in EV.
+    if (term === 'ev_soft') return isFiniteNumber(play.ls) && play.ls < 70 ? 1 : 0;
+    if (term === 'ev_hard') return isFiniteNumber(play.ls) && play.ls >= 105 ? 1 : 0;
+    // Non-linearity in the comparable-ball hit probability and its interaction
+    // with balls that reached the outfield (a dropped liner vs an infield
+    // roller are different questions).
+    if (term === 'hp_sq') return isFiniteNumber(hp) ? Math.pow(logit(hp), 2) : 0;
+    if (term === 'hp_x_of') return isFiniteNumber(hp) && locationGroup(play.loc) === 'OF' ? logit(hp) : 0;
+    if (term === 'bat_left') return play.bs === 'L' ? 1 : 0;
+    if (term === 'inn_late') return isFiniteNumber(play.inn) && play.inn >= 7 ? 1 : 0;
     if (term.indexOf('loc:') === 0) return locationGroup(play.loc) === term.slice(4) ? 1 : 0;
     if (term.indexOf('traj:') === 0) return trajGroup(play.traj) === term.slice(5) ? 1 : 0;
     // Home club (the official scorer is assigned by the home park).
@@ -214,6 +227,10 @@
   function missingInput(term, play) {
     if (term.indexOf('scorer:') === 0) return play.scorerId == null;
     if (term.indexOf('kind:') === 0) return play.errKind == null;
+    if (term === 'ev_soft' || term === 'ev_hard' || term === 'ev_z') return play.ls == null;
+    if (term === 'la_z') return play.la == null;
+    if (term === 'bat_left') return play.bs == null;
+    if (term === 'inn_late') return play.inn == null;
     return false;
   }
 
@@ -434,6 +451,7 @@
   function playFromStatsApi(apiPlay, hitDataOverride) {
     var res = (apiPlay && apiPlay.result) || {};
     var about = (apiPlay && apiPlay.about) || {};
+    var m = (apiPlay && apiPlay.matchup) || {};
     var bb = hitDataOverride || battedBallFromEvents(apiPlay && apiPlay.playEvents) || {};
     var ek = res.eventType === 'field_error' ? errorKindOfStatsApiPlay(apiPlay) : null;
     return {
@@ -442,6 +460,7 @@
       top: about.isTopInning === true ? true : about.isTopInning === false ? false : null,
       inn: about.inning != null ? about.inning : null,
       ai: about.atBatIndex != null ? about.atBatIndex : null,
+      bs: (m.batSide && m.batSide.code) || null,
       ls: bb.ls != null ? bb.ls : null,
       la: bb.la != null ? bb.la : null,
       traj: bb.traj || null,
@@ -462,6 +481,7 @@
       top: rec.top === true ? true : rec.top === false ? false : null,
       inn: rec.inn != null ? rec.inn : null,
       ai: rec.ai != null ? rec.ai : null,
+      bs: rec.bs || null,
       ls: hd.ls != null ? hd.ls : null,
       la: hd.la != null ? hd.la : null,
       traj: hd.traj || null,
@@ -511,6 +531,8 @@
       var play = assign({
         et: et, top: top, homeId: homeId != null ? homeId : null, scorerId: sid,
         errKind: fromError ? errorKindFromDescription(initialDesc) : null,
+        inn: p && p.about && p.about.inning != null ? p.about.inning : null,
+        bs: p && p.matchup && p.matchup.batSide ? (p.matchup.batSide.code || null) : null,
       }, bb);
       var res = fromError ? scoreErrorToHit(model, play) : scoreHitToError(model, play);
       return res ? { kind: fromError ? 'errorToHit' : 'hitToError', result: res, battedBall: bb, target: review.atBatIndex } : null;

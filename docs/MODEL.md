@@ -2,7 +2,7 @@
 
 This document describes exactly what `pipeline/` computes and what
 `assets/js/scoring-model.js` scores. Numbers quoted are from the pipeline run of
-**2026-09-24** (GitHub Actions run 36044396417); the live values are always in
+**2026-09-30** (GitHub Actions run 36669791772); the live values are always in
 `data/model/scoring-model.json`, `data/model/pipeline-report.json` and on
 [`scoring.html`](../scoring.html) → Model.
 
@@ -28,7 +28,7 @@ StatsAPI) and, once posted, the matching entry in MLB's official log.
 | MLB StatsAPI `/api/v1.1/game/{gamePk}/feed/live?fields=gameData,officialScorer,id,fullName,venue,name` | official scorer and venue of every game (§17) | once per game, cached |
 | Live capture — `data/capture/` (this project, from StatsAPI playByPlay during live games) | rulings as first called, error type, pending markers and their resolutions (§14) | every 10 min during game hours |
 
-Run of 2026-09-24 (20:15 UTC): 7,323 completed games (2,472 / 2,477 / 2,374), 553,370 plate appearances,
+Run of 2026-09-30 (04:39 UTC): 7,381 completed games (2,472 / 2,477 / 2,432), 557,749 plate appearances,
 0 fetch failures, projection self-check equal in all three seasons.
 
 ## 3. Reading the official log
@@ -38,7 +38,7 @@ Run of 2026-09-24 (20:15 UTC): 7,323 completed games (2,472 / 2,477 / 2,374), 55
   numbers "N) …". Variants seen and handled: single-hyphen separator (2024 #1–7), `ARI-LAD`
   (2024 #77), `SD at SF` (2025 #157), doubleheader suffixes (`CLE2`, `GM2`, `(GM1)`), `BOS@NYY!`,
   missing dates or innings, and inning text without the word "inning" (2026).
-- **Result:** 229 (2024), 211 (2025, incl. 1 postseason) and 253 (2026) entries, no numbering gaps.
+- **Result:** 229 (2024), 211 (2025, incl. 1 postseason) and 257 (2026) entries, no numbering gaps.
 - **Provenance:** each season file stores the source URL, capture time, byte size and SHA-256 of
   the HTML; `data/official/raw/scoring-changes-<season>.txt` keeps the verbatim entry lines.
 
@@ -95,7 +95,7 @@ do not count as an error. After this pass: 1 / 2 / 0 unclassified entries (2024 
    Irregularities; nothing is guessed. An entry that cannot be placed at all keeps `no_game_found` /
    `batter_not_found`.
 
-Run of 2026-09-24 (linker v3): 665 of 693 entries linked to their exact play; every error → hit
+Run of 2026-09-30 (linker v3): 668 of 697 entries linked to their exact play; every error → hit
 entry linked. Two 2026 hit → error entries (#140 "6/6 NYM@PHI", #173 "9/4 MIA@ATH") only became linkable
 with the date-recovery pass: the games were played on 6/18 (game 823448, Rincones Jr., bottom 9th)
 and 7/4 (game 824983, Bolte, bottom 9th) — MLB's own dates are wrong, which the linker flags
@@ -135,6 +135,13 @@ hosted CWS per [StatsAPI](https://statsapi.mlb.com/api/v1/schedule?sportId=1&sta
 - **Fielder group** (from `hitData.location`: P, C, 1B, 2B, 3B, SS, OF), **trajectory**
   (ground ball, line drive, fly ball, popup, bunt), standardised **exit velocity**, **batting at
   home**, **home club** and **official scorer** (candidates only — see §17).
+- **Exit-velocity extremes and hit-probability interactions** (added 2026-09-30, candidates only —
+  see [docs/model-improvement-2026.md](model-improvement-2026.md)): `ev_soft` (< 70 mph), `ev_hard`
+  (≥ 105 mph) — the change rate is U-shaped in exit velocity (beaten-out rollers and hot shots are
+  changed about half again as often as mid-speed balls, which neither the hit probability nor a
+  linear EV term can express) — plus `hp_x_of` (logit hit probability × ball reached the outfield),
+  `hp_sq`, `loc:SS`, `bat_left` and `inn_late` (tested; the first two of the family are the ones
+  selection keeps on current data).
 - **Excluded from the historical fit on purpose:** the error type and fielding credits — after a
   change to a hit they no longer exist in the data, so they would leak the answer. The error type
   enters only through the captured-data adjustment (§15), which uses the type *as captured live
@@ -149,41 +156,50 @@ hosted CWS per [StatsAPI](https://statsapi.mlb.com/api/v1/schedule?sportId=1&sta
 - 10-fold cross-validation **grouped by game** (a deterministic hash of `gamePk`).
 - Candidate feature sets from intercept-only up to all features (+ home club). Rule: the
   **simplest model within one standard error** of the best cross-validated log loss, using the SE
-  of *paired* per-play loss differences.
+  of *paired* per-play loss differences. The ladder includes the exit-velocity-extreme /
+  hit-probability-interaction sets added by the
+  [2026-09-30 study](model-improvement-2026.md) (CV AUC 0.61 → 0.62–0.63, out-of-time 0.62 →
+  0.64–0.65 on the study's data); selection re-runs on fresh data every pipeline run.
 - Scores for training plays shown on the site are **out-of-fold** (the play was not used to fit
   the model that scored it).
 - **Out-of-time check:** fit on 2024–2025, predict settled 2026 plays.
 
-**Selected models (run of 2026-09-24)**
+**Selected models (run of 2026-09-30)**
 
 | | Error → hit | Hit → error |
 | --- | --- | --- |
-| Terms | logit(hit prob.), fielder group (P, C, 1B, 3B, OF vs 2B/SS), trajectory | logit(hit prob.), infield, trajectory |
+| Terms | logit(hit prob.), fielder group (P, C, 1B, 3B, OF vs 2B/SS), trajectory, **ev_soft, ev_hard, hp_x_of** | logit(hit prob.), infield, trajectory |
 | λ | 1 | 1 |
-| Plays / changed | 3,161 / 189 (5.98%) | 100,972 / 120 (0.12%) |
-| CV AUC | 0.609 | 0.913 |
-| CV log loss (base) | 0.2199 (0.2264) | 0.0074 (0.0092) |
-| CV Brier (base) | 0.0549 (0.0562) | 0.00118 (0.00119) |
-| Out-of-time AUC, 2026 | 0.622 (944 plays, 58 changed) | 0.934 (30,982 plays, 46 changed) |
+| Plays / changed | 3,196 / 189 (5.91%) | 102,224 / 124 (0.12%) |
+| CV AUC | 0.624 | 0.915 |
+| CV log loss (base) | 0.2171 (0.2246) | 0.0074 (0.0094) |
+| CV Brier (base) | 0.0541 (0.0556) | 0.00120 (0.00121) |
+| Out-of-time AUC, 2026 | 0.649 (979 plays, 58 changed) | 0.937 (32,234 plays, 50 changed) |
 
-Error → hit coefficients: intercept −2.485; logit(hit prob.) +0.350; OF +1.919; 1B +0.521;
-C +0.602; 3B +0.314; P −0.025; line drive −1.178; fly ball −1.876; popup +0.074; bunt +0.775.
-The home-club and official-scorer sets were tested and **rejected** by the selection rule (§17).
+Error → hit coefficients: intercept −2.541; logit(hit prob.) +0.425; OF +1.722; 1B +0.537;
+C +0.367; 3B +0.349; P −0.287; line drive −1.073; fly ball −2.044; popup −0.008; bunt +0.585;
+**ev_soft +0.547; ev_hard +0.390; hp_x_of −0.321**. The exit-velocity-extreme terms are the
+2026-09-30 study's finding ([docs/model-improvement-2026.md](model-improvement-2026.md)): the
+change rate is U-shaped in exit velocity — beaten-out rollers (< 70 mph, ~7.5%) and hot shots
+(≥ 105 mph, ~10.7%) vs ~4% at 75–85 mph. The home-club and official-scorer sets were tested and
+**rejected** by the selection rule (§17).
 
 **What drives error → hit changes (raw rates, settled plays):**
 
 | Comparable-ball hit rate | Errors | Changed to hit | Rate |
 | --- | --- | --- | --- |
-| 0.00–0.10 | 949 | 38 | 4.0% |
-| 0.10–0.20 | 696 | 35 | 5.0% |
-| 0.20–0.35 | 872 | 50 | 5.7% |
-| 0.35–0.50 | 320 | 29 | 9.1% |
-| 0.50–0.70 | 283 | 34 | 12.0% |
+| 0.00–0.10 | 950 | 38 | 4.0% |
+| 0.10–0.20 | 719 | 37 | 5.2% |
+| 0.20–0.35 | 874 | 48 | 5.5% |
+| 0.35–0.50 | 323 | 29 | 9.0% |
+| 0.50–0.70 | 289 | 34 | 11.8% |
 | 0.70–1.00 | 41 | 3 | 7.3% |
 
-By fielder: outfield 9.8% (215), first base 7.5%, second base 6.4%, third base 6.2%, pitcher
-5.1%, shortstop 3.8%. By trajectory: line drive 9.2% (109), ground ball 6.0% (2,808), fly ball
-2.6%, popup 2.9%. By season: 6.1% / 5.7% / 6.1%.
+By fielder: outfield 9.7% (216), catcher 11.5% (26), first base 7.4%, second base 6.4%, third base
+6.2%, pitcher 5.0%, shortstop 3.8%. By trajectory: bunt 16% (25), line drive 9.0% (111), ground
+ball 6.0% (2,839), fly ball 2.6%, popup 2.9%. By season: 6.1% / 5.7% / 5.9%. By exit velocity:
+**< 70 mph 7.3% (577), 70–85 mph 4.2% (758), 85–105 mph 5.8% (1,643), ≥ 105 mph 10.7% (177)** —
+the U-shape the new terms express.
 
 ## 9. Score bands
 

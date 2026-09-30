@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-29T22:21:23.638Z",
+ "generatedAt": "2026-09-30T04:39:14.342Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -9,7 +9,7 @@
   ],
   "refreshDays": 21,
   "labelLagDays": 14,
-  "labelCutoff": "2026-09-15"
+  "labelCutoff": "2026-09-16"
  },
  "logs": {
   "2024": {
@@ -254,9 +254,9 @@
     "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=W"
    ],
    "scheduled": 2483,
-   "completed": 2430,
-   "gamesWithPlays": 2430,
-   "fetched": 265,
+   "completed": 2432,
+   "gamesWithPlays": 2432,
+   "fetched": 252,
    "failed": 0,
    "failures": [],
    "selfCheck": {
@@ -267,17 +267,17 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 1,
+    "fetched": 2,
     "failed": 0,
-    "withScorer": 2430,
+    "withScorer": 2432,
     "scorers": 82
    },
    "byGameType": {
     "R": 2429,
-    "F": 1
+    "F": 3
    },
-   "plateAppearances": 184398,
-   "fieldErrorPlateAppearances": 1042,
+   "plateAppearances": 184545,
+   "fieldErrorPlateAppearances": 1043,
    "officialEntries": 257,
    "entryKinds": {
     "ruling_change": 168,
@@ -379,17 +379,17 @@
    "unlinkedErrorToHit": 0,
    "unlinkedHitToError": 0,
    "chainsDroppedForDisagreement": 6,
-   "initialErrorPopulation": 1049,
+   "initialErrorPopulation": 1050,
    "initialErrorToHit": 58
   }
  },
  "discovery": {
   "creditCodes": {
-   "f_putout": 392733,
-   "f_assist": 124424,
-   "f_fielded_ball": 104695,
-   "f_deflection": 3930,
-   "f_throwing_error": 3775,
+   "f_putout": 392838,
+   "f_assist": 124460,
+   "f_fielded_ball": 104723,
+   "f_deflection": 3931,
+   "f_throwing_error": 3777,
    "f_fielding_error": 3129,
    "f_assist_of": 1963,
    "f_error_dropped_ball": 345,
@@ -400,7 +400,7 @@
   },
   "fieldErrorBatterCredits": {
    "f_fielding_error": 1960,
-   "f_throwing_error": 1090,
+   "f_throwing_error": 1091,
    "f_assist": 191,
    "f_error_dropped_ball": 162,
    "f_putout": 11,
@@ -416,39 +416,39 @@
   "unresolvedPendingResults": [],
   "scoringAdvisories": [],
   "battedBallLocations": {
-   "1": 13344,
-   "2": 3682,
-   "3": 28533,
-   "4": 44009,
-   "5": 39555,
-   "6": 45508,
-   "7": 62153,
-   "8": 69480,
-   "9": 64340,
+   "1": 13348,
+   "2": 3683,
+   "3": 28540,
+   "4": 44020,
+   "5": 39573,
+   "6": 45521,
+   "7": 62165,
+   "8": 69500,
+   "9": 64357,
    "78": 3320,
    "89": 3091,
    "null": 1298
   },
   "battedBallTrajectories": {
-   "ground_ball": 156906,
-   "fly_ball": 100625,
-   "line_drive": 89816,
-   "popup": 26788,
-   "bunt_grounder": 3795,
+   "ground_ball": 156950,
+   "fly_ball": 100647,
+   "line_drive": 89841,
+   "popup": 26797,
+   "bunt_grounder": 3798,
    "bunt_popup": 338,
    "bunt_line_drive": 28,
    "null": 17
   },
   "fieldErrorCoverage": {
-   "total": 3196,
-   "withEvLa": 3162,
-   "withTraj": 3196,
-   "withLoc": 3196
+   "total": 3197,
+   "withEvLa": 3163,
+   "withTraj": 3197,
+   "withLoc": 3197
   },
-  "battedBalls": 378313,
+  "battedBalls": 378416,
   "errorKindCheck": {
    "fielding|fielding": 1957,
-   "throwing|throwing": 1072,
+   "throwing|throwing": 1073,
    "missed_catch|missed_catch": 162,
    "shift_violation|shift_violation": 3,
    "none|none": 1,
@@ -457,9 +457,9 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": true,
-  "fetchedThisRun": false,
-  "fetchedAt": "2026-09-29T18:07:45.065Z",
+  "cached": false,
+  "fetchedThisRun": true,
+  "fetchedAt": "2026-09-30T04:39:37.826Z",
   "rowsAllGameTypes": 1397,
   "rowsByGameType": {
    "R": 1042,
@@ -467,27 +467,29 @@
    "E": 34
   },
   "rows": 1042,
-  "statsapiFieldErrors": 1042,
+  "statsapiFieldErrors": 1043,
   "matched": 1042,
   "onlySavant": 0,
   "onlySavantExamples": [],
-  "onlyStatsApiExamples": [],
+  "onlyStatsApiExamples": [
+   "849849:68"
+  ],
   "exitVelocityAgreement": 1,
   "launchAngleAgreement": 1,
   "hitProbVsSavantXba": {
    "n": 1029,
-   "pearson": 0.974,
+   "pearson": 0.9739,
    "meanAbsDiff": 0.0289
   },
   "perPlay": {
-   "needed": 1585,
+   "needed": 1586,
    "excludedNoBattedBall": 56,
    "matched": 1110,
    "matchedNoXba": 117,
    "unavailable": 358,
-   "notIndexedYet": 0,
+   "notIndexedYet": 1,
    "pending": 0,
-   "coverage": 0.7003,
+   "coverage": 0.6999,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -495,22 +497,22 @@
      "season": 2026,
      "month": null,
      "rows": 1397,
-     "fromCache": true,
-     "asked": 0,
+     "fromCache": false,
+     "asked": 1,
      "found": 1032,
-     "missed": 0,
+     "missed": 1,
      "integrity": null
     }
    ],
    "queriesDeferred": 0,
    "failures": [],
-   "requests": 0,
-   "cacheHits": 1,
+   "requests": 1,
+   "cacheHits": 0,
    "budgetExhausted": false
   },
   "client": {
-   "requests": 0,
-   "cacheHits": 1,
+   "requests": 1,
+   "cacheHits": 0,
    "budget": 4,
    "budgetExhausted": false,
    "rateLimited": false,
@@ -531,57 +533,60 @@
     "traj:line_drive",
     "traj:fly_ball",
     "traj:popup",
-    "traj:bunt"
+    "traj:bunt",
+    "ev_soft",
+    "ev_hard",
+    "hp_x_of"
    ],
-   "n": 3187,
+   "n": 3196,
    "positives": 189,
    "cv": {
     "folds": 10,
-    "logLoss": 0.21864,
-    "baseLogLoss": 0.22505,
-    "auc": 0.6081,
-    "brier": 0.05449,
-    "baseBrier": 0.05579,
+    "logLoss": 0.21709,
+    "baseLogLoss": 0.22458,
+    "auc": 0.6242,
+    "brier": 0.05409,
+    "baseBrier": 0.05564,
     "calibration": [
      {
       "band": "0–2",
-      "n": 88,
-      "predicted": 0.0142,
-      "observed": 0.0227,
-      "positives": 2
+      "n": 106,
+      "predicted": 0.0131,
+      "observed": 0.0377,
+      "positives": 4
      },
      {
       "band": "2–5",
-      "n": 1261,
-      "predicted": 0.0384,
-      "observed": 0.046,
+      "n": 1422,
+      "predicted": 0.037,
+      "observed": 0.0408,
       "positives": 58
      },
      {
       "band": "5–10",
-      "n": 1636,
-      "predicted": 0.0678,
-      "observed": 0.0593,
-      "positives": 97
+      "n": 1358,
+      "predicted": 0.0688,
+      "observed": 0.0685,
+      "positives": 93
      },
      {
       "band": "10–20",
-      "n": 181,
-      "predicted": 0.1248,
-      "observed": 0.1215,
-      "positives": 22
+      "n": 288,
+      "predicted": 0.1235,
+      "observed": 0.0729,
+      "positives": 21
      },
      {
       "band": "20–35",
-      "n": 20,
-      "predicted": 0.2473,
-      "observed": 0.45,
-      "positives": 9
+      "n": 21,
+      "predicted": 0.2435,
+      "observed": 0.5714,
+      "positives": 12
      },
      {
       "band": "35–50",
       "n": 1,
-      "predicted": 0.3677,
+      "predicted": 0.3589,
       "observed": 1,
       "positives": 1
      },
@@ -597,48 +602,48 @@
    "outOfTime": {
     "trainSeasons": "< 2026",
     "testSeason": 2026,
-    "n": 970,
+    "n": 979,
     "positives": 58,
-    "auc": 0.6203,
-    "logLoss": 0.21771,
-    "baseLogLoss": 0.2264,
-    "brier": 0.05454,
-    "baseBrier": 0.05622,
+    "auc": 0.6494,
+    "logLoss": 0.21514,
+    "baseLogLoss": 0.22488,
+    "brier": 0.05398,
+    "baseBrier": 0.05573,
     "calibration": [
      {
       "band": "0–2",
-      "n": 28,
-      "predicted": 0.014,
-      "observed": 0.0357,
+      "n": 18,
+      "predicted": 0.0095,
+      "observed": 0.0556,
       "positives": 1
      },
      {
       "band": "2–5",
-      "n": 353,
-      "predicted": 0.0386,
-      "observed": 0.051,
-      "positives": 18
+      "n": 444,
+      "predicted": 0.038,
+      "observed": 0.036,
+      "positives": 16
      },
      {
       "band": "5–10",
-      "n": 536,
-      "predicted": 0.0673,
-      "observed": 0.056,
-      "positives": 30
+      "n": 440,
+      "predicted": 0.0684,
+      "observed": 0.0705,
+      "positives": 31
      },
      {
       "band": "10–20",
-      "n": 44,
-      "predicted": 0.1261,
-      "observed": 0.1136,
+      "n": 67,
+      "predicted": 0.1254,
+      "observed": 0.0746,
       "positives": 5
      },
      {
       "band": "20–35",
-      "n": 9,
-      "predicted": 0.2531,
-      "observed": 0.4444,
-      "positives": 4
+      "n": 10,
+      "predicted": 0.2279,
+      "observed": 0.5,
+      "positives": 5
      },
      {
       "band": "35–50",
@@ -670,34 +675,34 @@
     "traj:popup",
     "traj:bunt"
    ],
-   "n": 101995,
+   "n": 102224,
    "positives": 124,
    "cv": {
     "folds": 10,
-    "logLoss": 0.00746,
-    "baseLogLoss": 0.00938,
+    "logLoss": 0.00744,
+    "baseLogLoss": 0.00936,
     "auc": 0.9147,
-    "brier": 0.00121,
+    "brier": 0.0012,
     "baseBrier": 0.00121,
     "calibration": [
      {
       "band": "0–2",
-      "n": 101830,
+      "n": 102061,
       "predicted": 0.0012,
       "observed": 0.0012,
       "positives": 122
      },
      {
       "band": "2–5",
-      "n": 158,
-      "predicted": 0.0261,
-      "observed": 0.0127,
+      "n": 156,
+      "predicted": 0.0262,
+      "observed": 0.0128,
       "positives": 2
      },
      {
       "band": "5–10",
       "n": 7,
-      "predicted": 0.063,
+      "predicted": 0.0629,
       "observed": 0,
       "positives": 0
      },
@@ -734,17 +739,17 @@
    "outOfTime": {
     "trainSeasons": "< 2026",
     "testSeason": 2026,
-    "n": 32005,
+    "n": 32234,
     "positives": 50,
-    "auc": 0.9374,
-    "logLoss": 0.00915,
-    "baseLogLoss": 0.01176,
-    "brier": 0.00155,
-    "baseBrier": 0.00156,
+    "auc": 0.9373,
+    "logLoss": 0.00909,
+    "baseLogLoss": 0.01168,
+    "brier": 0.00154,
+    "baseBrier": 0.00155,
     "calibration": [
      {
       "band": "0–2",
-      "n": 31942,
+      "n": 32171,
       "predicted": 0.001,
       "observed": 0.0016,
       "positives": 50
@@ -794,7 +799,7 @@
     ]
    }
   },
-  "surfaceBalls": 373512
+  "surfaceBalls": 373613
  },
  "warnings": [],
  "currentSeason": 2026,
@@ -805,12 +810,12 @@
   "files": [
    {
     "file": "data/capture/rulings-2026-09.json",
-    "plays": 28
+    "plays": 30
    }
   ],
-  "plays": 28,
-  "errorsCaptured": 27,
-  "capturedAsOriginal": 5,
+  "plays": 30,
+  "errorsCaptured": 29,
+  "capturedAsOriginal": 6,
   "settled": 0,
   "changedToHit": 1,
   "changedOther": 0,
@@ -819,16 +824,16 @@
   "pendingCaptured": 1,
   "pendingResolved": 1,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-09-27T21:59:07.261Z",
+  "lastCaptureAt": "2026-09-30T02:27:23.616Z",
   "lagMinutes": {
    "median": 89.3,
    "p90": 203,
-   "n": 27
+   "n": 29
   },
   "originalMaxLagMin": 30,
   "byKind": {
    "fielding": 15,
-   "throwing": 8,
+   "throwing": 10,
    "missed_catch": 4
   },
   "adjust": {
@@ -851,42 +856,42 @@
    "scorer": {
     "test": {
      "groups": 101,
-     "plays": 3187,
+     "plays": 3196,
      "positives": 189,
-     "statistic": 104.801,
-     "dispersion": 1.038,
-     "pValue": 0.3288,
+     "statistic": 103.431,
+     "dispersion": 1.024,
+     "pValue": 0.3768,
      "permutations": 2000,
      "seed": 20260924
     },
     "cv": {
      "tested": true,
      "groupsInCandidate": 28,
-     "logLoss": 0.21996,
-     "deltaVsBest": 0.001321,
-     "pairedSE": 0.0011,
+     "logLoss": 0.21952,
+     "deltaVsBest": 0.003287,
+     "pairedSE": 0.001737,
      "selected": false
     },
     "verdict": "no detectable difference — not used",
-    "playsWithScorer": 3187
+    "playsWithScorer": 3196
    },
    "homeClub": {
     "test": {
      "groups": 31,
-     "plays": 3187,
+     "plays": 3196,
      "positives": 189,
-     "statistic": 31.269,
-     "dispersion": 1.009,
-     "pValue": 0.4223,
+     "statistic": 30.717,
+     "dispersion": 0.991,
+     "pValue": 0.4173,
      "permutations": 2000,
      "seed": 20260924
     },
     "cv": {
      "tested": true,
      "groupsInCandidate": 30,
-     "logLoss": 0.2208,
-     "deltaVsBest": 0.002158,
-     "pairedSE": 0.001553,
+     "logLoss": 0.22037,
+     "deltaVsBest": 0.004136,
+     "pairedSE": 0.001987,
      "selected": false
     },
     "verdict": "no detectable difference — not used"
@@ -901,11 +906,11 @@
    "scorer": {
     "test": {
      "groups": 103,
-     "plays": 101995,
+     "plays": 102224,
      "positives": 124,
-     "statistic": 89.485,
-     "dispersion": 0.869,
-     "pValue": 0.7745,
+     "statistic": 89.753,
+     "dispersion": 0.871,
+     "pValue": 0.7784,
      "permutations": 500,
      "seed": 20260924
     },
@@ -914,16 +919,16 @@
      "selected": false
     },
     "verdict": "no detectable difference — not used",
-    "playsWithScorer": 101995
+    "playsWithScorer": 102224
    },
    "homeClub": {
     "test": {
      "groups": 31,
-     "plays": 101995,
+     "plays": 102224,
      "positives": 124,
-     "statistic": 25.19,
-     "dispersion": 0.813,
-     "pValue": 0.7345,
+     "statistic": 25.28,
+     "dispersion": 0.815,
+     "pValue": 0.6886,
      "permutations": 500,
      "seed": 20260924
     },
@@ -963,17 +968,17 @@
    "errorCredits": 2458
   },
   "2026": {
-   "games": 2430,
-   "gamesScanned": 2430,
-   "plateAppearances": 184398,
-   "events": 2488,
+   "games": 2432,
+   "gamesScanned": 2432,
+   "plateAppearances": 184545,
+   "events": 2490,
    "byScope": {
-    "batter_reached": 1102,
-    "on_hit": 559,
-    "other": 827
+    "batter_reached": 1103,
+    "other": 828,
+    "on_hit": 559
    },
-   "withVideo": 2488,
-   "errorCredits": 2466
+   "withVideo": 2490,
+   "errorCredits": 2468
   }
  }
 }
