@@ -6,6 +6,11 @@ name: Model rows dump
 
 on:
   workflow_dispatch:
+  push:
+    branches: ['arena/**']
+    paths:
+      - 'tools/dump-model-rows.mjs'
+      - '.github/workflows/model-rows-dump.yml'
 
 permissions:
   contents: write
