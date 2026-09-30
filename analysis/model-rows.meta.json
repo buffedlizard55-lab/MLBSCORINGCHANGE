@@ -1,0 +1,54 @@
+{
+  "generatedAt": "2026-09-30T04:19:00.995Z",
+  "tool": "tools/dump-model-rows.mjs",
+  "population": "data/model/error-events-<season>.json events with scope \"batter_reached\" (plays whose ORIGINAL ruling was a batter-reached error — the error→hit model population; changed plays included via the official-log link)",
+  "sources": [
+    "MLB StatsAPI /api/v1/schedule (game types R, F, D, L, W)",
+    "MLB StatsAPI /api/v1/game/{gamePk}/playByPlay (PBP_FIELDS projection; extractGamePlays compact records)",
+    "MLB StatsAPI /api/v1.1/game/{gamePk}/feed/live?fields=gameData,officialScorer,id,fullName,venue,name (unless --no-meta)",
+    "data/model/error-events-<season>.json (population, labels, out-of-fold model p)",
+    "data/model/error-watch.json (current season: hitProb, error kind + source, scorer, capture state)"
+  ],
+  "note": "Derived, regenerable study artifact — safe to delete and re-dump. NOT an input to the published model.",
+  "seasons": {
+    "2024": {
+      "population": 1162,
+      "changedToHit": 71,
+      "rows": 1162,
+      "settledRows": 1162,
+      "gamesNeeded": 912,
+      "gamesFetched": 0,
+      "playFetchFailures": [],
+      "metaFetchFailures": [],
+      "rowsWithoutPlayRecord": 0,
+      "watchJoined": false
+    },
+    "2025": {
+      "population": 1055,
+      "changedToHit": 60,
+      "rows": 1055,
+      "settledRows": 1055,
+      "gamesNeeded": 850,
+      "gamesFetched": 0,
+      "playFetchFailures": [],
+      "metaFetchFailures": [],
+      "rowsWithoutPlayRecord": 0,
+      "watchJoined": false
+    },
+    "2026": {
+      "population": 1049,
+      "changedToHit": 58,
+      "rows": 1049,
+      "settledRows": 970,
+      "gamesNeeded": 852,
+      "gamesFetched": 0,
+      "playFetchFailures": [],
+      "metaFetchFailures": [],
+      "rowsWithoutPlayRecord": 0,
+      "watchJoined": true
+    }
+  },
+  "rows": 3266,
+  "elapsedSeconds": 7,
+  "missingPlayRecords": 0
+}
