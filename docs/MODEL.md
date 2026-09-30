@@ -135,6 +135,13 @@ hosted CWS per [StatsAPI](https://statsapi.mlb.com/api/v1/schedule?sportId=1&sta
 - **Fielder group** (from `hitData.location`: P, C, 1B, 2B, 3B, SS, OF), **trajectory**
   (ground ball, line drive, fly ball, popup, bunt), standardised **exit velocity**, **batting at
   home**, **home club** and **official scorer** (candidates only — see §17).
+- **Exit-velocity extremes and hit-probability interactions** (added 2026-09-30, candidates only —
+  see [docs/model-improvement-2026.md](model-improvement-2026.md)): `ev_soft` (< 70 mph), `ev_hard`
+  (≥ 105 mph) — the change rate is U-shaped in exit velocity (beaten-out rollers and hot shots are
+  changed about half again as often as mid-speed balls, which neither the hit probability nor a
+  linear EV term can express) — plus `hp_x_of` (logit hit probability × ball reached the outfield),
+  `hp_sq`, `loc:SS`, `bat_left` and `inn_late` (tested; the first two of the family are the ones
+  selection keeps on current data).
 - **Excluded from the historical fit on purpose:** the error type and fielding credits — after a
   change to a hit they no longer exist in the data, so they would leak the answer. The error type
   enters only through the captured-data adjustment (§15), which uses the type *as captured live
@@ -149,7 +156,10 @@ hosted CWS per [StatsAPI](https://statsapi.mlb.com/api/v1/schedule?sportId=1&sta
 - 10-fold cross-validation **grouped by game** (a deterministic hash of `gamePk`).
 - Candidate feature sets from intercept-only up to all features (+ home club). Rule: the
   **simplest model within one standard error** of the best cross-validated log loss, using the SE
-  of *paired* per-play loss differences.
+  of *paired* per-play loss differences. The ladder includes the exit-velocity-extreme /
+  hit-probability-interaction sets added by the
+  [2026-09-30 study](model-improvement-2026.md) (CV AUC 0.61 → 0.62–0.63, out-of-time 0.62 →
+  0.64–0.65 on the study's data); selection re-runs on fresh data every pipeline run.
 - Scores for training plays shown on the site are **out-of-fold** (the play was not used to fit
   the model that scored it).
 - **Out-of-time check:** fit on 2024–2025, predict settled 2026 plays.

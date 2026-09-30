@@ -124,6 +124,56 @@ test('scoreWith computes the logistic score from named terms', () => {
   assert.equal(SM.featureValue('home:147', 0.5, {}), 0);
 });
 
+test('exit-velocity extremes, hit-prob interactions and context terms (2026-09-30 study)', () => {
+  const roller = { ls: 65, la: -30, loc: '5', traj: 'ground_ball', top: true, inn: 3, bs: 'R' };
+  assert.equal(SM.featureValue('ev_soft', 0.1, roller), 1, 'under 70 mph is a soft roller');
+  assert.equal(SM.featureValue('ev_hard', 0.1, roller), 0);
+  assert.equal(SM.featureValue('ev_soft', 0.1, { ls: 70 }), 0, '70 mph is not soft (boundary)');
+  assert.equal(SM.featureValue('ev_hard', 0.1, { ls: 105 }), 1, '105 mph and up is a hot shot');
+  assert.equal(SM.featureValue('ev_hard', 0.1, { ls: 104.9 }), 0);
+  assert.equal(SM.featureValue('hp_x_of', 0.4, { loc: '8' }), SM.logit(0.4), 'OF ball: full hit-prob logit');
+  assert.equal(SM.featureValue('hp_x_of', 0.4, { loc: '6' }), 0, 'infield ball: no OF interaction');
+  assert.ok(Math.abs(SM.featureValue('hp_sq', 0.4, {}) - SM.logit(0.4) ** 2) < 1e-12);
+  assert.equal(SM.featureValue('bat_left', 0.4, { bs: 'L' }), 1);
+  assert.equal(SM.featureValue('bat_left', 0.4, { bs: 'R' }), 0);
+  assert.equal(SM.featureValue('inn_late', 0.4, { inn: 7 }), 1);
+  assert.equal(SM.featureValue('inn_late', 0.4, { inn: 6 }), 0);
+  // Unknown inputs (no Statcast EV yet, batter side or inning not loaded) use
+  // the term's training mean — the average effect — never the reference's.
+  const spec = {
+    terms: ['ev_soft', 'bat_left', 'inn_late'], coef: [1, 1, 1], intercept: -3,
+    termMeans: { ev_soft: 0.18, bat_left: 0.35, inn_late: 0.5 },
+  };
+  const bare = SM.scoreWith(spec, {}, { traj: 'ground_ball' });
+  assert.deepEqual(bare.values, [0.18, 0.35, 0.5]);
+  const full = SM.scoreWith(spec, {}, roller);
+  assert.deepEqual(full.values, [1, 0, 0]);
+  // A fit with the new terms runs through selectAndFit unchanged.
+  const r = rng(7);
+  const recs = [];
+  for (let i = 0; i < 400; i += 1) {
+    const ls = 55 + r() * 55;
+    const la = -35 + r() * 60;
+    const soft = ls < 70;
+    recs.push({
+      ty: 'atBat', g: 2000 + (i % 40), ai: i, br: 1, bs: r() < 0.4 ? 'L' : 'R', inn: 1 + Math.floor(r() * 9),
+      et: (r() < (soft ? 0.5 : 0.1) ? 'single' : 'field_error'),
+      hd: { ls, la, traj: la < 10 ? 'ground_ball' : 'fly_ball', loc: String(1 + Math.floor(r() * 9)) },
+    });
+  }
+  const surface = { evMin: 0, evStep: 200, nEv: 1, laMin: -90, laStep: 180, nLa: 1, rate: [0.3] };
+  const model = { hitProb: { surface, fallback: { overall: 0.3 } } };
+  const rows = recs.map((x) => ({ id: `${x.g}:${x.ai}`, gamePk: x.g, season: 2025, y: x.et === 'single' ? 1 : 0, play: SM.playFromRecord(x) }));
+  const { spec: withNew, oofById } = selectAndFit(
+    rows,
+    [[], ['logit_hit_prob', 'ev_soft', 'ev_hard', 'hp_x_of']],
+    model, { k: 5, lambdas: [1] },
+  );
+  assert.ok(withNew.terms.includes('ev_soft'), 'soft rollers are informative in this synthetic world');
+  assert.ok(withNew.termMeans.ev_soft >= 0 && withNew.termMeans.ev_soft <= 1);
+  assert.equal(oofById.size, rows.length);
+});
+
 test('pendingDistribution picks the most specific adequately-sized cell', () => {
   const model = {
     pending: {

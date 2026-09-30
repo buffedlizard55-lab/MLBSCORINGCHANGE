@@ -826,6 +826,18 @@ async function main() {
     ['logit_hit_prob', 'loc:P', 'loc:C', 'loc:1B', 'loc:3B', 'loc:OF'],
     ['logit_hit_prob', 'loc:P', 'loc:C', 'loc:1B', 'loc:3B', 'loc:OF', 'traj:line_drive', 'traj:fly_ball', 'traj:popup', 'traj:bunt'],
     ['logit_hit_prob', 'loc:P', 'loc:C', 'loc:1B', 'loc:3B', 'loc:OF', 'traj:line_drive', 'traj:fly_ball', 'traj:popup', 'traj:bunt', 'ev_z', 'ev_missing'],
+    // Exit-velocity extremes (2026-09-30 study, docs/model-improvement-2026.md):
+    // among settled 2024–2026 reached-on-error plays the change rate is
+    // U-shaped in exit velocity — beaten-out rollers (< 70 mph) ~7.5% and hot
+    // shots (≥ 105 mph) ~10.7% vs ~4% at 75–85 mph — which a linear EV term
+    // cannot express (that candidate is tested above and loses). Indicators
+    // for the two extremes, plus an outfield interaction with the hit
+    // probability (dropped liners are a different question from infield
+    // rollers) and the same with a hit-probability square and a split SS
+    // term, all chosen (or not) by the same one-SE rule as everything else.
+    ['logit_hit_prob', 'loc:P', 'loc:C', 'loc:1B', 'loc:3B', 'loc:OF', 'traj:line_drive', 'traj:fly_ball', 'traj:popup', 'traj:bunt', 'ev_soft', 'ev_hard'],
+    ['logit_hit_prob', 'loc:P', 'loc:C', 'loc:1B', 'loc:3B', 'loc:OF', 'traj:line_drive', 'traj:fly_ball', 'traj:popup', 'traj:bunt', 'ev_soft', 'ev_hard', 'hp_x_of'],
+    ['logit_hit_prob', 'loc:P', 'loc:C', 'loc:1B', 'loc:3B', 'loc:OF', 'traj:line_drive', 'traj:fly_ball', 'traj:popup', 'traj:bunt', 'ev_soft', 'ev_hard', 'hp_x_of', 'hp_sq', 'loc:SS'],
     ['logit_hit_prob', 'loc:P', 'loc:C', 'loc:1B', 'loc:3B', 'loc:OF', 'traj:line_drive', 'traj:fly_ball', 'traj:popup', 'traj:bunt', 'ev_z', 'ev_missing', 'batting_home'],
   ];
   // Home-club terms (official scorers are assigned per home park) for clubs
