@@ -1,0 +1,64 @@
+# One-off / on-demand study dump: the exact per-play features of the error→hit
+# model population (all seasons), so the model can be analysed and improved
+# offline. Runs on GitHub-hosted runners because MLB hosts are reachable from
+# there. Manual dispatch only — never scheduled, never on main.
+name: Model rows dump
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: model-rows-dump-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  dump:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Restore play-by-play cache
+        uses: actions/cache/restore@v6
+        with:
+          path: pipeline-cache
+          key: dump-rows-${{ github.run_id }}
+          restore-keys: |
+            dump-rows-
+            pbp-v2-
+
+      - name: Dump model rows
+        env:
+          NODE_OPTIONS: --max-old-space-size=3072
+        run: node tools/dump-model-rows.mjs
+
+      - name: Save play-by-play cache
+        if: always()
+        uses: actions/cache/save@v6
+        with:
+          path: pipeline-cache
+          key: dump-rows-${{ github.run_id }}
+
+      - name: Commit dump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add analysis/model-rows.json.gz analysis/model-rows.meta.json
+          if git diff --cached --quiet; then
+            echo "No dump changes."
+            exit 0
+          fi
+          git commit -m "analysis: model-rows dump [run ${{ github.run_id }}]"
+          for attempt in 1 2 3; do
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && exit 0
+            sleep $((attempt * 10))
+          done
+          echo "::error::could not push dump commit"
+          exit 1
