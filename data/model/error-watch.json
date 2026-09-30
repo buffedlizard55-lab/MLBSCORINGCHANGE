@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-09-30T05:39:59.046Z",
+ "generatedAt": "2026-09-30T12:43:45.616Z",
  "labelCutoff": "2026-09-16",
  "plays": [
   {
@@ -9,6 +9,12 @@
    "gamePk": 849849,
    "ai": 68,
    "gameType": "F",
+   "savant": {
+    "xba": 0.165,
+    "ls": 56.8,
+    "la": -43,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CWS",
    "home": "HOU",
    "inning": 8,
@@ -51,6 +57,12 @@
    "gamePk": 849843,
    "ai": 8,
    "gameType": "F",
+   "savant": {
+    "xba": 0.168,
+    "ls": 88.4,
+    "la": -8,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CHC",
    "home": "SD",
    "inning": 2,
