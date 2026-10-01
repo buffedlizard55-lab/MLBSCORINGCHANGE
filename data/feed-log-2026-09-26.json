@@ -1,0 +1,222 @@
+{
+  "v": 1,
+  "date": "2026-09-26",
+  "savedAt": 1790849791164,
+  "entries": [
+    {
+      "gamePk": 822678,
+      "review": {
+        "id": "scoring-58",
+        "atBatIndex": 58,
+        "inning": 8,
+        "halfInning": "top",
+        "inningLabel": "▲ Top 8th",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "away",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "NYM",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Rescored",
+        "reason": "Field Error → Single + Error",
+        "description": "Brett Baty singles on a ground ball to shortstop Nasim Nuñez, deflected by pitcher Jake Irvin. Carson Benge scores. Fielding error by shortstop Nasim Nuñez.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "field_error",
+          "event": "Field Error",
+          "label": "Field Error",
+          "category": "error",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "final": {
+          "eventType": "single",
+          "event": "Single",
+          "label": "Single + Error",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 1
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-10-01T10:16:31.164Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 683146,
+          "fullName": "Brett Baty"
+        },
+        "pitcher": {
+          "id": 663623,
+          "fullName": "Jake Irvin"
+        },
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "stats": {
+          "batting": [
+            {
+              "stat": "H",
+              "delta": 1,
+              "player": "Brett Baty",
+              "playerId": 683146,
+              "evidence": "reaching on Nunez's error → Brett Baty singled with a run scoring on an error by Nasim Nunez"
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "H",
+              "delta": 1,
+              "player": "Jake Irvin",
+              "playerId": 663623,
+              "evidence": "reaching on Nunez's error → Brett Baty singled with a run scoring on an error by Nasim Nunez"
+            }
+          ],
+          "source": "official_log"
+        },
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=cddac673-5f55-35c6-a8ba-0d6d3b04ab8e",
+        "official": {
+          "season": 2026,
+          "seq": 258,
+          "date": "2026-09-26",
+          "raw": "258. 9/26 NYM@WSH -- In the top of the 8th, Brett Baty singled with a run scoring on an error by Nasim Nunez, instead of reaching on Nunez's error.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        }
+      },
+      "firstSeen": 1790849791164,
+      "lastSeen": 1790849791164,
+      "matchupLabel": "NYM @ WSH"
+    },
+    {
+      "gamePk": 822759,
+      "review": {
+        "id": "scoring-20",
+        "atBatIndex": 20,
+        "inning": 3,
+        "halfInning": "top",
+        "inningLabel": "▲ Top 3rd",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "away",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "CIN",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Rescored",
+        "reason": "Field Error + Error → Fielders Choice",
+        "description": "Sal Stewart reaches on a fielder's choice, fielded by shortstop Andrés Giménez. Matt McLain scores. Carlos Jorge to 3rd.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "field_error",
+          "event": "Field Error",
+          "label": "Field Error + Error",
+          "category": "error",
+          "isOut": false,
+          "errorMovements": 1
+        },
+        "final": {
+          "eventType": "fielders_choice",
+          "event": "Fielders Choice",
+          "label": "Fielders Choice",
+          "category": "other",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-10-01T10:16:31.164Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 701398,
+          "fullName": "Sal Stewart"
+        },
+        "pitcher": {
+          "id": 693686,
+          "fullName": "Spencer Miles"
+        },
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "stats": {
+          "batting": [
+            {
+              "stat": "RBI",
+              "delta": 1,
+              "player": "Sal Stewart",
+              "playerId": 701398,
+              "evidence": "As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles."
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "ER",
+              "delta": 1,
+              "player": "Spencer Miles",
+              "playerId": null,
+              "evidence": "As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles."
+            },
+            {
+              "stat": "UER",
+              "delta": -1,
+              "player": "Spencer Miles",
+              "playerId": null,
+              "evidence": "As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles."
+            }
+          ],
+          "source": "official_log"
+        },
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=8bf51274-0c05-33e0-bac5-66df808715c7",
+        "official": {
+          "season": 2026,
+          "seq": 260,
+          "date": "2026-09-26",
+          "raw": "260. 9/26 CIN@TOR -- In the top of the 3rd, Sal Stewart reaches on a fielder's choice, instead of a fielder's choice error by Andrés Giménez. As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        }
+      },
+      "firstSeen": 1790849791164,
+      "lastSeen": 1790849791164,
+      "matchupLabel": "CIN @ TOR"
+    }
+  ],
+  "order": [
+    "822678:scoring-58",
+    "822759:scoring-20"
+  ],
+  "snapshots": {},
+  "irregularities": {},
+  "grace": {},
+  "settled": [],
+  "trimmed": {
+    "entries": 0,
+    "snapshots": 0
+  }
+}

@@ -1,0 +1,336 @@
+{
+  "v": 1,
+  "date": "2026-09-25",
+  "savedAt": 1790849791164,
+  "entries": [
+    {
+      "gamePk": 824220,
+      "review": {
+        "id": "stat-29",
+        "atBatIndex": 29,
+        "inning": 3,
+        "halfInning": "bottom",
+        "inningLabel": "▼ Bot 3rd",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "home",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "DET",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Stat change",
+        "reason": "Strikeout: ER −2 · UER +2",
+        "description": "Spencer Torkelson strikes out swinging. Riley Greene scores. Dillon Dingler scores. Brett Callahan to 3rd. Spencer Torkelson to 1st. Passed ball by catcher Rafael Flores Jr.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "strikeout",
+          "event": "Strikeout",
+          "label": "Strikeout",
+          "category": "other",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "final": {
+          "eventType": "strikeout",
+          "event": "Strikeout",
+          "label": "Strikeout",
+          "category": "other",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-10-01T10:16:31.164Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 679529,
+          "fullName": "Spencer Torkelson"
+        },
+        "pitcher": {
+          "id": 696149,
+          "fullName": "Bubba Chandler"
+        },
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=5aeb916d-cc44-3ea4-a8a9-0bedb7ae4a21",
+        "official": {
+          "season": 2026,
+          "seq": 259,
+          "date": "2026-09-25",
+          "raw": "259. 9/25 PIT@DET -- In the bottom of the 3rd, Spencer Torkelson struck out but reached first based on a passed ball, instead of a wild pitch. As a result, both runs that scored on the play are now unearned to Bubba Chandler.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        },
+        "stats": {
+          "batting": [],
+          "pitching": [
+            {
+              "stat": "ER",
+              "delta": -2,
+              "player": "Bubba Chandler",
+              "playerId": null,
+              "evidence": "As a result, both runs that scored on the play are now unearned to Bubba Chandler."
+            },
+            {
+              "stat": "UER",
+              "delta": 2,
+              "player": "Bubba Chandler",
+              "playerId": null,
+              "evidence": "As a result, both runs that scored on the play are now unearned to Bubba Chandler."
+            }
+          ],
+          "source": "official_log"
+        }
+      },
+      "firstSeen": 1790849791164,
+      "lastSeen": 1790849791164,
+      "matchupLabel": "PIT @ DET"
+    },
+    {
+      "gamePk": 824058,
+      "review": {
+        "id": "scoring-52",
+        "atBatIndex": 52,
+        "inning": 5,
+        "halfInning": "bottom",
+        "inningLabel": "▼ Bot 5th",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "home",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "KC",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Rescored",
+        "reason": "Field Error → Single",
+        "description": "Michael Massey singles on a ground ball to third baseman José Ramírez.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "field_error",
+          "event": "Field Error",
+          "label": "Field Error",
+          "category": "error",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "final": {
+          "eventType": "single",
+          "event": "Single",
+          "label": "Single",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-10-01T10:16:31.164Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 686681,
+          "fullName": "Michael Massey"
+        },
+        "pitcher": {
+          "id": 542888,
+          "fullName": "Shawn Armstrong"
+        },
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "stats": {
+          "batting": [
+            {
+              "stat": "H",
+              "delta": 1,
+              "player": "Michael Massey",
+              "playerId": 686681,
+              "evidence": "reaching on an error by José Ramírez → Michael Massey singled"
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "H",
+              "delta": 1,
+              "player": "Shawn Armstrong",
+              "playerId": 542888,
+              "evidence": "reaching on an error by José Ramírez → Michael Massey singled"
+            }
+          ],
+          "source": "official_log"
+        },
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=ab5d8d60-439e-3961-8d55-8981e034045d",
+        "official": {
+          "season": 2026,
+          "seq": 261,
+          "date": "2026-09-25",
+          "raw": "261. 9/25 CLE@KC -- In the bottom of the 5th, Michael Massey singled, instead of reaching on an error by José Ramírez.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        }
+      },
+      "firstSeen": 1790849791164,
+      "lastSeen": 1790849791164,
+      "matchupLabel": "CLE @ KC"
+    },
+    {
+      "gamePk": 823491,
+      "review": {
+        "id": "scoring-66",
+        "atBatIndex": 66,
+        "inning": 8,
+        "halfInning": "top",
+        "inningLabel": "▲ Top 8th",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "away",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "BAL",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Rescored",
+        "reason": "Single → Field Error",
+        "description": "Gunnar Henderson reaches on a fielding error by second baseman José Caballero. Christian Franklin scores. Dylan Beavers to 2nd.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "single",
+          "event": "Single",
+          "label": "Single",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "final": {
+          "eventType": "field_error",
+          "event": "Field Error",
+          "label": "Field Error",
+          "category": "error",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [
+          "unexpected_suffix:(Gm.1) — flagged for review"
+        ],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-10-01T10:16:31.164Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 683002,
+          "fullName": "Gunnar Henderson"
+        },
+        "pitcher": {
+          "id": 621112,
+          "fullName": "Paul Blackburn"
+        },
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "stats": {
+          "batting": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Gunnar Henderson",
+              "playerId": 683002,
+              "evidence": "a single → Gunnar Henderson reaches on a fielding error by José Caballero"
+            },
+            {
+              "stat": "RBI",
+              "delta": -1,
+              "player": "Gunnar Henderson",
+              "playerId": 683002,
+              "evidence": "This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn."
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Paul Blackburn",
+              "playerId": 621112,
+              "evidence": "a single → Gunnar Henderson reaches on a fielding error by José Caballero"
+            },
+            {
+              "stat": "ER",
+              "delta": -1,
+              "player": "Paul Blackburn",
+              "playerId": null,
+              "evidence": "This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn."
+            },
+            {
+              "stat": "UER",
+              "delta": 1,
+              "player": "Paul Blackburn",
+              "playerId": null,
+              "evidence": "This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn."
+            }
+          ],
+          "source": "official_log"
+        },
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=1193516e-6da8-38a9-9f89-3f3fb05af7f0",
+        "official": {
+          "season": 2026,
+          "seq": 262,
+          "date": "2026-09-25",
+          "raw": "262. 9/25 BAL@NYY (Gm.1) -- In the top of the 8th, Gunnar Henderson reaches on a fielding error by José Caballero instead of a single. This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        }
+      },
+      "firstSeen": 1790849791164,
+      "lastSeen": 1790849791164,
+      "matchupLabel": "BAL @ NYY"
+    }
+  ],
+  "order": [
+    "824220:stat-29",
+    "824058:scoring-52",
+    "823491:scoring-66"
+  ],
+  "snapshots": {},
+  "irregularities": {},
+  "grace": {},
+  "settled": [],
+  "trimmed": {
+    "entries": 0,
+    "snapshots": 0
+  }
+}

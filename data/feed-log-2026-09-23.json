@@ -1,9 +1,134 @@
 {
   "v": 1,
   "date": "2026-09-23",
-  "savedAt": 1790126204056,
-  "entries": [],
-  "order": [],
+  "savedAt": 1790849791164,
+  "entries": [
+    {
+      "gamePk": 824785,
+      "review": {
+        "id": "scoring-47",
+        "atBatIndex": 47,
+        "inning": 6,
+        "halfInning": "top",
+        "inningLabel": "▲ Top 6th",
+        "reviewType": "Scoring Change",
+        "typeKey": "scoring_change",
+        "battingSide": "away",
+        "battingTeamId": null,
+        "battingTeamName": null,
+        "battingTeamAbbrev": "TOR",
+        "inProgress": false,
+        "isOverturned": null,
+        "outcome": "changed",
+        "outcomeLabel": "Rescored",
+        "reason": "Single + Error → Field Error",
+        "description": "Brandon Valenzuela reaches on a throwing error by second baseman Jeremiah Jackson. Kazuma Okamoto scores. George Springer scores.",
+        "initialDescription": null,
+        "initial": {
+          "eventType": "single",
+          "event": "Single",
+          "label": "Single + Error",
+          "category": "hit",
+          "isOut": false,
+          "errorMovements": 1
+        },
+        "final": {
+          "eventType": "field_error",
+          "event": "Field Error",
+          "label": "Field Error",
+          "category": "error",
+          "isOut": false,
+          "errorMovements": 0
+        },
+        "changeCount": 1,
+        "changes": [],
+        "previousHeadline": null,
+        "mechanism": {
+          "key": "official_log",
+          "label": "Confirmed in MLB’s official scoring-changes log (pipeline)"
+        },
+        "flags": [
+          "unexpected_suffix:(Gm.1) — flagged for review"
+        ],
+        "initialScoreAfter": null,
+        "scoreAfter": null,
+        "timestamp": "2026-10-01T10:16:31.164Z",
+        "initialObservedAt": null,
+        "isPitch": false,
+        "pitchVelo": null,
+        "batter": {
+          "id": 678218,
+          "fullName": "Brandon Valenzuela"
+        },
+        "pitcher": {
+          "id": 801725,
+          "fullName": "Luis De León"
+        },
+        "countBefore": null,
+        "countAfter": null,
+        "atBatCount": null,
+        "challenger": null,
+        "scoreImpact": null,
+        "stats": {
+          "batting": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Brandon Valenzuela",
+              "playerId": 678218,
+              "evidence": "a single and error → Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson"
+            },
+            {
+              "stat": "RBI",
+              "delta": null,
+              "to": 0,
+              "player": "Brandon Valenzuela",
+              "playerId": 678218,
+              "evidence": "As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt."
+            }
+          ],
+          "pitching": [
+            {
+              "stat": "H",
+              "delta": -1,
+              "player": "Luis De León",
+              "playerId": 801725,
+              "evidence": "a single and error → Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson"
+            },
+            {
+              "stat": "ER",
+              "delta": -2,
+              "player": "Chris Bassitt",
+              "playerId": null,
+              "evidence": "As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt."
+            },
+            {
+              "stat": "UER",
+              "delta": 2,
+              "player": "Chris Bassitt",
+              "playerId": null,
+              "evidence": "As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt."
+            }
+          ],
+          "source": "official_log"
+        },
+        "video": "https://baseballsavant.mlb.com/sporty-videos?playId=1fdcd635-8e7c-30e5-b1b8-63c2872dbb42",
+        "official": {
+          "season": 2026,
+          "seq": 263,
+          "date": "2026-09-23",
+          "raw": "263. 9/23 TOR@BAL (Gm.1) -- In the top of the 6th, Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson instead of a single and error. As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt.",
+          "url": "https://www.mlb.com/official-information/scoring-changes"
+        }
+      },
+      "firstSeen": 1790849791164,
+      "lastSeen": 1790849791164,
+      "matchupLabel": "TOR @ BAL"
+    }
+  ],
+  "order": [
+    "824785:scoring-47"
+  ],
   "snapshots": {},
   "irregularities": {},
   "grace": {},
