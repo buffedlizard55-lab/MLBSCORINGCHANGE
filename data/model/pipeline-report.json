@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-01T10:15:17.797Z",
+ "generatedAt": "2026-10-01T18:27:42.558Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -267,7 +267,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 2,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2437,
     "scorers": 82
@@ -461,7 +461,7 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-01T10:15:41.787Z",
+  "fetchedAt": "2026-10-01T18:28:05.932Z",
   "rowsAllGameTypes": 1400,
   "rowsByGameType": {
    "R": 1042,
@@ -492,12 +492,12 @@
   "perPlay": {
    "needed": 1591,
    "excludedNoBattedBall": 57,
-   "matched": 1082,
-   "matchedNoXba": 150,
+   "matched": 1114,
+   "matchedNoXba": 118,
    "unavailable": 359,
    "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.6801,
+   "coverage": 0.7002,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -506,37 +506,21 @@
      "month": null,
      "rows": 1400,
      "fromCache": false,
-     "asked": 2,
+     "asked": 0,
      "found": 1035,
-     "missed": 2,
+     "missed": 0,
      "integrity": null
-    },
-    {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-09-01&game_date_lt=2026-09-30",
-     "kind": "month",
-     "season": 2026,
-     "month": "2026-09",
-     "rows": 25000,
-     "fromCache": true,
-     "asked": 1,
-     "found": 152,
-     "missed": 1,
-     "integrity": {
-      "kept": 25000,
-      "outsideRange": 0,
-      "missingDate": 0
-     }
     }
    ],
    "queriesDeferred": 0,
    "failures": [],
    "requests": 1,
-   "cacheHits": 1,
+   "cacheHits": 0,
    "budgetExhausted": false
   },
   "client": {
    "requests": 1,
-   "cacheHits": 1,
+   "cacheHits": 0,
    "budget": 4,
    "budgetExhausted": false,
    "rateLimited": false,

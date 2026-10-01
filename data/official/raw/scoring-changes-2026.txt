@@ -1,6 +1,6 @@
 # Official MLB scoring changes — 2026
 # Source: https://www.mlb.com/official-information/scoring-changes
-# Fetched: 2026-10-01T10:15:17.797Z  sha256(html)=4b448148b17d5350668f12143493b76927a066941253f6bef51f2f4092c8c0ab
+# Fetched: 2026-10-01T18:27:42.558Z  sha256(html)=4b448148b17d5350668f12143493b76927a066941253f6bef51f2f4092c8c0ab
 # Verbatim entry lines as extracted from the page (one per line).
 
 1. 3/31 TB@MIL -- In the bottom of the 5th, assists have been added for Jake Fraley, Jonathan Aranda, Carson Williams, and Ben Williamson on the Brice Turang single.
