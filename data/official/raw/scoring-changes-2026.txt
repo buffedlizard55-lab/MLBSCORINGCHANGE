@@ -1,6 +1,6 @@
 # Official MLB scoring changes — 2026
 # Source: https://www.mlb.com/official-information/scoring-changes
-# Fetched: 2026-10-01T00:35:41.128Z  sha256(html)=1cb7510fb6b92af82d556ae8f05950988ec68c03673ad7c015ba8d353c3d095e
+# Fetched: 2026-10-01T10:15:17.797Z  sha256(html)=4b448148b17d5350668f12143493b76927a066941253f6bef51f2f4092c8c0ab
 # Verbatim entry lines as extracted from the page (one per line).
 
 1. 3/31 TB@MIL -- In the bottom of the 5th, assists have been added for Jake Fraley, Jonathan Aranda, Carson Williams, and Ben Williamson on the Brice Turang single.
@@ -260,3 +260,10 @@
 255. 9/25 NYM@WAS -- In the bottom of the 1st, Dylan Crews advances to second on a wild pitch by Jefry Yan, instead of a stolen base.
 256. 9/25 HOU@ATH -- In the bottom of the 6th, the run charged to AJ Blubaugh is now Team Unearned. It remains earned to Blubaugh.
 257. 9/19 WAS@STL -- In the top of the 6th, Andrés Chaparro reaches on a throwing error by third baseman José Fermín, instead of an infield single. As a result, the run in the inning is unearned to Justin Bruihl.
+258. 9/26 NYM@WSH -- In the top of the 8th, Brett Baty singled with a run scoring on an error by Nasim Nunez, instead of reaching on Nunez's error.
+259. 9/25 PIT@DET -- In the bottom of the 3rd, Spencer Torkelson struck out but reached first based on a passed ball, instead of a wild pitch. As a result, both runs that scored on the play are now unearned to Bubba Chandler.
+260. 9/26 CIN@TOR -- In the top of the 3rd, Sal Stewart reaches on a fielder's choice, instead of a fielder's choice error by Andrés Giménez. As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles.
+261. 9/25 CLE@KC -- In the bottom of the 5th, Michael Massey singled, instead of reaching on an error by José Ramírez.
+262. 9/25 BAL@NYY (Gm.1) -- In the top of the 8th, Gunnar Henderson reaches on a fielding error by José Caballero instead of a single. This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn.
+263. 9/23 TOR@BAL (Gm.1) -- In the top of the 6th, Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson instead of a single and error. As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt.
+264. 9/24 CLE@BOS -- In the bottom of the 5th, Ceddanne Rafaela singled, instead of reaching on a throwing error by Travis Bazzana.

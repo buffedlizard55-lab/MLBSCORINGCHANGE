@@ -5,19 +5,19 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-10-01T00:35:41.128Z",
-  "sha256": "1cb7510fb6b92af82d556ae8f05950988ec68c03673ad7c015ba8d353c3d095e",
-  "bytes": 921024
+  "fetchedAt": "2026-10-01T10:15:17.797Z",
+  "sha256": "4b448148b17d5350668f12143493b76927a066941253f6bef51f2f4092c8c0ab",
+  "bytes": 924157
  },
  "sections": [
   {
    "label": "2026 Regular Season",
-   "entries": 257,
+   "entries": 264,
    "issues": []
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-10-01T00:35:41.128Z",
+ "generatedAt": "2026-10-01T10:15:17.797Z",
  "entries": [
   {
    "seq": 1,
@@ -269,7 +269,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0276,
+    "p": 0.0277,
     "score": 3,
     "kind": "out_of_fold"
    },
@@ -1351,7 +1351,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0098,
+    "p": 0.0097,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3698,7 +3698,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0776,
+    "p": 0.0775,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -4299,7 +4299,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0783,
+    "p": 0.0782,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -4863,7 +4863,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0121,
+    "p": 0.012,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -5582,7 +5582,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.036,
+    "p": 0.0359,
     "score": 4,
     "kind": "out_of_fold"
    },
@@ -6957,7 +6957,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0611,
+    "p": 0.0608,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -7221,7 +7221,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0263,
+    "p": 0.0264,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -9879,7 +9879,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.108,
+    "p": 0.1078,
     "score": 11,
     "kind": "out_of_fold"
    },
@@ -10223,7 +10223,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2241,
+    "p": 0.224,
     "score": 22,
     "kind": "out_of_fold"
    },
@@ -10472,7 +10472,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.3138,
+    "p": 0.3137,
     "score": 31,
     "kind": "out_of_fold"
    }
@@ -11437,7 +11437,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0815,
+    "p": 0.0814,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -13073,7 +13073,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0495,
+    "p": 0.0494,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -13598,7 +13598,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0883,
+    "p": 0.0882,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -14196,7 +14196,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0975,
+    "p": 0.0976,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -14393,7 +14393,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0883,
+    "p": 0.0882,
     "score": 9,
     "kind": "out_of_fold"
    },
@@ -18167,7 +18167,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.271,
+    "p": 0.2709,
     "score": 27,
     "kind": "out_of_fold"
    }
@@ -18331,7 +18331,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0819,
+    "p": 0.0818,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -18802,7 +18802,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0915,
+    "p": 0.0914,
     "score": 9,
     "kind": "out_of_fold"
    },
@@ -19098,7 +19098,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0679,
+    "p": 0.0678,
     "score": 7,
     "kind": "out_of_fold"
    },
@@ -20076,7 +20076,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0831,
+    "p": 0.0832,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -20598,7 +20598,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0814,
+    "p": 0.0813,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -23619,6 +23619,754 @@
     "ls": 58.4,
     "la": -54,
     "gameDate": "2026-09-19",
+    "source": "savant:estimated_ba_using_speedangle"
+   }
+  },
+  {
+   "seq": 258,
+   "raw": "258. 9/26 NYM@WSH -- In the top of the 8th, Brett Baty singled with a run scoring on an error by Nasim Nunez, instead of reaching on Nunez's error.",
+   "date": "2026-09-26",
+   "month": 9,
+   "day": 26,
+   "away": "NYM",
+   "home": "WSH",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the top of the 8th, Brett Baty singled with a run scoring on an error by Nasim Nunez, instead of reaching on Nunez's error.",
+   "half": "top",
+   "inning": 8,
+   "issues": [],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "hit+error",
+    "initialHitType": null,
+    "finalHitType": "single",
+    "rule": "T1",
+    "oldPhrase": "reaching on Nunez's error",
+    "newPhrase": "Brett Baty singled with a run scoring on an error by Nasim Nunez",
+    "transition": "error->hit+error",
+    "flags": [
+     "errorToHit",
+     "battingStat",
+     "pitchingStat"
+    ]
+   },
+   "link": {
+    "gamePk": 822678,
+    "atBatIndex": 58,
+    "batterName": "Brett Baty",
+    "currentEventType": "single",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 683146,
+    "currentEvent": "Single",
+    "currentDescription": "Brett Baty singles on a ground ball to shortstop Nasim Nuñez, deflected by pitcher Jake Irvin. Carson Benge scores. Fielding error by shortstop Nasim Nuñez.",
+    "inning": 8,
+    "half": "top",
+    "officialDate": "2026-09-26",
+    "gameType": "R",
+    "away": "NYM",
+    "home": "WSH",
+    "pitcherName": "Jake Irvin",
+    "pitcherId": 663623,
+    "playId": "cddac673-5f55-35c6-a8ba-0d6d3b04ab8e",
+    "currentRbi": 0,
+    "currentEarnedRuns": 0,
+    "currentUnearnedRuns": 1
+   },
+   "stats": {
+    "batting": [
+     {
+      "stat": "H",
+      "delta": 1,
+      "sign": 1,
+      "player": "Brett Baty",
+      "playerId": 683146,
+      "playerSource": "linked_play_batter",
+      "evidence": "reaching on Nunez's error → Brett Baty singled with a run scoring on an error by Nasim Nunez",
+      "rule": "transition:hit"
+     }
+    ],
+    "pitching": [
+     {
+      "stat": "H",
+      "delta": 1,
+      "sign": 1,
+      "player": "Jake Irvin",
+      "playerId": 663623,
+      "playerSource": "linked_play_pitcher",
+      "evidence": "reaching on Nunez's error → Brett Baty singled with a run scoring on an error by Nasim Nunez",
+      "rule": "transition:hit"
+     }
+    ],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": true,
+    "pitchingChange": true
+   },
+   "model": {
+    "question": "errorToHit",
+    "p": 0.0207,
+    "score": 2,
+    "kind": "model"
+   },
+   "savant": {
+    "xba": 0.113,
+    "ls": 76.2,
+    "la": -4,
+    "gameDate": "2026-09-26",
+    "source": "savant:estimated_ba_using_speedangle"
+   }
+  },
+  {
+   "seq": 259,
+   "raw": "259. 9/25 PIT@DET -- In the bottom of the 3rd, Spencer Torkelson struck out but reached first based on a passed ball, instead of a wild pitch. As a result, both runs that scored on the play are now unearned to Bubba Chandler.",
+   "date": "2026-09-25",
+   "month": 9,
+   "day": 25,
+   "away": "PIT",
+   "home": "DET",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the bottom of the 3rd, Spencer Torkelson struck out but reached first based on a passed ball, instead of a wild pitch. As a result, both runs that scored on the play are now unearned to Bubba Chandler.",
+   "half": "bottom",
+   "inning": 3,
+   "issues": [],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "wild_pitch_passed_ball",
+    "initial": null,
+    "final": null,
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": null,
+    "oldPhrase": null,
+    "newPhrase": null,
+    "transition": null,
+    "flags": [
+     "pitchingStat"
+    ]
+   },
+   "link": {
+    "gamePk": 824220,
+    "atBatIndex": 29,
+    "batterName": "Spencer Torkelson",
+    "currentEventType": "strikeout",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 679529,
+    "currentEvent": "Strikeout",
+    "currentDescription": "Spencer Torkelson strikes out swinging. Riley Greene scores. Dillon Dingler scores. Brett Callahan to 3rd. Spencer Torkelson to 1st. Passed ball by catcher Rafael Flores Jr.",
+    "inning": 3,
+    "half": "bottom",
+    "officialDate": "2026-09-25",
+    "gameType": "R",
+    "away": "PIT",
+    "home": "DET",
+    "pitcherName": "Bubba Chandler",
+    "pitcherId": 696149,
+    "playId": "5aeb916d-cc44-3ea4-a8a9-0bedb7ae4a21",
+    "currentRbi": 0,
+    "currentEarnedRuns": 0,
+    "currentUnearnedRuns": 2
+   },
+   "stats": {
+    "batting": [],
+    "pitching": [
+     {
+      "stat": "ER",
+      "delta": -2,
+      "sign": -1,
+      "player": "Bubba Chandler",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "As a result, both runs that scored on the play are now unearned to Bubba Chandler.",
+      "rule": "earned:unearned"
+     },
+     {
+      "stat": "UER",
+      "delta": 2,
+      "sign": 1,
+      "player": "Bubba Chandler",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "As a result, both runs that scored on the play are now unearned to Bubba Chandler.",
+      "rule": "earned:unearned"
+     }
+    ],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": false,
+    "pitchingChange": true
+   }
+  },
+  {
+   "seq": 260,
+   "raw": "260. 9/26 CIN@TOR -- In the top of the 3rd, Sal Stewart reaches on a fielder's choice, instead of a fielder's choice error by Andrés Giménez. As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles.",
+   "date": "2026-09-26",
+   "month": 9,
+   "day": 26,
+   "away": "CIN",
+   "home": "TOR",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the top of the 3rd, Sal Stewart reaches on a fielder's choice, instead of a fielder's choice error by Andrés Giménez. As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles.",
+   "half": "top",
+   "inning": 3,
+   "issues": [],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "fc+error",
+    "final": "fc",
+    "initialHitType": null,
+    "finalHitType": null,
+    "rule": "T1",
+    "oldPhrase": "a fielder's choice error by Andrés Giménez",
+    "newPhrase": "Sal Stewart reaches on a fielder's choice",
+    "transition": "fc+error->fc",
+    "flags": [
+     "battingStat",
+     "pitchingStat"
+    ]
+   },
+   "link": {
+    "gamePk": 822759,
+    "atBatIndex": 20,
+    "batterName": "Sal Stewart",
+    "currentEventType": "fielders_choice",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 701398,
+    "currentEvent": "Fielders Choice",
+    "currentDescription": "Sal Stewart reaches on a fielder's choice, fielded by shortstop Andrés Giménez. Matt McLain scores. Carlos Jorge to 3rd.",
+    "inning": 3,
+    "half": "top",
+    "officialDate": "2026-09-26",
+    "gameType": "R",
+    "away": "CIN",
+    "home": "TOR",
+    "pitcherName": "Spencer Miles",
+    "pitcherId": 693686,
+    "playId": "8bf51274-0c05-33e0-bac5-66df808715c7",
+    "currentRbi": 1,
+    "currentEarnedRuns": 1,
+    "currentUnearnedRuns": 0
+   },
+   "stats": {
+    "batting": [
+     {
+      "stat": "RBI",
+      "delta": 1,
+      "sign": 1,
+      "now": null,
+      "player": "Sal Stewart",
+      "playerId": 701398,
+      "playerSource": "linked_play_batter",
+      "evidence": "As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles.",
+      "rule": "rbi:gets"
+     }
+    ],
+    "pitching": [
+     {
+      "stat": "ER",
+      "delta": 1,
+      "sign": 1,
+      "player": "Spencer Miles",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles.",
+      "rule": "earned:earned"
+     },
+     {
+      "stat": "UER",
+      "delta": -1,
+      "sign": -1,
+      "player": "Spencer Miles",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "As a result, Stewart now gets an RBI and the run that scored is now earned to Spencer Miles.",
+      "rule": "earned:earned"
+     }
+    ],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": true,
+    "pitchingChange": true
+   }
+  },
+  {
+   "seq": 261,
+   "raw": "261. 9/25 CLE@KC -- In the bottom of the 5th, Michael Massey singled, instead of reaching on an error by José Ramírez.",
+   "date": "2026-09-25",
+   "month": 9,
+   "day": 25,
+   "away": "CLE",
+   "home": "KC",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the bottom of the 5th, Michael Massey singled, instead of reaching on an error by José Ramírez.",
+   "half": "bottom",
+   "inning": 5,
+   "issues": [],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "hit",
+    "initialHitType": null,
+    "finalHitType": "single",
+    "rule": "T1",
+    "oldPhrase": "reaching on an error by José Ramírez",
+    "newPhrase": "Michael Massey singled",
+    "transition": "error->hit",
+    "flags": [
+     "errorToHit",
+     "battingStat",
+     "pitchingStat"
+    ]
+   },
+   "link": {
+    "gamePk": 824058,
+    "atBatIndex": 52,
+    "batterName": "Michael Massey",
+    "currentEventType": "single",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 686681,
+    "currentEvent": "Single",
+    "currentDescription": "Michael Massey singles on a ground ball to third baseman José Ramírez.",
+    "inning": 5,
+    "half": "bottom",
+    "officialDate": "2026-09-25",
+    "gameType": "R",
+    "away": "CLE",
+    "home": "KC",
+    "pitcherName": "Shawn Armstrong",
+    "pitcherId": 542888,
+    "playId": "ab5d8d60-439e-3961-8d55-8981e034045d",
+    "currentRbi": 0,
+    "currentEarnedRuns": 0,
+    "currentUnearnedRuns": 0
+   },
+   "stats": {
+    "batting": [
+     {
+      "stat": "H",
+      "delta": 1,
+      "sign": 1,
+      "player": "Michael Massey",
+      "playerId": 686681,
+      "playerSource": "linked_play_batter",
+      "evidence": "reaching on an error by José Ramírez → Michael Massey singled",
+      "rule": "transition:hit"
+     }
+    ],
+    "pitching": [
+     {
+      "stat": "H",
+      "delta": 1,
+      "sign": 1,
+      "player": "Shawn Armstrong",
+      "playerId": 542888,
+      "playerSource": "linked_play_pitcher",
+      "evidence": "reaching on an error by José Ramírez → Michael Massey singled",
+      "rule": "transition:hit"
+     }
+    ],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": true,
+    "pitchingChange": true
+   },
+   "model": {
+    "question": "errorToHit",
+    "p": 0.1194,
+    "score": 12,
+    "kind": "model"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-09-25",
+    "source": "savant:estimated_ba_using_speedangle"
+   }
+  },
+  {
+   "seq": 262,
+   "raw": "262. 9/25 BAL@NYY (Gm.1) -- In the top of the 8th, Gunnar Henderson reaches on a fielding error by José Caballero instead of a single. This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn.",
+   "date": "2026-09-25",
+   "month": 9,
+   "day": 25,
+   "away": "BAL",
+   "home": "NYY",
+   "suffix": " (Gm.1)",
+   "gameNumber": 1,
+   "body": "In the top of the 8th, Gunnar Henderson reaches on a fielding error by José Caballero instead of a single. This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn.",
+   "half": "top",
+   "inning": 8,
+   "issues": [
+    "unexpected_suffix:(Gm.1)"
+   ],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "hit",
+    "final": "error",
+    "initialHitType": "single",
+    "finalHitType": null,
+    "rule": "T1",
+    "oldPhrase": "a single",
+    "newPhrase": "Gunnar Henderson reaches on a fielding error by José Caballero",
+    "transition": "hit->error",
+    "flags": [
+     "hitToError",
+     "battingStat",
+     "pitchingStat"
+    ]
+   },
+   "link": {
+    "gamePk": 823491,
+    "atBatIndex": 66,
+    "batterName": "Gunnar Henderson",
+    "currentEventType": "field_error",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 683002,
+    "currentEvent": "Field Error",
+    "currentDescription": "Gunnar Henderson reaches on a fielding error by second baseman José Caballero. Christian Franklin scores. Dylan Beavers to 2nd.",
+    "inning": 8,
+    "half": "top",
+    "officialDate": "2026-09-25",
+    "gameType": "R",
+    "away": "BAL",
+    "home": "NYY",
+    "pitcherName": "Paul Blackburn",
+    "pitcherId": 621112,
+    "playId": "1193516e-6da8-38a9-9f89-3f3fb05af7f0",
+    "currentRbi": 0,
+    "currentEarnedRuns": 0,
+    "currentUnearnedRuns": 1
+   },
+   "stats": {
+    "batting": [
+     {
+      "stat": "H",
+      "delta": -1,
+      "sign": -1,
+      "player": "Gunnar Henderson",
+      "playerId": 683002,
+      "playerSource": "linked_play_batter",
+      "evidence": "a single → Gunnar Henderson reaches on a fielding error by José Caballero",
+      "rule": "transition:hit"
+     },
+     {
+      "stat": "RBI",
+      "delta": -1,
+      "sign": -1,
+      "now": null,
+      "player": "Gunnar Henderson",
+      "playerId": 683002,
+      "playerSource": "linked_play_batter",
+      "evidence": "This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn.",
+      "rule": "rbi:loses"
+     }
+    ],
+    "pitching": [
+     {
+      "stat": "H",
+      "delta": -1,
+      "sign": -1,
+      "player": "Paul Blackburn",
+      "playerId": 621112,
+      "playerSource": "linked_play_pitcher",
+      "evidence": "a single → Gunnar Henderson reaches on a fielding error by José Caballero",
+      "rule": "transition:hit"
+     },
+     {
+      "stat": "ER",
+      "delta": -1,
+      "sign": -1,
+      "player": "Paul Blackburn",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn.",
+      "rule": "earned:unearned"
+     },
+     {
+      "stat": "UER",
+      "delta": 1,
+      "sign": 1,
+      "player": "Paul Blackburn",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn.",
+      "rule": "earned:unearned"
+     }
+    ],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": true,
+    "pitchingChange": true
+   },
+   "model": {
+    "question": "hitToError",
+    "p": 0.0056,
+    "score": 1,
+    "kind": "model"
+   },
+   "savant": {
+    "xba": null,
+    "ls": null,
+    "la": null,
+    "gameDate": "2026-09-25",
+    "source": "savant:estimated_ba_using_speedangle"
+   }
+  },
+  {
+   "seq": 263,
+   "raw": "263. 9/23 TOR@BAL (Gm.1) -- In the top of the 6th, Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson instead of a single and error. As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt.",
+   "date": "2026-09-23",
+   "month": 9,
+   "day": 23,
+   "away": "TOR",
+   "home": "BAL",
+   "suffix": " (Gm.1)",
+   "gameNumber": 1,
+   "body": "In the top of the 6th, Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson instead of a single and error. As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt.",
+   "half": "top",
+   "inning": 6,
+   "issues": [
+    "unexpected_suffix:(Gm.1)"
+   ],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "hit+error",
+    "final": "error",
+    "initialHitType": "single",
+    "finalHitType": null,
+    "rule": "T1",
+    "oldPhrase": "a single and error",
+    "newPhrase": "Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson",
+    "transition": "hit+error->error",
+    "flags": [
+     "hitToError",
+     "battingStat",
+     "pitchingStat"
+    ]
+   },
+   "link": {
+    "gamePk": 824785,
+    "atBatIndex": 47,
+    "batterName": "Brandon Valenzuela",
+    "currentEventType": "field_error",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 678218,
+    "currentEvent": "Field Error",
+    "currentDescription": "Brandon Valenzuela reaches on a throwing error by second baseman Jeremiah Jackson. Kazuma Okamoto scores. George Springer scores.",
+    "inning": 6,
+    "half": "top",
+    "officialDate": "2026-09-23",
+    "gameType": "R",
+    "away": "TOR",
+    "home": "BAL",
+    "pitcherName": "Luis De León",
+    "pitcherId": 801725,
+    "playId": "1fdcd635-8e7c-30e5-b1b8-63c2872dbb42",
+    "currentRbi": 0,
+    "currentEarnedRuns": 0,
+    "currentUnearnedRuns": 2
+   },
+   "stats": {
+    "batting": [
+     {
+      "stat": "H",
+      "delta": -1,
+      "sign": -1,
+      "player": "Brandon Valenzuela",
+      "playerId": 678218,
+      "playerSource": "linked_play_batter",
+      "evidence": "a single and error → Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson",
+      "rule": "transition:hit"
+     },
+     {
+      "stat": "RBI",
+      "delta": null,
+      "sign": -1,
+      "now": 0,
+      "player": "Brandon Valenzuela",
+      "playerId": 678218,
+      "playerSource": "linked_play_batter",
+      "evidence": "As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt.",
+      "rule": "rbi:none_now",
+      "statsapiAgrees": true
+     }
+    ],
+    "pitching": [
+     {
+      "stat": "H",
+      "delta": -1,
+      "sign": -1,
+      "player": "Luis De León",
+      "playerId": 801725,
+      "playerSource": "linked_play_pitcher",
+      "evidence": "a single and error → Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson",
+      "rule": "transition:hit"
+     },
+     {
+      "stat": "ER",
+      "delta": -2,
+      "sign": -1,
+      "player": "Chris Bassitt",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt.",
+      "rule": "earned:unearned"
+     },
+     {
+      "stat": "UER",
+      "delta": 2,
+      "sign": 1,
+      "player": "Chris Bassitt",
+      "playerId": null,
+      "playerSource": "official_text",
+      "evidence": "As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt.",
+      "rule": "earned:unearned"
+     }
+    ],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": true,
+    "pitchingChange": true
+   },
+   "model": {
+    "question": "hitToError",
+    "p": 0.0094,
+    "score": 1,
+    "kind": "model"
+   },
+   "savant": {
+    "xba": 0.083,
+    "ls": 105.3,
+    "la": -30,
+    "gameDate": "2026-09-23",
+    "source": "savant:estimated_ba_using_speedangle"
+   }
+  },
+  {
+   "seq": 264,
+   "raw": "264. 9/24 CLE@BOS -- In the bottom of the 5th, Ceddanne Rafaela singled, instead of reaching on a throwing error by Travis Bazzana.",
+   "date": "2026-09-24",
+   "month": 9,
+   "day": 24,
+   "away": "CLE",
+   "home": "BOS",
+   "suffix": "",
+   "gameNumber": null,
+   "body": "In the bottom of the 5th, Ceddanne Rafaela singled, instead of reaching on a throwing error by Travis Bazzana.",
+   "half": "bottom",
+   "inning": 5,
+   "issues": [],
+   "section": "2026 Regular Season",
+   "sectionIndex": 0,
+   "cls": {
+    "kind": "ruling_change",
+    "initial": "error",
+    "final": "hit",
+    "initialHitType": null,
+    "finalHitType": "single",
+    "rule": "T1",
+    "oldPhrase": "reaching on a throwing error by Travis Bazzana",
+    "newPhrase": "Ceddanne Rafaela singled",
+    "transition": "error->hit",
+    "flags": [
+     "errorToHit",
+     "battingStat",
+     "pitchingStat"
+    ]
+   },
+   "link": {
+    "gamePk": 824707,
+    "atBatIndex": 33,
+    "batterName": "Ceddanne Rafaela",
+    "currentEventType": "single",
+    "method": "full_name",
+    "flags": [],
+    "batterId": 678882,
+    "currentEvent": "Single",
+    "currentDescription": "Ceddanne Rafaela singles on a ground ball to second baseman Travis Bazzana.",
+    "inning": 5,
+    "half": "bottom",
+    "officialDate": "2026-09-24",
+    "gameType": "R",
+    "away": "CLE",
+    "home": "BOS",
+    "pitcherName": "Joey Cantillo",
+    "pitcherId": 676282,
+    "playId": "638baaef-251b-30f7-9420-b14c2868f43b",
+    "currentRbi": 0,
+    "currentEarnedRuns": 0,
+    "currentUnearnedRuns": 0
+   },
+   "stats": {
+    "batting": [
+     {
+      "stat": "H",
+      "delta": 1,
+      "sign": 1,
+      "player": "Ceddanne Rafaela",
+      "playerId": 678882,
+      "playerSource": "linked_play_batter",
+      "evidence": "reaching on a throwing error by Travis Bazzana → Ceddanne Rafaela singled",
+      "rule": "transition:hit"
+     }
+    ],
+    "pitching": [
+     {
+      "stat": "H",
+      "delta": 1,
+      "sign": 1,
+      "player": "Joey Cantillo",
+      "playerId": 676282,
+      "playerSource": "linked_play_pitcher",
+      "evidence": "reaching on a throwing error by Travis Bazzana → Ceddanne Rafaela singled",
+      "rule": "transition:hit"
+     }
+    ],
+    "unparsed": [],
+    "noPlayerStats": false,
+    "flags": [],
+    "battingChange": true,
+    "pitchingChange": true
+   },
+   "model": {
+    "question": "errorToHit",
+    "p": 0.0483,
+    "score": 5,
+    "kind": "model"
+   },
+   "savant": {
+    "xba": null,
+    "ls": 88.3,
+    "la": -26,
+    "gameDate": "2026-09-24",
     "source": "savant:estimated_ba_using_speedangle"
    }
   }

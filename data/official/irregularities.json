@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-01T00:35:41.128Z",
- "count": 80,
+ "generatedAt": "2026-10-01T10:15:17.797Z",
+ "count": 82,
  "items": [
   {
    "season": 2024,
@@ -1261,6 +1261,36 @@
    "gamePk": 824947,
    "atBatIndex": null,
    "currentEventType": null
+  },
+  {
+   "season": 2026,
+   "seq": 262,
+   "section": "2026 Regular Season",
+   "raw": "262. 9/25 BAL@NYY (Gm.1) -- In the top of the 8th, Gunnar Henderson reaches on a fielding error by José Caballero instead of a single. This removes the RBI for Henderson and makes the run scores now unearned to Paul Blackburn.",
+   "parseIssues": [
+    "unexpected_suffix:(Gm.1)"
+   ],
+   "linkFlags": [],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "hit->error",
+   "gamePk": 823491,
+   "atBatIndex": 66,
+   "currentEventType": "field_error"
+  },
+  {
+   "season": 2026,
+   "seq": 263,
+   "section": "2026 Regular Season",
+   "raw": "263. 9/23 TOR@BAL (Gm.1) -- In the top of the 6th, Brandon Valenzuela reaches on a throwing error by Jeremiah Jackson instead of a single and error. As a result, there are now no RBI's on the play and makes both runs unearned to Chris Bassitt.",
+   "parseIssues": [
+    "unexpected_suffix:(Gm.1)"
+   ],
+   "linkFlags": [],
+   "sourceUrl": "https://www.mlb.com/official-information/scoring-changes",
+   "classification": "hit+error->error",
+   "gamePk": 824785,
+   "atBatIndex": 47,
+   "currentEventType": "field_error"
   },
   {
    "season": 2026,
