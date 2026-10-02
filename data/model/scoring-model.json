@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-10-01T18:27:42.558Z",
+ "generatedAt": "2026-10-02T00:51:25.300Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -16359,87 +16359,87 @@
    "hp_x_of"
   ],
   "lambda": 1,
-  "intercept": -2.543745,
+  "intercept": -2.546929,
   "coef": [
-   0.42321,
-   -0.288382,
-   0.365565,
-   0.533223,
-   0.345519,
-   1.716963,
-   -1.079933,
-   -2.039334,
-   -0.008591,
-   0.585915,
-   0.548858,
-   0.394992,
-   -0.319853
+   0.423215,
+   -0.284775,
+   0.368428,
+   0.529254,
+   0.347038,
+   1.718517,
+   -1.078795,
+   -2.043258,
+   -0.009127,
+   0.587569,
+   0.5477,
+   0.397684,
+   -0.319465
   ],
   "termMeans": {
-   "logit_hit_prob": -1.57146,
-   "loc:P": 0.07437,
-   "loc:C": 0.00813,
-   "loc:1B": 0.1225,
-   "loc:3B": 0.30531,
-   "loc:OF": 0.06781,
-   "traj:line_drive": 0.035,
-   "traj:fly_ball": 0.04719,
-   "traj:popup": 0.02187,
-   "traj:bunt": 0.00781,
-   "ev_soft": 0.18063,
-   "ev_hard": 0.05531,
-   "hp_x_of": -0.12383
+   "logit_hit_prob": -1.57339,
+   "loc:P": 0.07414,
+   "loc:C": 0.0081,
+   "loc:1B": 0.12274,
+   "loc:3B": 0.30498,
+   "loc:OF": 0.06791,
+   "traj:line_drive": 0.03489,
+   "traj:fly_ball": 0.04735,
+   "traj:popup": 0.02212,
+   "traj:bunt": 0.00779,
+   "ev_soft": 0.18069,
+   "ev_hard": 0.05514,
+   "hp_x_of": -0.12435
   },
-  "baseRate": 0.05906,
-  "n": 3200,
+  "baseRate": 0.05888,
+  "n": 3210,
   "positives": 189,
   "cv": {
    "folds": 10,
-   "logLoss": 0.21695,
-   "baseLogLoss": 0.22438,
-   "auc": 0.6236,
-   "brier": 0.05404,
-   "baseBrier": 0.05557,
+   "logLoss": 0.21643,
+   "baseLogLoss": 0.22387,
+   "auc": 0.6238,
+   "brier": 0.05388,
+   "baseBrier": 0.05541,
    "calibration": [
     {
      "band": "0–2",
-     "n": 106,
-     "predicted": 0.0132,
-     "observed": 0.0377,
+     "n": 107,
+     "predicted": 0.0131,
+     "observed": 0.0374,
      "positives": 4
     },
     {
      "band": "2–5",
-     "n": 1430,
+     "n": 1442,
      "predicted": 0.037,
-     "observed": 0.0406,
+     "observed": 0.0402,
      "positives": 58
     },
     {
      "band": "5–10",
-     "n": 1354,
+     "n": 1352,
      "predicted": 0.0688,
-     "observed": 0.0687,
-     "positives": 93
+     "observed": 0.0695,
+     "positives": 94
     },
     {
      "band": "10–20",
-     "n": 288,
-     "predicted": 0.1231,
-     "observed": 0.0729,
-     "positives": 21
+     "n": 287,
+     "predicted": 0.123,
+     "observed": 0.0697,
+     "positives": 20
     },
     {
      "band": "20–35",
      "n": 21,
-     "predicted": 0.2422,
+     "predicted": 0.2418,
      "observed": 0.5714,
      "positives": 12
     },
     {
      "band": "35–50",
      "n": 1,
-     "predicted": 0.3573,
+     "predicted": 0.3574,
      "observed": 1,
      "positives": 1
     },
@@ -16453,104 +16453,104 @@
    ]
   },
   "selectionRule": "simplest model within one standard error (paired per-play log-loss differences vs the best candidate) under 10-fold cross-validation grouped by game",
-  "bestLogLoss": 0.21609,
+  "bestLogLoss": 0.21559,
   "selection": [
    {
     "terms": [],
     "lambda": 1,
-    "logLoss": 0.22458,
-    "foldSE": 0.0087,
-    "deltaVsBest": 0.008489,
-    "pairedSE": 0.002954,
-    "auc": 0.4521,
-    "brier": 0.0556
+    "logLoss": 0.22407,
+    "foldSE": 0.00879,
+    "deltaVsBest": 0.008484,
+    "pairedSE": 0.002945,
+    "auc": 0.4515,
+    "brier": 0.05543
    },
    {
     "terms": [
      "logit_hit_prob"
     ],
     "lambda": 0.3,
-    "logLoss": 0.22085,
-    "foldSE": 0.00899,
-    "deltaVsBest": 0.004757,
-    "pairedSE": 0.002358,
-    "auc": 0.5983,
-    "brier": 0.05512
+    "logLoss": 0.22032,
+    "foldSE": 0.00907,
+    "deltaVsBest": 0.004733,
+    "pairedSE": 0.002348,
+    "auc": 0.5986,
+    "brier": 0.05496
    },
    {
     "terms": [
      "logit_hit_prob"
-    ],
-    "lambda": 1,
-    "logLoss": 0.22085,
-    "foldSE": 0.00899,
-    "deltaVsBest": 0.004756,
-    "pairedSE": 0.002358,
-    "auc": 0.5984,
-    "brier": 0.05512
-   },
-   {
-    "terms": [
-     "logit_hit_prob"
-    ],
-    "lambda": 3,
-    "logLoss": 0.22084,
-    "foldSE": 0.00898,
-    "deltaVsBest": 0.004753,
-    "pairedSE": 0.002358,
-    "auc": 0.5984,
-    "brier": 0.05512
-   },
-   {
-    "terms": [
-     "logit_hit_prob"
-    ],
-    "lambda": 10,
-    "logLoss": 0.22084,
-    "foldSE": 0.00896,
-    "deltaVsBest": 0.00475,
-    "pairedSE": 0.002361,
-    "auc": 0.5983,
-    "brier": 0.05512
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "infield"
-    ],
-    "lambda": 0.3,
-    "logLoss": 0.22033,
-    "foldSE": 0.00902,
-    "deltaVsBest": 0.004239,
-    "pairedSE": 0.002099,
-    "auc": 0.6138,
-    "brier": 0.05513
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "infield"
     ],
     "lambda": 1,
     "logLoss": 0.22032,
-    "foldSE": 0.00902,
-    "deltaVsBest": 0.004231,
-    "pairedSE": 0.002106,
-    "auc": 0.6133,
-    "brier": 0.05512
+    "foldSE": 0.00907,
+    "deltaVsBest": 0.004732,
+    "pairedSE": 0.002348,
+    "auc": 0.5986,
+    "brier": 0.05496
    },
    {
     "terms": [
-     "logit_hit_prob",
-     "infield"
+     "logit_hit_prob"
     ],
     "lambda": 3,
+    "logLoss": 0.22032,
+    "foldSE": 0.00906,
+    "deltaVsBest": 0.004729,
+    "pairedSE": 0.002349,
+    "auc": 0.5986,
+    "brier": 0.05496
+   },
+   {
+    "terms": [
+     "logit_hit_prob"
+    ],
+    "lambda": 10,
     "logLoss": 0.22031,
-    "foldSE": 0.009,
-    "deltaVsBest": 0.004224,
-    "pairedSE": 0.002125,
+    "foldSE": 0.00904,
+    "deltaVsBest": 0.004726,
+    "pairedSE": 0.002351,
+    "auc": 0.5985,
+    "brier": 0.05496
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "infield"
+    ],
+    "lambda": 0.3,
+    "logLoss": 0.21981,
+    "foldSE": 0.0091,
+    "deltaVsBest": 0.004221,
+    "pairedSE": 0.00209,
+    "auc": 0.6139,
+    "brier": 0.05496
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "infield"
+    ],
+    "lambda": 1,
+    "logLoss": 0.2198,
+    "foldSE": 0.00909,
+    "deltaVsBest": 0.004213,
+    "pairedSE": 0.002097,
+    "auc": 0.6133,
+    "brier": 0.05496
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "infield"
+    ],
+    "lambda": 3,
+    "logLoss": 0.21979,
+    "foldSE": 0.00908,
+    "deltaVsBest": 0.004206,
+    "pairedSE": 0.002116,
     "auc": 0.6122,
-    "brier": 0.05511
+    "brier": 0.05495
    },
    {
     "terms": [
@@ -16558,12 +16558,12 @@
      "infield"
     ],
     "lambda": 10,
-    "logLoss": 0.22036,
-    "foldSE": 0.00896,
-    "deltaVsBest": 0.004272,
-    "pairedSE": 0.00218,
-    "auc": 0.6091,
-    "brier": 0.05509
+    "logLoss": 0.21984,
+    "foldSE": 0.00904,
+    "deltaVsBest": 0.004253,
+    "pairedSE": 0.002171,
+    "auc": 0.6093,
+    "brier": 0.05493
    },
    {
     "terms": [
@@ -16575,29 +16575,12 @@
      "loc:OF"
     ],
     "lambda": 0.3,
-    "logLoss": 0.22159,
-    "foldSE": 0.00845,
-    "deltaVsBest": 0.0055,
-    "pairedSE": 0.001967,
-    "auc": 0.6032,
-    "brier": 0.05523
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF"
-    ],
-    "lambda": 1,
-    "logLoss": 0.22097,
+    "logLoss": 0.22107,
     "foldSE": 0.00852,
-    "deltaVsBest": 0.004877,
-    "pairedSE": 0.001938,
-    "auc": 0.6046,
-    "brier": 0.05518
+    "deltaVsBest": 0.005483,
+    "pairedSE": 0.00196,
+    "auc": 0.6033,
+    "brier": 0.05507
    },
    {
     "terms": [
@@ -16607,73 +16590,14 @@
      "loc:1B",
      "loc:3B",
      "loc:OF"
-    ],
-    "lambda": 3,
-    "logLoss": 0.22054,
-    "foldSE": 0.00861,
-    "deltaVsBest": 0.004448,
-    "pairedSE": 0.001972,
-    "auc": 0.6069,
-    "brier": 0.05512
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF"
-    ],
-    "lambda": 10,
-    "logLoss": 0.2204,
-    "foldSE": 0.00872,
-    "deltaVsBest": 0.004309,
-    "pairedSE": 0.002084,
-    "auc": 0.6064,
-    "brier": 0.05509
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt"
-    ],
-    "lambda": 0.3,
-    "logLoss": 0.21806,
-    "foldSE": 0.00846,
-    "deltaVsBest": 0.001974,
-    "pairedSE": 0.001536,
-    "auc": 0.6044,
-    "brier": 0.05372
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt"
     ],
     "lambda": 1,
-    "logLoss": 0.21805,
-    "foldSE": 0.00847,
-    "deltaVsBest": 0.001965,
-    "pairedSE": 0.001275,
-    "auc": 0.6076,
-    "brier": 0.05429
+    "logLoss": 0.22045,
+    "foldSE": 0.0086,
+    "deltaVsBest": 0.004862,
+    "pairedSE": 0.00193,
+    "auc": 0.6047,
+    "brier": 0.05502
    },
    {
     "terms": [
@@ -16682,40 +16606,15 @@
      "loc:C",
      "loc:1B",
      "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt"
+     "loc:OF"
     ],
     "lambda": 3,
-    "logLoss": 0.2189,
-    "foldSE": 0.00853,
-    "deltaVsBest": 0.002809,
-    "pairedSE": 0.001526,
-    "auc": 0.6153,
-    "brier": 0.05476
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt"
-    ],
-    "lambda": 10,
-    "logLoss": 0.21993,
+    "logLoss": 0.22002,
     "foldSE": 0.00868,
-    "deltaVsBest": 0.003842,
-    "pairedSE": 0.001949,
-    "auc": 0.6112,
-    "brier": 0.055
+    "deltaVsBest": 0.004434,
+    "pairedSE": 0.001965,
+    "auc": 0.607,
+    "brier": 0.05496
    },
    {
     "terms": [
@@ -16724,181 +16623,14 @@
      "loc:C",
      "loc:1B",
      "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_z",
-     "ev_missing"
-    ],
-    "lambda": 0.3,
-    "logLoss": 0.21831,
-    "foldSE": 0.00838,
-    "deltaVsBest": 0.002223,
-    "pairedSE": 0.001517,
-    "auc": 0.6046,
-    "brier": 0.05373
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_z",
-     "ev_missing"
-    ],
-    "lambda": 1,
-    "logLoss": 0.21813,
-    "foldSE": 0.00845,
-    "deltaVsBest": 0.002045,
-    "pairedSE": 0.001228,
-    "auc": 0.6086,
-    "brier": 0.05429
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_z",
-     "ev_missing"
-    ],
-    "lambda": 3,
-    "logLoss": 0.21883,
-    "foldSE": 0.00855,
-    "deltaVsBest": 0.00274,
-    "pairedSE": 0.001467,
-    "auc": 0.6192,
-    "brier": 0.05475
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_z",
-     "ev_missing"
+     "loc:OF"
     ],
     "lambda": 10,
-    "logLoss": 0.21973,
-    "foldSE": 0.00869,
-    "deltaVsBest": 0.003645,
-    "pairedSE": 0.001889,
-    "auc": 0.6183,
-    "brier": 0.05498
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_soft",
-     "ev_hard"
-    ],
-    "lambda": 0.3,
-    "logLoss": 0.21741,
-    "foldSE": 0.00821,
-    "deltaVsBest": 0.00132,
-    "pairedSE": 0.001262,
-    "auc": 0.6143,
-    "brier": 0.05367
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_soft",
-     "ev_hard"
-    ],
-    "lambda": 1,
-    "logLoss": 0.21737,
-    "foldSE": 0.00823,
-    "deltaVsBest": 0.001278,
-    "pairedSE": 0.000945,
-    "auc": 0.621,
-    "brier": 0.05424
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_soft",
-     "ev_hard"
-    ],
-    "lambda": 3,
-    "logLoss": 0.21813,
-    "foldSE": 0.0083,
-    "deltaVsBest": 0.002038,
-    "pairedSE": 0.001254,
-    "auc": 0.6278,
-    "brier": 0.0547
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_soft",
-     "ev_hard"
-    ],
-    "lambda": 10,
-    "logLoss": 0.21916,
-    "foldSE": 0.00848,
-    "deltaVsBest": 0.003066,
-    "pairedSE": 0.001761,
-    "auc": 0.6236,
+    "logLoss": 0.21988,
+    "foldSE": 0.00879,
+    "deltaVsBest": 0.004294,
+    "pairedSE": 0.002076,
+    "auc": 0.6065,
     "brier": 0.05493
    },
    {
@@ -16912,18 +16644,15 @@
      "traj:line_drive",
      "traj:fly_ball",
      "traj:popup",
-     "traj:bunt",
-     "ev_soft",
-     "ev_hard",
-     "hp_x_of"
+     "traj:bunt"
     ],
     "lambda": 0.3,
-    "logLoss": 0.21715,
-    "foldSE": 0.00832,
-    "deltaVsBest": 0.001059,
-    "pairedSE": 0.001136,
-    "auc": 0.6167,
-    "brier": 0.05358
+    "logLoss": 0.21755,
+    "foldSE": 0.00855,
+    "deltaVsBest": 0.001958,
+    "pairedSE": 0.00153,
+    "auc": 0.6047,
+    "brier": 0.05357
    },
    {
     "terms": [
@@ -16936,18 +16665,15 @@
      "traj:line_drive",
      "traj:fly_ball",
      "traj:popup",
-     "traj:bunt",
-     "ev_soft",
-     "ev_hard",
-     "hp_x_of"
+     "traj:bunt"
     ],
     "lambda": 1,
-    "logLoss": 0.21695,
-    "foldSE": 0.00841,
-    "deltaVsBest": 0.000859,
-    "pairedSE": 0.000866,
-    "auc": 0.6236,
-    "brier": 0.05404
+    "logLoss": 0.21754,
+    "foldSE": 0.00855,
+    "deltaVsBest": 0.001951,
+    "pairedSE": 0.001269,
+    "auc": 0.6078,
+    "brier": 0.05413
    },
    {
     "terms": [
@@ -16960,18 +16686,36 @@
      "traj:line_drive",
      "traj:fly_ball",
      "traj:popup",
-     "traj:bunt",
-     "ev_soft",
-     "ev_hard",
-     "hp_x_of"
+     "traj:bunt"
     ],
     "lambda": 3,
-    "logLoss": 0.21768,
-    "foldSE": 0.0085,
-    "deltaVsBest": 0.001594,
-    "pairedSE": 0.001157,
-    "auc": 0.6292,
-    "brier": 0.05451
+    "logLoss": 0.21838,
+    "foldSE": 0.00861,
+    "deltaVsBest": 0.002795,
+    "pairedSE": 0.001519,
+    "auc": 0.6156,
+    "brier": 0.0546
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt"
+    ],
+    "lambda": 10,
+    "logLoss": 0.21941,
+    "foldSE": 0.00876,
+    "deltaVsBest": 0.003826,
+    "pairedSE": 0.001942,
+    "auc": 0.6114,
+    "brier": 0.05484
    },
    {
     "terms": [
@@ -16985,16 +16729,84 @@
      "traj:fly_ball",
      "traj:popup",
      "traj:bunt",
-     "ev_soft",
-     "ev_hard",
-     "hp_x_of"
+     "ev_z",
+     "ev_missing"
+    ],
+    "lambda": 0.3,
+    "logLoss": 0.2178,
+    "foldSE": 0.00846,
+    "deltaVsBest": 0.00221,
+    "pairedSE": 0.001512,
+    "auc": 0.6047,
+    "brier": 0.05357
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_z",
+     "ev_missing"
+    ],
+    "lambda": 1,
+    "logLoss": 0.21762,
+    "foldSE": 0.00853,
+    "deltaVsBest": 0.002035,
+    "pairedSE": 0.001223,
+    "auc": 0.6089,
+    "brier": 0.05414
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_z",
+     "ev_missing"
+    ],
+    "lambda": 3,
+    "logLoss": 0.21832,
+    "foldSE": 0.00862,
+    "deltaVsBest": 0.002731,
+    "pairedSE": 0.001462,
+    "auc": 0.6194,
+    "brier": 0.05459
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_z",
+     "ev_missing"
     ],
     "lambda": 10,
-    "logLoss": 0.2188,
-    "foldSE": 0.00865,
-    "deltaVsBest": 0.002713,
-    "pairedSE": 0.001658,
-    "auc": 0.6282,
+    "logLoss": 0.21922,
+    "foldSE": 0.00876,
+    "deltaVsBest": 0.003634,
+    "pairedSE": 0.001883,
+    "auc": 0.6185,
     "brier": 0.05482
    },
    {
@@ -17010,18 +16822,206 @@
      "traj:popup",
      "traj:bunt",
      "ev_soft",
+     "ev_hard"
+    ],
+    "lambda": 0.3,
+    "logLoss": 0.21689,
+    "foldSE": 0.0083,
+    "deltaVsBest": 0.001303,
+    "pairedSE": 0.001257,
+    "auc": 0.6145,
+    "brier": 0.05351
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_soft",
+     "ev_hard"
+    ],
+    "lambda": 1,
+    "logLoss": 0.21685,
+    "foldSE": 0.00831,
+    "deltaVsBest": 0.001263,
+    "pairedSE": 0.00094,
+    "auc": 0.6212,
+    "brier": 0.05408
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_soft",
+     "ev_hard"
+    ],
+    "lambda": 3,
+    "logLoss": 0.21761,
+    "foldSE": 0.00837,
+    "deltaVsBest": 0.002025,
+    "pairedSE": 0.001249,
+    "auc": 0.6279,
+    "brier": 0.05454
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_soft",
+     "ev_hard"
+    ],
+    "lambda": 10,
+    "logLoss": 0.21864,
+    "foldSE": 0.00856,
+    "deltaVsBest": 0.003052,
+    "pairedSE": 0.001755,
+    "auc": 0.6236,
+    "brier": 0.05476
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_soft",
+     "ev_hard",
+     "hp_x_of"
+    ],
+    "lambda": 0.3,
+    "logLoss": 0.21663,
+    "foldSE": 0.00841,
+    "deltaVsBest": 0.001041,
+    "pairedSE": 0.001131,
+    "auc": 0.6169,
+    "brier": 0.05343
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_soft",
+     "ev_hard",
+     "hp_x_of"
+    ],
+    "lambda": 1,
+    "logLoss": 0.21643,
+    "foldSE": 0.00848,
+    "deltaVsBest": 0.000845,
+    "pairedSE": 0.000861,
+    "auc": 0.6238,
+    "brier": 0.05388
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_soft",
+     "ev_hard",
+     "hp_x_of"
+    ],
+    "lambda": 3,
+    "logLoss": 0.21717,
+    "foldSE": 0.00857,
+    "deltaVsBest": 0.001583,
+    "pairedSE": 0.001152,
+    "auc": 0.6295,
+    "brier": 0.05435
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_soft",
+     "ev_hard",
+     "hp_x_of"
+    ],
+    "lambda": 10,
+    "logLoss": 0.21829,
+    "foldSE": 0.00872,
+    "deltaVsBest": 0.002702,
+    "pairedSE": 0.001653,
+    "auc": 0.6284,
+    "brier": 0.05466
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_soft",
      "ev_hard",
      "hp_x_of",
      "hp_sq",
      "loc:SS"
     ],
     "lambda": 0.3,
-    "logLoss": 0.21617,
-    "foldSE": 0.00756,
-    "deltaVsBest": 0.000082,
-    "pairedSE": 0.000758,
-    "auc": 0.6265,
-    "brier": 0.05354
+    "logLoss": 0.21567,
+    "foldSE": 0.00765,
+    "deltaVsBest": 0.000077,
+    "pairedSE": 0.000757,
+    "auc": 0.6267,
+    "brier": 0.05339
    },
    {
     "terms": [
@@ -17042,12 +17042,12 @@
      "loc:SS"
     ],
     "lambda": 1,
-    "logLoss": 0.21609,
-    "foldSE": 0.00765,
+    "logLoss": 0.21559,
+    "foldSE": 0.00772,
     "deltaVsBest": 0,
     "pairedSE": 0,
-    "auc": 0.6313,
-    "brier": 0.05401
+    "auc": 0.6314,
+    "brier": 0.05385
    },
    {
     "terms": [
@@ -17068,12 +17068,12 @@
      "loc:SS"
     ],
     "lambda": 3,
-    "logLoss": 0.21699,
-    "foldSE": 0.00774,
-    "deltaVsBest": 0.000905,
-    "pairedSE": 0.000771,
-    "auc": 0.636,
-    "brier": 0.0545
+    "logLoss": 0.2165,
+    "foldSE": 0.00781,
+    "deltaVsBest": 0.000909,
+    "pairedSE": 0.00077,
+    "auc": 0.6361,
+    "brier": 0.05435
    },
    {
     "terms": [
@@ -17094,12 +17094,12 @@
      "loc:SS"
     ],
     "lambda": 10,
-    "logLoss": 0.21816,
-    "foldSE": 0.00796,
-    "deltaVsBest": 0.002072,
-    "pairedSE": 0.001422,
+    "logLoss": 0.21766,
+    "foldSE": 0.00803,
+    "deltaVsBest": 0.002074,
+    "pairedSE": 0.001418,
     "auc": 0.6359,
-    "brier": 0.05481
+    "brier": 0.05465
    },
    {
     "terms": [
@@ -17118,36 +17118,36 @@
      "batting_home"
     ],
     "lambda": 0.3,
-    "logLoss": 0.21847,
-    "foldSE": 0.00844,
-    "deltaVsBest": 0.002381,
-    "pairedSE": 0.001521,
-    "auc": 0.6032,
-    "brier": 0.05376
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "ev_z",
-     "ev_missing",
-     "batting_home"
-    ],
-    "lambda": 1,
-    "logLoss": 0.21829,
+    "logLoss": 0.21796,
     "foldSE": 0.00853,
-    "deltaVsBest": 0.002198,
-    "pairedSE": 0.001239,
-    "auc": 0.6077,
-    "brier": 0.05432
+    "deltaVsBest": 0.002367,
+    "pairedSE": 0.001515,
+    "auc": 0.6035,
+    "brier": 0.05361
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "ev_z",
+     "ev_missing",
+     "batting_home"
+    ],
+    "lambda": 1,
+    "logLoss": 0.21778,
+    "foldSE": 0.0086,
+    "deltaVsBest": 0.002187,
+    "pairedSE": 0.001234,
+    "auc": 0.6079,
+    "brier": 0.05417
    },
    {
     "terms": [
@@ -17166,12 +17166,12 @@
      "batting_home"
     ],
     "lambda": 3,
-    "logLoss": 0.21898,
-    "foldSE": 0.00862,
-    "deltaVsBest": 0.002886,
-    "pairedSE": 0.00148,
-    "auc": 0.618,
-    "brier": 0.05478
+    "logLoss": 0.21846,
+    "foldSE": 0.00869,
+    "deltaVsBest": 0.002876,
+    "pairedSE": 0.001475,
+    "auc": 0.6182,
+    "brier": 0.05462
    },
    {
     "terms": [
@@ -17190,362 +17190,11 @@
      "batting_home"
     ],
     "lambda": 10,
-    "logLoss": 0.21986,
-    "foldSE": 0.00874,
-    "deltaVsBest": 0.003771,
-    "pairedSE": 0.0019,
-    "auc": 0.6167,
-    "brier": 0.055
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "home:108",
-     "home:109",
-     "home:110",
-     "home:111",
-     "home:112",
-     "home:113",
-     "home:114",
-     "home:115",
-     "home:116",
-     "home:117",
-     "home:118",
-     "home:119",
-     "home:120",
-     "home:121",
-     "home:133",
-     "home:134",
-     "home:135",
-     "home:136",
-     "home:137",
-     "home:138",
-     "home:139",
-     "home:140",
-     "home:141",
-     "home:142",
-     "home:143",
-     "home:144",
-     "home:145",
-     "home:146",
-     "home:147",
-     "home:158"
-    ],
-    "lambda": 0.3,
-    "logLoss": 0.22258,
-    "foldSE": 0.00813,
-    "deltaVsBest": 0.006494,
-    "pairedSE": 0.002297,
-    "auc": 0.5814,
-    "brier": 0.0543
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "home:108",
-     "home:109",
-     "home:110",
-     "home:111",
-     "home:112",
-     "home:113",
-     "home:114",
-     "home:115",
-     "home:116",
-     "home:117",
-     "home:118",
-     "home:119",
-     "home:120",
-     "home:121",
-     "home:133",
-     "home:134",
-     "home:135",
-     "home:136",
-     "home:137",
-     "home:138",
-     "home:139",
-     "home:140",
-     "home:141",
-     "home:142",
-     "home:143",
-     "home:144",
-     "home:145",
-     "home:146",
-     "home:147",
-     "home:158"
-    ],
-    "lambda": 1,
-    "logLoss": 0.22136,
-    "foldSE": 0.008,
-    "deltaVsBest": 0.005267,
-    "pairedSE": 0.001926,
-    "auc": 0.5894,
-    "brier": 0.05473
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "home:108",
-     "home:109",
-     "home:110",
-     "home:111",
-     "home:112",
-     "home:113",
-     "home:114",
-     "home:115",
-     "home:116",
-     "home:117",
-     "home:118",
-     "home:119",
-     "home:120",
-     "home:121",
-     "home:133",
-     "home:134",
-     "home:135",
-     "home:136",
-     "home:137",
-     "home:138",
-     "home:139",
-     "home:140",
-     "home:141",
-     "home:142",
-     "home:143",
-     "home:144",
-     "home:145",
-     "home:146",
-     "home:147",
-     "home:158"
-    ],
-    "lambda": 3,
-    "logLoss": 0.22053,
-    "foldSE": 0.00801,
-    "deltaVsBest": 0.004437,
-    "pairedSE": 0.001825,
-    "auc": 0.6008,
-    "brier": 0.055
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "home:108",
-     "home:109",
-     "home:110",
-     "home:111",
-     "home:112",
-     "home:113",
-     "home:114",
-     "home:115",
-     "home:116",
-     "home:117",
-     "home:118",
-     "home:119",
-     "home:120",
-     "home:121",
-     "home:133",
-     "home:134",
-     "home:135",
-     "home:136",
-     "home:137",
-     "home:138",
-     "home:139",
-     "home:140",
-     "home:141",
-     "home:142",
-     "home:143",
-     "home:144",
-     "home:145",
-     "home:146",
-     "home:147",
-     "home:158"
-    ],
-    "lambda": 10,
-    "logLoss": 0.22021,
-    "foldSE": 0.00831,
-    "deltaVsBest": 0.004118,
-    "pairedSE": 0.001985,
-    "auc": 0.6066,
-    "brier": 0.05506
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "scorer:427131",
-     "scorer:427508",
-     "scorer:431022",
-     "scorer:431036",
-     "scorer:431038",
-     "scorer:431054",
-     "scorer:431058",
-     "scorer:431070",
-     "scorer:431080",
-     "scorer:431081",
-     "scorer:431083",
-     "scorer:431088",
-     "scorer:433298",
-     "scorer:434138",
-     "scorer:482386",
-     "scorer:482388",
-     "scorer:482394",
-     "scorer:493726",
-     "scorer:496999",
-     "scorer:501169",
-     "scorer:504025",
-     "scorer:511136",
-     "scorer:511409",
-     "scorer:607890",
-     "scorer:640277",
-     "scorer:663079",
-     "scorer:699537",
-     "scorer:800935"
-    ],
-    "lambda": 0.3,
-    "logLoss": 0.22145,
-    "foldSE": 0.00875,
-    "deltaVsBest": 0.005364,
-    "pairedSE": 0.002435,
-    "auc": 0.5946,
-    "brier": 0.0541
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "scorer:427131",
-     "scorer:427508",
-     "scorer:431022",
-     "scorer:431036",
-     "scorer:431038",
-     "scorer:431054",
-     "scorer:431058",
-     "scorer:431070",
-     "scorer:431080",
-     "scorer:431081",
-     "scorer:431083",
-     "scorer:431088",
-     "scorer:433298",
-     "scorer:434138",
-     "scorer:482386",
-     "scorer:482388",
-     "scorer:482394",
-     "scorer:493726",
-     "scorer:496999",
-     "scorer:501169",
-     "scorer:504025",
-     "scorer:511136",
-     "scorer:511409",
-     "scorer:607890",
-     "scorer:640277",
-     "scorer:663079",
-     "scorer:699537",
-     "scorer:800935"
-    ],
-    "lambda": 1,
-    "logLoss": 0.21961,
-    "foldSE": 0.00861,
-    "deltaVsBest": 0.003519,
-    "pairedSE": 0.00182,
-    "auc": 0.6034,
-    "brier": 0.05452
-   },
-   {
-    "terms": [
-     "logit_hit_prob",
-     "loc:P",
-     "loc:C",
-     "loc:1B",
-     "loc:3B",
-     "loc:OF",
-     "traj:line_drive",
-     "traj:fly_ball",
-     "traj:popup",
-     "traj:bunt",
-     "scorer:427131",
-     "scorer:427508",
-     "scorer:431022",
-     "scorer:431036",
-     "scorer:431038",
-     "scorer:431054",
-     "scorer:431058",
-     "scorer:431070",
-     "scorer:431080",
-     "scorer:431081",
-     "scorer:431083",
-     "scorer:431088",
-     "scorer:433298",
-     "scorer:434138",
-     "scorer:482386",
-     "scorer:482388",
-     "scorer:482394",
-     "scorer:493726",
-     "scorer:496999",
-     "scorer:501169",
-     "scorer:504025",
-     "scorer:511136",
-     "scorer:511409",
-     "scorer:607890",
-     "scorer:640277",
-     "scorer:663079",
-     "scorer:699537",
-     "scorer:800935"
-    ],
-    "lambda": 3,
-    "logLoss": 0.21937,
-    "foldSE": 0.00858,
-    "deltaVsBest": 0.003278,
-    "pairedSE": 0.001737,
-    "auc": 0.6135,
+    "logLoss": 0.21935,
+    "foldSE": 0.00881,
+    "deltaVsBest": 0.00376,
+    "pairedSE": 0.001893,
+    "auc": 0.6169,
     "brier": 0.05484
    },
    {
@@ -17560,6 +17209,357 @@
      "traj:fly_ball",
      "traj:popup",
      "traj:bunt",
+     "home:108",
+     "home:109",
+     "home:110",
+     "home:111",
+     "home:112",
+     "home:113",
+     "home:114",
+     "home:115",
+     "home:116",
+     "home:117",
+     "home:118",
+     "home:119",
+     "home:120",
+     "home:121",
+     "home:133",
+     "home:134",
+     "home:135",
+     "home:136",
+     "home:137",
+     "home:138",
+     "home:139",
+     "home:140",
+     "home:141",
+     "home:142",
+     "home:143",
+     "home:144",
+     "home:145",
+     "home:146",
+     "home:147",
+     "home:158"
+    ],
+    "lambda": 0.3,
+    "logLoss": 0.22204,
+    "foldSE": 0.00823,
+    "deltaVsBest": 0.006453,
+    "pairedSE": 0.00229,
+    "auc": 0.5816,
+    "brier": 0.05414
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "home:108",
+     "home:109",
+     "home:110",
+     "home:111",
+     "home:112",
+     "home:113",
+     "home:114",
+     "home:115",
+     "home:116",
+     "home:117",
+     "home:118",
+     "home:119",
+     "home:120",
+     "home:121",
+     "home:133",
+     "home:134",
+     "home:135",
+     "home:136",
+     "home:137",
+     "home:138",
+     "home:139",
+     "home:140",
+     "home:141",
+     "home:142",
+     "home:143",
+     "home:144",
+     "home:145",
+     "home:146",
+     "home:147",
+     "home:158"
+    ],
+    "lambda": 1,
+    "logLoss": 0.22082,
+    "foldSE": 0.0081,
+    "deltaVsBest": 0.005235,
+    "pairedSE": 0.00192,
+    "auc": 0.5896,
+    "brier": 0.05457
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "home:108",
+     "home:109",
+     "home:110",
+     "home:111",
+     "home:112",
+     "home:113",
+     "home:114",
+     "home:115",
+     "home:116",
+     "home:117",
+     "home:118",
+     "home:119",
+     "home:120",
+     "home:121",
+     "home:133",
+     "home:134",
+     "home:135",
+     "home:136",
+     "home:137",
+     "home:138",
+     "home:139",
+     "home:140",
+     "home:141",
+     "home:142",
+     "home:143",
+     "home:144",
+     "home:145",
+     "home:146",
+     "home:147",
+     "home:158"
+    ],
+    "lambda": 3,
+    "logLoss": 0.22,
+    "foldSE": 0.00809,
+    "deltaVsBest": 0.004415,
+    "pairedSE": 0.001819,
+    "auc": 0.6011,
+    "brier": 0.05484
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "home:108",
+     "home:109",
+     "home:110",
+     "home:111",
+     "home:112",
+     "home:113",
+     "home:114",
+     "home:115",
+     "home:116",
+     "home:117",
+     "home:118",
+     "home:119",
+     "home:120",
+     "home:121",
+     "home:133",
+     "home:134",
+     "home:135",
+     "home:136",
+     "home:137",
+     "home:138",
+     "home:139",
+     "home:140",
+     "home:141",
+     "home:142",
+     "home:143",
+     "home:144",
+     "home:145",
+     "home:146",
+     "home:147",
+     "home:158"
+    ],
+    "lambda": 10,
+    "logLoss": 0.21969,
+    "foldSE": 0.00839,
+    "deltaVsBest": 0.004101,
+    "pairedSE": 0.001978,
+    "auc": 0.6069,
+    "brier": 0.0549
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "scorer:427131",
+     "scorer:427508",
+     "scorer:431022",
+     "scorer:431036",
+     "scorer:431038",
+     "scorer:431054",
+     "scorer:431058",
+     "scorer:431070",
+     "scorer:431080",
+     "scorer:431081",
+     "scorer:431083",
+     "scorer:431088",
+     "scorer:433298",
+     "scorer:434138",
+     "scorer:482386",
+     "scorer:482388",
+     "scorer:482394",
+     "scorer:493726",
+     "scorer:496999",
+     "scorer:501169",
+     "scorer:504025",
+     "scorer:511136",
+     "scorer:511409",
+     "scorer:607890",
+     "scorer:640277",
+     "scorer:663079",
+     "scorer:699537",
+     "scorer:800935"
+    ],
+    "lambda": 0.3,
+    "logLoss": 0.22086,
+    "foldSE": 0.00886,
+    "deltaVsBest": 0.005267,
+    "pairedSE": 0.002431,
+    "auc": 0.5956,
+    "brier": 0.05393
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "scorer:427131",
+     "scorer:427508",
+     "scorer:431022",
+     "scorer:431036",
+     "scorer:431038",
+     "scorer:431054",
+     "scorer:431058",
+     "scorer:431070",
+     "scorer:431080",
+     "scorer:431081",
+     "scorer:431083",
+     "scorer:431088",
+     "scorer:433298",
+     "scorer:434138",
+     "scorer:482386",
+     "scorer:482388",
+     "scorer:482394",
+     "scorer:493726",
+     "scorer:496999",
+     "scorer:501169",
+     "scorer:504025",
+     "scorer:511136",
+     "scorer:511409",
+     "scorer:607890",
+     "scorer:640277",
+     "scorer:663079",
+     "scorer:699537",
+     "scorer:800935"
+    ],
+    "lambda": 1,
+    "logLoss": 0.21903,
+    "foldSE": 0.00871,
+    "deltaVsBest": 0.003445,
+    "pairedSE": 0.001815,
+    "auc": 0.6043,
+    "brier": 0.05435
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
+     "scorer:427131",
+     "scorer:427508",
+     "scorer:431022",
+     "scorer:431036",
+     "scorer:431038",
+     "scorer:431054",
+     "scorer:431058",
+     "scorer:431070",
+     "scorer:431080",
+     "scorer:431081",
+     "scorer:431083",
+     "scorer:431088",
+     "scorer:433298",
+     "scorer:434138",
+     "scorer:482386",
+     "scorer:482388",
+     "scorer:482394",
+     "scorer:493726",
+     "scorer:496999",
+     "scorer:501169",
+     "scorer:504025",
+     "scorer:511136",
+     "scorer:511409",
+     "scorer:607890",
+     "scorer:640277",
+     "scorer:663079",
+     "scorer:699537",
+     "scorer:800935"
+    ],
+    "lambda": 3,
+    "logLoss": 0.21881,
+    "foldSE": 0.00866,
+    "deltaVsBest": 0.003226,
+    "pairedSE": 0.001731,
+    "auc": 0.6142,
+    "brier": 0.05468
+   },
+   {
+    "terms": [
+     "logit_hit_prob",
+     "loc:P",
+     "loc:C",
+     "loc:1B",
+     "loc:3B",
+     "loc:OF",
+     "traj:line_drive",
+     "traj:fly_ball",
+     "traj:popup",
+     "traj:bunt",
      "scorer:427131",
      "scorer:427508",
      "scorer:431022",
@@ -17590,51 +17590,51 @@
      "scorer:800935"
     ],
     "lambda": 10,
-    "logLoss": 0.21992,
-    "foldSE": 0.00868,
-    "deltaVsBest": 0.003833,
-    "pairedSE": 0.001991,
-    "auc": 0.6117,
-    "brier": 0.05501
+    "logLoss": 0.21939,
+    "foldSE": 0.00876,
+    "deltaVsBest": 0.0038,
+    "pairedSE": 0.001984,
+    "auc": 0.6121,
+    "brier": 0.05484
    }
   ],
   "outOfTime": {
    "trainSeasons": "< 2026",
    "testSeason": 2026,
-   "n": 983,
+   "n": 993,
    "positives": 58,
-   "auc": 0.6475,
-   "logLoss": 0.21468,
-   "baseLogLoss": 0.22422,
-   "brier": 0.0538,
-   "baseBrier": 0.05552,
+   "auc": 0.6479,
+   "logLoss": 0.21307,
+   "baseLogLoss": 0.22257,
+   "brier": 0.0533,
+   "baseBrier": 0.055,
    "calibration": [
     {
      "band": "0–2",
-     "n": 18,
+     "n": 19,
      "predicted": 0.0095,
-     "observed": 0.0556,
+     "observed": 0.0526,
      "positives": 1
     },
     {
      "band": "2–5",
-     "n": 445,
-     "predicted": 0.038,
-     "observed": 0.036,
+     "n": 450,
+     "predicted": 0.0379,
+     "observed": 0.0356,
      "positives": 16
     },
     {
      "band": "5–10",
-     "n": 441,
-     "predicted": 0.0684,
-     "observed": 0.0703,
+     "n": 444,
+     "predicted": 0.0685,
+     "observed": 0.0698,
      "positives": 31
     },
     {
      "band": "10–20",
-     "n": 69,
-     "predicted": 0.1253,
-     "observed": 0.0725,
+     "n": 70,
+     "predicted": 0.1251,
+     "observed": 0.0714,
      "positives": 5
     },
     {
@@ -17665,9 +17665,9 @@
    "byHitProbability": [
     {
      "key": "0.00–0.10",
-     "n": 950,
+     "n": 956,
      "positives": 38,
-     "rate": 0.04
+     "rate": 0.0397
     },
     {
      "key": "0.10–0.20",
@@ -17677,15 +17677,15 @@
     },
     {
      "key": "0.20–0.35",
-     "n": 875,
+     "n": 878,
      "positives": 48,
-     "rate": 0.0549
+     "rate": 0.0547
     },
     {
      "key": "0.35–0.50",
-     "n": 324,
+     "n": 325,
      "positives": 29,
-     "rate": 0.0895
+     "rate": 0.0892
     },
     {
      "key": "0.50–0.70",
@@ -17703,27 +17703,27 @@
    "byFielder": [
     {
      "key": "3B",
-     "n": 977,
+     "n": 979,
      "positives": 60,
-     "rate": 0.0614
+     "rate": 0.0613
     },
     {
      "key": "SS",
-     "n": 878,
+     "n": 881,
      "positives": 33,
-     "rate": 0.0376
+     "rate": 0.0375
     },
     {
      "key": "2B",
-     "n": 471,
+     "n": 473,
      "positives": 30,
-     "rate": 0.0637
+     "rate": 0.0634
     },
     {
      "key": "1B",
-     "n": 392,
+     "n": 394,
      "positives": 29,
-     "rate": 0.074
+     "rate": 0.0736
     },
     {
      "key": "P",
@@ -17733,9 +17733,9 @@
     },
     {
      "key": "OF",
-     "n": 217,
+     "n": 218,
      "positives": 21,
-     "rate": 0.0968
+     "rate": 0.0963
     },
     {
      "key": "C",
@@ -17753,15 +17753,15 @@
    "byTrajectory": [
     {
      "key": "ground_ball",
-     "n": 2842,
+     "n": 2850,
      "positives": 169,
-     "rate": 0.0595
+     "rate": 0.0593
     },
     {
      "key": "fly_ball",
-     "n": 151,
+     "n": 152,
      "positives": 4,
-     "rate": 0.0265
+     "rate": 0.0263
     },
     {
      "key": "line_drive",
@@ -17771,9 +17771,9 @@
     },
     {
      "key": "popup",
-     "n": 70,
+     "n": 71,
      "positives": 2,
-     "rate": 0.0286
+     "rate": 0.0282
     },
     {
      "key": "bunt",
@@ -17797,9 +17797,9 @@
     },
     {
      "key": 2026,
-     "n": 983,
+     "n": 993,
      "positives": 58,
-     "rate": 0.059
+     "rate": 0.0584
     }
    ],
    "byHomeClub": [
@@ -17823,9 +17823,9 @@
     },
     {
      "key": "CWS",
-     "n": 121,
+     "n": 123,
      "positives": 4,
-     "rate": 0.0331
+     "rate": 0.0325
     },
     {
      "key": "MIL",
@@ -17835,15 +17835,15 @@
     },
     {
      "key": "COL",
-     "n": 118,
+     "n": 119,
      "positives": 7,
-     "rate": 0.0593
+     "rate": 0.0588
     },
     {
      "key": "LAA",
-     "n": 118,
+     "n": 119,
      "positives": 9,
-     "rate": 0.0763
+     "rate": 0.0756
     },
     {
      "key": "PHI",
@@ -17858,16 +17858,16 @@
      "rate": 0.0351
     },
     {
+     "key": "PIT",
+     "n": 114,
+     "positives": 5,
+     "rate": 0.0439
+    },
+    {
      "key": "MIA",
      "n": 113,
      "positives": 4,
      "rate": 0.0354
-    },
-    {
-     "key": "PIT",
-     "n": 113,
-     "positives": 5,
-     "rate": 0.0442
     },
     {
      "key": "CLE",
@@ -17876,16 +17876,16 @@
      "rate": 0.0541
     },
     {
+     "key": "HOU",
+     "n": 110,
+     "positives": 9,
+     "rate": 0.0818
+    },
+    {
      "key": "NYY",
      "n": 110,
      "positives": 6,
      "rate": 0.0545
-    },
-    {
-     "key": "HOU",
-     "n": 109,
-     "positives": 9,
-     "rate": 0.0826
     },
     {
      "key": "LAD",
@@ -17901,9 +17901,9 @@
     },
     {
      "key": "TB",
-     "n": 102,
+     "n": 103,
      "positives": 6,
-     "rate": 0.0588
+     "rate": 0.0583
     },
     {
      "key": "CIN",
@@ -17936,22 +17936,22 @@
      "rate": 0.0947
     },
     {
+     "key": "AZ",
+     "n": 95,
+     "positives": 4,
+     "rate": 0.0421
+    },
+    {
      "key": "SD",
      "n": 94,
      "positives": 5,
      "rate": 0.0532
     },
     {
-     "key": "AZ",
-     "n": 94,
-     "positives": 4,
-     "rate": 0.0426
-    },
-    {
      "key": "STL",
-     "n": 93,
+     "n": 94,
      "positives": 13,
-     "rate": 0.1398
+     "rate": 0.1383
     },
     {
      "key": "SEA",
@@ -17967,9 +17967,9 @@
     },
     {
      "key": "TEX",
-     "n": 83,
+     "n": 84,
      "positives": 4,
-     "rate": 0.0482
+     "rate": 0.0476
     },
     {
      "key": "ATH",
@@ -18020,8 +18020,8 @@
   ],
   "errorKind": {
    "stoodByKind": {
-    "fielding": 1837,
-    "throwing": 1014,
+    "fielding": 1845,
+    "throwing": 1016,
     "missed_catch": 150,
     "shift_violation": 2,
     "unknown": 1
@@ -18036,20 +18036,20 @@
    "impliedRelativeRate": {
     "fielding": {
      "shareOfChangedWithStatedType": 0.519,
-     "shareOfErrorsThatStood": 0.612,
+     "shareOfErrorsThatStood": 0.613,
      "ratio": 0.85,
      "changedStated": 28
     },
     "throwing": {
      "shareOfChangedWithStatedType": 0.37,
-     "shareOfErrorsThatStood": 0.338,
+     "shareOfErrorsThatStood": 0.337,
      "ratio": 1.1,
      "changedStated": 20
     },
     "missed_catch": {
      "shareOfChangedWithStatedType": 0.111,
      "shareOfErrorsThatStood": 0.05,
-     "ratio": 2.22,
+     "ratio": 2.23,
      "changedStated": 6
     }
    },
@@ -18087,52 +18087,52 @@
    "traj:bunt"
   ],
   "lambda": 1,
-  "intercept": -8.487964,
+  "intercept": -8.488518,
   "coef": [
-   -0.447993,
-   3.078379,
-   -0.255605,
-   0.352585,
-   -0.59995,
-   -1.034013
+   -0.451256,
+   3.081791,
+   -0.257654,
+   0.343819,
+   -0.613219,
+   -1.039562
   ],
   "termMeans": {
-   "logit_hit_prob": 0.42865,
-   "infield": 0.13751,
-   "traj:line_drive": 0.52346,
-   "traj:fly_ball": 0.09408,
-   "traj:popup": 0.00362,
-   "traj:bunt": 0.01165
+   "logit_hit_prob": 0.42885,
+   "infield": 0.1375,
+   "traj:line_drive": 0.52352,
+   "traj:fly_ball": 0.09407,
+   "traj:popup": 0.00363,
+   "traj:bunt": 0.01163
   },
-  "baseRate": 0.00121,
-  "n": 102345,
-  "positives": 124,
+  "baseRate": 0.00122,
+  "n": 102573,
+  "positives": 125,
   "cv": {
    "folds": 10,
-   "logLoss": 0.00743,
-   "baseLogLoss": 0.00935,
-   "auc": 0.9147,
-   "brier": 0.0012,
-   "baseBrier": 0.00121,
+   "logLoss": 0.00746,
+   "baseLogLoss": 0.0094,
+   "auc": 0.9152,
+   "brier": 0.00121,
+   "baseBrier": 0.00122,
    "calibration": [
     {
      "band": "0–2",
-     "n": 102182,
+     "n": 102398,
      "predicted": 0.0012,
      "observed": 0.0012,
-     "positives": 122
+     "positives": 123
     },
     {
      "band": "2–5",
-     "n": 156,
-     "predicted": 0.0261,
-     "observed": 0.0128,
+     "n": 168,
+     "predicted": 0.0259,
+     "observed": 0.0119,
      "positives": 2
     },
     {
      "band": "5–10",
      "n": 7,
-     "predicted": 0.0628,
+     "predicted": 0.0635,
      "observed": 0,
      "positives": 0
     },
@@ -18167,40 +18167,40 @@
    ]
   },
   "selectionRule": "simplest model within one standard error (paired per-play log-loss differences vs the best candidate) under 10-fold cross-validation grouped by game",
-  "bestLogLoss": 0.00743,
+  "bestLogLoss": 0.00746,
   "selection": [
    {
     "terms": [],
     "lambda": 1,
-    "logLoss": 0.00936,
+    "logLoss": 0.00941,
     "foldSE": 0.00088,
-    "deltaVsBest": 0.001928,
-    "pairedSE": 0.000213,
-    "auc": 0.4095,
-    "brier": 0.00121
+    "deltaVsBest": 0.001945,
+    "pairedSE": 0.000214,
+    "auc": 0.4093,
+    "brier": 0.00122
    },
    {
     "terms": [
      "logit_hit_prob"
     ],
     "lambda": 1,
-    "logLoss": 0.00842,
+    "logLoss": 0.00846,
     "foldSE": 0.00078,
-    "deltaVsBest": 0.000984,
+    "deltaVsBest": 0.000992,
     "pairedSE": 0.000142,
-    "auc": 0.827,
-    "brier": 0.00121
+    "auc": 0.828,
+    "brier": 0.00122
    },
    {
     "terms": [
      "logit_hit_prob"
     ],
     "lambda": 10,
-    "logLoss": 0.00842,
+    "logLoss": 0.00846,
     "foldSE": 0.00078,
-    "deltaVsBest": 0.000985,
-    "pairedSE": 0.000141,
-    "auc": 0.8269,
+    "deltaVsBest": 0.000993,
+    "pairedSE": 0.000142,
+    "auc": 0.8279,
     "brier": 0.00121
    },
    {
@@ -18209,12 +18209,12 @@
      "infield"
     ],
     "lambda": 1,
-    "logLoss": 0.00747,
+    "logLoss": 0.0075,
     "foldSE": 0.00062,
     "deltaVsBest": 0.000032,
     "pairedSE": 0.000023,
-    "auc": 0.9133,
-    "brier": 0.0012
+    "auc": 0.9138,
+    "brier": 0.00121
    },
    {
     "terms": [
@@ -18222,12 +18222,12 @@
      "infield"
     ],
     "lambda": 10,
-    "logLoss": 0.00758,
+    "logLoss": 0.00761,
     "foldSE": 0.00065,
-    "deltaVsBest": 0.000145,
+    "deltaVsBest": 0.000146,
     "pairedSE": 0.000046,
-    "auc": 0.915,
-    "brier": 0.0012
+    "auc": 0.9155,
+    "brier": 0.00121
    },
    {
     "terms": [
@@ -18239,12 +18239,12 @@
      "traj:bunt"
     ],
     "lambda": 1,
-    "logLoss": 0.00743,
-    "foldSE": 0.00062,
+    "logLoss": 0.00746,
+    "foldSE": 0.00063,
     "deltaVsBest": 0,
     "pairedSE": 0,
-    "auc": 0.9147,
-    "brier": 0.0012
+    "auc": 0.9152,
+    "brier": 0.00121
    },
    {
     "terms": [
@@ -18256,12 +18256,12 @@
      "traj:bunt"
     ],
     "lambda": 10,
-    "logLoss": 0.00756,
+    "logLoss": 0.00759,
     "foldSE": 0.00065,
     "deltaVsBest": 0.000129,
-    "pairedSE": 0.000039,
-    "auc": 0.9129,
-    "brier": 0.0012
+    "pairedSE": 0.000038,
+    "auc": 0.9134,
+    "brier": 0.00121
    },
    {
     "terms": [
@@ -18278,12 +18278,12 @@
      "ev_z"
     ],
     "lambda": 1,
-    "logLoss": 0.00752,
+    "logLoss": 0.00754,
     "foldSE": 0.00063,
     "deltaVsBest": 0.00008,
-    "pairedSE": 0.000035,
-    "auc": 0.9094,
-    "brier": 0.0012
+    "pairedSE": 0.000034,
+    "auc": 0.9099,
+    "brier": 0.00121
    },
    {
     "terms": [
@@ -18300,31 +18300,31 @@
      "ev_z"
     ],
     "lambda": 10,
-    "logLoss": 0.0076,
+    "logLoss": 0.00763,
     "foldSE": 0.00066,
     "deltaVsBest": 0.00017,
-    "pairedSE": 0.000045,
-    "auc": 0.911,
-    "brier": 0.0012
+    "pairedSE": 0.000044,
+    "auc": 0.9115,
+    "brier": 0.00121
    }
   ],
   "outOfTime": {
    "trainSeasons": "< 2026",
    "testSeason": 2026,
-   "n": 32355,
-   "positives": 50,
-   "auc": 0.9373,
-   "logLoss": 0.00906,
-   "baseLogLoss": 0.01165,
-   "brier": 0.00153,
-   "baseBrier": 0.00154,
+   "n": 32583,
+   "positives": 51,
+   "auc": 0.938,
+   "logLoss": 0.00915,
+   "baseLogLoss": 0.01178,
+   "brier": 0.00155,
+   "baseBrier": 0.00156,
    "calibration": [
     {
      "band": "0–2",
-     "n": 32292,
+     "n": 32520,
      "predicted": 0.001,
-     "observed": 0.0015,
-     "positives": 50
+     "observed": 0.0016,
+     "positives": 51
     },
     {
      "band": "2–5",
@@ -18375,37 +18375,37 @@
    "byHitProbability": [
     {
      "key": "0.00–0.10",
-     "n": 3905,
+     "n": 3911,
      "positives": 42,
-     "rate": 0.0108
+     "rate": 0.0107
     },
     {
      "key": "0.10–0.20",
-     "n": 6495,
-     "positives": 18,
-     "rate": 0.0028
+     "n": 6511,
+     "positives": 19,
+     "rate": 0.0029
     },
     {
      "key": "0.20–0.35",
-     "n": 15622,
+     "n": 15648,
      "positives": 34,
      "rate": 0.0022
     },
     {
      "key": "0.35–0.50",
-     "n": 13352,
+     "n": 13387,
      "positives": 11,
      "rate": 0.0008
     },
     {
      "key": "0.50–0.70",
-     "n": 25516,
+     "n": 25578,
      "positives": 18,
      "rate": 0.0007
     },
     {
      "key": "0.70–1.00",
-     "n": 37455,
+     "n": 37538,
      "positives": 1,
      "rate": 0
     }
@@ -18413,37 +18413,37 @@
    "byFielder": [
     {
      "key": "OF",
-     "n": 87000,
+     "n": 87197,
      "positives": 13,
      "rate": 0.0001
     },
     {
      "key": "3B",
-     "n": 4336,
-     "positives": 31,
-     "rate": 0.0071
+     "n": 4347,
+     "positives": 32,
+     "rate": 0.0074
     },
     {
      "key": "SS",
-     "n": 3599,
+     "n": 3608,
      "positives": 32,
      "rate": 0.0089
     },
     {
      "key": "2B",
-     "n": 2647,
+     "n": 2652,
      "positives": 23,
      "rate": 0.0087
     },
     {
      "key": "P",
-     "n": 2008,
+     "n": 2011,
      "positives": 11,
      "rate": 0.0055
     },
     {
      "key": "1B",
-     "n": 1283,
+     "n": 1286,
      "positives": 13,
      "rate": 0.0101
     },
@@ -18463,31 +18463,31 @@
    "byTrajectory": [
     {
      "key": "line_drive",
-     "n": 53574,
+     "n": 53699,
      "positives": 8,
      "rate": 0.0001
     },
     {
      "key": "ground_ball",
-     "n": 37578,
-     "positives": 103,
-     "rate": 0.0027
+     "n": 37659,
+     "positives": 104,
+     "rate": 0.0028
     },
     {
      "key": "fly_ball",
-     "n": 9629,
+     "n": 9649,
      "positives": 9,
      "rate": 0.0009
     },
     {
      "key": "bunt",
-     "n": 1192,
+     "n": 1193,
      "positives": 2,
      "rate": 0.0017
     },
     {
      "key": "popup",
-     "n": 371,
+     "n": 372,
      "positives": 2,
      "rate": 0.0054
     },
@@ -18513,9 +18513,9 @@
     },
     {
      "key": 2026,
-     "n": 32355,
-     "positives": 50,
-     "rate": 0.0015
+     "n": 32583,
+     "positives": 51,
+     "rate": 0.0016
     }
    ]
   },
@@ -18575,7 +18575,7 @@
    2025,
    2026
   ],
-  "labelCutoff": "2026-09-17",
+  "labelCutoff": "2026-09-18",
   "note": "Labels come from MLB's official scoring-change log. Changes made during a game may not appear in it; the live capture (data/capture) records them directly."
  },
  "sources": [
@@ -18633,23 +18633,23 @@
    ],
    "method": "permutation test (group labels shuffled across plays) of Σ (observed − expected)² / variance, expected from out-of-fold model probabilities; plus a cross-validated candidate model with one term per group (≥ 40 plays)",
    "scorer": {
-    "playsWithScorer": 3200,
+    "playsWithScorer": 3210,
     "test": {
      "groups": 101,
-     "plays": 3200,
+     "plays": 3210,
      "positives": 189,
-     "statistic": 103.882,
-     "dispersion": 1.029,
-     "pValue": 0.3588,
+     "statistic": 104.358,
+     "dispersion": 1.033,
+     "pValue": 0.3523,
      "permutations": 2000,
      "seed": 20260924
     },
     "cv": {
      "tested": true,
      "groupsInCandidate": 28,
-     "logLoss": 0.21937,
-     "deltaVsBest": 0.003278,
-     "pairedSE": 0.001737,
+     "logLoss": 0.21881,
+     "deltaVsBest": 0.003226,
+     "pairedSE": 0.001731,
      "selected": false
     },
     "verdict": "no detectable difference — not used",
@@ -18657,10 +18657,10 @@
      {
       "key": "431054",
       "label": "Ed Munson",
-      "n": 93,
+      "n": 94,
       "observed": 6,
       "expected": 6.11,
-      "ratio": 0.982,
+      "ratio": 0.983,
       "shrunkRatio": 0.993
      },
      {
@@ -18668,8 +18668,8 @@
       "label": "Bill Seiple",
       "n": 73,
       "observed": 1,
-      "expected": 4.05,
-      "ratio": 0.247,
+      "expected": 4.04,
+      "ratio": 0.248,
       "shrunkRatio": 0.783
      },
      {
@@ -18677,9 +18677,18 @@
       "label": "Tim O'Driscoll",
       "n": 60,
       "observed": 6,
-      "expected": 3.84,
-      "ratio": 1.564,
-      "shrunkRatio": 1.156
+      "expected": 3.82,
+      "ratio": 1.569,
+      "shrunkRatio": 1.157
+     },
+     {
+      "key": "482388",
+      "label": "Bill Mathews",
+      "n": 57,
+      "observed": 4,
+      "expected": 3.51,
+      "ratio": 1.141,
+      "shrunkRatio": 1.037
      },
      {
       "key": "504025",
@@ -18687,16 +18696,16 @@
       "n": 57,
       "observed": 4,
       "expected": 3.34,
-      "ratio": 1.196,
-      "shrunkRatio": 1.049
+      "ratio": 1.199,
+      "shrunkRatio": 1.05
      },
      {
       "key": "431083",
       "label": "Jordan Sprechman",
       "n": 57,
       "observed": 5,
-      "expected": 3.29,
-      "ratio": 1.52,
+      "expected": 3.28,
+      "ratio": 1.524,
       "shrunkRatio": 1.129
      },
      {
@@ -18704,26 +18713,17 @@
       "label": "Benjamin Trittipoe",
       "n": 56,
       "observed": 4,
-      "expected": 3.45,
-      "ratio": 1.158,
+      "expected": 3.44,
+      "ratio": 1.162,
       "shrunkRatio": 1.041
-     },
-     {
-      "key": "482388",
-      "label": "Bill Mathews",
-      "n": 56,
-      "observed": 4,
-      "expected": 3.47,
-      "ratio": 1.151,
-      "shrunkRatio": 1.039
      },
      {
       "key": "427508",
       "label": "Stew Thornley",
       "n": 56,
       "observed": 2,
-      "expected": 3.41,
-      "ratio": 0.586,
+      "expected": 3.4,
+      "ratio": 0.588,
       "shrunkRatio": 0.895
      },
      {
@@ -18731,9 +18731,9 @@
       "label": "John Jackson",
       "n": 55,
       "observed": 6,
-      "expected": 3.68,
-      "ratio": 1.632,
-      "shrunkRatio": 1.17
+      "expected": 3.66,
+      "ratio": 1.638,
+      "shrunkRatio": 1.171
      },
      {
       "key": "699537",
@@ -18741,8 +18741,8 @@
       "n": 54,
       "observed": 4,
       "expected": 2.93,
-      "ratio": 1.363,
-      "shrunkRatio": 1.082
+      "ratio": 1.367,
+      "shrunkRatio": 1.083
      },
      {
       "key": "511136",
@@ -18750,7 +18750,7 @@
       "n": 53,
       "observed": 1,
       "expected": 2.97,
-      "ratio": 0.336,
+      "ratio": 0.337,
       "shrunkRatio": 0.848
      },
      {
@@ -18759,7 +18759,7 @@
       "n": 53,
       "observed": 2,
       "expected": 3.03,
-      "ratio": 0.659,
+      "ratio": 0.661,
       "shrunkRatio": 0.921
      },
      {
@@ -18767,8 +18767,8 @@
       "label": "Howie Karpin",
       "n": 52,
       "observed": 4,
-      "expected": 3.11,
-      "ratio": 1.285,
+      "expected": 3.1,
+      "ratio": 1.289,
       "shrunkRatio": 1.068
      },
      {
@@ -18776,35 +18776,44 @@
       "label": "Michael Duca",
       "n": 50,
       "observed": 6,
-      "expected": 2.78,
-      "ratio": 2.157,
-      "shrunkRatio": 1.252
+      "expected": 2.77,
+      "ratio": 2.163,
+      "shrunkRatio": 1.253
      },
      {
       "key": "607890",
       "label": "Jason Johnson",
-      "n": 48,
+      "n": 49,
       "observed": 1,
-      "expected": 2.79,
-      "ratio": 0.358,
-      "shrunkRatio": 0.86
+      "expected": 2.86,
+      "ratio": 0.349,
+      "shrunkRatio": 0.855
      },
      {
       "key": "431022",
       "label": "Dave Einspahr",
       "n": 47,
       "observed": 2,
-      "expected": 2.47,
-      "ratio": 0.811,
+      "expected": 2.46,
+      "ratio": 0.814,
       "shrunkRatio": 0.963
+     },
+     {
+      "key": "431081",
+      "label": "Allan Spear",
+      "n": 46,
+      "observed": 1,
+      "expected": 2.69,
+      "ratio": 0.372,
+      "shrunkRatio": 0.867
      },
      {
       "key": "434138",
       "label": "Billy Altman",
       "n": 45,
       "observed": 4,
-      "expected": 3.3,
-      "ratio": 1.212,
+      "expected": 3.29,
+      "ratio": 1.216,
       "shrunkRatio": 1.053
      },
      {
@@ -18812,26 +18821,17 @@
       "label": "Jason Lee",
       "n": 45,
       "observed": 1,
-      "expected": 2.5,
-      "ratio": 0.4,
+      "expected": 2.49,
+      "ratio": 0.401,
       "shrunkRatio": 0.88
-     },
-     {
-      "key": "431081",
-      "label": "Allan Spear",
-      "n": 44,
-      "observed": 1,
-      "expected": 2.54,
-      "ratio": 0.393,
-      "shrunkRatio": 0.877
      },
      {
       "key": "511409",
       "label": "Chris Johnson",
       "n": 44,
       "observed": 4,
-      "expected": 2.3,
-      "ratio": 1.743,
+      "expected": 2.29,
+      "ratio": 1.749,
       "shrunkRatio": 1.139
      },
      {
@@ -18839,8 +18839,8 @@
       "label": "Ron Jernick",
       "n": 44,
       "observed": 2,
-      "expected": 2.44,
-      "ratio": 0.82,
+      "expected": 2.43,
+      "ratio": 0.822,
       "shrunkRatio": 0.965
      },
      {
@@ -18849,7 +18849,7 @@
       "n": 43,
       "observed": 1,
       "expected": 2.63,
-      "ratio": 0.38,
+      "ratio": 0.381,
       "shrunkRatio": 0.871
      },
      {
@@ -18858,7 +18858,7 @@
       "n": 42,
       "observed": 2,
       "expected": 2.58,
-      "ratio": 0.774,
+      "ratio": 0.776,
       "shrunkRatio": 0.954
      },
      {
@@ -18867,16 +18867,25 @@
       "n": 42,
       "observed": 3,
       "expected": 3.07,
-      "ratio": 0.977,
+      "ratio": 0.978,
       "shrunkRatio": 0.995
+     },
+     {
+      "key": "431088",
+      "label": "Bob Webb",
+      "n": 41,
+      "observed": 1,
+      "expected": 2.47,
+      "ratio": 0.404,
+      "shrunkRatio": 0.882
      },
      {
       "key": "433298",
       "label": "Eric Radovich",
       "n": 41,
       "observed": 3,
-      "expected": 2.41,
-      "ratio": 1.245,
+      "expected": 2.4,
+      "ratio": 1.249,
       "shrunkRatio": 1.048
      },
      {
@@ -18885,7 +18894,7 @@
       "n": 41,
       "observed": 1,
       "expected": 2.21,
-      "ratio": 0.452,
+      "ratio": 0.453,
       "shrunkRatio": 0.901
      },
      {
@@ -18893,26 +18902,17 @@
       "label": "Ron Kleinfelter",
       "n": 41,
       "observed": 0,
-      "expected": 2,
+      "expected": 1.99,
       "ratio": 0,
-      "shrunkRatio": 0.833
-     },
-     {
-      "key": "431088",
-      "label": "Bob Webb",
-      "n": 40,
-      "observed": 1,
-      "expected": 2.37,
-      "ratio": 0.421,
-      "shrunkRatio": 0.889
+      "shrunkRatio": 0.834
      },
      {
       "key": "431084",
       "label": "Mike Stamus",
       "n": 39,
       "observed": 1,
-      "expected": 2.27,
-      "ratio": 0.441,
+      "expected": 2.26,
+      "ratio": 0.443,
       "shrunkRatio": 0.897
      },
      {
@@ -18920,8 +18920,8 @@
       "label": "Chad Broski",
       "n": 37,
       "observed": 3,
-      "expected": 2.2,
-      "ratio": 1.364,
+      "expected": 2.19,
+      "ratio": 1.368,
       "shrunkRatio": 1.066
      },
      {
@@ -18930,7 +18930,7 @@
       "n": 37,
       "observed": 2,
       "expected": 1.99,
-      "ratio": 1.004,
+      "ratio": 1.006,
       "shrunkRatio": 1.001
      },
      {
@@ -18938,8 +18938,8 @@
       "label": "Roger Lajoie",
       "n": 37,
       "observed": 2,
-      "expected": 2.27,
-      "ratio": 0.881,
+      "expected": 2.26,
+      "ratio": 0.883,
       "shrunkRatio": 0.978
      },
      {
@@ -18947,8 +18947,8 @@
       "label": "Chris Thoms",
       "n": 36,
       "observed": 1,
-      "expected": 1.87,
-      "ratio": 0.535,
+      "expected": 1.86,
+      "ratio": 0.537,
       "shrunkRatio": 0.927
      },
      {
@@ -18957,16 +18957,16 @@
       "n": 36,
       "observed": 4,
       "expected": 2.25,
-      "ratio": 1.775,
-      "shrunkRatio": 1.142
+      "ratio": 1.78,
+      "shrunkRatio": 1.143
      },
      {
       "key": "636643",
       "label": "Tim Clodjeaux",
       "n": 36,
       "observed": 2,
-      "expected": 1.91,
-      "ratio": 1.048,
+      "expected": 1.9,
+      "ratio": 1.051,
       "shrunkRatio": 1.008
      },
      {
@@ -18974,8 +18974,8 @@
       "label": "Dan Zibell",
       "n": 35,
       "observed": 1,
-      "expected": 1.95,
-      "ratio": 0.514,
+      "expected": 1.94,
+      "ratio": 0.515,
       "shrunkRatio": 0.921
      },
      {
@@ -18984,8 +18984,8 @@
       "n": 35,
       "observed": 3,
       "expected": 2.11,
-      "ratio": 1.42,
-      "shrunkRatio": 1.073
+      "ratio": 1.423,
+      "shrunkRatio": 1.074
      },
      {
       "key": "670603",
@@ -18993,26 +18993,26 @@
       "n": 35,
       "observed": 2,
       "expected": 1.97,
-      "ratio": 1.014,
-      "shrunkRatio": 1.002
+      "ratio": 1.016,
+      "shrunkRatio": 1.003
      },
      {
       "key": "680379",
       "label": "John Maffei",
       "n": 35,
       "observed": 2,
-      "expected": 1.94,
-      "ratio": 1.032,
-      "shrunkRatio": 1.005
+      "expected": 1.93,
+      "ratio": 1.034,
+      "shrunkRatio": 1.006
      },
      {
       "key": "482170",
       "label": "Mark Honbo",
       "n": 35,
       "observed": 3,
-      "expected": 1.83,
-      "ratio": 1.642,
-      "shrunkRatio": 1.099
+      "expected": 1.82,
+      "ratio": 1.646,
+      "shrunkRatio": 1.1
      },
      {
       "key": "681131",
@@ -19020,16 +19020,16 @@
       "n": 34,
       "observed": 2,
       "expected": 2.4,
-      "ratio": 0.832,
-      "shrunkRatio": 0.967
+      "ratio": 0.833,
+      "shrunkRatio": 0.968
      },
      {
       "key": "800937",
       "label": "Jay D'Abramo",
       "n": 34,
       "observed": 1,
-      "expected": 2.08,
-      "ratio": 0.481,
+      "expected": 2.07,
+      "ratio": 0.483,
       "shrunkRatio": 0.911
      },
      {
@@ -19037,7 +19037,7 @@
       "label": "Shawn Medeiros",
       "n": 34,
       "observed": 0,
-      "expected": 2.13,
+      "expected": 2.12,
       "ratio": 0,
       "shrunkRatio": 0.825
      },
@@ -19046,8 +19046,8 @@
       "label": "Adam Liberman",
       "n": 33,
       "observed": 2,
-      "expected": 1.75,
-      "ratio": 1.146,
+      "expected": 1.74,
+      "ratio": 1.149,
       "shrunkRatio": 1.022
      },
      {
@@ -19056,16 +19056,16 @@
       "n": 33,
       "observed": 3,
       "expected": 2.21,
-      "ratio": 1.356,
-      "shrunkRatio": 1.064
+      "ratio": 1.36,
+      "shrunkRatio": 1.065
      },
      {
       "key": "573949",
       "label": "Charlie McCarthy",
       "n": 32,
       "observed": 1,
-      "expected": 1.82,
-      "ratio": 0.551,
+      "expected": 1.81,
+      "ratio": 0.552,
       "shrunkRatio": 0.931
      },
      {
@@ -19074,8 +19074,8 @@
       "n": 32,
       "observed": 3,
       "expected": 2.02,
-      "ratio": 1.483,
-      "shrunkRatio": 1.081
+      "ratio": 1.485,
+      "shrunkRatio": 1.082
      },
      {
       "key": "814501",
@@ -19083,7 +19083,7 @@
       "n": 32,
       "observed": 6,
       "expected": 2.03,
-      "ratio": 2.952,
+      "ratio": 2.959,
       "shrunkRatio": 1.33
      },
      {
@@ -19092,7 +19092,7 @@
       "n": 32,
       "observed": 2,
       "expected": 1.56,
-      "ratio": 1.28,
+      "ratio": 1.283,
       "shrunkRatio": 1.038
      },
      {
@@ -19100,18 +19100,18 @@
       "label": "David Feldman",
       "n": 31,
       "observed": 2,
-      "expected": 1.88,
-      "ratio": 1.063,
-      "shrunkRatio": 1.01
+      "expected": 1.87,
+      "ratio": 1.067,
+      "shrunkRatio": 1.011
      },
      {
       "key": "603873",
       "label": "David Vatz",
       "n": 31,
       "observed": 1,
-      "expected": 1.8,
-      "ratio": 0.556,
-      "shrunkRatio": 0.932
+      "expected": 1.79,
+      "ratio": 0.557,
+      "shrunkRatio": 0.933
      },
      {
       "key": "541663",
@@ -19119,7 +19119,7 @@
       "n": 31,
       "observed": 1,
       "expected": 2,
-      "ratio": 0.5,
+      "ratio": 0.501,
       "shrunkRatio": 0.917
      },
      {
@@ -19128,8 +19128,8 @@
       "n": 31,
       "observed": 2,
       "expected": 1.69,
-      "ratio": 1.181,
-      "shrunkRatio": 1.026
+      "ratio": 1.184,
+      "shrunkRatio": 1.027
      },
      {
       "key": "431091",
@@ -19137,26 +19137,35 @@
       "n": 31,
       "observed": 4,
       "expected": 2.2,
-      "ratio": 1.816,
-      "shrunkRatio": 1.147
+      "ratio": 1.82,
+      "shrunkRatio": 1.148
+     },
+     {
+      "key": "431047",
+      "label": "Dave Matheson",
+      "n": 30,
+      "observed": 4,
+      "expected": 1.67,
+      "ratio": 2.391,
+      "shrunkRatio": 1.199
      },
      {
       "key": "431085",
       "label": "Howard Starkman",
       "n": 30,
       "observed": 0,
-      "expected": 2.02,
+      "expected": 2.01,
       "ratio": 0,
-      "shrunkRatio": 0.832
+      "shrunkRatio": 0.833
      },
      {
-      "key": "431047",
-      "label": "Dave Matheson",
+      "key": "823823",
+      "label": "Lauren Wiser",
       "n": 29,
-      "observed": 4,
-      "expected": 1.65,
-      "ratio": 2.428,
-      "shrunkRatio": 1.202
+      "observed": 1,
+      "expected": 1.69,
+      "ratio": 0.592,
+      "shrunkRatio": 0.941
      },
      {
       "key": "661298",
@@ -19165,25 +19174,16 @@
       "observed": 0,
       "expected": 1.62,
       "ratio": 0,
-      "shrunkRatio": 0.86
+      "shrunkRatio": 0.861
      },
      {
       "key": "800936",
       "label": "Frank Johnson",
       "n": 28,
       "observed": 1,
-      "expected": 1.59,
-      "ratio": 0.63,
-      "shrunkRatio": 0.949
-     },
-     {
-      "key": "823823",
-      "label": "Lauren Wiser",
-      "n": 28,
-      "observed": 1,
-      "expected": 1.66,
-      "ratio": 0.604,
-      "shrunkRatio": 0.944
+      "expected": 1.58,
+      "ratio": 0.632,
+      "shrunkRatio": 0.95
      },
      {
       "key": "640298",
@@ -19191,7 +19191,7 @@
       "n": 28,
       "observed": 1,
       "expected": 1.68,
-      "ratio": 0.595,
+      "ratio": 0.596,
       "shrunkRatio": 0.942
      },
      {
@@ -19199,8 +19199,8 @@
       "label": "Rick Blount",
       "n": 28,
       "observed": 1,
-      "expected": 1.62,
-      "ratio": 0.619,
+      "expected": 1.61,
+      "ratio": 0.621,
       "shrunkRatio": 0.947
      },
      {
@@ -19209,7 +19209,7 @@
       "n": 27,
       "observed": 2,
       "expected": 1.56,
-      "ratio": 1.282,
+      "ratio": 1.285,
       "shrunkRatio": 1.038
      },
      {
@@ -19218,7 +19218,7 @@
       "n": 27,
       "observed": 2,
       "expected": 1.65,
-      "ratio": 1.209,
+      "ratio": 1.212,
       "shrunkRatio": 1.03
      },
      {
@@ -19226,8 +19226,8 @@
       "label": "Mike Maconi",
       "n": 27,
       "observed": 2,
-      "expected": 1.38,
-      "ratio": 1.454,
+      "expected": 1.37,
+      "ratio": 1.458,
       "shrunkRatio": 1.055
      },
      {
@@ -19246,16 +19246,16 @@
       "observed": 0,
       "expected": 1.33,
       "ratio": 0,
-      "shrunkRatio": 0.882
+      "shrunkRatio": 0.883
      },
      {
       "key": "535257",
       "label": "Pat Butcher",
       "n": 25,
       "observed": 1,
-      "expected": 1.12,
-      "ratio": 0.895,
-      "shrunkRatio": 0.989
+      "expected": 1.11,
+      "ratio": 0.897,
+      "shrunkRatio": 0.99
      },
      {
       "key": "699949",
@@ -19263,8 +19263,17 @@
       "n": 24,
       "observed": 3,
       "expected": 1.42,
-      "ratio": 2.109,
-      "shrunkRatio": 1.138
+      "ratio": 2.115,
+      "shrunkRatio": 1.139
+     },
+     {
+      "key": "674635",
+      "label": "Chris Ruiz",
+      "n": 23,
+      "observed": 1,
+      "expected": 1.4,
+      "ratio": 0.714,
+      "shrunkRatio": 0.965
      },
      {
       "key": "511128",
@@ -19272,7 +19281,7 @@
       "n": 23,
       "observed": 3,
       "expected": 1.21,
-      "ratio": 2.482,
+      "ratio": 2.488,
       "shrunkRatio": 1.16
      },
      {
@@ -19281,7 +19290,7 @@
       "n": 23,
       "observed": 1,
       "expected": 1.33,
-      "ratio": 0.751,
+      "ratio": 0.753,
       "shrunkRatio": 0.971
      },
      {
@@ -19290,7 +19299,7 @@
       "n": 23,
       "observed": 1,
       "expected": 1.19,
-      "ratio": 0.838,
+      "ratio": 0.841,
       "shrunkRatio": 0.983
      },
      {
@@ -19299,26 +19308,17 @@
       "n": 23,
       "observed": 1,
       "expected": 1.06,
-      "ratio": 0.941,
-      "shrunkRatio": 0.994
+      "ratio": 0.944,
+      "shrunkRatio": 0.995
      },
      {
       "key": "482136",
       "label": "Brian Berger",
       "n": 22,
       "observed": 1,
-      "expected": 1.12,
-      "ratio": 0.896,
+      "expected": 1.11,
+      "ratio": 0.9,
       "shrunkRatio": 0.99
-     },
-     {
-      "key": "674635",
-      "label": "Chris Ruiz",
-      "n": 22,
-      "observed": 1,
-      "expected": 1.37,
-      "ratio": 0.73,
-      "shrunkRatio": 0.967
      },
      {
       "key": "650888",
@@ -19326,7 +19326,7 @@
       "n": 22,
       "observed": 1,
       "expected": 1.2,
-      "ratio": 0.831,
+      "ratio": 0.833,
       "shrunkRatio": 0.982
      },
      {
@@ -19334,9 +19334,9 @@
       "label": "Evan Roberts",
       "n": 21,
       "observed": 1,
-      "expected": 1.29,
-      "ratio": 0.776,
-      "shrunkRatio": 0.974
+      "expected": 1.28,
+      "ratio": 0.779,
+      "shrunkRatio": 0.975
      },
      {
       "key": "639680",
@@ -19353,17 +19353,17 @@
       "n": 21,
       "observed": 1,
       "expected": 1.44,
-      "ratio": 0.693,
-      "shrunkRatio": 0.961
+      "ratio": 0.695,
+      "shrunkRatio": 0.962
      },
      {
       "key": "661294",
       "label": "Ryan Easton",
       "n": 21,
       "observed": 2,
-      "expected": 1.43,
-      "ratio": 1.403,
-      "shrunkRatio": 1.05
+      "expected": 1.42,
+      "ratio": 1.406,
+      "shrunkRatio": 1.051
      },
      {
       "key": "431089",
@@ -19371,7 +19371,7 @@
       "n": 20,
       "observed": 2,
       "expected": 1.42,
-      "ratio": 1.408,
+      "ratio": 1.412,
       "shrunkRatio": 1.051
      }
     ]
@@ -19379,20 +19379,20 @@
    "homeClub": {
     "test": {
      "groups": 31,
-     "plays": 3200,
+     "plays": 3210,
      "positives": 189,
-     "statistic": 30.801,
-     "dispersion": 0.994,
-     "pValue": 0.4113,
+     "statistic": 30.882,
+     "dispersion": 0.996,
+     "pValue": 0.4218,
      "permutations": 2000,
      "seed": 20260924
     },
     "cv": {
      "tested": true,
      "groupsInCandidate": 30,
-     "logLoss": 0.22021,
-     "deltaVsBest": 0.004118,
-     "pairedSE": 0.001985,
+     "logLoss": 0.21969,
+     "deltaVsBest": 0.004101,
+     "pairedSE": 0.001978,
      "selected": false
     },
     "verdict": "no detectable difference — not used",
@@ -19402,277 +19402,277 @@
       "label": "BOS",
       "n": 142,
       "observed": 8,
-      "expected": 8.29,
-      "ratio": 0.965,
-      "shrunkRatio": 0.984
+      "expected": 8.27,
+      "ratio": 0.967,
+      "shrunkRatio": 0.985
      },
      {
       "key": "SF",
       "label": "SF",
       "n": 127,
       "observed": 9,
-      "expected": 6.97,
-      "ratio": 1.291,
-      "shrunkRatio": 1.119
+      "expected": 6.95,
+      "ratio": 1.295,
+      "shrunkRatio": 1.121
      },
      {
       "key": "WSH",
       "label": "WSH",
       "n": 127,
       "observed": 6,
-      "expected": 7.61,
-      "ratio": 0.789,
-      "shrunkRatio": 0.909
+      "expected": 7.59,
+      "ratio": 0.791,
+      "shrunkRatio": 0.91
      },
      {
       "key": "CWS",
       "label": "CWS",
-      "n": 121,
+      "n": 123,
       "observed": 4,
-      "expected": 7.15,
-      "ratio": 0.56,
-      "shrunkRatio": 0.816
+      "expected": 7.28,
+      "ratio": 0.55,
+      "shrunkRatio": 0.81
+     },
+     {
+      "key": "COL",
+      "label": "COL",
+      "n": 119,
+      "observed": 7,
+      "expected": 7.16,
+      "ratio": 0.977,
+      "shrunkRatio": 0.99
+     },
+     {
+      "key": "LAA",
+      "label": "LAA",
+      "n": 119,
+      "observed": 9,
+      "expected": 6.53,
+      "ratio": 1.379,
+      "shrunkRatio": 1.15
      },
      {
       "key": "MIL",
       "label": "MIL",
       "n": 119,
       "observed": 11,
-      "expected": 7.8,
-      "ratio": 1.409,
-      "shrunkRatio": 1.179
-     },
-     {
-      "key": "COL",
-      "label": "COL",
-      "n": 118,
-      "observed": 7,
-      "expected": 7.16,
-      "ratio": 0.978,
-      "shrunkRatio": 0.991
-     },
-     {
-      "key": "LAA",
-      "label": "LAA",
-      "n": 118,
-      "observed": 9,
-      "expected": 6.54,
-      "ratio": 1.377,
-      "shrunkRatio": 1.149
+      "expected": 7.78,
+      "ratio": 1.413,
+      "shrunkRatio": 1.181
      },
      {
       "key": "PHI",
       "label": "PHI",
       "n": 115,
       "observed": 11,
-      "expected": 6.82,
-      "ratio": 1.613,
-      "shrunkRatio": 1.249
+      "expected": 6.8,
+      "ratio": 1.617,
+      "shrunkRatio": 1.25
      },
      {
       "key": "MIN",
       "label": "MIN",
       "n": 114,
       "observed": 4,
-      "expected": 6.55,
-      "ratio": 0.611,
-      "shrunkRatio": 0.846
+      "expected": 6.53,
+      "ratio": 0.612,
+      "shrunkRatio": 0.847
+     },
+     {
+      "key": "PIT",
+      "label": "PIT",
+      "n": 114,
+      "observed": 5,
+      "expected": 6.47,
+      "ratio": 0.773,
+      "shrunkRatio": 0.911
      },
      {
       "key": "MIA",
       "label": "MIA",
       "n": 113,
       "observed": 4,
-      "expected": 6.35,
-      "ratio": 0.63,
-      "shrunkRatio": 0.856
-     },
-     {
-      "key": "PIT",
-      "label": "PIT",
-      "n": 113,
-      "observed": 5,
-      "expected": 6.38,
-      "ratio": 0.784,
-      "shrunkRatio": 0.916
+      "expected": 6.33,
+      "ratio": 0.631,
+      "shrunkRatio": 0.857
      },
      {
       "key": "CLE",
       "label": "CLE",
       "n": 111,
       "observed": 6,
-      "expected": 6.54,
-      "ratio": 0.918,
-      "shrunkRatio": 0.967
+      "expected": 6.52,
+      "ratio": 0.921,
+      "shrunkRatio": 0.969
+     },
+     {
+      "key": "HOU",
+      "label": "HOU",
+      "n": 110,
+      "observed": 9,
+      "expected": 6.51,
+      "ratio": 1.381,
+      "shrunkRatio": 1.15
      },
      {
       "key": "NYY",
       "label": "NYY",
       "n": 110,
       "observed": 6,
-      "expected": 6.56,
-      "ratio": 0.915,
-      "shrunkRatio": 0.966
-     },
-     {
-      "key": "HOU",
-      "label": "HOU",
-      "n": 109,
-      "observed": 9,
-      "expected": 6.5,
-      "ratio": 1.384,
-      "shrunkRatio": 1.151
+      "expected": 6.54,
+      "ratio": 0.917,
+      "shrunkRatio": 0.967
      },
      {
       "key": "LAD",
       "label": "LAD",
       "n": 108,
       "observed": 5,
-      "expected": 6.73,
-      "ratio": 0.743,
-      "shrunkRatio": 0.897
+      "expected": 6.71,
+      "ratio": 0.745,
+      "shrunkRatio": 0.898
      },
      {
       "key": "CHC",
       "label": "CHC",
       "n": 104,
       "observed": 5,
-      "expected": 6.1,
-      "ratio": 0.82,
-      "shrunkRatio": 0.932
+      "expected": 6.08,
+      "ratio": 0.823,
+      "shrunkRatio": 0.933
+     },
+     {
+      "key": "TB",
+      "label": "TB",
+      "n": 103,
+      "observed": 6,
+      "expected": 6.19,
+      "ratio": 0.969,
+      "shrunkRatio": 0.988
      },
      {
       "key": "CIN",
       "label": "CIN",
       "n": 102,
       "observed": 6,
-      "expected": 5.73,
-      "ratio": 1.047,
-      "shrunkRatio": 1.017
-     },
-     {
-      "key": "TB",
-      "label": "TB",
-      "n": 102,
-      "observed": 6,
-      "expected": 6.17,
-      "ratio": 0.973,
-      "shrunkRatio": 0.99
+      "expected": 5.71,
+      "ratio": 1.051,
+      "shrunkRatio": 1.018
      },
      {
       "key": "DET",
       "label": "DET",
       "n": 101,
       "observed": 6,
-      "expected": 5.82,
-      "ratio": 1.032,
-      "shrunkRatio": 1.012
+      "expected": 5.8,
+      "ratio": 1.035,
+      "shrunkRatio": 1.013
      },
      {
       "key": "ATL",
       "label": "ATL",
       "n": 97,
       "observed": 5,
-      "expected": 5.85,
-      "ratio": 0.855,
-      "shrunkRatio": 0.946
+      "expected": 5.83,
+      "ratio": 0.857,
+      "shrunkRatio": 0.947
      },
      {
       "key": "BAL",
       "label": "BAL",
       "n": 96,
       "observed": 4,
-      "expected": 5.47,
-      "ratio": 0.731,
-      "shrunkRatio": 0.905
+      "expected": 5.46,
+      "ratio": 0.733,
+      "shrunkRatio": 0.906
+     },
+     {
+      "key": "AZ",
+      "label": "AZ",
+      "n": 95,
+      "observed": 4,
+      "expected": 5.37,
+      "ratio": 0.744,
+      "shrunkRatio": 0.911
      },
      {
       "key": "NYM",
       "label": "NYM",
       "n": 95,
       "observed": 9,
-      "expected": 6,
-      "ratio": 1.5,
-      "shrunkRatio": 1.188
-     },
-     {
-      "key": "AZ",
-      "label": "AZ",
-      "n": 94,
-      "observed": 4,
-      "expected": 5.31,
-      "ratio": 0.754,
-      "shrunkRatio": 0.915
+      "expected": 5.98,
+      "ratio": 1.505,
+      "shrunkRatio": 1.189
      },
      {
       "key": "SD",
       "label": "SD",
       "n": 94,
       "observed": 5,
-      "expected": 5.5,
-      "ratio": 0.909,
+      "expected": 5.49,
+      "ratio": 0.911,
       "shrunkRatio": 0.968
      },
      {
       "key": "STL",
       "label": "STL",
-      "n": 93,
+      "n": 94,
       "observed": 13,
-      "expected": 5.59,
-      "ratio": 2.328,
-      "shrunkRatio": 1.476
+      "expected": 5.61,
+      "ratio": 2.319,
+      "shrunkRatio": 1.474
      },
      {
       "key": "SEA",
       "label": "SEA",
       "n": 91,
       "observed": 7,
-      "expected": 5.38,
-      "ratio": 1.301,
-      "shrunkRatio": 1.105
+      "expected": 5.37,
+      "ratio": 1.304,
+      "shrunkRatio": 1.106
      },
      {
       "key": "TOR",
       "label": "TOR",
       "n": 88,
       "observed": 2,
-      "expected": 5.45,
-      "ratio": 0.367,
-      "shrunkRatio": 0.777
+      "expected": 5.43,
+      "ratio": 0.368,
+      "shrunkRatio": 0.778
      },
      {
       "key": "TEX",
       "label": "TEX",
-      "n": 83,
+      "n": 84,
       "observed": 4,
-      "expected": 5.24,
-      "ratio": 0.763,
-      "shrunkRatio": 0.918
+      "expected": 5.27,
+      "ratio": 0.76,
+      "shrunkRatio": 0.917
      },
      {
       "key": "ATH",
       "label": "ATH",
       "n": 81,
       "observed": 5,
-      "expected": 4.41,
-      "ratio": 1.135,
-      "shrunkRatio": 1.041
+      "expected": 4.39,
+      "ratio": 1.138,
+      "shrunkRatio": 1.042
      },
      {
       "key": "KC",
       "label": "KC",
       "n": 75,
       "observed": 4,
-      "expected": 4.32,
-      "ratio": 0.925,
-      "shrunkRatio": 0.977
+      "expected": 4.31,
+      "ratio": 0.927,
+      "shrunkRatio": 0.978
      },
      {
       "key": "OAK",
       "label": "OAK",
       "n": 39,
       "observed": 0,
-      "expected": 2.14,
+      "expected": 2.13,
       "ratio": 0,
       "shrunkRatio": 0.824
      }
@@ -19696,14 +19696,14 @@
    ],
    "method": "permutation test (group labels shuffled across plays) of Σ (observed − expected)² / variance, expected from out-of-fold model probabilities; plus a cross-validated candidate model with one term per group (≥ 40 plays)",
    "scorer": {
-    "playsWithScorer": 102345,
+    "playsWithScorer": 102573,
     "test": {
      "groups": 103,
-     "plays": 102345,
-     "positives": 124,
-     "statistic": 89.882,
-     "dispersion": 0.873,
-     "pValue": 0.7685,
+     "plays": 102573,
+     "positives": 125,
+     "statistic": 88.267,
+     "dispersion": 0.857,
+     "pValue": 0.7705,
      "permutations": 500,
      "seed": 20260924
     },
@@ -19717,11 +19717,11 @@
    "homeClub": {
     "test": {
      "groups": 31,
-     "plays": 102345,
-     "positives": 124,
-     "statistic": 25.34,
-     "dispersion": 0.817,
-     "pValue": 0.6846,
+     "plays": 102573,
+     "positives": 125,
+     "statistic": 24.493,
+     "dispersion": 0.79,
+     "pValue": 0.7186,
      "permutations": 500,
      "seed": 20260924
     },
@@ -20367,55 +20367,55 @@
     "ev_hard",
     "hp_x_of"
    ],
-   "n": 3200,
+   "n": 3210,
    "positives": 189,
    "cv": {
     "folds": 10,
-    "logLoss": 0.21695,
-    "baseLogLoss": 0.22438,
-    "auc": 0.6236,
-    "brier": 0.05404,
-    "baseBrier": 0.05557,
+    "logLoss": 0.21643,
+    "baseLogLoss": 0.22387,
+    "auc": 0.6238,
+    "brier": 0.05388,
+    "baseBrier": 0.05541,
     "calibration": [
      {
       "band": "0–2",
-      "n": 106,
-      "predicted": 0.0132,
-      "observed": 0.0377,
+      "n": 107,
+      "predicted": 0.0131,
+      "observed": 0.0374,
       "positives": 4
      },
      {
       "band": "2–5",
-      "n": 1430,
+      "n": 1442,
       "predicted": 0.037,
-      "observed": 0.0406,
+      "observed": 0.0402,
       "positives": 58
      },
      {
       "band": "5–10",
-      "n": 1354,
+      "n": 1352,
       "predicted": 0.0688,
-      "observed": 0.0687,
-      "positives": 93
+      "observed": 0.0695,
+      "positives": 94
      },
      {
       "band": "10–20",
-      "n": 288,
-      "predicted": 0.1231,
-      "observed": 0.0729,
-      "positives": 21
+      "n": 287,
+      "predicted": 0.123,
+      "observed": 0.0697,
+      "positives": 20
      },
      {
       "band": "20–35",
       "n": 21,
-      "predicted": 0.2422,
+      "predicted": 0.2418,
       "observed": 0.5714,
       "positives": 12
      },
      {
       "band": "35–50",
       "n": 1,
-      "predicted": 0.3573,
+      "predicted": 0.3574,
       "observed": 1,
       "positives": 1
      },
@@ -20431,40 +20431,40 @@
    "outOfTime": {
     "trainSeasons": "< 2026",
     "testSeason": 2026,
-    "n": 983,
+    "n": 993,
     "positives": 58,
-    "auc": 0.6475,
-    "logLoss": 0.21468,
-    "baseLogLoss": 0.22422,
-    "brier": 0.0538,
-    "baseBrier": 0.05552,
+    "auc": 0.6479,
+    "logLoss": 0.21307,
+    "baseLogLoss": 0.22257,
+    "brier": 0.0533,
+    "baseBrier": 0.055,
     "calibration": [
      {
       "band": "0–2",
-      "n": 18,
+      "n": 19,
       "predicted": 0.0095,
-      "observed": 0.0556,
+      "observed": 0.0526,
       "positives": 1
      },
      {
       "band": "2–5",
-      "n": 445,
-      "predicted": 0.038,
-      "observed": 0.036,
+      "n": 450,
+      "predicted": 0.0379,
+      "observed": 0.0356,
       "positives": 16
      },
      {
       "band": "5–10",
-      "n": 441,
-      "predicted": 0.0684,
-      "observed": 0.0703,
+      "n": 444,
+      "predicted": 0.0685,
+      "observed": 0.0698,
       "positives": 31
      },
      {
       "band": "10–20",
-      "n": 69,
-      "predicted": 0.1253,
-      "observed": 0.0725,
+      "n": 70,
+      "predicted": 0.1251,
+      "observed": 0.0714,
       "positives": 5
      },
      {
@@ -20504,34 +20504,34 @@
     "traj:popup",
     "traj:bunt"
    ],
-   "n": 102345,
-   "positives": 124,
+   "n": 102573,
+   "positives": 125,
    "cv": {
     "folds": 10,
-    "logLoss": 0.00743,
-    "baseLogLoss": 0.00935,
-    "auc": 0.9147,
-    "brier": 0.0012,
-    "baseBrier": 0.00121,
+    "logLoss": 0.00746,
+    "baseLogLoss": 0.0094,
+    "auc": 0.9152,
+    "brier": 0.00121,
+    "baseBrier": 0.00122,
     "calibration": [
      {
       "band": "0–2",
-      "n": 102182,
+      "n": 102398,
       "predicted": 0.0012,
       "observed": 0.0012,
-      "positives": 122
+      "positives": 123
      },
      {
       "band": "2–5",
-      "n": 156,
-      "predicted": 0.0261,
-      "observed": 0.0128,
+      "n": 168,
+      "predicted": 0.0259,
+      "observed": 0.0119,
       "positives": 2
      },
      {
       "band": "5–10",
       "n": 7,
-      "predicted": 0.0628,
+      "predicted": 0.0635,
       "observed": 0,
       "positives": 0
      },
@@ -20568,20 +20568,20 @@
    "outOfTime": {
     "trainSeasons": "< 2026",
     "testSeason": 2026,
-    "n": 32355,
-    "positives": 50,
-    "auc": 0.9373,
-    "logLoss": 0.00906,
-    "baseLogLoss": 0.01165,
-    "brier": 0.00153,
-    "baseBrier": 0.00154,
+    "n": 32583,
+    "positives": 51,
+    "auc": 0.938,
+    "logLoss": 0.00915,
+    "baseLogLoss": 0.01178,
+    "brier": 0.00155,
+    "baseBrier": 0.00156,
     "calibration": [
      {
       "band": "0–2",
-      "n": 32292,
+      "n": 32520,
       "predicted": 0.001,
-      "observed": 0.0015,
-      "positives": 50
+      "observed": 0.0016,
+      "positives": 51
      },
      {
       "band": "2–5",
