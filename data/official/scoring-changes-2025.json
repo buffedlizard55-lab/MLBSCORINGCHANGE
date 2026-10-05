@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-04T23:59:09.743Z",
+ "generatedAt": "2026-10-05T05:50:12.992Z",
  "entries": [
   {
    "seq": 1,
@@ -2085,7 +2085,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.3588,
+    "p": 0.3589,
     "score": 36,
     "kind": "out_of_fold"
    }
@@ -6855,7 +6855,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0626,
+    "p": 0.0625,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -11315,7 +11315,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0132,
+    "p": 0.0131,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -14079,7 +14079,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0119,
+    "p": 0.0118,
     "score": 1,
     "kind": "out_of_fold"
    }
