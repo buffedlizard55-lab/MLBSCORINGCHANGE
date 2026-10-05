@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-10-05T14:51:54.739Z",
+ "generatedAt": "2026-10-05T22:03:31.372Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -19742,11 +19742,11 @@
    },
    {
     "file": "data/capture/rulings-2026-10.json",
-    "plays": 2
+    "plays": 3
    }
   ],
-  "plays": 33,
-  "errorsCaptured": 32,
+  "plays": 34,
+  "errorsCaptured": 33,
   "capturedAsOriginal": 6,
   "settled": 0,
   "changedToHit": 4,
@@ -19756,21 +19756,39 @@
   "pendingCaptured": 1,
   "pendingResolved": 1,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-10-05T00:42:27.110Z",
+  "lastCaptureAt": "2026-10-05T21:56:56.041Z",
   "lagMinutes": {
-   "median": 95.6,
+   "median": 94.9,
    "p90": 179.5,
-   "n": 32
+   "n": 33
   },
   "originalMaxLagMin": 30,
   "byKind": {
    "fielding": 18,
-   "throwing": 10,
+   "throwing": 11,
    "missed_catch": 4
   },
   "source": "data/capture/rulings-YYYY-MM.json — pipeline/capture.mjs polls MLB StatsAPI playByPlay during live games (GitHub Actions, every 10 minutes during game hours)",
   "whyNeeded": "StatsAPI rewrites history: timecode snapshots and diffPatch show the current ruling even for moments before a change (verified on 2026 official log #3 and #6), so an original call can only be known if it was recorded before it changed.",
   "recentErrors": [
+   {
+    "id": "849834:8",
+    "g": 849834,
+    "ai": 8,
+    "date": "2026-10-05",
+    "kind": "throwing",
+    "pos": "P",
+    "firstAt": "2026-10-05T21:56:56.041Z",
+    "lagMin": 31,
+    "afterPending": false,
+    "original": false,
+    "settled": false,
+    "current": "field_error",
+    "currentSource": "last capture",
+    "changeSeenAt": null,
+    "logged": false,
+    "scoreAtCapture": 3
+   },
    {
     "id": "849825:49",
     "g": 849825,

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-05T14:51:54.739Z",
+ "generatedAt": "2026-10-05T22:03:31.372Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -462,7 +462,7 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-05T14:52:15.754Z",
+  "fetchedAt": "2026-10-05T22:03:51.995Z",
   "rowsAllGameTypes": 1401,
   "rowsByGameType": {
    "R": 1041,
@@ -817,11 +817,11 @@
    },
    {
     "file": "data/capture/rulings-2026-10.json",
-    "plays": 2
+    "plays": 3
    }
   ],
-  "plays": 33,
-  "errorsCaptured": 32,
+  "plays": 34,
+  "errorsCaptured": 33,
   "capturedAsOriginal": 6,
   "settled": 0,
   "changedToHit": 4,
@@ -831,16 +831,16 @@
   "pendingCaptured": 1,
   "pendingResolved": 1,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-10-05T00:42:27.110Z",
+  "lastCaptureAt": "2026-10-05T21:56:56.041Z",
   "lagMinutes": {
-   "median": 95.6,
+   "median": 94.9,
    "p90": 179.5,
-   "n": 32
+   "n": 33
   },
   "originalMaxLagMin": 30,
   "byKind": {
    "fielding": 18,
-   "throwing": 10,
+   "throwing": 11,
    "missed_catch": 4
   },
   "adjust": {
