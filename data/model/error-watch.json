@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-10-05T05:50:12.992Z",
+ "generatedAt": "2026-10-05T14:51:54.739Z",
  "labelCutoff": "2026-09-21",
  "plays": [
   {
@@ -9,6 +9,12 @@
    "gamePk": 849825,
    "ai": 57,
    "gameType": "D",
+   "savant": {
+    "xba": 0.104,
+    "ls": 68.7,
+    "la": -36,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "SD",
    "home": "MIL",
    "inning": 7,
@@ -51,6 +57,12 @@
    "gamePk": 849825,
    "ai": 49,
    "gameType": "D",
+   "savant": {
+    "xba": 0.063,
+    "ls": 65.2,
+    "la": -32,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "SD",
    "home": "MIL",
    "inning": 7,
