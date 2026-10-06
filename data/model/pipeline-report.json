@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-06T06:29:10.886Z",
+ "generatedAt": "2026-10-06T16:00:00.446Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -267,7 +267,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 2,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2446,
     "scorers": 82
@@ -462,52 +462,48 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-06T06:29:27.320Z",
-  "rowsAllGameTypes": 1401,
+  "fetchedAt": "2026-10-06T16:00:24.537Z",
+  "rowsAllGameTypes": 1404,
   "rowsByGameType": {
    "R": 1041,
    "S": 321,
    "E": 34,
-   "F": 3,
-   "D": 2
+   "D": 5,
+   "F": 3
   },
-  "rows": 1046,
+  "rows": 1049,
   "statsapiFieldErrors": 1049,
-  "matched": 1046,
+  "matched": 1049,
   "onlySavant": 0,
   "onlySavantExamples": [],
-  "onlyStatsApiExamples": [
-   "849834:8",
-   "849839:3",
-   "849839:44"
-  ],
+  "onlyStatsApiExamples": [],
   "exitVelocityAgreement": 1,
   "launchAngleAgreement": 1,
   "hitProbVsSavantXba": {
-   "n": 1033,
+   "n": 1035,
    "pearson": 0.974,
    "meanAbsDiff": 0.0289
   },
   "perPlay": {
    "needed": 1595,
    "excludedNoBattedBall": 58,
-   "matched": 1117,
+   "matched": 1119,
    "matchedNoXba": 117,
    "unavailable": 359,
-   "notIndexedYet": 2,
+   "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.7003,
+   "coverage": 0.7016,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
      "kind": "season_errors",
      "season": 2026,
      "month": null,
-     "rows": 1401,
+     "rows": 1404,
      "fromCache": false,
-     "asked": 2,
-     "found": 1036,
-     "missed": 2,
+     "asked": 0,
+     "found": 1038,
+     "missed": 0,
      "integrity": null
     }
    ],
