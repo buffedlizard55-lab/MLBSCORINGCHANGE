@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-10-07T06:08:07.538Z",
+ "generatedAt": "2026-10-07T13:33:18.597Z",
  "labelCutoff": "2026-09-23",
  "plays": [
   {
@@ -9,6 +9,12 @@
    "gamePk": 849826,
    "ai": 51,
    "gameType": "D",
+   "savant": {
+    "xba": 0.143,
+    "ls": 56.8,
+    "la": 18,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "MIL",
    "home": "SD",
    "inning": 6,
@@ -35,9 +41,15 @@
    "final": "error",
    "official": [],
    "errKind": "throwing",
-   "errKindSource": "current_ruling",
+   "errKindSource": "captured",
    "scorer": "Brittany Womack",
-   "captured": null
+   "captured": {
+    "firstAt": "2026-10-07T09:23:31.486Z",
+    "lagMin": 318.2,
+    "firstDescription": "Miguel Andujar reaches on a throwing error by shortstop Cooper Pratt. Xander Bogaerts scores.",
+    "changes": [],
+    "scoreAtCapture": 7
+   }
   },
   {
    "id": "849819:2",
@@ -45,6 +57,12 @@
    "gamePk": 849819,
    "ai": 2,
    "gameType": "D",
+   "savant": {
+    "xba": 0.239,
+    "ls": 100.9,
+    "la": -13,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "LAD",
    "home": "ATL",
    "inning": 1,

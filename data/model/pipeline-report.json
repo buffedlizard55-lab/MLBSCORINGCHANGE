@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-07T06:08:07.538Z",
+ "generatedAt": "2026-10-07T13:33:18.597Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -267,7 +267,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 2,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2448,
     "scorers": 82
@@ -462,51 +462,48 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-07T06:08:29.203Z",
-  "rowsAllGameTypes": 1404,
+  "fetchedAt": "2026-10-07T13:33:36.462Z",
+  "rowsAllGameTypes": 1406,
   "rowsByGameType": {
    "R": 1041,
    "S": 321,
    "E": 34,
-   "D": 5,
+   "D": 7,
    "F": 3
   },
-  "rows": 1049,
+  "rows": 1051,
   "statsapiFieldErrors": 1051,
-  "matched": 1049,
+  "matched": 1051,
   "onlySavant": 0,
   "onlySavantExamples": [],
-  "onlyStatsApiExamples": [
-   "849819:2",
-   "849826:51"
-  ],
+  "onlyStatsApiExamples": [],
   "exitVelocityAgreement": 1,
   "launchAngleAgreement": 1,
   "hitProbVsSavantXba": {
-   "n": 1035,
-   "pearson": 0.974,
+   "n": 1037,
+   "pearson": 0.9739,
    "meanAbsDiff": 0.0289
   },
   "perPlay": {
    "needed": 1597,
    "excludedNoBattedBall": 58,
-   "matched": 1119,
+   "matched": 1121,
    "matchedNoXba": 117,
    "unavailable": 359,
-   "notIndexedYet": 2,
+   "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.7007,
+   "coverage": 0.7019,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
      "kind": "season_errors",
      "season": 2026,
      "month": null,
-     "rows": 1404,
+     "rows": 1406,
      "fromCache": false,
-     "asked": 2,
-     "found": 1038,
-     "missed": 2,
+     "asked": 0,
+     "found": 1040,
+     "missed": 0,
      "integrity": null
     }
    ],
@@ -820,11 +817,11 @@
    },
    {
     "file": "data/capture/rulings-2026-10.json",
-    "plays": 6
+    "plays": 7
    }
   ],
-  "plays": 37,
-  "errorsCaptured": 36,
+  "plays": 38,
+  "errorsCaptured": 37,
   "capturedAsOriginal": 7,
   "settled": 0,
   "changedToHit": 4,
@@ -834,16 +831,16 @@
   "pendingCaptured": 1,
   "pendingResolved": 1,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-10-06T23:47:22.654Z",
+  "lastCaptureAt": "2026-10-07T09:23:31.486Z",
   "lagMinutes": {
    "median": 94.9,
-   "p90": 179.5,
-   "n": 36
+   "p90": 203,
+   "n": 37
   },
   "originalMaxLagMin": 30,
   "byKind": {
    "fielding": 20,
-   "throwing": 12,
+   "throwing": 13,
    "missed_catch": 4
   },
   "adjust": {
