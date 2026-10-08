@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-10-08T01:03:18.367Z",
-  "sha256": "763fb4cd8e83a55efcec3aa3ddad8ab664a6efc0df93d444799044598e8ad79f",
+  "fetchedAt": "2026-10-08T10:42:16.887Z",
+  "sha256": "fad2f80ebe4dc87dd5e670934c5c193ad012c7f10687b60f921f194994cc3820",
   "bytes": 923481
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-10-08T01:03:18.367Z",
+ "generatedAt": "2026-10-08T10:42:16.887Z",
  "entries": [
   {
    "seq": 1,
@@ -3190,7 +3190,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0927,
+    "p": 0.0928,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -5307,7 +5307,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0873,
+    "p": 0.0872,
     "score": 9,
     "kind": "out_of_fold"
    },
@@ -6316,7 +6316,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1915,
+    "p": 0.1914,
     "score": 19,
     "kind": "out_of_fold"
    }
@@ -10223,7 +10223,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.3308,
+    "p": 0.3307,
     "score": 33,
     "kind": "out_of_fold"
    },
@@ -10472,7 +10472,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.4432,
+    "p": 0.4433,
     "score": 44,
     "kind": "out_of_fold"
    }
@@ -11550,7 +11550,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.009,
+    "p": 0.0089,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -18036,7 +18036,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0399,
+    "p": 0.0398,
     "score": 4,
     "kind": "out_of_fold"
    },
@@ -18167,7 +18167,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.4082,
+    "p": 0.4081,
     "score": 41,
     "kind": "out_of_fold"
    }
@@ -18331,7 +18331,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0806,
+    "p": 0.0807,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -21236,7 +21236,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0478,
+    "p": 0.0477,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -24358,7 +24358,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0472,
+    "p": 0.0473,
     "score": 5,
     "kind": "out_of_fold"
    },

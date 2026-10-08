@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-08T01:03:18.367Z",
+ "generatedAt": "2026-10-08T10:42:16.887Z",
  "entries": [
   {
    "seq": 1,
@@ -408,7 +408,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.01,
+    "p": 0.0101,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -521,7 +521,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0674,
+    "p": 0.0673,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -2085,7 +2085,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.4938,
+    "p": 0.4939,
     "score": 49,
     "kind": "out_of_fold"
    }
@@ -2628,7 +2628,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0767,
+    "p": 0.0766,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -4258,7 +4258,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.4254,
+    "p": 0.4255,
     "score": 43,
     "kind": "out_of_fold"
    }
@@ -7581,7 +7581,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0565,
+    "p": 0.0566,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -10050,7 +10050,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0301,
+    "p": 0.0302,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -10143,7 +10143,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1647,
+    "p": 0.1646,
     "score": 16,
     "kind": "out_of_fold"
    }
@@ -12731,7 +12731,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0781,
+    "p": 0.0782,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -15601,7 +15601,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0537,
+    "p": 0.0538,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -17243,7 +17243,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1984,
+    "p": 0.1983,
     "score": 20,
     "kind": "out_of_fold"
    }
@@ -18821,7 +18821,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1453,
+    "p": 0.1454,
     "score": 15,
     "kind": "out_of_fold"
    }
