@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-10-08T18:54:10.700Z",
-  "sha256": "a60371c49c7247706ef5db19bd02d01c5960ef8a1e9f770a71e95efdf6293c1d",
+  "fetchedAt": "2026-10-09T01:15:26.637Z",
+  "sha256": "8619df6e40df26723978870c8b5dd3d2895db8b229b4822c5af77c6c76eed461",
   "bytes": 923487
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-10-08T18:54:10.700Z",
+ "generatedAt": "2026-10-09T01:15:26.637Z",
  "entries": [
   {
    "seq": 1,
@@ -269,7 +269,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0269,
+    "p": 0.0267,
     "score": 3,
     "kind": "out_of_fold"
    },
@@ -500,7 +500,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0601,
+    "p": 0.06,
     "score": 6,
     "kind": "out_of_fold"
    },
@@ -602,7 +602,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0059,
+    "p": 0.0057,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -1444,7 +1444,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0544,
+    "p": 0.0547,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -1557,7 +1557,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0393,
+    "p": 0.039,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -2185,7 +2185,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0079,
+    "p": 0.008,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -2305,7 +2305,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.024,
+    "p": 0.0245,
     "score": 2,
     "kind": "out_of_fold"
    }
@@ -2732,7 +2732,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0085,
+    "p": 0.0086,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -3036,7 +3036,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2555,
+    "p": 0.2589,
     "score": 26,
     "kind": "out_of_fold"
    }
@@ -3190,7 +3190,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0928,
+    "p": 0.0936,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -3344,8 +3344,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0916,
-    "score": 9,
+    "p": 0.0959,
+    "score": 10,
     "kind": "out_of_fold"
    }
   },
@@ -3698,7 +3698,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0771,
+    "p": 0.0772,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -4046,7 +4046,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0418,
+    "p": 0.0417,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -4299,7 +4299,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0748,
+    "p": 0.0749,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -4652,7 +4652,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0109,
+    "p": 0.011,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -5307,7 +5307,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0872,
+    "p": 0.0884,
     "score": 9,
     "kind": "out_of_fold"
    },
@@ -5582,7 +5582,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0195,
+    "p": 0.0199,
     "score": 2,
     "kind": "out_of_fold"
    },
@@ -6316,7 +6316,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1914,
+    "p": 0.1918,
     "score": 19,
     "kind": "out_of_fold"
    }
@@ -6429,7 +6429,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.009,
+    "p": 0.0091,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -6549,7 +6549,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0063,
+    "p": 0.0064,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -6857,7 +6857,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0036,
+    "p": 0.0037,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -6957,7 +6957,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0602,
+    "p": 0.0604,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -7221,7 +7221,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0256,
+    "p": 0.0254,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -7548,7 +7548,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0399,
+    "p": 0.0397,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -7918,7 +7918,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0061,
+    "p": 0.0062,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -8263,8 +8263,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0754,
-    "score": 8,
+    "p": 0.0745,
+    "score": 7,
     "kind": "out_of_fold"
    }
   },
@@ -8376,7 +8376,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0064,
+    "p": 0.0065,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -8568,7 +8568,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0043,
+    "p": 0.0044,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -8731,7 +8731,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0394,
+    "p": 0.0391,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -8909,7 +8909,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0088,
+    "p": 0.0089,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -9009,8 +9009,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0743,
-    "score": 7,
+    "p": 0.0769,
+    "score": 8,
     "kind": "out_of_fold"
    }
   },
@@ -9748,7 +9748,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0625,
+    "p": 0.0624,
     "score": 6,
     "kind": "out_of_fold"
    },
@@ -9879,7 +9879,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1077,
+    "p": 0.109,
     "score": 11,
     "kind": "out_of_fold"
    },
@@ -9979,7 +9979,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0504,
+    "p": 0.0524,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -10092,7 +10092,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0976,
+    "p": 0.1002,
     "score": 10,
     "kind": "out_of_fold"
    },
@@ -10223,7 +10223,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.3307,
+    "p": 0.3282,
     "score": 33,
     "kind": "out_of_fold"
    },
@@ -10472,8 +10472,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.4433,
-    "score": 44,
+    "p": 0.4529,
+    "score": 45,
     "kind": "out_of_fold"
    }
   },
@@ -11220,7 +11220,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0676,
+    "p": 0.0702,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -11313,7 +11313,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0906,
+    "p": 0.0948,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -11437,7 +11437,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0811,
+    "p": 0.0813,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -11550,7 +11550,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0089,
+    "p": 0.009,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -11983,7 +11983,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0559,
+    "p": 0.0557,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -12096,7 +12096,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0046,
+    "p": 0.0047,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -12729,7 +12729,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0958,
+    "p": 0.0952,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -12855,7 +12855,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0077,
+    "p": 0.0078,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -13073,7 +13073,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.049,
+    "p": 0.0489,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -13598,7 +13598,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0882,
+    "p": 0.089,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -13711,7 +13711,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0056,
+    "p": 0.0057,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -13831,7 +13831,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0102,
+    "p": 0.0103,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -14016,7 +14016,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0712,
+    "p": 0.0716,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -14196,7 +14196,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0983,
+    "p": 0.0981,
     "score": 10,
     "kind": "out_of_fold"
    }
@@ -14300,7 +14300,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0315,
+    "p": 0.0323,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -14393,7 +14393,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0874,
+    "p": 0.0907,
     "score": 9,
     "kind": "out_of_fold"
    },
@@ -14493,7 +14493,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.3592,
+    "p": 0.357,
     "score": 36,
     "kind": "out_of_fold"
    },
@@ -14669,7 +14669,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0044,
+    "p": 0.0045,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -14789,7 +14789,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0065,
+    "p": 0.0066,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -16395,7 +16395,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0276,
+    "p": 0.0273,
     "score": 3,
     "kind": "out_of_fold"
    }
@@ -16689,7 +16689,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0543,
+    "p": 0.0545,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -17378,7 +17378,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.053,
+    "p": 0.0549,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -17502,7 +17502,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.016,
+    "p": 0.0159,
     "score": 2,
     "kind": "out_of_fold"
    },
@@ -17622,7 +17622,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0064,
+    "p": 0.0065,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -17849,7 +17849,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.007,
+    "p": 0.0071,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -18036,7 +18036,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0398,
+    "p": 0.0397,
     "score": 4,
     "kind": "out_of_fold"
    },
@@ -18167,7 +18167,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.4081,
+    "p": 0.4051,
     "score": 41,
     "kind": "out_of_fold"
    }
@@ -18331,7 +18331,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0807,
+    "p": 0.0809,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -18702,7 +18702,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0065,
+    "p": 0.0066,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -18802,7 +18802,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0915,
+    "p": 0.0909,
     "score": 9,
     "kind": "out_of_fold"
    },
@@ -18902,7 +18902,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.004,
+    "p": 0.0041,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -19379,7 +19379,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0079,
+    "p": 0.008,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -19892,7 +19892,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0042,
+    "p": 0.0043,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -20189,7 +20189,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0121,
+    "p": 0.0122,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -20289,7 +20289,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0482,
+    "p": 0.0501,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -20478,7 +20478,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0022,
+    "p": 0.0023,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -20598,7 +20598,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.08,
+    "p": 0.0798,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -20817,8 +20817,8 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1469,
-    "score": 15,
+    "p": 0.1434,
+    "score": 14,
     "kind": "out_of_fold"
    }
   },
@@ -20930,7 +20930,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0093,
+    "p": 0.0094,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -21236,7 +21236,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0477,
+    "p": 0.0482,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -21590,7 +21590,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0064,
+    "p": 0.0065,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -22258,7 +22258,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0728,
+    "p": 0.072,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -22470,7 +22470,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1081,
+    "p": 0.1095,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -22594,7 +22594,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0044,
+    "p": 0.0045,
     "score": 0,
     "kind": "out_of_fold"
    },
@@ -23140,7 +23140,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0092,
+    "p": 0.0093,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -23610,7 +23610,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0078,
+    "p": 0.0079,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -23710,7 +23710,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0201,
+    "p": 0.0194,
     "score": 2,
     "kind": "model"
    },
@@ -23991,9 +23991,9 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1172,
+    "p": 0.1177,
     "score": 12,
-    "kind": "model"
+    "kind": "out_of_fold"
    },
    "savant": {
     "xba": 0.34,
@@ -24124,9 +24124,9 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0057,
+    "p": 0.0059,
     "score": 1,
-    "kind": "model"
+    "kind": "out_of_fold"
    },
    "savant": {
     "xba": 0.436,
@@ -24258,7 +24258,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0094,
+    "p": 0.0095,
     "score": 1,
     "kind": "out_of_fold"
    },
@@ -24358,7 +24358,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0473,
+    "p": 0.047,
     "score": 5,
     "kind": "out_of_fold"
    },
