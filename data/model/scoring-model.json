@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-10-11T05:56:17.442Z",
+ "generatedAt": "2026-10-11T13:00:41.823Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -19757,11 +19757,11 @@
    },
    {
     "file": "data/capture/rulings-2026-10.json",
-    "plays": 10
+    "plays": 11
    }
   ],
-  "plays": 41,
-  "errorsCaptured": 40,
+  "plays": 42,
+  "errorsCaptured": 41,
   "capturedAsOriginal": 7,
   "settled": 27,
   "changedToHit": 4,
@@ -19771,21 +19771,39 @@
   "pendingCaptured": 1,
   "pendingResolved": 1,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-10-08T06:22:57.270Z",
+  "lastCaptureAt": "2026-10-11T07:20:07.923Z",
   "lagMinutes": {
    "median": 100,
    "p90": 218.1,
-   "n": 40
+   "n": 41
   },
   "originalMaxLagMin": 30,
   "byKind": {
-   "fielding": 22,
+   "fielding": 23,
    "throwing": 14,
    "missed_catch": 4
   },
   "source": "data/capture/rulings-YYYY-MM.json — pipeline/capture.mjs polls MLB StatsAPI playByPlay during live games (GitHub Actions, every 10 minutes during game hours)",
   "whyNeeded": "StatsAPI rewrites history: timecode snapshots and diffPatch show the current ruling even for moments before a change (verified on 2026 official log #3 and #6), so an original call can only be known if it was recorded before it changed.",
   "recentErrors": [
+   {
+    "id": "849831:49",
+    "g": 849831,
+    "ai": 49,
+    "date": "2026-10-10",
+    "kind": "fielding",
+    "pos": "SS",
+    "firstAt": "2026-10-11T07:20:07.923Z",
+    "lagMin": 311,
+    "afterPending": false,
+    "original": false,
+    "settled": false,
+    "current": "field_error",
+    "currentSource": "final play-by-play",
+    "changeSeenAt": null,
+    "logged": false,
+    "scoreAtCapture": 3
+   },
    {
     "id": "849838:59",
     "g": 849838,
@@ -20487,24 +20505,6 @@
     "changeSeenAt": null,
     "logged": false,
     "scoreAtCapture": 6
-   },
-   {
-    "id": "824623:9",
-    "g": 824623,
-    "ai": 9,
-    "date": "2026-09-24",
-    "kind": "fielding",
-    "pos": "3B",
-    "firstAt": "2026-09-24T20:00:22.458Z",
-    "lagMin": 77.6,
-    "afterPending": false,
-    "original": false,
-    "settled": true,
-    "current": "field_error",
-    "currentSource": "final play-by-play",
-    "changeSeenAt": null,
-    "logged": false,
-    "scoreAtCapture": 5
    }
   ],
   "pending": [

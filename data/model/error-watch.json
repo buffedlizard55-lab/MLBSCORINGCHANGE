@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-10-11T05:56:17.442Z",
+ "generatedAt": "2026-10-11T13:00:41.823Z",
  "labelCutoff": "2026-09-27",
  "plays": [
   {
@@ -9,6 +9,12 @@
    "gamePk": 849831,
    "ai": 49,
    "gameType": "D",
+   "savant": {
+    "xba": 0.098,
+    "ls": 84.5,
+    "la": -12,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CWS",
    "home": "CLE",
    "inning": 7,
@@ -35,9 +41,15 @@
    "final": "error",
    "official": [],
    "errKind": "fielding",
-   "errKindSource": "current_ruling",
+   "errKindSource": "captured",
    "scorer": "Adam Liberman",
-   "captured": null
+   "captured": {
+    "firstAt": "2026-10-11T07:20:07.923Z",
+    "lagMin": 311,
+    "firstDescription": "Travis Bazzana reaches on a fielding error by shortstop Colson Montgomery.",
+    "changes": [],
+    "scoreAtCapture": 3
+   }
   },
   {
    "id": "849838:59",
