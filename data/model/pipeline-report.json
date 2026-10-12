@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-11T19:35:27.137Z",
+ "generatedAt": "2026-10-12T00:36:44.948Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -9,7 +9,7 @@
   ],
   "refreshDays": 21,
   "labelLagDays": 14,
-  "labelCutoff": "2026-09-27"
+  "labelCutoff": "2026-09-28"
  },
  "logs": {
   "2024": {
@@ -256,7 +256,7 @@
    "scheduled": 2476,
    "completed": 2454,
    "gamesWithPlays": 2454,
-   "fetched": 130,
+   "fetched": 115,
    "failed": 0,
    "failures": [],
    "selfCheck": {
@@ -460,8 +460,8 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": false,
-  "fetchedThisRun": true,
+  "cached": true,
+  "fetchedThisRun": false,
   "fetchedAt": "2026-10-11T19:35:50.364Z",
   "rowsAllGameTypes": 1410,
   "rowsByGameType": {
@@ -500,7 +500,7 @@
      "season": 2026,
      "month": null,
      "rows": 1410,
-     "fromCache": false,
+     "fromCache": true,
      "asked": 0,
      "found": 1044,
      "missed": 0,
@@ -509,13 +509,13 @@
    ],
    "queriesDeferred": 0,
    "failures": [],
-   "requests": 1,
-   "cacheHits": 0,
+   "requests": 0,
+   "cacheHits": 1,
    "budgetExhausted": false
   },
   "client": {
-   "requests": 1,
-   "cacheHits": 0,
+   "requests": 0,
+   "cacheHits": 1,
    "budget": 4,
    "budgetExhausted": false,
    "rateLimited": false,
