@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-13T02:36:19.903Z",
+ "generatedAt": "2026-10-13T10:44:32.898Z",
  "entries": [
   {
    "seq": 1,
@@ -215,7 +215,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.048,
+    "p": 0.0481,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -2535,7 +2535,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0127,
+    "p": 0.0125,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -3274,7 +3274,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.3044,
+    "p": 0.3043,
     "score": 30,
     "kind": "out_of_fold"
    }
@@ -8006,7 +8006,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0738,
+    "p": 0.0737,
     "score": 7,
     "kind": "out_of_fold"
    }
@@ -9232,7 +9232,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.174,
+    "p": 0.1739,
     "score": 17,
     "kind": "out_of_fold"
    }
@@ -9567,7 +9567,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1066,
+    "p": 0.1061,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -11041,7 +11041,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0568,
+    "p": 0.0569,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -12725,7 +12725,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0055,
+    "p": 0.0056,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -13112,7 +13112,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.2989,
+    "p": 0.2988,
     "score": 30,
     "kind": "out_of_fold"
    }
@@ -18768,7 +18768,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0477,
+    "p": 0.048,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -19012,7 +19012,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1487,
+    "p": 0.1486,
     "score": 15,
     "kind": "out_of_fold"
    }
@@ -19143,7 +19143,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0097,
+    "p": 0.0098,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -19895,7 +19895,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0045,
+    "p": 0.0044,
     "score": 0,
     "kind": "out_of_fold"
    }
