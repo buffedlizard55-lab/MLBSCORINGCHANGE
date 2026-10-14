@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-10-14T05:03:11.478Z",
+ "generatedAt": "2026-10-14T12:01:57.272Z",
  "labelCutoff": "2026-09-30",
  "plays": [
   {
@@ -9,6 +9,12 @@
    "gamePk": 849813,
    "ai": 33,
    "gameType": "L",
+   "savant": {
+    "xba": 0.068,
+    "ls": 84.9,
+    "la": -16,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "CLE",
    "home": "TB",
    "inning": 4,
