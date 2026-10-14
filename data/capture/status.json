@@ -1,11 +1,11 @@
 {
  "schema": 1,
- "lastRunAt": "2026-10-13T23:59:52.740Z",
- "lastChangeAt": "2026-10-11T07:20:07.926Z",
+ "lastRunAt": "2026-10-14T03:04:59.405Z",
+ "lastChangeAt": "2026-10-14T03:04:59.405Z",
  "lastRun": {
-  "polls": 4,
+  "polls": 1,
   "gamesPolled": 1,
-  "added": 0,
+  "added": 1,
   "changed": 0,
   "filled": 0,
   "warnings": []
