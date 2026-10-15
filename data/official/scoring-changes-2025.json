@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-14T21:46:35.133Z",
+ "generatedAt": "2026-10-15T04:49:16.876Z",
  "entries": [
   {
    "seq": 1,
@@ -8143,7 +8143,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0755,
+    "p": 0.0756,
     "score": 8,
     "kind": "out_of_fold"
    }
