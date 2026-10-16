@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-15T21:29:28.004Z",
+ "generatedAt": "2026-10-16T04:39:32.114Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -9,7 +9,7 @@
   ],
   "refreshDays": 21,
   "labelLagDays": 14,
-  "labelCutoff": "2026-10-01"
+  "labelCutoff": "2026-10-02"
  },
  "logs": {
   "2024": {
@@ -253,32 +253,32 @@
     "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=L",
     "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&gameType=W"
    ],
-   "scheduled": 2476,
-   "completed": 2460,
-   "gamesWithPlays": 2460,
-   "fetched": 87,
+   "scheduled": 2473,
+   "completed": 2461,
+   "gamesWithPlays": 2461,
+   "fetched": 76,
    "failed": 0,
    "failures": [],
    "selfCheck": {
-    "gamePk": 823326,
-    "projectedUrl": "https://statsapi.mlb.com/api/v1/game/823326/playByPlay?fields=allPlays,result,type,event,eventType,description,rbi,awayScore,homeScore,isOut,about,atBatIndex,inning,isTopInning,halfInning,hasReview,startTime,matchup,batter,pitcher,id,fullName,batSide,pitchHand,code,splits,menOnBase,count,outs,playEvents,details,isInPlay,index,hitData,launchSpeed,launchAngle,totalDistance,trajectory,hardness,location,coordinates,coordX,coordY,runners,movement,originBase,start,end,outBase,runner,credits,credit,player,position,abbreviation,isScoringEvent,playId,playIndex,isPitch,earned,teamUnearned",
+    "gamePk": 824703,
+    "projectedUrl": "https://statsapi.mlb.com/api/v1/game/824703/playByPlay?fields=allPlays,result,type,event,eventType,description,rbi,awayScore,homeScore,isOut,about,atBatIndex,inning,isTopInning,halfInning,hasReview,startTime,matchup,batter,pitcher,id,fullName,batSide,pitchHand,code,splits,menOnBase,count,outs,playEvents,details,isInPlay,index,hitData,launchSpeed,launchAngle,totalDistance,trajectory,hardness,location,coordinates,coordX,coordY,runners,movement,originBase,start,end,outBase,runner,credits,credit,player,position,abbreviation,isScoringEvent,playId,playIndex,isPitch,earned,teamUnearned",
     "equal": true,
-    "plays": 70
+    "plays": 74
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
     "fetched": 1,
     "failed": 0,
-    "withScorer": 2460,
+    "withScorer": 2461,
     "scorers": 82
    },
    "byGameType": {
     "R": 2429,
     "D": 16,
     "F": 9,
-    "L": 6
+    "L": 7
    },
-   "plateAppearances": 186581,
+   "plateAppearances": 186654,
    "fieldErrorPlateAppearances": 1056,
    "officialEntries": 264,
    "entryKinds": {
@@ -389,12 +389,12 @@
  },
  "discovery": {
   "creditCodes": {
-   "f_putout": 394313,
-   "f_assist": 124884,
-   "f_fielded_ball": 105049,
+   "f_putout": 394367,
+   "f_assist": 124904,
+   "f_fielded_ball": 105057,
    "f_deflection": 3943,
    "f_throwing_error": 3792,
-   "f_fielding_error": 3140,
+   "f_fielding_error": 3141,
    "f_assist_of": 1969,
    "f_error_dropped_ball": 345,
    "c_catcher_interf": 272,
@@ -422,23 +422,23 @@
   "battedBallLocations": {
    "1": 13388,
    "2": 3692,
-   "3": 28645,
-   "4": 44200,
-   "5": 39689,
-   "6": 45699,
-   "7": 62373,
-   "8": 69719,
-   "9": 64583,
+   "3": 28647,
+   "4": 44206,
+   "5": 39694,
+   "6": 45706,
+   "7": 62382,
+   "8": 69731,
+   "9": 64586,
    "78": 3326,
-   "89": 3106,
-   "null": 1300
+   "89": 3108,
+   "null": 1302
   },
   "battedBallTrajectories": {
-   "ground_ball": 157500,
-   "fly_ball": 100980,
-   "line_drive": 90139,
-   "popup": 26899,
-   "bunt_grounder": 3815,
+   "ground_ball": 157520,
+   "fly_ball": 100991,
+   "line_drive": 90153,
+   "popup": 26900,
+   "bunt_grounder": 3817,
    "bunt_popup": 341,
    "bunt_line_drive": 29,
    "null": 17
@@ -449,7 +449,7 @@
    "withTraj": 3210,
    "withLoc": 3210
   },
-  "battedBalls": 379720,
+  "battedBalls": 379768,
   "errorKindCheck": {
    "fielding|fielding": 1965,
    "throwing|throwing": 1078,
@@ -463,7 +463,7 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-15T21:29:46.431Z",
+  "fetchedAt": "2026-10-16T04:39:52.889Z",
   "rowsAllGameTypes": 1411,
   "rowsByGameType": {
    "R": 1041,
@@ -483,7 +483,7 @@
   "launchAngleAgreement": 1,
   "hitProbVsSavantXba": {
    "n": 1042,
-   "pearson": 0.9739,
+   "pearson": 0.9738,
    "meanAbsDiff": 0.0288
   },
   "perPlay": {
@@ -547,7 +547,7 @@
    "positives": 192,
    "cv": {
     "folds": 10,
-    "logLoss": 0.21669,
+    "logLoss": 0.2167,
     "baseLogLoss": 0.22347,
     "auc": 0.6122,
     "brier": 0.05337,
@@ -584,7 +584,7 @@
      {
       "band": "20–35",
       "n": 18,
-      "predicted": 0.2537,
+      "predicted": 0.2536,
       "observed": 0.3333,
       "positives": 6
      },
@@ -646,7 +646,7 @@
      {
       "band": "20–35",
       "n": 11,
-      "predicted": 0.2748,
+      "predicted": 0.2747,
       "observed": 0.4545,
       "positives": 5
      },
@@ -804,7 +804,7 @@
     ]
    }
   },
-  "surfaceBalls": 374902
+  "surfaceBalls": 374950
  },
  "warnings": [],
  "currentSeason": 2026,
@@ -867,9 +867,9 @@
      "groups": 101,
      "plays": 3269,
      "positives": 192,
-     "statistic": 102.778,
+     "statistic": 102.782,
      "dispersion": 1.018,
-     "pValue": 0.3838,
+     "pValue": 0.3833,
      "permutations": 2000,
      "seed": 20260924
     },
@@ -889,7 +889,7 @@
      "groups": 31,
      "plays": 3269,
      "positives": 192,
-     "statistic": 29.39,
+     "statistic": 29.391,
      "dispersion": 0.948,
      "pValue": 0.4863,
      "permutations": 2000,
@@ -898,7 +898,7 @@
     "cv": {
      "tested": true,
      "groupsInCandidate": 30,
-     "logLoss": 0.21968,
+     "logLoss": 0.21969,
      "deltaVsBest": 0.004091,
      "pairedSE": 0.001943,
      "selected": false
@@ -917,7 +917,7 @@
      "groups": 103,
      "plays": 104370,
      "positives": 128,
-     "statistic": 87.577,
+     "statistic": 87.576,
      "dispersion": 0.85,
      "pValue": 0.8263,
      "permutations": 500,
@@ -977,17 +977,17 @@
    "errorCredits": 2458
   },
   "2026": {
-   "games": 2460,
-   "gamesScanned": 2460,
-   "plateAppearances": 186581,
-   "events": 2519,
+   "games": 2461,
+   "gamesScanned": 2461,
+   "plateAppearances": 186654,
+   "events": 2520,
    "byScope": {
+    "on_hit": 563,
     "batter_reached": 1119,
-    "on_hit": 562,
     "other": 838
    },
-   "withVideo": 2519,
-   "errorCredits": 2496
+   "withVideo": 2520,
+   "errorCredits": 2497
   }
  }
 }
