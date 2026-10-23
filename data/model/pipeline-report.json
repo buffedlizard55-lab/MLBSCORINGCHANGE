@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-22T21:42:37.565Z",
+ "generatedAt": "2026-10-23T05:07:53.561Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -9,7 +9,7 @@
   ],
   "refreshDays": 21,
   "labelLagDays": 14,
-  "labelCutoff": "2026-10-08"
+  "labelCutoff": "2026-10-09"
  },
  "logs": {
   "2024": {
@@ -256,14 +256,14 @@
    "scheduled": 2472,
    "completed": 2464,
    "gamesWithPlays": 2464,
-   "fetched": 27,
+   "fetched": 26,
    "failed": 0,
    "failures": [],
    "selfCheck": {
-    "gamePk": 849844,
-    "projectedUrl": "https://statsapi.mlb.com/api/v1/game/849844/playByPlay?fields=allPlays,result,type,event,eventType,description,rbi,awayScore,homeScore,isOut,about,atBatIndex,inning,isTopInning,halfInning,hasReview,startTime,matchup,batter,pitcher,id,fullName,batSide,pitchHand,code,splits,menOnBase,count,outs,playEvents,details,isInPlay,index,hitData,launchSpeed,launchAngle,totalDistance,trajectory,hardness,location,coordinates,coordX,coordY,runners,movement,originBase,start,end,outBase,runner,credits,credit,player,position,abbreviation,isScoringEvent,playId,playIndex,isPitch,earned,teamUnearned",
+    "gamePk": 849829,
+    "projectedUrl": "https://statsapi.mlb.com/api/v1/game/849829/playByPlay?fields=allPlays,result,type,event,eventType,description,rbi,awayScore,homeScore,isOut,about,atBatIndex,inning,isTopInning,halfInning,hasReview,startTime,matchup,batter,pitcher,id,fullName,batSide,pitchHand,code,splits,menOnBase,count,outs,playEvents,details,isInPlay,index,hitData,launchSpeed,launchAngle,totalDistance,trajectory,hardness,location,coordinates,coordX,coordY,runners,movement,originBase,start,end,outBase,runner,credits,credit,player,position,abbreviation,isScoringEvent,playId,playIndex,isPitch,earned,teamUnearned",
     "equal": true,
-    "plays": 69
+    "plays": 68
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
@@ -463,7 +463,7 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-22T21:42:56.286Z",
+  "fetchedAt": "2026-10-23T05:08:10.446Z",
   "rowsAllGameTypes": 1412,
   "rowsByGameType": {
    "R": 1041,
