@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T16:02:18.757Z",
+ "generatedAt": "2026-10-24T20:56:17.832Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -462,9 +462,9 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": true,
-  "fetchedThisRun": false,
-  "fetchedAt": "2026-10-24T11:12:37.349Z",
+  "cached": false,
+  "fetchedThisRun": true,
+  "fetchedAt": "2026-10-24T20:56:36.878Z",
   "rowsAllGameTypes": 1412,
   "rowsByGameType": {
    "R": 1041,
@@ -503,7 +503,7 @@
      "season": 2026,
      "month": null,
      "rows": 1412,
-     "fromCache": true,
+     "fromCache": false,
      "asked": 0,
      "found": 1046,
      "missed": 0,
@@ -512,13 +512,13 @@
    ],
    "queriesDeferred": 0,
    "failures": [],
-   "requests": 0,
-   "cacheHits": 1,
+   "requests": 1,
+   "cacheHits": 0,
    "budgetExhausted": false
   },
   "client": {
-   "requests": 0,
-   "cacheHits": 1,
+   "requests": 1,
+   "cacheHits": 0,
    "budget": 4,
    "budgetExhausted": false,
    "rateLimited": false,
