@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-24T04:44:54.935Z",
+ "generatedAt": "2026-10-24T11:12:16.395Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -267,7 +267,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 1,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2465,
     "scorers": 82
@@ -464,7 +464,7 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-24T04:45:09.480Z",
+  "fetchedAt": "2026-10-24T11:12:37.349Z",
   "rowsAllGameTypes": 1412,
   "rowsByGameType": {
    "R": 1041,
