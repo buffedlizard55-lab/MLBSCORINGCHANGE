@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-10-24T11:12:16.395Z",
-  "sha256": "8a4f0d6ec2893be3787aba42297f44d05723cd15525ef2353bd0bb6999689e8a",
+  "fetchedAt": "2026-10-24T16:02:18.757Z",
+  "sha256": "f078ffb790751e63d591001f35eba0222eb92a1df18c41d39a0efa40c86da08c",
   "bytes": 923548
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-10-24T11:12:16.395Z",
+ "generatedAt": "2026-10-24T16:02:18.757Z",
  "entries": [
   {
    "seq": 1,
