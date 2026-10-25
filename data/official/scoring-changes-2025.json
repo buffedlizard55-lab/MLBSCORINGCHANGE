@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-24T23:20:46.300Z",
+ "generatedAt": "2026-10-25T04:52:01.385Z",
  "entries": [
   {
    "seq": 1,
@@ -181,9 +181,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.392,
+    "ls": 102.7,
+    "la": -1,
     "gameDate": "2025-03-30",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -1258,7 +1258,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0608,
+    "p": 0.0607,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -1351,7 +1351,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0357,
+    "p": 0.0356,
     "score": 4,
     "kind": "out_of_fold"
    }
@@ -2085,7 +2085,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.4885,
+    "p": 0.4884,
     "score": 49,
     "kind": "out_of_fold"
    }
@@ -2718,9 +2718,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.201,
+    "ls": 97.1,
+    "la": -12,
     "gameDate": "2025-04-27",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -2838,9 +2838,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.443,
+    "ls": 98.4,
+    "la": 3,
     "gameDate": "2025-04-25",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -3454,7 +3454,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0459,
+    "p": 0.046,
     "score": 5,
     "kind": "out_of_fold"
    }
@@ -4258,7 +4258,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.4242,
+    "p": 0.4243,
     "score": 42,
     "kind": "out_of_fold"
    }
@@ -5465,7 +5465,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1252,
+    "p": 0.1251,
     "score": 13,
     "kind": "out_of_fold"
    }
@@ -5585,7 +5585,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.076,
+    "p": 0.0759,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -7293,7 +7293,7 @@
    "model": {
     "question": "errorToHit",
     "p": 0.025,
-    "score": 2,
+    "score": 3,
     "kind": "out_of_fold"
    }
   },
@@ -8143,7 +8143,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0751,
+    "p": 0.0752,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -8372,9 +8372,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.494,
+    "ls": 100.9,
+    "la": 1,
     "gameDate": "2025-06-24",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -8536,7 +8536,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0867,
+    "p": 0.0866,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -8758,9 +8758,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": 87.6,
-    "la": 20,
+    "xba": 0.207,
+    "ls": 42.5,
+    "la": -66,
     "gameDate": "2025-06-25",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -8978,9 +8978,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.273,
+    "ls": 100.9,
+    "la": -6,
     "gameDate": "2025-06-25",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -9705,9 +9705,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.227,
+    "ls": 103.7,
+    "la": -17,
     "gameDate": "2025-06-29",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -11951,7 +11951,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1082,
+    "p": 0.1081,
     "score": 11,
     "kind": "out_of_fold"
    }
@@ -12600,7 +12600,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.058,
+    "p": 0.0578,
     "score": 6,
     "kind": "out_of_fold"
    }
@@ -14267,7 +14267,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.0885,
+    "p": 0.0884,
     "score": 9,
     "kind": "out_of_fold"
    }
@@ -15707,9 +15707,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.139,
+    "ls": 90.3,
+    "la": -16,
     "gameDate": "2025-08-30",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -16588,7 +16588,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.077,
+    "p": 0.0769,
     "score": 8,
     "kind": "out_of_fold"
    }
@@ -17243,7 +17243,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1952,
+    "p": 0.195,
     "score": 20,
     "kind": "out_of_fold"
    }
@@ -18821,7 +18821,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1465,
+    "p": 0.1464,
     "score": 15,
     "kind": "out_of_fold"
    }
@@ -18963,9 +18963,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.615,
+    "ls": 97.1,
+    "la": 7,
     "gameDate": "2025-09-26",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -19083,9 +19083,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.151,
+    "ls": 93.6,
+    "la": -13,
     "gameDate": "2025-09-28",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -19153,9 +19153,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.39,
+    "ls": 100.6,
+    "la": 22,
     "gameDate": "2025-09-27",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -19421,7 +19421,7 @@
    },
    "model": {
     "question": "errorToHit",
-    "p": 0.1886,
+    "p": 0.1885,
     "score": 19,
     "kind": "out_of_fold"
    }
