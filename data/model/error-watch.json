@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-10-25T11:41:42.338Z",
+ "generatedAt": "2026-10-25T16:32:51.075Z",
  "labelCutoff": "2026-10-11",
  "plays": [
   {
@@ -7288,9 +7288,9 @@
    "ai": 2,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.281,
+    "ls": 92.4,
+    "la": -3,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PHI",
@@ -7330,9 +7330,9 @@
    "ai": 23,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 76.3,
-    "la": 25,
+    "xba": 0.104,
+    "ls": 68.8,
+    "la": -5,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIL",
@@ -7372,9 +7372,9 @@
    "ai": 66,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.058,
+    "ls": 77.1,
+    "la": -21,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SD",
@@ -7414,9 +7414,9 @@
    "ai": 20,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.085,
+    "ls": 77.1,
+    "la": -39,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CWS",
@@ -7456,9 +7456,9 @@
    "ai": 0,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.723,
+    "ls": 92.1,
+    "la": 17,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CWS",
@@ -7498,9 +7498,9 @@
    "ai": 35,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.261,
+    "ls": 88.7,
+    "la": -4,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "DET",
@@ -7540,9 +7540,9 @@
    "ai": 35,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 65.7,
-    "la": 37,
+    "xba": 0.079,
+    "ls": 65.6,
+    "la": -37,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIA",
@@ -7624,9 +7624,9 @@
    "ai": 48,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 77.9,
-    "la": 34,
+    "xba": 0.139,
+    "ls": 96,
+    "la": -16,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CIN",
@@ -7666,9 +7666,9 @@
    "ai": 20,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.011,
+    "ls": 71.2,
+    "la": 60,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -7750,9 +7750,9 @@
    "ai": 3,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 70.9,
-    "la": 27,
+    "xba": 0.186,
+    "ls": 87.5,
+    "la": -3,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SD",
@@ -7792,9 +7792,9 @@
    "ai": 39,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.167,
+    "ls": 88.2,
+    "la": -9,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIA",
@@ -7834,9 +7834,9 @@
    "ai": 70,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.563,
+    "ls": 103.6,
+    "la": 4,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BAL",
@@ -7876,9 +7876,9 @@
    "ai": 3,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.204,
+    "ls": 90.7,
+    "la": -9,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -7918,9 +7918,9 @@
    "ai": 28,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.045,
+    "ls": 74.9,
+    "la": -14,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CWS",
@@ -8002,9 +8002,9 @@
    "ai": 54,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.001,
+    "ls": 88.6,
+    "la": 43,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -8044,9 +8044,9 @@
    "ai": 66,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.308,
+    "ls": 72.1,
+    "la": -57,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -8086,9 +8086,9 @@
    "ai": 52,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.091,
+    "ls": 90.5,
+    "la": 27,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -8128,9 +8128,9 @@
    "ai": 50,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": -48,
+    "xba": 0.391,
+    "ls": 98.1,
+    "la": 0,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -8170,9 +8170,9 @@
    "ai": 11,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.232,
+    "ls": 42.9,
+    "la": -56,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BAL",
@@ -8212,9 +8212,9 @@
    "ai": 41,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 70.2,
-    "la": -40,
+    "xba": 0.118,
+    "ls": 56,
+    "la": 10,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAD",
@@ -8254,9 +8254,9 @@
    "ai": 71,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.317,
+    "ls": 100.1,
+    "la": -4,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -8338,9 +8338,9 @@
    "ai": 64,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.078,
+    "ls": 72.5,
+    "la": -3,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -8380,9 +8380,9 @@
    "ai": 19,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.637,
+    "ls": 105,
+    "la": 5,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -8464,9 +8464,9 @@
    "ai": 54,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.136,
+    "ls": 69.7,
+    "la": -41,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIL",
@@ -8506,9 +8506,9 @@
    "ai": 61,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.059,
+    "ls": 67.2,
+    "la": -9,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "HOU",
@@ -8548,9 +8548,9 @@
    "ai": 65,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.082,
+    "ls": 85.8,
+    "la": -14,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -8590,9 +8590,9 @@
    "ai": 50,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.315,
+    "ls": 105.2,
+    "la": -10,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "HOU",
@@ -8632,9 +8632,9 @@
    "ai": 26,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.043,
+    "ls": 77.2,
+    "la": -35,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -14128,9 +14128,9 @@
    "ai": 42,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 77.7,
-    "la": 36,
+    "xba": 0.114,
+    "ls": 47.4,
+    "la": 29,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -14170,9 +14170,9 @@
    "ai": 28,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.031,
+    "ls": 69.3,
+    "la": -22,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -14212,9 +14212,9 @@
    "ai": 19,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.097,
+    "ls": 106.4,
+    "la": -27,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -14254,9 +14254,9 @@
    "ai": 37,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.117,
+    "ls": 82.2,
+    "la": -7,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIA",
@@ -14296,9 +14296,9 @@
    "ai": 18,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.17,
+    "ls": 81.6,
+    "la": -1,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -14380,9 +14380,9 @@
    "ai": 60,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.074,
+    "ls": 83.9,
+    "la": -21,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -14470,9 +14470,9 @@
    "ai": 43,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.044,
+    "ls": 86.3,
+    "la": -40,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BAL",
@@ -14512,9 +14512,9 @@
    "ai": 42,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.254,
+    "ls": 76.8,
+    "la": 7,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BAL",
@@ -14554,9 +14554,9 @@
    "ai": 73,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.098,
+    "ls": 84.9,
+    "la": -10,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "HOU",
@@ -14596,9 +14596,9 @@
    "ai": 1,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.276,
+    "ls": 62.1,
+    "la": -63,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SEA",
@@ -14638,9 +14638,9 @@
    "ai": 3,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.264,
+    "ls": 89.3,
+    "la": -2,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "ATL",
@@ -14680,9 +14680,9 @@
    "ai": 22,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.471,
+    "ls": 98.6,
+    "la": 3,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -14722,9 +14722,9 @@
    "ai": 11,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.157,
+    "ls": 89.4,
+    "la": 23,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIL",
@@ -14764,9 +14764,9 @@
    "ai": 46,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.113,
+    "ls": 83.3,
+    "la": -8,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TOR",
@@ -14806,9 +14806,9 @@
    "ai": 2,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 81.5,
-    "la": 9,
+    "xba": 0.156,
+    "ls": 84.9,
+    "la": -3,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CLE",
@@ -14884,9 +14884,9 @@
    "ai": 20,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.087,
+    "ls": 57,
+    "la": -30,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PHI",
@@ -14926,9 +14926,9 @@
    "ai": 4,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 73.1,
-    "la": 44,
+    "xba": 0.356,
+    "ls": 38.8,
+    "la": -48,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -14968,9 +14968,9 @@
    "ai": 30,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.405,
+    "ls": 98.1,
+    "la": -1,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -15010,9 +15010,9 @@
    "ai": 70,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.234,
+    "ls": 92.2,
+    "la": -8,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -15052,9 +15052,9 @@
    "ai": 63,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.241,
+    "ls": 102.1,
+    "la": -11,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -15094,9 +15094,9 @@
    "ai": 39,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 49.3,
-    "la": -33,
+    "xba": 0.06,
+    "ls": 87.8,
+    "la": -30,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -15136,9 +15136,9 @@
    "ai": 32,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.176,
+    "ls": 94.2,
+    "la": -9,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIL",
@@ -15178,9 +15178,9 @@
    "ai": 47,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.056,
+    "ls": 74.7,
+    "la": -32,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TOR",
@@ -15220,9 +15220,9 @@
    "ai": 28,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.405,
+    "ls": 80.7,
+    "la": -63,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TOR",
@@ -15262,9 +15262,9 @@
    "ai": 29,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.242,
+    "ls": 78.7,
+    "la": 2,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -15304,9 +15304,9 @@
    "ai": 79,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.017,
+    "ls": 100.8,
+    "la": 61,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -15394,9 +15394,9 @@
    "ai": 39,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 80.2,
-    "la": 59,
+    "xba": 0.309,
+    "ls": 65.9,
+    "la": -57,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -15436,9 +15436,9 @@
    "ai": 11,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.258,
+    "ls": 99.3,
+    "la": -10,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BAL",
@@ -15478,9 +15478,9 @@
    "ai": 76,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.234,
+    "ls": 45.7,
+    "la": -58,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "HOU",
@@ -15520,9 +15520,9 @@
    "ai": 26,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.073,
+    "ls": 72.5,
+    "la": -4,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "HOU",
@@ -15562,9 +15562,9 @@
    "ai": 73,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.173,
+    "ls": 95.9,
+    "la": -17,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -15604,9 +15604,9 @@
    "ai": 4,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.28,
+    "ls": 96.2,
+    "la": 27,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIL",
@@ -15694,9 +15694,9 @@
    "ai": 6,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.313,
+    "ls": 103.7,
+    "la": -13,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -15736,9 +15736,9 @@
    "ai": 23,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.069,
+    "ls": 80.2,
+    "la": -14,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "ATH",
@@ -15778,9 +15778,9 @@
    "ai": 27,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.157,
+    "ls": 103.2,
+    "la": -25,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -20860,9 +20860,9 @@
    "ai": 11,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.279,
+    "ls": 106.4,
+    "la": -14,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAD",
@@ -20902,9 +20902,9 @@
    "ai": 7,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.27,
+    "ls": 96,
+    "la": -10,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -20944,9 +20944,9 @@
    "ai": 60,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.232,
+    "ls": 77.8,
+    "la": 4,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIA",
@@ -21022,9 +21022,9 @@
    "ai": 18,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.101,
+    "ls": 82.6,
+    "la": -14,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SF",
@@ -21064,9 +21064,9 @@
    "ai": 71,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.216,
+    "ls": 66.4,
+    "la": 11,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CWS",
@@ -21106,9 +21106,9 @@
    "ai": 54,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.337,
+    "ls": 59.1,
+    "la": -67,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CIN",
@@ -21148,9 +21148,9 @@
    "ai": 29,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.063,
+    "ls": 92.5,
+    "la": 33,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "DET",
@@ -21190,9 +21190,9 @@
    "ai": 12,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.053,
+    "ls": 91.3,
+    "la": -38,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "DET",
@@ -21232,9 +21232,9 @@
    "ai": 28,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 79.2,
-    "la": 64,
+    "xba": 0.122,
+    "ls": 46.1,
+    "la": -18,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAA",
@@ -21274,9 +21274,9 @@
    "ai": 42,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.028,
+    "ls": 69.8,
+    "la": -23,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYM",
@@ -21316,9 +21316,9 @@
    "ai": 10,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.05,
+    "ls": 67.5,
+    "la": -19,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYM",
@@ -21400,9 +21400,9 @@
    "ai": 24,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.174,
+    "ls": 96,
+    "la": -12,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -21490,9 +21490,9 @@
    "ai": 86,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.242,
+    "ls": 95.6,
+    "la": -11,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SEA",
@@ -21532,9 +21532,9 @@
    "ai": 25,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.523,
+    "ls": 96.8,
+    "la": 3,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SEA",
@@ -21574,9 +21574,9 @@
    "ai": 21,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.038,
+    "ls": 66.8,
+    "la": -25,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SEA",
@@ -21616,9 +21616,9 @@
    "ai": 51,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 73.8,
-    "la": 39,
+    "xba": 0.143,
+    "ls": 85.5,
+    "la": -9,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "HOU",
@@ -21658,9 +21658,9 @@
    "ai": 40,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.15,
+    "ls": 95.2,
+    "la": -15,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "HOU",
@@ -21700,9 +21700,9 @@
    "ai": 24,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.064,
+    "ls": 73.3,
+    "la": -25,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CIN",
@@ -21784,9 +21784,9 @@
    "ai": 53,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.281,
+    "ls": 90.6,
+    "la": -2,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TEX",
@@ -21826,9 +21826,9 @@
    "ai": 39,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.082,
+    "ls": 100.6,
+    "la": -34,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TEX",
@@ -21868,9 +21868,9 @@
    "ai": 44,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.08,
+    "ls": 54.1,
+    "la": -11,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -21910,9 +21910,9 @@
    "ai": 18,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.417,
+    "ls": 95.8,
+    "la": -1,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -21952,9 +21952,9 @@
    "ai": 11,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 55.5,
-    "la": 32,
+    "xba": 0.121,
+    "ls": 62.7,
+    "la": 4,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -21994,9 +21994,9 @@
    "ai": 33,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.344,
+    "ls": 81.7,
+    "la": 5,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SEA",
@@ -22084,9 +22084,9 @@
    "ai": 38,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 92.5,
-    "la": -35,
+    "xba": 0.268,
+    "ls": 99.4,
+    "la": -5,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CIN",
@@ -22126,9 +22126,9 @@
    "ai": 40,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.429,
+    "ls": 95.2,
+    "la": 2,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAD",
@@ -22210,9 +22210,9 @@
    "ai": 14,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.086,
+    "ls": 86.7,
+    "la": -18,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -22384,9 +22384,9 @@
    "ai": 17,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.059,
+    "ls": 84.3,
+    "la": -28,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PHI",
@@ -22426,9 +22426,9 @@
    "ai": 40,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.137,
+    "ls": 100.9,
+    "la": -21,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CIN",
@@ -22468,9 +22468,9 @@
    "ai": 70,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 75.4,
-    "la": 60,
+    "xba": 0.061,
+    "ls": 64.3,
+    "la": -31,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "ATL",
@@ -22510,9 +22510,9 @@
    "ai": 39,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.46,
+    "ls": 98.1,
+    "la": 2,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CHC",
@@ -22552,9 +22552,9 @@
    "ai": 28,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.034,
+    "ls": 67.3,
+    "la": -26,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PHI",
@@ -22930,9 +22930,9 @@
    "ai": 27,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.309,
+    "ls": 91.3,
+    "la": 2,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CHC",
@@ -23056,9 +23056,9 @@
    "ai": 26,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": 70.2,
-    "la": 40,
+    "xba": 0.177,
+    "ls": 63,
+    "la": 13,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "ATL",
@@ -23098,9 +23098,9 @@
    "ai": 44,
    "gameType": "R",
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.466,
+    "ls": 98,
+    "la": 17,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -28774,9 +28774,9 @@
    "ai": 7,
    "gameType": "R",
    "savant": {
-    "xba": 0.003,
-    "ls": 91.6,
-    "la": 53,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -28816,9 +28816,9 @@
    "ai": 49,
    "gameType": "R",
    "savant": {
-    "xba": 0.038,
-    "ls": 87.4,
-    "la": -33,
+    "xba": null,
+    "ls": 74.1,
+    "la": 14,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -28858,9 +28858,9 @@
    "ai": 74,
    "gameType": "R",
    "savant": {
-    "xba": 0.049,
-    "ls": 79.4,
-    "la": -34,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SF",
@@ -28900,9 +28900,9 @@
    "ai": 40,
    "gameType": "R",
    "savant": {
-    "xba": 0.344,
-    "ls": 34.4,
-    "la": 9,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SF",
@@ -28942,9 +28942,9 @@
    "ai": 75,
    "gameType": "R",
    "savant": {
-    "xba": 0.643,
-    "ls": 102.4,
-    "la": 6,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PHI",
@@ -28984,9 +28984,9 @@
    "ai": 46,
    "gameType": "R",
    "savant": {
-    "xba": 0.177,
-    "ls": 81.9,
-    "la": 0,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIA",
@@ -29026,9 +29026,9 @@
    "ai": 67,
    "gameType": "R",
    "savant": {
-    "xba": 0.077,
-    "ls": 60.4,
-    "la": -32,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAA",
@@ -29068,9 +29068,9 @@
    "ai": 19,
    "gameType": "R",
    "savant": {
-    "xba": 0.466,
-    "ls": 106.1,
-    "la": -1,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -29152,9 +29152,9 @@
    "ai": 52,
    "gameType": "R",
    "savant": {
-    "xba": 0.209,
-    "ls": 78.8,
-    "la": 1,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -29194,9 +29194,9 @@
    "ai": 41,
    "gameType": "R",
    "savant": {
-    "xba": 0.114,
-    "ls": 74.5,
-    "la": 2,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -29236,9 +29236,9 @@
    "ai": 68,
    "gameType": "R",
    "savant": {
-    "xba": 0.201,
-    "ls": 93.4,
-    "la": -6,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CHC",
@@ -29278,9 +29278,9 @@
    "ai": 41,
    "gameType": "R",
    "savant": {
-    "xba": 0.169,
-    "ls": 61.7,
-    "la": -80,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CHC",
@@ -29320,9 +29320,9 @@
    "ai": 1,
    "gameType": "R",
    "savant": {
-    "xba": 0.218,
-    "ls": 93.6,
-    "la": -6,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -29362,9 +29362,9 @@
    "ai": 74,
    "gameType": "R",
    "savant": {
-    "xba": 0.376,
-    "ls": 102.6,
-    "la": -7,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TOR",
@@ -29488,9 +29488,9 @@
    "ai": 69,
    "gameType": "R",
    "savant": {
-    "xba": 0.175,
-    "ls": 99.8,
-    "la": -20,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIL",
@@ -29530,9 +29530,9 @@
    "ai": 22,
    "gameType": "R",
    "savant": {
-    "xba": 0.183,
-    "ls": 95.3,
-    "la": 30,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PHI",
@@ -29668,9 +29668,9 @@
    "ai": 45,
    "gameType": "R",
    "savant": {
-    "xba": 0.313,
-    "ls": 106.9,
-    "la": -12,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAA",
@@ -29710,9 +29710,9 @@
    "ai": 11,
    "gameType": "R",
    "savant": {
-    "xba": 0.168,
-    "ls": 85.6,
-    "la": -4,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -29752,9 +29752,9 @@
    "ai": 58,
    "gameType": "R",
    "savant": {
-    "xba": 0.381,
-    "ls": 101.4,
-    "la": -3,
+    "xba": null,
+    "ls": 67.5,
+    "la": -44,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SD",
@@ -29794,9 +29794,9 @@
    "ai": 41,
    "gameType": "R",
    "savant": {
-    "xba": 0.147,
-    "ls": 61.8,
-    "la": -45,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CHC",
@@ -29836,9 +29836,9 @@
    "ai": 3,
    "gameType": "R",
    "savant": {
-    "xba": 0.122,
-    "ls": 91.1,
-    "la": -13,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SEA",
@@ -29920,9 +29920,9 @@
    "ai": 1,
    "gameType": "R",
    "savant": {
-    "xba": 0.6,
-    "ls": 95,
-    "la": 7,
+    "xba": null,
+    "ls": 69.6,
+    "la": 33,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "ATL",
@@ -30010,9 +30010,9 @@
    "ai": 48,
    "gameType": "R",
    "savant": {
-    "xba": 0.357,
-    "ls": 85.2,
-    "la": 4,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -30052,9 +30052,9 @@
    "ai": 39,
    "gameType": "R",
    "savant": {
-    "xba": 0.052,
-    "ls": 69.5,
-    "la": -14,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -30220,9 +30220,9 @@
    "ai": 59,
    "gameType": "R",
    "savant": {
-    "xba": 0.173,
-    "ls": 92.5,
-    "la": -13,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CHC",
@@ -30304,9 +30304,9 @@
    "ai": 12,
    "gameType": "R",
    "savant": {
-    "xba": 0.196,
-    "ls": 62.5,
-    "la": -60,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TB",
@@ -30346,9 +30346,9 @@
    "ai": 27,
    "gameType": "R",
    "savant": {
-    "xba": 0.243,
-    "ls": 65.9,
-    "la": -50,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -30388,9 +30388,9 @@
    "ai": 2,
    "gameType": "R",
    "savant": {
-    "xba": 0.489,
-    "ls": 98.8,
-    "la": 4,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "STL",
@@ -30514,9 +30514,9 @@
    "ai": 19,
    "gameType": "R",
    "savant": {
-    "xba": 0.056,
-    "ls": 77.2,
-    "la": -22,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CHC",
@@ -30598,9 +30598,9 @@
    "ai": 35,
    "gameType": "R",
    "savant": {
-    "xba": 0.551,
-    "ls": 102.9,
-    "la": 3,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SEA",
@@ -30724,9 +30724,9 @@
    "ai": 32,
    "gameType": "R",
    "savant": {
-    "xba": 0.466,
-    "ls": 89.8,
-    "la": 6,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -36220,9 +36220,9 @@
    "ai": 70,
    "gameType": "R",
    "savant": {
-    "xba": 0.142,
-    "ls": 64.9,
-    "la": -43,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -36262,9 +36262,9 @@
    "ai": 10,
    "gameType": "R",
    "savant": {
-    "xba": 0.321,
-    "ls": 96,
-    "la": -5,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -36352,9 +36352,9 @@
    "ai": 16,
    "gameType": "R",
    "savant": {
-    "xba": 0.074,
-    "ls": 80.7,
-    "la": -16,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "KC",
@@ -36394,9 +36394,9 @@
    "ai": 35,
    "gameType": "R",
    "savant": {
-    "xba": 0.121,
-    "ls": 77.8,
-    "la": -45,
+    "xba": null,
+    "ls": 76.9,
+    "la": 15,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TB",
@@ -36436,9 +36436,9 @@
    "ai": 49,
    "gameType": "R",
    "savant": {
-    "xba": 0.224,
-    "ls": 98.9,
-    "la": -7,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -36478,9 +36478,9 @@
    "ai": 29,
    "gameType": "R",
    "savant": {
-    "xba": 0.312,
-    "ls": 93.2,
-    "la": -1,
+    "xba": null,
+    "ls": 80.6,
+    "la": 29,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "STL",
@@ -36520,9 +36520,9 @@
    "ai": 9,
    "gameType": "R",
    "savant": {
-    "xba": 0.084,
-    "ls": 91.5,
-    "la": -27,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -36562,9 +36562,9 @@
    "ai": 30,
    "gameType": "R",
    "savant": {
-    "xba": 0.222,
-    "ls": 50.3,
-    "la": -64,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "DET",
@@ -36646,9 +36646,9 @@
    "ai": 26,
    "gameType": "R",
    "savant": {
-    "xba": 0.439,
-    "ls": 95.5,
-    "la": 1,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "STL",
@@ -36688,9 +36688,9 @@
    "ai": 19,
    "gameType": "R",
    "savant": {
-    "xba": 0.273,
-    "ls": 83,
-    "la": 4,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CHC",
@@ -36730,9 +36730,9 @@
    "ai": 67,
    "gameType": "R",
    "savant": {
-    "xba": 0.048,
-    "ls": 70.1,
-    "la": -10,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -36772,9 +36772,9 @@
    "ai": 23,
    "gameType": "R",
    "savant": {
-    "xba": 0.057,
-    "ls": 86.2,
-    "la": -42,
+    "xba": null,
+    "ls": 72.9,
+    "la": 34,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -36814,9 +36814,9 @@
    "ai": 73,
    "gameType": "R",
    "savant": {
-    "xba": 0.426,
-    "ls": 101.8,
-    "la": -5,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAA",
@@ -36898,9 +36898,9 @@
    "ai": 28,
    "gameType": "R",
    "savant": {
-    "xba": 0.438,
-    "ls": 101.6,
-    "la": -2,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIA",
@@ -36940,9 +36940,9 @@
    "ai": 71,
    "gameType": "R",
    "savant": {
-    "xba": 0.276,
-    "ls": 99.6,
-    "la": -8,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -36982,9 +36982,9 @@
    "ai": 66,
    "gameType": "R",
    "savant": {
-    "xba": 0.169,
-    "ls": 95.9,
-    "la": -14,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SD",
@@ -37024,9 +37024,9 @@
    "ai": 59,
    "gameType": "R",
    "savant": {
-    "xba": 0.423,
-    "ls": 100,
-    "la": 0,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PHI",
@@ -37066,9 +37066,9 @@
    "ai": 31,
    "gameType": "R",
    "savant": {
-    "xba": 0.076,
-    "ls": 60,
-    "la": -15,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PHI",
@@ -37108,9 +37108,9 @@
    "ai": 42,
    "gameType": "R",
    "savant": {
-    "xba": 0.341,
-    "ls": 101.4,
-    "la": -5,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -37150,9 +37150,9 @@
    "ai": 53,
    "gameType": "R",
    "savant": {
-    "xba": 0.263,
-    "ls": 99.7,
-    "la": -7,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "DET",
@@ -37318,9 +37318,9 @@
    "ai": 66,
    "gameType": "R",
    "savant": {
-    "xba": 0.163,
-    "ls": 68.7,
-    "la": 5,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "SD",
@@ -37360,9 +37360,9 @@
    "ai": 80,
    "gameType": "R",
    "savant": {
-    "xba": 0.27,
-    "ls": 93.8,
-    "la": -3,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -37450,9 +37450,9 @@
    "ai": 72,
    "gameType": "R",
    "savant": {
-    "xba": 0.152,
-    "ls": 52.1,
-    "la": -84,
+    "xba": null,
+    "ls": 70.4,
+    "la": 14,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIA",
@@ -37492,9 +37492,9 @@
    "ai": 49,
    "gameType": "R",
    "savant": {
-    "xba": 0.134,
-    "ls": 73.4,
-    "la": -43,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIN",
@@ -37534,9 +37534,9 @@
    "ai": 32,
    "gameType": "R",
    "savant": {
-    "xba": 0.051,
-    "ls": 74,
-    "la": -15,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIN",
@@ -37576,9 +37576,9 @@
    "ai": 10,
    "gameType": "R",
    "savant": {
-    "xba": 0.213,
-    "ls": 82.6,
-    "la": 4,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "ATH",
@@ -37696,9 +37696,9 @@
    "ai": 55,
    "gameType": "R",
    "savant": {
-    "xba": 0.197,
-    "ls": 60.4,
-    "la": 15,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -37738,9 +37738,9 @@
    "ai": 54,
    "gameType": "R",
    "savant": {
-    "xba": 0.574,
-    "ls": 96.8,
-    "la": 5,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -43545,9 +43545,9 @@
    "ai": 14,
    "gameType": "R",
    "savant": {
-    "xba": 0.129,
-    "ls": 95.5,
-    "la": -25,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAA",
@@ -43587,9 +43587,9 @@
    "ai": 24,
    "gameType": "R",
    "savant": {
-    "xba": 0.131,
-    "ls": 95.5,
-    "la": 32,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -43635,9 +43635,9 @@
    "ai": 39,
    "gameType": "R",
    "savant": {
-    "xba": 0.076,
-    "ls": 75.6,
-    "la": -12,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -43677,9 +43677,9 @@
    "ai": 68,
    "gameType": "R",
    "savant": {
-    "xba": 0.257,
-    "ls": 97.3,
-    "la": -5,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "ATH",
@@ -43719,9 +43719,9 @@
    "ai": 61,
    "gameType": "R",
    "savant": {
-    "xba": 0.189,
-    "ls": 86.3,
-    "la": -3,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "ATH",
@@ -43857,9 +43857,9 @@
    "ai": 72,
    "gameType": "R",
    "savant": {
-    "xba": 0.014,
-    "ls": 88.9,
-    "la": 79,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -43899,9 +43899,9 @@
    "ai": 52,
    "gameType": "R",
    "savant": {
-    "xba": 0.481,
-    "ls": 108.9,
-    "la": -5,
+    "xba": null,
+    "ls": 80.7,
+    "la": 61,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -43941,9 +43941,9 @@
    "ai": 48,
    "gameType": "R",
    "savant": {
-    "xba": 0.234,
-    "ls": 103.2,
-    "la": -6,
+    "xba": null,
+    "ls": 89.3,
+    "la": 46,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -43983,9 +43983,9 @@
    "ai": 45,
    "gameType": "R",
    "savant": {
-    "xba": 0.224,
-    "ls": 100.4,
-    "la": -11,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",
@@ -44073,9 +44073,9 @@
    "ai": 26,
    "gameType": "R",
    "savant": {
-    "xba": 0.15,
-    "ls": 81.4,
-    "la": -8,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -44115,9 +44115,9 @@
    "ai": 16,
    "gameType": "R",
    "savant": {
-    "xba": 0.308,
-    "ls": 64.6,
-    "la": -49,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -44157,9 +44157,9 @@
    "ai": 80,
    "gameType": "R",
    "savant": {
-    "xba": 0.48,
-    "ls": 95.3,
-    "la": 5,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIN",
@@ -44199,9 +44199,9 @@
    "ai": 7,
    "gameType": "R",
    "savant": {
-    "xba": 0.083,
-    "ls": 88.3,
-    "la": -22,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -44241,9 +44241,9 @@
    "ai": 19,
    "gameType": "R",
    "savant": {
-    "xba": 0.185,
-    "ls": 55.5,
-    "la": -46,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAA",
@@ -44325,9 +44325,9 @@
    "ai": 16,
    "gameType": "R",
    "savant": {
-    "xba": 0.437,
-    "ls": 108.9,
-    "la": -3,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -44367,9 +44367,9 @@
    "ai": 64,
    "gameType": "R",
    "savant": {
-    "xba": 0.203,
-    "ls": 104.3,
-    "la": -20,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "CLE",
@@ -44457,9 +44457,9 @@
    "ai": 15,
    "gameType": "R",
    "savant": {
-    "xba": 0.014,
-    "ls": 95.2,
-    "la": 63,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -44499,9 +44499,9 @@
    "ai": 17,
    "gameType": "R",
    "savant": {
-    "xba": 0.446,
-    "ls": 90.1,
-    "la": 5,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -44541,9 +44541,9 @@
    "ai": 51,
    "gameType": "R",
    "savant": {
-    "xba": 0.276,
-    "ls": 65.2,
-    "la": -71,
+    "xba": null,
+    "ls": 82.4,
+    "la": 61,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAA",
@@ -44583,9 +44583,9 @@
    "ai": 45,
    "gameType": "R",
    "savant": {
-    "xba": 0.218,
-    "ls": 102.8,
-    "la": -15,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "LAA",
@@ -44625,9 +44625,9 @@
    "ai": 42,
    "gameType": "R",
    "savant": {
-    "xba": 0.139,
-    "ls": 86.8,
-    "la": -9,
+    "xba": null,
+    "ls": 59.6,
+    "la": 39,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "AZ",
@@ -44667,9 +44667,9 @@
    "ai": 21,
    "gameType": "R",
    "savant": {
-    "xba": 0.055,
-    "ls": 71.8,
-    "la": -18,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "PIT",
@@ -44709,9 +44709,9 @@
    "ai": 14,
    "gameType": "R",
    "savant": {
-    "xba": 0.003,
-    "ls": 90.3,
-    "la": 75,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TEX",
@@ -44751,9 +44751,9 @@
    "ai": 21,
    "gameType": "R",
    "savant": {
-    "xba": 0.204,
-    "ls": 72.7,
-    "la": -50,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TB",
@@ -44793,9 +44793,9 @@
    "ai": 28,
    "gameType": "R",
    "savant": {
-    "xba": 0.284,
-    "ls": 108.7,
-    "la": -13,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "COL",
@@ -44835,9 +44835,9 @@
    "ai": 38,
    "gameType": "R",
    "savant": {
-    "xba": 0.006,
-    "ls": 87.4,
-    "la": 65,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "MIN",
@@ -44877,9 +44877,9 @@
    "ai": 72,
    "gameType": "R",
    "savant": {
-    "xba": 0.314,
-    "ls": 95.8,
-    "la": -10,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -44919,9 +44919,9 @@
    "ai": 32,
    "gameType": "R",
    "savant": {
-    "xba": 0.058,
-    "ls": 85.1,
-    "la": -34,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "WSH",
@@ -44961,9 +44961,9 @@
    "ai": 36,
    "gameType": "R",
    "savant": {
-    "xba": 0.396,
-    "ls": 93.4,
-    "la": 1,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "BOS",
@@ -45003,9 +45003,9 @@
    "ai": 49,
    "gameType": "R",
    "savant": {
-    "xba": 0.232,
-    "ls": 99.9,
-    "la": -17,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "DET",
@@ -45087,9 +45087,9 @@
    "ai": 6,
    "gameType": "R",
    "savant": {
-    "xba": 0.104,
-    "ls": 95.7,
-    "la": -22,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "TB",
@@ -45129,9 +45129,9 @@
    "ai": 70,
    "gameType": "R",
    "savant": {
-    "xba": 0.07,
-    "ls": 72.6,
-    "la": -3,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "source": "savant:estimated_ba_using_speedangle"
    },
    "away": "NYY",

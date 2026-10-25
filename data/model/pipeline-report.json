@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T11:41:42.338Z",
+ "generatedAt": "2026-10-25T16:32:51.075Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -462,8 +462,8 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": false,
-  "fetchedThisRun": true,
+  "cached": true,
+  "fetchedThisRun": false,
   "fetchedAt": "2026-10-25T11:42:04.156Z",
   "rowsAllGameTypes": 1414,
   "rowsByGameType": {
@@ -491,12 +491,12 @@
   "perPlay": {
    "needed": 1605,
    "excludedNoBattedBall": 58,
-   "matched": 1045,
-   "matchedNoXba": 201,
+   "matched": 1057,
+   "matchedNoXba": 189,
    "unavailable": 359,
    "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.6511,
+   "coverage": 0.6586,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -504,37 +504,21 @@
      "season": 2026,
      "month": null,
      "rows": 1414,
-     "fromCache": false,
+     "fromCache": true,
      "asked": 0,
      "found": 1048,
      "missed": 0,
      "integrity": null
     },
     {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-08-01&game_date_lt=2026-08-31",
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-05-01&game_date_lt=2026-05-31",
      "kind": "month",
      "season": 2026,
-     "month": "2026-08",
+     "month": "2026-05",
      "rows": 25000,
      "fromCache": false,
-     "asked": 18,
-     "found": 141,
-     "missed": 11,
-     "integrity": {
-      "kept": 25000,
-      "outsideRange": 0,
-      "missingDate": 0
-     }
-    },
-    {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-07-01&game_date_lt=2026-07-31",
-     "kind": "month",
-     "season": 2026,
-     "month": "2026-07",
-     "rows": 25000,
-     "fromCache": false,
-     "asked": 26,
-     "found": 171,
+     "asked": 30,
+     "found": 169,
      "missed": 21,
      "integrity": {
       "kept": 25000,
@@ -543,15 +527,31 @@
      }
     },
     {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-06-01&game_date_lt=2026-06-30",
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-04-01&game_date_lt=2026-04-30",
      "kind": "month",
      "season": 2026,
-     "month": "2026-06",
+     "month": "2026-04",
      "rows": 25000,
      "fromCache": false,
-     "asked": 29,
-     "found": 178,
-     "missed": 23,
+     "asked": 39,
+     "found": 160,
+     "missed": 32,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-03-01&game_date_lt=2026-03-31",
+     "kind": "month",
+     "season": 2026,
+     "month": "2026-03",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 6,
+     "found": 137,
+     "missed": 0,
      "integrity": {
       "kept": 25000,
       "outsideRange": 0,
@@ -561,13 +561,13 @@
    ],
    "queriesDeferred": 0,
    "failures": [],
-   "requests": 4,
-   "cacheHits": 0,
+   "requests": 3,
+   "cacheHits": 1,
    "budgetExhausted": false
   },
   "client": {
-   "requests": 4,
-   "cacheHits": 0,
+   "requests": 3,
+   "cacheHits": 1,
    "budget": 4,
    "budgetExhausted": false,
    "rateLimited": false,

@@ -5,8 +5,8 @@
   "url": "https://www.mlb.com/official-information/scoring-changes",
   "fetchedUrl": "https://www.mlb.com/official-information/scoring-changes",
   "archivedAt": null,
-  "fetchedAt": "2026-10-25T11:41:42.338Z",
-  "sha256": "357214c67200667de13cde180b582d96338acc0e12fd62ef8dada1c6808233f8",
+  "fetchedAt": "2026-10-25T16:32:51.075Z",
+  "sha256": "005898a422a47d734276e5d0840504081e25c356dd7356eb5b347c3b6819f59b",
   "bytes": 923548
  },
  "sections": [
@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": false,
- "generatedAt": "2026-10-25T11:41:42.338Z",
+ "generatedAt": "2026-10-25T16:32:51.075Z",
  "entries": [
   {
    "seq": 1,
@@ -1690,9 +1690,9 @@
     "pitchingChange": false
    },
    "savant": {
-    "xba": 0.131,
-    "ls": 95.5,
-    "la": 32,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2026-03-31",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -6434,9 +6434,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": 0.142,
-    "ls": 103.2,
-    "la": -26,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2026-04-30",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -14674,9 +14674,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": null,
-    "ls": 80,
-    "la": 12,
+    "xba": 0.486,
+    "ls": 95.7,
+    "la": 5,
     "gameDate": "2026-06-28",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -14794,9 +14794,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.338,
+    "ls": 102.9,
+    "la": -10,
     "gameDate": "2026-06-28",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -18575,9 +18575,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.065,
+    "ls": 74.2,
+    "la": -8,
     "gameDate": "2026-07-26",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -18707,9 +18707,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.326,
+    "ls": 75.8,
+    "la": 11,
     "gameDate": "2026-07-28",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -18907,9 +18907,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": null,
-    "ls": 75.6,
-    "la": 22,
+    "xba": 0.649,
+    "ls": 96.7,
+    "la": 6,
     "gameDate": "2026-07-26",
     "source": "savant:estimated_ba_using_speedangle"
    }
@@ -21595,9 +21595,9 @@
     "kind": "out_of_fold"
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.34,
+    "ls": 80.5,
+    "la": 8,
     "gameDate": "2026-08-29",
     "source": "savant:estimated_ba_using_speedangle"
    }
