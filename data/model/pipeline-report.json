@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T04:52:01.385Z",
+ "generatedAt": "2026-10-25T11:41:42.338Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -267,7 +267,7 @@
    },
    "meta": {
     "url": "https://statsapi.mlb.com/api/v1.1/game/823244/feed/live?fields=gameData,officialScorer,id,fullName,venue,name",
-    "fetched": 1,
+    "fetched": 0,
     "failed": 0,
     "withScorer": 2466,
     "scorers": 82
@@ -464,88 +464,94 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-25T04:52:18.016Z",
-  "rowsAllGameTypes": 1412,
+  "fetchedAt": "2026-10-25T11:42:04.156Z",
+  "rowsAllGameTypes": 1414,
   "rowsByGameType": {
    "R": 1041,
    "S": 321,
    "E": 34,
    "D": 11,
    "F": 3,
+   "W": 2,
    "L": 2
   },
-  "rows": 1057,
+  "rows": 1059,
   "statsapiFieldErrors": 1059,
-  "matched": 1057,
+  "matched": 1059,
   "onlySavant": 0,
   "onlySavantExamples": [],
-  "onlyStatsApiExamples": [
-   "849802:0",
-   "849802:35"
-  ],
+  "onlyStatsApiExamples": [],
   "exitVelocityAgreement": 1,
   "launchAngleAgreement": 1,
   "hitProbVsSavantXba": {
-   "n": 1043,
+   "n": 1045,
    "pearson": 0.9739,
    "meanAbsDiff": 0.0288
   },
   "perPlay": {
    "needed": 1605,
    "excludedNoBattedBall": 58,
-   "matched": 1116,
-   "matchedNoXba": 128,
+   "matched": 1045,
+   "matchedNoXba": 201,
    "unavailable": 359,
-   "notIndexedYet": 2,
+   "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.6953,
+   "coverage": 0.6511,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
      "kind": "season_errors",
      "season": 2026,
      "month": null,
-     "rows": 1412,
+     "rows": 1414,
      "fromCache": false,
-     "asked": 2,
-     "found": 1046,
-     "missed": 2,
-     "integrity": null
-    },
-    {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2025%7C&player_type=batter&type=details",
-     "kind": "season_errors",
-     "season": 2025,
-     "month": null,
-     "rows": 1336,
-     "fromCache": false,
-     "asked": 32,
-     "found": 45,
+     "asked": 0,
+     "found": 1048,
      "missed": 0,
      "integrity": null
     },
     {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2024%7C&player_type=batter&type=details",
-     "kind": "season_errors",
-     "season": 2024,
-     "month": null,
-     "rows": 1472,
-     "fromCache": false,
-     "asked": 29,
-     "found": 42,
-     "missed": 0,
-     "integrity": null
-    },
-    {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-09-01&game_date_lt=2026-09-30",
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-08-01&game_date_lt=2026-08-31",
      "kind": "month",
      "season": 2026,
-     "month": "2026-09",
+     "month": "2026-08",
      "rows": 25000,
-     "fromCache": true,
-     "asked": 11,
-     "found": 152,
+     "fromCache": false,
+     "asked": 18,
+     "found": 141,
      "missed": 11,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-07-01&game_date_lt=2026-07-31",
+     "kind": "month",
+     "season": 2026,
+     "month": "2026-07",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 26,
+     "found": 171,
+     "missed": 21,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-06-01&game_date_lt=2026-06-30",
+     "kind": "month",
+     "season": 2026,
+     "month": "2026-06",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 29,
+     "found": 178,
+     "missed": 23,
      "integrity": {
       "kept": 25000,
       "outsideRange": 0,
@@ -555,13 +561,13 @@
    ],
    "queriesDeferred": 0,
    "failures": [],
-   "requests": 3,
-   "cacheHits": 1,
+   "requests": 4,
+   "cacheHits": 0,
    "budgetExhausted": false
   },
   "client": {
-   "requests": 3,
-   "cacheHits": 1,
+   "requests": 4,
+   "cacheHits": 0,
    "budget": 4,
    "budgetExhausted": false,
    "rateLimited": false,
@@ -863,11 +869,11 @@
    },
    {
     "file": "data/capture/rulings-2026-10.json",
-    "plays": 14
+    "plays": 15
    }
   ],
-  "plays": 45,
-  "errorsCaptured": 44,
+  "plays": 46,
+  "errorsCaptured": 45,
   "capturedAsOriginal": 8,
   "settled": 41,
   "changedToHit": 4,
@@ -877,15 +883,15 @@
   "pendingCaptured": 1,
   "pendingResolved": 1,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-10-25T00:33:52.834Z",
+  "lastCaptureAt": "2026-10-25T05:13:53.839Z",
   "lagMinutes": {
    "median": 100,
    "p90": 218.1,
-   "n": 44
+   "n": 45
   },
   "originalMaxLagMin": 30,
   "byKind": {
-   "fielding": 25,
+   "fielding": 26,
    "throwing": 15,
    "missed_catch": 4
   },
