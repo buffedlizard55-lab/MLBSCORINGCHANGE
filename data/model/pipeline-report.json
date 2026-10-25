@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T16:32:51.075Z",
+ "generatedAt": "2026-10-25T20:56:28.921Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -462,9 +462,9 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": true,
-  "fetchedThisRun": false,
-  "fetchedAt": "2026-10-25T11:42:04.156Z",
+  "cached": false,
+  "fetchedThisRun": true,
+  "fetchedAt": "2026-10-25T20:56:48.527Z",
   "rowsAllGameTypes": 1414,
   "rowsByGameType": {
    "R": 1041,
@@ -491,12 +491,12 @@
   "perPlay": {
    "needed": 1605,
    "excludedNoBattedBall": 58,
-   "matched": 1057,
-   "matchedNoXba": 189,
+   "matched": 1145,
+   "matchedNoXba": 101,
    "unavailable": 359,
    "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.6586,
+   "coverage": 0.7134,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -504,54 +504,54 @@
      "season": 2026,
      "month": null,
      "rows": 1414,
-     "fromCache": true,
+     "fromCache": false,
      "asked": 0,
      "found": 1048,
      "missed": 0,
      "integrity": null
     },
     {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-05-01&game_date_lt=2026-05-31",
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-10-01&game_date_lt=2025-10-31",
      "kind": "month",
-     "season": 2026,
-     "month": "2026-05",
-     "rows": 25000,
+     "season": 2025,
+     "month": "2025-10",
+     "rows": 12739,
      "fromCache": false,
-     "asked": 30,
-     "found": 169,
-     "missed": 21,
-     "integrity": {
-      "kept": 25000,
-      "outsideRange": 0,
-      "missingDate": 0
-     }
-    },
-    {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-04-01&game_date_lt=2026-04-30",
-     "kind": "month",
-     "season": 2026,
-     "month": "2026-04",
-     "rows": 25000,
-     "fromCache": false,
-     "asked": 39,
-     "found": 160,
-     "missed": 32,
-     "integrity": {
-      "kept": 25000,
-      "outsideRange": 0,
-      "missingDate": 0
-     }
-    },
-    {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-03-01&game_date_lt=2026-03-31",
-     "kind": "month",
-     "season": 2026,
-     "month": "2026-03",
-     "rows": 25000,
-     "fromCache": false,
-     "asked": 6,
-     "found": 137,
+     "asked": 1,
+     "found": 5,
      "missed": 0,
+     "integrity": {
+      "kept": 12739,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-09-01&game_date_lt=2025-09-30",
+     "kind": "month",
+     "season": 2025,
+     "month": "2025-09",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 22,
+     "found": 21,
+     "missed": 20,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-08-01&game_date_lt=2025-08-31",
+     "kind": "month",
+     "season": 2025,
+     "month": "2025-08",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 22,
+     "found": 9,
+     "missed": 20,
      "integrity": {
       "kept": 25000,
       "outsideRange": 0,
@@ -559,17 +559,17 @@
      }
     }
    ],
-   "queriesDeferred": 0,
+   "queriesDeferred": 1,
    "failures": [],
-   "requests": 3,
-   "cacheHits": 1,
-   "budgetExhausted": false
+   "requests": 4,
+   "cacheHits": 0,
+   "budgetExhausted": true
   },
   "client": {
-   "requests": 3,
-   "cacheHits": 1,
+   "requests": 4,
+   "cacheHits": 0,
    "budget": 4,
-   "budgetExhausted": false,
+   "budgetExhausted": true,
    "rateLimited": false,
    "failures": [],
    "notes": [],

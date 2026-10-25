@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-25T16:32:51.075Z",
+ "generatedAt": "2026-10-25T20:56:28.921Z",
  "entries": [
   {
    "seq": 1,
@@ -15707,9 +15707,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.139,
-    "ls": 90.3,
-    "la": -16,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-08-30",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -18963,9 +18963,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.615,
-    "ls": 97.1,
-    "la": 7,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-09-26",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -19083,9 +19083,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.151,
-    "ls": 93.6,
-    "la": -13,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-09-28",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -19153,9 +19153,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.39,
-    "ls": 100.6,
-    "la": 22,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-09-27",
     "source": "savant:estimated_ba_using_speedangle"
    },
