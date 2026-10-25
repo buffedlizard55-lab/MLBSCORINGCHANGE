@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-25T20:56:28.921Z",
+ "generatedAt": "2026-10-25T23:19:42.454Z",
  "entries": [
   {
    "seq": 1,
@@ -2718,9 +2718,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.201,
-    "ls": 97.1,
-    "la": -12,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-04-27",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -2838,9 +2838,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.443,
-    "ls": 98.4,
-    "la": 3,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-04-25",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -5538,9 +5538,9 @@
     "pitchingChange": true
    },
    "savant": {
-    "xba": null,
-    "ls": null,
-    "la": null,
+    "xba": 0.246,
+    "ls": 83.7,
+    "la": 3,
     "gameDate": "2025-05-25",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -8372,9 +8372,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.494,
-    "ls": 100.9,
-    "la": 1,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-06-24",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -8758,9 +8758,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.207,
-    "ls": 42.5,
-    "la": -66,
+    "xba": null,
+    "ls": 87.6,
+    "la": 20,
     "gameDate": "2025-06-25",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -8978,9 +8978,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.273,
-    "ls": 100.9,
-    "la": -6,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-06-25",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -9705,9 +9705,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.227,
-    "ls": 103.7,
-    "la": -17,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-06-29",
     "source": "savant:estimated_ba_using_speedangle"
    },

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-25T20:56:28.921Z",
+ "generatedAt": "2026-10-25T23:19:42.454Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -462,8 +462,8 @@
  },
  "savant": {
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
-  "cached": false,
-  "fetchedThisRun": true,
+  "cached": true,
+  "fetchedThisRun": false,
   "fetchedAt": "2026-10-25T20:56:48.527Z",
   "rowsAllGameTypes": 1414,
   "rowsByGameType": {
@@ -491,12 +491,12 @@
   "perPlay": {
    "needed": 1605,
    "excludedNoBattedBall": 58,
-   "matched": 1145,
-   "matchedNoXba": 101,
+   "matched": 1140,
+   "matchedNoXba": 106,
    "unavailable": 359,
    "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.7134,
+   "coverage": 0.7103,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -504,37 +504,21 @@
      "season": 2026,
      "month": null,
      "rows": 1414,
-     "fromCache": false,
+     "fromCache": true,
      "asked": 0,
      "found": 1048,
      "missed": 0,
      "integrity": null
     },
     {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-10-01&game_date_lt=2025-10-31",
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-07-01&game_date_lt=2025-07-31",
      "kind": "month",
      "season": 2025,
-     "month": "2025-10",
-     "rows": 12739,
-     "fromCache": false,
-     "asked": 1,
-     "found": 5,
-     "missed": 0,
-     "integrity": {
-      "kept": 12739,
-      "outsideRange": 0,
-      "missingDate": 0
-     }
-    },
-    {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-09-01&game_date_lt=2025-09-30",
-     "kind": "month",
-     "season": 2025,
-     "month": "2025-09",
+     "month": "2025-07",
      "rows": 25000,
      "fromCache": false,
-     "asked": 22,
-     "found": 21,
+     "asked": 26,
+     "found": 13,
      "missed": 20,
      "integrity": {
       "kept": 25000,
@@ -543,15 +527,47 @@
      }
     },
     {
-     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-08-01&game_date_lt=2025-08-31",
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-06-01&game_date_lt=2025-06-30",
      "kind": "month",
      "season": 2025,
-     "month": "2025-08",
+     "month": "2025-06",
      "rows": 25000,
      "fromCache": false,
-     "asked": 22,
+     "asked": 30,
+     "found": 35,
+     "missed": 23,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-05-01&game_date_lt=2025-05-31",
+     "kind": "month",
+     "season": 2025,
+     "month": "2025-05",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 19,
      "found": 9,
-     "missed": 20,
+     "missed": 16,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-04-01&game_date_lt=2025-04-30",
+     "kind": "month",
+     "season": 2025,
+     "month": "2025-04",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 21,
+     "found": 12,
+     "missed": 18,
      "integrity": {
       "kept": 25000,
       "outsideRange": 0,
@@ -559,17 +575,17 @@
      }
     }
    ],
-   "queriesDeferred": 1,
+   "queriesDeferred": 0,
    "failures": [],
    "requests": 4,
-   "cacheHits": 0,
-   "budgetExhausted": true
+   "cacheHits": 1,
+   "budgetExhausted": false
   },
   "client": {
    "requests": 4,
-   "cacheHits": 0,
+   "cacheHits": 1,
    "budget": 4,
-   "budgetExhausted": true,
+   "budgetExhausted": false,
    "rateLimited": false,
    "failures": [],
    "notes": [],
