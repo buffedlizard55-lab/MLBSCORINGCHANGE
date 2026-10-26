@@ -22,7 +22,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-26T04:56:11.768Z",
+ "generatedAt": "2026-10-26T13:13:55.912Z",
  "entries": [
   {
    "seq": 1,
@@ -181,9 +181,9 @@
    "section": "2025 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.392,
-    "ls": 102.7,
-    "la": -1,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2025-03-30",
     "source": "savant:estimated_ba_using_speedangle"
    },

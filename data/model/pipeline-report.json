@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-26T04:56:11.768Z",
+ "generatedAt": "2026-10-26T13:13:55.912Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -464,7 +464,7 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-26T04:56:31.567Z",
+  "fetchedAt": "2026-10-26T13:14:12.049Z",
   "rowsAllGameTypes": 1414,
   "rowsByGameType": {
    "R": 1041,
@@ -491,12 +491,12 @@
   "perPlay": {
    "needed": 1605,
    "excludedNoBattedBall": 58,
-   "matched": 1140,
-   "matchedNoXba": 106,
+   "matched": 1139,
+   "matchedNoXba": 107,
    "unavailable": 359,
    "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.7103,
+   "coverage": 0.7097,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -509,19 +509,67 @@
      "found": 1048,
      "missed": 0,
      "integrity": null
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2025-03-01&game_date_lt=2025-03-31",
+     "kind": "month",
+     "season": 2025,
+     "month": "2025-03",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 2,
+     "found": 7,
+     "missed": 0,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2024-10-01&game_date_lt=2024-10-31",
+     "kind": "month",
+     "season": 2024,
+     "month": "2024-10",
+     "rows": 12868,
+     "fromCache": false,
+     "asked": 3,
+     "found": 16,
+     "missed": 0,
+     "integrity": {
+      "kept": 12868,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2024-09-01&game_date_lt=2024-09-30",
+     "kind": "month",
+     "season": 2024,
+     "month": "2024-09",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 20,
+     "found": 4,
+     "missed": 18,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
     }
    ],
-   "queriesDeferred": 0,
+   "queriesDeferred": 3,
    "failures": [],
-   "requests": 1,
+   "requests": 4,
    "cacheHits": 0,
-   "budgetExhausted": false
+   "budgetExhausted": true
   },
   "client": {
-   "requests": 1,
+   "requests": 4,
    "cacheHits": 0,
    "budget": 4,
-   "budgetExhausted": false,
+   "budgetExhausted": true,
    "rateLimited": false,
    "failures": [],
    "notes": [],
