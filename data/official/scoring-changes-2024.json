@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-26T13:13:55.912Z",
+ "generatedAt": "2026-10-26T20:34:23.633Z",
  "entries": [
   {
    "seq": 1,
@@ -10589,9 +10589,9 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.011,
-    "ls": 84.9,
-    "la": 51,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2024-06-26",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -13227,9 +13227,9 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.201,
-    "ls": 95.1,
-    "la": -13,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2024-07-27",
     "source": "savant:estimated_ba_using_speedangle"
    },
@@ -17188,9 +17188,9 @@
    "section": "2024 Regular Season",
    "sectionIndex": 0,
    "savant": {
-    "xba": 0.07,
-    "ls": 54.4,
-    "la": -20,
+    "xba": null,
+    "ls": null,
+    "la": null,
     "gameDate": "2024-08-28",
     "source": "savant:estimated_ba_using_speedangle"
    },
