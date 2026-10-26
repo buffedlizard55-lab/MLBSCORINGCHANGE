@@ -17,7 +17,7 @@
   }
  ],
  "fromPrevious": true,
- "generatedAt": "2026-10-25T23:19:42.454Z",
+ "generatedAt": "2026-10-26T04:56:11.768Z",
  "entries": [
   {
    "seq": 1,
@@ -12725,7 +12725,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0056,
+    "p": 0.0055,
     "score": 1,
     "kind": "out_of_fold"
    }
@@ -16867,7 +16867,7 @@
    },
    "model": {
     "question": "hitToError",
-    "p": 0.0041,
+    "p": 0.004,
     "score": 0,
     "kind": "out_of_fold"
    }
