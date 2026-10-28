@@ -1,6 +1,6 @@
 {
  "season": 2026,
- "generatedAt": "2026-10-28T05:51:45.220Z",
+ "generatedAt": "2026-10-28T13:07:03.455Z",
  "labelCutoff": "2026-10-14",
  "plays": [
   {
@@ -9,6 +9,12 @@
    "gamePk": 849803,
    "ai": 87,
    "gameType": "W",
+   "savant": {
+    "xba": 0.257,
+    "ls": 86.5,
+    "la": 1,
+    "source": "savant:estimated_ba_using_speedangle"
+   },
    "away": "MIL",
    "home": "TB",
    "inning": 12,
@@ -35,9 +41,15 @@
    "final": "error",
    "official": [],
    "errKind": "throwing",
-   "errKindSource": "current_ruling",
+   "errKindSource": "captured",
    "scorer": "Jay D'Abramo",
-   "captured": null
+   "captured": {
+    "firstAt": "2026-10-28T08:59:08.218Z",
+    "lagMin": 282.6,
+    "firstDescription": "Junior Caminero reaches on a throwing error by third baseman Joey Ortiz.",
+    "changes": [],
+    "scoreAtCapture": 7
+   }
   },
   {
    "id": "849802:35",

@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-10-28T05:51:45.220Z",
+ "generatedAt": "2026-10-28T13:07:03.455Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -19761,11 +19761,11 @@
    },
    {
     "file": "data/capture/rulings-2026-10.json",
-    "plays": 15
+    "plays": 16
    }
   ],
-  "plays": 46,
-  "errorsCaptured": 45,
+  "plays": 47,
+  "errorsCaptured": 46,
   "capturedAsOriginal": 8,
   "settled": 42,
   "changedToHit": 4,
@@ -19775,21 +19775,39 @@
   "pendingCaptured": 1,
   "pendingResolved": 1,
   "firstCaptureAt": "2026-09-24T20:00:22.458Z",
-  "lastCaptureAt": "2026-10-25T05:13:53.839Z",
+  "lastCaptureAt": "2026-10-28T08:59:08.218Z",
   "lagMinutes": {
-   "median": 100,
-   "p90": 218.1,
-   "n": 45
+   "median": 102.1,
+   "p90": 282.6,
+   "n": 46
   },
   "originalMaxLagMin": 30,
   "byKind": {
    "fielding": 26,
-   "throwing": 15,
+   "throwing": 16,
    "missed_catch": 4
   },
   "source": "data/capture/rulings-YYYY-MM.json — pipeline/capture.mjs polls MLB StatsAPI playByPlay during live games (GitHub Actions, every 10 minutes during game hours)",
   "whyNeeded": "StatsAPI rewrites history: timecode snapshots and diffPatch show the current ruling even for moments before a change (verified on 2026 official log #3 and #6), so an original call can only be known if it was recorded before it changed.",
   "recentErrors": [
+   {
+    "id": "849803:87",
+    "g": 849803,
+    "ai": 87,
+    "date": "2026-10-27",
+    "kind": "throwing",
+    "pos": "3B",
+    "firstAt": "2026-10-28T08:59:08.218Z",
+    "lagMin": 282.6,
+    "afterPending": false,
+    "original": false,
+    "settled": false,
+    "current": "field_error",
+    "currentSource": "final play-by-play",
+    "changeSeenAt": null,
+    "logged": false,
+    "scoreAtCapture": 7
+   },
    {
     "id": "849802:35",
     "g": 849802,
@@ -20491,24 +20509,6 @@
     "changeSeenAt": null,
     "logged": false,
     "scoreAtCapture": 9
-   },
-   {
-    "id": "823409:25",
-    "g": 823409,
-    "ai": 25,
-    "date": "2026-09-25",
-    "kind": "throwing",
-    "pos": "3B",
-    "firstAt": "2026-09-26T00:43:02.233Z",
-    "lagMin": 73.7,
-    "afterPending": false,
-    "original": false,
-    "settled": true,
-    "current": "field_error",
-    "currentSource": "final play-by-play",
-    "changeSeenAt": null,
-    "logged": false,
-    "scoreAtCapture": 4
    }
   ],
   "pending": [
