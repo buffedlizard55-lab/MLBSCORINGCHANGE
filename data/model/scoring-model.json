@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-10-29T18:31:34.998Z",
+ "generatedAt": "2026-10-30T01:06:55.696Z",
  "hitProb": {
   "surface": {
    "evMin": 40,
@@ -18594,7 +18594,7 @@
    2025,
    2026
   ],
-  "labelCutoff": "2026-10-15",
+  "labelCutoff": "2026-10-16",
   "note": "Labels come from MLB's official scoring-change log. Changes made during a game may not appear in it; the live capture (data/capture) records them directly."
  },
  "sources": [
