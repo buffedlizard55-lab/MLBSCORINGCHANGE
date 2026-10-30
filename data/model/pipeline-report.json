@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-30T01:06:55.696Z",
+ "generatedAt": "2026-10-30T10:10:05.279Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -464,7 +464,7 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-30T01:07:16.602Z",
+  "fetchedAt": "2026-10-30T10:10:25.701Z",
   "rowsAllGameTypes": 1416,
   "rowsByGameType": {
    "R": 1041,
