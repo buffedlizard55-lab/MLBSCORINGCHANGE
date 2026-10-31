@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-31T05:53:23.674Z",
+ "generatedAt": "2026-10-31T12:42:56.397Z",
  "pipelineVersion": 1,
  "settings": {
   "seasons": [
@@ -464,7 +464,7 @@
   "url": "https://baseballsavant.mlb.com/statcast_search/csv",
   "cached": false,
   "fetchedThisRun": true,
-  "fetchedAt": "2026-10-31T05:53:44.610Z",
+  "fetchedAt": "2026-10-31T12:43:17.099Z",
   "rowsAllGameTypes": 1416,
   "rowsByGameType": {
    "R": 1041,
@@ -491,12 +491,12 @@
   "perPlay": {
    "needed": 1607,
    "excludedNoBattedBall": 58,
-   "matched": 1131,
-   "matchedNoXba": 117,
-   "unavailable": 359,
+   "matched": 1096,
+   "matchedNoXba": 153,
+   "unavailable": 358,
    "notIndexedYet": 0,
    "pending": 0,
-   "coverage": 0.7038,
+   "coverage": 0.682,
    "queries": [
     {
      "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&hfAB=field%5C.%5C.error%7C&hfSea=2026%7C&player_type=batter&type=details",
@@ -509,16 +509,32 @@
      "found": 1050,
      "missed": 0,
      "integrity": null
+    },
+    {
+     "url": "https://baseballsavant.mlb.com/statcast_search/csv?all=true&player_type=batter&type=details&game_date_gt=2026-09-01&game_date_lt=2026-09-30",
+     "kind": "month",
+     "season": 2026,
+     "month": "2026-09",
+     "rows": 25000,
+     "fromCache": false,
+     "asked": 1,
+     "found": 170,
+     "missed": 0,
+     "integrity": {
+      "kept": 25000,
+      "outsideRange": 0,
+      "missingDate": 0
+     }
     }
    ],
    "queriesDeferred": 0,
    "failures": [],
-   "requests": 1,
+   "requests": 2,
    "cacheHits": 0,
    "budgetExhausted": false
   },
   "client": {
-   "requests": 1,
+   "requests": 2,
    "cacheHits": 0,
    "budget": 4,
    "budgetExhausted": false,
